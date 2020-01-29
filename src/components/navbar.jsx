@@ -1,28 +1,35 @@
 import React, { useState } from "react";
 
 const Navbar = props => {
-  const isConnected = true;
+  const isConnected = false;
 
-  const [toggle, setToggle] = useState(false);
+  const [toggleMenu, setToggleMenu] = useState(false);
+  const [loginWindow, setToggleLoginWindow] = useState(false);
 
   return (
     <>
-      {toggle && (
-        <div className="unclick" onClick={() => setToggle(!toggle)}></div>
+      {toggleMenu && (
+        <div
+          className="unclick"
+          onClick={() => setToggleMenu(!toggleMenu)}
+        ></div>
       )}
       <nav className="navbar">
         <div className="container">
           <p>Logo Boutique</p>
           {(isConnected && (
             <div className="my_options">
-              <p className="unselectable" onClick={() => setToggle(!toggle)}>
+              <p
+                className="unselectable"
+                onClick={() => setToggleMenu(!toggleMenu)}
+              >
                 Prénom
                 <span
                   className="arrow-menu unselectable"
-                  onClick={() => setToggle(!toggle)}
+                  onClick={() => setToggleMenu(!toggleMenu)}
                 ></span>
               </p>
-              {toggle && (
+              {toggleMenu && (
                 <ul className="toggle-menu">
                   <li>Mon compte</li>
                   <li>Mes rachats</li>
