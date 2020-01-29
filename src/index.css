@@ -1,0 +1,124 @@
+/**************************
+********GENERAL************
+**************************/
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 70%;
+  margin: 0 auto;
+}
+
+.display-none {
+  display: none;
+}
+
+p,
+ul,
+li {
+  font-size: 1.6rem;
+}
+
+.classic-links:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.unselectable {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -o-user-select: none;
+}
+
+/**************************
+*********NAVBAR***********
+**************************/
+
+nav {
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+}
+
+nav > .container {
+  display: flex;
+  justify-content: space-between;
+}
+
+nav ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+ul.connect {
+  display: flex;
+}
+
+ul.connect li {
+  padding: 1rem;
+}
+
+.my_options {
+  position: relative;
+}
+
+.unclick {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.toggle-menu {
+  position: absolute;
+  z-index: 2;
+  top: 25px;
+  width: 140px;
+  border-radius: 5px;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+  background-color: white;
+}
+
+.toggle-menu li {
+  padding: 1rem;
+  text-align: left;
+}
+
+.toggle-menu li:hover {
+  color: white;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.toggle-menu li:first-child {
+  padding: 1rem;
+  text-align: left;
+}
+
+/* Arrow to toggle menu */
+.arrow-menu {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  vertical-align: middle;
+  content: "";
+  border-top-style: solid;
+  border-top-width: 4px;
+  border-right: 4px solid transparent;
+  border-bottom: 0 solid transparent;
+  border-left: 4px solid transparent;
+  margin-left: 5px;
+}
