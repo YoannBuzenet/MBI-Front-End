@@ -31,10 +31,10 @@ const Navbar = props => {
               )}
             </div>
           )) || (
-            <ul className="connect">
-              <li className="classic-links">S'inscrire</li>
-              <li className="classic-links">Se connecter</li>
-            </ul>
+            <div className="connect">
+              <p className="classic-links">S'inscrire</p>
+              <p className="classic-links">Se connecter</p>
+            </div>
           )}
         </div>
       </nav>

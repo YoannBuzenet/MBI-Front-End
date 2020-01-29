@@ -62,12 +62,12 @@ nav ul {
   padding: 0;
 }
 
-ul.connect {
+div.connect {
   display: flex;
 }
 
-ul.connect li {
-  padding: 1rem;
+div.connect p {
+  padding-left: 2rem;
 }
 
 .my_options {
