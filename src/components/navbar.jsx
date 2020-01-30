@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Navbar = props => {
   const isConnected = false;
@@ -16,7 +17,9 @@ const Navbar = props => {
       )}
       <nav className="navbar">
         <div className="container">
-          <p>Logo Boutique</p>
+          <Link to="/" className="classic-links">
+            <p>Logo Boutique</p>
+          </Link>
           {(isConnected && (
             <div className="my_options">
               <p
@@ -39,8 +42,12 @@ const Navbar = props => {
             </div>
           )) || (
             <div className="connect">
-              <p className="classic-links">S'inscrire</p>
-              <p className="classic-links">Se connecter</p>
+              <Link className="classic-links">
+                <p>S'inscrire</p>
+              </Link>
+              <Link className="classic-links" to="/login">
+                <p>Se connecter</p>
+              </Link>
             </div>
           )}
         </div>

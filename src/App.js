@@ -3,6 +3,14 @@ import "./App.css";
 import Navbar from "./components/navbar";
 import AuthContext from "./context/authContext";
 import AuthAPI from "./services/authAPI";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  withRouter,
+  Redirect
+} from "react-router-dom";
+import LoginPage from "./pages/LoginPage";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(
@@ -14,12 +22,19 @@ function App() {
     setIsAuthenticated: setIsAuthenticated
   };
 
+  const NavbarWithRouter = withRouter(Navbar);
+
   return (
-    <AuthContext.Provider value={contextValue}>
-      <div className="App">
-        <Navbar />
-      </div>
-    </AuthContext.Provider>
+    <div className="App">
+      <AuthContext.Provider value={contextValue}>
+        <Router>
+          <NavbarWithRouter />
+          <Switch>
+            <Route path="/login" component={LoginPage} />} />
+          </Switch>
+        </Router>
+      </AuthContext.Provider>
+    </div>
   );
 }
 
