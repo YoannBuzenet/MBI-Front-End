@@ -10,7 +10,11 @@ import {
   withRouter,
   Redirect
 } from "react-router-dom";
+import PrivateRoute from "./components/privateRoute";
 import LoginPage from "./pages/LoginPage";
+import Homepage from "./pages/Homepage";
+import myAccount from "./pages/myAccount";
+import mySellRequests from "./pages/mySellRequests";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(
@@ -30,6 +34,9 @@ function App() {
         <Router>
           <NavbarWithRouter />
           <Switch>
+            <Route path="/" exact component={Homepage} />
+            <PrivateRoute path="/my_sell_requests" component={mySellRequests} />
+            <PrivateRoute path="/my_account" component={myAccount} />
             <Route path="/login" component={LoginPage} />} />
           </Switch>
         </Router>

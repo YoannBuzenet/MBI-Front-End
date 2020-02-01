@@ -25,6 +25,7 @@ const LoginPage = ({ onLogin, history }) => {
   };
 
   const handleSubmit = async event => {
+    setIsAuthenticated(true);
     event.preventDefault();
     try {
       await authAPI.authenticate(credentials);

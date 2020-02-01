@@ -1,11 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
+import AuthContext from "../context/authContext";
 
-const Navbar = props => {
-  const isConnected = false;
+const Navbar = ({ history }) => {
+  const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
 
   const [toggleMenu, setToggleMenu] = useState(false);
   const [loginWindow, setToggleLoginWindow] = useState(false);
+
+  const handleLogout = () => {
+    setIsAuthenticated(false);
+    history.replace("/");
+  };
 
   return (
     <>
@@ -20,7 +26,7 @@ const Navbar = props => {
           <Link to="/" className="classic-links">
             <p>Logo Boutique</p>
           </Link>
-          {(isConnected && (
+          {(isAuthenticated && (
             <div className="my_options">
               <p
                 className="unselectable"
@@ -34,9 +40,17 @@ const Navbar = props => {
               </p>
               {toggleMenu && (
                 <ul className="toggle-menu">
-                  <li>Mon compte</li>
-                  <li>Mes rachats</li>
-                  <li>Déconnexion</li>
+                  <li>
+                    <Link to="/my_account" className="toggle-menu-links">
+                      Mon compte
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/my_sell_requests" className="toggle-menu-links">
+                      Mes rachats
+                    </Link>
+                  </li>
+                  <li onClick={handleLogout}>Déconnexion</li>
                 </ul>
               )}
             </div>

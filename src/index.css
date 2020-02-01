@@ -77,6 +77,7 @@ div.connect p {
 
 .my_options {
   position: relative;
+  cursor: pointer;
 }
 
 .unclick {
@@ -111,6 +112,15 @@ div.connect p {
 .toggle-menu li:first-child {
   padding: 1rem;
   text-align: left;
+}
+
+.toggle-menu-links {
+  text-decoration: none;
+  color: black;
+}
+
+.toggle-menu-links:hover {
+  color: white;
 }
 
 /* Arrow to toggle menu */
