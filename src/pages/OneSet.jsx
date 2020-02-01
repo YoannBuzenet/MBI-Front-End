@@ -1,18 +1,18 @@
 import React from "react";
 import SetList from "../components/setList";
 
-const mySellRequests = props => {
+const OneSet = props => {
   return (
     <>
       <div className="container">
-        <h1>Home Page</h1>
+        <h1>NOM EDITION</h1>
         <div className="content-split">
           <SetList />
-          <div className="last-modification">Les dernières modifications</div>
+          <div className="last-modification"></div>
         </div>
       </div>
     </>
   );
 };
 
-export default mySellRequests;
+export default OneSet;

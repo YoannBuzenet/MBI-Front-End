@@ -27,7 +27,9 @@ body {
 
 p,
 ul,
-li {
+li,
+div,
+td {
   font-size: 1.6rem;
 }
 
@@ -145,4 +147,37 @@ div.connect p {
   border-bottom: 0 solid transparent;
   border-left: 4px solid transparent;
   margin-left: 5px;
+}
+
+/**************************
+********SPLIT LAYOUT*******
+**************************/
+.content-split {
+  display: flex;
+  justify-content: space-around;
+}
+
+/**************************
+********SETLIST*******
+**************************/
+
+.setList-table td:hover {
+  background-color: grey;
+}
+
+.setList-link {
+  text-decoration: none;
+  color: black;
+}
+
+.setList-link:hover {
+  color: white;
+}
+
+/**************************
+********HOMEPAGE*******
+**************************/
+.last-modification {
+  width: 80%;
+  background-color: grey;
 }

@@ -13,8 +13,9 @@ import {
 import PrivateRoute from "./components/privateRoute";
 import LoginPage from "./pages/LoginPage";
 import Homepage from "./pages/Homepage";
-import myAccount from "./pages/myAccount";
-import mySellRequests from "./pages/mySellRequests";
+import myAccount from "./pages/MyAccount";
+import mySellRequests from "./pages/MySellRequests";
+import OneSet from "./pages/OneSet";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(
@@ -37,6 +38,7 @@ function App() {
             <Route path="/" exact component={Homepage} />
             <PrivateRoute path="/my_sell_requests" component={mySellRequests} />
             <PrivateRoute path="/my_account" component={myAccount} />
+            <Route path="/sets/:id" component={OneSet} />
             <Route path="/login" component={LoginPage} />} />
           </Switch>
         </Router>

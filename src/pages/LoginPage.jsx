@@ -26,12 +26,13 @@ const LoginPage = ({ onLogin, history }) => {
 
   const handleSubmit = async event => {
     setIsAuthenticated(true);
+    history.replace("/");
     event.preventDefault();
     try {
       await authAPI.authenticate(credentials);
       setError("");
       setIsAuthenticated(true);
-      history.replace("/customers");
+      history.replace("/");
     } catch (error) {
       setError(
         "Aucun compte ne possède cette adresse, ou alors les informations ne correspondent pas."
