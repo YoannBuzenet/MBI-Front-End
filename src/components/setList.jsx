@@ -32,6 +32,27 @@ const SetList = props => {
                 </Link>
               </td>
             </tr>
+            <tr>
+              <td>
+                <Link to="/sets/IDSET" className="setList-link">
+                  Name 4
+                </Link>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <Link to="/sets/IDSET" className="setList-link">
+                  Name 5
+                </Link>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <Link to="/sets/IDSET" className="setList-link">
+                  Name 6
+                </Link>
+              </td>
+            </tr>
           </tbody>
         </table>
       </div>
