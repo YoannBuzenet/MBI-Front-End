@@ -35,7 +35,7 @@ const OneSet = props => {
                 <option value="">1</option>
                 <option value="">1</option>
               </select>
-              BOUTON CTA
+              <i class="fas fa-plus-circle"></i>
               <br />
               NOM CARTE LANGUE
               <select name="" id="">
@@ -62,7 +62,7 @@ const OneSet = props => {
                 <option value="">1</option>
                 <option value="">1</option>
               </select>
-              BOUTON CTA
+              <i class="fas fa-plus-circle"></i>
               <br />
               NOM CARTE LANGUE
               <select name="" id="">
@@ -89,7 +89,7 @@ const OneSet = props => {
                 <option value="">1</option>
                 <option value="">1</option>
               </select>
-              BOUTON CTA
+              <i class="fas fa-plus-circle"></i>
               <br />
             </form>
           </div>
