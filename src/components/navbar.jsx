@@ -28,34 +28,50 @@ const Navbar = ({ history }) => {
           </Link>
           {(isAuthenticated && (
             <div className="my_options">
-              <p
-                className="unselectable"
-                onClick={() => setToggleMenu(!toggleMenu)}
+              <Link
+                className="classic-links nav-element"
+                to="/my_selling_basket"
               >
-                Prénom
-                <span
-                  className="arrow-menu unselectable"
+                Mon Rachat (<span className="buying-total">0</span>)
+              </Link>
+              <div className="toggle-menu-container">
+                <p
+                  className="unselectable display-inline-block nav-element"
                   onClick={() => setToggleMenu(!toggleMenu)}
-                ></span>
-              </p>
-              {toggleMenu && (
-                <ul className="toggle-menu">
-                  <li>
-                    <Link to="/my_account" className="toggle-menu-links">
-                      Mon compte
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/my_sell_requests" className="toggle-menu-links">
-                      Mes rachats
-                    </Link>
-                  </li>
-                  <li onClick={handleLogout}>Déconnexion</li>
-                </ul>
-              )}
+                >
+                  Prénom
+                  <span
+                    className="arrow-menu unselectable"
+                    onClick={() => setToggleMenu(!toggleMenu)}
+                  ></span>
+                </p>
+                {toggleMenu && (
+                  <ul className="toggle-menu">
+                    <li>
+                      <Link to="/my_account" className="toggle-menu-links">
+                        Mon compte
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        to="/my_sell_requests"
+                        className="toggle-menu-links"
+                      >
+                        Mes rachats
+                      </Link>
+                    </li>
+                    <li onClick={handleLogout}>Déconnexion</li>
+                  </ul>
+                )}
+              </div>
             </div>
           )) || (
             <div className="connect">
+              <Link className="classic-links" to="/my_selling_basket">
+                <p>
+                  Mon Rachat (<span className="buying-total">0</span>)
+                </p>
+              </Link>
               <Link className="classic-links">
                 <p>S'inscrire</p>
               </Link>

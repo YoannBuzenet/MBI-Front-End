@@ -14,8 +14,9 @@ import PrivateRoute from "./components/privateRoute";
 import LoginPage from "./pages/LoginPage";
 import Homepage from "./pages/Homepage";
 import myAccount from "./pages/MyAccount";
-import mySellRequests from "./pages/MySellRequests";
+import mySellRequests from "./pages/AllMySellRequests";
 import OneSet from "./pages/OneSet";
+import MySellingBasket from "./pages/MySellingBasket";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(
@@ -36,10 +37,14 @@ function App() {
           <NavbarWithRouter />
           <Switch>
             <Route path="/" exact component={Homepage} />
-            <PrivateRoute path="/my_sell_requests" component={mySellRequests} />
-            <PrivateRoute path="/my_account" component={myAccount} />
+            <Route path="/my_selling_basket" component={mySellRequests} />
             <Route path="/sets/:id" component={OneSet} />
             <Route path="/login" component={LoginPage} />} />
+            <PrivateRoute
+              path="/my_sell_requests"
+              component={MySellingBasket}
+            />
+            <PrivateRoute path="/my_account" component={myAccount} />
           </Switch>
         </Router>
       </AuthContext.Provider>
