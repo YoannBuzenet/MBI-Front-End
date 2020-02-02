@@ -1,5 +1,6 @@
 import React from "react";
-import SetList from "../components/setList";
+import SetList from "../components/SetList";
+import LastModifications from "../components/LastModifications";
 
 const mySellRequests = props => {
   return (
@@ -8,7 +9,7 @@ const mySellRequests = props => {
         <h1>Home Page</h1>
         <div className="content-split">
           <SetList />
-          <div className="last-modification">Les dernières modifications</div>
+          <LastModifications />
         </div>
       </div>
     </>

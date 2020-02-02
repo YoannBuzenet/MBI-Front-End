@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import SetList from "../components/setList";
+import SetList from "../components/SetList";
 import SellingBasketContext from "../context/sellingBasket";
 
 const OneSet = props => {
@@ -9,10 +9,6 @@ const OneSet = props => {
   useEffect(() => {
     console.log(currentBasket);
   });
-
-  function handleAddCardToCart(card) {
-    setCurrentBasket([...currentBasket, card]);
-  }
 
   return (
     <>
@@ -65,7 +61,22 @@ const OneSet = props => {
                     <td>
                       <i
                         className="fas fa-plus-circle add-item-basket"
-                        onClick={() => handleAddCardToCart({ lol: "card" })}
+                        onClick={() =>
+                          setCurrentBasket([
+                            ...currentBasket,
+                            {
+                              cardName: "Foret de la Yavimaya",
+                              set: "Invasion",
+                              price: 2,
+                              condition: "NM",
+                              lang: "EN",
+                              isFoil: "No",
+                              uuid: "9215-ddfsdf-9898-dsfd",
+                              currency: "euros",
+                              quantity: 4
+                            }
+                          ])
+                        }
                       ></i>
                     </td>
                   </tr>
@@ -109,7 +120,22 @@ const OneSet = props => {
                     <td>
                       <i
                         className="fas fa-plus-circle add-item-basket"
-                        onClick={() => handleAddCardToCart({ lol2: "card2" })}
+                        onClick={() =>
+                          setCurrentBasket([
+                            ...currentBasket,
+                            {
+                              cardName: "Foret de la Yavimaya",
+                              set: "Planeshift",
+                              price: 2,
+                              condition: "NM",
+                              lang: "EN",
+                              isFoil: "No",
+                              uuid: "9215-ddfsdf-9898-dsfd",
+                              currency: "euros",
+                              quantity: 4
+                            }
+                          ])
+                        }
                       ></i>
                     </td>
                   </tr>

@@ -217,6 +217,22 @@ div.connect p {
   background-color: grey;
 }
 
+.last-modification .all-cards {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.last-modification .card {
+  display: flex;
+  justify-content: space-around;
+  width: 250px;
+}
+
+.last-modification .card .card-infos {
+  margin-left: 30px;
+}
+
 /**************************
 ********ONESET PAGE*******
 **************************/

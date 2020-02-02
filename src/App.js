@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import "./App.css";
-import Navbar from "./components/navbar";
+import Navbar from "./components/Navbar";
 import AuthContext from "./context/authContext";
 import SellRequestContext from "./context/sellingBasket";
 import AuthAPI from "./services/authAPI";
@@ -11,7 +11,7 @@ import {
   withRouter,
   Redirect
 } from "react-router-dom";
-import PrivateRoute from "./components/privateRoute";
+import PrivateRoute from "./components/PrivateRoute";
 import LoginPage from "./pages/LoginPage";
 import Homepage from "./pages/Homepage";
 import myAccount from "./pages/MyAccount";
@@ -32,7 +32,19 @@ function App() {
   };
 
   //Creating the Sell Request Basket state
-  const [currentBasket, setCurrentBasket] = useState([{ lol: "lol" }]);
+  const [currentBasket, setCurrentBasket] = useState([
+    {
+      cardName: "Kavru caméléon",
+      set: "Invasion",
+      price: 2,
+      condition: "NM",
+      lang: "EN",
+      isFoil: "Yes",
+      uuid: "9215-ddfsdf-9898-dsfd",
+      currency: "euros",
+      quantity: 4
+    }
+  ]);
 
   // Passing Authentication state in Context
   const contextBasket = {
@@ -53,10 +65,7 @@ function App() {
               <Route path="/my_sell_requests" component={mySellRequests} />
               <Route path="/sets/:id" component={OneSet} />
               <Route path="/login" component={LoginPage} />} />
-              <PrivateRoute
-                path="/my_selling_basket"
-                component={MySellingBasket}
-              />
+              <Route path="/my_selling_basket" component={MySellingBasket} />
               <PrivateRoute path="/my_account" component={myAccount} />
             </Switch>
           </Router>
