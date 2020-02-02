@@ -9,88 +9,132 @@ const OneSet = props => {
         <div className="content-split">
           <SetList />
           <div className="last-modification">
-            <form action="">
-              NOM CARTE LANGUE
-              <select name="" id="">
-                <option value="">1</option>
-                <option value="">1</option>
-              </select>
-              ETAT
-              <select name="" id="">
-                <option value="">1</option>
-                <option value="">1</option>
-              </select>
-              QTE
-              <select name="" id="">
-                <option value="">1</option>
-                <option value="">1</option>
-              </select>
-              FOIL
-              <select name="" id="">
-                <option value="">1</option>
-                <option value="">1</option>
-              </select>
-              PRIX
-              <select name="" id="">
-                <option value="">1</option>
-                <option value="">1</option>
-              </select>
-              <i class="fas fa-plus-circle"></i>
-              <br />
-              NOM CARTE LANGUE
-              <select name="" id="">
-                <option value="">1</option>
-                <option value="">1</option>
-              </select>
-              ETAT
-              <select name="" id="">
-                <option value="">1</option>
-                <option value="">1</option>
-              </select>
-              QTE
-              <select name="" id="">
-                <option value="">1</option>
-                <option value="">1</option>
-              </select>
-              FOIL
-              <select name="" id="">
-                <option value="">1</option>
-                <option value="">1</option>
-              </select>
-              PRIX
-              <select name="" id="">
-                <option value="">1</option>
-                <option value="">1</option>
-              </select>
-              <i class="fas fa-plus-circle"></i>
-              <br />
-              NOM CARTE LANGUE
-              <select name="" id="">
-                <option value="">1</option>
-                <option value="">1</option>
-              </select>
-              ETAT
-              <select name="" id="">
-                <option value="">1</option>
-                <option value="">1</option>
-              </select>
-              QTE
-              <select name="" id="">
-                <option value="">1</option>
-                <option value="">1</option>
-              </select>
-              FOIL
-              <select name="" id="">
-                <option value="">1</option>
-                <option value="">1</option>
-              </select>
-              PRIX
-              <select name="" id="">
-                <option value="">1</option>
-                <option value="">1</option>
-              </select>
-              <i class="fas fa-plus-circle"></i>
-              <br />
+            <form action="" className="center-text">
+              <table className="zebra-table">
+                <thead></thead>
+                <tbody>
+                  <tr>
+                    <td>NOM CARTE LANGUE</td>
+                    <td>
+                      <select name="" id="">
+                        <option value="">1</option>
+                        <option value="">1</option>
+                      </select>
+                    </td>
+                    <td>
+                      ETAT
+                      <select name="" id="">
+                        <option value="">1</option>
+                        <option value="">1</option>
+                      </select>
+                    </td>
+                    <td>
+                      QTE
+                      <select name="" id="">
+                        <option value="">1</option>
+                        <option value="">1</option>
+                      </select>
+                    </td>
+                    <td>
+                      FOIL
+                      <select name="" id="">
+                        <option value="">1</option>
+                        <option value="">1</option>
+                      </select>
+                    </td>
+                    <td>
+                      PRIX
+                      <select name="" id="">
+                        <option value="">1</option>
+                        <option value="">1</option>
+                      </select>
+                    </td>
+                    <td>
+                      <i class="fas fa-plus-circle add-item-basket"></i>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>NOM CARTE LANGUE</td>
+                    <td>
+                      <select name="" id="">
+                        <option value="">1</option>
+                        <option value="">1</option>
+                      </select>
+                    </td>
+                    <td>
+                      ETAT
+                      <select name="" id="">
+                        <option value="">1</option>
+                        <option value="">1</option>
+                      </select>
+                    </td>
+                    <td>
+                      QTE
+                      <select name="" id="">
+                        <option value="">1</option>
+                        <option value="">1</option>
+                      </select>
+                    </td>
+                    <td>
+                      FOIL
+                      <select name="" id="">
+                        <option value="">1</option>
+                        <option value="">1</option>
+                      </select>
+                    </td>
+                    <td>
+                      PRIX
+                      <select name="" id="">
+                        <option value="">1</option>
+                        <option value="">1</option>
+                      </select>
+                    </td>
+                    <td>
+                      <i class="fas fa-plus-circle add-item-basket"></i>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>NOM CARTE LANGUE</td>
+                    <td>
+                      <select name="" id="">
+                        <option value="">1</option>
+                        <option value="">1</option>
+                      </select>
+                    </td>
+                    <td>
+                      ETAT
+                      <select name="" id="">
+                        <option value="">1</option>
+                        <option value="">1</option>
+                      </select>
+                    </td>
+                    <td>
+                      QTE
+                      <select name="" id="">
+                        <option value="">1</option>
+                        <option value="">1</option>
+                      </select>
+                    </td>
+                    <td>
+                      FOIL
+                      <select name="" id="">
+                        <option value="">1</option>
+                        <option value="">1</option>
+                      </select>
+                    </td>
+                    <td>
+                      PRIX
+                      <select name="" id="">
+                        <option value="">1</option>
+                        <option value="">1</option>
+                      </select>
+                    </td>
+                    <td>
+                      <i class="fas fa-plus-circle add-item-basket"></i>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </form>
           </div>
         </div>

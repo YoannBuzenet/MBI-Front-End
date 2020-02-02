@@ -21,6 +21,10 @@ body {
   margin: 0 auto;
 }
 
+.center-text {
+  text-align: center;
+}
+
 .display-none {
   display: none;
 }
@@ -49,6 +53,21 @@ td {
   -ms-user-select: none;
   user-select: none;
   -o-user-select: none;
+}
+
+/**************************
+********TABLES************
+**************************/
+table {
+  width: 100%;
+}
+
+.zebra-table tr:nth-child(odd) {
+  background-color: grey;
+}
+
+.zebra-table tr:hover {
+  background-color: black;
 }
 
 /**************************
@@ -180,4 +199,11 @@ div.connect p {
 .last-modification {
   width: 80%;
   background-color: grey;
+}
+
+/**************************
+********ONESET PAGE*******
+**************************/
+.add-item-basket {
+  cursor: pointer;
 }
