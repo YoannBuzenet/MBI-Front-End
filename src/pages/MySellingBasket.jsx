@@ -6,6 +6,16 @@ const MyCurrentSellRequest = props => {
 
   console.log(currentBasket);
 
+  const handleDelete = cardUuid => {
+    const newCurrentBasket = currentBasket.filter(
+      card => cardUuid !== card.uuid
+    );
+    setCurrentBasket(newCurrentBasket);
+  };
+
+  //Array to know the total of buying prices. As it's not stored everywhere we create memory here.
+  const total_prices = [];
+
   return (
     <>
       <div className="container">
@@ -18,8 +28,8 @@ const MyCurrentSellRequest = props => {
               <th>Etat</th>
               <th>Langue</th>
               <th>Foil</th>
-              <th>Quantité</th>
               <th>Prix</th>
+              <th>Quantité</th>
               <th>Total</th>
               <th></th>
             </tr>
@@ -32,14 +42,38 @@ const MyCurrentSellRequest = props => {
                 <td>{card.condition}</td>
                 <td>{card.lang}</td>
                 <td>{card.isFoil}</td>
-                <td>{card.quantity}</td>
                 <td>{card.price}</td>
+                <td>{card.quantity}</td>
                 <td>{card.price * card.quantity}</td>
+                {total_prices.push(card.price * card.quantity)}
                 <td>
-                  <i className="fas fa-minus-circle"></i>
+                  <i
+                    className="fas fa-minus-circle delete-from-selling-basket"
+                    onClick={() => handleDelete(card.uuid)}
+                  ></i>
                 </td>
               </tr>
             ))}
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>
+                Total cartes :
+                {currentBasket.reduce((total, card) => {
+                  return total + card.quantity;
+                }, 0)}
+              </td>
+              <td>
+                Total :
+                {total_prices.reduce((total, number) => {
+                  return total + number;
+                }, 0)}
+              </td>
+            </tr>
           </tbody>
         </table>
       </div>

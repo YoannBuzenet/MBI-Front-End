@@ -37,7 +37,7 @@ const LastModifications = props => {
                         condition: "NM",
                         lang: "EN",
                         isFoil: "No",
-                        uuid: "9215-ddfsdf-9898-dsfd",
+                        uuid: "9215-ddfsdf-9898-dsfde",
                         currency: "euros",
                         quantity: 4
                       }
@@ -68,13 +68,13 @@ const LastModifications = props => {
                     setCurrentBasket([
                       ...currentBasket,
                       {
-                        cardName: "Foret de la Yavimaya",
+                        cardName: "Cape de tatou",
                         set: "Invasion",
                         price: 2,
                         condition: "NM",
                         lang: "EN",
                         isFoil: "No",
-                        uuid: "9215-ddfsdf-9898-dsfd",
+                        uuid: "9215-ddfsdf-9898-dsfdz",
                         currency: "euros",
                         quantity: 4
                       }
@@ -105,13 +105,13 @@ const LastModifications = props => {
                     setCurrentBasket([
                       ...currentBasket,
                       {
-                        cardName: "Foret de la Yavimaya",
+                        cardName: "Boule de Feu",
                         set: "Invasion",
                         price: 2,
                         condition: "NM",
                         lang: "EN",
                         isFoil: "No",
-                        uuid: "9215-ddfsdf-9898-dsfd",
+                        uuid: "9215-ddfsdf-9898-dsfda",
                         currency: "euros",
                         quantity: 4
                       }
@@ -142,7 +142,7 @@ const LastModifications = props => {
                     setCurrentBasket([
                       ...currentBasket,
                       {
-                        cardName: "Foret de la Yavimaya",
+                        cardName: "Black Lotus",
                         set: "Invasion",
                         price: 2,
                         condition: "NM",

@@ -65,13 +65,13 @@ const OneSet = props => {
                           setCurrentBasket([
                             ...currentBasket,
                             {
-                              cardName: "Foret de la Yavimaya",
+                              cardName: "Dague de vif-argent",
                               set: "Invasion",
                               price: 2,
                               condition: "NM",
                               lang: "EN",
                               isFoil: "No",
-                              uuid: "9215-ddfsdf-9898-dsfd",
+                              uuid: "9215-ddfsdf-9898-dsfdc",
                               currency: "euros",
                               quantity: 4
                             }
@@ -124,13 +124,13 @@ const OneSet = props => {
                           setCurrentBasket([
                             ...currentBasket,
                             {
-                              cardName: "Foret de la Yavimaya",
+                              cardName: "Sorcier Sybarite",
                               set: "Planeshift",
                               price: 2,
                               condition: "NM",
                               lang: "EN",
                               isFoil: "No",
-                              uuid: "9215-ddfsdf-9898-dsfd",
+                              uuid: "9215-ddfsdf-9898-dsfdv",
                               currency: "euros",
                               quantity: 4
                             }
