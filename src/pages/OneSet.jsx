@@ -1,7 +1,19 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import SetList from "../components/setList";
+import SellingBasketContext from "../context/sellingBasket";
 
 const OneSet = props => {
+  //Current Selling Request Basket
+  const { currentBasket, setCurrentBasket } = useContext(SellingBasketContext);
+
+  useEffect(() => {
+    console.log(currentBasket);
+  });
+
+  function handleAddCardToCart(card) {
+    setCurrentBasket([...currentBasket, card]);
+  }
+
   return (
     <>
       <div className="container">
@@ -14,7 +26,8 @@ const OneSet = props => {
                 <thead></thead>
                 <tbody>
                   <tr>
-                    <td>NOM CARTE LANGUE</td>
+                    <td>NOM CARTE</td>
+                    <td>LANGUE</td>
                     <td>
                       <select name="" id="">
                         <option value="">1</option>
@@ -50,11 +63,15 @@ const OneSet = props => {
                       </select>
                     </td>
                     <td>
-                      <i class="fas fa-plus-circle add-item-basket"></i>
+                      <i
+                        className="fas fa-plus-circle add-item-basket"
+                        onClick={() => handleAddCardToCart({ lol: "card" })}
+                      ></i>
                     </td>
                   </tr>
                   <tr>
-                    <td>NOM CARTE LANGUE</td>
+                    <td>NOM CARTE</td>
+                    <td>LANGUE</td>
                     <td>
                       <select name="" id="">
                         <option value="">1</option>
@@ -90,11 +107,15 @@ const OneSet = props => {
                       </select>
                     </td>
                     <td>
-                      <i class="fas fa-plus-circle add-item-basket"></i>
+                      <i
+                        className="fas fa-plus-circle add-item-basket"
+                        onClick={() => handleAddCardToCart({ lol2: "card2" })}
+                      ></i>
                     </td>
                   </tr>
                   <tr>
-                    <td>NOM CARTE LANGUE</td>
+                    <td>NOM CARTE</td>
+                    <td>LANGUE</td>
                     <td>
                       <select name="" id="">
                         <option value="">1</option>
@@ -130,7 +151,7 @@ const OneSet = props => {
                       </select>
                     </td>
                     <td>
-                      <i class="fas fa-plus-circle add-item-basket"></i>
+                      <i className="fas fa-plus-circle add-item-basket"></i>
                     </td>
                   </tr>
                 </tbody>

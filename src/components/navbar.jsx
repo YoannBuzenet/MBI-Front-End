@@ -1,17 +1,26 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import AuthContext from "../context/authContext";
+import SellingBasketContext from "../context/sellingBasket";
 
 const Navbar = ({ history }) => {
+  //Current Authentication
   const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
 
+  //Current Selling Request Basket
+  const { currentBasket, setCurrentBasket } = useContext(SellingBasketContext);
+
+  //Current toggle menu state
   const [toggleMenu, setToggleMenu] = useState(false);
-  const [loginWindow, setToggleLoginWindow] = useState(false);
 
   const handleLogout = () => {
     setIsAuthenticated(false);
     history.replace("/");
   };
+
+  useEffect(() => {
+    console.log("navbar rerender");
+  }, [currentBasket]);
 
   return (
     <>
@@ -32,7 +41,8 @@ const Navbar = ({ history }) => {
                 className="classic-links nav-element"
                 to="/my_selling_basket"
               >
-                Mon Rachat (<span className="buying-total">0</span>)
+                Mon Rachat (
+                <span className="buying-total">{currentBasket.length}</span>)
               </Link>
               <div className="toggle-menu-container">
                 <p
@@ -67,12 +77,16 @@ const Navbar = ({ history }) => {
             </div>
           )) || (
             <div className="connect">
-              <Link className="classic-links" to="/my_selling_basket">
+              <Link
+                className="classic-links nav-element"
+                to="/my_selling_basket"
+              >
                 <p>
-                  Mon Rachat (<span className="buying-total">0</span>)
+                  Mon Rachat (
+                  <span className="buying-total">{currentBasket.length}</span>)
                 </p>
               </Link>
-              <Link className="classic-links">
+              <Link className="classic-links" to="/">
                 <p>S'inscrire</p>
               </Link>
               <Link className="classic-links" to="/login">
