@@ -42,7 +42,12 @@ const Navbar = ({ history }) => {
                 to="/my_selling_basket"
               >
                 Mon Rachat (
-                <span className="buying-total">{currentBasket.length}</span>)
+                <span className="buying-total">
+                  {currentBasket.reduce((total, card) => {
+                    return total + card.quantity;
+                  }, 0)}
+                </span>
+                )
               </Link>
               <div className="toggle-menu-container">
                 <p
@@ -83,7 +88,12 @@ const Navbar = ({ history }) => {
               >
                 <p>
                   Mon Rachat (
-                  <span className="buying-total">{currentBasket.length}</span>)
+                  <span className="buying-total">
+                    {currentBasket.reduce((total, card) => {
+                      return total + card.quantity;
+                    }, 0)}
+                  </span>
+                  )
                 </p>
               </Link>
               <Link className="classic-links" to="/">

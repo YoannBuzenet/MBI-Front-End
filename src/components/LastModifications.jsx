@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import SellingBasketContext from "../context/sellingBasket";
 
-const LastModifications = props => {
+const LastModifications = ({ handleAddSellingBasket }) => {
   //Current Selling Request Basket
   const { currentBasket, setCurrentBasket } = useContext(SellingBasketContext);
 
@@ -28,20 +28,17 @@ const LastModifications = props => {
                 <i
                   className="fas fa-plus-circle add-item-basket"
                   onClick={() =>
-                    setCurrentBasket([
-                      ...currentBasket,
-                      {
-                        cardName: "Foret de la Yavimaya",
-                        set: "Invasion",
-                        price: 2,
-                        condition: "NM",
-                        lang: "EN",
-                        isFoil: "No",
-                        uuid: "9215-ddfsdf-9898-dsfde",
-                        currency: "euros",
-                        quantity: 4
-                      }
-                    ])
+                    handleAddSellingBasket(currentBasket, {
+                      cardName: "Foret de la Yavimaya",
+                      set: "Invasion",
+                      price: 2,
+                      condition: "NM",
+                      lang: "EN",
+                      isFoil: "No",
+                      uuid: "9215-ddfsdf-9898-dsfde",
+                      currency: "euros",
+                      quantity: 4
+                    })
                   }
                 ></i>
               </form>
@@ -65,20 +62,17 @@ const LastModifications = props => {
                 <i
                   className="fas fa-plus-circle add-item-basket"
                   onClick={() =>
-                    setCurrentBasket([
-                      ...currentBasket,
-                      {
-                        cardName: "Cape de tatou",
-                        set: "Invasion",
-                        price: 2,
-                        condition: "NM",
-                        lang: "EN",
-                        isFoil: "No",
-                        uuid: "9215-ddfsdf-9898-dsfdz",
-                        currency: "euros",
-                        quantity: 4
-                      }
-                    ])
+                    handleAddSellingBasket(currentBasket, {
+                      cardName: "Cape de tatou",
+                      set: "Invasion",
+                      price: 2,
+                      condition: "NM",
+                      lang: "EN",
+                      isFoil: "No",
+                      uuid: "9215-ddfsdf-9898-dsfdz",
+                      currency: "euros",
+                      quantity: 4
+                    })
                   }
                 ></i>
               </form>
@@ -102,20 +96,17 @@ const LastModifications = props => {
                 <i
                   className="fas fa-plus-circle add-item-basket"
                   onClick={() =>
-                    setCurrentBasket([
-                      ...currentBasket,
-                      {
-                        cardName: "Boule de Feu",
-                        set: "Invasion",
-                        price: 2,
-                        condition: "NM",
-                        lang: "EN",
-                        isFoil: "No",
-                        uuid: "9215-ddfsdf-9898-dsfda",
-                        currency: "euros",
-                        quantity: 4
-                      }
-                    ])
+                    handleAddSellingBasket(currentBasket, {
+                      cardName: "Boule de Feu",
+                      set: "Invasion",
+                      price: 2,
+                      condition: "NM",
+                      lang: "EN",
+                      isFoil: "No",
+                      uuid: "9215-ddfsdf-9898-dsfda",
+                      currency: "euros",
+                      quantity: 4
+                    })
                   }
                 ></i>
               </form>
@@ -139,20 +130,17 @@ const LastModifications = props => {
                 <i
                   className="fas fa-plus-circle add-item-basket"
                   onClick={() =>
-                    setCurrentBasket([
-                      ...currentBasket,
-                      {
-                        cardName: "Black Lotus",
-                        set: "Invasion",
-                        price: 2,
-                        condition: "NM",
-                        lang: "EN",
-                        isFoil: "No",
-                        uuid: "9215-ddfsdf-9898-dsfd",
-                        currency: "euros",
-                        quantity: 4
-                      }
-                    ])
+                    handleAddSellingBasket(currentBasket, {
+                      cardName: "Black Lotus",
+                      set: "Invasion",
+                      price: 2,
+                      condition: "NM",
+                      lang: "EN",
+                      isFoil: "No",
+                      uuid: "9215-ddfsdf-9898-dsfd",
+                      currency: "euros",
+                      quantity: 4
+                    })
                   }
                 ></i>
               </form>

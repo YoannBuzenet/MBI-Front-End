@@ -54,6 +54,42 @@ function App() {
 
   const NavbarWithRouter = withRouter(Navbar);
 
+  //Function to add to Selling Basket. Can't use it in a separate file because of the Hook use that require being part of a component. If we find a better way to refactor it ! ...
+  const handleAddSellingBasket = (currentBasket, card) => {
+    for (var i = 0; i < currentBasket.length; i++) {
+      if (
+        currentBasket[i].cardName === card.cardName &&
+        currentBasket[i].set === card.set &&
+        currentBasket[i].price === card.price &&
+        currentBasket[i].condition === card.condition &&
+        currentBasket[i].lang === card.lang &&
+        currentBasket[i].isFoil === card.isFoil &&
+        currentBasket[i].uuid === card.uuid
+      ) {
+        const updatedCard = currentBasket[i];
+        updatedCard.quantity += card.quantity;
+
+        // setCurrentbasket by adding quantity of the card currently added to the selling basket
+        setCurrentBasket(
+          currentBasket.map(card => {
+            return card.cardName === updatedCard.cardName &&
+              card.set === updatedCard.set &&
+              card.price === updatedCard.price &&
+              card.condition === updatedCard.condition &&
+              card.lang === updatedCard.lang &&
+              card.isFoil === updatedCard.isFoil &&
+              card.uuid === updatedCard.uuid
+              ? { ...updatedCard }
+              : card;
+          })
+        );
+        break;
+      } else {
+        setCurrentBasket([...currentBasket, card]);
+      }
+    }
+  };
+
   return (
     <div className="App">
       <AuthContext.Provider value={contextValue}>
@@ -61,9 +97,20 @@ function App() {
           <Router>
             <NavbarWithRouter />
             <Switch>
-              <Route path="/" exact component={Homepage} />
+              <Route
+                path="/"
+                exact
+                render={props => (
+                  <Homepage handleAddSellingBasket={handleAddSellingBasket} />
+                )}
+              />
               <Route path="/my_sell_requests" component={mySellRequests} />
-              <Route path="/sets/:id" component={OneSet} />
+              <Route
+                path="/sets/:id"
+                render={props => (
+                  <OneSet handleAddSellingBasket={handleAddSellingBasket} />
+                )}
+              />
               <Route path="/login" component={LoginPage} />} />
               <Route path="/my_selling_basket" component={MySellingBasket} />
               <PrivateRoute path="/my_account" component={myAccount} />
