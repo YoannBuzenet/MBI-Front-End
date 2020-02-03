@@ -67,12 +67,24 @@ table {
   margin: auto;
 }
 
-.zebra-table tr:nth-child(odd) {
-  background-color: grey;
+.zebra-table tbody tr:nth-child(odd) {
+  background-color: hsla(0, 0%, 0%, 0.09);
 }
 
 .zebra-table tr:hover {
   background-color: hsla(0, 0%, 0%, 0.09);
+}
+.zebra-table tbody > tr:only-child {
+  background-color: transparent;
+}
+.zebra-table tbody > tr:only-child:hover {
+  background-color: transparent;
+}
+.zebra-table tr:last-child {
+  background-color: transparent;
+}
+.zebra-table tr:last-child:hover {
+  background-color: transparent;
 }
 
 /**************************
@@ -197,7 +209,7 @@ div.connect p {
 **************************/
 
 .setList-table td:hover {
-  background-color: grey;
+  background-color: hsla(0, 0%, 0%, 0.29);
 }
 
 .setList-link {
@@ -214,7 +226,6 @@ div.connect p {
 **************************/
 .last-modification {
   width: 80%;
-  background-color: grey;
 }
 
 .last-modification .all-cards {

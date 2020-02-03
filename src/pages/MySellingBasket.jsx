@@ -13,6 +13,17 @@ const MyCurrentSellRequest = props => {
     setCurrentBasket(newCurrentBasket);
   };
 
+  //Function to update the amount of exemplar of one card
+  const handleChange = (event, currentBasket, card) => {
+    card.quantity = parseInt(event.target.value);
+    setCurrentBasket(
+      currentBasket.map(cardInBasket => {
+        console.log(card);
+        return cardInBasket === card ? { ...card } : cardInBasket;
+      })
+    );
+  };
+
   //Array to know the total of buying prices. As it's not stored everywhere we create memory here.
   const total_prices = [];
 
@@ -20,7 +31,7 @@ const MyCurrentSellRequest = props => {
     <>
       <div className="container">
         <h1>Ma demande de rachat</h1>
-        <table>
+        <table className="zebra-table">
           <thead>
             <tr>
               <th>Nom de la carte</th>
@@ -43,7 +54,27 @@ const MyCurrentSellRequest = props => {
                 <td>{card.lang}</td>
                 <td>{card.isFoil}</td>
                 <td>{card.price}</td>
-                <td>{card.quantity}</td>
+                <td>
+                  <select
+                    name=""
+                    id=""
+                    onChange={event => handleChange(event, currentBasket, card)}
+                  >
+                    <option value={card.quantity}>{card.quantity}</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                  </select>
+                </td>
                 <td>{card.price * card.quantity}</td>
                 {total_prices.push(card.price * card.quantity)}
                 <td>
