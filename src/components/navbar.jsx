@@ -51,7 +51,7 @@ const Navbar = ({ history }) => {
               </Link>
               <div className="toggle-menu-container">
                 <p
-                  className="unselectable display-inline-block nav-element"
+                  className="unselectable display-inline-block nav-element pointer"
                   onClick={() => setToggleMenu(!toggleMenu)}
                 >
                   Prénom
@@ -62,11 +62,19 @@ const Navbar = ({ history }) => {
                 </p>
                 {toggleMenu && (
                   <ul className="toggle-menu">
-                    <Link to="/my_account" className="toggle-menu-links">
+                    <Link
+                      to="/my_account"
+                      className="toggle-menu-links"
+                      onClick={() => setToggleMenu(!toggleMenu)}
+                    >
                       <li>Mon compte</li>
                     </Link>
 
-                    <Link to="/my_sell_requests" className="toggle-menu-links">
+                    <Link
+                      to="/my_sell_requests"
+                      className="toggle-menu-links"
+                      onClick={() => setToggleMenu(!toggleMenu)}
+                    >
                       <li>Mes rachats</li>
                     </Link>
 

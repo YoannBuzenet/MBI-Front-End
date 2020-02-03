@@ -59,6 +59,10 @@ td {
   -o-user-select: none;
 }
 
+.pointer {
+  cursor: pointer;
+}
+
 /**************************
 ********TABLES************
 **************************/
@@ -114,7 +118,6 @@ div.connect p {
 }
 
 .my_options {
-  cursor: pointer;
   display: flex;
   justify-content: space-between;
   align-items: center;
