@@ -158,14 +158,14 @@ div.connect p {
   background-color: rgba(0, 0, 0, 0.3);
 }
 
-.toggle-menu li:first-child {
+.toggle-menu a:first-child li {
   padding: 1rem;
   text-align: left;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
 }
 
-.toggle-menu li:last-child {
+.toggle-menu > li:last-child {
   padding: 1rem;
   text-align: left;
   border-bottom-left-radius: 5px;

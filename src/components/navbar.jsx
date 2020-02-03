@@ -62,19 +62,14 @@ const Navbar = ({ history }) => {
                 </p>
                 {toggleMenu && (
                   <ul className="toggle-menu">
-                    <li>
-                      <Link to="/my_account" className="toggle-menu-links">
-                        Mon compte
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        to="/my_sell_requests"
-                        className="toggle-menu-links"
-                      >
-                        Mes rachats
-                      </Link>
-                    </li>
+                    <Link to="/my_account" className="toggle-menu-links">
+                      <li>Mon compte</li>
+                    </Link>
+
+                    <Link to="/my_sell_requests" className="toggle-menu-links">
+                      <li>Mes rachats</li>
+                    </Link>
+
                     <li onClick={handleLogout}>Déconnexion</li>
                   </ul>
                 )}
