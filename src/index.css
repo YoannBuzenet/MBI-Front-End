@@ -258,3 +258,38 @@ div.connect p {
 .delete-from-selling-basket {
   cursor: pointer;
 }
+
+.all-content {
+  display: flex;
+  justify-content: space-around;
+}
+
+.all-content > .right-content {
+  max-width: 30%;
+  flex-grow: 1;
+}
+
+.all-content > .left-content {
+  flex-grow: 1;
+}
+
+.all-content > .main-content {
+  flex-grow: 3;
+}
+
+.sellRequest-validation-block {
+  margin-top: 1rem;
+  margin-right: 1rem;
+  padding: 1rem;
+  background-color: hsla(0, 0%, 0%, 0.09);
+}
+
+.sellRequest-validation-block input {
+  margin-right: 10px;
+}
+
+.sellRequest-validation-button {
+  display: block;
+  margin: 1rem auto;
+  padding: 1rem;
+}
