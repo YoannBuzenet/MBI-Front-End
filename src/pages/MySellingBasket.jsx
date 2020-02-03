@@ -88,7 +88,7 @@ const MyCurrentSellRequest = ({ history }) => {
                   </td>
                 </tr>
               ))}
-              <tr>
+              <tr className="total-line">
                 <td></td>
                 <td></td>
                 <td></td>

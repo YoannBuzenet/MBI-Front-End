@@ -75,19 +75,14 @@ table {
   background-color: hsla(0, 0%, 0%, 0.09);
 }
 
-.zebra-table tr:hover {
-  background-color: hsla(0, 0%, 0%, 0.09);
+.zebra-table tbody tr:hover {
+  background-color: hsla(0, 0%, 0%, 0.19);
 }
-.zebra-table tbody > tr:only-child {
+
+.zebra-table .total-line {
   background-color: transparent;
 }
-.zebra-table tbody > tr:only-child:hover {
-  background-color: transparent;
-}
-.zebra-table tr:last-child {
-  background-color: transparent;
-}
-.zebra-table tr:last-child:hover {
+.zebra-table .total-line:hover {
   background-color: transparent;
 }
 
