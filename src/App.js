@@ -19,6 +19,7 @@ import mySellRequests from "./pages/AllMySellRequests";
 import OneSet from "./pages/OneSet";
 import MySellingBasket from "./pages/MySellingBasket";
 import RegisterPage from "./pages/RegisterPage";
+import OneSellRequest from "./pages/OneSellRequest";
 
 function App() {
   //Creating the Authentication state
@@ -118,6 +119,10 @@ function App() {
               <Route path="/login" component={LoginPage} />} />
               <Route path="/register" component={RegisterPage} />} />
               <Route path="/my_selling_basket" component={MySellingBasket} />
+              <PrivateRoute
+                path="/my_sell_requests/:id"
+                component={OneSellRequest}
+              />
               <PrivateRoute
                 path="/my_sell_requests"
                 component={mySellRequests}

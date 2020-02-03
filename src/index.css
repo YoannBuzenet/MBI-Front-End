@@ -63,6 +63,12 @@ td {
   cursor: pointer;
 }
 
+.subInfos {
+  display: block;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
 /**************************
 ********TABLES************
 **************************/
@@ -79,10 +85,10 @@ table {
   background-color: hsla(0, 0%, 0%, 0.19);
 }
 
-.zebra-table .total-line {
+.zebra-table tbody tr.total-line {
   background-color: transparent;
 }
-.zebra-table .total-line:hover {
+.zebra-table tbody tr.total-line:hover {
   background-color: transparent;
 }
 
@@ -304,4 +310,18 @@ div.connect p {
 .my-account button {
   padding: 1rem;
   margin-top: 2rem;
+}
+
+/**************************
+*****ONE SELL REQUEST******
+**************************/
+.sellRequest-infos {
+  display: flex;
+  justify-content: space-around;
+}
+
+.sellRequest-status,
+.sellRequest-lastDate {
+  text-transform: uppercase;
+  text-align: left;
 }

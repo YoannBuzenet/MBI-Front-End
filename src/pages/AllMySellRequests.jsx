@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const mySellRequests = props => {
   const currentSellRequests = [
@@ -90,7 +91,11 @@ const mySellRequests = props => {
         <tbody>
           {currentSellRequests.map(sellRequest => (
             <tr>
-              <td>{sellRequest.internalRef}</td>
+              <td>
+                <Link to={"/my_sell_requests/" + sellRequest.internalRef}>
+                  {sellRequest.internalRef}
+                </Link>
+              </td>
               <td>{sellRequest.customerSendDate}</td>
               <td>{sellRequest.shopReceptionDate}</td>
               <td>{sellRequest.status}</td>
