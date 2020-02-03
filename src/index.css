@@ -293,3 +293,17 @@ div.connect p {
   margin: 1rem auto;
   padding: 1rem;
 }
+
+/**************************
+********MY ACCOUNT*******
+**************************/
+.my-account input,
+.my-account textarea {
+  margin: 0.5rem auto;
+  display: block;
+}
+
+.my-account button {
+  padding: 1rem;
+  margin-top: 2rem;
+}

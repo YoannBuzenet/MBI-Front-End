@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import SellingBasketContext from "../context/sellingBasket";
 import AuthContext from "../context/authContext";
 
-const SellRequestValidation = props => {
+const SellRequestValidation = ({ history }) => {
   //Current Basket
   const { currentBasket, setCurrentBasket } = useContext(SellingBasketContext);
 
@@ -11,6 +11,7 @@ const SellRequestValidation = props => {
 
   const handleSubmit = event => {
     event.preventDefault();
+    history.replace("/my_sell_requests");
   };
 
   return (
@@ -22,8 +23,10 @@ const SellRequestValidation = props => {
           {isAuthenticated ? (
             <div className="isUserAuthenticated">
               <form action="" onSubmit={handleSubmit}>
-                <input type="checkbox" required />
-                <span>J'accepte les conditions générales de ventes.</span>
+                <input type="checkbox" required id="checkbox-compliance" />
+                <label for="checkbox-compliance">
+                  J'accepte les conditions générales de ventes.
+                </label>
                 <button className="sellRequest-validation-button" type="submit">
                   Valider mon rachat
                 </button>

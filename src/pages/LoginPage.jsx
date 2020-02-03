@@ -25,7 +25,9 @@ const LoginPage = ({ onLogin, history }) => {
   };
 
   const handleSubmit = async event => {
+    //Remove that line when going live
     setIsAuthenticated(true);
+
     history.replace("/");
     event.preventDefault();
     try {
@@ -57,7 +59,7 @@ const LoginPage = ({ onLogin, history }) => {
         <Field
           name="password"
           type="password"
-          label="Adresse e-mail"
+          label="Password"
           value={credentials.password}
           onChange={handleChange}
           placeholder="Mot de passe"

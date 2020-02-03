@@ -109,7 +109,6 @@ function App() {
                   <Homepage handleAddSellingBasket={handleAddSellingBasket} />
                 )}
               />
-              <Route path="/my_sell_requests" component={mySellRequests} />
               <Route
                 path="/sets/:id"
                 render={props => (
@@ -119,6 +118,10 @@ function App() {
               <Route path="/login" component={LoginPage} />} />
               <Route path="/register" component={RegisterPage} />} />
               <Route path="/my_selling_basket" component={MySellingBasket} />
+              <PrivateRoute
+                path="/my_sell_requests"
+                component={mySellRequests}
+              />
               <PrivateRoute path="/my_account" component={myAccount} />
             </Switch>
           </Router>

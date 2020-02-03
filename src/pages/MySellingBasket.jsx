@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import SellingBasketContext from "../context/sellingBasket";
 import SellRequestValidation from "../components/SellRequestValidation";
 
-const MyCurrentSellRequest = props => {
+const MyCurrentSellRequest = ({ history }) => {
   const { currentBasket, setCurrentBasket } = useContext(SellingBasketContext);
 
   const handleDelete = cardUuid => {
@@ -112,7 +112,7 @@ const MyCurrentSellRequest = props => {
           </table>
         </div>
         <div className="right-content">
-          <SellRequestValidation />
+          <SellRequestValidation history={history} />
         </div>
       </div>
     </>
