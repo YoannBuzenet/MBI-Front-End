@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import SellingBasketContext from "../context/sellingBasket";
+import CardWithThumbnail from "./CardWithThumbnail";
 
 const LastModifications = ({ handleAddSellingBasket }) => {
   //Current Selling Request Basket
@@ -10,142 +11,66 @@ const LastModifications = ({ handleAddSellingBasket }) => {
       <div className="last-modification">
         <h2>Les dernières modifications</h2>
         <div className="all-cards">
-          <div className="card">
-            <div className="card-picture">
-              <img src="https://placehold.it/100x175" alt="" />
-            </div>
-            <div className="card-infos">
-              <div className="card-title">Card 1</div>
-              <div className="card-language">English</div>
-              <div className="card-condition">NM</div>
-              <div className="card-price">3€</div>
-              <form action="">
-                QTE
-                <select name="" id="">
-                  <option value="">1</option>
-                  <option value="">1</option>
-                </select>
-                <i
-                  className="fas fa-plus-circle add-item-basket"
-                  onClick={() =>
-                    handleAddSellingBasket(currentBasket, {
-                      cardName: "Foret de la Yavimaya",
-                      set: "Invasion",
-                      price: 2,
-                      condition: "NM",
-                      lang: "EN",
-                      isFoil: "No",
-                      uuid: "9215-ddfsdf-9898-dsfde",
-                      currency: "euros",
-                      quantity: 4
-                    })
-                  }
-                ></i>
-              </form>
-            </div>
-          </div>
-          <div className="card">
-            <div className="card-picture">
-              <img src="https://placehold.it/100x175" alt="" />
-            </div>
-            <div className="card-infos">
-              <div className="card-title">Card 1</div>
-              <div className="card-language">English</div>
-              <div className="card-condition">NM</div>
-              <div className="card-price">3€</div>
-              <form action="">
-                QTE
-                <select name="" id="">
-                  <option value="">1</option>
-                  <option value="">1</option>
-                </select>
-                <i
-                  className="fas fa-plus-circle add-item-basket"
-                  onClick={() =>
-                    handleAddSellingBasket(currentBasket, {
-                      cardName: "Cape de tatou",
-                      set: "Invasion",
-                      price: 2,
-                      condition: "NM",
-                      lang: "EN",
-                      isFoil: "No",
-                      uuid: "9215-ddfsdf-9898-dsfdz",
-                      currency: "euros",
-                      quantity: 4
-                    })
-                  }
-                ></i>
-              </form>
-            </div>
-          </div>
-          <div className="card">
-            <div className="card-picture">
-              <img src="https://placehold.it/100x175" alt="" />
-            </div>
-            <div className="card-infos">
-              <div className="card-title">Card 1</div>
-              <div className="card-language">English</div>
-              <div className="card-condition">NM</div>
-              <div className="card-price">3€</div>
-              <form action="">
-                QTE
-                <select name="" id="">
-                  <option value="">1</option>
-                  <option value="">1</option>
-                </select>
-                <i
-                  className="fas fa-plus-circle add-item-basket"
-                  onClick={() =>
-                    handleAddSellingBasket(currentBasket, {
-                      cardName: "Boule de Feu",
-                      set: "Invasion",
-                      price: 2,
-                      condition: "NM",
-                      lang: "EN",
-                      isFoil: "No",
-                      uuid: "9215-ddfsdf-9898-dsfda",
-                      currency: "euros",
-                      quantity: 4
-                    })
-                  }
-                ></i>
-              </form>
-            </div>
-          </div>
-          <div className="card">
-            <div className="card-picture">
-              <img src="https://placehold.it/100x175" alt="" />
-            </div>
-            <div className="card-infos">
-              <div className="card-title">Card 1</div>
-              <div className="card-language">English</div>
-              <div className="card-condition">NM</div>
-              <div className="card-price">3€</div>
-              <form action="">
-                QTE
-                <select name="" id="">
-                  <option value="">1</option>
-                  <option value="">1</option>
-                </select>
-                <i
-                  className="fas fa-plus-circle add-item-basket"
-                  onClick={() =>
-                    handleAddSellingBasket(currentBasket, {
-                      cardName: "Black Lotus",
-                      set: "Invasion",
-                      price: 2,
-                      condition: "NM",
-                      lang: "EN",
-                      isFoil: "No",
-                      uuid: "9215-ddfsdf-9898-dsfd",
-                      currency: "euros",
-                      quantity: 4
-                    })
-                  }
-                ></i>
-              </form>
-            </div>
-          </div>
+          <CardWithThumbnail
+            picture="https://placehold.it/100x175"
+            handleAddSellingBasket={handleAddSellingBasket}
+            card={{
+              cardName: "Foret de la Yavimaya",
+              set: "Invasion",
+              price: 2,
+              condition: "NM",
+              lang: "EN",
+              isFoil: "No",
+              uuid: "9215-ddfsdf-9898-dsfde",
+              currency: "euros",
+              quantity: 1
+            }}
+          />
+          <CardWithThumbnail
+            picture="https://placehold.it/100x175"
+            handleAddSellingBasket={handleAddSellingBasket}
+            card={{
+              cardName: "Kavru Languefeu",
+              set: "Planeshift",
+              price: 2,
+              condition: "EXC",
+              lang: "EN",
+              isFoil: "No",
+              uuid: "9215-ddfsdf-9898-dsfd",
+              currency: "euros",
+              quantity: 1
+            }}
+          />
+          <CardWithThumbnail
+            picture="https://placehold.it/100x175"
+            handleAddSellingBasket={handleAddSellingBasket}
+            card={{
+              cardName: "Cape de tatou",
+              set: "Invasion",
+              price: 2,
+              condition: "PL",
+              lang: "EN",
+              isFoil: "No",
+              uuid: "9215-ddfsdf-9898-dsfdi",
+              currency: "euros",
+              quantity: 1
+            }}
+          />
+          <CardWithThumbnail
+            picture="https://placehold.it/100x175"
+            handleAddSellingBasket={handleAddSellingBasket}
+            card={{
+              cardName: "Apprenti Spinosophe",
+              set: "Invasion",
+              price: 2,
+              condition: "NM",
+              lang: "EN",
+              isFoil: "Yes",
+              uuid: "9215-ddfsdf-9898-dsfdn",
+              currency: "euros",
+              quantity: 1
+            }}
+          />
         </div>
       </div>
     </>
