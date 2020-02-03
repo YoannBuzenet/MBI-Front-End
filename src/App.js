@@ -18,6 +18,7 @@ import myAccount from "./pages/MyAccount";
 import mySellRequests from "./pages/AllMySellRequests";
 import OneSet from "./pages/OneSet";
 import MySellingBasket from "./pages/MySellingBasket";
+import RegisterPage from "./pages/RegisterPage";
 
 function App() {
   //Creating the Authentication state
@@ -56,6 +57,11 @@ function App() {
 
   //Function to add to Selling Basket. Can't use it in a separate file because of the Hook use that require being part of a component. If we find a better way to refactor it ! ...
   const handleAddSellingBasket = (currentBasket, card) => {
+    //If the selling basket is empty, just add the new card.
+    if (currentBasket.length === 0) {
+      setCurrentBasket([card]);
+    }
+
     for (var i = 0; i < currentBasket.length; i++) {
       if (
         currentBasket[i].cardName === card.cardName &&
@@ -68,7 +74,6 @@ function App() {
       ) {
         const updatedCard = currentBasket[i];
         updatedCard.quantity += card.quantity;
-
         // setCurrentbasket by adding quantity of the card currently added to the selling basket
         setCurrentBasket(
           currentBasket.map(card => {
@@ -112,6 +117,7 @@ function App() {
                 )}
               />
               <Route path="/login" component={LoginPage} />} />
+              <Route path="/register" component={RegisterPage} />} />
               <Route path="/my_selling_basket" component={MySellingBasket} />
               <PrivateRoute path="/my_account" component={myAccount} />
             </Switch>

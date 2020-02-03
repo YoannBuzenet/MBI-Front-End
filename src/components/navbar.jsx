@@ -96,7 +96,7 @@ const Navbar = ({ history }) => {
                   )
                 </p>
               </Link>
-              <Link className="classic-links" to="/">
+              <Link className="classic-links" to="/register">
                 <p>S'inscrire</p>
               </Link>
               <Link className="classic-links" to="/login">
