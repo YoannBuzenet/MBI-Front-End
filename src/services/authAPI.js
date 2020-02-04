@@ -21,7 +21,7 @@ function register(credentials) {
   console.log(credentials);
   return axios
     .post("http://127.0.0.1:8000/Register", credentials)
-    .then(response => response.data.token);
+    .then(response => console.log(response));
 }
 
 function logout() {

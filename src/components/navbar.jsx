@@ -18,10 +18,6 @@ const Navbar = ({ history }) => {
     history.replace("/");
   };
 
-  useEffect(() => {
-    console.log("navbar rerender");
-  }, [currentBasket]);
-
   return (
     <>
       {toggleMenu && (

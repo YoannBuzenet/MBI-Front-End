@@ -8,8 +8,6 @@ const CardWithThumbnail = ({ picture, handleAddSellingBasket, card }) => {
   //Using the current Card in state
   const [currentCard, setCard] = useState(card);
 
-  useEffect(() => console.log(card));
-
   const handleChange = ({ currentTarget }, currentCard) => {
     const { name, value } = currentTarget;
     if (name == "quantity") {

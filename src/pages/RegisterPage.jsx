@@ -19,7 +19,20 @@ const RegisterPage = ({ history }) => {
     event.preventDefault();
 
     try {
-      await authAPI.register(credentials);
+      //Object creation to remake with destructuration, to keep up with async
+      const jsonToSend = {
+        email: credentials.mail,
+        pass: credentials.password,
+        client: {
+          nom: credentials.lastName,
+          prenom: credentials.firstName,
+          adress: credentials.adress,
+          postalCode: credentials.postalCode,
+          town: credentials.town,
+          tel: credentials.tel
+        }
+      };
+      await authAPI.register(jsonToSend);
 
       history.replace("/");
     } catch (error) {
