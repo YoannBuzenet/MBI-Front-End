@@ -57,10 +57,13 @@ function isAuthenticated() {
   }
 }
 
+function isAdmin() {}
+
 export default {
   authenticate: authenticate,
   logout: logout,
   setup: setup,
   isAuthenticated: isAuthenticated,
-  register
+  register,
+  isAdmin
 };

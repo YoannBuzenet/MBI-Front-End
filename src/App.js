@@ -11,7 +11,7 @@ import {
   withRouter,
   Redirect
 } from "react-router-dom";
-import PrivateRoute from "./components/PrivateRoute";
+import LoggedRoute from "./components/LoggedRoute";
 import LoginPage from "./pages/LoginPage";
 import Homepage from "./pages/Homepage";
 import myAccount from "./pages/MyAccount";
@@ -34,19 +34,7 @@ function App() {
   };
 
   //Creating the Sell Request Basket state
-  const [currentBasket, setCurrentBasket] = useState([
-    {
-      cardName: "Kavru caméléon",
-      set: "Invasion",
-      price: 2,
-      condition: "NM",
-      lang: "EN",
-      isFoil: "Yes",
-      uuid: "9215-ddfsdf-9898-dsfd",
-      currency: "euros",
-      quantity: 4
-    }
-  ]);
+  const [currentBasket, setCurrentBasket] = useState([]);
 
   // Passing Authentication state in Context
   const contextBasket = {
@@ -119,15 +107,15 @@ function App() {
               <Route path="/login" component={LoginPage} />} />
               <Route path="/register" component={RegisterPage} />} />
               <Route path="/my_selling_basket" component={MySellingBasket} />
-              <PrivateRoute
+              <LoggedRoute
                 path="/my_sell_requests/:id"
                 component={OneSellRequest}
               />
-              <PrivateRoute
+              <LoggedRoute
                 path="/my_sell_requests"
                 component={mySellRequests}
               />
-              <PrivateRoute path="/my_account" component={myAccount} />
+              <LoggedRoute path="/my_account" component={myAccount} />
             </Switch>
           </Router>
         </SellRequestContext.Provider>
