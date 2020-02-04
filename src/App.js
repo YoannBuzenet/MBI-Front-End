@@ -61,8 +61,12 @@ function App() {
         currentBasket[i].isFoil === card.isFoil &&
         currentBasket[i].uuid === card.uuid
       ) {
-        const updatedCard = currentBasket[i];
-        updatedCard.quantity += card.quantity;
+        var updatedCard = currentBasket[i];
+        //updating quantities in the basket with destructuration (to stay tuned with async updates)
+        updatedCard = {
+          ...updatedCard,
+          quantity: card.quantity + updatedCard.quantity
+        };
 
         // setCurrentbasket by adding quantity of the card currently added to the selling basket
         setCurrentBasket(
