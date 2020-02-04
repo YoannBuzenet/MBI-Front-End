@@ -1,8 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
+import authAPI from "../services/authAPI";
+import Field from "../components/forms/Field";
 
-const RegisterPage = props => {
-  const handleSubmit = event => {
+const RegisterPage = ({ history }) => {
+  const [credentials, setCredentials] = useState({
+    mail: "",
+    password: "",
+    firstName: "",
+    lastName: "",
+    tel: "",
+    adress: "",
+    postalCode: "",
+    town: ""
+  });
+
+  const handleSubmit = async event => {
+    history.replace("/");
     event.preventDefault();
+
+    try {
+      await authAPI.register(credentials);
+
+      history.replace("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleChange = event => {
+    const value = event.currentTarget.value;
+    const name = event.currentTarget.name;
+
+    setCredentials({
+      ...credentials,
+      [name]: value
+    });
   };
 
   return (
@@ -10,32 +42,78 @@ const RegisterPage = props => {
       <div className="container my-account">
         <h1>S'inscrire</h1>
         <form action="" onSubmit={handleSubmit}>
-          <label htmlFor="firstName">Prénom</label>
-          <input type="text" id="firstName" required />
+          <Field
+            name="mail"
+            type="mail"
+            id="mail"
+            required
+            onChange={handleChange}
+            label="Email"
+          />
 
-          <label htmlFor="lastName">Nom</label>
-          <input type="text" id="lastName" required />
+          <Field
+            name="password"
+            type="password"
+            id="password"
+            required
+            onChange={handleChange}
+            label="Mot de Passe"
+          />
 
-          <label htmlFor="tel">Telephone</label>
-          <input type="tel" id="tel" required />
+          <Field
+            type="text"
+            id="firstName"
+            name="firstName"
+            required
+            onChange={handleChange}
+            label="Prénom"
+          />
 
-          <label htmlFor="mail">Email</label>
-          <input type="mail" id="mail" required />
+          <Field
+            type="text"
+            id="lastName"
+            name="lastName"
+            required
+            onChange={handleChange}
+            label="Nom de Famille"
+          />
 
-          <label htmlFor="street-adress">Adresse</label>
+          <Field
+            type="tel"
+            id="tel"
+            name="tel"
+            required
+            onChange={handleChange}
+            label="Telephone"
+          />
+
+          <label htmlFor="adress">Adresse</label>
           <textarea
-            name="street-adress"
-            id="street-adress"
+            name="adress"
+            id="adress"
             cols="22"
             rows="3"
             required
+            onChange={handleChange}
           ></textarea>
 
-          <label htmlFor="postal-code">Code Postal</label>
-          <input type="text" id="postal-code" required />
+          <Field
+            name="postalCode"
+            type="text"
+            id="postalCode"
+            required
+            onChange={handleChange}
+            label="Code Postal"
+          />
 
-          <label htmlFor="town">Ville</label>
-          <input type="text" id="town" required />
+          <Field
+            name="town"
+            type="text"
+            id="town"
+            required
+            onChange={handleChange}
+            label="Ville"
+          />
 
           <button type="submit">Envoyer</button>
         </form>
