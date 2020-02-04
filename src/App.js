@@ -63,6 +63,7 @@ function App() {
       ) {
         const updatedCard = currentBasket[i];
         updatedCard.quantity += card.quantity;
+
         // setCurrentbasket by adding quantity of the card currently added to the selling basket
         setCurrentBasket(
           currentBasket.map(card => {

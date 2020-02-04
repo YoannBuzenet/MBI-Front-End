@@ -9,11 +9,11 @@ const CardLine = ({ card, handleAddSellingBasket }) => {
   const [currentCard, setCard] = useState(card);
 
   useEffect(() => {
-    console.log(currentCard);
+    console.log("cardline card", card);
+    console.log("cardline modified card", currentCard);
   });
 
-  const handleChange = ({ currentTarget }, card) => {
-    // card.quantity = parseInt(event.target.value);
+  const handleChange = ({ currentTarget }, currentCard) => {
     const { name, value } = currentTarget;
     if (name == "quantity") {
       var newValue = parseInt(value);
@@ -28,11 +28,12 @@ const CardLine = ({ card, handleAddSellingBasket }) => {
     <>
       <td>{card.cardName}</td>
       <td>
+        {/* Select will have to be refactored with a .map on a Select Component */}
         <select
           name="lang"
-          id=""
+          id={card.cardName + "id1"}
           onChange={event => {
-            handleChange(event, card);
+            handleChange(event, currentCard);
           }}
         >
           <option value={card.lang}>{card.lang}</option>
@@ -43,9 +44,9 @@ const CardLine = ({ card, handleAddSellingBasket }) => {
       <td>
         <select
           name="condition"
-          id=""
+          id={card.cardName + "id2"}
           onChange={event => {
-            handleChange(event, card);
+            handleChange(event, currentCard);
           }}
         >
           <option value={card.condition}>{card.condition}</option>
@@ -56,9 +57,9 @@ const CardLine = ({ card, handleAddSellingBasket }) => {
       <td>
         <select
           name="quantity"
-          id=""
+          id={card.cardName + "id3"}
           onChange={event => {
-            handleChange(event, card);
+            handleChange(event, currentCard);
           }}
         >
           <option value={card.quantity}>{card.quantity}</option>
@@ -69,9 +70,9 @@ const CardLine = ({ card, handleAddSellingBasket }) => {
       <td>
         <select
           name="isFoil"
-          id=""
+          id={card.cardName + "id4"}
           onChange={event => {
-            handleChange(event, card);
+            handleChange(event, currentCard);
           }}
         >
           <option value={card.isFoil}>{card.isFoil}</option>

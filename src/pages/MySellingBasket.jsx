@@ -14,11 +14,12 @@ const MyCurrentSellRequest = ({ history }) => {
 
   //Function to update the amount of exemplar of one card
   const handleChange = (event, currentBasket, card) => {
-    card.quantity = parseInt(event.target.value);
+    const updatedQuantity = parseInt(event.target.value);
     setCurrentBasket(
       currentBasket.map(cardInBasket => {
-        console.log(card);
-        return cardInBasket === card ? { ...card } : cardInBasket;
+        return cardInBasket === card
+          ? (card = { ...card, quantity: updatedQuantity })
+          : cardInBasket;
       })
     );
   };

@@ -1,12 +1,24 @@
-import React, { useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import SellingBasketContext from "../context/sellingBasket";
 
 const CardWithThumbnail = ({ picture, handleAddSellingBasket, card }) => {
   //Current Selling Request Basket
   const { currentBasket, setCurrentBasket } = useContext(SellingBasketContext);
 
-  const handleChange = (event, card) => {
-    card.quantity = parseInt(event.target.value);
+  //Using the current Card in state
+  const [currentCard, setCard] = useState(card);
+
+  useEffect(() => console.log(card));
+
+  const handleChange = ({ currentTarget }, currentCard) => {
+    const { name, value } = currentTarget;
+    if (name == "quantity") {
+      var newValue = parseInt(value);
+    } else {
+      var newValue = value.toString();
+    }
+
+    setCard({ ...currentCard, [name]: newValue });
   };
 
   return (
@@ -23,10 +35,10 @@ const CardWithThumbnail = ({ picture, handleAddSellingBasket, card }) => {
           <form action="">
             QTE
             <select
-              name=""
+              name="quantity"
               id=""
               onChange={event => {
-                handleChange(event, card);
+                handleChange(event, currentCard);
               }}
             >
               <option value="1">1</option>
@@ -35,7 +47,7 @@ const CardWithThumbnail = ({ picture, handleAddSellingBasket, card }) => {
             </select>
             <i
               className="fas fa-plus-circle add-item-basket"
-              onClick={() => handleAddSellingBasket(currentBasket, card)}
+              onClick={() => handleAddSellingBasket(currentBasket, currentCard)}
             ></i>
           </form>
         </div>
