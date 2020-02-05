@@ -8,7 +8,7 @@ const LoginPage = ({ onLogin, history }) => {
   const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
 
   const [credentials, setCredentials] = useState({
-    username: "",
+    email: "",
     password: ""
   });
 
@@ -26,9 +26,7 @@ const LoginPage = ({ onLogin, history }) => {
 
   const handleSubmit = async event => {
     //Remove that line when going live
-    setIsAuthenticated(true);
-
-    history.replace("/");
+    // setIsAuthenticated(true);
     event.preventDefault();
     try {
       await authAPI.authenticate(credentials);
@@ -48,7 +46,7 @@ const LoginPage = ({ onLogin, history }) => {
 
       <form action="" onSubmit={handleSubmit}>
         <Field
-          name="username"
+          name="email"
           label="Adresse e-mail"
           value={credentials.username}
           onChange={handleChange}

@@ -3,7 +3,7 @@ import jwtDecode from "jwt-decode";
 
 function authenticate(credentials) {
   return axios
-    .post("http://localhost:8000/api/login_check", credentials)
+    .post("http://127.0.0.1:8000/login", credentials)
     .then(response => response.data.token)
     .then(token => {
       //On stocke le token dans le local storage
