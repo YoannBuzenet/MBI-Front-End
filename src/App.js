@@ -2,8 +2,10 @@ import React, { useContext, useState, useEffect } from "react";
 import "./App.css";
 import Navbar from "./components/Navbar";
 import AuthContext from "./context/authContext";
+import SetsContext from "./context/setsContext";
 import SellRequestContext from "./context/sellingBasket";
 import AuthAPI from "./services/authAPI";
+import SetsAPI from "./services/setsAPI";
 import {
   BrowserRouter as Router,
   Switch,
@@ -26,6 +28,19 @@ function App() {
   const [authenticationInfos, setAuthenticationInfos] = useState(
     AuthAPI.userInfos()
   );
+
+  //Creating the AllSets state
+  const [allSets, setAllSets] = useState([]);
+
+  useEffect(() => {
+    SetsAPI.findAll().then(data => setAllSets(data));
+  }, []);
+
+  // Creating All Sets value for context
+  const contextAllSets = {
+    allSets: allSets,
+    setAllSets: setAllSets
+  };
 
   // Passing Authentication state in Context
   const contextValue = {
@@ -97,36 +112,38 @@ function App() {
     <div className="App">
       <AuthContext.Provider value={contextValue}>
         <SellRequestContext.Provider value={contextBasket}>
-          <Router>
-            <NavbarWithRouter />
-            <Switch>
-              <Route
-                path="/"
-                exact
-                render={props => (
-                  <Homepage handleAddSellingBasket={handleAddSellingBasket} />
-                )}
-              />
-              <Route
-                path="/sets/:id"
-                render={props => (
-                  <OneSet handleAddSellingBasket={handleAddSellingBasket} />
-                )}
-              />
-              <Route path="/login" component={LoginPage} />} />
-              <Route path="/register" component={RegisterPage} />} />
-              <Route path="/my_selling_basket" component={MySellingBasket} />
-              <LoggedRoute
-                path="/my_sell_requests/:id"
-                component={OneSellRequest}
-              />
-              <LoggedRoute
-                path="/my_sell_requests"
-                component={mySellRequests}
-              />
-              <LoggedRoute path="/my_account" component={myAccount} />
-            </Switch>
-          </Router>
+          <SetsContext.Provider value={contextAllSets}>
+            <Router>
+              <NavbarWithRouter />
+              <Switch>
+                <Route
+                  path="/"
+                  exact
+                  render={props => (
+                    <Homepage handleAddSellingBasket={handleAddSellingBasket} />
+                  )}
+                />
+                <Route
+                  path="/sets/:id"
+                  render={props => (
+                    <OneSet handleAddSellingBasket={handleAddSellingBasket} />
+                  )}
+                />
+                <Route path="/login" component={LoginPage} />} />
+                <Route path="/register" component={RegisterPage} />} />
+                <Route path="/my_selling_basket" component={MySellingBasket} />
+                <LoggedRoute
+                  path="/my_sell_requests/:id"
+                  component={OneSellRequest}
+                />
+                <LoggedRoute
+                  path="/my_sell_requests"
+                  component={mySellRequests}
+                />
+                <LoggedRoute path="/my_account" component={myAccount} />
+              </Switch>
+            </Router>
+          </SetsContext.Provider>
         </SellRequestContext.Provider>
       </AuthContext.Provider>
     </div>
