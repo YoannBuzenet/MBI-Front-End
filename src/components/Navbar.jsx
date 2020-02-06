@@ -12,7 +12,7 @@ const Navbar = ({ history }) => {
   //Current Selling Request Basket
   const { currentBasket, setCurrentBasket } = useContext(SellingBasketContext);
 
-  //Current toggle menu state
+  //Current toggle menu state.
   const [toggleMenu, setToggleMenu] = useState(false);
 
   const handleLogout = () => {
