@@ -39,8 +39,6 @@ const Navbar = ({ history }) => {
     history.replace("/");
   };
 
-  console.log(authenticationInfos);
-
   return (
     <>
       {toggleMenu && (
