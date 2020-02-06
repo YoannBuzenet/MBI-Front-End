@@ -49,7 +49,7 @@ const SetList = props => {
             <tr>
               <td>
                 <Link to="/sets/IDSET" className="setList-link">
-                  Name 6
+                  Name 61
                 </Link>
               </td>
             </tr>
