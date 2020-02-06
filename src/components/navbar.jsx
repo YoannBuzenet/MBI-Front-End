@@ -5,7 +5,9 @@ import SellingBasketContext from "../context/sellingBasket";
 
 const Navbar = ({ history }) => {
   //Current Authentication
-  const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
+  const { authenticationInfos, setAuthenticationInfos } = useContext(
+    AuthContext
+  );
 
   //Current Selling Request Basket
   const { currentBasket, setCurrentBasket } = useContext(SellingBasketContext);
@@ -14,7 +16,26 @@ const Navbar = ({ history }) => {
   const [toggleMenu, setToggleMenu] = useState(false);
 
   const handleLogout = () => {
-    setIsAuthenticated(false);
+    setAuthenticationInfos({
+      authenticationInfos: {
+        isAuthenticated: false,
+        userInfos: {
+          id: "",
+          email: "",
+          roles: {}
+        },
+        customerInfos: {
+          id: "",
+          prenom: "",
+          nom: "",
+          tel: "",
+          adress: "",
+          postalCode: "",
+          town: "",
+          sellRequests: {}
+        }
+      }
+    });
     history.replace("/");
   };
 
@@ -31,7 +52,7 @@ const Navbar = ({ history }) => {
           <Link to="/" className="classic-links">
             <p>Logo Boutique</p>
           </Link>
-          {(isAuthenticated && (
+          {authenticationInfos.isAuthenticated ? (
             <div className="my_options">
               <Link
                 className="classic-links nav-element"
@@ -79,7 +100,7 @@ const Navbar = ({ history }) => {
                 )}
               </div>
             </div>
-          )) || (
+          ) : (
             <div className="connect">
               <Link
                 className="classic-links nav-element"

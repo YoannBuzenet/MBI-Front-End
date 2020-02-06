@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import "./App.css";
 import Navbar from "./components/Navbar";
 import AuthContext from "./context/authContext";
@@ -23,14 +23,14 @@ import OneSellRequest from "./pages/OneSellRequest";
 
 function App() {
   //Creating the Authentication state
-  const [isAuthenticated, setIsAuthenticated] = useState(
-    AuthAPI.isAuthenticated()
+  const [authenticationInfos, setAuthenticationInfos] = useState(
+    AuthAPI.userInfos()
   );
 
   // Passing Authentication state in Context
   const contextValue = {
-    isAuthenticated: isAuthenticated,
-    setIsAuthenticated: setIsAuthenticated
+    authenticationInfos: authenticationInfos,
+    setAuthenticationInfos: setAuthenticationInfos
   };
 
   //Creating the Sell Request Basket state
@@ -88,6 +88,10 @@ function App() {
       }
     }
   };
+
+  useEffect(() => {
+    console.log("App is loading one time");
+  });
 
   return (
     <div className="App">
