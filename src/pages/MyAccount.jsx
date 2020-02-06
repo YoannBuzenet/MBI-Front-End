@@ -25,15 +25,11 @@ const MyAccount = props => {
     const value = event.currentTarget.value;
     const name = event.currentTarget.name;
 
-    console.log(name);
-
     setAccountInformation({
       ...accountInformation,
       [name]: value
     });
   };
-
-  console.log(authenticationInfos);
 
   return (
     <>
