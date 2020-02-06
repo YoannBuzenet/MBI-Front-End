@@ -3,8 +3,11 @@ import { Redirect, Route } from "react-router-dom";
 import AuthContext from "../context/authContext";
 
 const LoggedShopRoute = ({ path, component }) => {
-  const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
-  return isAuthenticated ? (
+  const { authenticationInfos, setAuthenticationInfos } = useContext(
+    AuthContext
+  );
+  //Ajouter is shop ?
+  return authenticationInfos.isAuthenticated ? (
     <Route path={path} component={component} />
   ) : (
     <Redirect to="/login" />

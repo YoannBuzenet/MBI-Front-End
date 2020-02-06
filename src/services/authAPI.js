@@ -12,7 +12,7 @@ function authenticate(credentials) {
     .then(data => {
       //Stocking in local storage
       window.localStorage.setItem("authToken", data.token);
-      window.localStorage.setItem("userInfos", data);
+      window.localStorage.setItem("userInfos", JSON.stringify(data));
 
       //Puting token into axios bearer
       axios.defaults.headers["Authorization"] = "Bearer " + data.token;
@@ -75,24 +75,24 @@ function userInfos() {
     const jwtData = jwtDecode(token);
 
     //We get back all datas stocked in the browser about the user and put it back in memory.
-    const userDatas = window.localStorage.getItem("userInfos");
+    const userDatas = JSON.parse(window.localStorage.getItem("userInfos"));
 
     return {
       isAuthenticated: jwtData.exp * 1000 > new Date().getTime(),
       user: {
-        id: "",
-        email: "",
-        roles: {}
+        id: userDatas.user.id,
+        email: userDatas.user.email,
+        roles: userDatas.user.roles
       },
       customer: {
-        id: "",
-        prenom: "",
-        nom: "",
-        tel: "",
-        adress: "",
-        postalCode: "",
-        town: "",
-        sellRequests: {}
+        id: userDatas.client.id,
+        prenom: userDatas.client.prenom,
+        nom: userDatas.client.nom,
+        tel: userDatas.client.tel,
+        adress: userDatas.client.adress,
+        postalCode: userDatas.client.postalCode,
+        town: userDatas.client.town,
+        sellRequests: userDatas.client.sellRequests
       }
     };
   } else {
