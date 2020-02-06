@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import AuthContext from "../context/authContext";
 import SellingBasketContext from "../context/sellingBasket";
+import authAPI from "../services/authAPI";
 
 const Navbar = ({ history }) => {
   //Current Authentication
@@ -16,6 +17,7 @@ const Navbar = ({ history }) => {
   const [toggleMenu, setToggleMenu] = useState(false);
 
   const handleLogout = () => {
+    authAPI.logout();
     setAuthenticationInfos({
       authenticationInfos: {
         isAuthenticated: false,
@@ -36,6 +38,7 @@ const Navbar = ({ history }) => {
         }
       }
     });
+
     history.replace("/");
   };
 
