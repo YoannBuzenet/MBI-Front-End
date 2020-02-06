@@ -39,6 +39,8 @@ const Navbar = ({ history }) => {
     history.replace("/");
   };
 
+  console.log(authenticationInfos);
+
   return (
     <>
       {toggleMenu && (
@@ -71,7 +73,7 @@ const Navbar = ({ history }) => {
                   className="unselectable display-inline-block nav-element pointer"
                   onClick={() => setToggleMenu(!toggleMenu)}
                 >
-                  Prénom
+                  {authenticationInfos.customer.prenom}
                   <span
                     className="arrow-menu unselectable"
                     onClick={() => setToggleMenu(!toggleMenu)}

@@ -76,17 +76,15 @@ function userInfos() {
 
     //We get back all datas stocked in the browser about the user and put it back in memory.
     const userDatas = window.localStorage.getItem("userInfos");
-    console.log(jwtData);
 
     return {
-      exp: jwtData.exp * 1000,
       isAuthenticated: jwtData.exp * 1000 > new Date().getTime(),
-      userInfos: {
+      user: {
         id: "",
         email: "",
         roles: {}
       },
-      customerInfos: {
+      customer: {
         id: "",
         prenom: "",
         nom: "",
@@ -100,12 +98,12 @@ function userInfos() {
   } else {
     return {
       isAuthenticated: false,
-      userInfos: {
+      user: {
         id: "",
         email: "",
         roles: {}
       },
-      customerInfos: {
+      customer: {
         id: "",
         prenom: "",
         nom: "",
