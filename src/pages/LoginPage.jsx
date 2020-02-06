@@ -32,9 +32,10 @@ const LoginPage = ({ onLogin, history }) => {
     event.preventDefault();
     try {
       const userData = await authAPI.authenticate(credentials);
+
       setError("");
       setAuthenticationInfos(userData);
-      console.log(JSON.stringify(userData));
+
       history.replace("/");
     } catch (error) {
       setError(

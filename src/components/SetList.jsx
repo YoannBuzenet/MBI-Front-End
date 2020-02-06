@@ -1,6 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import SetsContext from "../context/setsContext";
+
 const SetList = props => {
+  const { allSets, setAllSets } = useContext(SetsContext);
+
+  allSets.sort(function(a, b) {
+    if (a.name < b.name) {
+      return -1;
+    }
+    if (a.name > b.name) {
+      return 1;
+    }
+    return 0;
+  });
+
   return (
     <>
       <div className="left-div">
@@ -11,48 +25,17 @@ const SetList = props => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>
-                <Link to="/sets/1" className="setList-link">
-                  Name 1
-                </Link>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <Link to="/sets/IDSET" className="setList-link">
-                  Name 2
-                </Link>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <Link to="/sets/IDSET" className="setList-link">
-                  Name 3
-                </Link>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <Link to="/sets/IDSET" className="setList-link">
-                  Name 4
-                </Link>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <Link to="/sets/IDSET" className="setList-link">
-                  Name 5
-                </Link>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <Link to="/sets/IDSET" className="setList-link">
-                  Name 61
-                </Link>
-              </td>
-            </tr>
+            {allSets.map(set => {
+              return (
+                <tr key={set.id}>
+                  <td>
+                    <Link to={"/sets/" + set.id} className="setList-link">
+                      {set.name}
+                    </Link>
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>
