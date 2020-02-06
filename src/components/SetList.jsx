@@ -5,6 +5,7 @@ import SetsContext from "../context/setsContext";
 const SetList = props => {
   const { allSets, setAllSets } = useContext(SetsContext);
 
+  //sorting sets by their name before displaying them
   allSets.sort(function(a, b) {
     if (a.name < b.name) {
       return -1;

@@ -8,11 +8,6 @@ const CardLine = ({ card, handleAddSellingBasket }) => {
   //Using the current Card in state
   const [currentCard, setCard] = useState(card);
 
-  useEffect(() => {
-    console.log("cardline card", card);
-    console.log("cardline modified card", currentCard);
-  });
-
   const handleChange = ({ currentTarget }, currentCard) => {
     const { name, value } = currentTarget;
     if (name == "quantity") {

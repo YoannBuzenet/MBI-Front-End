@@ -1,15 +1,24 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import SetList from "../components/SetList";
 import SellingBasketContext from "../context/sellingBasket";
 import CardLine from "../components/CardLine";
+import SetsAPI from "../services/setsAPI";
 
-const OneSet = ({ handleAddSellingBasket }) => {
+const OneSet = ({ handleAddSellingBasket, match }) => {
   //Current Selling Request Basket
   const { currentBasket, setCurrentBasket } = useContext(SellingBasketContext);
 
+  //State of the set, initialized as empty array, about to receive the complete card list
+  const [cards, setCards] = useState([]);
+
+  //Getting the id from params
+  const { id = 1 } = match.params;
+
+  //Fetching data when component is mounted
   useEffect(() => {
-    console.log(currentBasket);
-  });
+    SetsAPI.findOneById(id).then(data => setCards(data));
+    console.log(SetsAPI.findOneById(id));
+  }, [id]);
 
   return (
     <>
@@ -30,54 +39,24 @@ const OneSet = ({ handleAddSellingBasket }) => {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <CardLine
-                    card={{
-                      cardName: "Dague de vif-argent",
-                      set: "Invasion",
-                      price: 2,
-                      condition: "NM",
-                      lang: "EN",
-                      isFoil: "No",
-                      uuid: "9215-ddfsdf-9898-dsfdcww",
-                      currency: "euros",
-                      quantity: 4
-                    }}
-                    handleAddSellingBasket={handleAddSellingBasket}
-                  />
-                </tr>
-                <tr>
-                  <CardLine
-                    card={{
-                      cardName: "Fortune dans le travail",
-                      set: "Invasion",
-                      price: 2,
-                      condition: "NM",
-                      lang: "EN",
-                      isFoil: "No",
-                      uuid: "9215-ddfsdf-9898-dsfdcwww",
-                      currency: "euros",
-                      quantity: 4
-                    }}
-                    handleAddSellingBasket={handleAddSellingBasket}
-                  />
-                </tr>
-                <tr>
-                  <CardLine
-                    card={{
-                      cardName: "Espoir et révélation",
-                      set: "Invasion",
-                      price: 2,
-                      condition: "NM",
-                      lang: "EN",
-                      isFoil: "No",
-                      uuid: "9215-ddfsdf-9898-dsfdcwwww",
-                      currency: "euros",
-                      quantity: 4
-                    }}
-                    handleAddSellingBasket={handleAddSellingBasket}
-                  />
-                </tr>
+                {cards.map(card => (
+                  <tr>
+                    <CardLine
+                      card={{
+                        cardName: card.name,
+                        set: "Invasion",
+                        price: 2,
+                        condition: "NM",
+                        lang: "EN",
+                        isFoil: "No",
+                        uuid: card.uuid,
+                        currency: "euros",
+                        quantity: 4
+                      }}
+                      handleAddSellingBasket={handleAddSellingBasket}
+                    />
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>
