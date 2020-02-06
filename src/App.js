@@ -125,8 +125,11 @@ function App() {
                 />
                 <Route
                   path="/sets/:id"
-                  render={props => (
-                    <OneSet handleAddSellingBasket={handleAddSellingBasket} />
+                  render={({ match }) => (
+                    <OneSet
+                      handleAddSellingBasket={handleAddSellingBasket}
+                      match={match}
+                    />
                   )}
                 />
                 <Route path="/login" component={LoginPage} />} />

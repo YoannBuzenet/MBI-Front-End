@@ -185,6 +185,18 @@ div.connect p {
   color: white;
 }
 
+.navbar {
+  position: fixed;
+  top: 0;
+  z-index: 3;
+  width: 100%;
+  background-color: white;
+}
+
+.margin-bottom {
+  margin-bottom: 7rem;
+}
+
 /* Arrow to toggle menu */
 .arrow-menu {
   display: inline-block;

@@ -129,6 +129,7 @@ const Navbar = ({ history }) => {
           )}
         </div>
       </nav>
+      <div className="margin-bottom"></div>
     </>
   );
 };
