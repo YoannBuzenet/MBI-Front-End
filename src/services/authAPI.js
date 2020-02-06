@@ -1,19 +1,43 @@
 import axios from "axios";
 import jwtDecode from "jwt-decode";
 
+//When an user logins, if the credentials are rights, we send back data to identify him.
 function authenticate(credentials) {
   return axios
     .post("http://127.0.0.1:8000/login", credentials)
-    .then(response => response.data.token)
-    .then(token => {
-      //On stocke le token dans le local storage
-      window.localStorage.setItem("authToken", token);
+    .then(response => {
+      // console.log(response.data);
+      return response.data;
+    })
+    .then(data => {
+      //Stocking in local storage
+      window.localStorage.setItem("authToken", data.token);
+      window.localStorage.setItem("userInfos", data);
 
-      //Faire en sorte maintenant que Axios porte le token dans son autorisation header de requete
-      //On affete ses parametres par defaut
-      axios.defaults.headers["Authorization"] = "Bearer " + token;
+      //Puting token into axios bearer
+      axios.defaults.headers["Authorization"] = "Bearer " + data.token;
 
-      return true;
+      //We return an object containing all data relevant to the current user : is he logged, who is he. Of course, every access is checked on the server.
+      return {
+        authenticationInfos: {
+          isAuthenticated: true,
+          user: {
+            id: data.user.id,
+            email: data.user.email,
+            roles: data.user.roles
+          },
+          customer: {
+            id: data.client.id,
+            prenom: data.client.prenom,
+            nom: data.client.nom,
+            tel: data.client.tel,
+            adress: data.client.adress,
+            postalCode: data.client.postalCode,
+            town: data.client.town,
+            sellRequests: data.client.SellRequests
+          }
+        }
+      };
     });
 }
 
@@ -44,26 +68,67 @@ function setup() {
   }
 }
 
-function isAuthenticated() {
+function userInfos() {
   //1. Voir si on a un token
   const token = window.localStorage.getItem("authToken");
+
   //Vérifier si la date d'exp du token est bonne, si oui on considère que connecté ( le serveur fait le vrai check derrière)
   if (token) {
     const jwtData = jwtDecode(token);
 
-    return jwtData.exp * 1000 > new Date().getTime();
+    //We get back all datas stocked in the browser about the user and put it back in memory.
+    const userDatas = window.localStorage.getItem("userInfos");
+    console.log(jwtData);
+
+    return {
+      authenticationInfos: {
+        exp: jwtData.exp * 1000,
+        isAuthenticated: jwtData.exp * 1000 > new Date().getTime(),
+        userInfos: {
+          id: "",
+          email: "",
+          roles: {}
+        },
+        customerInfos: {
+          id: "",
+          prenom: "",
+          nom: "",
+          tel: "",
+          adress: "",
+          postalCode: "",
+          town: "",
+          sellRequests: {}
+        }
+      }
+    };
   } else {
-    return false;
+    return {
+      authenticationInfos: {
+        isAuthenticated: false,
+        userInfos: {
+          id: "",
+          email: "",
+          roles: {}
+        },
+        customerInfos: {
+          id: "",
+          prenom: "",
+          nom: "",
+          tel: "",
+          adress: "",
+          postalCode: "",
+          town: "",
+          sellRequests: {}
+        }
+      }
+    };
   }
 }
-
-function isAdmin() {}
 
 export default {
   authenticate: authenticate,
   logout: logout,
   setup: setup,
-  isAuthenticated: isAuthenticated,
-  register,
-  isAdmin
+  userInfos,
+  register
 };
