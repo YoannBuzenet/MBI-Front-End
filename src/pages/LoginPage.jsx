@@ -5,7 +5,9 @@ import AuthContext from "../context/authContext";
 import Field from "../components/forms/Field";
 
 const LoginPage = ({ onLogin, history }) => {
-  const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
+  const { authenticationInfos, setAuthenticationInfos } = useContext(
+    AuthContext
+  );
 
   const [credentials, setCredentials] = useState({
     email: "",
@@ -29,9 +31,10 @@ const LoginPage = ({ onLogin, history }) => {
     // setIsAuthenticated(true);
     event.preventDefault();
     try {
-      await authAPI.authenticate(credentials);
+      const userData = await authAPI.authenticate(credentials);
       setError("");
-      setIsAuthenticated(true);
+      setAuthenticationInfos(userData);
+      console.log(userData);
       history.replace("/");
     } catch (error) {
       setError(
