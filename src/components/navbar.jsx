@@ -39,14 +39,8 @@ const Navbar = ({ history }) => {
     history.replace("/");
   };
 
-  // const isLogged = JSON.parse(JSON.stringify(authenticationInfos));
-  console.log("ici", authenticationInfos.exp);
-  const { isAuthenticated } = { authenticationInfos };
-  console.log(isAuthenticated);
-
   return (
     <>
-      {/* {JSON.stringify(authenticationInfos)} */}
       {toggleMenu && (
         <div
           className="unclick"

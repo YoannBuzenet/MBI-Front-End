@@ -19,23 +19,21 @@ function authenticate(credentials) {
 
       //We return an object containing all data relevant to the current user : is he logged, who is he. Of course, every access is checked on the server.
       return {
-        authenticationInfos: {
-          isAuthenticated: true,
-          user: {
-            id: data.user.id,
-            email: data.user.email,
-            roles: data.user.roles
-          },
-          customer: {
-            id: data.client.id,
-            prenom: data.client.prenom,
-            nom: data.client.nom,
-            tel: data.client.tel,
-            adress: data.client.adress,
-            postalCode: data.client.postalCode,
-            town: data.client.town,
-            sellRequests: data.client.SellRequests
-          }
+        isAuthenticated: true,
+        user: {
+          id: data.user.id,
+          email: data.user.email,
+          roles: data.user.roles
+        },
+        customer: {
+          id: data.client.id,
+          prenom: data.client.prenom,
+          nom: data.client.nom,
+          tel: data.client.tel,
+          adress: data.client.adress,
+          postalCode: data.client.postalCode,
+          town: data.client.town,
+          sellRequests: data.client.SellRequests
         }
       };
     });
@@ -81,45 +79,41 @@ function userInfos() {
     console.log(jwtData);
 
     return {
-      authenticationInfos: {
-        exp: jwtData.exp * 1000,
-        isAuthenticated: jwtData.exp * 1000 > new Date().getTime(),
-        userInfos: {
-          id: "",
-          email: "",
-          roles: {}
-        },
-        customerInfos: {
-          id: "",
-          prenom: "",
-          nom: "",
-          tel: "",
-          adress: "",
-          postalCode: "",
-          town: "",
-          sellRequests: {}
-        }
+      exp: jwtData.exp * 1000,
+      isAuthenticated: jwtData.exp * 1000 > new Date().getTime(),
+      userInfos: {
+        id: "",
+        email: "",
+        roles: {}
+      },
+      customerInfos: {
+        id: "",
+        prenom: "",
+        nom: "",
+        tel: "",
+        adress: "",
+        postalCode: "",
+        town: "",
+        sellRequests: {}
       }
     };
   } else {
     return {
-      authenticationInfos: {
-        isAuthenticated: false,
-        userInfos: {
-          id: "",
-          email: "",
-          roles: {}
-        },
-        customerInfos: {
-          id: "",
-          prenom: "",
-          nom: "",
-          tel: "",
-          adress: "",
-          postalCode: "",
-          town: "",
-          sellRequests: {}
-        }
+      isAuthenticated: false,
+      userInfos: {
+        id: "",
+        email: "",
+        roles: {}
+      },
+      customerInfos: {
+        id: "",
+        prenom: "",
+        nom: "",
+        tel: "",
+        adress: "",
+        postalCode: "",
+        town: "",
+        sellRequests: {}
       }
     };
   }
