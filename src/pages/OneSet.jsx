@@ -51,8 +51,8 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
                   <th>Nom de la carte</th>
                   <th>Langue</th>
                   <th>Condition</th>
-                  <th>Quantité</th>
                   <th>Foil</th>
+                  <th>Quantité</th>
                   <th>Prix</th>
                 </tr>
               </thead>
