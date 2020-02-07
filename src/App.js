@@ -22,6 +22,7 @@ import OneSet from "./pages/OneSet";
 import MySellingBasket from "./pages/MySellingBasket";
 import RegisterPage from "./pages/RegisterPage";
 import OneSellRequest from "./pages/OneSellRequest";
+import SellingBasketAPI from "./services/sellingBasketAPI";
 
 function App() {
   //Creating the Authentication state
@@ -33,7 +34,15 @@ function App() {
   const [allSets, setAllSets] = useState([]);
 
   useEffect(() => {
-    SetsAPI.findAll().then(data => setAllSets(data));
+    //Load all the sets on App first Load
+    SetsAPI.findAll().then(data => {
+      setAllSets(data);
+    });
+    //Get the optional saved Selling Basket saved in Localstorage
+    const eventuallySavedBasket = SellingBasketAPI.getSaved();
+    if (eventuallySavedBasket !== null) {
+      setCurrentBasket(eventuallySavedBasket);
+    }
   }, []);
 
   // Creating All Sets value for context
@@ -51,6 +60,11 @@ function App() {
   //Creating the Sell Request Basket state
   const [currentBasket, setCurrentBasket] = useState([]);
 
+  useEffect(() => {
+    SellingBasketAPI.save(currentBasket);
+    console.log(currentBasket);
+  }, [currentBasket]);
+
   // Passing Authentication state in Context
   const contextBasket = {
     currentBasket: currentBasket,
@@ -59,13 +73,15 @@ function App() {
 
   const NavbarWithRouter = withRouter(Navbar);
 
-  //Function to add to Selling Basket. Can't use it in a separate file because of the Hook use that require being part of a component. If we find a better way to refactor it ! ...
+  //VERY IMPORTANT Function to add cards to Selling Basket.
+  //We put it in App component because it need the use of hooks.
   const handleAddSellingBasket = (currentBasket, card) => {
     //If the selling basket is empty, just add the new card.
     if (currentBasket.length === 0) {
       setCurrentBasket([card]);
     }
-
+    //If there are cards, we parse each of them and check which are in.
+    //Here we just check and update quantity
     for (var i = 0; i < currentBasket.length; i++) {
       if (
         currentBasket[i].cardName === card.cardName &&
@@ -84,6 +100,7 @@ function App() {
         };
 
         // setCurrentbasket by adding quantity of the card currently added to the selling basket
+        // Here we update the new card OBJECT into the selling basket
         setCurrentBasket(
           currentBasket.map(card => {
             return card.cardName === updatedCard.cardName &&
@@ -97,6 +114,7 @@ function App() {
               : card;
           })
         );
+
         break;
       } else {
         setCurrentBasket([...currentBasket, card]);
