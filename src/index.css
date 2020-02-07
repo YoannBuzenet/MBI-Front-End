@@ -271,6 +271,16 @@ div.connect p {
   cursor: pointer;
 }
 
+.cardPictureHolder {
+  position: relative;
+}
+
+.cardPictureOnHover {
+  position: absolute;
+  top: -220px;
+  z-index: 2;
+}
+
 /**************************
 ********SELLING BASKET*******
 **************************/
