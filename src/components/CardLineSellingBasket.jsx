@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import SellingBasketContext from "../context/sellingBasket";
+import SellingBasketAPI from "../services/sellingBasketAPI";
 
 const CardLine = ({ card, handleAddSellingBasket, index }) => {
   //Current Selling Request Basket
@@ -26,6 +27,14 @@ const CardLine = ({ card, handleAddSellingBasket, index }) => {
     }
 
     setCard({ ...currentCard, [name]: newValue });
+  };
+
+  const handleDelete = cardUuid => {
+    const newCurrentBasket = currentBasket.filter(
+      card => cardUuid !== card.uuid
+    );
+    setCurrentBasket(newCurrentBasket);
+    SellingBasketAPI.save(newCurrentBasket);
   };
 
   //Creating the specific link to get the scryffalID picture. It is composed of a static base, + the 2 first character of the ID, + the ID
@@ -60,13 +69,14 @@ const CardLine = ({ card, handleAddSellingBasket, index }) => {
             </div>
           )}
         </td>
+        <td>{card.set}</td>
         <td>
           {/* Select will have to be refactored with a .map on a Select Component */}
           <select
             name="lang"
             id={card.cardName + "id1"}
             onChange={event => {
-              handleChange(event, currentCard);
+              handleChange(event, currentBasket, currentCard);
             }}
           >
             <option value={card.lang}>{card.lang}</option>
@@ -79,7 +89,7 @@ const CardLine = ({ card, handleAddSellingBasket, index }) => {
             name="condition"
             id={card.cardName + "id2"}
             onChange={event => {
-              handleChange(event, currentCard);
+              handleChange(event, currentBasket, currentCard);
             }}
           >
             <option value={card.condition}>{card.condition}</option>
@@ -87,13 +97,12 @@ const CardLine = ({ card, handleAddSellingBasket, index }) => {
             <option value="PL">PL</option>
           </select>
         </td>
-
         <td>
           <select
             name="isFoil"
             id={card.cardName + "id4"}
             onChange={event => {
-              handleChange(event, currentCard);
+              handleChange(event, currentBasket, currentCard);
             }}
           >
             <option value={card.isFoil}>{card.isFoil}</option>
@@ -101,12 +110,13 @@ const CardLine = ({ card, handleAddSellingBasket, index }) => {
             <option value="No">No</option>
           </select>
         </td>
+
         <td>
           <select
             name="quantity"
             id={card.cardName + "id3"}
             onChange={event => {
-              handleChange(event, currentCard);
+              handleChange(event, currentBasket, currentCard);
             }}
           >
             <option value={card.quantity}>{card.quantity}</option>
@@ -127,10 +137,8 @@ const CardLine = ({ card, handleAddSellingBasket, index }) => {
         <td>{card.price}</td>
         <td>
           <i
-            className="fas fa-plus-circle add-item-basket"
-            onClick={() => {
-              return handleAddSellingBasket(currentBasket, currentCard);
-            }}
+            className="fas fa-minus-circle delete-from-selling-basket"
+            onClick={() => handleDelete(card.uuid)}
           ></i>
         </td>
       </tr>

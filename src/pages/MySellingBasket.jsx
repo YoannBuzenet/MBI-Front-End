@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import SellingBasketContext from "../context/sellingBasket";
 import SellRequestValidation from "../components/SellRequestValidation";
 import SellingBasketAPI from "../services/sellingBasketAPI";
+import CardLineSellingBasket from "../components/CardLineSellingBasket";
 
 const MyCurrentSellRequest = ({ history }) => {
   const { currentBasket, setCurrentBasket } = useContext(SellingBasketContext);
@@ -45,54 +46,17 @@ const MyCurrentSellRequest = ({ history }) => {
                 <th>Etat</th>
                 <th>Langue</th>
                 <th>Foil</th>
-                <th>Prix</th>
                 <th>Quantité</th>
+                <th>Prix</th>
                 <th>Total</th>
                 <th></th>
               </tr>
             </thead>
             <tbody>
               {currentBasket.map((card, index) => (
-                <tr key={index}>
-                  <td>{card.cardName}</td>
-                  <td>{card.set}</td>
-                  <td>{card.condition}</td>
-                  <td>{card.lang}</td>
-                  <td>{card.isFoil}</td>
-                  <td>{card.price}</td>
-                  <td>
-                    <select
-                      name=""
-                      id=""
-                      onChange={event =>
-                        handleChange(event, currentBasket, card)
-                      }
-                    >
-                      <option value={card.quantity}>{card.quantity}</option>
-                      <option value="1">1</option>
-                      <option value="2">2</option>
-                      <option value="3">3</option>
-                      <option value="4">4</option>
-                      <option value="5">5</option>
-                      <option value="6">6</option>
-                      <option value="7">7</option>
-                      <option value="8">8</option>
-                      <option value="9">9</option>
-                      <option value="10">10</option>
-                      <option value="11">11</option>
-                      <option value="12">12</option>
-                    </select>
-                  </td>
-                  <td>{card.price * card.quantity}</td>
-                  {total_prices.push(card.price * card.quantity)}
-                  <td>
-                    <i
-                      className="fas fa-minus-circle delete-from-selling-basket"
-                      onClick={() => handleDelete(card.uuid)}
-                    ></i>
-                  </td>
-                </tr>
+                <CardLineSellingBasket card={card} key={index} />
               ))}
+
               <tr className="total-line">
                 <td></td>
                 <td></td>
