@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import SellingBasketContext from "../context/sellingBasket";
 import SellingBasketAPI from "../services/sellingBasketAPI";
 
-const CardLine = ({ card, handleAddSellingBasket, index }) => {
+const CardLineSellingBasket = ({ card, index }) => {
   //Current Selling Request Basket
   const { currentBasket, setCurrentBasket } = useContext(SellingBasketContext);
 
@@ -16,6 +16,7 @@ const CardLine = ({ card, handleAddSellingBasket, index }) => {
     if (isOnHover) {
       //If we neeed to change something on hover update, here it is
     }
+    console.log(card);
   }, [isOnHover]);
 
   const handleChange = ({ currentTarget }, currentCard) => {
@@ -27,6 +28,7 @@ const CardLine = ({ card, handleAddSellingBasket, index }) => {
     }
 
     setCard({ ...currentCard, [name]: newValue });
+    console.log(currentCard);
   };
 
   const handleDelete = cardUuid => {
@@ -38,15 +40,15 @@ const CardLine = ({ card, handleAddSellingBasket, index }) => {
   };
 
   //Creating the specific link to get the scryffalID picture. It is composed of a static base, + the 2 first character of the ID, + the ID
-  const firstCharac = card.picture.substr(0, 1);
-  const secondCharac = card.picture.substr(1, 1);
+  const firstCharac = card.scryfallid.substr(0, 1);
+  const secondCharac = card.scryfallid.substr(1, 1);
   const urlCard =
     "https://img.scryfall.com/cards/small/front/" +
     firstCharac +
     "/" +
     secondCharac +
     "/" +
-    card.picture +
+    card.scryfallid +
     ".jpg";
 
   return (
@@ -61,7 +63,7 @@ const CardLine = ({ card, handleAddSellingBasket, index }) => {
         }}
       >
         <td className="cardPictureHolder">
-          {card.cardName}
+          {card.name}
           {isOnHover && (
             //TODO : change className following the scrolling, to know if the position must be top or bottom, to stay in window
             <div className="cardPictureOnHoverTop">
@@ -105,9 +107,14 @@ const CardLine = ({ card, handleAddSellingBasket, index }) => {
               handleChange(event, currentBasket, currentCard);
             }}
           >
-            <option value={card.isFoil}>{card.isFoil}</option>
-            <option value="Yes">Yes</option>
-            <option value="No">No</option>
+            <option value={card.isFoil == "Yes" ? "Yes" : "No"}>
+              {card.isFoil == "Yes" ? "Yes" : "No"}
+            </option>
+            {card.hasfoil == 1 && card.hasnonfoil == 1 && (
+              <option value={card.isFoil == "Yes" ? "No" : "Yes"}>
+                {card.isFoil == "Yes" ? "No" : "Yes"}
+              </option>
+            )}
           </select>
         </td>
 
@@ -146,4 +153,4 @@ const CardLine = ({ card, handleAddSellingBasket, index }) => {
   );
 };
 
-export default CardLine;
+export default CardLineSellingBasket;

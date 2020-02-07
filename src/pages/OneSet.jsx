@@ -62,6 +62,7 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
                     card={card}
                     handleAddSellingBasket={handleAddSellingBasket}
                     key={index}
+                    setName={setName}
                   />
                 ))}
               </tbody>

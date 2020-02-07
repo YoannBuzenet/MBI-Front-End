@@ -1,12 +1,20 @@
 import React, { useContext, useState, useEffect } from "react";
 import SellingBasketContext from "../context/sellingBasket";
 
-const CardLine = ({ card, handleAddSellingBasket, index }) => {
+const CardLine = ({ card, handleAddSellingBasket, index, setName }) => {
   //Current Selling Request Basket
   const { currentBasket, setCurrentBasket } = useContext(SellingBasketContext);
 
   //Using the current Card in state
-  const [currentCard, setCard] = useState(card);
+  const [currentCard, setCard] = useState({
+    ...card,
+    quantity: 1,
+    condition: "NM",
+    lang: "EN",
+    isFoil: card.hasnonfoil ? "No" : "Yes",
+    set: setName,
+    price: 0
+  });
 
   //Saving the Hover state
   const [isOnHover, setIsOnHover] = useState(false);
@@ -14,6 +22,7 @@ const CardLine = ({ card, handleAddSellingBasket, index }) => {
   useEffect(() => {
     if (isOnHover) {
       //If we neeed to change something on hover update, here it is
+      console.log(card);
     }
   }, [isOnHover]);
 
@@ -24,7 +33,6 @@ const CardLine = ({ card, handleAddSellingBasket, index }) => {
     } else {
       var newValue = value.toString();
     }
-
     setCard({ ...currentCard, [name]: newValue });
   };
 
@@ -97,8 +105,8 @@ const CardLine = ({ card, handleAddSellingBasket, index }) => {
               handleChange(event, currentCard);
             }}
           >
-            {card.hasfoil && <option value="Yes">Yes</option>}
             {card.hasnonfoil && <option value="No">No</option>}
+            {card.hasfoil && <option value="Yes">Yes</option>}
           </select>
         </td>
         <td>
@@ -128,6 +136,7 @@ const CardLine = ({ card, handleAddSellingBasket, index }) => {
           <i
             className="fas fa-plus-circle add-item-basket"
             onClick={() => {
+              console.log(currentCard);
               return handleAddSellingBasket(currentBasket, currentCard);
             }}
           ></i>
