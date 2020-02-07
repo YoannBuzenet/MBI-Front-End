@@ -8,6 +8,15 @@ const CardLine = ({ card, handleAddSellingBasket }) => {
   //Using the current Card in state
   const [currentCard, setCard] = useState(card);
 
+  //Saving the Hover state
+  const [isOnHover, setIsOnHover] = useState(false);
+
+  useEffect(() => {
+    if (isOnHover) {
+      //If we neeed to change something on hover update, here it is
+    }
+  }, [isOnHover]);
+
   const handleChange = ({ currentTarget }, currentCard) => {
     const { name, value } = currentTarget;
     if (name == "quantity") {
@@ -19,9 +28,35 @@ const CardLine = ({ card, handleAddSellingBasket }) => {
     setCard({ ...currentCard, [name]: newValue });
   };
 
+  //Creating the specific link to get the scryffalID picture. It is composed of a static base, + the 2 first character of the ID, + the ID
+  const firstCharac = card.picture.substr(0, 1);
+  const secondCharac = card.picture.substr(1, 1);
+  const urlCard =
+    "aaahttps://img.scryfall.com/cards/small/front/" +
+    firstCharac +
+    "/" +
+    secondCharac +
+    "/" +
+    card.picture +
+    ".jpg";
+
   return (
     <>
-      <td>{card.cardName}</td>
+      <td
+        onMouseEnter={() => {
+          setIsOnHover(!isOnHover);
+        }}
+        onMouseLeave={() => {
+          setIsOnHover(!isOnHover);
+        }}
+      >
+        {card.cardName}
+        {isOnHover && (
+          <div className="cardPicture">
+            <img src={urlCard} alt={card.name} />
+          </div>
+        )}
+      </td>
       <td>
         {/* Select will have to be refactored with a .map on a Select Component */}
         <select

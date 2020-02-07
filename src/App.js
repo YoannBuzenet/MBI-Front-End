@@ -60,9 +60,9 @@ function App() {
   //Creating the Sell Request Basket state
   const [currentBasket, setCurrentBasket] = useState([]);
 
+  // Each time the currentBasket (which stores what we want to sell) is updated, we save it in Local storage.
   useEffect(() => {
     SellingBasketAPI.save(currentBasket);
-    console.log(currentBasket);
   }, [currentBasket]);
 
   // Passing Authentication state in Context
