@@ -16,7 +16,6 @@ const CardLineSellingBasket = ({ card, index }) => {
     if (isOnHover) {
       //If we neeed to change something on hover update, here it is
     }
-    console.log(card);
   }, [isOnHover]);
 
   const handleChange = ({ currentTarget }, currentCard) => {
@@ -28,7 +27,6 @@ const CardLineSellingBasket = ({ card, index }) => {
     }
 
     setCard({ ...currentCard, [name]: newValue });
-    console.log(currentCard);
   };
 
   const handleDelete = cardUuid => {

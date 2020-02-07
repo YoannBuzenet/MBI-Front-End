@@ -23,9 +23,27 @@ import MySellingBasket from "./pages/MySellingBasket";
 import RegisterPage from "./pages/RegisterPage";
 import OneSellRequest from "./pages/OneSellRequest";
 import SellingBasketAPI from "./services/sellingBasketAPI";
-import genericInfoAPI from "./services/genericInfoAPI";
+import genericCardCharacteristicsAPI from "./services/genericCardCharacteristicsAPI";
 
 function App() {
+  //APP INITIALIZATION USE EFFECT
+
+  useEffect(() => {
+    //Load all the sets on App first Load
+    SetsAPI.findAll().then(data => {
+      setAllSets(data);
+    });
+
+    //Get the optional saved Selling Basket saved in Localstorage
+    const eventuallySavedBasket = SellingBasketAPI.getSaved();
+
+    if (eventuallySavedBasket !== null) {
+      setCurrentBasket(eventuallySavedBasket);
+    }
+    //Get all languages
+    genericCardCharacteristicsAPI.getAllLang().then(data => console.log(data));
+  }, []);
+
   //Creating the Authentication state
   const [authenticationInfos, setAuthenticationInfos] = useState(
     AuthAPI.userInfos()
@@ -33,22 +51,6 @@ function App() {
 
   //Creating the AllSets state
   const [allSets, setAllSets] = useState([]);
-
-  //INITIALIZATION USE EFFECT
-  useEffect(() => {
-    //Load all the sets on App first Load
-    SetsAPI.findAll().then(data => {
-      setAllSets(data);
-    });
-    //Get the optional saved Selling Basket saved in Localstorage
-    const eventuallySavedBasket = SellingBasketAPI.getSaved();
-    if (eventuallySavedBasket !== null) {
-      setCurrentBasket(eventuallySavedBasket);
-    }
-
-    //Get all languages
-    genericInfoAPI.getAllLang().then(data => console.log(data));
-  }, []);
 
   // Creating All Sets value for context
   const contextAllSets = {
@@ -156,7 +158,8 @@ function App() {
                   )}
                 />
                 <Route path="/login" component={LoginPage} />} />
-                <Route path="/register" component={RegisterPage} />} />
+                <Route path="/register" component={RegisterPage} />
+                } />
                 <Route path="/my_selling_basket" component={MySellingBasket} />
                 <LoggedRoute
                   path="/my_sell_requests/:id"
