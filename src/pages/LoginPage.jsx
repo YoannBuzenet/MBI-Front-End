@@ -36,7 +36,7 @@ const LoginPage = ({ onLogin, history }) => {
       setError("");
       setAuthenticationInfos(userData);
 
-      history.replace("/");
+      history.goBack();
     } catch (error) {
       setError(
         "Aucun compte ne possède cette adresse, ou alors les informations ne correspondent pas."

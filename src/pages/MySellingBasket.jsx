@@ -7,28 +7,6 @@ import CardLineSellingBasket from "../components/CardLineSellingBasket";
 const MyCurrentSellRequest = ({ history }) => {
   const { currentBasket, setCurrentBasket } = useContext(SellingBasketContext);
 
-  const handleDelete = cardUuid => {
-    const newCurrentBasket = currentBasket.filter(
-      card => cardUuid !== card.uuid
-    );
-    setCurrentBasket(newCurrentBasket);
-    SellingBasketAPI.save(newCurrentBasket);
-  };
-
-  //Function to update the amount of exemplar of one card
-  const handleChange = (event, currentBasket, card) => {
-    const updatedQuantity = parseInt(event.target.value);
-    setCurrentBasket(
-      currentBasket.map(cardInBasket => {
-        return cardInBasket === card
-          ? (card = { ...card, quantity: updatedQuantity })
-          : cardInBasket;
-      })
-    );
-
-    SellingBasketAPI.save(currentBasket);
-  };
-
   //Array to know the total of buying prices. As it's not stored everywhere we create memory here.
   const total_prices = [];
 

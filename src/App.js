@@ -23,6 +23,7 @@ import MySellingBasket from "./pages/MySellingBasket";
 import RegisterPage from "./pages/RegisterPage";
 import OneSellRequest from "./pages/OneSellRequest";
 import SellingBasketAPI from "./services/sellingBasketAPI";
+import genericInfoAPI from "./services/genericInfoAPI";
 
 function App() {
   //Creating the Authentication state
@@ -33,6 +34,7 @@ function App() {
   //Creating the AllSets state
   const [allSets, setAllSets] = useState([]);
 
+  //INITIALIZATION USE EFFECT
   useEffect(() => {
     //Load all the sets on App first Load
     SetsAPI.findAll().then(data => {
@@ -43,6 +45,9 @@ function App() {
     if (eventuallySavedBasket !== null) {
       setCurrentBasket(eventuallySavedBasket);
     }
+
+    //Get all languages
+    genericInfoAPI.getAllLang().then(data => console.log(data));
   }, []);
 
   // Creating All Sets value for context
