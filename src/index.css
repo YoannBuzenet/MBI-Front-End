@@ -275,9 +275,15 @@ div.connect p {
   position: relative;
 }
 
-.cardPictureOnHover {
+.cardPictureOnHoverTop {
   position: absolute;
   top: -220px;
+  z-index: 2;
+}
+
+.cardPictureOnHoverBottom {
+  position: absolute;
+  top: 220px;
   z-index: 2;
 }
 

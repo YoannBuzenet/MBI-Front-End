@@ -29,15 +29,15 @@ const CardLine = ({ card, handleAddSellingBasket, index }) => {
   };
 
   //Creating the specific link to get the scryffalID picture. It is composed of a static base, + the 2 first character of the ID, + the ID
-  const firstCharac = card.picture.substr(0, 1);
-  const secondCharac = card.picture.substr(1, 1);
+  const firstCharac = card.scryfallid.substr(0, 1);
+  const secondCharac = card.scryfallid.substr(1, 1);
   const urlCard =
     "https://img.scryfall.com/cards/small/front/" +
     firstCharac +
     "/" +
     secondCharac +
     "/" +
-    card.picture +
+    card.scryfallid +
     ".jpg";
 
   return (
@@ -52,10 +52,11 @@ const CardLine = ({ card, handleAddSellingBasket, index }) => {
         }}
       >
         <td className="cardPictureHolder">
-          {card.cardName}
+          {card.name}
           {isOnHover && (
             //TODO : change className following the scrolling, to know if the position must be top or bottom, to stay in window
-            <div className="cardPictureOnHover">
+            //Other class CSS ready just aside this one, JS logic to make
+            <div className="cardPictureOnHoverTop">
               <img src={urlCard} alt={card.name} />
             </div>
           )}
@@ -64,12 +65,12 @@ const CardLine = ({ card, handleAddSellingBasket, index }) => {
           {/* Select will have to be refactored with a .map on a Select Component */}
           <select
             name="lang"
-            id={card.cardName + "id1"}
+            id={card.Name + "id1"}
             onChange={event => {
               handleChange(event, currentCard);
             }}
           >
-            <option value={card.lang}>{card.lang}</option>
+            <option value="EN">EN</option>
             <option value="FR">FR</option>
             <option value="ES">ES</option>
           </select>
@@ -77,12 +78,12 @@ const CardLine = ({ card, handleAddSellingBasket, index }) => {
         <td>
           <select
             name="condition"
-            id={card.cardName + "id2"}
+            id={card.name + "id2"}
             onChange={event => {
               handleChange(event, currentCard);
             }}
           >
-            <option value={card.condition}>{card.condition}</option>
+            <option value="NM">NM</option>
             <option value="EXC">EXC</option>
             <option value="PL">PL</option>
           </select>
@@ -91,25 +92,23 @@ const CardLine = ({ card, handleAddSellingBasket, index }) => {
         <td>
           <select
             name="isFoil"
-            id={card.cardName + "id4"}
+            id={card.name + "id4"}
             onChange={event => {
               handleChange(event, currentCard);
             }}
           >
-            <option value={card.isFoil}>{card.isFoil}</option>
-            <option value="Yes">Yes</option>
-            <option value="No">No</option>
+            {card.hasfoil && <option value="Yes">Yes</option>}
+            {card.hasnonfoil && <option value="No">No</option>}
           </select>
         </td>
         <td>
           <select
             name="quantity"
-            id={card.cardName + "id3"}
+            id={card.name + "id3"}
             onChange={event => {
               handleChange(event, currentCard);
             }}
           >
-            <option value={card.quantity}>{card.quantity}</option>
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
@@ -124,7 +123,7 @@ const CardLine = ({ card, handleAddSellingBasket, index }) => {
             <option value="12">12</option>
           </select>
         </td>
-        <td>{card.price}</td>
+        <td>2</td>
         <td>
           <i
             className="fas fa-plus-circle add-item-basket"

@@ -64,7 +64,7 @@ const CardLine = ({ card, handleAddSellingBasket, index }) => {
           {card.cardName}
           {isOnHover && (
             //TODO : change className following the scrolling, to know if the position must be top or bottom, to stay in window
-            <div className="cardPictureOnHover">
+            <div className="cardPictureOnHoverTop">
               <img src={urlCard} alt={card.name} />
             </div>
           )}
