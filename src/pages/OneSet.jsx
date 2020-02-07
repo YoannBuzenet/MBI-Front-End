@@ -58,23 +58,22 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
               </thead>
               <tbody>
                 {cards.map((card, index) => (
-                  <tr key={index}>
-                    <CardLine
-                      card={{
-                        cardName: card.name,
-                        picture: card.scryfallillustrationid,
-                        set: "Invasion",
-                        price: 2,
-                        condition: "NM",
-                        lang: "EN",
-                        isFoil: "No",
-                        uuid: card.uuid,
-                        currency: "euros",
-                        quantity: 1
-                      }}
-                      handleAddSellingBasket={handleAddSellingBasket}
-                    />
-                  </tr>
+                  <CardLine
+                    card={{
+                      cardName: card.name,
+                      picture: card.scryfallid,
+                      set: "Invasion",
+                      price: 2,
+                      condition: "NM",
+                      lang: "EN",
+                      isFoil: "No",
+                      uuid: card.uuid,
+                      currency: "euros",
+                      quantity: 1
+                    }}
+                    handleAddSellingBasket={handleAddSellingBasket}
+                    key={index}
+                  />
                 ))}
               </tbody>
             </table>
