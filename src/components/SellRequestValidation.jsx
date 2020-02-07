@@ -7,7 +7,9 @@ const SellRequestValidation = ({ history }) => {
   const { currentBasket, setCurrentBasket } = useContext(SellingBasketContext);
 
   //Current Authentication
-  const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
+  const { authenticationInfos, setAuthenticationInfos } = useContext(
+    AuthContext
+  );
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -20,7 +22,7 @@ const SellRequestValidation = ({ history }) => {
       {/* Div is changing if the user has an empty basket or not */}
       {(currentBasket.length > 0 && (
         <div className="isCurrentBasketReady">
-          {isAuthenticated ? (
+          {authenticationInfos.isAuthenticated ? (
             <div className="isUserAuthenticated">
               <form action="" onSubmit={handleSubmit}>
                 <input type="checkbox" required id="checkbox-compliance" />
@@ -35,7 +37,8 @@ const SellRequestValidation = ({ history }) => {
           ) : (
             <div className="userShouldConnect">
               Pour soumettre complètement votre rachat, vous devez vous inscrire
-              ou vous connecter.<p>(Votre panier ne sera pas perdu)</p>
+              ou vous connecter.
+              <p>(Votre panier ne sera pas perdu)</p>
             </div>
           )}
         </div>

@@ -62,6 +62,7 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
                     <CardLine
                       card={{
                         cardName: card.name,
+                        picture: card.scryfallillustrationid,
                         set: "Invasion",
                         price: 2,
                         condition: "NM",
