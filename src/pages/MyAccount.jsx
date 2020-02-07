@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import AuthContext from "../context/authContext";
+import userAPI from "../services/userAPI";
 
 const MyAccount = props => {
   //Current Authentication
@@ -17,8 +18,25 @@ const MyAccount = props => {
     town: authenticationInfos.customer.town
   });
 
-  const handleSubmit = event => {
+  const handleSubmit = async event => {
     event.preventDefault();
+
+    //TODO :La liste des credentials semble etre plutot pour User plutot que Customer, à MAJ
+    const credentials = {
+      email: "string", //Empecher de modifier le mail en PUT customer ?
+      roles: ["string"], //Empecher de modifier le role en PUT customer ?
+      password: "string",
+      shop: "string",
+      client: "string",
+      nickname: "string",
+      pass: "string"
+    };
+
+    try {
+      await userAPI.update(authenticationInfos.user.id, credentials);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleChange = event => {

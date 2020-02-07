@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import SellingBasketContext from "../context/sellingBasket";
 import SellRequestValidation from "../components/SellRequestValidation";
+import SellingBasketAPI from "../services/sellingBasketAPI";
 
 const MyCurrentSellRequest = ({ history }) => {
   const { currentBasket, setCurrentBasket } = useContext(SellingBasketContext);
@@ -10,6 +11,7 @@ const MyCurrentSellRequest = ({ history }) => {
       card => cardUuid !== card.uuid
     );
     setCurrentBasket(newCurrentBasket);
+    SellingBasketAPI.save(newCurrentBasket);
   };
 
   //Function to update the amount of exemplar of one card
@@ -22,6 +24,8 @@ const MyCurrentSellRequest = ({ history }) => {
           : cardInBasket;
       })
     );
+
+    SellingBasketAPI.save(currentBasket);
   };
 
   //Array to know the total of buying prices. As it's not stored everywhere we create memory here.

@@ -39,13 +39,6 @@ function authenticate(credentials) {
     });
 }
 
-function register(credentials) {
-  console.log(credentials);
-  return axios
-    .post("http://127.0.0.1:8000/Register", credentials)
-    .then(response => console.log(response));
-}
-
 function logout() {
   window.localStorage.removeItem("authToken");
   delete axios.defaults.headers["Authorization"];
@@ -121,6 +114,5 @@ export default {
   authenticate: authenticate,
   logout: logout,
   setup: setup,
-  userInfos,
-  register
+  userInfos
 };

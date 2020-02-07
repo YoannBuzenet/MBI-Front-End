@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import authAPI from "../services/authAPI";
+import userAPI from "../services/userAPI";
 import Field from "../components/forms/Field";
 
 const RegisterPage = ({ history }) => {
@@ -32,7 +32,7 @@ const RegisterPage = ({ history }) => {
           tel: credentials.tel
         }
       };
-      await authAPI.register(jsonToSend);
+      await userAPI.register(jsonToSend);
 
       history.replace("/");
     } catch (error) {
