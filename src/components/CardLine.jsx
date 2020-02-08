@@ -1,15 +1,13 @@
 import React, { useContext, useState, useEffect } from "react";
 import SellingBasketContext from "../context/sellingBasket";
-import genericCardInfosContext from "../context/genericCardInfosContext";
+import GenericCardInfosContext from "../context/genericCardInfosContext";
 
 const CardLine = ({ card, handleAddSellingBasket, index, setName }) => {
   //Current Selling Request Basket
   const { currentBasket, setCurrentBasket } = useContext(SellingBasketContext);
 
   //DEFINED langages and Conditions
-  const { currentGenericInfos, setCurrentGenericInfos } = useContext(
-    genericCardInfosContext
-  );
+  const { lang, conditions } = useContext(GenericCardInfosContext);
 
   //Using the current Card in state
   const [currentCard, setCard] = useState({
@@ -28,8 +26,6 @@ const CardLine = ({ card, handleAddSellingBasket, index, setName }) => {
   useEffect(() => {
     if (isOnHover) {
       //If we neeed to change something on hover update, here it is
-      console.log(card);
-      console.log(genericCardInfosContext);
     }
   }, [isOnHover]);
 
