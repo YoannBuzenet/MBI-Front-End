@@ -2,6 +2,7 @@ import axios from "axios";
 import jwtDecode from "jwt-decode";
 
 //When an user logins, if the credentials are rights, we send back data to identify him.
+//Then we store data into local storage.
 function authenticate(credentials) {
   return axios
     .post("http://127.0.0.1:8000/login", credentials)
@@ -59,6 +60,7 @@ function setup() {
   }
 }
 
+//Get user info from Local Storage
 function userInfos() {
   //1. Voir si on a un token
   const token = window.localStorage.getItem("authToken");
@@ -110,9 +112,15 @@ function userInfos() {
   }
 }
 
+//Update User Info in the local storage
+function updateUserInfos(allUserInfos) {
+  window.localStorage.setItem("userInfos", JSON.stringify(allUserInfos));
+}
+
 export default {
   authenticate: authenticate,
   logout: logout,
   setup: setup,
-  userInfos
+  userInfos,
+  updateUserInfos
 };

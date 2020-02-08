@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import AuthContext from "../context/authContext";
 import userAPI from "../services/userAPI";
+import AuthAPI from "../services/authAPI";
 
 const MyAccount = props => {
   //Current Authentication
@@ -15,7 +16,8 @@ const MyAccount = props => {
     mail: authenticationInfos.user.email,
     adress: authenticationInfos.customer.adress,
     postalCode: authenticationInfos.customer.postalCode,
-    town: authenticationInfos.customer.town
+    town: authenticationInfos.customer.town,
+    idCustomer: authenticationInfos.customer.id
   });
 
   const handleSubmit = async event => {
@@ -23,17 +25,58 @@ const MyAccount = props => {
 
     //TODO :La liste des credentials semble etre plutot pour User plutot que Customer, à MAJ
     const credentials = {
-      email: "string", //Empecher de modifier le mail en PUT customer ?
-      roles: ["string"], //Empecher de modifier le role en PUT customer ?
-      password: "string",
-      shop: "string",
-      client: "string",
-      nickname: "string",
-      pass: "string"
+      client: {
+        id: accountInformation.idCustomer,
+        nom: accountInformation.lastName,
+        prenom: accountInformation.firstName,
+        adress: accountInformation.adress,
+        postalCode: accountInformation.postalCode,
+        town: accountInformation.town,
+        tel: accountInformation.tel
+      },
+      nickname: "",
+      pass: ""
     };
 
     try {
-      await userAPI.update(authenticationInfos.user.id, credentials);
+      const response = await userAPI.update(
+        authenticationInfos.user.id,
+        credentials
+      );
+      //UPDATE LE STATE
+      console.log(response.data);
+      // setAccountInformation({
+      //   firstName: authenticationInfos.customer.prenom,
+      //   lastName: authenticationInfos.customer.nom,
+      //   tel: authenticationInfos.customer.tel,
+      //   mail: authenticationInfos.user.email,
+      //   adress: authenticationInfos.customer.adress,
+      //   postalCode: authenticationInfos.customer.postalCode,
+      //   town: authenticationInfos.customer.town,
+      //   idCustomer: authenticationInfos.customer.id
+      // });
+      //UPDATE LES INFOS EN MEMOIRE VIVE
+      // setAuthenticationInfos({
+      //   isAuthenticated: false,
+      //   user: {
+      //     id: "",
+      //     email: "",
+      //     roles: {}
+      //   },
+      //   customer: {
+      //     id: "",
+      //     prenom: "",
+      //     nom: "",
+      //     tel: "",
+      //     adress: "",
+      //     postalCode: "",
+      //     town: "",
+      //     sellRequests: {}
+      //   }
+      // });
+      //UPDATE LES INFOS DANS LE TOKEN
+      // AuthAPI.updateUserInfos(authenticationInfos)
+      //TODO : NOTIF SUCCES
     } catch (error) {
       console.log(error);
     }

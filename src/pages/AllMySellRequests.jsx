@@ -1,7 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
+import sellRequestAPI from "../services/sellRequestAPI";
 
-const mySellRequests = props => {
+const AllMySellRequests = props => {
+  useEffect(() => {
+    console.log(sellRequestAPI.findAll());
+  });
+
   const currentSellRequests = [
     {
       status: "En traitement",
@@ -110,4 +115,4 @@ const mySellRequests = props => {
   );
 };
 
-export default mySellRequests;
+export default AllMySellRequests;

@@ -11,8 +11,17 @@ const SellRequestValidation = ({ history }) => {
     AuthContext
   );
 
+  console.log(authenticationInfos);
+
   const handleSubmit = event => {
     event.preventDefault();
+
+    const sellRequestData = {
+      client: "/client/" + authenticationInfos.customer.id,
+      shop: ""
+    };
+
+    //TODO : NOTIF success
     history.replace("/my_sell_requests");
   };
 
@@ -26,7 +35,7 @@ const SellRequestValidation = ({ history }) => {
             <div className="isUserAuthenticated">
               <form action="" onSubmit={handleSubmit}>
                 <input type="checkbox" required id="checkbox-compliance" />
-                <label for="checkbox-compliance">
+                <label htmlFor="checkbox-compliance">
                   J'accepte les conditions générales de ventes.
                 </label>
                 <button className="sellRequest-validation-button" type="submit">
