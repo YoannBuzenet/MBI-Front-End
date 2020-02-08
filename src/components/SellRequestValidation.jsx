@@ -11,7 +11,7 @@ const SellRequestValidation = ({ history }) => {
     AuthContext
   );
 
-  console.log(authenticationInfos);
+  // console.log(authenticationInfos);
 
   const handleSubmit = event => {
     event.preventDefault();

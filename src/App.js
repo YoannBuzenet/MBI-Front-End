@@ -4,7 +4,7 @@ import Navbar from "./components/Navbar";
 import AuthContext from "./context/authContext";
 import SetsContext from "./context/setsContext";
 import SellRequestContext from "./context/sellingBasket";
-import GenericCardInfosContext from "./context/genericCardInfosContext";
+import GenericContext from "./context/genericCardInfosContext";
 import AuthAPI from "./services/authAPI";
 import SetsAPI from "./services/setsAPI";
 import {
@@ -76,10 +76,6 @@ function App() {
   // Each time the currentBasket (which stores what we want to sell) is updated, we save it in Local storage.
   useEffect(() => {
     SellingBasketAPI.save(currentBasket);
-    console.log("generic sets context", SetsContext);
-    console.log("generic sets", contextAllSets);
-    console.log("generic infos context", GenericCardInfosContext);
-    console.log("generic infos", genericCardsInfos);
   }, [currentBasket]);
 
   // Passing Authentication state in Context
@@ -148,7 +144,7 @@ function App() {
       <AuthContext.Provider value={contextValue}>
         <SellRequestContext.Provider value={contextBasket}>
           <SetsContext.Provider value={contextAllSets}>
-            <GenericCardInfosContext.Provider value={genericCardsInfos}>
+            <GenericContext.Provider value={genericCardsInfos}>
               <Router>
                 <NavbarWithRouter />
                 <Switch>
@@ -188,7 +184,7 @@ function App() {
                   <LoggedRoute path="/my_account" component={myAccount} />
                 </Switch>
               </Router>
-            </GenericCardInfosContext.Provider>
+            </GenericContext.Provider>
           </SetsContext.Provider>
         </SellRequestContext.Provider>
       </AuthContext.Provider>
