@@ -1,9 +1,10 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import Navbar from "./components/Navbar";
 import AuthContext from "./context/authContext";
 import SetsContext from "./context/setsContext";
 import SellRequestContext from "./context/sellingBasket";
+import GenericCardInfoContext from "./context/genericCardCharacteristicsContext";
 import AuthAPI from "./services/authAPI";
 import SetsAPI from "./services/setsAPI";
 import {
@@ -23,7 +24,8 @@ import MySellingBasket from "./pages/MySellingBasket";
 import RegisterPage from "./pages/RegisterPage";
 import OneSellRequest from "./pages/OneSellRequest";
 import SellingBasketAPI from "./services/sellingBasketAPI";
-import genericCardCharacteristicsAPI from "./services/genericCardCharacteristicsAPI";
+import allConditions from "./definitions/conditionsDefinition";
+import allLanguages from "./definitions/languagesDefinition";
 
 function App() {
   //APP INITIALIZATION USE EFFECT
@@ -40,36 +42,47 @@ function App() {
     if (eventuallySavedBasket !== null) {
       setCurrentBasket(eventuallySavedBasket);
     }
-    //Get all languages
-    genericCardCharacteristicsAPI.getAllLang().then(data => console.log(data));
   }, []);
 
-  //Creating the Authentication state
+  // STATE Creating the Authentication state
   const [authenticationInfos, setAuthenticationInfos] = useState(
     AuthAPI.userInfos()
   );
 
-  //Creating the AllSets state
+  // STATE Creating the AllSets state
   const [allSets, setAllSets] = useState([]);
 
-  // Creating All Sets value for context
+  // STATE Creating the Generic Cards Info State
+  const [genericCardsInfos, setGenericCardsInfos] = useState({
+    lang: allLanguages,
+    conditions: allConditions
+  });
+
+  // CONTEXT CREATION Creating All Sets value for context
+  const contextGenericCardsInfos = {
+    lang: allLanguages,
+    conditions: allConditions
+  };
+
+  // CONTEXT CREATION Creating All Sets value for context
   const contextAllSets = {
     allSets: allSets,
     setAllSets: setAllSets
   };
 
-  // Passing Authentication state in Context
+  // CONTEXT CREATION Passing Authentication state in Context
   const contextValue = {
     authenticationInfos: authenticationInfos,
     setAuthenticationInfos: setAuthenticationInfos
   };
 
-  //Creating the Sell Request Basket state
+  // STATE Creating the Sell Request Basket state
   const [currentBasket, setCurrentBasket] = useState([]);
 
   // Each time the currentBasket (which stores what we want to sell) is updated, we save it in Local storage.
   useEffect(() => {
     SellingBasketAPI.save(currentBasket);
+    console.log(genericCardsInfos);
   }, [currentBasket]);
 
   // Passing Authentication state in Context
@@ -138,40 +151,47 @@ function App() {
       <AuthContext.Provider value={contextValue}>
         <SellRequestContext.Provider value={contextBasket}>
           <SetsContext.Provider value={contextAllSets}>
-            <Router>
-              <NavbarWithRouter />
-              <Switch>
-                <Route
-                  path="/"
-                  exact
-                  render={props => (
-                    <Homepage handleAddSellingBasket={handleAddSellingBasket} />
-                  )}
-                />
-                <Route
-                  path="/sets/:id"
-                  render={({ match }) => (
-                    <OneSet
-                      handleAddSellingBasket={handleAddSellingBasket}
-                      match={match}
-                    />
-                  )}
-                />
-                <Route path="/login" component={LoginPage} />} />
-                <Route path="/register" component={RegisterPage} />
-                } />
-                <Route path="/my_selling_basket" component={MySellingBasket} />
-                <LoggedRoute
-                  path="/my_sell_requests/:id"
-                  component={OneSellRequest}
-                />
-                <LoggedRoute
-                  path="/my_sell_requests"
-                  component={mySellRequests}
-                />
-                <LoggedRoute path="/my_account" component={myAccount} />
-              </Switch>
-            </Router>
+            <GenericCardInfoContext.Provider value={contextGenericCardsInfos}>
+              <Router>
+                <NavbarWithRouter />
+                <Switch>
+                  <Route
+                    path="/"
+                    exact
+                    render={props => (
+                      <Homepage
+                        handleAddSellingBasket={handleAddSellingBasket}
+                      />
+                    )}
+                  />
+                  <Route
+                    path="/sets/:id"
+                    render={({ match }) => (
+                      <OneSet
+                        handleAddSellingBasket={handleAddSellingBasket}
+                        match={match}
+                      />
+                    )}
+                  />
+                  <Route path="/login" component={LoginPage} />} />
+                  <Route path="/register" component={RegisterPage} />
+                  } />
+                  <Route
+                    path="/my_selling_basket"
+                    component={MySellingBasket}
+                  />
+                  <LoggedRoute
+                    path="/my_sell_requests/:id"
+                    component={OneSellRequest}
+                  />
+                  <LoggedRoute
+                    path="/my_sell_requests"
+                    component={mySellRequests}
+                  />
+                  <LoggedRoute path="/my_account" component={myAccount} />
+                </Switch>
+              </Router>
+            </GenericCardInfoContext.Provider>
           </SetsContext.Provider>
         </SellRequestContext.Provider>
       </AuthContext.Provider>
