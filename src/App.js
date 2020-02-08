@@ -4,7 +4,7 @@ import Navbar from "./components/Navbar";
 import AuthContext from "./context/authContext";
 import SetsContext from "./context/setsContext";
 import SellRequestContext from "./context/sellingBasket";
-import GenericCardInfoContext from "./context/genericCardCharacteristicsContext";
+import GenericCardInfosContext from "./context/genericCardInfosContext";
 import AuthAPI from "./services/authAPI";
 import SetsAPI from "./services/setsAPI";
 import {
@@ -54,15 +54,9 @@ function App() {
 
   // STATE Creating the Generic Cards Info State
   const [genericCardsInfos, setGenericCardsInfos] = useState({
-    lang: allLanguages,
-    conditions: allConditions
+    lang: allLanguages.allLanguages,
+    conditions: allConditions.allConditions
   });
-
-  // CONTEXT CREATION Creating All Sets value for context
-  const contextGenericCardsInfos = {
-    lang: allLanguages,
-    conditions: allConditions
-  };
 
   // CONTEXT CREATION Creating All Sets value for context
   const contextAllSets = {
@@ -82,7 +76,10 @@ function App() {
   // Each time the currentBasket (which stores what we want to sell) is updated, we save it in Local storage.
   useEffect(() => {
     SellingBasketAPI.save(currentBasket);
-    console.log(genericCardsInfos);
+    console.log("generic sets context", SetsContext);
+    console.log("generic sets", contextAllSets);
+    console.log("generic infos context", GenericCardInfosContext);
+    console.log("generic infos", genericCardsInfos);
   }, [currentBasket]);
 
   // Passing Authentication state in Context
@@ -151,7 +148,7 @@ function App() {
       <AuthContext.Provider value={contextValue}>
         <SellRequestContext.Provider value={contextBasket}>
           <SetsContext.Provider value={contextAllSets}>
-            <GenericCardInfoContext.Provider value={contextGenericCardsInfos}>
+            <GenericCardInfosContext.Provider value={genericCardsInfos}>
               <Router>
                 <NavbarWithRouter />
                 <Switch>
@@ -191,7 +188,7 @@ function App() {
                   <LoggedRoute path="/my_account" component={myAccount} />
                 </Switch>
               </Router>
-            </GenericCardInfoContext.Provider>
+            </GenericCardInfosContext.Provider>
           </SetsContext.Provider>
         </SellRequestContext.Provider>
       </AuthContext.Provider>

@@ -2,6 +2,5 @@ import React from "react";
 
 export default React.createContext({
   lang: [],
-  conditions: [],
-  setGenericContext: value => {}
+  conditions: []
 });

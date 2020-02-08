@@ -7,9 +7,8 @@ function register(credentials) {
 }
 
 function update(id, credentials) {
-  return axios
-    .put("http://127.0.0.1:8000/users/" + id, credentials)
-    .then(response => console.log(response));
+  console.log(id, credentials);
+  return axios.put("http://127.0.0.1:8000/users/" + id, credentials);
 }
 
 export default {
