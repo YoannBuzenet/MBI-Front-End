@@ -26,6 +26,7 @@ const CardLine = ({ card, handleAddSellingBasket, index, setName }) => {
   useEffect(() => {
     if (isOnHover) {
       //If we neeed to change something on hover update, here it is
+      console.log(conditions);
     }
   }, [isOnHover]);
 
