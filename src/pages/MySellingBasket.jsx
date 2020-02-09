@@ -28,9 +28,11 @@ const MyCurrentSellRequest = ({ history }) => {
               </tr>
             </thead>
             <tbody>
-              {currentBasket.map((card, index) => {
-                return <CardLineSellingBasket card={card} key={index} />;
-              })}
+              {currentBasket.length > 0
+                ? currentBasket.map((card, index) => {
+                    return <CardLineSellingBasket card={card} key={index} />;
+                  })
+                : null}
 
               <tr className="total-line">
                 <td></td>

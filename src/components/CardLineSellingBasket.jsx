@@ -19,12 +19,12 @@ const CardLineSellingBasket = ({ card, index }) => {
   useEffect(() => {
     if (isOnHover) {
       //If we neeed to change something on hover update, here it is
-      console.log(card);
-      console.log(lang);
+      console.log(currentCard);
+      console.log(currentBasket);
     }
   }, [isOnHover]);
 
-  const handleChange = ({ currentTarget }, currentCard) => {
+  const handleChange = ({ currentTarget }, currentCard, currentBasket) => {
     const { name, value } = currentTarget;
     if (name == "quantity") {
       var newValue = parseInt(value);
@@ -58,7 +58,7 @@ const CardLineSellingBasket = ({ card, index }) => {
   return (
     <>
       <tr
-        key={index}
+        key={card.id}
         onMouseEnter={() => {
           setIsOnHover(!isOnHover);
         }}
@@ -82,12 +82,12 @@ const CardLineSellingBasket = ({ card, index }) => {
             name="lang"
             id={card.cardName + "id1"}
             onChange={event => {
-              handleChange(event, currentBasket, currentCard);
+              handleChange(event, currentCard, currentBasket);
             }}
           >
             {card.foreignData.length > 0 ? (
               [
-                <option value={card.lang} key="a">
+                <option value={card.lang} key={card.id + "2"}>
                   {card.lang == "9"
                     ? "EN"
                     : card.foreignData.filter(
@@ -96,11 +96,19 @@ const CardLineSellingBasket = ({ card, index }) => {
                       )[0].language_id.shortname}
                 </option>
               ].concat(
-                card.foreignData.map((foreignData, index) => (
-                  <option value={foreignData.language_id.id} key={index}>
-                    {foreignData.language_id.shortname}
-                  </option>
-                ))
+                card.foreignData
+                  .filter(
+                    currentlanguage =>
+                      currentlanguage.language_id.id !== parseInt(card.lang)
+                  )
+                  .map((foreignData, index) => (
+                    <option
+                      value={foreignData.language_id.id}
+                      key={index + "3"}
+                    >
+                      {foreignData.language_id.shortname}
+                    </option>
+                  ))
               )
             ) : (
               <option value="9">EN</option>
@@ -112,7 +120,7 @@ const CardLineSellingBasket = ({ card, index }) => {
             name="condition"
             id={card.cardName + "id2"}
             onChange={event => {
-              handleChange(event, currentBasket, currentCard);
+              handleChange(event, currentCard, currentBasket);
             }}
           >
             <option value={card.condition}>{card.condition}</option>
@@ -125,7 +133,7 @@ const CardLineSellingBasket = ({ card, index }) => {
             name="isFoil"
             id={card.cardName + "id4"}
             onChange={event => {
-              handleChange(event, currentBasket, currentCard);
+              handleChange(event, currentCard, currentBasket);
             }}
           >
             <option value={card.isFoil == "Yes" ? "Yes" : "No"}>
@@ -144,7 +152,7 @@ const CardLineSellingBasket = ({ card, index }) => {
             name="quantity"
             id={card.cardName + "id3"}
             onChange={event => {
-              handleChange(event, currentBasket, currentCard);
+              handleChange(event, currentCard, currentBasket);
             }}
           >
             <option value={card.quantity}>{card.quantity}</option>
