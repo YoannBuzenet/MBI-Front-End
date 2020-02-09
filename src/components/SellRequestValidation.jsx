@@ -18,8 +18,35 @@ const SellRequestValidation = ({ history }) => {
 
     const sellRequestData = {
       client: "/client/" + authenticationInfos.customer.id,
-      shop: ""
+      shop: "/shop/" + authenticationInfos.shop.id,
+      amount: currentBasket.reduce((total, card) => {
+        return total + card.price * card.quantity;
+      }, 0),
+      cardTotalQuantity: currentBasket.reduce((total, card) => {
+        return total + card.quantity;
+      }, 0),
+      sellRequestCards: [
+        {
+          language: "/languages/3",
+          CardCondition: "/card_conditions/1",
+          cards: "/cards/500",
+          cardQuantity: 2,
+          price: 2
+        }
+      ].concat(
+        currentBasket.map(card => {
+          return {
+            language: "test",
+            CardCondition: "test",
+            cards: "test",
+            cardQuantity: 1,
+            price: 1
+          };
+        })
+      )
     };
+
+    console.log(sellRequestData);
 
     //TODO : NOTIF success
     history.replace("/my_sell_requests");

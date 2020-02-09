@@ -135,10 +135,6 @@ function App() {
     }
   };
 
-  useEffect(() => {
-    console.log("App is loading one time");
-  });
-
   return (
     <div className="App">
       <AuthContext.Provider value={contextValue}>

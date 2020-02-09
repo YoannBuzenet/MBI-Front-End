@@ -7,9 +7,6 @@ import CardLineSellingBasket from "../components/CardLineSellingBasket";
 const MyCurrentSellRequest = ({ history }) => {
   const { currentBasket, setCurrentBasket } = useContext(SellingBasketContext);
 
-  //Array to know the total of buying prices. As it's not stored everywhere we create memory here.
-  const total_prices = [];
-
   return (
     <>
       <div className="all-content sell-request">
@@ -31,9 +28,9 @@ const MyCurrentSellRequest = ({ history }) => {
               </tr>
             </thead>
             <tbody>
-              {currentBasket.map((card, index) => (
-                <CardLineSellingBasket card={card} key={index} />
-              ))}
+              {currentBasket.map((card, index) => {
+                return <CardLineSellingBasket card={card} key={index} />;
+              })}
 
               <tr className="total-line">
                 <td></td>
@@ -41,7 +38,7 @@ const MyCurrentSellRequest = ({ history }) => {
                 <td></td>
                 <td></td>
                 <td></td>
-                <td></td>
+
                 <td>
                   Total cartes :
                   {currentBasket.reduce((total, card) => {
@@ -50,10 +47,11 @@ const MyCurrentSellRequest = ({ history }) => {
                 </td>
                 <td>
                   Total :
-                  {total_prices.reduce((total, number) => {
-                    return total + number;
+                  {currentBasket.reduce((total, card) => {
+                    return total + card.price * card.quantity;
                   }, 0)}
                 </td>
+                <td></td>
               </tr>
             </tbody>
           </table>

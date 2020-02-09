@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 import sellRequestAPI from "../services/sellRequestAPI";
 
 const AllMySellRequests = props => {
-  useEffect(() => {
-    console.log(sellRequestAPI.findAll());
-  });
+  // useEffect(() => {
+  //   console.log(sellRequestAPI.findAll());
+  // });
 
   const currentSellRequests = [
     {
@@ -76,8 +76,6 @@ const AllMySellRequests = props => {
     }
   ];
 
-  console.log(currentSellRequests);
-
   return (
     <>
       <h1>Mes demandes de rachat</h1>
@@ -94,8 +92,8 @@ const AllMySellRequests = props => {
           </tr>
         </thead>
         <tbody>
-          {currentSellRequests.map(sellRequest => (
-            <tr>
+          {currentSellRequests.map((sellRequest, index) => (
+            <tr key={index}>
               <td>
                 <Link to={"/my_sell_requests/" + sellRequest.internalRef}>
                   {sellRequest.internalRef}

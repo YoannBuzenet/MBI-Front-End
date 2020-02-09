@@ -82,7 +82,6 @@ function userInfos() {
 
     //We get back all datas stocked in the browser about the user and put it back in memory.
     const userDatas = JSON.parse(window.localStorage.getItem("userInfos"));
-    console.log(userDatas);
 
     return {
       isAuthenticated: jwtData.exp * 1000 > new Date().getTime(),

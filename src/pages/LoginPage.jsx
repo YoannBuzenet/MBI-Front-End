@@ -34,7 +34,6 @@ const LoginPage = ({ onLogin, history }) => {
       const userData = await authAPI.authenticate(credentials);
 
       setError("");
-      console.log(userData);
       setAuthenticationInfos(userData);
 
       history.goBack();
