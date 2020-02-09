@@ -37,7 +37,7 @@ const SellRequestValidation = ({ history }) => {
       ].concat(
         currentBasket.map(card => {
           return {
-            language: "test",
+            language: "/languages/" + card.lang,
             CardCondition: "test",
             cards: card["@id"],
             cardQuantity: card.quantity,
