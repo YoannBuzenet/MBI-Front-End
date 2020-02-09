@@ -27,7 +27,6 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
   //      - AllSets are updated (which allow to reload when allSets are completely loaded and to display the set name)
   useEffect(() => {
     SetsAPI.findOneById(id).then(data => setCards(data));
-    console.log(SetsAPI.findOneById(id));
     //We get the current set Name if all the sets are loaded
     if (allSets.length > 0) {
       const currentSet = allSets.find(element => element.id == id);

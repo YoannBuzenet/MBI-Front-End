@@ -26,6 +26,7 @@ import OneSellRequest from "./pages/OneSellRequest";
 import SellingBasketAPI from "./services/sellingBasketAPI";
 import allConditions from "./definitions/conditionsDefinition";
 import allLanguages from "./definitions/languagesDefinition";
+import genericCardCharacteristicsAPI from "./services/genericCardCharacteristicsAPI";
 
 function App() {
   //APP INITIALIZATION USE EFFECT
@@ -42,6 +43,16 @@ function App() {
     if (eventuallySavedBasket !== null) {
       setCurrentBasket(eventuallySavedBasket);
     }
+
+    //Getting all languages Definition
+    genericCardCharacteristicsAPI
+      .getAllLang()
+      .then(data => setLangDefinition(data));
+
+    //Getting all conditions Definition
+    genericCardCharacteristicsAPI
+      .getAllConditions()
+      .then(data => setConditionDefinition(data));
   }, []);
 
   // STATE Creating the Authentication state
@@ -52,11 +63,14 @@ function App() {
   // STATE Creating the AllSets state
   const [allSets, setAllSets] = useState([]);
 
-  // STATE Creating the Generic Cards Info State
-  const [genericCardsInfos, setGenericCardsInfos] = useState({
-    lang: allLanguages.allLanguages,
-    conditions: allConditions.allConditions
-  });
+  // STATE Creating the langage definition state
+  const [langDefinition, setLangDefinition] = useState({});
+
+  // STATE Creating the conditions definition state
+  const [conditionDefinition, setConditionDefinition] = useState({});
+
+  // STATE Creating the Sell Request Basket state
+  const [currentBasket, setCurrentBasket] = useState([]);
 
   // CONTEXT CREATION Creating All Sets value for context
   const contextAllSets = {
@@ -70,12 +84,16 @@ function App() {
     setAuthenticationInfos: setAuthenticationInfos
   };
 
-  // STATE Creating the Sell Request Basket state
-  const [currentBasket, setCurrentBasket] = useState([]);
+  //CONTEXT CREATION Passing Lang and condition definition
+  const contextDefinition = {
+    lang: langDefinition,
+    conditions: conditionDefinition
+  };
 
   // Each time the currentBasket (which stores what we want to sell) is updated, we save it in Local storage.
   useEffect(() => {
     SellingBasketAPI.save(currentBasket);
+    console.log(contextDefinition);
   }, [currentBasket]);
 
   // Passing Authentication state in Context
@@ -140,7 +158,7 @@ function App() {
       <AuthContext.Provider value={contextValue}>
         <SellRequestContext.Provider value={contextBasket}>
           <SetsContext.Provider value={contextAllSets}>
-            <GenericContext.Provider value={genericCardsInfos}>
+            <GenericContext.Provider value={contextDefinition}>
               <Router>
                 <NavbarWithRouter />
                 <Switch>
