@@ -17,7 +17,7 @@ const CardLine = ({ card, handleAddSellingBasket, index, setName }) => {
     lang: "EN",
     isFoil: card.hasnonfoil ? "No" : "Yes",
     set: setName,
-    price: 0
+    price: 1
   });
 
   //Saving the Hover state
@@ -135,7 +135,7 @@ const CardLine = ({ card, handleAddSellingBasket, index, setName }) => {
             <option value="12">12</option>
           </select>
         </td>
-        <td>2</td>
+        <td>{card.price || 2} </td>
         <td>
           <i
             className="fas fa-plus-circle add-item-basket"
