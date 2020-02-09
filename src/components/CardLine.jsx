@@ -52,6 +52,9 @@ const CardLine = ({ card, handleAddSellingBasket, index, setName }) => {
     card.scryfallid +
     ".jpg";
 
+  //TEMPORARY DEFAULT DEFINITION TODO : GET IT THOURGH API
+  const gradingArea = "EU";
+
   return (
     <>
       <tr
@@ -95,9 +98,23 @@ const CardLine = ({ card, handleAddSellingBasket, index, setName }) => {
               handleChange(event, currentCard);
             }}
           >
-            <option value="NM">NM</option>
-            <option value="EXC">EXC</option>
-            <option value="PL">PL</option>
+            {conditions.length > 0
+              ? gradingArea === "EU"
+                ? conditions.map((condition, index) =>
+                    condition.isEU ? (
+                      <option key={index} value={condition.id}>
+                        {condition.shortname}
+                      </option>
+                    ) : null
+                  )
+                : conditions.map((condition, index) =>
+                    condition.isUS ? (
+                      <option value={condition.id} key={index}>
+                        {condition.shortnameUS}
+                      </option>
+                    ) : null
+                  )
+              : null}
           </select>
         </td>
 
