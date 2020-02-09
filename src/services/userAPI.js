@@ -1,9 +1,7 @@
 import axios from "axios";
 
 function register(credentials) {
-  return axios
-    .post("http://127.0.0.1:8000/Register", credentials)
-    .then(response => console.log(response));
+  return axios.post("http://127.0.0.1:8000/Register", credentials);
 }
 
 function update(id, credentials) {

@@ -35,6 +35,17 @@ function authenticate(credentials) {
           postalCode: data.client.postalCode,
           town: data.client.town,
           sellRequests: data.client.SellRequests
+        },
+        shop: {
+          id: data.shop.id,
+          legalName: data.shop.legalName,
+          SIRET: data.shop.SIRET,
+          vatNumber: data.shop.vatNumber,
+          tel: data.shop.tel,
+          email: data.shop.email,
+          adress: data.shop.adress,
+          postalCode: data.shop.postalCode,
+          town: data.shop.town
         }
       };
     });
@@ -71,6 +82,7 @@ function userInfos() {
 
     //We get back all datas stocked in the browser about the user and put it back in memory.
     const userDatas = JSON.parse(window.localStorage.getItem("userInfos"));
+    console.log(userDatas);
 
     return {
       isAuthenticated: jwtData.exp * 1000 > new Date().getTime(),
@@ -88,6 +100,17 @@ function userInfos() {
         postalCode: userDatas.client.postalCode,
         town: userDatas.client.town,
         sellRequests: userDatas.client.sellRequests
+      },
+      shop: {
+        id: userDatas.shop.id,
+        legalName: userDatas.shop.legalName,
+        SIRET: userDatas.shop.SIRET,
+        vatNumber: userDatas.shop.vatNumber,
+        tel: userDatas.shop.tel,
+        email: userDatas.shop.email,
+        adress: userDatas.shop.adress,
+        postalCode: userDatas.shop.postalCode,
+        town: userDatas.shop.town
       }
     };
   } else {
@@ -107,13 +130,24 @@ function userInfos() {
         postalCode: "",
         town: "",
         sellRequests: {}
+      },
+      shop: {
+        id: "",
+        legalName: "",
+        SIRET: "",
+        vatNumber: "",
+        tel: "",
+        email: "",
+        adress: "",
+        postalCode: "",
+        town: ""
       }
     };
   }
 }
 
 //Update User Info in the local storage
-function updateUserInfos(allUserInfos) {
+function updateUserInfosLocalStorage(allUserInfos) {
   window.localStorage.setItem("userInfos", JSON.stringify(allUserInfos));
 }
 
@@ -122,5 +156,5 @@ export default {
   logout: logout,
   setup: setup,
   userInfos,
-  updateUserInfos
+  updateUserInfosLocalStorage
 };
