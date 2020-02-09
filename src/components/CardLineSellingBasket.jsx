@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import SellingBasketContext from "../context/sellingBasket";
 import SellingBasketAPI from "../services/sellingBasketAPI";
+import GenericCardInfosContext from "../context/genericCardInfosContext";
 
 const CardLineSellingBasket = ({ card, index }) => {
   //Current Selling Request Basket
@@ -12,10 +13,14 @@ const CardLineSellingBasket = ({ card, index }) => {
   //Saving the Hover state
   const [isOnHover, setIsOnHover] = useState(false);
 
+  //DEFINED langages and Conditions
+  const { lang, conditions } = useContext(GenericCardInfosContext);
+
   useEffect(() => {
     if (isOnHover) {
       //If we neeed to change something on hover update, here it is
       console.log(card);
+      console.log(lang);
     }
   }, [isOnHover]);
 
@@ -80,9 +85,26 @@ const CardLineSellingBasket = ({ card, index }) => {
               handleChange(event, currentBasket, currentCard);
             }}
           >
-            <option value={card.lang}>{card.lang}</option>
-            <option value="FR">FR</option>
-            <option value="ES">ES</option>
+            {card.foreignData.length > 0 ? (
+              [
+                <option value={card.lang} key="a">
+                  {card.lang == "9"
+                    ? "EN"
+                    : card.foreignData.filter(
+                        currentlanguage =>
+                          currentlanguage.language_id.id === parseInt(card.lang)
+                      )[0].language_id.shortname}
+                </option>
+              ].concat(
+                card.foreignData.map((foreignData, index) => (
+                  <option value={foreignData.language_id.id} key={index}>
+                    {foreignData.language_id.shortname}
+                  </option>
+                ))
+              )
+            ) : (
+              <option value="9">EN</option>
+            )}
           </select>
         </td>
         <td>

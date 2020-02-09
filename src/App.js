@@ -93,7 +93,6 @@ function App() {
   // Each time the currentBasket (which stores what we want to sell) is updated, we save it in Local storage.
   useEffect(() => {
     SellingBasketAPI.save(currentBasket);
-    console.log(contextDefinition);
   }, [currentBasket]);
 
   // Passing Authentication state in Context
