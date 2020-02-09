@@ -31,16 +31,18 @@ const SellRequestValidation = ({ history }) => {
           CardCondition: "/card_conditions/1",
           cards: "/cards/500",
           cardQuantity: 2,
-          price: 2
+          price: 2,
+          isFOil: false
         }
       ].concat(
         currentBasket.map(card => {
           return {
             language: "test",
             CardCondition: "test",
-            cards: "test",
-            cardQuantity: 1,
-            price: 1
+            cards: card["@id"],
+            cardQuantity: card.quantity,
+            price: card.price,
+            isFoil: card.isFoil === "Yes" ? true : false
           };
         })
       )

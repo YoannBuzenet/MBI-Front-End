@@ -14,7 +14,7 @@ const CardLine = ({ card, handleAddSellingBasket, index, setName }) => {
     ...card,
     quantity: 1,
     condition: "NM",
-    lang: "EN",
+    lang: "9",
     isFoil: card.hasnonfoil ? "No" : "Yes",
     set: setName,
     price: 1
@@ -26,7 +26,7 @@ const CardLine = ({ card, handleAddSellingBasket, index, setName }) => {
   useEffect(() => {
     if (isOnHover) {
       //If we neeed to change something on hover update, here it is
-      console.log(conditions);
+      console.log(card);
     }
   }, [isOnHover]);
 
@@ -80,14 +80,26 @@ const CardLine = ({ card, handleAddSellingBasket, index, setName }) => {
           {/* Select will have to be refactored with a .map on a Select Component */}
           <select
             name="lang"
-            id={card.Name + "id1"}
+            id={card.name + "id1"}
             onChange={event => {
               handleChange(event, currentCard);
             }}
           >
-            <option value="EN">EN</option>
-            <option value="FR">FR</option>
-            <option value="ES">ES</option>
+            {card.foreignData.length > 0 ? (
+              [
+                <option value="9" key="a">
+                  EN
+                </option>
+              ].concat(
+                card.foreignData.map((foreignData, index) => (
+                  <option value={foreignData.language_id.id} key={index}>
+                    {foreignData.language_id.shortname}
+                  </option>
+                ))
+              )
+            ) : (
+              <option value="9">EN</option>
+            )}
           </select>
         </td>
         <td>

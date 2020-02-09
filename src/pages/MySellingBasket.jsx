@@ -18,8 +18,8 @@ const MyCurrentSellRequest = ({ history }) => {
               <tr>
                 <th>Nom de la carte</th>
                 <th>Edition</th>
-                <th>Etat</th>
                 <th>Langue</th>
+                <th>Etat</th>
                 <th>Foil</th>
                 <th>Quantité</th>
                 <th>Prix</th>
