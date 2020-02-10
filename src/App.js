@@ -27,6 +27,7 @@ import SellingBasketAPI from "./services/sellingBasketAPI";
 import allConditions from "./definitions/conditionsDefinition";
 import allLanguages from "./definitions/languagesDefinition";
 import genericCardCharacteristicsAPI from "./services/genericCardCharacteristicsAPI";
+import CanSubmitContext from "./context/canSubmitSellRequestContext";
 
 function App() {
   //APP INITIALIZATION USE EFFECT
@@ -72,6 +73,9 @@ function App() {
   // STATE Creating the Sell Request Basket state
   const [currentBasket, setCurrentBasket] = useState([]);
 
+  //STATE Creating the CanSubmit Authorization
+  const [canSubmit, setCanSubmit] = useState(true);
+
   // CONTEXT CREATION Creating All Sets value for context
   const contextAllSets = {
     allSets: allSets,
@@ -88,6 +92,12 @@ function App() {
   const contextDefinition = {
     lang: langDefinition,
     conditions: conditionDefinition
+  };
+
+  //CONTEXT CREATION Passing Can Submit Info
+  const contextSubmit = {
+    canSubmit: canSubmit,
+    setCanSubmit: setCanSubmit
   };
 
   // Each time the currentBasket (which stores what we want to sell) is updated, we save it in Local storage.
@@ -158,45 +168,53 @@ function App() {
         <SellRequestContext.Provider value={contextBasket}>
           <SetsContext.Provider value={contextAllSets}>
             <GenericContext.Provider value={contextDefinition}>
-              <Router>
-                <NavbarWithRouter />
-                <Switch>
-                  <Route
-                    path="/"
-                    exact
-                    render={props => (
-                      <Homepage
-                        handleAddSellingBasket={handleAddSellingBasket}
-                      />
-                    )}
-                  />
-                  <Route
-                    path="/sets/:id"
-                    render={({ match }) => (
-                      <OneSet
-                        handleAddSellingBasket={handleAddSellingBasket}
-                        match={match}
-                      />
-                    )}
-                  />
-                  <Route path="/login" component={LoginPage} />} />
-                  <Route path="/register" component={RegisterPage} />
-                  } />
-                  <Route
-                    path="/my_selling_basket"
-                    component={MySellingBasket}
-                  />
-                  <LoggedRoute
-                    path="/my_sell_requests/:id"
-                    component={OneSellRequest}
-                  />
-                  <LoggedRoute
-                    path="/my_sell_requests"
-                    component={mySellRequests}
-                  />
-                  <LoggedRoute path="/my_account" component={myAccount} />
-                </Switch>
-              </Router>
+              <CanSubmitContext.Provider value={contextSubmit}>
+                <Router>
+                  <NavbarWithRouter />
+                  <Switch>
+                    <Route
+                      path="/"
+                      exact
+                      render={props => (
+                        <Homepage
+                          handleAddSellingBasket={handleAddSellingBasket}
+                        />
+                      )}
+                    />
+                    <Route
+                      path="/sets/:id"
+                      render={({ match }) => (
+                        <OneSet
+                          handleAddSellingBasket={handleAddSellingBasket}
+                          match={match}
+                        />
+                      )}
+                    />
+                    <Route path="/login" component={LoginPage} />} />
+                    <Route path="/register" component={RegisterPage} />
+                    } />
+                    <Route
+                      path="/my_selling_basket"
+                      render={({ match, history }) => (
+                        <MySellingBasket
+                          handleAddSellingBasket={handleAddSellingBasket}
+                          match={match}
+                          history={history}
+                        />
+                      )}
+                    />
+                    <LoggedRoute
+                      path="/my_sell_requests/:id"
+                      component={OneSellRequest}
+                    />
+                    <LoggedRoute
+                      path="/my_sell_requests"
+                      component={mySellRequests}
+                    />
+                    <LoggedRoute path="/my_account" component={myAccount} />
+                  </Switch>
+                </Router>
+              </CanSubmitContext.Provider>
             </GenericContext.Provider>
           </SetsContext.Provider>
         </SellRequestContext.Provider>
