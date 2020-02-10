@@ -4,7 +4,7 @@ import SellRequestValidation from "../components/SellRequestValidation";
 import SellingBasketAPI from "../services/sellingBasketAPI";
 import CardLineSellingBasket from "../components/CardLineSellingBasket";
 
-const MyCurrentSellRequest = ({ history }) => {
+const MyCurrentSellRequest = ({ history, handleAddSellingBasket }) => {
   const { currentBasket, setCurrentBasket } = useContext(SellingBasketContext);
 
   useEffect(() => {}, [currentBasket]);
@@ -37,6 +37,7 @@ const MyCurrentSellRequest = ({ history }) => {
                         card={card}
                         key={index}
                         indexCard={index}
+                        handleAddSellingBasket={handleAddSellingBasket}
                       />
                     );
                   })

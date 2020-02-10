@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import SellingBasketContext from "../context/sellingBasket";
 import AuthContext from "../context/authContext";
+import canSubmitContext from "../context/canSubmitSellRequestContext";
 
 const SellRequestValidation = ({ history }) => {
   //Current Basket
@@ -11,10 +12,34 @@ const SellRequestValidation = ({ history }) => {
     AuthContext
   );
 
-  // console.log(authenticationInfos);
+  //Knowing if the Sell Request is OK to be submitted (no duplicate)
+  const { canSubmit, setCanSubmit } = useContext(canSubmitContext);
 
   const handleSubmit = event => {
     event.preventDefault();
+
+    // for (var i = 0; i < currentBasket.length; i++) {
+    //   for (let j = i + 1; j <= currentBasket.length; j++) {
+    //     if (
+    //       currentBasket[i].name === currentBasket[j].name &&
+    //       currentBasket[i].set === currentBasket[j] &&
+    //       currentBasket[i].price === currentBasket[j] &&
+    //       currentBasket[i].condition === currentBasket[j] &&
+    //       currentBasket[i].lang === currentBasket[j] &&
+    //       currentBasket[i].isFoil === currentBasket[j] &&
+    //       currentBasket[i].uuid === currentBasket[j]
+    //     ) {
+    //       alert("no");
+    //     }
+    //   }
+    // }
+
+    console.log(canSubmit);
+    if (!canSubmit) {
+      console.log(
+        "Vous ne pouvez pas encore soumettre vos rachats, merci de vérifier vos doublons."
+      );
+    }
 
     const sellRequestData = {
       client: "/client/" + authenticationInfos.customer.id,

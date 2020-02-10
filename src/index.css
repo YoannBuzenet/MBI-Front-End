@@ -334,6 +334,10 @@ div.connect p {
   padding: 1rem;
 }
 
+.error-line {
+  background-color: red !important;
+}
+
 /**************************
 ********MY ACCOUNT*******
 **************************/

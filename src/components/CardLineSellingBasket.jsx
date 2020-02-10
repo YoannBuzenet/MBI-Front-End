@@ -3,10 +3,23 @@ import SellingBasketContext from "../context/sellingBasket";
 import SellingBasketAPI from "../services/sellingBasketAPI";
 import GenericCardInfosContext from "../context/genericCardInfosContext";
 import sellingBasketAPI from "../services/sellingBasketAPI";
+import canSubmitContext from "../context/canSubmitSellRequestContext";
 
-const CardLineSellingBasket = ({ card, indexCard }) => {
+//In this component, following the edit of already added card was really difficult. I couldn't manage to update the basket if the card already existed.
+//Thus, The only thing I could do was to see if the card was already in there : I added a warning and a standard synchro alert system
+//It would be pretty to manage to see in real time which cards are similar and show them continuously. For this, a perfect handling of the current basket would be necessary.
+//Feel free to remove the error system, and the error context, that I implemented to complete this incomplete system.
+//Currently, if we wee that the card edited is already in the Basket, we changed a context variable to prevent from submitting the request.
+
+const CardLineSellingBasket = ({ card, indexCard, handleAddSellingBasket }) => {
   //Current Selling Request Basket
   const { currentBasket, setCurrentBasket } = useContext(SellingBasketContext);
+
+  //Knowing if the Sell Request is OK to be submitted (no duplicate)
+  const { canSubmit, setCanSubmit } = useContext(canSubmitContext);
+
+  //DEFINED langages and Conditions
+  const { lang, conditions } = useContext(GenericCardInfosContext);
 
   //Using the current Card in state
   const [currentCard, setCard] = useState(card);
@@ -14,16 +27,23 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
   //Saving the Hover state
   const [isOnHover, setIsOnHover] = useState(false);
 
-  //DEFINED langages and Conditions
-  const { lang, conditions } = useContext(GenericCardInfosContext);
+  //Defining loading state, to know if component is loaded
+  const [isLoaded, setIsloaded] = useState(false);
+
+  //Following the errors in the basket (duplicates)
+  const [errors, setErrors] = useState([]);
 
   useEffect(() => {
     if (isOnHover) {
       //If we neeed to change something on hover update, here it is
+      console.log(currentCard);
+      console.log(canSubmit);
     }
   }, [isOnHover]);
 
   useEffect(() => {
+    if (isLoaded) checkIfIfCardAlreadyHere(currentBasket, currentCard);
+
     //We remove the card then we add it again
     const newBasket = currentBasket.filter(
       (card, index) => index !== indexCard
@@ -35,6 +55,37 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
     sellingBasketAPI.save(newBasket);
   }, [currentCard]);
 
+  useEffect(() => {
+    console.log(errors);
+    console.log(canSubmit);
+  }, [errors]);
+
+  const checkIfIfCardAlreadyHere = (currentBasket, card) => {
+    for (var i = 0; i < currentBasket.length; i++) {
+      if (
+        currentBasket[i].name === card.name &&
+        currentBasket[i].set === card.set &&
+        currentBasket[i].price === card.price &&
+        currentBasket[i].condition === card.condition &&
+        currentBasket[i].lang === card.lang &&
+        currentBasket[i].isFoil === card.isFoil &&
+        currentBasket[i].uuid === card.uuid
+      ) {
+        //TODO : NOTIFICATION
+        alert(
+          `Ligne ${indexCard + 1} : La carte ${card.name}, de l'édition ${
+            card.set
+          }, état ${card.condition}, langue ${card.lang}, foil : ${
+            card.isFoil
+          } est en doublon. Merci de ne soumettre qu'une seule ligne.`
+        );
+
+        setErrors([...errors, indexCard]);
+        setCanSubmit(false);
+      }
+    }
+  };
+
   const handleChange = ({ currentTarget }, currentCard, currentBasket) => {
     const { name, value } = currentTarget;
     if (name == "quantity") {
@@ -42,7 +93,9 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
     } else {
       var newValue = value.toString();
     }
-
+    setCanSubmit(true);
+    setIsloaded(true);
+    setErrors([]);
     setCard({ ...currentCard, [name]: newValue });
   };
 
@@ -67,6 +120,9 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
     card.scryfallid +
     ".jpg";
 
+  //Defining the class, if it's error or not
+  const sellingBasketLine = errors.includes(indexCard) ? "error-line" : "";
+
   return (
     <>
       <tr
@@ -77,6 +133,7 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
         onMouseLeave={() => {
           setIsOnHover(!isOnHover);
         }}
+        className={sellingBasketLine}
       >
         <td className="cardPictureHolder">
           {card.name}
@@ -174,8 +231,8 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
             onChange={event => {
               handleChange(event, currentCard, currentBasket);
             }}
+            value={currentCard.quantity}
           >
-            <option value={card.quantity}>{card.quantity}</option>
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
