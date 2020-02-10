@@ -31,9 +31,6 @@ const CardLineSellingBasket = ({ card, indexCard, handleAddSellingBasket }) => {
   //Defining loading state, to know if component is loaded
   const [isLoaded, setIsloaded] = useState(false);
 
-  //Following the errors in the basket (duplicates)
-  const [errors, setErrors] = useState([]);
-
   useEffect(() => {
     if (isOnHover) {
       //If we neeed to change something on hover update, here it is
@@ -44,41 +41,43 @@ const CardLineSellingBasket = ({ card, indexCard, handleAddSellingBasket }) => {
   }, [isOnHover]);
 
   useEffect(() => {
-    if (isLoaded) checkIfIfCardAlreadyHere(currentBasket, currentCard);
-
-    //We remove the card then we add it again
-    const newBasket = currentBasket.filter(
-      (card, index) => index !== indexCard
-    );
-    newBasket.splice(indexCard, 0, currentCard);
-
-    setCurrentBasket(newBasket);
-
-    sellingBasketAPI.save(newBasket);
+    if (isLoaded) {
+      checkIfIfCardAlreadyHere(currentBasket, currentCard);
+    }
   }, [currentCard]);
 
-  const checkIfIfCardAlreadyHere = (currentBasket, card) => {
+  const checkIfIfCardAlreadyHere = (currentBasket, newCard) => {
     for (var i = 0; i < currentBasket.length; i++) {
       if (
-        currentBasket[i].name === card.name &&
-        currentBasket[i].set === card.set &&
-        currentBasket[i].price === card.price &&
-        currentBasket[i].condition === card.condition &&
-        currentBasket[i].lang === card.lang &&
-        currentBasket[i].isFoil === card.isFoil &&
-        currentBasket[i].uuid === card.uuid
+        currentBasket[i].name === newCard.name &&
+        currentBasket[i].set === newCard.set &&
+        currentBasket[i].price === newCard.price &&
+        currentBasket[i].condition === newCard.condition &&
+        currentBasket[i].lang === newCard.lang &&
+        currentBasket[i].isFoil === newCard.isFoil &&
+        currentBasket[i].uuid === newCard.uuid
       ) {
-        //TODO : NOTIFICATION
+        //TODO : REAL NOTIFICATION
         alert(
-          `Ligne ${indexCard + 1} : La carte ${card.name}, de l'édition ${
-            card.set
-          }, état ${card.condition}, langue ${card.lang}, foil : ${
-            card.isFoil
+          `Ligne ${indexCard + 1} : La carte ${newCard.name}, de l'édition ${
+            newCard.set
+          }, état ${newCard.condition}, langue ${newCard.lang}, foil : ${
+            newCard.isFoil
           } est en doublon. Merci de ne soumettre qu'une seule ligne.`
         );
 
         setErrorList([...errorList, (errorList[indexCard] = indexCard)]);
       } else {
+        //We remove the card then we add it again at the same Index
+        const newBasket = currentBasket.filter(
+          (card, index) => index !== indexCard
+        );
+        newBasket.splice(indexCard, 0, currentCard);
+
+        setCurrentBasket(newBasket);
+        console.log("osef");
+
+        sellingBasketAPI.save(newBasket);
       }
     }
   };
