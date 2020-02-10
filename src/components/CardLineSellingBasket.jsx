@@ -2,8 +2,9 @@ import React, { useContext, useState, useEffect } from "react";
 import SellingBasketContext from "../context/sellingBasket";
 import SellingBasketAPI from "../services/sellingBasketAPI";
 import GenericCardInfosContext from "../context/genericCardInfosContext";
+import sellingBasketAPI from "../services/sellingBasketAPI";
 
-const CardLineSellingBasket = ({ card, index }) => {
+const CardLineSellingBasket = ({ card, indexCard }) => {
   //Current Selling Request Basket
   const { currentBasket, setCurrentBasket } = useContext(SellingBasketContext);
 
@@ -20,9 +21,22 @@ const CardLineSellingBasket = ({ card, index }) => {
     if (isOnHover) {
       //If we neeed to change something on hover update, here it is
       console.log(currentCard);
-      console.log(currentBasket);
     }
   }, [isOnHover]);
+
+  useEffect(() => {
+    //We remove the card then we add it again
+    const newBasket = currentBasket.filter(
+      (card, index) => index !== indexCard
+    );
+    newBasket.splice(indexCard, 0, currentCard);
+
+    setCurrentBasket(newBasket);
+    console.log(currentCard);
+    console.log(currentBasket);
+
+    sellingBasketAPI.save(newBasket);
+  }, [currentCard]);
 
   const handleChange = ({ currentTarget }, currentCard, currentBasket) => {
     const { name, value } = currentTarget;
@@ -81,6 +95,7 @@ const CardLineSellingBasket = ({ card, index }) => {
           <select
             name="lang"
             id={card.cardName + "id1"}
+            value={card.lang}
             onChange={event => {
               handleChange(event, currentCard, currentBasket);
             }}
@@ -95,21 +110,23 @@ const CardLineSellingBasket = ({ card, index }) => {
                           currentlanguage.language_id.id === parseInt(card.lang)
                       )[0].language_id.shortname}
                 </option>
-              ].concat(
-                card.foreignData
-                  .filter(
-                    currentlanguage =>
-                      currentlanguage.language_id.id !== parseInt(card.lang)
-                  )
-                  .map((foreignData, index) => (
-                    <option
-                      value={foreignData.language_id.id}
-                      key={index + "3"}
-                    >
-                      {foreignData.language_id.shortname}
-                    </option>
-                  ))
-              )
+              ]
+                .concat(
+                  card.foreignData
+                    .filter(
+                      currentlanguage =>
+                        currentlanguage.language_id.id !== parseInt(card.lang)
+                    )
+                    .map((foreignData, index) => (
+                      <option
+                        value={foreignData.language_id.id}
+                        key={index + "3"}
+                      >
+                        {foreignData.language_id.shortname}
+                      </option>
+                    ))
+                )
+                .concat([<option value="9">EN</option>])
             ) : (
               <option value="9">EN</option>
             )}
@@ -132,16 +149,17 @@ const CardLineSellingBasket = ({ card, index }) => {
           <select
             name="isFoil"
             id={card.cardName + "id4"}
+            value={currentCard.isFoil}
             onChange={event => {
               handleChange(event, currentCard, currentBasket);
             }}
           >
-            <option value={card.isFoil == "Yes" ? "Yes" : "No"}>
-              {card.isFoil == "Yes" ? "Yes" : "No"}
+            <option value={currentCard.isFoil == "Yes" ? "Yes" : "No"}>
+              {currentCard.isFoil == "Yes" ? "Yes" : "No"}
             </option>
             {card.hasfoil == 1 && card.hasnonfoil == 1 && (
-              <option value={card.isFoil == "Yes" ? "No" : "Yes"}>
-                {card.isFoil == "Yes" ? "No" : "Yes"}
+              <option value={currentCard.isFoil == "Yes" ? "No" : "Yes"}>
+                {currentCard.isFoil == "Yes" ? "No" : "Yes"}
               </option>
             )}
           </select>
