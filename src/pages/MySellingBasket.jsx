@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import SellingBasketContext from "../context/sellingBasket";
 import SellRequestValidation from "../components/SellRequestValidation";
 import SellingBasketAPI from "../services/sellingBasketAPI";
@@ -6,6 +6,8 @@ import CardLineSellingBasket from "../components/CardLineSellingBasket";
 
 const MyCurrentSellRequest = ({ history }) => {
   const { currentBasket, setCurrentBasket } = useContext(SellingBasketContext);
+
+  useEffect(() => {}, [currentBasket]);
 
   return (
     <>
@@ -30,7 +32,13 @@ const MyCurrentSellRequest = ({ history }) => {
             <tbody>
               {currentBasket.length > 0
                 ? currentBasket.map((card, index) => {
-                    return <CardLineSellingBasket card={card} key={index} />;
+                    return (
+                      <CardLineSellingBasket
+                        card={card}
+                        key={index}
+                        indexCard={index}
+                      />
+                    );
                   })
                 : null}
 
