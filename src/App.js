@@ -162,6 +162,45 @@ function App() {
     }
   };
 
+  const updateSellingBasketCheckDuplicate = (currentBasket, newCard) => {
+    var isThereDuplicate = false;
+    for (var i = 0; i < currentBasket.length; i++) {
+      if (
+        currentBasket[i].name === newCard.name &&
+        currentBasket[i].set === newCard.set &&
+        currentBasket[i].price === newCard.price &&
+        currentBasket[i].condition === newCard.condition &&
+        currentBasket[i].lang === newCard.lang &&
+        currentBasket[i].isFoil === newCard.isFoil &&
+        currentBasket[i].uuid === newCard.uuid
+      ) {
+        isThereDuplicate = true;
+      } else {
+      }
+    }
+    return isThereDuplicate;
+  };
+
+  const checkForDuplicates = currentBasket => {
+    var areThereDuplicate = false;
+    for (var i = 0; i < currentBasket.length - 1; i++) {
+      for (var j = i + 1; j < currentBasket.length; j++) {
+        if (
+          currentBasket[i].name === currentBasket[j].name &&
+          currentBasket[i].set === currentBasket[j].set &&
+          currentBasket[i].price === currentBasket[j].price &&
+          currentBasket[i].condition === currentBasket[j].condition &&
+          currentBasket[i].lang === currentBasket[j].lang &&
+          currentBasket[i].isFoil === currentBasket[j].isFoil &&
+          currentBasket[i].uuid === currentBasket[j].uuid
+        ) {
+          areThereDuplicate = true;
+        }
+      }
+    }
+    return areThereDuplicate;
+  };
+
   return (
     <div className="App">
       <AuthContext.Provider value={contextValue}>
@@ -197,7 +236,10 @@ function App() {
                       path="/my_selling_basket"
                       render={({ match, history }) => (
                         <MySellingBasket
-                          handleAddSellingBasket={handleAddSellingBasket}
+                          updateSellingBasketCheckDuplicate={
+                            updateSellingBasketCheckDuplicate
+                          }
+                          checkForDuplicates={checkForDuplicates}
                           match={match}
                           history={history}
                         />

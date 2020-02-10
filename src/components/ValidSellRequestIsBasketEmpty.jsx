@@ -2,7 +2,10 @@ import React, { useContext } from "react";
 import ValidSellRequestDuplicatesStep from "./ValidSellRequestDuplicatesStep";
 import SellingBasketContext from "../context/sellingBasket";
 
-const ValidSellRequestIsBasketEmpty = props => {
+const ValidSellRequestIsBasketEmpty = ({
+  handleSubmit,
+  checkForDuplicates
+}) => {
   //Current Basket
   const { currentBasket, setCurrentBasket } = useContext(SellingBasketContext);
 
@@ -10,7 +13,10 @@ const ValidSellRequestIsBasketEmpty = props => {
     <>
       {(currentBasket.length > 0 && (
         <div className="isCurrentBasketReady">
-          <ValidSellRequestDuplicatesStep handleSubmit={props.handleSubmit} />
+          <ValidSellRequestDuplicatesStep
+            handleSubmit={handleSubmit}
+            checkForDuplicates={checkForDuplicates}
+          />
         </div>
       )) || (
         <div className="isCurrentBasketEmpty">
