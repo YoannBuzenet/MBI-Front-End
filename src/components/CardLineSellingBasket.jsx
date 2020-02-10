@@ -12,7 +12,11 @@ import canSubmitContext from "../context/canSubmitSellRequestContext";
 //Currently, if we wee that the card edited is already in the Basket, we changed a context variable to prevent from submitting the request.
 //Problem is that each line in the basket is checking its errors. When the basket renders, all line wants to set CanSubmit. We need a more granular way to follow the error.
 
-const CardLineSellingBasket = ({ card, indexCard, handleAddSellingBasket }) => {
+const CardLineSellingBasket = ({
+  card,
+  indexCard,
+  updateSellingBasketCheckDuplicate
+}) => {
   //Current Selling Request Basket
   const { currentBasket, setCurrentBasket } = useContext(SellingBasketContext);
 
@@ -34,15 +38,41 @@ const CardLineSellingBasket = ({ card, indexCard, handleAddSellingBasket }) => {
   useEffect(() => {
     if (isOnHover) {
       //If we neeed to change something on hover update, here it is
-      console.log(currentCard);
-      console.log(errorList);
+      // console.log(currentCard);
+      // console.log(errorList);
       console.log(currentBasket);
     }
   }, [isOnHover]);
 
   useEffect(() => {
     if (isLoaded) {
-      checkIfIfCardAlreadyHere(currentBasket, currentCard);
+      //checkIfIfCardAlreadyHere(currentBasket, currentCard);
+      //We remove the card then we add it again at the same Index
+      const newBasket = currentBasket.filter(
+        (card, index) => index !== indexCard
+      );
+      newBasket.splice(indexCard, 0, currentCard);
+
+      setCurrentBasket(newBasket);
+
+      sellingBasketAPI.save(newBasket);
+
+      if (updateSellingBasketCheckDuplicate(currentBasket, currentCard)) {
+        //TODO : REAL NOTIFICATION
+        console.log("current basket", currentBasket);
+        console.log("current card", currentCard);
+        alert(
+          `Ligne ${indexCard + 1} : La carte ${
+            currentCard.name
+          }, de l'édition ${currentCard.set}, état ${
+            currentCard.condition
+          }, langue ${currentCard.lang}, foil : ${
+            currentCard.isFoil
+          } est en doublon. Merci de ne soumettre qu'une seule ligne.`
+        );
+
+        setErrorList([...errorList, (errorList[indexCard] = indexCard)]);
+      }
     }
   }, [currentCard]);
 
@@ -67,17 +97,6 @@ const CardLineSellingBasket = ({ card, indexCard, handleAddSellingBasket }) => {
         );
 
         setErrorList([...errorList, (errorList[indexCard] = indexCard)]);
-      } else {
-        //We remove the card then we add it again at the same Index
-        const newBasket = currentBasket.filter(
-          (card, index) => index !== indexCard
-        );
-        newBasket.splice(indexCard, 0, currentCard);
-
-        setCurrentBasket(newBasket);
-        console.log("osef");
-
-        sellingBasketAPI.save(newBasket);
       }
     }
   };
@@ -93,6 +112,7 @@ const CardLineSellingBasket = ({ card, indexCard, handleAddSellingBasket }) => {
     setIsloaded(true);
     setErrorList([]);
     setCard({ ...currentCard, [name]: newValue });
+    console.log(currentCard);
   };
 
   const handleDelete = card => {

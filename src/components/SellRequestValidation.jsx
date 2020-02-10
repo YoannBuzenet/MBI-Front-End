@@ -1,10 +1,10 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import SellingBasketContext from "../context/sellingBasket";
 import AuthContext from "../context/authContext";
 import canSubmitContext from "../context/canSubmitSellRequestContext";
 import ValidSellRequestIsBasketEmpty from "./ValidSellRequestIsBasketEmpty";
 
-const SellRequestValidation = ({ history }) => {
+const SellRequestValidation = ({ history, checkForDuplicates }) => {
   //Current Basket
   const { currentBasket, setCurrentBasket } = useContext(SellingBasketContext);
 
@@ -16,24 +16,12 @@ const SellRequestValidation = ({ history }) => {
   //Knowing if the Sell Request is OK to be submitted (no duplicate)
   const { errorList, setErrorList } = useContext(canSubmitContext);
 
+  useEffect(() => {
+    console.log(checkForDuplicates(currentBasket));
+  }, [currentBasket]);
+
   const handleSubmit = event => {
     event.preventDefault();
-
-    // for (var i = 0; i < currentBasket.length; i++) {
-    //   for (let j = i + 1; j <= currentBasket.length; j++) {
-    //     if (
-    //       currentBasket[i].name === currentBasket[j].name &&
-    //       currentBasket[i].set === currentBasket[j] &&
-    //       currentBasket[i].price === currentBasket[j] &&
-    //       currentBasket[i].condition === currentBasket[j] &&
-    //       currentBasket[i].lang === currentBasket[j] &&
-    //       currentBasket[i].isFoil === currentBasket[j] &&
-    //       currentBasket[i].uuid === currentBasket[j]
-    //     ) {
-    //       alert("no");
-    //     }
-    //   }
-    // }
 
     console.log(errorList);
     if (errorList.length > 0) {
@@ -83,7 +71,10 @@ const SellRequestValidation = ({ history }) => {
   return (
     <div className="sellRequest-validation-block">
       <h2>Valider mon rachat</h2>
-      <ValidSellRequestIsBasketEmpty handleSubmit={handleSubmit} />
+      <ValidSellRequestIsBasketEmpty
+        handleSubmit={handleSubmit}
+        checkForDuplicates={checkForDuplicates}
+      />
     </div>
   );
 };
