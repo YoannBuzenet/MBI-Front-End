@@ -20,7 +20,6 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
   useEffect(() => {
     if (isOnHover) {
       //If we neeed to change something on hover update, here it is
-      console.log(currentCard);
     }
   }, [isOnHover]);
 
@@ -32,8 +31,6 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
     newBasket.splice(indexCard, 0, currentCard);
 
     setCurrentBasket(newBasket);
-    console.log(currentCard);
-    console.log(currentBasket);
 
     sellingBasketAPI.save(newBasket);
   }, [currentCard]);
@@ -49,12 +46,13 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
     setCard({ ...currentCard, [name]: newValue });
   };
 
-  const handleDelete = cardUuid => {
-    const newCurrentBasket = currentBasket.filter(
-      card => cardUuid !== card.uuid
+  const handleDelete = card => {
+    //We remove the card thanks to its index in the currentBasket
+    const newBasket = currentBasket.filter(
+      (card, index) => index !== indexCard
     );
-    setCurrentBasket(newCurrentBasket);
-    SellingBasketAPI.save(newCurrentBasket);
+    setCurrentBasket(newBasket);
+    SellingBasketAPI.save(newBasket);
   };
 
   //Creating the specific link to get the scryffalID picture. It is composed of a static base, + the 2 first character of the ID, + the ID
@@ -126,7 +124,11 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
                       </option>
                     ))
                 )
-                .concat([<option value="9">EN</option>])
+                .concat([
+                  <option value="9" key={card.id + "3" + card.lang}>
+                    EN
+                  </option>
+                ])
             ) : (
               <option value="9">EN</option>
             )}
@@ -192,7 +194,10 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
         <td>
           <i
             className="fas fa-minus-circle delete-from-selling-basket"
-            onClick={() => handleDelete(card.uuid)}
+            onClick={() => {
+              console.log(currentCard);
+              return handleDelete(currentCard);
+            }}
           ></i>
         </td>
       </tr>
