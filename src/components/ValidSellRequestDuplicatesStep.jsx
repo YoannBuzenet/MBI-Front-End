@@ -17,15 +17,16 @@ const ValidSellRequestDuplicatesStep = ({
   const { errorList, setErrorList } = useContext(canSubmitContext);
 
   useEffect(() => {
+    // console.log(errorList.length);
     const check = checkForDuplicates(currentBasket);
     setFinalCheck(check[0]);
-    console.log(check);
-    console.log("check1", check[1]);
-    console.log("check2", check[2]);
-    setErrorList([check[1], check[2]]);
+    // console.log(check);
+    // console.log("check1", check[1]);
+    // console.log("check2", check[2]);
+    if (check[1] !== undefined && check[2] !== undefined) {
+      setErrorList([check[1], check[2]]);
+    }
   }, [currentBasket]);
-
-  console.log(finalCheck);
 
   return (
     <>
