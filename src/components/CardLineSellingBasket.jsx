@@ -40,7 +40,7 @@ const CardLineSellingBasket = ({
       //If we neeed to change something on hover update, here it is
       // console.log(currentCard);
       // console.log(errorList);
-      console.log(currentBasket);
+      // console.log(currentBasket);
     }
   }, [isOnHover]);
 
@@ -72,34 +72,11 @@ const CardLineSellingBasket = ({
         );
 
         setErrorList([...errorList, (errorList[indexCard] = indexCard)]);
+      } else {
+        setErrorList([]);
       }
     }
   }, [currentCard]);
-
-  const checkIfIfCardAlreadyHere = (currentBasket, newCard) => {
-    for (var i = 0; i < currentBasket.length; i++) {
-      if (
-        currentBasket[i].name === newCard.name &&
-        currentBasket[i].set === newCard.set &&
-        currentBasket[i].price === newCard.price &&
-        currentBasket[i].condition === newCard.condition &&
-        currentBasket[i].lang === newCard.lang &&
-        currentBasket[i].isFoil === newCard.isFoil &&
-        currentBasket[i].uuid === newCard.uuid
-      ) {
-        //TODO : REAL NOTIFICATION
-        alert(
-          `Ligne ${indexCard + 1} : La carte ${newCard.name}, de l'édition ${
-            newCard.set
-          }, état ${newCard.condition}, langue ${newCard.lang}, foil : ${
-            newCard.isFoil
-          } est en doublon. Merci de ne soumettre qu'une seule ligne.`
-        );
-
-        setErrorList([...errorList, (errorList[indexCard] = indexCard)]);
-      }
-    }
-  };
 
   const handleChange = ({ currentTarget }, currentCard, currentBasket) => {
     const { name, value } = currentTarget;
