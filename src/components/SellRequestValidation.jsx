@@ -16,10 +16,6 @@ const SellRequestValidation = ({ history, checkForDuplicates }) => {
   //Knowing if the Sell Request is OK to be submitted (no duplicate)
   const { errorList, setErrorList } = useContext(canSubmitContext);
 
-  useEffect(() => {
-    console.log(checkForDuplicates(currentBasket));
-  }, [currentBasket]);
-
   const handleSubmit = event => {
     event.preventDefault();
 
