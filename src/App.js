@@ -183,6 +183,8 @@ function App() {
 
   const checkForDuplicates = currentBasket => {
     var areThereDuplicate = false;
+    var indexItem1;
+    var indexItem2;
     for (var i = 0; i < currentBasket.length - 1; i++) {
       for (var j = i + 1; j < currentBasket.length; j++) {
         if (
@@ -195,10 +197,12 @@ function App() {
           currentBasket[i].uuid === currentBasket[j].uuid
         ) {
           areThereDuplicate = true;
+          indexItem1 = i;
+          indexItem2 = j;
         }
       }
     }
-    return areThereDuplicate;
+    return [areThereDuplicate, indexItem1, indexItem2];
   };
 
   return (
