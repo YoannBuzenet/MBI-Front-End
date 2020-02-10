@@ -74,7 +74,7 @@ function App() {
   const [currentBasket, setCurrentBasket] = useState([]);
 
   //STATE Creating the CanSubmit Authorization
-  const [canSubmit, setCanSubmit] = useState(true);
+  const [errorList, setErrorList] = useState([]);
 
   // CONTEXT CREATION Creating All Sets value for context
   const contextAllSets = {
@@ -96,8 +96,8 @@ function App() {
 
   //CONTEXT CREATION Passing Can Submit Info
   const contextSubmit = {
-    canSubmit: canSubmit,
-    setCanSubmit: setCanSubmit
+    errorList: errorList,
+    setErrorList: setErrorList
   };
 
   // Each time the currentBasket (which stores what we want to sell) is updated, we save it in Local storage.
