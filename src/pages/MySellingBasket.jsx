@@ -3,11 +3,13 @@ import SellingBasketContext from "../context/sellingBasket";
 import SellRequestValidation from "../components/SellRequestValidation";
 import SellingBasketAPI from "../services/sellingBasketAPI";
 import CardLineSellingBasket from "../components/CardLineSellingBasket";
+import canSubmitContext from "../context/canSubmitSellRequestContext";
 
 const MyCurrentSellRequest = ({ history, handleAddSellingBasket }) => {
   const { currentBasket, setCurrentBasket } = useContext(SellingBasketContext);
 
-  useEffect(() => {}, [currentBasket]);
+  //Knowing if the Sell Request is OK to be submitted (no duplicate)
+  const { errorList, setErrorList } = useContext(canSubmitContext);
 
   return (
     <>

@@ -10,13 +10,14 @@ import canSubmitContext from "../context/canSubmitSellRequestContext";
 //It would be pretty to manage to see in real time which cards are similar and show them continuously. For this, a perfect handling of the current basket would be necessary.
 //Feel free to remove the error system, and the error context, that I implemented to complete this incomplete system.
 //Currently, if we wee that the card edited is already in the Basket, we changed a context variable to prevent from submitting the request.
+//Problem is that each line in the basket is checking its errors. When the basket renders, all line wants to set CanSubmit. We need a more granular way to follow the error.
 
 const CardLineSellingBasket = ({ card, indexCard, handleAddSellingBasket }) => {
   //Current Selling Request Basket
   const { currentBasket, setCurrentBasket } = useContext(SellingBasketContext);
 
   //Knowing if the Sell Request is OK to be submitted (no duplicate)
-  const { canSubmit, setCanSubmit } = useContext(canSubmitContext);
+  const { errorList, setErrorList } = useContext(canSubmitContext);
 
   //DEFINED langages and Conditions
   const { lang, conditions } = useContext(GenericCardInfosContext);
@@ -37,7 +38,8 @@ const CardLineSellingBasket = ({ card, indexCard, handleAddSellingBasket }) => {
     if (isOnHover) {
       //If we neeed to change something on hover update, here it is
       console.log(currentCard);
-      console.log(canSubmit);
+      console.log(errorList);
+      console.log(currentBasket);
     }
   }, [isOnHover]);
 
@@ -54,11 +56,6 @@ const CardLineSellingBasket = ({ card, indexCard, handleAddSellingBasket }) => {
 
     sellingBasketAPI.save(newBasket);
   }, [currentCard]);
-
-  useEffect(() => {
-    console.log(errors);
-    console.log(canSubmit);
-  }, [errors]);
 
   const checkIfIfCardAlreadyHere = (currentBasket, card) => {
     for (var i = 0; i < currentBasket.length; i++) {
@@ -80,8 +77,8 @@ const CardLineSellingBasket = ({ card, indexCard, handleAddSellingBasket }) => {
           } est en doublon. Merci de ne soumettre qu'une seule ligne.`
         );
 
-        setErrors([...errors, indexCard]);
-        setCanSubmit(false);
+        setErrorList([...errorList, (errorList[indexCard] = indexCard)]);
+      } else {
       }
     }
   };
@@ -93,9 +90,9 @@ const CardLineSellingBasket = ({ card, indexCard, handleAddSellingBasket }) => {
     } else {
       var newValue = value.toString();
     }
-    setCanSubmit(true);
+
     setIsloaded(true);
-    setErrors([]);
+    setErrorList([]);
     setCard({ ...currentCard, [name]: newValue });
   };
 
@@ -121,7 +118,7 @@ const CardLineSellingBasket = ({ card, indexCard, handleAddSellingBasket }) => {
     ".jpg";
 
   //Defining the class, if it's error or not
-  const sellingBasketLine = errors.includes(indexCard) ? "error-line" : "";
+  const sellingBasketLine = errorList.includes(indexCard) ? "error-line" : "";
 
   return (
     <>

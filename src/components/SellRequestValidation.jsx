@@ -13,7 +13,7 @@ const SellRequestValidation = ({ history }) => {
   );
 
   //Knowing if the Sell Request is OK to be submitted (no duplicate)
-  const { canSubmit, setCanSubmit } = useContext(canSubmitContext);
+  const { errorList, setErrorList } = useContext(canSubmitContext);
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -34,8 +34,8 @@ const SellRequestValidation = ({ history }) => {
     //   }
     // }
 
-    console.log(canSubmit);
-    if (!canSubmit) {
+    console.log(errorList);
+    if (errorList.length > 0) {
       console.log(
         "Vous ne pouvez pas encore soumettre vos rachats, merci de vérifier vos doublons."
       );
