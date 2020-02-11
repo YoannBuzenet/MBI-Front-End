@@ -181,6 +181,10 @@ function App() {
     return isThereDuplicate;
   };
 
+  //This fonction should be rewritten to get O LOG N space time & complexity
+  // Currenlty it is N²
+  //To do this, get all the relevant information and hash them into ONE integer. Then sort this array following that integer.
+  //Then use algoexpert.io
   const checkForDuplicates = currentBasket => {
     var areThereDuplicate = false;
     var indexItem1;

@@ -13,7 +13,7 @@ const CardLine = ({ card, handleAddSellingBasket, index, setName }) => {
   const [currentCard, setCard] = useState({
     ...card,
     quantity: 1,
-    condition: "NM",
+    condition: 2,
     lang: "9",
     isFoil: card.hasnonfoil ? "No" : "Yes",
     set: setName,
@@ -25,6 +25,7 @@ const CardLine = ({ card, handleAddSellingBasket, index, setName }) => {
 
   useEffect(() => {
     if (isOnHover) {
+      console.log(conditions);
       //If we neeed to change something on hover update, here it is
       console.log(card);
     }
@@ -109,6 +110,7 @@ const CardLine = ({ card, handleAddSellingBasket, index, setName }) => {
             onChange={event => {
               handleChange(event, currentCard);
             }}
+            defaultValue="2"
           >
             {conditions.length > 0
               ? gradingArea === "EU"
