@@ -5,11 +5,7 @@ import SellingBasketAPI from "../services/sellingBasketAPI";
 import CardLineSellingBasket from "../components/CardLineSellingBasket";
 import canSubmitContext from "../context/canSubmitSellRequestContext";
 
-const MyCurrentSellRequest = ({
-  history,
-  updateSellingBasketCheckDuplicate,
-  checkForDuplicates
-}) => {
+const MyCurrentSellRequest = ({ history, checkForDuplicates }) => {
   const { currentBasket, setCurrentBasket } = useContext(SellingBasketContext);
 
   //Knowing if the Sell Request is OK to be submitted (no duplicate)
@@ -43,9 +39,6 @@ const MyCurrentSellRequest = ({
                         card={card}
                         key={index}
                         indexCard={index}
-                        updateSellingBasketCheckDuplicate={
-                          updateSellingBasketCheckDuplicate
-                        }
                       />
                     );
                   })

@@ -162,25 +162,6 @@ function App() {
     }
   };
 
-  const updateSellingBasketCheckDuplicate = (currentBasket, newCard) => {
-    var isThereDuplicate = false;
-    for (var i = 0; i < currentBasket.length; i++) {
-      if (
-        currentBasket[i].name === newCard.name &&
-        currentBasket[i].set === newCard.set &&
-        currentBasket[i].price === newCard.price &&
-        currentBasket[i].condition === newCard.condition &&
-        currentBasket[i].lang === newCard.lang &&
-        currentBasket[i].isFoil === newCard.isFoil &&
-        currentBasket[i].uuid === newCard.uuid
-      ) {
-        isThereDuplicate = true;
-      } else {
-      }
-    }
-    return isThereDuplicate;
-  };
-
   //This fonction should be rewritten to get O LOG N space time & complexity
   // Currenlty it is N²
   //To do this, get all the relevant information and hash them into ONE integer. Then sort this array following that integer.
@@ -244,9 +225,6 @@ function App() {
                       path="/my_selling_basket"
                       render={({ match, history }) => (
                         <MySellingBasket
-                          updateSellingBasketCheckDuplicate={
-                            updateSellingBasketCheckDuplicate
-                          }
                           checkForDuplicates={checkForDuplicates}
                           match={match}
                           history={history}

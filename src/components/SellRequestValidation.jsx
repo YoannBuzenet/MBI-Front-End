@@ -3,6 +3,7 @@ import SellingBasketContext from "../context/sellingBasket";
 import AuthContext from "../context/authContext";
 import canSubmitContext from "../context/canSubmitSellRequestContext";
 import ValidSellRequestIsBasketEmpty from "./ValidSellRequestIsBasketEmpty";
+import sellRequestAPI from "../services/sellRequestAPI";
 
 const SellRequestValidation = ({ history, checkForDuplicates }) => {
   //Current Basket
@@ -16,43 +17,38 @@ const SellRequestValidation = ({ history, checkForDuplicates }) => {
   //Knowing if the Sell Request is OK to be submitted (no duplicate)
   const { errorList, setErrorList } = useContext(canSubmitContext);
 
-  const handleSubmit = event => {
+  const handleSubmit = async event => {
     event.preventDefault();
 
-    console.log(errorList);
-    if (errorList.length > 0) {
-      console.log(
-        "Vous ne pouvez pas encore soumettre vos rachats, merci de vérifier vos doublons."
-      );
-    }
-
     const sellRequestData = {
-      client: "/client/" + authenticationInfos.customer.id,
-      shop: "/shop/" + authenticationInfos.shop.id,
+      client: "/clients/" + authenticationInfos.customer.id,
+      shop: "/shops/" + authenticationInfos.shop.id,
       amount: currentBasket.reduce((total, card) => {
         return total + card.price * card.quantity;
       }, 0),
       cardTotalQuantity: currentBasket.reduce((total, card) => {
         return total + card.quantity;
       }, 0),
-      sellRequestCards: [
-        currentBasket.map(card => {
-          return {
-            language: "/languages/" + card.lang,
-            CardCondition: "/card_conditions/" + card.condition,
-            cards: card["@id"],
-            cardQuantity: card.quantity,
-            price: card.price,
-            isFoil: card.isFoil === "Yes" ? true : false
-          };
-        })
-      ]
+      sellRequestCards: currentBasket.map(card => {
+        return {
+          language: "/languages/" + card.lang,
+          CardCondition: "/card_conditions/" + card.condition,
+          cards: card["@id"],
+          cardQuantity: card.quantity,
+          price: card.price,
+          isFoil: card.isFoil === "Yes" ? true : false
+        };
+      })
     };
 
-    console.log(sellRequestData);
-
-    //TODO : NOTIF success
-    history.replace("/my_sell_requests");
+    console.log(JSON.stringify(sellRequestData));
+    try {
+      const sendSellRequest = await sellRequestAPI.send(sellRequestData);
+      //TODO : NOTIF success
+      history.replace("/my_sell_requests");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

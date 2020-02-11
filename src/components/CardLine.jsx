@@ -13,7 +13,7 @@ const CardLine = ({ card, handleAddSellingBasket, index, setName }) => {
   const [currentCard, setCard] = useState({
     ...card,
     quantity: 1,
-    condition: 2,
+    condition: "2",
     lang: "9",
     isFoil: card.hasnonfoil ? "No" : "Yes",
     set: setName,

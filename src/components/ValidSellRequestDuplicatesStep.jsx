@@ -24,6 +24,7 @@ const ValidSellRequestDuplicatesStep = ({
     // console.log("check1", check[1]);
     // console.log("check2", check[2]);
     if (check[1] !== undefined && check[2] !== undefined) {
+      //TODO NOTIFICATION
       setErrorList([check[1], check[2]]);
     }
   }, [currentBasket]);
