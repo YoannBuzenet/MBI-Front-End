@@ -1,16 +1,13 @@
 import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import AuthContext from "../context/authContext";
+import StatusCalculator from "../components/StatusCalculator";
 
 const AllMySellRequests = props => {
   //Current Authentication
   const { authenticationInfos, setAuthenticationInfos } = useContext(
     AuthContext
   );
-
-  useEffect(() => {
-    console.log(authenticationInfos);
-  });
 
   return (
     <>
@@ -36,7 +33,9 @@ const AllMySellRequests = props => {
               (sellRequest, index) => (
                 <tr key={index}>
                   <td>{sellRequest.id}</td>
-                  <td>statut</td>
+                  <td>
+                    <StatusCalculator sellRequest={sellRequest} />
+                  </td>
                   <td>Date soumission</td>
                   <td>{sellRequest.dateEnvoi || "A venir"}</td>
                   <td>{sellRequest.dateRecu || "A venir"}</td>
