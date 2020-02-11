@@ -54,20 +54,26 @@ const ShopNavbar = ({ history }) => {
       )}
       <nav className="navbar navbar-admin">
         <div className="container">
+          <Link to="/shopadmin/cards" className="classic-links">
+            <p>Boutique - Accès Admin</p>
+          </Link>
           <Link to="/" className="classic-links">
-            <p>T'es admin bro</p>
+            <p>Voir le site client</p>
           </Link>
           {
             <div className="my_options">
+              <Link className="classic-links nav-element" to="/shopadmin/cards">
+                Cartes
+              </Link>
               <Link
                 className="classic-links nav-element"
-                to="/my_selling_basket"
+                to="/shopadmin/sell_requests"
               >
                 Rachats
               </Link>
               <Link
                 className="classic-links nav-element"
-                to="/my_selling_basket"
+                to="/shopadmin/customers"
               >
                 Clients
               </Link>

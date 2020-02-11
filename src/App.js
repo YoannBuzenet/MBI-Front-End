@@ -27,6 +27,11 @@ import SellingBasketAPI from "./services/sellingBasketAPI";
 import genericCardCharacteristicsAPI from "./services/genericCardCharacteristicsAPI";
 import CanSubmitContext from "./context/canSubmitSellRequestContext";
 import ShopNavbar from "./components/shop/ShopNavBar";
+import LoggedShopRoute from "./components/LoggedShopRoute";
+import ShopAdminHome from "./pages/shopAdmin/ShopAdminHome";
+import ShopAdminAllSellRequests from "./pages/shopAdmin/ShopAdminAllSellRequest";
+import ShopAdminAllCustomers from "./pages/shopAdmin/ShopAdminAllCustomers";
+import ShopAdminCards from "./pages/shopAdmin/ShopAdminCards";
 
 function App() {
   //APP INITIALIZATION USE EFFECT
@@ -245,6 +250,24 @@ function App() {
                       component={mySellRequests}
                     />
                     <LoggedRoute path="/my_account" component={myAccount} />
+                    {/* Admin Part */}
+                    <LoggedShopRoute
+                      path="/shopadmin"
+                      component={ShopAdminHome}
+                      exact
+                    />
+                    <LoggedShopRoute
+                      path="/shopadmin/sell_requests"
+                      component={ShopAdminAllSellRequests}
+                    />
+                    <LoggedShopRoute
+                      path="/shopadmin/customers"
+                      component={ShopAdminAllCustomers}
+                    />
+                    <LoggedShopRoute
+                      path="/shopadmin/cards"
+                      component={ShopAdminCards}
+                    />
                   </Switch>
                 </Router>
               </CanSubmitContext.Provider>
