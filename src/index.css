@@ -217,6 +217,13 @@ div.connect p {
 }
 
 /**************************
+******NAVBAR ADMIN*********
+**************************/
+.navbar-admin {
+  background-color: orange;
+}
+
+/**************************
 ********SPLIT LAYOUT*******
 **************************/
 .content-split {

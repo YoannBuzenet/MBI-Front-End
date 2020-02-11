@@ -6,7 +6,7 @@ export default React.createContext({
     user: {
       id: "",
       email: "",
-      roles: {}
+      roles: []
     },
     customer: {
       id: "",
@@ -16,7 +16,7 @@ export default React.createContext({
       adress: "",
       postalCode: "",
       town: "",
-      sellRequests: {}
+      sellRequests: []
     }
   },
   setAuthenticationInfos: value => {}
