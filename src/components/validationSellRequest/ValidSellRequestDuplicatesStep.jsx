@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import ValidSellRequestAuthenticatedStep from "./ValidSellRequestAuthenticatedStep";
-import canSubmitContext from "../context/canSubmitSellRequestContext";
-import SellingBasketContext from "../context/sellingBasket";
+import canSubmitContext from "../../context/canSubmitSellRequestContext";
+import SellingBasketContext from "../../context/sellingBasket";
 
 const ValidSellRequestDuplicatesStep = ({
   handleSubmit,

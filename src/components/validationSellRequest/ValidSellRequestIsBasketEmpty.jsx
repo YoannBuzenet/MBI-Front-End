@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import ValidSellRequestDuplicatesStep from "./ValidSellRequestDuplicatesStep";
-import SellingBasketContext from "../context/sellingBasket";
+import SellingBasketContext from "../../context/sellingBasket";
 
 const ValidSellRequestIsBasketEmpty = ({
   handleSubmit,

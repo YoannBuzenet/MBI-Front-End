@@ -24,8 +24,6 @@ import MySellingBasket from "./pages/MySellingBasket";
 import RegisterPage from "./pages/RegisterPage";
 import OneSellRequest from "./pages/OneSellRequest";
 import SellingBasketAPI from "./services/sellingBasketAPI";
-import allConditions from "./definitions/conditionsDefinition";
-import allLanguages from "./definitions/languagesDefinition";
 import genericCardCharacteristicsAPI from "./services/genericCardCharacteristicsAPI";
 import CanSubmitContext from "./context/canSubmitSellRequestContext";
 

@@ -35,7 +35,8 @@ const LoginPage = ({ onLogin, history }) => {
 
       setError("");
       setAuthenticationInfos(userData);
-
+      console.log(userData);
+      console.log(authenticationInfos);
       history.goBack();
     } catch (error) {
       setError(
