@@ -13,7 +13,7 @@ function authenticate(credentials) {
       //Stocking in local storage
       window.localStorage.setItem("authToken", data.token);
       window.localStorage.setItem("userInfos", JSON.stringify(data));
-
+      console.log(data);
       //Puting token into axios bearer
       axios.defaults.headers["Authorization"] = "Bearer " + data.token;
 
@@ -97,7 +97,7 @@ function userInfos() {
         adress: userDatas.client.adress,
         postalCode: userDatas.client.postalCode,
         town: userDatas.client.town,
-        sellRequests: userDatas.client.sellRequests
+        SellRequests: userDatas.client.SellRequests
       },
       shop: {
         id: userDatas.client.shop.id,
@@ -127,7 +127,7 @@ function userInfos() {
         adress: "",
         postalCode: "",
         town: "",
-        sellRequests: {}
+        SellRequests: {}
       },
       shop: {
         id: "",

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import SellingBasketContext from "../context/sellingBasket";
-import SellRequestValidation from "../components/SellRequestValidation";
+import SellRequestValidation from "../components/validationSellRequest/SellRequestValidation";
 import SellingBasketAPI from "../services/sellingBasketAPI";
 import CardLineSellingBasket from "../components/CardLineSellingBasket";
 import canSubmitContext from "../context/canSubmitSellRequestContext";

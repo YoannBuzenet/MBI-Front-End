@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import AuthContext from "../context/authContext";
+import AuthContext from "../../context/authContext";
 import ValidSellRequestAcceptLegalConditions from "./ValidSellRequestAcceptLegalConditions";
 
 const ValidSellRequestAuthenticatedStep = props => {

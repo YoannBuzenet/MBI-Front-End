@@ -1,9 +1,9 @@
 import React, { useContext, useEffect } from "react";
-import SellingBasketContext from "../context/sellingBasket";
-import AuthContext from "../context/authContext";
-import canSubmitContext from "../context/canSubmitSellRequestContext";
+import SellingBasketContext from "../../context/sellingBasket";
+import AuthContext from "../../context/authContext";
+import canSubmitContext from "../../context/canSubmitSellRequestContext";
 import ValidSellRequestIsBasketEmpty from "./ValidSellRequestIsBasketEmpty";
-import sellRequestAPI from "../services/sellRequestAPI";
+import sellRequestAPI from "../../services/sellRequestAPI";
 
 const SellRequestValidation = ({ history, checkForDuplicates }) => {
   //Current Basket
@@ -41,13 +41,13 @@ const SellRequestValidation = ({ history, checkForDuplicates }) => {
       })
     };
 
-    console.log(JSON.stringify(sellRequestData));
     try {
       const sendSellRequest = await sellRequestAPI.send(sellRequestData);
       //TODO : NOTIF success
       history.replace("/my_sell_requests");
     } catch (error) {
       console.log(error);
+      //TODO : NOTIF ECHEC
     }
   };
 
