@@ -36,26 +36,17 @@ const SellRequestValidation = ({ history, checkForDuplicates }) => {
         return total + card.quantity;
       }, 0),
       sellRequestCards: [
-        {
-          language: "/languages/3",
-          CardCondition: "/card_conditions/1",
-          cards: "/cards/500",
-          cardQuantity: 2,
-          price: 2,
-          isFOil: false
-        }
-      ].concat(
         currentBasket.map(card => {
           return {
             language: "/languages/" + card.lang,
-            CardCondition: "test",
+            CardCondition: "/card_conditions/" + card.condition,
             cards: card["@id"],
             cardQuantity: card.quantity,
             price: card.price,
             isFoil: card.isFoil === "Yes" ? true : false
           };
         })
-      )
+      ]
     };
 
     console.log(sellRequestData);

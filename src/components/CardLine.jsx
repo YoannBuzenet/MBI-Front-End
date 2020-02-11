@@ -54,6 +54,7 @@ const CardLine = ({ card, handleAddSellingBasket, index, setName }) => {
     ".jpg";
 
   //TEMPORARY DEFAULT DEFINITION TODO : GET IT THOURGH API
+  //ALSO DEFINED IN CARDSELLINGBASKET
   const gradingArea = "EU";
 
   return (
