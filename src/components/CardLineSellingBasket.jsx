@@ -38,9 +38,10 @@ const CardLineSellingBasket = ({
   useEffect(() => {
     if (isOnHover) {
       //If we neeed to change something on hover update, here it is
-      // console.log(currentCard);
+      console.log(currentCard);
       // console.log(errorList);
       // console.log(currentBasket);
+      console.log(conditions);
     }
   }, [isOnHover]);
 
@@ -115,6 +116,10 @@ const CardLineSellingBasket = ({
 
   //Defining the class, if it's error or not
   const sellingBasketLine = errorList.includes(indexCard) ? "error-line" : "";
+
+  //TEMPORARY DEFAULT DEFINITION TODO : GET IT THOURGH API
+  //ALSO DEFINED IN CARDLINE
+  const gradingArea = "EU";
 
   return (
     <>
@@ -191,10 +196,29 @@ const CardLineSellingBasket = ({
             onChange={event => {
               handleChange(event, currentCard, currentBasket);
             }}
+            value={card.condition}
           >
-            <option value={card.condition}>{card.condition}</option>
-            <option value="EXC">EXC</option>
-            <option value="PL">PL</option>
+            {conditions.length > 0
+              ? gradingArea === "EU"
+                ? conditions
+                    .filter(condition => condition.id !== card.condition)
+                    .map((condition, index) =>
+                      condition.isEU ? (
+                        <option key={index} value={condition.id}>
+                          {condition.shortname}
+                        </option>
+                      ) : null
+                    )
+                : conditions
+                    .filter(condition => condition.id !== card.condition)
+                    .map((condition, index) =>
+                      condition.isUS ? (
+                        <option value={condition.id} key={index}>
+                          {condition.shortnameUS}
+                        </option>
+                      ) : null
+                    )
+              : null}
           </select>
         </td>
         <td>
