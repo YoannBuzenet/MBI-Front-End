@@ -117,7 +117,7 @@ function userInfos() {
       user: {
         id: "",
         email: "",
-        roles: {}
+        roles: []
       },
       customer: {
         id: "",
@@ -127,7 +127,7 @@ function userInfos() {
         adress: "",
         postalCode: "",
         town: "",
-        SellRequests: {}
+        SellRequests: []
       },
       shop: {
         id: "",

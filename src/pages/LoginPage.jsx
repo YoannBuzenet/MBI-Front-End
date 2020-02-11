@@ -35,10 +35,11 @@ const LoginPage = ({ onLogin, history }) => {
 
       setError("");
       setAuthenticationInfos(userData);
-      console.log(userData);
-      console.log(authenticationInfos);
+
       history.goBack();
     } catch (error) {
+      //PARSE THE ERROR BEFORE SETTING IT
+      //TODO : NOTIFICATION
       setError(
         "Aucun compte ne possède cette adresse, ou alors les informations ne correspondent pas."
       );

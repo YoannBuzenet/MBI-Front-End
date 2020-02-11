@@ -26,6 +26,7 @@ import OneSellRequest from "./pages/OneSellRequest";
 import SellingBasketAPI from "./services/sellingBasketAPI";
 import genericCardCharacteristicsAPI from "./services/genericCardCharacteristicsAPI";
 import CanSubmitContext from "./context/canSubmitSellRequestContext";
+import ShopNavbar from "./components/shop/ShopNavBar";
 
 function App() {
   //APP INITIALIZATION USE EFFECT
@@ -110,6 +111,7 @@ function App() {
   };
 
   const NavbarWithRouter = withRouter(Navbar);
+  const ShopNavbarWithRouter = withRouter(ShopNavbar);
 
   //VERY IMPORTANT Function to add cards to Selling Basket.
   //We put it in App component because it need the use of hooks.
@@ -196,7 +198,12 @@ function App() {
             <GenericContext.Provider value={contextDefinition}>
               <CanSubmitContext.Provider value={contextSubmit}>
                 <Router>
-                  <NavbarWithRouter />
+                  {authenticationInfos.user.roles &&
+                  authenticationInfos.user.roles.includes("ROLE_SHOP") ? (
+                    <ShopNavbarWithRouter />
+                  ) : (
+                    <NavbarWithRouter />
+                  )}
                   <Switch>
                     <Route
                       path="/"
