@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import userAPI from "../services/userAPI";
 import Field from "../components/forms/Field";
 
+//TODO : insert the shop ID via ENV variable
+const shopID = 1;
+
 const RegisterPage = ({ history }) => {
   const [credentials, setCredentials] = useState({
     mail: "",
@@ -29,7 +32,8 @@ const RegisterPage = ({ history }) => {
           adress: credentials.adress,
           postalCode: credentials.postalCode,
           town: credentials.town,
-          tel: credentials.tel
+          tel: credentials.tel,
+          shop: "/shops/" + shopID
         }
       };
       await userAPI.register(jsonToSend);

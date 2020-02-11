@@ -7,7 +7,7 @@ function authenticate(credentials) {
   return axios
     .post("http://127.0.0.1:8000/login", credentials)
     .then(response => {
-      // console.log(response.data);
+      console.log(response.data);
       return response.data;
     })
     .then(data => {
@@ -37,15 +37,15 @@ function authenticate(credentials) {
           sellRequests: data.client.SellRequests
         },
         shop: {
-          id: data.shop.id,
-          legalName: data.shop.legalName,
-          SIRET: data.shop.SIRET,
-          vatNumber: data.shop.vatNumber,
-          tel: data.shop.tel,
-          email: data.shop.email,
-          adress: data.shop.adress,
-          postalCode: data.shop.postalCode,
-          town: data.shop.town
+          id: data.client.shop.id,
+          legalName: data.client.shop.legalName,
+          SIRET: data.client.shop.SIRET,
+          vatNumber: data.client.shop.vatNumber,
+          tel: data.client.shop.tel,
+          email: data.client.shop.email,
+          adress: data.client.shop.adress,
+          postalCode: data.client.shop.postalCode,
+          town: data.client.shop.town
         }
       };
     });
@@ -101,15 +101,15 @@ function userInfos() {
         sellRequests: userDatas.client.sellRequests
       },
       shop: {
-        id: userDatas.shop.id,
-        legalName: userDatas.shop.legalName,
-        SIRET: userDatas.shop.SIRET,
-        vatNumber: userDatas.shop.vatNumber,
-        tel: userDatas.shop.tel,
-        email: userDatas.shop.email,
-        adress: userDatas.shop.adress,
-        postalCode: userDatas.shop.postalCode,
-        town: userDatas.shop.town
+        id: userDatas.client.shop.id,
+        legalName: userDatas.client.shop.legalName,
+        SIRET: userDatas.client.shop.SIRET,
+        vatNumber: userDatas.client.shop.vatNumber,
+        tel: userDatas.client.shop.tel,
+        email: userDatas.client.shop.email,
+        adress: userDatas.client.shop.adress,
+        postalCode: userDatas.client.shop.postalCode,
+        town: userDatas.client.shop.town
       }
     };
   } else {
