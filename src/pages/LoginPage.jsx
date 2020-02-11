@@ -36,10 +36,15 @@ const LoginPage = ({ onLogin, history }) => {
       setError("");
       setAuthenticationInfos(userData);
 
-      history.goBack();
+      if (userData.user.roles.includes("ROLE_SHOP")) {
+        history.replace("/shopadmin");
+      } else {
+        history.goBack();
+      }
     } catch (error) {
       //PARSE THE ERROR BEFORE SETTING IT
       //TODO : NOTIFICATION
+      console.log(error);
       setError(
         "Aucun compte ne possède cette adresse, ou alors les informations ne correspondent pas."
       );

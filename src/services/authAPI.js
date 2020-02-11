@@ -13,7 +13,7 @@ function authenticate(credentials) {
       //Stocking in local storage
       window.localStorage.setItem("authToken", data.token);
       window.localStorage.setItem("userInfos", JSON.stringify(data));
-      console.log(data);
+
       //Puting token into axios bearer
       axios.defaults.headers["Authorization"] = "Bearer " + data.token;
 

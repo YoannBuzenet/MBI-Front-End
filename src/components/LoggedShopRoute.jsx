@@ -6,8 +6,8 @@ const LoggedShopRoute = ({ path, component }) => {
   const { authenticationInfos, setAuthenticationInfos } = useContext(
     AuthContext
   );
-  //Ajouter is shop ?
-  return authenticationInfos.isAuthenticated ? (
+
+  return authenticationInfos.user.roles.includes("ROLE_SHOP") ? (
     <Route path={path} component={component} />
   ) : (
     <Redirect to="/login" />
