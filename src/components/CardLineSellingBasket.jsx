@@ -57,25 +57,6 @@ const CardLineSellingBasket = ({
       setCurrentBasket(newBasket);
 
       sellingBasketAPI.save(newBasket);
-
-      if (updateSellingBasketCheckDuplicate(currentBasket, currentCard)) {
-        //TODO : REAL NOTIFICATION
-        console.log("current basket", currentBasket);
-        console.log("current card", currentCard);
-        alert(
-          `Ligne ${indexCard + 1} : La carte ${
-            currentCard.name
-          }, de l'édition ${currentCard.set}, état ${
-            currentCard.condition
-          }, langue ${currentCard.lang}, foil : ${
-            currentCard.isFoil
-          } est en doublon. Merci de ne soumettre qu'une seule ligne.`
-        );
-
-        setErrorList([...errorList, (errorList[indexCard] = indexCard)]);
-      } else {
-        setErrorList([]);
-      }
     }
   }, [currentCard]);
 
