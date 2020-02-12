@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 
 const StatusCalculator = ({ sellRequest }) => {
-  useEffect(() => console.log(sellRequest), []);
+  // useEffect(() => console.log(sellRequest), []);
 
   var status = "Default";
   //Keep this one for submit prop
-  //   if (sellRequest.dateEnvoi) {
-  //     status = "Envoyé";
-  //   }
+  if (sellRequest.DateSubmit) {
+    status = "Soumis";
+  }
 
   if (sellRequest.dateEnvoi) {
     status = "Envoyé";

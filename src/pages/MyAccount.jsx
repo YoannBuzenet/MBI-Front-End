@@ -72,11 +72,12 @@ const MyAccount = props => {
           adress: response.data.client.adress,
           postalCode: response.data.client.postalCode,
           town: response.data.client.town,
-          sellRequests: {}
+          SellRequests: response.data.client.SellRequests
         },
         shop: { ...authenticationInfos.shop }
       });
       //UPDATE INFOS IN LE LOCAL STORAGE
+      //FORMAT IN LOCAL STORAGE IS DIFFERENT FROM WHAT IS STORED IN MEMORY (maybe we should put everything is memory format)
       //Preparing data format to send, to copy what's stored in local storage
       const currentDataInLocalStorage = AuthAPI.userInfos();
       const newDataInLocalStorage = {
@@ -94,9 +95,20 @@ const MyAccount = props => {
           adress: response.data.client.adress,
           postalCode: response.data.client.postalCode,
           town: response.data.client.town,
-          sellRequests: {}
+          SellRequests: response.data.client.SellRequests
         },
-        shop: { ...authenticationInfos.shop }
+        // Ajouter ici les infos qui viennt de JE SAIS PAS LOL LA STRUCTURE CHANGE A CHAQUE PAGE
+        shop: {
+          id: "",
+          legalName: "",
+          SIRET: "",
+          vatNumber: "",
+          tel: "",
+          email: "",
+          adress: "",
+          postalCode: "",
+          town: ""
+        }
       };
       AuthAPI.updateUserInfosLocalStorage(newDataInLocalStorage);
 

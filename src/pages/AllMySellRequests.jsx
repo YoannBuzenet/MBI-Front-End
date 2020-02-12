@@ -9,6 +9,10 @@ const AllMySellRequests = props => {
     AuthContext
   );
 
+  // useEffect(() => {
+  //   console.log(authenticationInfos.customer.SellRequests);
+  // });
+
   return (
     <>
       <h1>Mes demandes de rachat</h1>
@@ -28,7 +32,8 @@ const AllMySellRequests = props => {
           </tr>
         </thead>
         <tbody>
-          {authenticationInfos.customer.SellRequests.length > 0 &&
+          {authenticationInfos.customer.SellRequests &&
+            authenticationInfos.customer.SellRequests.length > 0 &&
             authenticationInfos.customer.SellRequests.map(
               (sellRequest, index) => (
                 <tr key={index}>
