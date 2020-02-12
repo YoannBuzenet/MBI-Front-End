@@ -10,6 +10,7 @@ function authenticate(credentials) {
       return response.data;
     })
     .then(data => {
+      console.log(data);
       //Stocking in local storage
       window.localStorage.setItem("authToken", data.token);
       window.localStorage.setItem("userInfos", JSON.stringify(data));
@@ -33,7 +34,7 @@ function authenticate(credentials) {
           adress: data.client.adress,
           postalCode: data.client.postalCode,
           town: data.client.town,
-          sellRequests: data.client.SellRequests
+          SellRequests: data.client.SellRequests
         },
         shop: {
           id: data.client.shop.id,

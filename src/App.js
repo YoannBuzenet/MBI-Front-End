@@ -32,6 +32,8 @@ import ShopAdminHome from "./pages/shopAdmin/ShopAdminHome";
 import ShopAdminAllSellRequests from "./pages/shopAdmin/ShopAdminAllSellRequest";
 import ShopAdminAllCustomers from "./pages/shopAdmin/ShopAdminAllCustomers";
 import ShopAdminCards from "./pages/shopAdmin/ShopAdminCards";
+import authAPI from "./services/authAPI";
+import axios from "axios";
 
 function App() {
   //APP INITIALIZATION USE EFFECT
@@ -58,6 +60,9 @@ function App() {
     genericCardCharacteristicsAPI
       .getAllConditions()
       .then(data => setConditionDefinition(data));
+
+    //Checking is the JWT token is still good, if yes, Keep it on Axios
+    authAPI.setup();
   }, []);
 
   // STATE Creating the Authentication state
