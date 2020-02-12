@@ -72,7 +72,7 @@ const MyAccount = props => {
           adress: response.data.client.adress,
           postalCode: response.data.client.postalCode,
           town: response.data.client.town,
-          SellRequests: response.data.client.SellRequests
+          SellRequests: authenticationInfos.customer.SellRequests
         },
         shop: { ...authenticationInfos.shop }
       });
@@ -95,9 +95,20 @@ const MyAccount = props => {
           adress: response.data.client.adress,
           postalCode: response.data.client.postalCode,
           town: response.data.client.town,
-          SellRequests: response.data.client.SellRequests
+          SellRequests: response.data.client.SellRequests,
+          shop: {
+            id: authenticationInfos.shop.id,
+            legalName: authenticationInfos.shop.legalName,
+            SIRET: authenticationInfos.shop.SIRET,
+            vatNumber: authenticationInfos.shop.vatNumber,
+            tel: authenticationInfos.shop.tel,
+            email: authenticationInfos.shop.email,
+            adress: authenticationInfos.shop.adress,
+            postalCode: authenticationInfos.shop.postalCode,
+            town: authenticationInfos.shop.town
+          }
         },
-        // Ajouter ici les infos qui viennt de JE SAIS PAS LOL LA STRUCTURE CHANGE A CHAQUE PAGE
+        //
         shop: {
           id: "",
           legalName: "",
