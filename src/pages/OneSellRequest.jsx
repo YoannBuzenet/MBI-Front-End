@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import sellRequestAPI from "../services/sellRequestAPI";
+import axios from "axios";
 
 const OneSellRequest = ({ match, history }) => {
   const { id } = match.params;
@@ -9,15 +10,18 @@ const OneSellRequest = ({ match, history }) => {
   });
 
   useEffect(() => {
-    const abortController = new AbortController();
-    sellRequestAPI.findById(id).then(data => {
-      setCurrentSellRequest(data);
-    });
+    const CancelToken = axios.CancelToken;
+    const source = CancelToken.source();
 
-    console.log("test");
-    return () => {
-      abortController.abort();
-    };
+    sellRequestAPI
+      .findById(id, {
+        cancelToken: source.token
+      })
+      .then(data => {
+        setCurrentSellRequest(data);
+      });
+
+    return () => source.cancel("");
   }, [id]);
 
   return (
