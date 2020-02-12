@@ -1,8 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import sellRequestAPI from "../services/sellRequestAPI";
 
-const OneSellRequest = props => {
+const OneSellRequest = ({ match, history }) => {
+  const { id } = match.params;
+
+  const [currentSellRequest, setCurrentSellRequest] = useState({
+    sellRequestCards: []
+  });
+
+  useEffect(() => {
+    const abortController = new AbortController();
+    sellRequestAPI.findById(id).then(data => {
+      setCurrentSellRequest(data);
+    });
+
+    console.log("test");
+    return () => {
+      abortController.abort();
+    };
+  }, [id]);
+
   return (
     <>
+      {currentSellRequest.sellRequestCards.length > 0 &&
+        currentSellRequest.sellRequestCards.map(() => "test print")}
       <h1>Mon Rachat</h1>
       <div className="sellRequest-infos">
         <p className="sellRequest-status">
