@@ -95,6 +95,9 @@ const SellRequestValidation = ({ history, checkForDuplicates }) => {
       const sendSellRequest = await sellRequestAPI.send(sellRequestData);
       setIsLoaded(true);
       // console.log(sendSellRequest.data);
+
+      //Adding the new sell request to the STATE information
+
       setAuthenticationInfos({
         ...authenticationInfos,
         customer: {

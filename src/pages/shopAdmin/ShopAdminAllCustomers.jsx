@@ -3,7 +3,7 @@ import customersAPI from "../../services/customersAPI";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-const ShopAdminAllCustomers = ({ match }) => {
+const ShopAdminAllCustomers = props => {
   const [listCustomers, setListCustomers] = useState([]);
 
   //Preparing the variable that allow Promises clean up on Axios
