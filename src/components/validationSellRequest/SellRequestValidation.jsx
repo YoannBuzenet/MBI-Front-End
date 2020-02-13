@@ -117,6 +117,8 @@ const SellRequestValidation = ({ history, checkForDuplicates }) => {
         }
       });
 
+      setCurrentBasket([]);
+
       //TODO : NOTIF success
       history.replace("/my_sell_requests");
     } catch (error) {
