@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import customersAPI from "../../services/customersAPI";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
-const ShopAdminAllCustomers = props => {
+const ShopAdminAllCustomers = ({ match }) => {
   const [listCustomers, setListCustomers] = useState([]);
 
   //Preparing the variable that allow Promises clean up on Axios
@@ -38,7 +39,12 @@ const ShopAdminAllCustomers = props => {
 
               return (
                 <tr key={customer.id}>
-                  <td>{customer.id}</td>
+                  <td>
+                    <Link to={"/shopadmin/customers/" + customer.id}>
+                      {customer.id}
+                    </Link>
+                  </td>
+
                   <td>{customer.nom}</td>
                   <td>{customer.prenom}</td>
                   <td>{customer.sellrequest.length}</td>
