@@ -45,7 +45,7 @@ const ShopAdminAllSellRequests = props => {
               return (
                 <tr key={sellRequest.id}>
                   <td>
-                    <Link to={"/shopadmin/customers/" + sellRequest.id}>
+                    <Link to={"/shopadmin/sell_requests/" + sellRequest.id}>
                       {sellRequest.id}
                     </Link>
                   </td>
