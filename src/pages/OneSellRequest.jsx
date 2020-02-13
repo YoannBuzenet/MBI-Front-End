@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from "react";
 import sellRequestAPI from "../services/sellRequestAPI";
 import axios from "axios";
+import StatusCalculator from "../components/StatusCalculator";
 
 const OneSellRequest = ({ match, history }) => {
+  //ENV VARIABLE TO DEFINE
+  const gradingArea = "isEU";
+
   const { id } = match.params;
 
   const [currentSellRequest, setCurrentSellRequest] = useState({
@@ -24,14 +28,17 @@ const OneSellRequest = ({ match, history }) => {
     return () => source.cancel("");
   }, [id]);
 
+  console.log(currentSellRequest.sellRequestCards);
+
   return (
     <>
-      {currentSellRequest.sellRequestCards.length > 0 &&
-        currentSellRequest.sellRequestCards.map(() => "test print")}
       <h1>Mon Rachat</h1>
       <div className="sellRequest-infos">
         <p className="sellRequest-status">
-          Statut<span className="subInfos">En cours de traitement</span>
+          Statut
+          <span className="subInfos">
+            <StatusCalculator sellRequest={currentSellRequest} />
+          </span>
         </p>
         <p className="sellRequest-lastDate">
           Dernière information<span className="subInfos">21/07/2019</span>
@@ -51,46 +58,23 @@ const OneSellRequest = ({ match, history }) => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Kavru Languefeu</td>
-            <td>Planeshift</td>
-            <td>Near Mint</td>
-            <td>FR</td>
-            <td>Non</td>
-            <td>.25€</td>
-            <td>2</td>
-            <td>.5</td>
-          </tr>
-          <tr>
-            <td>Kavru Languefeu</td>
-            <td>Planeshift</td>
-            <td>Near Mint</td>
-            <td>FR</td>
-            <td>Non</td>
-            <td>.25€</td>
-            <td>2</td>
-            <td>.5</td>
-          </tr>
-          <tr>
-            <td>Kavru Languefeu</td>
-            <td>Planeshift</td>
-            <td>Near Mint</td>
-            <td>FR</td>
-            <td>Non</td>
-            <td>.25€</td>
-            <td>2</td>
-            <td>.5</td>
-          </tr>
-          <tr>
-            <td>Kavru Languefeu</td>
-            <td>Planeshift</td>
-            <td>Near Mint</td>
-            <td>FR</td>
-            <td>Non</td>
-            <td>.25€</td>
-            <td>2</td>
-            <td>.5</td>
-          </tr>
+          {currentSellRequest.sellRequestCards.length > 0 &&
+            currentSellRequest.sellRequestCards.map((card, index) => (
+              <tr key={index}>
+                <td>{card.cards.name}</td>
+                <td>Planeshift</td>
+                <td>
+                  {gradingArea == "isEu"
+                    ? card.CardCondition.shortname
+                    : card.CardCondition.shortnameUS}
+                </td>
+                <td>{card.language.shortname}</td>
+                <td>{card.language.isFoil ? "Yes" : "No"}</td>
+                <td>{card.price}</td>
+                <td>{card.cardQuantity}</td>
+                <td>{card.price * card.cardQuantity}</td>
+              </tr>
+            ))}
         </tbody>
       </table>
     </>
