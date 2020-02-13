@@ -35,6 +35,14 @@ import ShopAdminCards from "./pages/shopAdmin/ShopAdminCards";
 import authAPI from "./services/authAPI";
 import axios from "axios";
 
+//Really Useful library to check all rerenders made on ALL components (you can setup it to check just one)
+// if (process.env.NODE_ENV === "development") {
+//   const whyDidYouRender = require("@welldone-software/why-did-you-render");
+//   whyDidYouRender(React, {
+//     include: [/.*/]
+//   });
+// }
+
 function App() {
   //APP INITIALIZATION USE EFFECT
 

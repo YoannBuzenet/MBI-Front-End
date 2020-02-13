@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 const StatusCalculator = ({ sellRequest }) => {
   // useEffect(() => console.log(sellRequest), []);
 
-  var status = "Default";
+  var status = "";
   //Keep this one for submit prop
   if (sellRequest.DateSubmit) {
     status = "Soumis";
