@@ -34,6 +34,8 @@ import ShopAdminAllCustomers from "./pages/shopAdmin/ShopAdminAllCustomers";
 import ShopAdminCards from "./pages/shopAdmin/ShopAdminCards";
 import authAPI from "./services/authAPI";
 import ShopAdminCustomer from "./pages/shopAdmin/ShopAdminCustomer";
+import ShopAdminOneSellRequest from "./pages/shopAdmin/ShopAdminOneSellRequest";
+import ShopAdminSettings from "./pages/shopAdmin/ShopAdminSettings";
 
 //Really Useful library to check all rerenders made on ALL components (you can setup it to check just one)
 // if (process.env.NODE_ENV === "development") {
@@ -265,9 +267,8 @@ function App() {
                     <LoggedRoute path="/my_account" component={myAccount} />
                     {/* Admin Part */}
                     <LoggedShopRoute
-                      path="/shopadmin"
-                      component={ShopAdminHome}
-                      exact
+                      path="/shopadmin/sell_requests/:id"
+                      component={ShopAdminOneSellRequest}
                     />
                     <LoggedShopRoute
                       path="/shopadmin/sell_requests"
@@ -284,6 +285,14 @@ function App() {
                     <LoggedShopRoute
                       path="/shopadmin/cards"
                       component={ShopAdminCards}
+                    />
+                    <LoggedShopRoute
+                      path="/shopadmin/settings"
+                      component={ShopAdminSettings}
+                    />
+                    <LoggedShopRoute
+                      path="/shopadmin"
+                      component={ShopAdminHome}
                     />
                   </Switch>
                 </Router>

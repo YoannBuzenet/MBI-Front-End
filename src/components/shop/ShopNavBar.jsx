@@ -99,7 +99,7 @@ const ShopNavbar = ({ history }) => {
                     </Link>
 
                     <Link
-                      to="/my_sell_requests"
+                      to="/shopadmin/settings"
                       className="toggle-menu-links"
                       onClick={() => setToggleMenu(!toggleMenu)}
                     >
