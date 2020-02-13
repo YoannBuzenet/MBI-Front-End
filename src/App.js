@@ -44,8 +44,10 @@ import axios from "axios";
 // }
 
 function App() {
-  //APP INITIALIZATION USE EFFECT
+  //Checking is the JWT token is still good, if yes, Keep it on Axios
+  const didGetTokenBack = authAPI.setup();
 
+  //APP INITIALIZATION USE EFFECT
   useEffect(() => {
     //Load all the sets on App first Load
     SetsAPI.findAll().then(data => {
@@ -68,9 +70,6 @@ function App() {
     genericCardCharacteristicsAPI
       .getAllConditions()
       .then(data => setConditionDefinition(data));
-
-    //Checking is the JWT token is still good, if yes, Keep it on Axios
-    authAPI.setup();
   }, []);
 
   // STATE Creating the Authentication state
@@ -241,7 +240,8 @@ function App() {
                         />
                       )}
                     />
-                    <Route path="/login" component={LoginPage} />} />
+                    <Route path="/login" component={LoginPage} />
+                    } />
                     <Route path="/register" component={RegisterPage} />
                     } />
                     <Route
