@@ -2,6 +2,7 @@ import React from "react";
 import moment from "moment";
 
 const LastInformationCalculator = ({ sellRequest }) => {
+  //TODO GIVE A FORMAT FOLLOWING THE AREA (EN date, EU/FR date)
   var lastDate = "";
 
   //Keep this one for submit prop
