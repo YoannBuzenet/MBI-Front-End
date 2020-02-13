@@ -60,6 +60,15 @@ const ShopNavbar = ({ history }) => {
           <Link to="/" className="classic-links">
             <p>Voir le site client</p>
           </Link>
+          <Link className="classic-links nav-element" to="/my_selling_basket">
+            Mon Rachat (
+            <span className="buying-total">
+              {currentBasket.reduce((total, card) => {
+                return total + card.quantity;
+              }, 0)}
+            </span>
+            )
+          </Link>
           {
             <div className="my_options">
               <Link className="classic-links nav-element" to="/shopadmin/cards">
