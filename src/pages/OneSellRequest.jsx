@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import sellRequestAPI from "../services/sellRequestAPI";
 import axios from "axios";
 import StatusCalculator from "../components/StatusCalculator";
+import LastInformationCalculator from "../components/LastInformationCalculator";
 
 const OneSellRequest = ({ match, history }) => {
   //ENV VARIABLE TO DEFINE
@@ -41,7 +42,10 @@ const OneSellRequest = ({ match, history }) => {
           </span>
         </p>
         <p className="sellRequest-lastDate">
-          Dernière information<span className="subInfos">21/07/2019</span>
+          Dernière information
+          <span className="subInfos">
+            <LastInformationCalculator sellRequest={currentSellRequest} />
+          </span>
         </p>
       </div>
       <table className="zebra-table">
