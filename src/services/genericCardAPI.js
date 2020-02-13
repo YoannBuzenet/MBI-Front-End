@@ -1,7 +1,7 @@
 function isPictureDisplayedTopOrBottom(event) {
   var className;
-
-  if (event.nativeEvent.offsetY < 100) {
+  console.log(event.clientY);
+  if (event.clientY < 200) {
     className = "cardPictureOnHoverBottom";
   } else {
     className = "cardPictureOnHoverTop";
