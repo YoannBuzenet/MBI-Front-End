@@ -67,7 +67,11 @@ function setup() {
     if (jwtData.exp * 1000 > new Date().getTime()) {
       //3. Donner le token à axios
       axios.defaults.headers["Authorization"] = "Bearer " + token;
+
+      return true;
     }
+  } else {
+    return false;
   }
 }
 
