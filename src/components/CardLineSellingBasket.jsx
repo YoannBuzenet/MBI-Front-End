@@ -4,6 +4,7 @@ import SellingBasketAPI from "../services/sellingBasketAPI";
 import GenericCardInfosContext from "../context/genericCardInfosContext";
 import sellingBasketAPI from "../services/sellingBasketAPI";
 import canSubmitContext from "../context/canSubmitSellRequestContext";
+import genericCardAPI from "../services/genericCardAPI";
 
 //In this component, following the edit of already added card was really difficult. I couldn't manage to update the basket if the card already existed.
 //Thus, The only thing I could do was to see if the card was already in there : I added a warning and a standard synchro alert system
@@ -34,6 +35,9 @@ const CardLineSellingBasket = ({
 
   //Defining loading state, to know if component is loaded
   const [isLoaded, setIsloaded] = useState(false);
+
+  //State - defining if the Hover should be Top or Bottom
+  const [hoverTopOrBottom, setHoverTopOrBottom] = useState();
 
   useEffect(() => {
     if (isOnHover) {
@@ -102,23 +106,26 @@ const CardLineSellingBasket = ({
   //ALSO DEFINED IN CARDLINE
   const gradingArea = "EU";
 
+  const hoverClassName = e => genericCardAPI.isPictureDisplayedTopOrBottom(e);
+
   return (
     <>
       <tr
         key={card.id}
-        onMouseEnter={() => {
+        onMouseEnter={e => {
           setIsOnHover(!isOnHover);
+          setHoverTopOrBottom(hoverClassName(e));
         }}
         onMouseLeave={() => {
           setIsOnHover(!isOnHover);
         }}
-        className={sellingBasketLine}
+        className={sellingBasketLine || ""}
       >
         <td className="cardPictureHolder">
           {card.name}
           {isOnHover && (
             //TODO : change className following the scrolling, to know if the position must be top or bottom, to stay in window
-            <div className="cardPictureOnHoverTop">
+            <div className={hoverTopOrBottom}>
               <img src={urlCard} alt={card.name} />
             </div>
           )}

@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import SellingBasketContext from "../context/sellingBasket";
 import GenericCardInfosContext from "../context/genericCardInfosContext";
+import genericCardAPI from "../services/genericCardAPI";
 
 const CardLine = ({ card, handleAddSellingBasket, index, setName }) => {
   //Current Selling Request Basket
@@ -8,6 +9,9 @@ const CardLine = ({ card, handleAddSellingBasket, index, setName }) => {
 
   //DEFINED langages and Conditions
   const { lang, conditions } = useContext(GenericCardInfosContext);
+
+  //State - defining if the Hover should be Top or Bottom
+  const [hoverTopOrBottom, setHoverTopOrBottom] = useState();
 
   //Using the current Card in state
   const [currentCard, setCard] = useState({
@@ -53,6 +57,8 @@ const CardLine = ({ card, handleAddSellingBasket, index, setName }) => {
     card.scryfallid +
     ".jpg";
 
+  const hoverClassName = e => genericCardAPI.isPictureDisplayedTopOrBottom(e);
+
   //TEMPORARY DEFAULT DEFINITION TODO : GET IT THOURGH API
   //ALSO DEFINED IN CARDSELLINGBASKET
   const gradingArea = "EU";
@@ -61,8 +67,9 @@ const CardLine = ({ card, handleAddSellingBasket, index, setName }) => {
     <>
       <tr
         key={index}
-        onMouseEnter={() => {
+        onMouseEnter={e => {
           setIsOnHover(!isOnHover);
+          setHoverTopOrBottom(hoverClassName(e));
         }}
         onMouseLeave={() => {
           setIsOnHover(!isOnHover);
@@ -73,7 +80,7 @@ const CardLine = ({ card, handleAddSellingBasket, index, setName }) => {
           {isOnHover && (
             //TODO : change className following the scrolling, to know if the position must be top or bottom, to stay in window
             //Other class CSS ready just aside this one, JS logic to make
-            <div className="cardPictureOnHoverTop">
+            <div className={hoverTopOrBottom}>
               <img src={urlCard} alt={card.name} />
             </div>
           )}
