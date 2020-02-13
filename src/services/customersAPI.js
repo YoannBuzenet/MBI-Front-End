@@ -6,10 +6,8 @@ function findAll(cleanUpParam) {
     .then(response => response.data["hydra:member"]);
 }
 
-function findOneById(id) {
-  return axios
-    .get("http://127.0.0.1:8000/clients/" + id)
-    .then(response => response.data.cards);
+function findOneById(id, cleanUpParam) {
+  return axios.get("http://127.0.0.1:8000/clients/" + id, cleanUpParam);
 }
 
 export default {
