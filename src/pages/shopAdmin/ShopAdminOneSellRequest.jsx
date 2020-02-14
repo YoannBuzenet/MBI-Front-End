@@ -64,7 +64,12 @@ const ShopAdminOneSellRequest = ({ match }) => {
           {currentSellRequest.sellRequestCards.length > 0 &&
             currentSellRequest.sellRequestCards.map((card, index) => (
               <tr key={index}>
-                <CardLineShop card={card} />
+                <CardLineShop
+                  card={card}
+                  indexCard={index}
+                  currentSellRequest={currentSellRequest}
+                  setCurrentSellRequest={setCurrentSellRequest}
+                />
               </tr>
             ))}
           <tr className="total-line">

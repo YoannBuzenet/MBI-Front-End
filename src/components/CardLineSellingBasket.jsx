@@ -13,11 +13,7 @@ import genericCardAPI from "../services/genericCardAPI";
 //Currently, if we wee that the card edited is already in the Basket, we changed a context variable to prevent from submitting the request.
 //Problem is that each line in the basket is checking its errors. When the basket renders, all line wants to set CanSubmit. We need a more granular way to follow the error.
 
-const CardLineSellingBasket = ({
-  card,
-  indexCard,
-  updateSellingBasketCheckDuplicate
-}) => {
+const CardLineSellingBasket = ({ card, indexCard }) => {
   //Current Selling Request Basket
   const { currentBasket, setCurrentBasket } = useContext(SellingBasketContext);
 
