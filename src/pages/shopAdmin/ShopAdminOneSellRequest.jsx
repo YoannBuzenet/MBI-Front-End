@@ -61,6 +61,7 @@ const ShopAdminOneSellRequest = ({ match }) => {
           </tr>
         </thead>
         <tbody>
+          {/* CHECKER SI LE RACHAT EST VALIDÉ, SI OUI AUTRE COMPONENT QUE CARDLINESHOP - JUSTE MONTRER LES PROPS */}
           {currentSellRequest.sellRequestCards.length > 0 &&
             currentSellRequest.sellRequestCards.map((card, index) => (
               <tr key={index}>
