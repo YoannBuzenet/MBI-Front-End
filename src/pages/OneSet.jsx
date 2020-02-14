@@ -57,14 +57,16 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
                 </tr>
               </thead>
               <tbody>
-                {cards.map((card, index) => (
-                  <CardLine
-                    card={card}
-                    handleAddSellingBasket={handleAddSellingBasket}
-                    key={index}
-                    setName={setName}
-                  />
-                ))}
+                {cards.map((card, index) => {
+                  return (
+                    <CardLine
+                      card={card}
+                      handleAddSellingBasket={handleAddSellingBasket}
+                      key={parseInt(card["@id"].substr(7))}
+                      setName={setName}
+                    />
+                  );
+                })}
               </tbody>
             </table>
           </div>
