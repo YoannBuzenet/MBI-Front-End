@@ -67,6 +67,36 @@ const ShopAdminOneSellRequest = ({ match }) => {
                 <CardLineShop card={card} />
               </tr>
             ))}
+          <tr className="total-line">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>NOMBRE DE CARTES</td>
+            <td>
+              {currentSellRequest.sellRequestCards.length > 0 &&
+                currentSellRequest.sellRequestCards.reduce((total, card) => {
+                  return total + card.cardQuantity;
+                }, 0)}
+            </td>
+          </tr>
+          <tr className="total-line">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>TOTAL</td>
+            <td>
+              {currentSellRequest.sellRequestCards.length > 0 &&
+                currentSellRequest.sellRequestCards.reduce((total, card) => {
+                  return total + card.price * card.cardQuantity;
+                }, 0)}
+            </td>
+          </tr>
         </tbody>
       </table>
     </>
