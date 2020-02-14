@@ -24,6 +24,18 @@ const CardLine = ({ card, handleAddSellingBasket, index, setName }) => {
     price: 1
   });
 
+  useEffect(() => {
+    setCard({
+      ...card,
+      quantity: 1,
+      condition: "2",
+      lang: "9",
+      isFoil: card.hasnonfoil ? "No" : "Yes",
+      set: setName,
+      price: 1
+    });
+  }, [card]);
+
   //Saving the Hover state
   const [isOnHover, setIsOnHover] = useState(false);
 
@@ -31,7 +43,6 @@ const CardLine = ({ card, handleAddSellingBasket, index, setName }) => {
     if (isOnHover) {
       // console.log(conditions);
       //If we neeed to change something on hover update, here it is
-      // console.log(card);
     }
   }, [isOnHover]);
 
