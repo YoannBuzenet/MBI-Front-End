@@ -41,16 +41,15 @@ const CardLineShop = ({ card, indexCard }) => {
   useEffect(() => {
     if (isLoaded) {
       //We remove the card then we add it again at the same Index
-      console.log("The currentCard did update");
       console.log("is loaded", currentCard);
       console.log("is loaded", currentAdminSellRequest);
-      // const newSellRequest = currentAdminSellRequest.filter(
-      //   (card, index) => index !== indexCard
-      // );
-      // newSellRequest.splice(indexCard, 0, currentCard);
+      const newSellRequest = currentAdminSellRequest.filter(
+        (card, index) => index !== indexCard
+      );
+      newSellRequest.splice(indexCard, 0, currentCard);
 
-      // setCurrentAdminSellRequest(newSellRequest);
-      // console.log(currentAdminSellRequest);
+      setCurrentAdminSellRequest(newSellRequest);
+      console.log(currentAdminSellRequest);
     }
   }, [currentCard]);
 
