@@ -55,17 +55,21 @@ const CardLineShop = ({ card, indexCard }) => {
 
   const handleChange = ({ currentTarget }, currentCard) => {
     const { name, value } = currentTarget;
-    console.log(name);
-    console.log(parseInt(value));
+    // console.log(name);
+    // console.log(value);
     if (name == "quantity" || name == "lang") {
       var newValue = parseInt(value);
     } else {
       var newValue = value.toString();
     }
-    console.log("Passing by there");
+    //console.log("Check SetIsLoad Passage");
     setIsLoaded(true);
+    //Blocked setErrorList because cause parent to re-render. Would be good to think about passing it as a state instead of context
     // setErrorList([]);
-    setCurrentCard({ ...currentCard, [name]: newValue });
+    setCurrentCard({
+      ...currentCard,
+      [name]: newValue
+    });
 
     console.log(currentCard);
   };

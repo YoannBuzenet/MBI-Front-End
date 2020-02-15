@@ -52,7 +52,7 @@ const ShopAdminOneSellRequest = ({ match }) => {
                 hasnonfoil: 1,
                 uuid: card.cards.uuid,
                 foreignData: card.cards.foreignData,
-                condition: card.CardCondition.id,
+                condition: card.CardCondition.id.toString(),
                 lang: card.language.id,
                 set: card.cards.edition.name,
                 price: card.price,
