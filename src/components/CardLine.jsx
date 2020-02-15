@@ -14,7 +14,7 @@ const CardLine = ({ card, handleAddSellingBasket, index, setName }) => {
   const [hoverTopOrBottom, setHoverTopOrBottom] = useState();
 
   //Using the current Card in state
-  const [currentCard, setCard] = useState({
+  const [currentCard, setCurrentCard] = useState({
     ...card,
     quantity: 1,
     condition: "2",
@@ -25,7 +25,7 @@ const CardLine = ({ card, handleAddSellingBasket, index, setName }) => {
   });
 
   useEffect(() => {
-    setCard({
+    setCurrentCard({
       ...card,
       quantity: 1,
       condition: "2",
@@ -53,7 +53,7 @@ const CardLine = ({ card, handleAddSellingBasket, index, setName }) => {
     } else {
       var newValue = value.toString();
     }
-    setCard({ ...currentCard, [name]: newValue });
+    setCurrentCard({ ...currentCard, [name]: newValue });
   };
 
   //Creating the specific link to get the scryffalID picture. It is composed of a static base, + the 2 first character of the ID, + the ID

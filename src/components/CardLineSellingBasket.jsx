@@ -147,27 +147,21 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
                           currentlanguage.language_id.id === parseInt(card.lang)
                       )[0].language_id.shortname}
                 </option>
-              ]
-                .concat(
-                  card.foreignData
-                    .filter(
-                      currentlanguage =>
-                        currentlanguage.language_id.id !== parseInt(card.lang)
-                    )
-                    .map((foreignData, index) => (
-                      <option
-                        value={foreignData.language_id.id}
-                        key={index + "3"}
-                      >
-                        {foreignData.language_id.shortname}
-                      </option>
-                    ))
-                )
-                .concat([
-                  <option value="9" key={card.id + "3" + card.lang}>
-                    EN
-                  </option>
-                ])
+              ].concat(
+                card.foreignData
+                  .filter(
+                    currentlanguage =>
+                      currentlanguage.language_id.id !== parseInt(card.lang)
+                  )
+                  .map((foreignData, index) => (
+                    <option
+                      value={foreignData.language_id.id}
+                      key={index + "3"}
+                    >
+                      {foreignData.language_id.shortname}
+                    </option>
+                  ))
+              )
             ) : (
               <option value="9">EN</option>
             )}

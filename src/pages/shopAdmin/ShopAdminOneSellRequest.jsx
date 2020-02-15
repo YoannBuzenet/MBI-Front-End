@@ -27,6 +27,10 @@ const ShopAdminOneSellRequest = ({ match }) => {
     return () => source.cancel("");
   }, [id]);
 
+  useEffect(() => {
+    console.log("la sell request entière a rerender");
+  });
+
   //ENV VARIABLE TO DEFINE
   const gradingArea = "isEU";
 
@@ -52,8 +56,8 @@ const ShopAdminOneSellRequest = ({ match }) => {
           <tr>
             <th>Nom de la carte</th>
             <th>Edition</th>
-            <th>Etat</th>
             <th>Langue</th>
+            <th>Etat</th>
             <th>Foil</th>
             <th>Prix</th>
             <th>Quantité</th>
@@ -67,6 +71,7 @@ const ShopAdminOneSellRequest = ({ match }) => {
               console.log(card);
               return (
                 <CardLineShop
+                  key={card.id}
                   card={card}
                   indexCard={index}
                   currentSellRequest={currentSellRequest}
