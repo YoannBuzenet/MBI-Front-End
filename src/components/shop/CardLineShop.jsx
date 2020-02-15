@@ -106,7 +106,7 @@ const CardLineShop = ({
   return (
     <>
       <tr
-        key={card.id}
+        key={parseInt(card["@id"].substr(7))}
         onMouseEnter={e => {
           setIsOnHover(!isOnHover);
           setHoverTopOrBottom(hoverClassName(e));
@@ -117,41 +117,43 @@ const CardLineShop = ({
         className={sellingBasketLine || ""}
       >
         <td className="cardPictureHolder">
-          {card.name}
+          {card.cards.name}
           {isOnHover && (
             //TODO : change className following the scrolling, to know if the position must be top or bottom, to stay in window
             <div className={hoverTopOrBottom}>
-              <img src={urlCard} alt={card.name} />
+              <img src={urlCard} alt={card.cards.name} />
             </div>
           )}
         </td>
-        <td>{card.set}</td>
+        <td>{card.cards.edition.name}</td>
         <td>
           {/* Select will have to be refactored with a .map on a Select Component */}
           <select
             name="lang"
-            id={card.cardName + "id1"}
-            value={card.lang}
+            id={card.cards.name + "id1"}
+            value={card.language.id}
             onChange={event => {
               handleChange(event, currentCard, currentSellRequest);
             }}
           >
-            {card.foreignData.length > 0 ? (
+            {card.cards.foreignData.length > 0 ? (
               [
-                <option value={card.lang} key={card.id + "2"}>
-                  {card.lang == "9"
+                <option value={card.language.id} key={card.id + "2"}>
+                  {card.language.id == "9"
                     ? "EN"
-                    : card.foreignData.filter(
+                    : card.cards.foreignData.filter(
                         currentlanguage =>
-                          currentlanguage.language_id.id === parseInt(card.lang)
+                          currentlanguage.language_id.id ===
+                          parseInt(card.language.id)
                       )[0].language_id.shortname}
                 </option>
               ]
                 .concat(
-                  card.foreignData
+                  card.cards.foreignData
                     .filter(
                       currentlanguage =>
-                        currentlanguage.language_id.id !== parseInt(card.lang)
+                        currentlanguage.language_id.id !==
+                        parseInt(card.language.id)
                     )
                     .map((foreignData, index) => (
                       <option
@@ -163,7 +165,7 @@ const CardLineShop = ({
                     ))
                 )
                 .concat([
-                  <option value="9" key={card.id + "3" + card.lang}>
+                  <option value="9" key={card.id + "3" + card.language.id}>
                     EN
                   </option>
                 ])
@@ -175,16 +177,16 @@ const CardLineShop = ({
         <td>
           <select
             name="condition"
-            id={card.cardName + "id2"}
+            id={card.cards.name + "id2"}
             onChange={event => {
               handleChange(event, currentCard, currentSellRequest);
             }}
-            value={card.condition}
+            value={card.CardCondition.id}
           >
             {conditions.length > 0
               ? gradingArea === "EU"
                 ? conditions
-                    .filter(condition => condition.id !== card.condition)
+                    .filter(condition => condition.id !== card.CardCondition.id)
                     .map((condition, index) =>
                       condition.isEU ? (
                         <option key={index} value={condition.id}>
@@ -193,7 +195,7 @@ const CardLineShop = ({
                       ) : null
                     )
                 : conditions
-                    .filter(condition => condition.id !== card.condition)
+                    .filter(condition => condition.id !== card.CardCondition.id)
                     .map((condition, index) =>
                       condition.isUS ? (
                         <option value={condition.id} key={index}>
@@ -207,7 +209,7 @@ const CardLineShop = ({
         <td>
           <select
             name="isFoil"
-            id={card.cardName + "id4"}
+            id={card.cards.name + "id4"}
             value={currentCard.isFoil}
             onChange={event => {
               handleChange(event, currentCard, currentSellRequest);

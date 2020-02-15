@@ -64,15 +64,14 @@ const ShopAdminOneSellRequest = ({ match }) => {
           {/* CHECKER SI LE RACHAT EST VALIDÉ, SI OUI AUTRE COMPONENT QUE CARDLINESHOP - JUSTE MONTRER LES PROPS */}
           {currentSellRequest.sellRequestCards.length > 0 &&
             currentSellRequest.sellRequestCards.map((card, index) => {
+              console.log(card);
               return (
-                <tr key={parseInt(card["@id"].substr(7))}>
-                  <CardLineShop
-                    card={card}
-                    indexCard={index}
-                    currentSellRequest={currentSellRequest}
-                    setCurrentSellRequest={setCurrentSellRequest}
-                  />
-                </tr>
+                <CardLineShop
+                  card={card}
+                  indexCard={index}
+                  currentSellRequest={currentSellRequest}
+                  setCurrentSellRequest={setCurrentSellRequest}
+                />
               );
             })}
           <tr className="total-line">
