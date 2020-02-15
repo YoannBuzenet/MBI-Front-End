@@ -18,6 +18,15 @@ const ShopAdminOneSellRequest = ({ match }) => {
   );
 
   useEffect(() => {
+    if (
+      currentAdminSellRequest.length > 0 &&
+      currentAdminSellRequest[0].idSellRequest !== parseInt(id)
+    ) {
+      setCurrentAdminSellRequest([]);
+    }
+  }, [id]);
+
+  useEffect(() => {
     const CancelToken = axios.CancelToken;
     const source = CancelToken.source();
 
@@ -33,7 +42,7 @@ const ShopAdminOneSellRequest = ({ match }) => {
           setCurrentAdminSellRequest([
             ...currentAdminSellRequest,
             ...data.sellRequestCards.map(card => {
-              console.log(card);
+              //console.log(card);
               return {
                 id: card.id,
                 name: card.cards.name,
@@ -47,7 +56,8 @@ const ShopAdminOneSellRequest = ({ match }) => {
                 set: card.cards.edition.name,
                 price: card.price,
                 quantity: card.cardQuantity,
-                idSellRequest: data.id
+                idSellRequest: data.id,
+                isFoil: card.isFoil
               };
             })
           ]);
@@ -58,10 +68,12 @@ const ShopAdminOneSellRequest = ({ match }) => {
   }, [id]);
 
   useEffect(() => {
-    console.log("la sell request entière a rerender");
+    console.log("The global sell request did rerender");
     console.log(currentAdminSellRequest);
-    console.log(currentAdminSellRequest.length);
-    console.log(parseInt(id));
+    console.log(
+      currentAdminSellRequest[0] ? currentAdminSellRequest[0].id : null
+    );
+    console.log(id);
   }, []);
 
   //ENV VARIABLE TO DEFINE
@@ -101,7 +113,6 @@ const ShopAdminOneSellRequest = ({ match }) => {
           {/* CHECKER SI LE RACHAT EST VALIDÉ, SI OUI AUTRE COMPONENT QUE CARDLINESHOP - JUSTE MONTRER LES PROPS */}
           {currentAdminSellRequest.length > 0 &&
             currentAdminSellRequest.map((card, index) => {
-              console.log(card);
               return (
                 <CardLineShop key={card.id} card={card} indexCard={index} />
               );
