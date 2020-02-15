@@ -6,12 +6,8 @@ import sellingBasketAPI from "../services/sellingBasketAPI";
 import canSubmitContext from "../context/canSubmitSellRequestContext";
 import genericCardAPI from "../services/genericCardAPI";
 
-//In this component, following the edit of already added card was really difficult. I couldn't manage to update the basket if the card already existed.
-//Thus, The only thing I could do was to see if the card was already in there : I added a warning and a standard synchro alert system
-//It would be pretty to manage to see in real time which cards are similar and show them continuously. For this, a perfect handling of the current basket would be necessary.
-//Feel free to remove the error system, and the error context, that I implemented to complete this incomplete system.
-//Currently, if we wee that the card edited is already in the Basket, we changed a context variable to prevent from submitting the request.
-//Problem is that each line in the basket is checking its errors. When the basket renders, all line wants to set CanSubmit. We need a more granular way to follow the error.
+//In this component, following the edit of already added card was really difficult in real time in the existing array.
+//Currently, if we wee that the card edited is already in the Basket, we changed a context variable to prevent from submitting the final request.
 
 const CardLineSellingBasket = ({ card, indexCard }) => {
   //Current Selling Request Basket
@@ -60,7 +56,7 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
     }
   }, [currentCard]);
 
-  const handleChange = ({ currentTarget }, currentCard, currentBasket) => {
+  const handleChange = ({ currentTarget }, currentCard) => {
     const { name, value } = currentTarget;
     if (name == "quantity") {
       var newValue = parseInt(value);
@@ -134,7 +130,7 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
             id={card.cardName + "id1"}
             value={card.lang}
             onChange={event => {
-              handleChange(event, currentCard, currentBasket);
+              handleChange(event, currentCard);
             }}
           >
             {card.foreignData.length > 0 ? (
@@ -161,6 +157,11 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
                       {foreignData.language_id.shortname}
                     </option>
                   ))
+                  .concat([
+                    <option value="9" key={card.id + "3" + card.lang}>
+                      EN
+                    </option>
+                  ])
               )
             ) : (
               <option value="9">EN</option>
@@ -172,7 +173,7 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
             name="condition"
             id={card.cardName + "id2"}
             onChange={event => {
-              handleChange(event, currentCard, currentBasket);
+              handleChange(event, currentCard);
             }}
             value={card.condition}
           >
@@ -205,7 +206,7 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
             id={card.cardName + "id4"}
             value={currentCard.isFoil}
             onChange={event => {
-              handleChange(event, currentCard, currentBasket);
+              handleChange(event, currentCard);
             }}
           >
             <option value={currentCard.isFoil == "Yes" ? "Yes" : "No"}>
@@ -224,7 +225,7 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
             name="quantity"
             id={card.cardName + "id3"}
             onChange={event => {
-              handleChange(event, currentCard, currentBasket);
+              handleChange(event, currentCard);
             }}
             value={currentCard.quantity}
           >

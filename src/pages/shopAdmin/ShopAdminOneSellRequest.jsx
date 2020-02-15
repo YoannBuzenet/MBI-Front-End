@@ -17,6 +17,8 @@ const ShopAdminOneSellRequest = ({ match }) => {
     AdminSellRequestContext
   );
 
+  const [globalInfosSellRequest, setGlobalInfosSellRequest] = useState();
+
   useEffect(() => {
     if (
       currentAdminSellRequest.length > 0 &&
@@ -39,10 +41,9 @@ const ShopAdminOneSellRequest = ({ match }) => {
           cancelToken: source.token
         })
         .then(data => {
-          setCurrentAdminSellRequest([
+          return setCurrentAdminSellRequest([
             ...currentAdminSellRequest,
             ...data.sellRequestCards.map(card => {
-              //console.log(card);
               return {
                 id: card.id,
                 name: card.cards.name,
@@ -56,8 +57,8 @@ const ShopAdminOneSellRequest = ({ match }) => {
                 set: card.cards.edition.name,
                 price: card.price,
                 quantity: card.cardQuantity,
-                idSellRequest: data.id,
-                isFoil: card.isFoil
+                isFoil: card.isFoil,
+                idSellRequest: data.id
               };
             })
           ]);
@@ -69,11 +70,14 @@ const ShopAdminOneSellRequest = ({ match }) => {
 
   useEffect(() => {
     console.log("The global sell request did rerender");
-    console.log(currentAdminSellRequest);
-    console.log(
-      currentAdminSellRequest[0] ? currentAdminSellRequest[0].id : null
-    );
-    console.log(id);
+    // console.log(globalInfosSellRequest);
+    // console.log(currentAdminSellRequest);
+    // console.log(
+    //   currentAdminSellRequest[0]
+    //     ? currentAdminSellRequest[0].idSellRequest
+    //     : null
+    // );
+    // console.log(id);
   }, []);
 
   //ENV VARIABLE TO DEFINE
@@ -86,7 +90,7 @@ const ShopAdminOneSellRequest = ({ match }) => {
         <p className="sellRequest-status">
           Statut
           <span className="subInfos">
-            <StatusCalculator sellRequest={currentAdminSellRequest} />
+            <StatusCalculator sellRequest={globalInfosSellRequest} />
           </span>
         </p>
         <p className="sellRequest-lastDate">

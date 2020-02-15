@@ -4,12 +4,7 @@ import canSubmitContext from "../../context/canSubmitSellRequestContext";
 import genericCardAPI from "../../services/genericCardAPI";
 import AdminSellRequestContext from "../../context/adminSellRequestContext";
 
-const CardLineShop = ({
-  card,
-  indexCard,
-  currentSellRequest,
-  setCurrentSellRequest
-}) => {
+const CardLineShop = ({ card, indexCard }) => {
   //Getting the Sell Request state by context
   const { currentAdminSellRequest, setCurrentAdminSellRequest } = useContext(
     AdminSellRequestContext
@@ -43,9 +38,6 @@ const CardLineShop = ({
     }
   }, [isOnHover]);
 
-  console.log("the card", card);
-  console.log("the current card", currentCard);
-
   useEffect(() => {
     if (isLoaded) {
       //We remove the card then we add it again at the same Index
@@ -65,15 +57,15 @@ const CardLineShop = ({
   const handleChange = ({ currentTarget }, currentCard) => {
     const { name, value } = currentTarget;
     console.log(name);
-    console.log(value);
-    if (name == "quantity") {
+    console.log(parseInt(value));
+    if (name == "quantity" || name == "lang") {
       var newValue = parseInt(value);
     } else {
       var newValue = value.toString();
     }
-
+    console.log("Passing by there");
     setIsLoaded(true);
-    setErrorList([]);
+    // setErrorList([]);
     setCurrentCard({ ...currentCard, [name]: newValue });
 
     console.log(currentCard);
@@ -81,10 +73,10 @@ const CardLineShop = ({
 
   const handleDelete = card => {
     //We remove the card thanks to its index in the currentSellRequest
-    const newSellRequest = currentSellRequest.filter(
+    const newSellRequest = currentAdminSellRequest.filter(
       (card, index) => index !== indexCard
     );
-    setCurrentSellRequest(newSellRequest);
+    setCurrentAdminSellRequest(newSellRequest);
   };
 
   //Creating the specific link to get the scryffalID picture. It is composed of a static base, + the 2 first character of the ID, + the ID
@@ -136,13 +128,13 @@ const CardLineShop = ({
             id={currentCard.name + "id1"}
             value={currentCard.lang}
             onChange={event => {
-              handleChange(event, currentCard, currentSellRequest);
+              handleChange(event, currentCard);
             }}
           >
             {currentCard.foreignData.length > 0 ? (
               [
                 <option value={currentCard.lang} key={currentCard.id + "2"}>
-                  {card.lang == "9"
+                  {currentCard.lang == "9"
                     ? "EN"
                     : currentCard.foreignData.filter(
                         currentlanguage =>
@@ -174,9 +166,9 @@ const CardLineShop = ({
             name="condition"
             id={currentCard.name + "id2"}
             onChange={event => {
-              handleChange(event, currentCard, currentSellRequest);
+              handleChange(event, currentCard);
             }}
-            value={card.condition}
+            value={currentCard.condition}
           >
             {conditions.length > 0
               ? gradingArea === "EU"
@@ -207,7 +199,7 @@ const CardLineShop = ({
             id={currentCard.name + "id4"}
             value={currentCard.isFoil}
             onChange={event => {
-              handleChange(event, currentCard, currentSellRequest);
+              handleChange(event, currentCard);
             }}
           >
             <option value={currentCard.isFoil == "Yes" ? "Yes" : "No"}>
@@ -226,7 +218,7 @@ const CardLineShop = ({
             name="quantity"
             id={currentCard + "id3"}
             onChange={event => {
-              handleChange(event, currentCard, currentSellRequest);
+              handleChange(event, currentCard);
             }}
             value={currentCard.quantity}
           >
