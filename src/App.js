@@ -3,7 +3,8 @@ import "./App.css";
 import Navbar from "./components/Navbar";
 import AuthContext from "./context/authContext";
 import SetsContext from "./context/setsContext";
-import SellRequestContext from "./context/sellingBasket";
+import SellingBasketContext from "./context/sellingBasket";
+import SellRequestContext from "./context/adminSellRequestContext";
 import GenericContext from "./context/genericCardInfosContext";
 import AuthAPI from "./services/authAPI";
 import SetsAPI from "./services/setsAPI";
@@ -94,6 +95,9 @@ function App() {
   //STATE Creating the CanSubmit Authorization
   const [errorList, setErrorList] = useState([]);
 
+  //STATE Creating the Admin Sell Request Context
+  const [currentAdminSellRequest, setCurrentAdminSellRequest] = useState([]);
+
   // CONTEXT CREATION Creating All Sets value for context
   const contextAllSets = {
     allSets: allSets,
@@ -116,6 +120,12 @@ function App() {
   const contextSubmit = {
     errorList: errorList,
     setErrorList: setErrorList
+  };
+
+  //CONTEXT CREATION Passing Admin Sell Request
+  const contextAdminSellRequest = {
+    currentAdminSellRequest: currentAdminSellRequest,
+    setCurrentAdminSellRequest: setCurrentAdminSellRequest
   };
 
   // Each time the currentBasket (which stores what we want to sell) is updated, we save it in Local storage.
@@ -212,94 +222,96 @@ function App() {
   return (
     <div className="App">
       <AuthContext.Provider value={contextValue}>
-        <SellRequestContext.Provider value={contextBasket}>
+        <SellingBasketContext.Provider value={contextBasket}>
           <SetsContext.Provider value={contextAllSets}>
             <GenericContext.Provider value={contextDefinition}>
               <CanSubmitContext.Provider value={contextSubmit}>
-                <Router>
-                  {authenticationInfos.user.roles &&
-                  authenticationInfos.user.roles.includes("ROLE_SHOP") ? (
-                    <ShopNavbarWithRouter />
-                  ) : (
-                    <NavbarWithRouter />
-                  )}
-                  <Switch>
-                    <Route
-                      path="/"
-                      exact
-                      render={props => (
-                        <Homepage
-                          handleAddSellingBasket={handleAddSellingBasket}
-                        />
-                      )}
-                    />
-                    <Route
-                      path="/sets/:id"
-                      render={({ match }) => (
-                        <OneSet
-                          handleAddSellingBasket={handleAddSellingBasket}
-                          match={match}
-                        />
-                      )}
-                    />
-                    <Route path="/login" component={LoginPage} />
-                    } />
-                    <Route path="/register" component={RegisterPage} />
-                    } />
-                    <Route
-                      path="/my_selling_basket"
-                      render={({ match, history }) => (
-                        <MySellingBasket
-                          checkForDuplicates={checkForDuplicates}
-                          match={match}
-                          history={history}
-                        />
-                      )}
-                    />
-                    <LoggedRoute
-                      path="/my_sell_requests/:id"
-                      component={OneSellRequest}
-                    />
-                    <LoggedRoute
-                      path="/my_sell_requests"
-                      component={mySellRequests}
-                    />
-                    <LoggedRoute path="/my_account" component={myAccount} />
-                    {/* Admin Part */}
-                    <LoggedShopRoute
-                      path="/shopadmin/sell_requests/:id"
-                      component={ShopAdminOneSellRequest}
-                    />
-                    <LoggedShopRoute
-                      path="/shopadmin/sell_requests"
-                      component={ShopAdminAllSellRequests}
-                    />
-                    <LoggedShopRoute
-                      path="/shopadmin/customers/:id"
-                      component={ShopAdminCustomer}
-                    />
-                    <LoggedShopRoute
-                      path="/shopadmin/customers"
-                      component={ShopAdminAllCustomers}
-                    />
-                    <LoggedShopRoute
-                      path="/shopadmin/cards"
-                      component={ShopAdminCards}
-                    />
-                    <LoggedShopRoute
-                      path="/shopadmin/settings"
-                      component={ShopAdminSettings}
-                    />
-                    <LoggedShopRoute
-                      path="/shopadmin"
-                      component={ShopAdminHome}
-                    />
-                  </Switch>
-                </Router>
+                <SellRequestContext.Provider value={contextAdminSellRequest}>
+                  <Router>
+                    {authenticationInfos.user.roles &&
+                    authenticationInfos.user.roles.includes("ROLE_SHOP") ? (
+                      <ShopNavbarWithRouter />
+                    ) : (
+                      <NavbarWithRouter />
+                    )}
+                    <Switch>
+                      <Route
+                        path="/"
+                        exact
+                        render={props => (
+                          <Homepage
+                            handleAddSellingBasket={handleAddSellingBasket}
+                          />
+                        )}
+                      />
+                      <Route
+                        path="/sets/:id"
+                        render={({ match }) => (
+                          <OneSet
+                            handleAddSellingBasket={handleAddSellingBasket}
+                            match={match}
+                          />
+                        )}
+                      />
+                      <Route path="/login" component={LoginPage} />
+                      } />
+                      <Route path="/register" component={RegisterPage} />
+                      } />
+                      <Route
+                        path="/my_selling_basket"
+                        render={({ match, history }) => (
+                          <MySellingBasket
+                            checkForDuplicates={checkForDuplicates}
+                            match={match}
+                            history={history}
+                          />
+                        )}
+                      />
+                      <LoggedRoute
+                        path="/my_sell_requests/:id"
+                        component={OneSellRequest}
+                      />
+                      <LoggedRoute
+                        path="/my_sell_requests"
+                        component={mySellRequests}
+                      />
+                      <LoggedRoute path="/my_account" component={myAccount} />
+                      {/* Admin Part */}
+                      <LoggedShopRoute
+                        path="/shopadmin/sell_requests/:id"
+                        component={ShopAdminOneSellRequest}
+                      />
+                      <LoggedShopRoute
+                        path="/shopadmin/sell_requests"
+                        component={ShopAdminAllSellRequests}
+                      />
+                      <LoggedShopRoute
+                        path="/shopadmin/customers/:id"
+                        component={ShopAdminCustomer}
+                      />
+                      <LoggedShopRoute
+                        path="/shopadmin/customers"
+                        component={ShopAdminAllCustomers}
+                      />
+                      <LoggedShopRoute
+                        path="/shopadmin/cards"
+                        component={ShopAdminCards}
+                      />
+                      <LoggedShopRoute
+                        path="/shopadmin/settings"
+                        component={ShopAdminSettings}
+                      />
+                      <LoggedShopRoute
+                        path="/shopadmin"
+                        component={ShopAdminHome}
+                      />
+                    </Switch>
+                  </Router>
+                </SellRequestContext.Provider>
               </CanSubmitContext.Provider>
             </GenericContext.Provider>
           </SetsContext.Provider>
-        </SellRequestContext.Provider>
+        </SellingBasketContext.Provider>
       </AuthContext.Provider>
     </div>
   );
