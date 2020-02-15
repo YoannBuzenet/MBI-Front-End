@@ -21,16 +21,14 @@ const CardLineShop = ({
   //DEFINED langages and Conditions
   const { lang, conditions } = useContext(GenericCardInfosContext);
 
-  //In this component we receive some card data coming directly from the API. Its format is kind of messy : to make it a real card,
-  //we rearrange everything in useState AND in an useEffect.
-  //Using the current Card in state
+  //STATE - creating card state from parent input
   const [currentCard, setCurrentCard] = useState(card);
 
   //Saving the Hover state
   const [isOnHover, setIsOnHover] = useState(false);
 
   //Defining loading state, to know if component is loaded
-  const [isLoaded, setIsloaded] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   //State - defining if the Hover should be Top or Bottom
   const [hoverTopOrBottom, setHoverTopOrBottom] = useState();
@@ -48,26 +46,10 @@ const CardLineShop = ({
   console.log("the card", card);
   console.log("the current card", currentCard);
 
-  //We transform what we got from the API into code that is compatible with the App
-  // useEffect(() => {
-  //   setCurrentCard({
-  //     name: card.cards.name,
-  //     scryfallid: card.cards.scryfallid,
-  //     hasfoil: 1,
-  //     hasnonfoil: 1,
-  //     uuid: card.cards.uuid,
-  //     foreignData: card.cards.foreignData,
-  //     condition: card.CardCondition.id,
-  //     lang: card.language.id,
-  //     set: card.cards.edition.name,
-  //     price: card.price,
-  //     quantity: card.cardQuantity
-  //   });
-  // }, [card]);
-
   useEffect(() => {
     if (isLoaded) {
       //We remove the card then we add it again at the same Index
+      console.log("The currentCard did update");
       console.log("is loaded", currentCard);
       console.log("is loaded", currentAdminSellRequest);
       // const newSellRequest = currentAdminSellRequest.filter(
@@ -90,7 +72,7 @@ const CardLineShop = ({
       var newValue = value.toString();
     }
 
-    setIsloaded(true);
+    setIsLoaded(true);
     setErrorList([]);
     setCurrentCard({ ...currentCard, [name]: newValue });
 
