@@ -5,26 +5,26 @@ const StatusCalculator = ({ sellRequest }) => {
 
   var status = "";
   //Keep this one for submit prop
-  if (sellRequest.DateSubmit) {
+  if (sellRequest && sellRequest.DateSubmit) {
     status = "Soumis";
   }
 
-  if (sellRequest.dateEnvoi) {
+  if (sellRequest && sellRequest.dateEnvoi) {
     status = "Envoyé";
   }
-  if (sellRequest.dateRecu) {
+  if (sellRequest && sellRequest.dateRecu) {
     status = "Reçu";
   }
-  if (sellRequest.dateProcessing) {
+  if (sellRequest && sellRequest.dateProcessing) {
     status = "En traitement";
   }
-  if (sellRequest.dateApprovalPending) {
+  if (sellRequest && sellRequest.dateApprovalPending) {
     status = "En attente de votre validation";
   }
-  if (sellRequest.dateValidated) {
+  if (sellRequest && sellRequest.dateValidated) {
     status = "Validé";
   }
-  if (sellRequest.dateCanceled) {
+  if (sellRequest && sellRequest.dateCanceled) {
     status = "Cancelled";
   }
 
