@@ -37,10 +37,11 @@ function update(
   );
 }
 
-function setUpdate(SellRequestCard, idToReach) {
+function setUpdate(IRItoUpdate, newLangID, idToReach) {
   // préparation de newCardProperties object
   var newCardProperties = {
-    cards: "/cards/" + SellRequestCard.id
+    cards: "/cards/" + IRItoUpdate,
+    language: "/languages/" + newLangID
   };
 
   return axios.put(

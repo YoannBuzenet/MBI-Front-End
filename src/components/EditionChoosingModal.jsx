@@ -14,15 +14,17 @@ const EditionChoosingModal = ({
       <div className="edition-modal">
         CHANGER L'EDITION
         <select
-          value={currentCard.set}
+          value="Choose a set"
           onChange={event => updateDBAndContextWithNewEdition(event)}
         >
           {editionInformations &&
-            editionInformations.map((card, index) => (
-              <option value={index} key={card.id}>
-                {card.edition.name}
-              </option>
-            ))}
+            editionInformations
+              .map((card, index) => (
+                <option value={index} key={card.id}>
+                  {card.edition.name}
+                </option>
+              ))
+              .concat([<option key={40000}>Choose a set</option>])}
         </select>
       </div>
     </>
