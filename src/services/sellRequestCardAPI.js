@@ -37,6 +37,19 @@ function update(
   );
 }
 
+function setUpdate(SellRequestCard, idToReach) {
+  // préparation de newCardProperties object
+  var newCardProperties = {
+    cards: "/cards/" + SellRequestCard.id
+  };
+
+  return axios.put(
+    "http://127.0.0.1:8000/sell_request_cards/" + idToReach,
+    newCardProperties
+  );
+}
+
 export default {
-  update
+  update,
+  setUpdate
 };

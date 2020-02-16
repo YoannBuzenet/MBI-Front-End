@@ -3,7 +3,7 @@ import React from "react";
 const EditionChoosingModal = ({
   editionInformations,
   currentCard,
-  updateSellRequestWithNewEdition,
+  updateDBAndContextWithNewEdition,
   setIsModal
 }) => {
   console.log(editionInformations);
@@ -15,7 +15,7 @@ const EditionChoosingModal = ({
         CHANGER L'EDITION
         <select
           value={currentCard.set}
-          onChange={event => updateSellRequestWithNewEdition(event)}
+          onChange={event => updateDBAndContextWithNewEdition(event)}
         >
           {editionInformations &&
             editionInformations.map((card, index) => (
