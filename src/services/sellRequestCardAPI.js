@@ -10,7 +10,6 @@ function update(
   var propertyUpdate;
   if (SellRequestCardPropertyName == "price") {
     propertyUpdate = {
-      card: "/cards/" + SellRequestCard.id,
       price: SellRequestCardPropertyValue
     };
   } else if (SellRequestCardPropertyName == "quantity") {
@@ -18,6 +17,27 @@ function update(
     propertyUpdate = {
       // card: "/cards/" + SellRequestCard.id,
       cardQuantity: SellRequestCardPropertyValue
+    };
+  } else if (SellRequestCardPropertyName == "isFoil") {
+    if (SellRequestCardPropertyValue == "Yes") {
+      SellRequestCardPropertyValue = true;
+    } else if (SellRequestCardPropertyValue == "No") {
+      SellRequestCardPropertyValue = false;
+    } else if (SellRequestCardPropertyName == "lang") {
+      console.log("lang mise à jour");
+      propertyUpdate = {
+        // card: "/cards/" + SellRequestCard.id,
+
+        language: {
+          id: SellRequestCardPropertyValue
+        }
+      };
+    }
+
+    console.log("isFoil mise à jour");
+    propertyUpdate = {
+      // card: "/cards/" + SellRequestCard.id,
+      isFoil: SellRequestCardPropertyValue
     };
   }
 
