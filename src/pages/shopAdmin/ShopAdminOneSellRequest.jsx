@@ -41,6 +41,10 @@ const ShopAdminOneSellRequest = ({ match }) => {
           cancelToken: source.token
         })
         .then(data => {
+          console.log(data);
+          return data;
+        })
+        .then(data => {
           return setCurrentAdminSellRequest({
             DateSubmit: data.DateSubmit,
             dateEnvoi: data.dateEnvoi,
@@ -82,7 +86,7 @@ const ShopAdminOneSellRequest = ({ match }) => {
 
   useEffect(() => {
     console.log("The global sell request did rerender");
-    console.log(currentAdminSellRequest);
+    //console.log(currentAdminSellRequest);
   }, []);
 
   //ENV VARIABLE TO DEFINE
