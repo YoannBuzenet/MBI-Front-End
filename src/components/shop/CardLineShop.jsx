@@ -3,6 +3,7 @@ import GenericCardInfosContext from "../../context/genericCardInfosContext";
 import canSubmitContext from "../../context/canSubmitSellRequestContext";
 import genericCardAPI from "../../services/genericCardAPI";
 import AdminSellRequestContext from "../../context/adminSellRequestContext";
+import sellRequestCardAPI from "../../services/sellRequestCardAPI";
 
 const CardLineShop = ({ card, indexCard }) => {
   //Getting the Sell Request state by context
@@ -43,10 +44,12 @@ const CardLineShop = ({ card, indexCard }) => {
       //We remove the card then we add it again at the same Index
       console.log("is loaded", currentCard);
       console.log("is loaded", currentAdminSellRequest);
-      const newSellRequest = currentAdminSellRequest.filter(
+      var newSellRequest = currentAdminSellRequest;
+
+      newSellRequest.sellRequests = currentAdminSellRequest.sellRequests.filter(
         (card, index) => index !== indexCard
       );
-      newSellRequest.splice(indexCard, 0, currentCard);
+      newSellRequest.sellRequests.splice(indexCard, 0, currentCard);
 
       setCurrentAdminSellRequest(newSellRequest);
       console.log(currentAdminSellRequest);
@@ -55,8 +58,8 @@ const CardLineShop = ({ card, indexCard }) => {
 
   const handleChange = ({ currentTarget }, currentCard) => {
     const { name, value } = currentTarget;
-    // console.log(name);
-    // console.log(value);
+    console.log(name);
+    console.log(value);
     if (name == "quantity" || name == "lang") {
       var newValue = parseInt(value);
     } else {
@@ -71,7 +74,10 @@ const CardLineShop = ({ card, indexCard }) => {
       [name]: newValue
     });
 
-    console.log(currentCard);
+    // sellRequestCardAPI
+    //   .update(currentCard, name, newValue)
+    //   .catch(console.log("Update did not happen"));
+    // console.log(currentCard);
   };
 
   const handleDelete = card => {
