@@ -13,6 +13,8 @@ const CardLineShop = ({ card, indexCard }) => {
     AdminSellRequestContext
   );
 
+  console.log(card);
+
   //Knowing if the Sell Request is OK to be submitted (no duplicate)
   const { errorList, setErrorList } = useContext(canSubmitContext);
 
@@ -95,11 +97,13 @@ const CardLineShop = ({ card, indexCard }) => {
       .then(data => setEditionInformation(data.data["hydra:member"]));
   };
 
-  const updateSellRequestWithNewEdition = (event, index) => {
+  const updateDBAndContextWithNewEdition = (event, index) => {
     console.log(event.target.value);
     setIsModal(false);
-    console.log("on change le set de cette carte");
+    console.log(editionInformations[parseInt(event.target.value)]);
+    const newCard = editionInformations[parseInt(event.target.value)];
     //requete API pour update la carte
+    sellRequestCardAPI.setUpdate(newCard, currentCard.id);
 
     //code pour update le contexte de la current sell request
   };
@@ -159,7 +163,9 @@ const CardLineShop = ({ card, indexCard }) => {
             <EditionChoosingModal
               editionInformations={editionInformations}
               currentCard={currentCard}
-              updateSellRequestWithNewEdition={updateSellRequestWithNewEdition}
+              updateDBAndContextWithNewEdition={
+                updateDBAndContextWithNewEdition
+              }
               setIsModal={setIsModal}
             />
           )}
