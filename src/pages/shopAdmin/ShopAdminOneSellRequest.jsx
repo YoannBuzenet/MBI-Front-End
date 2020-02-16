@@ -114,6 +114,7 @@ const ShopAdminOneSellRequest = ({ match }) => {
           <tr>
             <th>Nom de la carte</th>
             <th>Edition</th>
+            <th>Changer Edition</th>
             <th>Langue</th>
             <th>Etat</th>
             <th>Foil</th>
@@ -122,7 +123,7 @@ const ShopAdminOneSellRequest = ({ match }) => {
             <th>Total</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className="cardLineShop">
           {/* CHECKER SI LE RACHAT EST VALIDÉ, SI OUI AUTRE COMPONENT QUE CARDLINESHOP - JUSTE MONTRER LES PROPS */}
           {currentAdminSellRequest.sellRequests &&
             currentAdminSellRequest.sellRequests.length > 0 &&
@@ -132,6 +133,7 @@ const ShopAdminOneSellRequest = ({ match }) => {
               );
             })}
           <tr className="total-line">
+            <td></td>
             <td></td>
             <td></td>
             <td></td>
@@ -151,6 +153,7 @@ const ShopAdminOneSellRequest = ({ match }) => {
             </td>
           </tr>
           <tr className="total-line">
+            <td></td>
             <td></td>
             <td></td>
             <td></td>
