@@ -42,8 +42,8 @@ const CardLineShop = ({ card, indexCard }) => {
   useEffect(() => {
     if (isLoaded) {
       //We remove the card then we add it again at the same Index
-      console.log("is loaded", currentCard);
-      console.log("is loaded", currentAdminSellRequest);
+      // console.log("is loaded", currentCard);
+      // console.log("is loaded", currentAdminSellRequest);
       var newSellRequest = currentAdminSellRequest;
 
       newSellRequest.sellRequests = currentAdminSellRequest.sellRequests.filter(
@@ -52,7 +52,7 @@ const CardLineShop = ({ card, indexCard }) => {
       newSellRequest.sellRequests.splice(indexCard, 0, currentCard);
 
       setCurrentAdminSellRequest(newSellRequest);
-      console.log(currentAdminSellRequest);
+      // console.log(currentAdminSellRequest);
     }
   }, [currentCard]);
 
@@ -77,7 +77,7 @@ const CardLineShop = ({ card, indexCard }) => {
     sellRequestCardAPI
       .update(currentCard, name, newValue)
       .catch(error => console.log(error));
-    console.log(currentCard);
+    // console.log(currentCard);
   };
 
   const handleDelete = card => {
@@ -211,12 +211,12 @@ const CardLineShop = ({ card, indexCard }) => {
               handleChange(event, currentCard);
             }}
           >
-            <option value={currentCard.isFoil == "Yes" ? "Yes" : "No"}>
-              {currentCard.isFoil == "Yes" ? "Yes" : "No"}
+            <option value={currentCard.isFoil == true ? "Yes" : "No"}>
+              {currentCard.isFoil == true ? "Yes" : "No"}
             </option>
             {card.hasfoil == 1 && card.hasnonfoil == 1 && (
-              <option value={currentCard.isFoil == "Yes" ? "No" : "Yes"}>
-                {currentCard.isFoil == "Yes" ? "No" : "Yes"}
+              <option value={currentCard.isFoil == true ? "No" : "Yes"}>
+                {currentCard.isFoil == true ? "No" : "Yes"}
               </option>
             )}
           </select>
