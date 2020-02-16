@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 
 const StatusCalculator = ({ sellRequest }) => {
-  // useEffect(() => console.log(sellRequest), []);
+  // useEffect(() => console.log(sellRequest), [sellRequest]);
 
   var status = "";
   //Keep this one for submit prop

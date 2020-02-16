@@ -96,7 +96,9 @@ function App() {
   const [errorList, setErrorList] = useState([]);
 
   //STATE Creating the Admin Sell Request Context
-  const [currentAdminSellRequest, setCurrentAdminSellRequest] = useState([]);
+  const [currentAdminSellRequest, setCurrentAdminSellRequest] = useState({
+    sellRequests: []
+  });
 
   // CONTEXT CREATION Creating All Sets value for context
   const contextAllSets = {
