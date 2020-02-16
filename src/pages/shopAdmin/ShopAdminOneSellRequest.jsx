@@ -17,12 +17,11 @@ const ShopAdminOneSellRequest = ({ match }) => {
     AdminSellRequestContext
   );
 
-  const [globalInfosSellRequest, setGlobalInfosSellRequest] = useState();
-
   useEffect(() => {
     if (
-      currentAdminSellRequest.length > 0 &&
-      currentAdminSellRequest[0].idSellRequest !== parseInt(id)
+      currentAdminSellRequest.sellRequests &&
+      currentAdminSellRequest.sellRequests.length > 0 &&
+      currentAdminSellRequest.idSellRequest !== parseInt(id)
     ) {
       setCurrentAdminSellRequest([]);
     }
@@ -33,35 +32,48 @@ const ShopAdminOneSellRequest = ({ match }) => {
     const source = CancelToken.source();
 
     if (
-      currentAdminSellRequest.length == 0 ||
-      currentAdminSellRequest[0].idSellRequest !== parseInt(id)
+      (currentAdminSellRequest.sellRequests &&
+        currentAdminSellRequest.sellRequests.length == 0) ||
+      currentAdminSellRequest.idSellRequest !== parseInt(id)
     ) {
       sellRequestAPI
         .findById(id, {
           cancelToken: source.token
         })
         .then(data => {
-          return setCurrentAdminSellRequest([
-            ...currentAdminSellRequest,
-            ...data.sellRequestCards.map(card => {
-              return {
-                id: card.id,
-                name: card.cards.name,
-                scryfallid: card.cards.scryfallid,
-                hasfoil: card.cards.hasfoil,
-                hasnonfoil: card.cards.hasnonfoil,
-                uuid: card.cards.uuid,
-                foreignData: card.cards.foreignData,
-                condition: card.CardCondition.id.toString(),
-                lang: card.language.id,
-                set: card.cards.edition.name,
-                price: card.price,
-                quantity: card.cardQuantity,
-                isFoil: card.isFoil,
-                idSellRequest: data.id
-              };
-            })
-          ]);
+          return setCurrentAdminSellRequest({
+            DateSubmit: data.DateSubmit,
+            dateEnvoi: data.dateEnvoi,
+            dateRecu: data.dateRecu,
+            dateProcessing: data.dateProcessing,
+            dateApprovalPending: data.dateApprovalPending,
+            dateValidated: data.dateValidated,
+            dateCanceled: data.dateCanceled,
+            customer: data.client,
+            amount: data.amount,
+            cardTotalQuantity: data.cardTotalQuantity,
+            shop: data.shop,
+            idSellRequest: data.id,
+            sellRequests: [
+              ...data.sellRequestCards.map(card => {
+                return {
+                  id: card.id,
+                  name: card.cards.name,
+                  scryfallid: card.cards.scryfallid,
+                  hasfoil: 1,
+                  hasnonfoil: 1,
+                  uuid: card.cards.uuid,
+                  foreignData: card.cards.foreignData,
+                  condition: card.CardCondition.id.toString(),
+                  lang: card.language.id,
+                  set: card.cards.edition.name,
+                  price: card.price,
+                  quantity: card.cardQuantity,
+                  isFoil: card.isFoil
+                };
+              })
+            ]
+          });
         });
     }
 
@@ -70,14 +82,7 @@ const ShopAdminOneSellRequest = ({ match }) => {
 
   useEffect(() => {
     console.log("The global sell request did rerender");
-    // console.log(globalInfosSellRequest);
-    // console.log(currentAdminSellRequest);
-    // console.log(
-    //   currentAdminSellRequest[0]
-    //     ? currentAdminSellRequest[0].idSellRequest
-    //     : null
-    // );
-    // console.log(id);
+    console.log(currentAdminSellRequest);
   }, []);
 
   //ENV VARIABLE TO DEFINE
@@ -90,7 +95,7 @@ const ShopAdminOneSellRequest = ({ match }) => {
         <p className="sellRequest-status">
           Statut
           <span className="subInfos">
-            <StatusCalculator sellRequest={globalInfosSellRequest} />
+            <StatusCalculator sellRequest={currentAdminSellRequest} />
           </span>
         </p>
         <p className="sellRequest-lastDate">
@@ -115,8 +120,9 @@ const ShopAdminOneSellRequest = ({ match }) => {
         </thead>
         <tbody>
           {/* CHECKER SI LE RACHAT EST VALIDÉ, SI OUI AUTRE COMPONENT QUE CARDLINESHOP - JUSTE MONTRER LES PROPS */}
-          {currentAdminSellRequest.length > 0 &&
-            currentAdminSellRequest.map((card, index) => {
+          {currentAdminSellRequest.sellRequests &&
+            currentAdminSellRequest.sellRequests.length > 0 &&
+            currentAdminSellRequest.sellRequests.map((card, index) => {
               return (
                 <CardLineShop key={card.id} card={card} indexCard={index} />
               );
