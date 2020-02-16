@@ -74,10 +74,10 @@ const CardLineShop = ({ card, indexCard }) => {
       [name]: newValue
     });
 
-    // sellRequestCardAPI
-    //   .update(currentCard, name, newValue)
-    //   .catch(console.log("Update did not happen"));
-    // console.log(currentCard);
+    sellRequestCardAPI
+      .update(currentCard, name, newValue)
+      .catch(error => console.log(error));
+    console.log(currentCard);
   };
 
   const handleDelete = card => {
