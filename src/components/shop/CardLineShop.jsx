@@ -4,6 +4,8 @@ import canSubmitContext from "../../context/canSubmitSellRequestContext";
 import genericCardAPI from "../../services/genericCardAPI";
 import AdminSellRequestContext from "../../context/adminSellRequestContext";
 import sellRequestCardAPI from "../../services/sellRequestCardAPI";
+import cardsAPI from "../../services/cardsAPI";
+import EditionChoosingModal from "../EditionChoosingModal";
 
 const CardLineShop = ({ card, indexCard }) => {
   //Getting the Sell Request state by context
@@ -20,14 +22,20 @@ const CardLineShop = ({ card, indexCard }) => {
   //STATE - creating card state from parent input
   const [currentCard, setCurrentCard] = useState(card);
 
-  //Saving the Hover state
+  //STATE Saving the Hover state
   const [isOnHover, setIsOnHover] = useState(false);
 
-  //Defining loading state, to know if component is loaded
+  //STATE Defining loading state, to know if component is loaded
   const [isLoaded, setIsLoaded] = useState(false);
 
   //State - defining if the Hover should be Top or Bottom
   const [hoverTopOrBottom, setHoverTopOrBottom] = useState();
+
+  //STATE - defining if the edition choosing modal is ON or OFF
+  const [isModal, setIsModal] = useState(false);
+
+  //STATE - stocking the different editions that are provided in the modal
+  const [editionInformations, setEditionInformation] = useState();
 
   useEffect(() => {
     if (isOnHover) {
@@ -80,6 +88,13 @@ const CardLineShop = ({ card, indexCard }) => {
     // console.log(currentCard);
   };
 
+  const changeEdition = (event, currentCard) => {
+    setIsModal(true);
+    cardsAPI
+      .getByName(currentCard.name)
+      .then(data => setEditionInformation(data));
+  };
+
   const handleDelete = card => {
     //We remove the card thanks to its index in the currentSellRequest
     const newSellRequest = currentAdminSellRequest.filter(
@@ -129,7 +144,11 @@ const CardLineShop = ({ card, indexCard }) => {
             </div>
           )}
         </td>
-        <td>{currentCard.set}</td>
+        <td>
+          {currentCard.set}
+          {isModal && <EditionChoosingModal />}
+        </td>
+        <td onClick={event => changeEdition(event, currentCard)}>+</td>
         <td>
           {/* Select will have to be refactored with a .map on a Select Component */}
           <select
