@@ -19,25 +19,21 @@ function update(
       cardQuantity: SellRequestCardPropertyValue
     };
   } else if (SellRequestCardPropertyName == "isFoil") {
+    console.log("isFoil mise à jour");
     if (SellRequestCardPropertyValue == "Yes") {
       SellRequestCardPropertyValue = true;
     } else if (SellRequestCardPropertyValue == "No") {
       SellRequestCardPropertyValue = false;
-    } else if (SellRequestCardPropertyName == "lang") {
-      console.log("lang mise à jour");
-      propertyUpdate = {
-        // card: "/cards/" + SellRequestCard.id,
-
-        language: {
-          id: SellRequestCardPropertyValue
-        }
-      };
     }
-
-    console.log("isFoil mise à jour");
+  } else if (SellRequestCardPropertyName == "lang") {
+    console.log("lang mise à jour");
     propertyUpdate = {
-      // card: "/cards/" + SellRequestCard.id,
-      isFoil: SellRequestCardPropertyValue
+      language: "/languages/" + SellRequestCardPropertyValue
+    };
+  } else if (SellRequestCardPropertyName == "condition") {
+    console.log("condition mise à jour");
+    propertyUpdate = {
+      CardCondition: "/card_conditions/" + SellRequestCardPropertyValue
     };
   }
 
