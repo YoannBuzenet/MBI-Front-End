@@ -10,7 +10,7 @@ function update(
   var propertyUpdate;
   if (SellRequestCardPropertyName == "price") {
     propertyUpdate = {
-      price: SellRequestCardPropertyValue
+      price: parseInt(SellRequestCardPropertyValue)
     };
   } else if (SellRequestCardPropertyName == "quantity") {
     console.log("qté mise à jour");
