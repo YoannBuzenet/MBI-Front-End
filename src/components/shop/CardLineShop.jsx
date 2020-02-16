@@ -92,7 +92,7 @@ const CardLineShop = ({ card, indexCard }) => {
     setIsModal(true);
     cardsAPI
       .getByName(currentCard.name)
-      .then(data => setEditionInformation(data));
+      .then(data => setEditionInformation(data.data["hydra:member"]));
   };
 
   const handleDelete = card => {
@@ -146,7 +146,12 @@ const CardLineShop = ({ card, indexCard }) => {
         </td>
         <td>
           {currentCard.set}
-          {isModal && <EditionChoosingModal />}
+          {isModal && (
+            <EditionChoosingModal
+              editionInformations={editionInformations}
+              currentCard={currentCard}
+            />
+          )}
         </td>
         <td onClick={event => changeEdition(event, currentCard)}>+</td>
         <td>
