@@ -95,6 +95,15 @@ const CardLineShop = ({ card, indexCard }) => {
       .then(data => setEditionInformation(data.data["hydra:member"]));
   };
 
+  const updateSellRequestWithNewEdition = (event, index) => {
+    console.log(event.target.value);
+    setIsModal(false);
+    console.log("on change le set de cette carte");
+    //requete API pour update la carte
+
+    //code pour update le contexte de la current sell request
+  };
+
   const handleDelete = card => {
     //We remove the card thanks to its index in the currentSellRequest
     const newSellRequest = currentAdminSellRequest.filter(
@@ -150,6 +159,8 @@ const CardLineShop = ({ card, indexCard }) => {
             <EditionChoosingModal
               editionInformations={editionInformations}
               currentCard={currentCard}
+              updateSellRequestWithNewEdition={updateSellRequestWithNewEdition}
+              setIsModal={setIsModal}
             />
           )}
         </td>
