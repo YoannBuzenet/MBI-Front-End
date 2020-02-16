@@ -245,7 +245,16 @@ const CardLineShop = ({ card, indexCard }) => {
             <option value="12">12</option>
           </select>
         </td>
-        <td>{currentCard.price}</td>
+        <td>
+          <input
+            type="text"
+            onChange={event => {
+              handleChange(event, currentCard);
+            }}
+            name="price"
+            value={currentCard.price}
+          />
+        </td>
         <td>
           <i
             className="fas fa-minus-circle delete-from-selling-basket"
