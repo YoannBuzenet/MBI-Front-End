@@ -97,12 +97,14 @@ const CardLineShop = ({ card, indexCard }) => {
   };
 
   const updateDBAndContextWithNewEdition = (event, index) => {
+    //Closing the Modal Window
     setIsModal(false);
-    console.log(editionInformations[parseInt(event.target.value)]);
+
+    //Getting the new card from the state given by the ChangeEdition Method
     const newCard = editionInformations[parseInt(event.target.value)];
     const IRItoUpdate = newCard.id;
 
-    //Checking the current language exist in the set we're about to update. If not, we put English by default ( id 9)
+    //Checking IF the current language exist in the set we're about to update. If not, we put English by default ( id 9)
     var langNextCard;
     const result = newCard.foreignData.filter(
       lang => lang.language_id.id == currentCard.lang
@@ -113,11 +115,17 @@ const CardLineShop = ({ card, indexCard }) => {
     } else {
       langNextCard = 9;
     }
-    console.log(langNextCard);
+
     //API Request to update the card in DB
     sellRequestCardAPI.setUpdate(IRItoUpdate, langNextCard, currentCard.id);
 
-    //code pour update le contexte de la current sell request
+    //Updating the context
+    setCurrentCard({
+      ...currentCard,
+      set: newCard.edition.name,
+      lang: langNextCard,
+      foreignData: newCard.foreignData
+    });
   };
 
   const handleDelete = card => {
