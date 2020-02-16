@@ -13,8 +13,6 @@ const CardLineShop = ({ card, indexCard }) => {
     AdminSellRequestContext
   );
 
-  console.log(card);
-
   //Knowing if the Sell Request is OK to be submitted (no duplicate)
   const { errorList, setErrorList } = useContext(canSubmitContext);
 
@@ -23,6 +21,7 @@ const CardLineShop = ({ card, indexCard }) => {
 
   //STATE - creating card state from parent input
   const [currentCard, setCurrentCard] = useState(card);
+  console.log(currentCard);
 
   //STATE Saving the Hover state
   const [isOnHover, setIsOnHover] = useState(false);
@@ -98,12 +97,25 @@ const CardLineShop = ({ card, indexCard }) => {
   };
 
   const updateDBAndContextWithNewEdition = (event, index) => {
-    console.log(event.target.value);
     setIsModal(false);
     console.log(editionInformations[parseInt(event.target.value)]);
     const newCard = editionInformations[parseInt(event.target.value)];
-    //requete API pour update la carte
-    sellRequestCardAPI.setUpdate(newCard, currentCard.id);
+    const IRItoUpdate = newCard.id;
+
+    //Checking the current language exist in the set we're about to update. If not, we put English by default ( id 9)
+    var langNextCard;
+    const result = newCard.foreignData.filter(
+      lang => lang.language_id.id == currentCard.lang
+    );
+
+    if (result.length > 0) {
+      langNextCard = currentCard.lang;
+    } else {
+      langNextCard = 9;
+    }
+    console.log(langNextCard);
+    //API Request to update the card in DB
+    sellRequestCardAPI.setUpdate(IRItoUpdate, langNextCard, currentCard.id);
 
     //code pour update le contexte de la current sell request
   };
@@ -173,6 +185,7 @@ const CardLineShop = ({ card, indexCard }) => {
         <td onClick={event => changeEdition(event, currentCard)}>+</td>
         <td>
           {/* Select will have to be refactored with a .map on a Select Component */}
+          {/* Select LANG */}
           <select
             name="lang"
             id={currentCard.name + "id1"}
@@ -183,6 +196,7 @@ const CardLineShop = ({ card, indexCard }) => {
           >
             {currentCard.foreignData.length > 0 ? (
               [
+                //Find the selected value
                 <option value={currentCard.lang} key={currentCard.id + "2"}>
                   {currentCard.lang == "9"
                     ? "EN"
@@ -191,6 +205,7 @@ const CardLineShop = ({ card, indexCard }) => {
                           currentlanguage.language_id.id === currentCard.lang
                       )[0].language_id.shortname}
                 </option>
+                //Add the non selected languages among what's possible in this card
               ].concat(
                 currentCard.foreignData
                   .filter(
@@ -205,6 +220,11 @@ const CardLineShop = ({ card, indexCard }) => {
                       {foreignData.language_id.shortname}
                     </option>
                   ))
+                  .concat([
+                    <option value="9" key={card.id + "3" + card.lang}>
+                      EN
+                    </option>
+                  ])
               )
             ) : (
               <option value="9">EN</option>
