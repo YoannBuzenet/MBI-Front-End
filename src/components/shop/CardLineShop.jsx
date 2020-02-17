@@ -100,7 +100,7 @@ const CardLineShop = ({ card, indexCard }) => {
     //Closing the Modal Window
     setIsModal(false);
 
-    //Getting the new card from the state given by the ChangeEdition Method
+    //Getting the new card from the state given by the ChangeEdition Method, thanks to the value chosen in the modal window
     const newCard = editionInformations[parseInt(event.target.value)];
     const IRItoUpdate = newCard.id;
 
@@ -116,10 +116,12 @@ const CardLineShop = ({ card, indexCard }) => {
       langNextCard = 9;
     }
 
+    //TOAST IF LANG IS CHANGED
+
     //API Request to update the card in DB
     sellRequestCardAPI.setUpdate(IRItoUpdate, langNextCard, currentCard.id);
 
-    //Updating the context
+    //Updating the context. Updating this state triggers a context update on useEffect
     setCurrentCard({
       ...currentCard,
       set: newCard.edition.name,
