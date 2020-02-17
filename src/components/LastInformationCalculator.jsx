@@ -30,6 +30,8 @@ const LastInformationCalculator = ({ sellRequest }) => {
   }
 
   if (lastDate.length > 0) {
+    console.log(lastDate);
+    console.log(typeof lastDate);
     lastDate = new Date(lastDate);
     lastDate = moment(lastDate);
     lastDate = lastDate.format("YYYY-MM-DD");
