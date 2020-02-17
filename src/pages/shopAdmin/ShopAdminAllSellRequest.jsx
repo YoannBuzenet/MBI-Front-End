@@ -19,7 +19,7 @@ const ShopAdminAllSellRequests = props => {
         cancelToken: source.token
       })
       .then(response => setAllSellRequests(response.data["hydra:member"]));
-    console.log("hey");
+    // console.log("hey");
 
     return () => source.cancel("");
   }, []);
