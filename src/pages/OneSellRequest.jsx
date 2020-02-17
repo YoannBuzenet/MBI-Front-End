@@ -3,6 +3,7 @@ import sellRequestAPI from "../services/sellRequestAPI";
 import axios from "axios";
 import StatusCalculator from "../components/StatusCalculator";
 import LastInformationCalculator from "../components/LastInformationCalculator";
+import SellRequestStatusUpdater from "../components/SellRequestStatusUpdater";
 
 const OneSellRequest = ({ match, history }) => {
   //ENV VARIABLE TO DEFINE
@@ -111,6 +112,10 @@ const OneSellRequest = ({ match, history }) => {
           </tr>
         </tbody>
       </table>
+      <SellRequestStatusUpdater
+        currentSellRequest={currentSellRequest}
+        setCurrentSellRequest={setCurrentSellRequest}
+      />
     </>
   );
 };

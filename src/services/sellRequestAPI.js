@@ -14,8 +14,13 @@ function findById(id, cleanUpParam) {
     .then(response => response.data);
 }
 
+function update(id, newData) {
+  return axios.put("http://127.0.0.1:8000/sell_requests/" + id, newData);
+}
+
 export default {
   send,
+  update,
   findAll,
   findById
 };
