@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import AdminSellRequestContext from "../../context/adminSellRequestContext";
+import sellRequestAPI from "../../services/sellRequestAPI";
 
 const ShopSellRequestStatusValidator = props => {
   const { currentAdminSellRequest, setCurrentAdminSellRequest } = useContext(
@@ -79,15 +80,54 @@ const ShopSellRequestStatusValidator = props => {
 
   const validateSellRequest = () => {
     console.log("le rachat va etre validé");
+    const newData = {
+      dateValidated: new Date()
+    };
+    sellRequestAPI
+      .updateAsShop(currentAdminSellRequest.id, newData)
+      .then(data => {
+        setCurrentAdminSellRequest({
+          ...currentAdminSellRequest,
+          dateValidated: data.data.dateValidated
+        });
+      });
   };
 
   const cancelSellRequest = () => {
-    console.log("le rachat va etre annulé");
+    const newData = {
+      dateCanceled: new Date()
+    };
+    sellRequestAPI
+      .updateAsShop(currentAdminSellRequest.id, newData)
+      .then(data => {
+        setCurrentAdminSellRequest({
+          ...currentAdminSellRequest,
+          dateCanceled: data.data.dateCanceled
+        });
+      });
   };
 
-  const handleChange = event => {
-    console.log("le status devrait désormais être", event.target.value);
+  const handleChange = ({ currentTarget }) => {
+    const { value } = currentTarget;
+    console.log(value);
+
+    const newData = {
+      [value]: new Date()
+    };
+
+    sellRequestAPI
+      .updateAsShop(currentAdminSellRequest.id, newData)
+      .then(data => {
+        setCurrentAdminSellRequest({
+          ...currentAdminSellRequest,
+          [value]: data.data[value]
+        });
+        console.log(data.data);
+        console.log(data.data[value]);
+      });
   };
+
+  console.log(currentAdminSellRequest);
 
   return (
     <>
