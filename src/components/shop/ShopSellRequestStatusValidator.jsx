@@ -38,8 +38,10 @@ const ShopSellRequestStatusValidator = props => {
     if (currentAdminSellRequest && currentAdminSellRequest.dateCanceled) {
       setCurrentStatus("Cancelled");
     }
+  });
 
-    if (currentStatus == "soumis") {
+  useEffect(() => {
+    if (currentStatus == "Soumis" || currentStatus == "Envoyé") {
       setAvailableOptions([
         {
           status: "Reçu",
@@ -54,8 +56,26 @@ const ShopSellRequestStatusValidator = props => {
           value: "dateApprovalPending"
         }
       ]);
+    } else if (currentStatus == "Reçu") {
+      setAvailableOptions([
+        {
+          status: "En traitement",
+          value: "dateProcessing"
+        },
+        {
+          status: "En attente de validation client",
+          value: "dateApprovalPending"
+        }
+      ]);
+    } else if (currentStatus == "En traitement") {
+      setAvailableOptions([
+        {
+          status: "En attente de validation client",
+          value: "dateApprovalPending"
+        }
+      ]);
     }
-  });
+  }, [currentStatus]);
 
   const validateSellRequest = () => {
     console.log("le rachat va etre validé");
@@ -65,10 +85,32 @@ const ShopSellRequestStatusValidator = props => {
     console.log("le rachat va etre annulé");
   };
 
+  const handleChange = event => {
+    console.log("le status devrait désormais être", event.target.value);
+  };
+
   return (
     <>
       {currentAdminSellRequest.id && (
         <p>Ceci est un menu d'options pour MAJ le statut du rachat</p>
+      )}
+      {availableOptions.length > 0 && (
+        <select
+          value="default"
+          onChange={event => {
+            handleChange(event);
+          }}
+        >
+          {availableOptions
+            .concat({ status: "Choisir un statut", value: "default" })
+            .map((option, index) => {
+              return (
+                <option value={option.value} key={index}>
+                  {option.status}
+                </option>
+              );
+            })}
+        </select>
       )}
       {currentStatus !== "Validé" && currentStatus !== "Cancelled" && (
         <>
