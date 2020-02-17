@@ -157,14 +157,11 @@ const ShopAdminOneSellRequest = ({ match }) => {
             <td></td>
             <td>NOMBRE DE CARTES</td>
             <td>
-              {currentAdminSellRequest.sellRequestCards &&
-                currentAdminSellRequest.sellRequestCards.length > 0 &&
-                currentAdminSellRequest.sellRequestCards.reduce(
-                  (total, card) => {
-                    return total + card.cardQuantity;
-                  },
-                  0
-                )}
+              {currentAdminSellRequest.sellRequests &&
+                currentAdminSellRequest.sellRequests.length > 0 &&
+                currentAdminSellRequest.sellRequests.reduce((total, card) => {
+                  return total + card.quantity;
+                }, 0)}
             </td>
           </tr>
           <tr className="total-line">
@@ -177,14 +174,11 @@ const ShopAdminOneSellRequest = ({ match }) => {
             <td></td>
             <td>TOTAL</td>
             <td>
-              {currentAdminSellRequest.sellRequestCards &&
-                currentAdminSellRequest.sellRequestCards.length > 0 &&
-                currentAdminSellRequest.sellRequestCards.reduce(
-                  (total, card) => {
-                    return total + card.price * card.cardQuantity;
-                  },
-                  0
-                )}
+              {currentAdminSellRequest.sellRequests &&
+                currentAdminSellRequest.sellRequests.length > 0 &&
+                currentAdminSellRequest.sellRequests.reduce((total, card) => {
+                  return total + card.price * card.quantity;
+                }, 0)}
             </td>
           </tr>
         </tbody>
