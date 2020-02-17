@@ -4,6 +4,7 @@ import sellRequestAPI from "../../services/sellRequestAPI";
 import StatusCalculator from "../../components/StatusCalculator";
 import LastInformationCalculator from "../../components/LastInformationCalculator";
 import CardLineShop from "../../components/shop/CardLineShop";
+import CardLineShopStuck from "../../components/shop/CardLineShopStuck";
 import AdminSellRequestContext from "../../context/adminSellRequestContext";
 import ShopSellRequestStatusValidator from "../../components/shop/ShopSellRequestStatusValidator";
 
@@ -88,7 +89,7 @@ const ShopAdminOneSellRequest = ({ match }) => {
 
   useEffect(() => {
     console.log("The global sell request did rerender");
-    //console.log(currentAdminSellRequest);
+    console.log(currentAdminSellRequest);
   }, []);
 
   //ENV VARIABLE TO DEFINE
@@ -127,11 +128,23 @@ const ShopAdminOneSellRequest = ({ match }) => {
         </thead>
         <tbody className="cardLineShop">
           {/* CHECKER SI LE RACHAT EST VALIDÉ, SI OUI AUTRE COMPONENT QUE CARDLINESHOP - JUSTE MONTRER LES PROPS */}
-          {currentAdminSellRequest.sellRequests &&
+
+          {!currentAdminSellRequest.dateValidated &&
+            currentAdminSellRequest.sellRequests &&
             currentAdminSellRequest.sellRequests.length > 0 &&
             currentAdminSellRequest.sellRequests.map((card, index) => {
               return (
                 <CardLineShop key={card.id} card={card} indexCard={index} />
+              );
+            })}
+          {currentAdminSellRequest.dateValidated &&
+            currentAdminSellRequest.sellRequests.map((card, index) => {
+              return (
+                <CardLineShopStuck
+                  key={card.id}
+                  card={card}
+                  indexCard={index}
+                />
               );
             })}
           <tr className="total-line">
