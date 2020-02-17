@@ -5,6 +5,7 @@ import StatusCalculator from "../../components/StatusCalculator";
 import LastInformationCalculator from "../../components/LastInformationCalculator";
 import CardLineShop from "../../components/shop/CardLineShop";
 import AdminSellRequestContext from "../../context/adminSellRequestContext";
+import ShopSellRequestStatusValidator from "../../components/shop/ShopSellRequestStatusValidator";
 
 const ShopAdminOneSellRequest = ({ match }) => {
   const { id } = match.params;
@@ -46,6 +47,7 @@ const ShopAdminOneSellRequest = ({ match }) => {
         })
         .then(data => {
           return setCurrentAdminSellRequest({
+            id: data.id,
             DateSubmit: data.DateSubmit,
             dateEnvoi: data.dateEnvoi,
             dateRecu: data.dateRecu,
@@ -174,6 +176,7 @@ const ShopAdminOneSellRequest = ({ match }) => {
           </tr>
         </tbody>
       </table>
+      <ShopSellRequestStatusValidator />
     </>
   );
 };

@@ -9,7 +9,10 @@ const SellRequestStatusUpdater = ({
 
   useEffect(() => {
     if (currentSellRequest.id) {
-      if (currentSellRequest.dateEnvoi == null) {
+      if (
+        currentSellRequest.dateEnvoi == null &&
+        currentSellRequest.dateRecu == null
+      ) {
         setHasBeenSent(false);
         console.log(currentSellRequest);
         if (!hasBeenSent) {
@@ -22,9 +25,6 @@ const SellRequestStatusUpdater = ({
   }, [currentSellRequest, hasBeenSent]);
 
   const handleClick = (event, currentSellRequest) => {
-    //Mettre à jour l'API
-    //Refresh le contexte OU LE STATUS JE SAIS PLUS LOL
-    console.log("clické");
     sellRequestAPI
       .update(currentSellRequest.id, { dateEnvoi: new Date() })
       .then(data =>
@@ -33,7 +33,7 @@ const SellRequestStatusUpdater = ({
           dateEnvoi: data.data.dateEnvoi
         })
       );
-    // setHasBeenSent(true);
+    //TODO ADD A TOAST FOR SUCCESS
   };
 
   return (
@@ -48,6 +48,7 @@ const SellRequestStatusUpdater = ({
         </button>
       ) : null}
     </>
+    // TODO : ADD A TRACKING NUMBER
   );
 };
 

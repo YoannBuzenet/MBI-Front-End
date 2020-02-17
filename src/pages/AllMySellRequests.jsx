@@ -2,12 +2,16 @@ import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import AuthContext from "../context/authContext";
 import StatusCalculator from "../components/StatusCalculator";
+import moment from "moment";
+import DateDisplayer from "../components/DateDisplayer";
 
 const AllMySellRequests = props => {
   //Current Authentication
   const { authenticationInfos, setAuthenticationInfos } = useContext(
     AuthContext
   );
+
+  console.log(authenticationInfos.customer.SellRequests);
 
   // useEffect(() => {
   //   console.log(authenticationInfos.customer.SellRequests);
@@ -36,7 +40,7 @@ const AllMySellRequests = props => {
             authenticationInfos.customer.SellRequests.length > 0 &&
             authenticationInfos.customer.SellRequests.map(
               (sellRequest, index) => (
-                <tr key={index}>
+                <tr key={sellRequest.id}>
                   <td>
                     <Link to={"/my_sell_requests/" + sellRequest.id}>
                       {sellRequest.id}
@@ -45,12 +49,26 @@ const AllMySellRequests = props => {
                   <td>
                     <StatusCalculator sellRequest={sellRequest} />
                   </td>
-                  <td>Date soumission</td>
-                  <td>{sellRequest.dateEnvoi || "A venir"}</td>
-                  <td>{sellRequest.dateRecu || "A venir"}</td>
-                  <td>{sellRequest.dateProcessing || "A venir"}</td>
-                  <td>{sellRequest.dateApprovalPending || "A venir"}</td>
-                  <td>{sellRequest.dateValidated || "A venir"}</td>
+                  <td>
+                    <DateDisplayer dateToHandle={sellRequest.DateSubmit} />
+                  </td>
+                  <td>
+                    <DateDisplayer dateToHandle={sellRequest.dateEnvoi} />
+                  </td>
+                  <td>
+                    <DateDisplayer dateToHandle={sellRequest.dateRecu} />
+                  </td>
+                  <td>
+                    <DateDisplayer dateToHandle={sellRequest.dateProcessing} />
+                  </td>
+                  <td>
+                    <DateDisplayer
+                      dateToHandle={sellRequest.dateApprovalPending}
+                    />
+                  </td>
+                  <td>
+                    <DateDisplayer dateToHandle={sellRequest.dateValidated} />
+                  </td>
                   <td>{sellRequest.amount}</td>
                   <td>{sellRequest.cardTotalQuantity}</td>
                 </tr>
