@@ -18,6 +18,7 @@ const ShopAdminOneSellRequest = ({ match }) => {
   const { currentAdminSellRequest, setCurrentAdminSellRequest } = useContext(
     AdminSellRequestContext
   );
+  // console.log(currentAdminSellRequest);
 
   useEffect(() => {
     if (
@@ -127,8 +128,6 @@ const ShopAdminOneSellRequest = ({ match }) => {
           </tr>
         </thead>
         <tbody className="cardLineShop">
-          {/* CHECKER SI LE RACHAT EST VALIDÉ, SI OUI AUTRE COMPONENT QUE CARDLINESHOP - JUSTE MONTRER LES PROPS */}
-
           {!currentAdminSellRequest.dateValidated &&
             currentAdminSellRequest.sellRequests &&
             currentAdminSellRequest.sellRequests.length > 0 &&
@@ -137,16 +136,17 @@ const ShopAdminOneSellRequest = ({ match }) => {
                 <CardLineShop key={card.id} card={card} indexCard={index} />
               );
             })}
-          {currentAdminSellRequest.dateValidated &&
-            currentAdminSellRequest.sellRequests.map((card, index) => {
-              return (
-                <CardLineShopStuck
-                  key={card.id}
-                  card={card}
-                  indexCard={index}
-                />
-              );
-            })}
+          {currentAdminSellRequest.dateValidated ||
+            (currentAdminSellRequest.dateCanceled &&
+              currentAdminSellRequest.sellRequests.map((card, index) => {
+                return (
+                  <CardLineShopStuck
+                    key={card.id}
+                    card={card}
+                    indexCard={index}
+                  />
+                );
+              }))}
           <tr className="total-line">
             <td></td>
             <td></td>

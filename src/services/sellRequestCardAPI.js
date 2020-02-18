@@ -50,7 +50,12 @@ function setUpdate(IRItoUpdate, newLangID, idToReach) {
   );
 }
 
+function deleteCard(id) {
+  return axios.delete("http://127.0.0.1:8000/sell_request_cards/" + id);
+}
+
 export default {
   update,
-  setUpdate
+  setUpdate,
+  delete: deleteCard
 };
