@@ -6,6 +6,7 @@ import AdminSellRequestContext from "../../context/adminSellRequestContext";
 import sellRequestCardAPI from "../../services/sellRequestCardAPI";
 import cardsAPI from "../../services/cardsAPI";
 import EditionChoosingModal from "../EditionChoosingModal";
+import sellRequestAPI from "../../services/sellRequestAPI";
 
 const CardLineShop = ({ card, indexCard }) => {
   //Getting the Sell Request state by context
@@ -21,7 +22,7 @@ const CardLineShop = ({ card, indexCard }) => {
 
   //STATE - creating card state from parent input
   const [currentCard, setCurrentCard] = useState(card);
-  console.log(currentCard);
+  // console.log(currentCard);
 
   //STATE Saving the Hover state
   const [isOnHover, setIsOnHover] = useState(false);
@@ -60,7 +61,12 @@ const CardLineShop = ({ card, indexCard }) => {
       );
       newSellRequest.sellRequests.splice(indexCard, 0, currentCard);
 
-      setCurrentAdminSellRequest(newSellRequest);
+      setCurrentAdminSellRequest({
+        ...newSellRequest,
+        amount: newSellRequest.sellRequests.reduce((total, card) => {
+          return total + card.quantity;
+        }, 0)
+      });
       // console.log(currentAdminSellRequest);
     }
   }, [currentCard]);
@@ -87,6 +93,24 @@ const CardLineShop = ({ card, indexCard }) => {
       .update(currentCard, name, newValue)
       .catch(error => console.log(error));
     // console.log(currentCard);
+
+    if (name == "quantity") {
+      const newData = {
+        quantity: currentAdminSellRequest.sellRequests.reduce((total, card) => {
+          return total + card.quantity;
+        }, 0),
+        amount: currentAdminSellRequest.sellRequests.reduce((total, card) => {
+          return total + card.price * card.quantity;
+        }, 0)
+      };
+      console.log(newData);
+
+      //Updating Amount & card quantity on API
+      //!!!!!!TO DO : CORRECT THE PROBLEM ON QUANTITIES AND AMOUNT !!!!!!
+      sellRequestAPI
+        .updateAsShop(currentAdminSellRequest.id, newData)
+        .then(data => console.log("update OK"));
+    }
   };
 
   const changeEdition = (event, currentCard) => {
@@ -131,8 +155,24 @@ const CardLineShop = ({ card, indexCard }) => {
   };
 
   const handleDelete = card => {
+    //Telling the API to delete the sell request card
+    sellRequestCardAPI.delete(card.id).then(data => console.log("bien del"));
+
+    const newData = {
+      quantity: currentAdminSellRequest.sellRequests.reduce((total, card) => {
+        return total + card.quantity;
+      }, 0),
+      amount: currentAdminSellRequest.sellRequests.reduce((total, card) => {
+        return total + card.price * card.quantity;
+      }, 0)
+    };
+    //Updating Amount & card quantity on API
+    sellRequestAPI
+      .updateAsShop(currentAdminSellRequest.id, newData)
+      .then(data => console.log("update OK"));
+
     //We remove the card thanks to its index in the currentSellRequest
-    const newSellRequest = currentAdminSellRequest.filter(
+    const newSellRequest = currentAdminSellRequest.sellRequests.filter(
       (card, index) => index !== indexCard
     );
     setCurrentAdminSellRequest(newSellRequest);

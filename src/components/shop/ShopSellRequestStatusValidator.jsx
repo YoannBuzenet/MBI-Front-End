@@ -79,7 +79,7 @@ const ShopSellRequestStatusValidator = props => {
   }, [currentStatus]);
 
   const validateSellRequest = () => {
-    console.log("le rachat va etre validé");
+    // console.log("le rachat va etre validé");
     const newData = {
       dateValidated: new Date()
     };
@@ -109,7 +109,7 @@ const ShopSellRequestStatusValidator = props => {
 
   const handleChange = ({ currentTarget }) => {
     const { value } = currentTarget;
-    console.log(value);
+    // console.log(value);
 
     const newData = {
       [value]: new Date()
@@ -122,12 +122,12 @@ const ShopSellRequestStatusValidator = props => {
           ...currentAdminSellRequest,
           [value]: data.data[value]
         });
-        console.log(data.data);
-        console.log(data.data[value]);
+        // console.log(data.data);
+        // console.log(data.data[value]);
       });
   };
 
-  console.log(currentAdminSellRequest);
+  // console.log(currentAdminSellRequest);
 
   return (
     <>
