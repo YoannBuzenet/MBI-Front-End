@@ -64,6 +64,9 @@ const CardLineShop = ({ card, indexCard }) => {
       setCurrentAdminSellRequest({
         ...newSellRequest,
         amount: newSellRequest.sellRequests.reduce((total, card) => {
+          return total + card.quantity * card.price;
+        }, 0),
+        cardTotalQuantity: newSellRequest.sellRequests.reduce((total, card) => {
           return total + card.quantity;
         }, 0)
       });
@@ -96,9 +99,12 @@ const CardLineShop = ({ card, indexCard }) => {
 
     if (name == "quantity") {
       const newData = {
-        quantity: currentAdminSellRequest.sellRequests.reduce((total, card) => {
-          return total + card.quantity;
-        }, 0),
+        cardTotalQuantity: currentAdminSellRequest.sellRequests.reduce(
+          (total, card) => {
+            return total + card.quantity;
+          },
+          0
+        ),
         amount: currentAdminSellRequest.sellRequests.reduce((total, card) => {
           return total + card.price * card.quantity;
         }, 0)
