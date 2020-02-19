@@ -99,6 +99,43 @@ const ShopAdminOneSellRequest = ({ match }) => {
   return (
     <>
       <h1>One Sell Request</h1>
+      <div className="customer-infos">
+        <p>
+          Prénom :{" "}
+          {currentAdminSellRequest.customer &&
+            currentAdminSellRequest.customer.prenom}
+        </p>
+        <p>
+          Nom :{" "}
+          {currentAdminSellRequest.customer &&
+            currentAdminSellRequest.customer.nom}
+        </p>
+        <p>
+          Mail :{" "}
+          {currentAdminSellRequest.customer &&
+            currentAdminSellRequest.customer.user.email}
+        </p>
+        <p>
+          Tel :{" "}
+          {currentAdminSellRequest.customer &&
+            currentAdminSellRequest.customer.tel}
+        </p>
+        <p>
+          Adresse :{" "}
+          {currentAdminSellRequest.customer &&
+            currentAdminSellRequest.customer.adress}
+        </p>
+        <p>
+          Code Postal :{" "}
+          {currentAdminSellRequest.customer &&
+            currentAdminSellRequest.customer.postalCode}
+        </p>
+        <p>
+          Ville :{" "}
+          {currentAdminSellRequest.customer &&
+            currentAdminSellRequest.customer.town}
+        </p>
+      </div>
       <div className="sellRequest-infos">
         <p className="sellRequest-status">
           Statut
