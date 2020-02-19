@@ -20,11 +20,8 @@ const SetList = props => {
     <>
       <div className="left-div">
         <table className="setList-table">
-          <thead>
-            <tr>
-              <th>Set Name</th>
-            </tr>
-          </thead>
+          <h2>Set Name</h2>
+          <thead></thead>
           <tbody>
             {allSets.map(set => {
               return (

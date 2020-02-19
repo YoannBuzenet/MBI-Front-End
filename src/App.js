@@ -37,6 +37,7 @@ import authAPI from "./services/authAPI";
 import ShopAdminCustomer from "./pages/shopAdmin/ShopAdminCustomer";
 import ShopAdminOneSellRequest from "./pages/shopAdmin/ShopAdminOneSellRequest";
 import ShopAdminSettings from "./pages/shopAdmin/ShopAdminSettings";
+import Footer from "./components/Footer";
 
 //Really Useful library to check all rerenders made on ALL components (you can setup it to check just one)
 // if (process.env.NODE_ENV === "development") {
@@ -236,6 +237,7 @@ function App() {
                     ) : (
                       <NavbarWithRouter />
                     )}
+                    <Footer />
                     <Switch>
                       <Route
                         path="/"
