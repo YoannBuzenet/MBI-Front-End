@@ -53,6 +53,7 @@ const Navbar = ({ history }) => {
           <Link to="/" className="classic-links">
             <p>Logo Boutique</p>
           </Link>
+          <p>Fantasy Sphere</p>
           {authenticationInfos.isAuthenticated ? (
             <div className="my_options">
               <Link

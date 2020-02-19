@@ -43,10 +43,15 @@ const CardWithThumbnail = ({ picture, handleAddSellingBasket, card }) => {
               <option value="2">2</option>
               <option value="3">3</option>
             </select>
-            <i
-              className="fas fa-plus-circle add-item-basket"
-              onClick={() => handleAddSellingBasket(currentBasket, currentCard)}
-            ></i>
+            <p>
+              Add <span> </span>
+              <i
+                className="fas fa-plus-circle add-item-basket"
+                onClick={() =>
+                  handleAddSellingBasket(currentBasket, currentCard)
+                }
+              ></i>
+            </p>
           </form>
         </div>
       </div>

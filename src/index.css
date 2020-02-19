@@ -78,6 +78,14 @@ h2 {
   margin-top: 0;
 }
 
+#root {
+  min-height: 100vh; /* will cover the 100% of viewport */
+  overflow: hidden;
+  display: block;
+  position: relative;
+  padding-bottom: 60px; /* height of your footer */
+}
+
 /**************************
 ********TABLES************
 **************************/
@@ -221,11 +229,26 @@ div.connect p {
   margin-left: 5px;
 }
 
+@media only screen and (max-width: 930px) {
+}
+
 /**************************
 ******NAVBAR ADMIN*********
 **************************/
 .navbar-admin {
   background-color: orange;
+}
+
+/**************************
+*********FOOTER***********
+**************************/
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  height: 60px;
 }
 
 /**************************
@@ -280,6 +303,11 @@ div.connect p {
 .last-modification .card .card-infos {
   margin-left: 30px;
   width: 150px;
+}
+
+.last-modification .card .card-infos .card-title {
+  font-size: 2rem;
+  margin-bottom: 15px;
 }
 
 .last-modification .card .card-picture {
