@@ -5,6 +5,11 @@
   box-sizing: border-box;
 }
 
+:root {
+  --main-bg-color: coral;
+  --main-bg-color-weak: rgba(255, 127, 80, 0.5);
+}
+
 html {
   font-size: 62.5%;
   margin: 0;
@@ -99,7 +104,7 @@ table {
 }
 
 .zebra-table tbody tr:hover {
-  background-color: hsla(0, 0%, 0%, 0.19);
+  background-color: var(--main-bg-color);
 }
 
 .zebra-table tbody tr.total-line {
@@ -264,7 +269,7 @@ div.connect p {
 **************************/
 
 .setList-table td:hover {
-  background-color: hsla(0, 0%, 0%, 0.29);
+  background-color: var(--main-bg-color);
 }
 
 .setList-link {
@@ -278,6 +283,10 @@ div.connect p {
 
 .setList-table {
   text-align: left;
+}
+
+.setList-table td > a {
+  display: block;
 }
 
 /**************************
@@ -298,6 +307,11 @@ div.connect p {
   display: flex;
   justify-content: space-around;
   width: 350px;
+  border-radius: 5px;
+}
+
+.last-modification .card:hover {
+  background-color: var(--main-bg-color-weak);
 }
 
 .last-modification .card .card-infos {
