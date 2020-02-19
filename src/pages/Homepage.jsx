@@ -6,7 +6,6 @@ const mySellRequests = ({ handleAddSellingBasket }) => {
   return (
     <>
       <div className="container">
-        <h1>Home Page</h1>
         <div className="content-split">
           <SetList />
           <LastModifications handleAddSellingBasket={handleAddSellingBasket} />
