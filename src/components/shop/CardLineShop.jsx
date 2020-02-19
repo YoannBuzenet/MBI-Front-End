@@ -85,7 +85,7 @@ const CardLineShop = ({ card, indexCard }) => {
     }
     //console.log("Check SetIsLoad Passage");
     setIsLoaded(true);
-    //Blocked setErrorList because cause parent to re-render. Would be good to think about passing it as a state instead of context
+    //Blocked setErrorList because cause parent to re-render. Would be good to think about passing it as a state instead of context OR make the provider as near as possible of the content
     // setErrorList([]);
     setCurrentCard({
       ...currentCard,
@@ -111,8 +111,7 @@ const CardLineShop = ({ card, indexCard }) => {
       };
       console.log(newData);
 
-      //Updating Amount & card quantity on API
-      //!!!!!!TO DO : CORRECT THE PROBLEM ON QUANTITIES AND AMOUNT !!!!!!
+      //TOAST IF FAILURE
       sellRequestAPI
         .updateAsShop(currentAdminSellRequest.id, newData)
         .then(data => console.log("update OK"));
