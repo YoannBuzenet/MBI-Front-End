@@ -54,7 +54,6 @@ const CardLineShop = ({ card, indexCard }) => {
 
   useEffect(() => {
     if (isLoaded) {
-      console.log(cardHasBeenDeleted);
       //We remove the card then we add it again at the same Index
       // console.log("is loaded", currentCard);
       // console.log("is loaded", currentAdminSellRequest);
@@ -77,7 +76,47 @@ const CardLineShop = ({ card, indexCard }) => {
       });
       // console.log(currentAdminSellRequest);
     }
-  }, [currentCard, cardHasBeenDeleted]);
+  }, [currentCard]);
+
+  //Triggers if a card is deleted
+  useEffect(() => {
+    if (cardHasBeenDeleted) {
+      console.log("card has been deleted : ", cardHasBeenDeleted);
+      var newSellRequest = currentAdminSellRequest;
+
+      newSellRequest.sellRequests = currentAdminSellRequest.sellRequests.filter(
+        (card, index) => index !== indexCard
+      );
+
+      const newData = {
+        cardTotalQuantity: currentAdminSellRequest.sellRequests.reduce(
+          (total, card) => {
+            return total + card.quantity;
+          },
+          0
+        ),
+        amount: currentAdminSellRequest.sellRequests.reduce((total, card) => {
+          return total + card.price * card.quantity;
+        }, 0)
+      };
+
+      //UPDATING THE WHOLE SELL REQUEST ON API
+      // (ADD TOAST IF FAILURE)
+      sellRequestAPI
+        .updateAsShop(currentAdminSellRequest.id, newData)
+        .then(data => console.log("update OK"));
+
+      setCurrentAdminSellRequest({
+        ...newSellRequest,
+        amount: newSellRequest.sellRequests.reduce((total, card) => {
+          return total + card.quantity * card.price;
+        }, 0),
+        cardTotalQuantity: newSellRequest.sellRequests.reduce((total, card) => {
+          return total + card.quantity;
+        }, 0)
+      });
+    }
+  }, [cardHasBeenDeleted]);
 
   const handleChange = ({ currentTarget }, currentCard) => {
     const { name, value } = currentTarget;
@@ -170,12 +209,6 @@ const CardLineShop = ({ card, indexCard }) => {
     sellRequestCardAPI
       .delete(card.id)
       .then(data => setCardHasBeenDeleted(true));
-
-    //We remove the card thanks to its index in the currentSellRequest
-    // const newSellRequest = currentAdminSellRequest.sellRequests.filter(
-    //   (card, index) => index !== indexCard
-    // );
-    // setCurrentAdminSellRequest(newSellRequest);
   };
 
   //Creating the specific link to get the scryffalID picture. It is composed of a static base, + the 2 first character of the ID, + the ID
