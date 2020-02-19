@@ -73,6 +73,11 @@ td {
   text-align: center;
 }
 
+h1,
+h2 {
+  margin-top: 0;
+}
+
 /**************************
 ********TABLES************
 **************************/
@@ -266,13 +271,19 @@ div.connect p {
 }
 
 .last-modification .card {
+  margin-top: 20px;
   display: flex;
   justify-content: space-around;
-  width: 250px;
+  width: 350px;
 }
 
 .last-modification .card .card-infos {
   margin-left: 30px;
+  width: 150px;
+}
+
+.last-modification .card .card-picture {
+  width: 250px;
 }
 
 /**************************
