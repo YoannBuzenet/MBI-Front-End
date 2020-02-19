@@ -81,7 +81,7 @@ const CardLineShop = ({ card, indexCard }) => {
   //Triggers if a card is deleted
   useEffect(() => {
     if (cardHasBeenDeleted) {
-      console.log("card has been deleted : ", cardHasBeenDeleted);
+      // console.log("card has been deleted : ", cardHasBeenDeleted);
       var newSellRequest = currentAdminSellRequest;
 
       newSellRequest.sellRequests = currentAdminSellRequest.sellRequests.filter(
