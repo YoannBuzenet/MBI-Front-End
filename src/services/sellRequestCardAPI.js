@@ -17,9 +17,9 @@ function update(
     };
   } else if (SellRequestCardPropertyName == "isFoil") {
     if (SellRequestCardPropertyValue == "Yes") {
-      SellRequestCardPropertyValue = true;
+      propertyUpdate = { isFOil: true };
     } else if (SellRequestCardPropertyValue == "No") {
-      SellRequestCardPropertyValue = false;
+      propertyUpdate = { isFOil: false };
     }
   } else if (SellRequestCardPropertyName == "lang") {
     propertyUpdate = {
@@ -30,6 +30,8 @@ function update(
       CardCondition: "/card_conditions/" + SellRequestCardPropertyValue
     };
   }
+
+  console.log(propertyUpdate);
 
   return axios.put(
     "http://127.0.0.1:8000/sell_request_cards/" + SellRequestCard.id,

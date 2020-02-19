@@ -5,7 +5,7 @@ const DateDisplayer = ({ dateToHandle }) => {
   var date = "";
 
   if (dateToHandle !== null) {
-    date = new Date(dateToHandle.date);
+    date = new Date(dateToHandle);
     date = moment(date);
     date = date.format("YYYY-MM-DD");
   } else {
