@@ -12,7 +12,7 @@ const LastModifications = ({ handleAddSellingBasket }) => {
         <h2>Les dernières modifications</h2>
         <div className="all-cards">
           <CardWithThumbnail
-            picture="https://placehold.it/100x175"
+            picture="https://img.scryfall.com/cards/small/front/d/3/d3c99f65-2355-444b-b49a-c6b916f268b1.jpg"
             handleAddSellingBasket={handleAddSellingBasket}
             card={{
               name: "Foret de la Yavimaya",
@@ -28,7 +28,7 @@ const LastModifications = ({ handleAddSellingBasket }) => {
             }}
           />
           <CardWithThumbnail
-            picture="https://placehold.it/100x175"
+            picture="https://img.scryfall.com/cards/small/front/a/7/a7af8350-9a51-437c-a55e-19f3e07acfa9.jpg"
             handleAddSellingBasket={handleAddSellingBasket}
             card={{
               name: "Kavru Languefeu",
@@ -40,11 +40,11 @@ const LastModifications = ({ handleAddSellingBasket }) => {
               uuid: "9215-ddfsdf-9898-dsfd",
               currency: "euros",
               quantity: 1,
-              scryfallid: "d3c99f65-2355-444b-b49a-c6b916f268b1"
+              scryfallid: "a7af8350-9a51-437c-a55e-19f3e07acfa9"
             }}
           />
           <CardWithThumbnail
-            picture="https://placehold.it/100x175"
+            picture="https://img.scryfall.com/cards/small/front/7/d/7d9e0a23-d2a8-40a6-9076-ed6fb539141b.jpg"
             handleAddSellingBasket={handleAddSellingBasket}
             card={{
               name: "Cape de tatou",
@@ -60,7 +60,103 @@ const LastModifications = ({ handleAddSellingBasket }) => {
             }}
           />
           <CardWithThumbnail
-            picture="https://placehold.it/100x175"
+            picture="https://img.scryfall.com/cards/small/front/a/e/aee01e9c-0445-4228-a73a-3e5744844ed3.jpg"
+            handleAddSellingBasket={handleAddSellingBasket}
+            card={{
+              name: "Apprenti Spinosophe",
+              set: "Invasion",
+              price: 2,
+              condition: "NM",
+              lang: "EN",
+              isFoil: "Yes",
+              uuid: "9215-ddfsdf-9898-dsfdn",
+              currency: "euros",
+              quantity: 1,
+              scryfallid: "d3c99f65-2355-444b-b49a-c6b916f268b1"
+            }}
+          />
+          <CardWithThumbnail
+            picture="https://img.scryfall.com/cards/small/front/f/b/fb50813c-72df-49e7-bac5-e6e247649241.jpg"
+            handleAddSellingBasket={handleAddSellingBasket}
+            card={{
+              name: "Apprenti Spinosophe",
+              set: "Invasion",
+              price: 2,
+              condition: "NM",
+              lang: "EN",
+              isFoil: "Yes",
+              uuid: "9215-ddfsdf-9898-dsfdn",
+              currency: "euros",
+              quantity: 1,
+              scryfallid: "d3c99f65-2355-444b-b49a-c6b916f268b1"
+            }}
+          />
+          <CardWithThumbnail
+            picture="https://img.scryfall.com/cards/small/front/6/7/6774c646-76d4-4991-a7f3-b753ef200ce5.jpg"
+            handleAddSellingBasket={handleAddSellingBasket}
+            card={{
+              name: "Apprenti Spinosophe",
+              set: "Invasion",
+              price: 2,
+              condition: "NM",
+              lang: "EN",
+              isFoil: "Yes",
+              uuid: "9215-ddfsdf-9898-dsfdn",
+              currency: "euros",
+              quantity: 1,
+              scryfallid: "d3c99f65-2355-444b-b49a-c6b916f268b1"
+            }}
+          />
+          <CardWithThumbnail
+            picture="https://img.scryfall.com/cards/small/front/0/2/02902fcc-eefc-4e81-aafd-59fa203a71d7.jpg"
+            handleAddSellingBasket={handleAddSellingBasket}
+            card={{
+              name: "Apprenti Spinosophe",
+              set: "Invasion",
+              price: 2,
+              condition: "NM",
+              lang: "EN",
+              isFoil: "Yes",
+              uuid: "9215-ddfsdf-9898-dsfdn",
+              currency: "euros",
+              quantity: 1,
+              scryfallid: "d3c99f65-2355-444b-b49a-c6b916f268b1"
+            }}
+          />
+          <CardWithThumbnail
+            picture="https://img.scryfall.com/cards/small/front/0/3/03e0147e-841c-4593-83ce-001bf03885f2.jpg"
+            handleAddSellingBasket={handleAddSellingBasket}
+            card={{
+              name: "Apprenti Spinosophe",
+              set: "Invasion",
+              price: 2,
+              condition: "NM",
+              lang: "EN",
+              isFoil: "Yes",
+              uuid: "9215-ddfsdf-9898-dsfdn",
+              currency: "euros",
+              quantity: 1,
+              scryfallid: "d3c99f65-2355-444b-b49a-c6b916f268b1"
+            }}
+          />
+          <CardWithThumbnail
+            picture="https://img.scryfall.com/cards/small/front/f/f/ff37b863-f8c4-4584-8cc2-ac0e096e583f.jpg"
+            handleAddSellingBasket={handleAddSellingBasket}
+            card={{
+              name: "Apprenti Spinosophe",
+              set: "Invasion",
+              price: 2,
+              condition: "NM",
+              lang: "EN",
+              isFoil: "Yes",
+              uuid: "9215-ddfsdf-9898-dsfdn",
+              currency: "euros",
+              quantity: 1,
+              scryfallid: "d3c99f65-2355-444b-b49a-c6b916f268b1"
+            }}
+          />
+          <CardWithThumbnail
+            picture="https://img.scryfall.com/cards/small/front/5/4/5410254f-cf9d-46c2-acea-07298ae65924.jpg"
             handleAddSellingBasket={handleAddSellingBasket}
             card={{
               name: "Apprenti Spinosophe",

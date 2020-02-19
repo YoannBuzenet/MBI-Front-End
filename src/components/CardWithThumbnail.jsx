@@ -26,7 +26,7 @@ const CardWithThumbnail = ({ picture, handleAddSellingBasket, card }) => {
           <img src={picture} alt="" />
         </div>
         <div className="card-infos">
-          <div className="card-title">{card.cardName}</div>
+          <div className="card-title">{card.name}</div>
           <div className="card-language">{card.lang}</div>
           <div className="card-condition">{card.condition}</div>
           <div className="card-price">{card.price}€</div>

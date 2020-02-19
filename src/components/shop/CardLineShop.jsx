@@ -88,24 +88,6 @@ const CardLineShop = ({ card, indexCard }) => {
         (card, index) => index !== indexCard
       );
 
-      const newData = {
-        cardTotalQuantity: currentAdminSellRequest.sellRequests.reduce(
-          (total, card) => {
-            return total + card.quantity;
-          },
-          0
-        ),
-        amount: currentAdminSellRequest.sellRequests.reduce((total, card) => {
-          return total + card.price * card.quantity;
-        }, 0)
-      };
-
-      //UPDATING THE WHOLE SELL REQUEST ON API
-      // (ADD TOAST IF FAILURE)
-      sellRequestAPI
-        .updateAsShop(currentAdminSellRequest.id, newData)
-        .then(data => console.log("update OK"));
-
       setCurrentAdminSellRequest({
         ...newSellRequest,
         amount: newSellRequest.sellRequests.reduce((total, card) => {
@@ -115,6 +97,21 @@ const CardLineShop = ({ card, indexCard }) => {
           return total + card.quantity;
         }, 0)
       });
+
+      const newData = {
+        cardTotalQuantity: newSellRequest.sellRequests.reduce((total, card) => {
+          return total + card.quantity;
+        }, 0),
+        amount: newSellRequest.sellRequests.reduce((total, card) => {
+          return total + card.price * card.quantity;
+        }, 0)
+      };
+
+      //UPDATING THE WHOLE SELL REQUEST ON API
+      // (ADD TOAST IF FAILURE)
+      sellRequestAPI
+        .updateAsShop(newSellRequest.id, newData)
+        .then(data => console.log("update OK"));
     }
   }, [cardHasBeenDeleted]);
 
