@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import sellRequestAPI from "../services/sellRequestAPI";
 import AuthContext from "../context/authContext";
+import authAPI from "../services/authAPI";
 
 const SellRequestStatusUpdater = ({
   currentSellRequest,
@@ -40,7 +41,6 @@ const SellRequestStatusUpdater = ({
           sellrequest => sellrequest.id == id
         ).dateEnvoi == null
       ) {
-        console.log("HERE you update context");
         setAuthenticationInfos({
           ...authenticationInfos,
           customer: {
@@ -59,6 +59,31 @@ const SellRequestStatusUpdater = ({
       }
     }
   }, [currentSellRequest, hasBeenSent]);
+
+  //saving the change in local storage
+  useEffect(() => {
+    if (currentSellRequest.id) {
+      var dataToUpdateOnLocalStorage = JSON.parse(
+        window.localStorage.getItem("userInfos")
+      );
+      dataToUpdateOnLocalStorage = {
+        ...dataToUpdateOnLocalStorage,
+        client: {
+          ...dataToUpdateOnLocalStorage.client,
+          SellRequests: dataToUpdateOnLocalStorage.client.SellRequests.map(
+            sellrequest =>
+              sellrequest.id == id
+                ? (sellrequest = {
+                    ...sellrequest,
+                    dateEnvoi: currentSellRequest.dateEnvoi
+                  })
+                : sellrequest
+          )
+        }
+      };
+      authAPI.updateUserInfosLocalStorage(dataToUpdateOnLocalStorage);
+    }
+  }, [currentSellRequest]);
 
   //Registering the sell request as SENT
   const handleClick = (event, currentSellRequest) => {
