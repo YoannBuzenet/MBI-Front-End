@@ -115,6 +115,7 @@ const OneSellRequest = ({ match, history }) => {
       <SellRequestStatusUpdater
         currentSellRequest={currentSellRequest}
         setCurrentSellRequest={setCurrentSellRequest}
+        id={id}
       />
     </>
   );

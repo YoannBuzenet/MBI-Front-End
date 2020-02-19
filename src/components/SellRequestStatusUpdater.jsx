@@ -1,10 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import sellRequestAPI from "../services/sellRequestAPI";
+import AuthContext from "../context/authContext";
 
 const SellRequestStatusUpdater = ({
   currentSellRequest,
-  setCurrentSellRequest
+  setCurrentSellRequest,
+  id
 }) => {
+  //Current Authentication
+  const { authenticationInfos, setAuthenticationInfos } = useContext(
+    AuthContext
+  );
+  console.log(authenticationInfos);
   const [hasBeenSent, setHasBeenSent] = useState(true);
 
   useEffect(() => {
@@ -24,6 +31,36 @@ const SellRequestStatusUpdater = ({
     }
   }, [currentSellRequest, hasBeenSent]);
 
+  useEffect(() => {
+    if (currentSellRequest.id && currentSellRequest.dateEnvoi) {
+      if (
+        hasBeenSent &&
+        authenticationInfos.customer.SellRequests &&
+        authenticationInfos.customer.SellRequests.find(
+          sellrequest => sellrequest.id == id
+        ).dateEnvoi == null
+      ) {
+        console.log("HERE you update context");
+        setAuthenticationInfos({
+          ...authenticationInfos,
+          customer: {
+            ...authenticationInfos.customer,
+            SellRequests: authenticationInfos.customer.SellRequests.map(
+              sellrequest =>
+                sellrequest.id == id
+                  ? (sellrequest = {
+                      ...sellrequest,
+                      dateEnvoi: currentSellRequest.dateEnvoi
+                    })
+                  : sellrequest
+            )
+          }
+        });
+      }
+    }
+  }, [currentSellRequest, hasBeenSent]);
+
+  //Registering the sell request as SENT
   const handleClick = (event, currentSellRequest) => {
     sellRequestAPI
       .update(currentSellRequest.id, { dateEnvoi: new Date() })
