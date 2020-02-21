@@ -246,6 +246,22 @@ div.connect p {
 }
 
 /**************************
+**NAVBAR ADMIN SEARCH BAR**
+**************************/
+.search-card-form {
+  position: relative;
+}
+
+.search-card-form .search-result {
+  position: absolute;
+  top: 2.2rem;
+  width: 100%;
+}
+
+.search-card-form .search-result .card-line-result {
+  background-color: blue;
+}
+/**************************
 *********FOOTER***********
 **************************/
 
