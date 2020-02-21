@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import AuthContext from "../../context/authContext";
 import SellingBasketContext from "../../context/sellingBasket";
 import authAPI from "../../services/authAPI";
+import SearchCardBar from "../SearchCardBar";
 
 const ShopNavbar = ({ history }) => {
   //Current Authentication
@@ -60,6 +61,7 @@ const ShopNavbar = ({ history }) => {
           <Link to="/" className="classic-links">
             <p>Voir le site client</p>
           </Link>
+          <SearchCardBar />
           <Link className="classic-links nav-element" to="/my_selling_basket">
             <p>
               Créer Rachat (
