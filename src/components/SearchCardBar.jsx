@@ -12,8 +12,29 @@ const SearchCardBar = props => {
     if (currentSearch.length >= 3) {
       console.log("on y va bébé");
       cardsAPI
-        .getByName(currentSearch)
-        .then(data => setSearchResult(data.data["hydra:member"]));
+        .searchApproxByName(currentSearch)
+        .then(data => {
+          console.log(data.data);
+          const filteringArray = [];
+          filteringArray.push(data.data[0]);
+
+          for (let i = 0; i < data.data.length; i++) {
+            var isAlreadyHere = false;
+
+            for (let j = 0; j < filteringArray.length; j++) {
+              if (data.data[i].name == filteringArray[j].name) {
+                isAlreadyHere = true;
+              }
+            }
+            if (!isAlreadyHere) {
+              filteringArray.push(data.data[i]);
+            }
+          }
+          // console.log(filteringArray);
+          return filteringArray;
+          // return data.data;
+        })
+        .then(data => setSearchResult(data));
     }
   }, [currentSearch]);
 

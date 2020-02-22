@@ -61,7 +61,9 @@ const ShopNavbar = ({ history }) => {
           <Link to="/" className="classic-links">
             <p>Voir le site client</p>
           </Link>
+
           <SearchCardBar />
+
           <Link className="classic-links nav-element" to="/my_selling_basket">
             <p>
               Créer Rachat (
