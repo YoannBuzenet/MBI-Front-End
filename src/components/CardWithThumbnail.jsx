@@ -19,6 +19,8 @@ const CardWithThumbnail = ({ picture, handleAddSellingBasket, card }) => {
     setCard({ ...currentCard, [name]: newValue });
   };
 
+  console.log(typeof currentCard.price);
+
   return (
     <>
       <div className="card">
