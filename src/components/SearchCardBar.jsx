@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import cardsAPI from "../services/cardsAPI";
+import { Link } from "react-router-dom";
 
 const SearchCardBar = props => {
   console.log("render");
@@ -60,9 +61,15 @@ const SearchCardBar = props => {
           {searchResult.length > 0 &&
             searchResult.map((cardResult, index) => {
               return (
-                <div className="card-line-result" key={cardResult.id}>
-                  {cardResult.name}
-                </div>
+                <Link
+                  to={"/shopadmin/card/" + cardResult.name}
+                  onClick={() => {
+                    setSearchResult([]);
+                  }}
+                  key={cardResult.id}
+                >
+                  <div className="card-line-result">{cardResult.name}</div>
+                </Link>
               );
             })}
         </div>
