@@ -307,7 +307,7 @@ function App() {
                         component={ShopAdminSettings}
                       />
                       <LoggedShopRoute
-                        path="/shopadmin/card/:id"
+                        path="/shopadmin/card/:name"
                         component={ShopAdminOneCard}
                       />
                       <LoggedShopRoute
