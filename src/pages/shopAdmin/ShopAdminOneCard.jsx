@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import cardsAPI from "../../services/cardsAPI";
+import axios from "axios";
 
 const ShopAdminOneCard = ({ match }) => {
   const { name } = match.params;
@@ -11,15 +12,21 @@ const ShopAdminOneCard = ({ match }) => {
   const nameURLDecoded = decodeURI(name);
 
   useEffect(() => {
+    //Cancel subscriptions preparation
+    const CancelToken = axios.CancelToken;
+    const source = CancelToken.source();
+
     cardsAPI
-      .getByName(nameURLDecoded)
+      .getByName(nameURLDecoded, {
+        cancelToken: source.token
+      })
       .then(data => {
         console.log(data.data["hydra:member"]);
         return data;
       })
       .then(data => setAllPossibleVariations(data.data["hydra:member"]));
 
-    //Cancel subscriptions in return
+    return () => source.cancel("");
   }, []);
 
   return (
