@@ -60,6 +60,7 @@ const SearchCardBar = props => {
         <div className="search-result">
           {searchResult.length > 0 &&
             searchResult.map((cardResult, index) => {
+              console.log(cardResult);
               return (
                 <Link
                   to={"/shopadmin/card/" + cardResult.name}

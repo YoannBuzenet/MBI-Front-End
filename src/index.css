@@ -477,5 +477,6 @@ tbody.cardLineShop {
 **************************/
 
 .one-set {
+  margin-bottom: 1rem;
   background-color: lightblue;
 }
