@@ -471,3 +471,11 @@ tbody.cardLineShop {
   right: 0;
   z-index: 2;
 }
+
+/**************************
+****SHOP ADMIN ONE CARD****
+**************************/
+
+.one-set {
+  background-color: lightblue;
+}
