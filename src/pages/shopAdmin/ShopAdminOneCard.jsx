@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import cardsAPI from "../../services/cardsAPI";
 import axios from "axios";
+import ShopSetLangCards from "../../components/shop/ShopSetLangCards";
 
 const ShopAdminOneCard = ({ match }) => {
   const { name } = match.params;
@@ -34,11 +35,7 @@ const ShopAdminOneCard = ({ match }) => {
       <div className="container">
         <h1>{name}</h1>
         {allPossibleVariations.map(variation => {
-          return (
-            <div key={variation.id} className="one-set">
-              {variation.name} {variation.edition.name}
-            </div>
-          );
+          return <ShopSetLangCards variation={variation} key={variation.id} />;
         })}
       </div>
     </>
