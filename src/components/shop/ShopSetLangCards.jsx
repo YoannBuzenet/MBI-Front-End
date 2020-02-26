@@ -19,6 +19,7 @@ const ShopSetLangCards = ({ variation }) => {
     <>
       <div className="one-set">
         <h2>{variation.edition.name}</h2>
+        {/* All these operations are made to : integrate English in the lang array, and then putting the BaseLang on top by filtering arrays */}
         {[
           {
             name: cardsAPI.name,
@@ -44,12 +45,18 @@ const ShopSetLangCards = ({ variation }) => {
           .map((oneLang, index) => {
             return (
               <>
+                <h3>{oneLang.language_id.name}</h3>
                 <ShopOneLangAllConditionsCard
                   oneLang={oneLang}
                   index={index}
                   key={oneLang.language_id.id}
                 />
-                <p>Ici les foils</p>
+                <p>FOIL</p>
+                <ShopOneLangAllConditionsCard
+                  oneLang={oneLang}
+                  index={index}
+                  key={oneLang.language_id.id * 4}
+                />
               </>
             );
           })}

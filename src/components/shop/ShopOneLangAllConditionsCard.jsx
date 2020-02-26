@@ -8,7 +8,6 @@ const ShopOneLangAllConditionsCard = ({ oneLang, index }) => {
 
   return (
     <div>
-      <h3>{oneLang.language_id.name}</h3>
       <div>
         {conditions.map(condition => {
           return (
