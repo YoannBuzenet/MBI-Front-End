@@ -1,19 +1,22 @@
 import React, { useContext } from "react";
 import GenericCardInfosContext from "../../context/genericCardInfosContext";
+import ShopConditionPriceUpdate from "./ShopConditionPriceUpdate";
 
 const ShopOneLangAllConditionsCard = ({ oneLang, index }) => {
   //DEFINED langages and Conditions
   const { lang, conditions } = useContext(GenericCardInfosContext);
 
-  //TODO : pass this in env variable
-  const gradingArea = "nameEU";
-
   return (
     <div>
-      {oneLang.language_id.name}
+      <h3>{oneLang.language_id.name}</h3>
       <div>
         {conditions.map(condition => {
-          return <p>{condition["gradingArea"]}h</p>;
+          return (
+            <ShopConditionPriceUpdate
+              condition={condition}
+              key={condition.id}
+            />
+          );
         })}
       </div>
     </div>
