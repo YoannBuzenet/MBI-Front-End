@@ -1,17 +1,14 @@
-import React, { useContext, useEffect } from "react";
-import priceUpdateContext from "../../context/priceUpdateContext";
+import React, { useContext, useEffect, useState } from "react";
 
-const ShopConditionPriceUpdate = ({ condition, oneLang, isFoil }) => {
+const ShopConditionPriceUpdate = ({
+  condition,
+  oneLang,
+  isFoil,
+  priceState,
+  setPriceState
+}) => {
   //TODO : pass this in env variable
   const gradingArea = "nameEU";
-
-  //Context - building the memoization of all condition/lang possibilities
-  const { allPrices, setAllPrices } = useContext(priceUpdateContext);
-
-  useEffect(() => {
-    console.log(condition, oneLang, isFoil);
-    setAllPrices({ ...allPrices , (allPrices[oneLang][condition]: 0)});
-  }, []);
 
   return (
     <p>
