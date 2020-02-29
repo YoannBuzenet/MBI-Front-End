@@ -16,6 +16,8 @@ const ShopAdminOneCard = ({ match }) => {
 
   const nameURLDecoded = decodeURI(name);
 
+  //HERE create a function that get the input from API and create the context for step 1
+
   useEffect(() => {
     //Cancel subscriptions preparation
     const CancelToken = axios.CancelToken;
