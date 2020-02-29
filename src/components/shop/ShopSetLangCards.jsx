@@ -2,10 +2,14 @@ import React, { useContext } from "react";
 import GenericCardInfosContext from "../../context/genericCardInfosContext";
 import ShopOneLangAllConditionsCard from "./ShopOneLangAllConditionsCard";
 import cardsAPI from "../../services/cardsAPI";
+import priceUpdateContext from "../../context/priceUpdateContext";
 
 const ShopSetLangCards = ({ variation }) => {
   //DEFINED langages and Conditions
   const { lang, conditions } = useContext(GenericCardInfosContext);
+
+  //Context - building the memoization of all condition/lang possibilities
+  const { allPrices, setAllPrices } = useContext(priceUpdateContext);
 
   //TODO : pass this in env variable
   const gradingArea = "isEU";
@@ -50,12 +54,14 @@ const ShopSetLangCards = ({ variation }) => {
                   oneLang={oneLang}
                   index={index}
                   key={oneLang.language_id.id}
+                  isFoil={false}
                 />
                 <p>FOIL</p>
                 <ShopOneLangAllConditionsCard
                   oneLang={oneLang}
                   index={index}
                   key={oneLang.language_id.id * 43}
+                  isFoil={true}
                 />
               </>
             );

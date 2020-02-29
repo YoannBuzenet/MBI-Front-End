@@ -105,7 +105,7 @@ function App() {
   });
 
   //STATE - Price Update Page
-  const [allPrices, setAllPrices] = useState([]);
+  const [allPrices, setAllPrices] = useState({});
 
   // CONTEXT CREATION Creating All Sets value for context
   const contextAllSets = {
