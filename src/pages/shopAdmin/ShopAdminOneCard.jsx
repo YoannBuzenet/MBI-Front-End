@@ -3,18 +3,15 @@ import { useEffect } from "react";
 import cardsAPI from "../../services/cardsAPI";
 import axios from "axios";
 import ShopSetLangCards from "../../components/shop/ShopSetLangCards";
-import priceUpdateContext from "../../context/priceUpdateContext";
 
 const ShopAdminOneCard = ({ match }) => {
   const { name } = match.params;
 
-  //Context - building the memoization of all condition/lang possibilities
-  const { allPrices, setAllPrices } = useContext(priceUpdateContext);
-
-  console.log(allPrices, setAllPrices);
-
   //STATE - All the possibilities
   const [allPossibleVariations, setAllPossibleVariations] = useState([]);
+
+  //STATE - Building the state of every price on every existing card
+  const [priceState, setPriceState] = useState({});
 
   const nameURLDecoded = decodeURI(name);
 
@@ -41,7 +38,14 @@ const ShopAdminOneCard = ({ match }) => {
       <div className="container">
         <h1>{name}</h1>
         {allPossibleVariations.map(variation => {
-          return <ShopSetLangCards variation={variation} key={variation.id} />;
+          return (
+            <ShopSetLangCards
+              variation={variation}
+              key={variation.id}
+              priceState={priceState}
+              setPriceState={setPriceState}
+            />
+          );
         })}
       </div>
     </>
