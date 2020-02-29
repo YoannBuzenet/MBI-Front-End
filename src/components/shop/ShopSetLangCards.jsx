@@ -2,10 +2,14 @@ import React, { useContext } from "react";
 import GenericCardInfosContext from "../../context/genericCardInfosContext";
 import ShopOneLangAllConditionsCard from "./ShopOneLangAllConditionsCard";
 import cardsAPI from "../../services/cardsAPI";
+import priceUpdateContext from "../../context/priceUpdateContext";
 
-const ShopSetLangCards = ({ variation, priceState, setPriceState }) => {
+const ShopSetLangCards = ({ variation }) => {
   //DEFINED langages and Conditions
   const { lang, conditions } = useContext(GenericCardInfosContext);
+
+  //Context - building the memoization of all condition/lang possibilities
+  const { allPrices, setAllPrices } = useContext(priceUpdateContext);
 
   //TODO : pass this in env variable
   const gradingArea = "isEU";
@@ -51,8 +55,6 @@ const ShopSetLangCards = ({ variation, priceState, setPriceState }) => {
                   index={index}
                   key={oneLang.language_id.id}
                   isFoil={false}
-                  priceState={priceState}
-                  setPriceState={setPriceState}
                 />
                 <p>FOIL</p>
                 <ShopOneLangAllConditionsCard
@@ -60,8 +62,6 @@ const ShopSetLangCards = ({ variation, priceState, setPriceState }) => {
                   index={index}
                   key={oneLang.language_id.id * 43}
                   isFoil={true}
-                  priceState={priceState}
-                  setPriceState={setPriceState}
                 />
               </>
             );
