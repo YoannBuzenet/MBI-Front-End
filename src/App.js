@@ -6,6 +6,7 @@ import SetsContext from "./context/setsContext";
 import SellingBasketContext from "./context/sellingBasket";
 import SellRequestContext from "./context/adminSellRequestContext";
 import GenericContext from "./context/genericCardInfosContext";
+import PriceUpdateContext from "./context/priceUpdateContext";
 import AuthAPI from "./services/authAPI";
 import SetsAPI from "./services/setsAPI";
 import {
@@ -39,6 +40,7 @@ import ShopAdminOneSellRequest from "./pages/shopAdmin/ShopAdminOneSellRequest";
 import ShopAdminSettings from "./pages/shopAdmin/ShopAdminSettings";
 import Footer from "./components/Footer";
 import ShopAdminOneCard from "./pages/shopAdmin/ShopAdminOneCard";
+import priceUpdateContext from "./context/priceUpdateContext";
 
 //Really Useful library to check all rerenders made on ALL components (you can setup it to check just one)
 // if (process.env.NODE_ENV === "development") {
@@ -102,6 +104,9 @@ function App() {
     sellRequests: []
   });
 
+  //STATE - Price Update Page
+  const [allPrices, setAllPrices] = useState([]);
+
   // CONTEXT CREATION Creating All Sets value for context
   const contextAllSets = {
     allSets: allSets,
@@ -130,6 +135,12 @@ function App() {
   const contextAdminSellRequest = {
     currentAdminSellRequest: currentAdminSellRequest,
     setCurrentAdminSellRequest: setCurrentAdminSellRequest
+  };
+
+  //CONTEXT CREATION
+  const contextPriceUpdate = {
+    allPrices: allPrices,
+    setAllPrices: setAllPrices
   };
 
   // Each time the currentBasket (which stores what we want to sell) is updated, we save it in Local storage.
@@ -306,10 +317,12 @@ function App() {
                         path="/shopadmin/settings"
                         component={ShopAdminSettings}
                       />
-                      <LoggedShopRoute
-                        path="/shopadmin/card/:name"
-                        component={ShopAdminOneCard}
-                      />
+                      <PriceUpdateContext.Provider value={contextPriceUpdate}>
+                        <LoggedShopRoute
+                          path="/shopadmin/card/:name"
+                          component={ShopAdminOneCard}
+                        />
+                      </PriceUpdateContext.Provider>
                       <LoggedShopRoute
                         path="/shopadmin"
                         component={ShopAdminHome}
