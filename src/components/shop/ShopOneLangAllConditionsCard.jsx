@@ -2,13 +2,7 @@ import React, { useContext } from "react";
 import GenericCardInfosContext from "../../context/genericCardInfosContext";
 import ShopConditionPriceUpdate from "./ShopConditionPriceUpdate";
 
-const ShopOneLangAllConditionsCard = ({
-  oneLang,
-  index,
-  isFoil,
-  priceState,
-  setPriceState
-}) => {
+const ShopOneLangAllConditionsCard = ({ oneLang, index, isFoil }) => {
   //DEFINED langages and Conditions
   const { lang, conditions } = useContext(GenericCardInfosContext);
 
@@ -22,8 +16,6 @@ const ShopOneLangAllConditionsCard = ({
               condition={condition}
               key={condition.id}
               isFoil={isFoil}
-              priceState={priceState}
-              setPriceState={setPriceState}
             />
           );
         })}
