@@ -111,19 +111,19 @@ const ShopAdminOneCard = ({ match }) => {
   }, []);
 
   //Updating the display context when buffer context is set
-  useEffect(() => {
-    if (allPricesBuffer.length !== 0) {
-      console.log("update display context");
-    }
-  }, [allPricesBuffer]);
+  // useEffect(() => {
+  //   if (allPricesBuffer.length !== 0) {
+  //     console.log("update display context");
+  //   }
+  // }, [allPricesBuffer]);
 
   return (
     <>
       <div className="container">
         <h1>{name}</h1>
-        {/* {allPossibleVariations.map(variation => {
+        {allPricesBuffer.map(variation => {
           return <ShopSetLangCards variation={variation} key={variation.id} />;
-        })} */}
+        })}
       </div>
     </>
   );
