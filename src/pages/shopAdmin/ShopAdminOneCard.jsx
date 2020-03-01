@@ -4,6 +4,7 @@ import cardsAPI from "../../services/cardsAPI";
 import axios from "axios";
 import ShopSetLangCards from "../../components/shop/ShopSetLangCards";
 import priceUpdateContext from "../../context/priceUpdateContext";
+import GenericCardInfosContext from "../../context/genericCardInfosContext";
 
 const ShopAdminOneCard = ({ match }) => {
   const { name } = match.params;
@@ -14,9 +15,34 @@ const ShopAdminOneCard = ({ match }) => {
   //Context - building the memoization of all condition/lang possibilities
   const { allPrices, setAllPrices } = useContext(priceUpdateContext);
 
+  //DEFINED langages and Conditions
+  const { lang, conditions } = useContext(GenericCardInfosContext);
+
   const nameURLDecoded = decodeURI(name);
 
   //HERE create a function that get the input from API and create the context for step 1
+  function buildCompletePriceContext(
+    cardList,
+    langDefinition,
+    conditionDefinition
+  ) {
+    const completeContext = [...cardList];
+    console.log(completeContext);
+
+    for (let i = 0; i < completeContext.length; i++) {
+      const allLang = [
+        {
+          name: completeContext[i].name,
+          language_id: { id: 9, name: "English", shortname: "EN" }
+        }
+      ].concat(completeContext[i].foreignData);
+
+      for (let j = 0; j < allLang.length; j++) {
+        completeContext[i][allLang[j].language_id.id] = null;
+      }
+      console.log(completeContext);
+    }
+  }
 
   useEffect(() => {
     //Cancel subscriptions preparation
@@ -31,7 +57,7 @@ const ShopAdminOneCard = ({ match }) => {
         console.log(data.data["hydra:member"]);
         return data;
       })
-      .then(data => setAllPossibleVariations(data.data["hydra:member"]));
+      .then(data => buildCompletePriceContext(data.data["hydra:member"]));
 
     return () => source.cancel("");
   }, []);
@@ -40,9 +66,9 @@ const ShopAdminOneCard = ({ match }) => {
     <>
       <div className="container">
         <h1>{name}</h1>
-        {allPossibleVariations.map(variation => {
+        {/* {allPossibleVariations.map(variation => {
           return <ShopSetLangCards variation={variation} key={variation.id} />;
-        })}
+        })} */}
       </div>
     </>
   );
