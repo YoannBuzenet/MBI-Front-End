@@ -4,6 +4,7 @@ import cardsAPI from "../../services/cardsAPI";
 import axios from "axios";
 import ShopSetLangCards from "../../components/shop/ShopSetLangCards";
 import priceBufferContext from "../../context/priceBufferContext";
+import priceDisplayContext from "../../context/priceDisplayContext";
 import GenericCardInfosContext from "../../context/genericCardInfosContext";
 
 const ShopAdminOneCard = ({ match }) => {
@@ -12,7 +13,12 @@ const ShopAdminOneCard = ({ match }) => {
   //STATE - All the possibilities
   const [allPossibleVariations, setAllPossibleVariations] = useState([]);
 
-  //Context - building the memoization of all condition/lang possibilities
+  //Context - building the precise memoization of all condition/lang possibilities
+  const { allPricesDisplay, setAllPricesDisplay } = useContext(
+    priceDisplayContext
+  );
+
+  //Context - preparing the DISPLAY context format with data
   const { allPricesBuffer, setAllPricesBuffer } = useContext(
     priceBufferContext
   );
@@ -82,6 +88,7 @@ const ShopAdminOneCard = ({ match }) => {
   }
 
   useEffect(() => {
+    //Updating Buffer if empty
     if (allPricesBuffer.length == 0) {
       //Cancel subscriptions preparation
       const CancelToken = axios.CancelToken;
@@ -102,6 +109,13 @@ const ShopAdminOneCard = ({ match }) => {
       return () => source.cancel("");
     }
   }, []);
+
+  //Updating the display context when buffer context is set
+  useEffect(() => {
+    if (allPricesBuffer.length !== 0) {
+      console.log("update display context");
+    }
+  }, [allPricesBuffer]);
 
   return (
     <>
