@@ -20,6 +20,8 @@ const ShopAdminOneCard = ({ match }) => {
 
   const nameURLDecoded = decodeURI(name);
 
+  console.log(conditions);
+
   //HERE create a function that get the input from API and create the context for step 1
   function buildCompletePriceContext(
     cardList,
@@ -37,8 +39,19 @@ const ShopAdminOneCard = ({ match }) => {
         }
       ].concat(completeContext[i].foreignData);
 
+      completeContext[i].langs = {};
+
       for (let j = 0; j < allLang.length; j++) {
-        completeContext[i][allLang[j].language_id.id] = null;
+        completeContext[i].langs[allLang[j].language_id.id] = null;
+      }
+
+      for (const lang in completeContext[i].langs) {
+        completeContext[i].langs[lang] = {};
+        for (let k = 0; k < conditionDefinition.length; k++) {
+          // console.log(lang);
+          completeContext[i].langs[lang][conditionDefinition[k].id] = {};
+          // console.log(completeContext[i].langs[lang]);
+        }
       }
       console.log(completeContext);
     }
@@ -57,7 +70,9 @@ const ShopAdminOneCard = ({ match }) => {
         console.log(data.data["hydra:member"]);
         return data;
       })
-      .then(data => buildCompletePriceContext(data.data["hydra:member"]));
+      .then(data =>
+        buildCompletePriceContext(data.data["hydra:member"], lang, conditions)
+      );
 
     return () => source.cancel("");
   }, []);
