@@ -17,7 +17,8 @@ const ShopSetLangCards = ({ variation }) => {
   //TODO : pass this variable in session + localstorage (its given in resp to POST login)
   const baseLang = 3;
 
-  console.log(lang, conditions);
+  //   console.log(lang, conditions);
+  //   console.log(variation);
 
   return (
     <>
@@ -26,7 +27,7 @@ const ShopSetLangCards = ({ variation }) => {
         {/* All these operations are made to : integrate English in the lang array, and then putting the BaseLang on top by filtering arrays */}
         {[
           {
-            name: cardsAPI.name,
+            name: variation.name,
             language_id: { id: 9, name: "English", shortname: "EN" }
           }
         ]
@@ -35,7 +36,7 @@ const ShopSetLangCards = ({ variation }) => {
           .concat(
             [
               {
-                name: cardsAPI.name,
+                name: variation.name,
                 language_id: { id: 9, name: "English", shortname: "EN" }
               }
             ].filter(currentLang => currentLang.language_id.id !== baseLang)
@@ -54,15 +55,15 @@ const ShopSetLangCards = ({ variation }) => {
                   oneLang={oneLang}
                   index={index}
                   key={oneLang.language_id.id}
-                  isFoil={false}
+                  variation={variation}
                 />
-                <p>FOIL</p>
+                {/* <p>FOIL</p>
                 <ShopOneLangAllConditionsCard
                   oneLang={oneLang}
                   index={index}
                   key={oneLang.language_id.id * 43}
-                  isFoil={true}
-                />
+                  isFoil={true} 
+                />*/}
               </>
             );
           })}
