@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import cardsAPI from "../../services/cardsAPI";
 import axios from "axios";
 import ShopSetLangCards from "../../components/shop/ShopSetLangCards";
-import priceUpdateContext from "../../context/priceUpdateContext";
+import priceBufferContext from "../../context/priceBufferContext";
 import GenericCardInfosContext from "../../context/genericCardInfosContext";
 
 const ShopAdminOneCard = ({ match }) => {
@@ -13,7 +13,9 @@ const ShopAdminOneCard = ({ match }) => {
   const [allPossibleVariations, setAllPossibleVariations] = useState([]);
 
   //Context - building the memoization of all condition/lang possibilities
-  const { allPrices, setAllPrices } = useContext(priceUpdateContext);
+  const { allPricesBuffer, setAllPricesBuffer } = useContext(
+    priceBufferContext
+  );
 
   //DEFINED langages and Conditions
   const { lang, conditions } = useContext(GenericCardInfosContext);
@@ -75,27 +77,30 @@ const ShopAdminOneCard = ({ match }) => {
         }
       }
       console.log(completeContext);
+      setAllPricesBuffer(completeContext);
     }
   }
 
   useEffect(() => {
-    //Cancel subscriptions preparation
-    const CancelToken = axios.CancelToken;
-    const source = CancelToken.source();
+    if (allPricesBuffer.length == 0) {
+      //Cancel subscriptions preparation
+      const CancelToken = axios.CancelToken;
+      const source = CancelToken.source();
 
-    cardsAPI
-      .getByName(nameURLDecoded, {
-        cancelToken: source.token
-      })
-      .then(data => {
-        console.log(data.data["hydra:member"]);
-        return data;
-      })
-      .then(data =>
-        buildCompletePriceContext(data.data["hydra:member"], lang, conditions)
-      );
+      cardsAPI
+        .getByName(nameURLDecoded, {
+          cancelToken: source.token
+        })
+        .then(data => {
+          console.log(data.data["hydra:member"]);
+          return data;
+        })
+        .then(data =>
+          buildCompletePriceContext(data.data["hydra:member"], lang, conditions)
+        );
 
-    return () => source.cancel("");
+      return () => source.cancel("");
+    }
   }, []);
 
   return (

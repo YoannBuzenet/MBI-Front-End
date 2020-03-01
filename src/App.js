@@ -39,7 +39,7 @@ import ShopAdminOneSellRequest from "./pages/shopAdmin/ShopAdminOneSellRequest";
 import ShopAdminSettings from "./pages/shopAdmin/ShopAdminSettings";
 import Footer from "./components/Footer";
 import ShopAdminOneCard from "./pages/shopAdmin/ShopAdminOneCard";
-import PriceUpdateContext from "./context/priceUpdateContext";
+import PriceBufferContext from "./context/priceBufferContext";
 
 //Really Useful library to check all rerenders made on ALL components (you can setup it to check just one)
 // if (process.env.NODE_ENV === "development") {
@@ -104,7 +104,7 @@ function App() {
   });
 
   //STATE - Price Update Page
-  const [allPrices, setAllPrices] = useState({});
+  const [allPricesBuffer, setAllPricesBuffer] = useState([]);
 
   // CONTEXT CREATION Creating All Sets value for context
   const contextAllSets = {
@@ -138,8 +138,8 @@ function App() {
 
   //CONTEXT CREATION
   const contextPriceUpdate = {
-    allPrices: allPrices,
-    setAllPrices: setAllPrices
+    allPricesBuffer: allPricesBuffer,
+    setAllPricesBuffer: setAllPricesBuffer
   };
 
   // Each time the currentBasket (which stores what we want to sell) is updated, we save it in Local storage.
@@ -316,12 +316,12 @@ function App() {
                         path="/shopadmin/settings"
                         component={ShopAdminSettings}
                       />
-                      <PriceUpdateContext.Provider value={contextPriceUpdate}>
+                      <PriceBufferContext.Provider value={contextPriceUpdate}>
                         <LoggedShopRoute
                           path="/shopadmin/card/:name"
                           component={ShopAdminOneCard}
                         />
-                      </PriceUpdateContext.Provider>
+                      </PriceBufferContext.Provider>
                       <LoggedShopRoute
                         path="/shopadmin"
                         component={ShopAdminHome}

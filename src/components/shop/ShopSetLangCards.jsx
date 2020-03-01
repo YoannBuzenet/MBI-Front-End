@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import GenericCardInfosContext from "../../context/genericCardInfosContext";
 import ShopOneLangAllConditionsCard from "./ShopOneLangAllConditionsCard";
 import cardsAPI from "../../services/cardsAPI";
-import priceUpdateContext from "../../context/priceUpdateContext";
+import priceUpdateContext from "../../context/priceBufferContext";
 
 const ShopSetLangCards = ({ variation }) => {
   //DEFINED langages and Conditions
