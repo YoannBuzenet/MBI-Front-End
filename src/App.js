@@ -40,6 +40,7 @@ import ShopAdminSettings from "./pages/shopAdmin/ShopAdminSettings";
 import Footer from "./components/Footer";
 import ShopAdminOneCard from "./pages/shopAdmin/ShopAdminOneCard";
 import PriceBufferContext from "./context/priceBufferContext";
+import PriceDisplayContext from "./context/priceDisplayContext";
 
 //Really Useful library to check all rerenders made on ALL components (you can setup it to check just one)
 // if (process.env.NODE_ENV === "development") {
@@ -103,8 +104,11 @@ function App() {
     sellRequests: []
   });
 
-  //STATE - Price Update Page
+  //STATE - Price Buffer Update State
   const [allPricesBuffer, setAllPricesBuffer] = useState([]);
+
+  //STATE - Price Display Update State
+  const [allPricesDisplay, setAllPricesDisplay] = useState([]);
 
   // CONTEXT CREATION Creating All Sets value for context
   const contextAllSets = {
@@ -136,10 +140,16 @@ function App() {
     setCurrentAdminSellRequest: setCurrentAdminSellRequest
   };
 
-  //CONTEXT CREATION
-  const contextPriceUpdate = {
+  //CONTEXT CREATION - PRICE BUFFER
+  const contextPriceBuffer = {
     allPricesBuffer: allPricesBuffer,
     setAllPricesBuffer: setAllPricesBuffer
+  };
+
+  //CONTEXT CREATION - PRICE DISPLAY
+  const contextPriceDisplay = {
+    allPricesDisplay: allPricesDisplay,
+    setAllPricesDisplay: setAllPricesDisplay
   };
 
   // Each time the currentBasket (which stores what we want to sell) is updated, we save it in Local storage.
@@ -316,11 +326,15 @@ function App() {
                         path="/shopadmin/settings"
                         component={ShopAdminSettings}
                       />
-                      <PriceBufferContext.Provider value={contextPriceUpdate}>
-                        <LoggedShopRoute
-                          path="/shopadmin/card/:name"
-                          component={ShopAdminOneCard}
-                        />
+                      <PriceBufferContext.Provider value={contextPriceBuffer}>
+                        <PriceDisplayContext.Provider
+                          value={contextPriceDisplay}
+                        >
+                          <LoggedShopRoute
+                            path="/shopadmin/card/:name"
+                            component={ShopAdminOneCard}
+                          />
+                        </PriceDisplayContext.Provider>
                       </PriceBufferContext.Provider>
                       <LoggedShopRoute
                         path="/shopadmin"
