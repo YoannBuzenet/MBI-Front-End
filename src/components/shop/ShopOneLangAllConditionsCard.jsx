@@ -14,7 +14,12 @@ const ShopOneLangAllConditionsCard = ({
   //TODO : pass this in env variable
   const gradingArea = "nameEU";
 
-  console.log(variation);
+  console.log(
+    variation,
+    variation.langs,
+    variation.foreignData,
+    oneLang.language_id.id
+  );
 
   return (
     <div>
