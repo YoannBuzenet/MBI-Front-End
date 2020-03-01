@@ -23,6 +23,7 @@ const ShopAdminOneCard = ({ match }) => {
   console.log(conditions);
 
   //HERE create a function that get the input from API and create the context for step 1
+  //Order for the context : Lang / Condition / isFoil / Price
   function buildCompletePriceContext(
     cardList,
     langDefinition,
@@ -48,9 +49,29 @@ const ShopAdminOneCard = ({ match }) => {
       for (const lang in completeContext[i].langs) {
         completeContext[i].langs[lang] = {};
         for (let k = 0; k < conditionDefinition.length; k++) {
-          // console.log(lang);
           completeContext[i].langs[lang][conditionDefinition[k].id] = {};
-          // console.log(completeContext[i].langs[lang]);
+        }
+      }
+
+      for (const lang in completeContext[i].langs) {
+        for (const condition in completeContext[i].langs[lang]) {
+          completeContext[i].langs[lang][condition] = {};
+          completeContext[i].langs[lang][condition][0] = null;
+          completeContext[i].langs[lang][condition][1] = null;
+        }
+      }
+
+      //Parser les prix de la carte et les attribuer au contexte
+      for (let l = 0; l < completeContext.length; l++) {
+        for (let m = 0; m < completeContext[l].cardShopPrices.length; m++) {
+          const isFoil = completeContext[l].cardShopPrices[m].isFoil ? 1 : 0;
+          const condition = parseInt(
+            completeContext[l].cardShopPrices[m].cardCondition.substr(17)
+          );
+          const language = completeContext[l].cardShopPrices[m].language.id;
+          const price = completeContext[l].cardShopPrices[m].price;
+
+          completeContext[l]["langs"][language][condition][isFoil] = price;
         }
       }
       console.log(completeContext);
