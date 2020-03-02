@@ -57,26 +57,21 @@ function App() {
   //APP INITIALIZATION USE EFFECT
   useEffect(() => {
     //Load all the sets on App first Load
-    SetsAPI.findAll().then(data => {
-      setAllSets(data);
-    });
-
+    const allSets = SetsAPI.findAll();
+    const allLangs = genericCardCharacteristicsAPI.getAllLang();
+    const allConditions = genericCardCharacteristicsAPI.getAllConditions();
+    Promise.all([allSets, allLangs, allConditions]).then(
+      ([allSets, allLangs, allConditions]) => {
+        setAllSets(allSets);
+        setLangDefinition(allLangs);
+        setConditionDefinition(allConditions);
+      }
+    );
     //Get the optional saved Selling Basket saved in Localstorage
     const eventuallySavedBasket = SellingBasketAPI.getSaved();
-
     if (eventuallySavedBasket !== null) {
       setCurrentBasket(eventuallySavedBasket);
     }
-
-    //Getting all languages Definition
-    genericCardCharacteristicsAPI
-      .getAllLang()
-      .then(data => setLangDefinition(data));
-
-    //Getting all conditions Definition
-    genericCardCharacteristicsAPI
-      .getAllConditions()
-      .then(data => setConditionDefinition(data));
   }, []);
 
   // STATE Creating the Authentication state

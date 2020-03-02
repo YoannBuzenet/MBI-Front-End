@@ -10,6 +10,14 @@ import GenericCardInfosContext from "../../context/genericCardInfosContext";
 const ShopAdminOneCard = ({ match }) => {
   const { name } = match.params;
 
+  //STATE - current card name
+  const [currentName, setCurrentName] = useState(match.params.name);
+
+  //STATE - current Card Name decoded
+  const [currentNameDecoded, setCurrentNameDecoded] = useState(
+    decodeURI(currentName)
+  );
+
   //STATE - All the possibilities
   const [allPossibleVariations, setAllPossibleVariations] = useState([]);
 
@@ -26,9 +34,23 @@ const ShopAdminOneCard = ({ match }) => {
   //DEFINED langages and Conditions
   const { lang, conditions } = useContext(GenericCardInfosContext);
 
-  const nameURLDecoded = decodeURI(name);
-
   console.log(conditions);
+
+  useEffect(() => {
+    setCurrentName(match.params.name);
+    console.log(allPricesBuffer);
+    console.log("rerender CARD");
+  }, [match.params.name]);
+
+  useEffect(() => {
+    setCurrentNameDecoded(currentName);
+  }, [currentName]);
+
+  // useEffect(() => {
+  //   if (allPricesBuffer.length !== 0) {
+  //     setAllPricesBuffer([]);
+  //   }
+  // }, [currentName, match.params.name]);
 
   //HERE create a function that get the input from API and create the context for step 1
   //Order for the context : Lang / Condition / isFoil / Price
@@ -90,16 +112,18 @@ const ShopAdminOneCard = ({ match }) => {
   useEffect(() => {
     //Updating Buffer if empty
     if (
-      allPricesBuffer.length == 0 &&
-      lang.length === 11 &&
-      conditions.length === 7
+      allPricesBuffer.length === 0 ||
+      (allPricesBuffer[0] && allPricesBuffer[0].name !== currentName)
     ) {
+      if (allPricesBuffer[0] && allPricesBuffer[0].name) {
+        console.log(allPricesBuffer[0], allPricesBuffer[0].name);
+      }
       //Cancel subscriptions preparation
       const CancelToken = axios.CancelToken;
       const source = CancelToken.source();
 
       cardsAPI
-        .getByName(nameURLDecoded, {
+        .getByName(currentNameDecoded, {
           cancelToken: source.token
         })
         .then(data => {
@@ -112,7 +136,7 @@ const ShopAdminOneCard = ({ match }) => {
 
       return () => source.cancel("");
     }
-  }, [lang, conditions]);
+  }, [currentName]);
 
   //Updating the display context when buffer context is set
   // useEffect(() => {
@@ -124,7 +148,7 @@ const ShopAdminOneCard = ({ match }) => {
   return (
     <>
       <div className="container">
-        <h1>{name}</h1>
+        <h1>{currentNameDecoded}</h1>
         {allPricesBuffer.map((variation, index) => {
           return (
             <ShopSetLangCards
