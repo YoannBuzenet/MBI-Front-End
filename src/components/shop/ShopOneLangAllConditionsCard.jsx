@@ -24,6 +24,8 @@ const ShopOneLangAllConditionsCard = ({
   //TODO : pass this in env variable
   const gradingArea = "nameEU";
 
+  //TODO : check if logged at any load of admin page and put a toast if not logged
+
   // console.log("less info", allPricesBuffer[index].langs);
 
   useEffect(() => {
@@ -34,15 +36,16 @@ const ShopOneLangAllConditionsCard = ({
       allPricesBuffer[index].langs,
       oneLang.language_id.id
     );
-    if (!allPricesBuffer[index].langs) {
-      console.log("we try to force a rerender to get full context.");
-      setIsContextLoaded(true);
-    }
   }, [allPricesBuffer.lang]);
 
   return (
     <div>
-      <div>{Object.entries(allPricesBuffer[index]).map(data => data[0])}</div>
+      <div>
+        {allPricesBuffer[index].langs &&
+          Object.entries(allPricesBuffer[index].langs).map(
+            data => data[1][1][1]
+          )}
+      </div>
       <div>{allPricesBuffer[index].langs && "try display content"}</div>
     </div>
   );
