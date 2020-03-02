@@ -2,14 +2,16 @@ import React, { useContext } from "react";
 import GenericCardInfosContext from "../../context/genericCardInfosContext";
 import ShopOneLangAllConditionsCard from "./ShopOneLangAllConditionsCard";
 import cardsAPI from "../../services/cardsAPI";
-import priceUpdateContext from "../../context/priceBufferContext";
+import priceBufferContext from "../../context/priceBufferContext";
 
-const ShopSetLangCards = ({ variation }) => {
+const ShopSetLangCards = ({ variation, index }) => {
   //DEFINED langages and Conditions
   const { lang, conditions } = useContext(GenericCardInfosContext);
 
   //Context - building the memoization of all condition/lang possibilities
-  const { allPrices, setAllPrices } = useContext(priceUpdateContext);
+  const { allPricesBuffer, setAllPricesBuffer } = useContext(
+    priceBufferContext
+  );
 
   //TODO : pass this in env variable
   const gradingArea = "isEU";
@@ -23,7 +25,7 @@ const ShopSetLangCards = ({ variation }) => {
   return (
     <>
       <div className="one-set">
-        <h2>{variation.edition.name}</h2>
+        <h2>{allPricesBuffer[index].edition.name}</h2>
         {/* All these operations are made to : integrate English in the lang array, and then putting the BaseLang on top by filtering arrays */}
         {[
           {
@@ -47,7 +49,7 @@ const ShopSetLangCards = ({ variation }) => {
             )
           )
 
-          .map((oneLang, index) => {
+          .map(oneLang => {
             return (
               <>
                 <h3>{oneLang.language_id.name}</h3>

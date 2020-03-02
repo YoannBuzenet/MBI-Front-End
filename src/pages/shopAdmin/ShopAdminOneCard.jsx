@@ -89,7 +89,11 @@ const ShopAdminOneCard = ({ match }) => {
 
   useEffect(() => {
     //Updating Buffer if empty
-    if (allPricesBuffer.length == 0) {
+    if (
+      allPricesBuffer.length == 0 &&
+      lang.length === 11 &&
+      conditions.length === 7
+    ) {
       //Cancel subscriptions preparation
       const CancelToken = axios.CancelToken;
       const source = CancelToken.source();
@@ -108,7 +112,7 @@ const ShopAdminOneCard = ({ match }) => {
 
       return () => source.cancel("");
     }
-  }, []);
+  }, [lang, conditions]);
 
   //Updating the display context when buffer context is set
   // useEffect(() => {
@@ -121,8 +125,14 @@ const ShopAdminOneCard = ({ match }) => {
     <>
       <div className="container">
         <h1>{name}</h1>
-        {allPricesBuffer.map(variation => {
-          return <ShopSetLangCards variation={variation} key={variation.id} />;
+        {allPricesBuffer.map((variation, index) => {
+          return (
+            <ShopSetLangCards
+              variation={variation}
+              key={variation.id}
+              index={index}
+            />
+          );
         })}
       </div>
     </>
