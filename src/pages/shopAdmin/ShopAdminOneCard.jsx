@@ -34,12 +34,10 @@ const ShopAdminOneCard = ({ match }) => {
   //DEFINED langages and Conditions
   const { lang, conditions } = useContext(GenericCardInfosContext);
 
-  console.log(conditions);
-
   useEffect(() => {
     setCurrentName(match.params.name);
-    console.log(allPricesBuffer);
-    console.log("rerender CARD");
+    // console.log(allPricesBuffer);
+    // console.log("rerender CARD");
   }, [match.params.name]);
 
   useEffect(() => {
@@ -103,7 +101,7 @@ const ShopAdminOneCard = ({ match }) => {
           completeContext[l]["langs"][language][condition][isFoil] = price;
         }
       }
-      console.log(completeContext);
+      // console.log(completeContext);
     }
     //Once all synchronous for loops are done, we set the global table in context.
     setAllPricesBuffer(completeContext);

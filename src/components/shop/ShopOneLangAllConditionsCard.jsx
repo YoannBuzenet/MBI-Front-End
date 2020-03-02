@@ -32,25 +32,48 @@ const ShopOneLangAllConditionsCard = ({
 
   //TODO : check if logged at any load of admin page and put a toast if not logged
 
-  function buildNonFoilDisplayArray(context) {
+  function buildNonFoilDisplayArray(context, index, idLang) {
     var array_to_display = [];
+
+    console.log(context[index].langs[idLang]);
+
+    for (const conditionKey in context[index].langs[idLang]) {
+      console.log("conditionKey", conditionKey);
+      for (const isFoilKey in context[index].langs[idLang][conditionKey]) {
+        console.log("isFoilKey", isFoilKey);
+        console.log(context[index].langs[idLang][conditionKey][isFoilKey]);
+        for (const priceValue in context[index].langs[idLang][conditionKey][
+          isFoilKey
+        ]) {
+          console.log("null");
+        }
+      }
+    }
+
+    console.log(array_to_display);
 
     return array_to_display;
   }
 
-  function buildFoilDisplayArray(context) {
+  function buildFoilDisplayArray(context, index, idLang) {
     var array_to_display = [];
+
+    console.log(array_to_display);
 
     return array_to_display;
   }
 
   useEffect(() => {
-    console.log(
-      allPricesBuffer[index].langs[oneLang.language_id.id],
-      oneLang.language_id.id
+    // console.log(
+    //   allPricesBuffer[index].langs[oneLang.language_id.id],
+    //   oneLang.language_id.id
+    // );
+    setNonFoilArray(
+      buildNonFoilDisplayArray(allPricesBuffer, index, oneLang.language_id.id)
     );
-    setNonFoilArray(buildNonFoilDisplayArray(allPricesBuffer));
-    setfoilArray(buildFoilDisplayArray(allPricesBuffer));
+    setfoilArray(
+      buildFoilDisplayArray(allPricesBuffer, index, oneLang.language_id.id)
+    );
   }, []);
 
   return (
