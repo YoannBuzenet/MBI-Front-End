@@ -80,6 +80,7 @@ const ShopAdminOneCard = ({ match }) => {
         completeContext[i].langs[lang] = {};
         for (let k = 0; k < conditionDefinition.length; k++) {
           completeContext[i].langs[lang][conditionDefinition[k].id] = {};
+          console.log("test");
         }
       }
 
@@ -88,6 +89,7 @@ const ShopAdminOneCard = ({ match }) => {
           completeContext[i].langs[lang][condition] = {};
           completeContext[i].langs[lang][condition][0] = null;
           completeContext[i].langs[lang][condition][1] = null;
+          console.log("test2");
         }
       }
 
@@ -102,11 +104,15 @@ const ShopAdminOneCard = ({ match }) => {
           const price = completeContext[l].cardShopPrices[m].price;
 
           completeContext[l]["langs"][language][condition][isFoil] = price;
+          console.log("test3");
         }
       }
       console.log(completeContext);
-      setAllPricesBuffer(completeContext);
+      console.log(
+        "building everything with contextbuilding everything with contextbuilding everything with contextbuilding everything with contextbuilding everything with contextbuilding everything with contextbuilding everything with contextbuilding everything with contextbuilding everything with context"
+      );
     }
+    setAllPricesBuffer(completeContext);
   }
 
   useEffect(() => {
@@ -116,8 +122,15 @@ const ShopAdminOneCard = ({ match }) => {
       (allPricesBuffer[0] && allPricesBuffer[0].name !== currentName)
     ) {
       if (allPricesBuffer[0] && allPricesBuffer[0].name) {
-        console.log(allPricesBuffer[0], allPricesBuffer[0].name);
+        console.log(
+          "same samesame samesame samesame samesame samesame samesame samesame samesame same",
+          allPricesBuffer[0],
+          allPricesBuffer[0].name
+        );
       }
+      console.log(
+        "re appel apire appel apire appel apire appel apire appel apire appel apire appel apire appel apire appel apire appel apire appel apire appel apire appel apire appel apire appel apire appel apire appel apire appel apire appel apire appel apire appel apire appel apire appel apire appel apire appel apire appel api"
+      );
       //Cancel subscriptions preparation
       const CancelToken = axios.CancelToken;
       const source = CancelToken.source();
