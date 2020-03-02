@@ -1,17 +1,23 @@
 import React, { useContext, useEffect, useState } from "react";
+import GenericCardInfosContext from "../../context/genericCardInfosContext";
 
-const ShopConditionPriceUpdate = ({ condition, oneLang, isFoil }) => {
+const ShopConditionPriceUpdate = ({
+  conditionID,
+  langID,
+  isFoil,
+  priceValue
+}) => {
   //TODO : pass this in env variable
   const gradingArea = "nameEU";
 
-  useEffect(() => {
-    console.log(condition, oneLang, isFoil);
-    // setPriceState({ ...priceState, [oneLang[condition[isFoil]]]: 0 });
-  });
+  //DEFINED langages and Conditions
+  const { lang, conditions } = useContext(GenericCardInfosContext);
+
+  useEffect(() => {});
 
   return (
     <p>
-      {condition[gradingArea]} <input type="text" />
+      <input type="text" />
     </p>
   );
 };
