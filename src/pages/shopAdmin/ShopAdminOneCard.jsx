@@ -110,7 +110,7 @@ const ShopAdminOneCard = ({ match }) => {
   }
 
   useEffect(() => {
-    //Updating Buffer if empty
+    //Updating Buffer if empty or if cardName changed
     if (
       allPricesBuffer.length === 0 ||
       (allPricesBuffer[0] && allPricesBuffer[0].name !== currentName)
@@ -137,13 +137,6 @@ const ShopAdminOneCard = ({ match }) => {
       return () => source.cancel("");
     }
   }, [currentName]);
-
-  //Updating the display context when buffer context is set
-  // useEffect(() => {
-  //   if (allPricesBuffer.length !== 0) {
-  //     console.log("update display context");
-  //   }
-  // }, [allPricesBuffer]);
 
   return (
     <>
