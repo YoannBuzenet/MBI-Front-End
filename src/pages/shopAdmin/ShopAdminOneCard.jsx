@@ -60,7 +60,6 @@ const ShopAdminOneCard = ({ match }) => {
     conditionDefinition
   ) {
     const completeContext = [...cardList];
-    console.log(completeContext);
 
     for (let i = 0; i < completeContext.length; i++) {
       const allLang = [
@@ -80,7 +79,6 @@ const ShopAdminOneCard = ({ match }) => {
         completeContext[i].langs[lang] = {};
         for (let k = 0; k < conditionDefinition.length; k++) {
           completeContext[i].langs[lang][conditionDefinition[k].id] = {};
-          console.log("test");
         }
       }
 
@@ -89,11 +87,10 @@ const ShopAdminOneCard = ({ match }) => {
           completeContext[i].langs[lang][condition] = {};
           completeContext[i].langs[lang][condition][0] = null;
           completeContext[i].langs[lang][condition][1] = null;
-          console.log("test2");
         }
       }
 
-      //Parser les prix de la carte et les attribuer au contexte
+      //Parse each price and integrate in our big table
       for (let l = 0; l < completeContext.length; l++) {
         for (let m = 0; m < completeContext[l].cardShopPrices.length; m++) {
           const isFoil = completeContext[l].cardShopPrices[m].isFoil ? 1 : 0;
@@ -104,14 +101,11 @@ const ShopAdminOneCard = ({ match }) => {
           const price = completeContext[l].cardShopPrices[m].price;
 
           completeContext[l]["langs"][language][condition][isFoil] = price;
-          console.log("test3");
         }
       }
       console.log(completeContext);
-      console.log(
-        "building everything with contextbuilding everything with contextbuilding everything with contextbuilding everything with contextbuilding everything with contextbuilding everything with contextbuilding everything with contextbuilding everything with contextbuilding everything with context"
-      );
     }
+    //Once all synchronous for loops are done, we set the global table in context.
     setAllPricesBuffer(completeContext);
   }
 
@@ -121,16 +115,6 @@ const ShopAdminOneCard = ({ match }) => {
       allPricesBuffer.length === 0 ||
       (allPricesBuffer[0] && allPricesBuffer[0].name !== currentName)
     ) {
-      if (allPricesBuffer[0] && allPricesBuffer[0].name) {
-        console.log(
-          "same samesame samesame samesame samesame samesame samesame samesame samesame same",
-          allPricesBuffer[0],
-          allPricesBuffer[0].name
-        );
-      }
-      console.log(
-        "re appel apire appel apire appel apire appel apire appel apire appel apire appel apire appel apire appel apire appel apire appel apire appel apire appel apire appel apire appel apire appel apire appel apire appel apire appel apire appel apire appel apire appel apire appel apire appel apire appel apire appel api"
-      );
       //Cancel subscriptions preparation
       const CancelToken = axios.CancelToken;
       const source = CancelToken.source();

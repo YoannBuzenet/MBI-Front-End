@@ -21,30 +21,55 @@ const ShopOneLangAllConditionsCard = ({
   //STATE - Checking if context is fully loaded
   const [isContextLoaded, setIsContextLoaded] = useState(false);
 
+  //STATE - Array to iterate and create the components for NON foil components
+  const [nonFoilArray, setNonFoilArray] = useState([]);
+
+  //STATE - Array to iterate and create the components for FOIL components
+  const [foilArray, setfoilArray] = useState([]);
+
   //TODO : pass this in env variable
   const gradingArea = "nameEU";
 
   //TODO : check if logged at any load of admin page and put a toast if not logged
 
-  // console.log("less info", allPricesBuffer[index].langs);
+  function buildNonFoilDisplayArray(context) {
+    var array_to_display = [];
+
+    return array_to_display;
+  }
+
+  function buildFoilDisplayArray(context) {
+    var array_to_display = [];
+
+    return array_to_display;
+  }
 
   useEffect(() => {
     console.log(
-      allPricesBuffer,
-      allPricesBuffer[index],
-      "here there are more info",
-      allPricesBuffer[index].langs,
+      allPricesBuffer[index].langs[oneLang.language_id.id],
       oneLang.language_id.id
     );
-  }, [allPricesBuffer.lang]);
+    setNonFoilArray(buildNonFoilDisplayArray(allPricesBuffer));
+    setfoilArray(buildFoilDisplayArray(allPricesBuffer));
+  }, []);
 
   return (
     <div>
       <div>
-        {allPricesBuffer[index].langs &&
-          Object.entries(allPricesBuffer[index].langs).map(
-            data => data[1][1][1]
-          )}
+        <p>Non Foil</p>
+        <p>
+          {nonFoilArray.map(infoContainer => {
+            return "lol";
+          })}
+        </p>
+      </div>
+      <div>
+        <p>Foil</p>
+        <p>
+          {foilArray.map(infoContainer => {
+            return "lolFoil";
+          })}
+        </p>
       </div>
       <div>{allPricesBuffer[index].langs && "try display content"}</div>
     </div>
