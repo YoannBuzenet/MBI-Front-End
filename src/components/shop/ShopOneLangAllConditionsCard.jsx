@@ -49,7 +49,8 @@ const ShopOneLangAllConditionsCard = ({
             langKey: idLang,
             conditionKey: conditionKey,
             isFoilKey: isFoilKey,
-            priceValue: priceValue
+            priceValue: priceValue,
+            isInitialized: priceValue ? 1 : 0
           });
         }
       }
@@ -77,7 +78,8 @@ const ShopOneLangAllConditionsCard = ({
             langKey: idLang,
             conditionKey: conditionKey,
             isFoilKey: isFoilKey,
-            priceValue: priceValue
+            priceValue: priceValue,
+            isInitialized: priceValue ? 1 : 0
           });
         }
       }
@@ -110,6 +112,7 @@ const ShopOneLangAllConditionsCard = ({
                   langID={infoContainer.langKey}
                   isFoil={infoContainer.isFoilKey}
                   priceValue={infoContainer.priceValue}
+                  isInitialized={infoContainer.isInitialized}
                 />
               );
             })}
@@ -126,6 +129,7 @@ const ShopOneLangAllConditionsCard = ({
                   langID={infoContainer.langKey}
                   isFoil={infoContainer.isFoilKey}
                   priceValue={infoContainer.priceValue}
+                  isInitialized={infoContainer.isInitialized}
                 />
               );
             })}

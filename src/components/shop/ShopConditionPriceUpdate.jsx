@@ -5,7 +5,8 @@ const ShopConditionPriceUpdate = ({
   conditionID,
   langID,
   isFoil,
-  priceValue
+  priceValue,
+  isInitialized
 }) => {
   //TODO : pass this in env variable
   const gradingArea = "nameEU";
