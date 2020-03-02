@@ -35,17 +35,22 @@ const ShopOneLangAllConditionsCard = ({
   function buildNonFoilDisplayArray(context, index, idLang) {
     var array_to_display = [];
 
-    console.log(context[index].langs[idLang]);
+    // console.log(context[index].langs[idLang]);
 
     for (const conditionKey in context[index].langs[idLang]) {
-      console.log("conditionKey", conditionKey);
+      // console.log("conditionKey", conditionKey);
       for (const isFoilKey in context[index].langs[idLang][conditionKey]) {
-        console.log("isFoilKey", isFoilKey);
-        console.log(context[index].langs[idLang][conditionKey][isFoilKey]);
-        for (const priceValue in context[index].langs[idLang][conditionKey][
-          isFoilKey
-        ]) {
-          console.log("null");
+        // console.log("isFoilKey", isFoilKey);
+        // console.log(context[index].langs[idLang][conditionKey][isFoilKey]);
+        if (isFoilKey === "0") {
+          const priceValue =
+            context[index].langs[idLang][conditionKey][isFoilKey];
+          array_to_display.push({
+            langKey: idLang,
+            conditionKey: conditionKey,
+            isFoilKey: isFoilKey,
+            priceValue: priceValue
+          });
         }
       }
     }
@@ -58,16 +63,32 @@ const ShopOneLangAllConditionsCard = ({
   function buildFoilDisplayArray(context, index, idLang) {
     var array_to_display = [];
 
+    // console.log(context[index].langs[idLang]);
+
+    for (const conditionKey in context[index].langs[idLang]) {
+      // console.log("conditionKey", conditionKey);
+      for (const isFoilKey in context[index].langs[idLang][conditionKey]) {
+        // console.log("isFoilKey", isFoilKey);
+        // console.log(context[index].langs[idLang][conditionKey][isFoilKey]);
+        if (isFoilKey === "1") {
+          const priceValue =
+            context[index].langs[idLang][conditionKey][isFoilKey];
+          array_to_display.push({
+            langKey: idLang,
+            conditionKey: conditionKey,
+            isFoilKey: isFoilKey,
+            priceValue: priceValue
+          });
+        }
+      }
+    }
+
     console.log(array_to_display);
 
     return array_to_display;
   }
 
   useEffect(() => {
-    // console.log(
-    //   allPricesBuffer[index].langs[oneLang.language_id.id],
-    //   oneLang.language_id.id
-    // );
     setNonFoilArray(
       buildNonFoilDisplayArray(allPricesBuffer, index, oneLang.language_id.id)
     );
@@ -81,17 +102,33 @@ const ShopOneLangAllConditionsCard = ({
       <div>
         <p>Non Foil</p>
         <p>
-          {nonFoilArray.map(infoContainer => {
-            return "lol";
-          })}
+          {nonFoilArray.length !== 0 &&
+            nonFoilArray.map(infoContainer => {
+              return (
+                <ShopConditionPriceUpdate
+                  conditionID={infoContainer.conditionKey}
+                  langID={infoContainer.langKey}
+                  isFoil={infoContainer.isFoilKey}
+                  priceValue={infoContainer.priceValue}
+                />
+              );
+            })}
         </p>
       </div>
       <div>
         <p>Foil</p>
         <p>
-          {foilArray.map(infoContainer => {
-            return "lolFoil";
-          })}
+          {foilArray.length !== 0 &&
+            foilArray.map(infoContainer => {
+              return (
+                <ShopConditionPriceUpdate
+                  conditionID={infoContainer.conditionKey}
+                  langID={infoContainer.langKey}
+                  isFoil={infoContainer.isFoilKey}
+                  priceValue={infoContainer.priceValue}
+                />
+              );
+            })}
         </p>
       </div>
       <div>{allPricesBuffer[index].langs && "try display content"}</div>
