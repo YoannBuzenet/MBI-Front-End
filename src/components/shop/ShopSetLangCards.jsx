@@ -59,13 +59,6 @@ const ShopSetLangCards = ({ variation, index }) => {
                   key={oneLang.language_id.id}
                   variation={variation}
                 />
-                {/* <p>FOIL</p>
-                <ShopOneLangAllConditionsCard
-                  oneLang={oneLang}
-                  index={index}
-                  key={oneLang.language_id.id * 43}
-                  isFoil={true} 
-                />*/}
               </>
             );
           })}
