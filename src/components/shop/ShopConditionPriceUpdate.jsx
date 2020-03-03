@@ -29,16 +29,16 @@ const ShopConditionPriceUpdate = ({
     allPricesBuffer[index].langs[langID][conditionID][isFoil] === null
       ? ""
       : allPricesBuffer[index].langs[langID][conditionID][isFoil];
-  console.log(allPricesBuffer);
-  console.log(
-    conditionID,
-    langID,
-    isFoil,
-    priceValue,
-    isInitialized,
-    index,
-    cardID
-  );
+  // console.log(allPricesBuffer);
+  // console.log(
+  //   conditionID,
+  //   langID,
+  //   isFoil,
+  //   priceValue,
+  //   isInitialized,
+  //   index,
+  //   cardID
+  // );
 
   const handlechange = (
     event,
@@ -51,7 +51,7 @@ const ShopConditionPriceUpdate = ({
     cardID
   ) => {
     //Checking the input is a number
-    console.log(event.target.value);
+    // console.log(event.target.value);
     if (!isNaN(parseInt(event.target.value))) {
       console.log(
         parseInt(event.target.value),
@@ -66,24 +66,22 @@ const ShopConditionPriceUpdate = ({
       const newPrice = parseInt(event.target.value);
 
       if (conditionID === 1 && isFoil === 0 && langID === baseLang) {
-        console.log("on met tout à jour pour le NON foil");
+        console.log("Updating everything but foil cards");
         //update all languages and condition in the current set
         // send the batch
       } else if (conditionID === 1) {
-        console.log(
-          "on met toutes les conditions dans la langue donnée et le isFoil donné"
-        );
+        console.log("Updating all conditions in given language and isFoilKey");
         //update all conditions in the given languages
         //send the batch
       } else {
         const allPricesCopy = [...allPricesBuffer];
         allPricesCopy[index].langs[langID][conditionID][isFoil] = newPrice;
         setAllPricesBuffer(allPricesCopy);
-        console.log(allPricesCopy);
+        // console.log(allPricesCopy);
         if (isInitialized === 1) {
-          console.log("JE TE PUT");
+          console.log("I PUT YOU");
         } else {
-          console.log("JE TE POSTE");
+          console.log("I POST YOU");
         }
       }
     } else if (event.target.value === "") {

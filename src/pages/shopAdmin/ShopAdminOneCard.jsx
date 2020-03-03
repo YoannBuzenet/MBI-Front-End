@@ -7,8 +7,6 @@ import priceBufferContext from "../../context/priceBufferContext";
 import GenericCardInfosContext from "../../context/genericCardInfosContext";
 
 const ShopAdminOneCard = ({ match }) => {
-  const { name } = match.params;
-
   //STATE - current card name
   const [currentName, setCurrentName] = useState(match.params.name);
 
@@ -95,7 +93,9 @@ const ShopAdminOneCard = ({ match }) => {
           completeContext[l]["langs"][language][condition][isFoil] = price;
         }
       }
-      // console.log(completeContext);
+      console.log(completeContext);
+      console.log(currentName);
+      console.log(currentNameDecoded);
     }
     //Once all synchronous for-loops are done, we set the global table in context.
     setAllPricesBuffer(completeContext);
@@ -111,6 +111,10 @@ const ShopAdminOneCard = ({ match }) => {
       const CancelToken = axios.CancelToken;
       const source = CancelToken.source();
 
+      console.log("you should trigger");
+      console.log(currentName);
+      console.log(currentNameDecoded);
+
       cardsAPI
         .getByName(currentNameDecoded, {
           cancelToken: source.token
@@ -125,7 +129,7 @@ const ShopAdminOneCard = ({ match }) => {
 
       return () => source.cancel("");
     }
-  }, [currentName, conditions]);
+  }, [currentNameDecoded, conditions]);
 
   return (
     <>
