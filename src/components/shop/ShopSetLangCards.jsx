@@ -22,6 +22,8 @@ const ShopSetLangCards = ({ variation, index }) => {
   //   console.log(lang, conditions);
   //   console.log(variation);
 
+  const Fragment = React.Fragment;
+
   return (
     <>
       <div className="one-set">
@@ -51,7 +53,7 @@ const ShopSetLangCards = ({ variation, index }) => {
 
           .map(oneLang => {
             return (
-              <>
+              <Fragment key={oneLang.language_id.id}>
                 <h3>{oneLang.language_id.name}</h3>
                 <ShopOneLangAllConditionsCard
                   oneLang={oneLang}
@@ -59,7 +61,7 @@ const ShopSetLangCards = ({ variation, index }) => {
                   key={oneLang.language_id.id}
                   variation={variation}
                 />
-              </>
+              </Fragment>
             );
           })}
       </div>{" "}
