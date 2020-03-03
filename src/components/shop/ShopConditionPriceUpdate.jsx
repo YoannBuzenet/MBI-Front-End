@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import GenericCardInfosContext from "../../context/genericCardInfosContext";
+import priceBufferContext from "../../context/priceBufferContext";
 
 const ShopConditionPriceUpdate = ({
   conditionID,
@@ -8,6 +9,11 @@ const ShopConditionPriceUpdate = ({
   priceValue,
   isInitialized
 }) => {
+  //Context - preparing the DISPLAY context format with data
+  const { allPricesBuffer, setAllPricesBuffer } = useContext(
+    priceBufferContext
+  );
+
   //TODO : pass this in env variable
   const gradingArea = "nameEU";
 
