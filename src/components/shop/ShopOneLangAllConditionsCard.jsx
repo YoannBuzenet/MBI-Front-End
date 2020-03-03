@@ -106,39 +106,36 @@ const ShopOneLangAllConditionsCard = ({
     <div>
       <div>
         {nonFoilArray.length > 0 && <p>Non Foil</p>}
-        <p>
-          {nonFoilArray.length !== 0 &&
-            nonFoilArray.map(infoContainer => {
-              return (
-                <ShopConditionPriceUpdate
-                  conditionID={infoContainer.conditionKey}
-                  langID={infoContainer.langKey}
-                  isFoil={infoContainer.isFoilKey}
-                  priceValue={infoContainer.priceValue}
-                  isInitialized={infoContainer.isInitialized}
-                />
-              );
-            })}
-        </p>
+
+        {nonFoilArray.length !== 0 &&
+          nonFoilArray.map(infoContainer => {
+            return (
+              <ShopConditionPriceUpdate
+                conditionID={infoContainer.conditionKey}
+                langID={infoContainer.langKey}
+                isFoil={infoContainer.isFoilKey}
+                priceValue={infoContainer.priceValue}
+                isInitialized={infoContainer.isInitialized}
+              />
+            );
+          })}
       </div>
       <div>
         {foilArray.length > 0 && <p>Foil</p>}
-        <p>
-          {foilArray.length !== 0 &&
-            foilArray.map(infoContainer => {
-              return (
-                <ShopConditionPriceUpdate
-                  conditionID={infoContainer.conditionKey}
-                  langID={infoContainer.langKey}
-                  isFoil={infoContainer.isFoilKey}
-                  priceValue={infoContainer.priceValue}
-                  isInitialized={infoContainer.isInitialized}
-                />
-              );
-            })}
-        </p>
+
+        {foilArray.length !== 0 &&
+          foilArray.map(infoContainer => {
+            return (
+              <ShopConditionPriceUpdate
+                conditionID={infoContainer.conditionKey}
+                langID={infoContainer.langKey}
+                isFoil={infoContainer.isFoilKey}
+                priceValue={infoContainer.priceValue}
+                isInitialized={infoContainer.isInitialized}
+              />
+            );
+          })}
       </div>
-      <div>{allPricesBuffer[index].langs && "try display content"}</div>
     </div>
   );
 };
