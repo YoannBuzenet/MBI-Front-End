@@ -4,7 +4,6 @@ import cardsAPI from "../../services/cardsAPI";
 import axios from "axios";
 import ShopSetLangCards from "../../components/shop/ShopSetLangCards";
 import priceBufferContext from "../../context/priceBufferContext";
-import priceDisplayContext from "../../context/priceDisplayContext";
 import GenericCardInfosContext from "../../context/genericCardInfosContext";
 
 const ShopAdminOneCard = ({ match }) => {
@@ -16,14 +15,6 @@ const ShopAdminOneCard = ({ match }) => {
   //STATE - current Card Name decoded
   const [currentNameDecoded, setCurrentNameDecoded] = useState(
     decodeURI(currentName)
-  );
-
-  //STATE - All the possibilities
-  const [allPossibleVariations, setAllPossibleVariations] = useState([]);
-
-  //Context - building the precise memoization of all condition/lang possibilities
-  const { allPricesDisplay, setAllPricesDisplay } = useContext(
-    priceDisplayContext
   );
 
   //Context - preparing the DISPLAY context format with data

@@ -40,7 +40,6 @@ import ShopAdminSettings from "./pages/shopAdmin/ShopAdminSettings";
 import Footer from "./components/Footer";
 import ShopAdminOneCard from "./pages/shopAdmin/ShopAdminOneCard";
 import PriceBufferContext from "./context/priceBufferContext";
-import PriceDisplayContext from "./context/priceDisplayContext";
 
 //Really Useful library to check all rerenders made on ALL components (you can setup it to check just one)
 // if (process.env.NODE_ENV === "development") {
@@ -102,9 +101,6 @@ function App() {
   //STATE - Price Buffer Update State
   const [allPricesBuffer, setAllPricesBuffer] = useState([]);
 
-  //STATE - Price Display Update State
-  const [allPricesDisplay, setAllPricesDisplay] = useState([]);
-
   // CONTEXT CREATION Creating All Sets value for context
   const contextAllSets = {
     allSets: allSets,
@@ -139,12 +135,6 @@ function App() {
   const contextPriceBuffer = {
     allPricesBuffer: allPricesBuffer,
     setAllPricesBuffer: setAllPricesBuffer
-  };
-
-  //CONTEXT CREATION - PRICE DISPLAY
-  const contextPriceDisplay = {
-    allPricesDisplay: allPricesDisplay,
-    setAllPricesDisplay: setAllPricesDisplay
   };
 
   // Each time the currentBasket (which stores what we want to sell) is updated, we save it in Local storage.
@@ -322,14 +312,10 @@ function App() {
                         component={ShopAdminSettings}
                       />
                       <PriceBufferContext.Provider value={contextPriceBuffer}>
-                        <PriceDisplayContext.Provider
-                          value={contextPriceDisplay}
-                        >
-                          <LoggedShopRoute
-                            path="/shopadmin/card/:name"
-                            component={ShopAdminOneCard}
-                          />
-                        </PriceDisplayContext.Provider>
+                        <LoggedShopRoute
+                          path="/shopadmin/card/:name"
+                          component={ShopAdminOneCard}
+                        />
                       </PriceBufferContext.Provider>
                       <LoggedShopRoute
                         path="/shopadmin"
