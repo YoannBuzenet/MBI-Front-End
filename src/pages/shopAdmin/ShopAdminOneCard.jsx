@@ -95,8 +95,17 @@ const ShopAdminOneCard = ({ match }) => {
           const condition = parseInt(
             completeContext[l].cardShopPrices[m].cardCondition.substr(17)
           );
+          // console.log(completeContext[l]);
+          // console.log(completeContext[l].cardShopPrices[m]);
+          // console.log(completeContext[l].cardShopPrices[m].language.id);
           const language = completeContext[l].cardShopPrices[m].language.id;
           const price = completeContext[l].cardShopPrices[m].price;
+          // console.log(language);
+          // console.log(completeContext[l]);
+          // console.log(completeContext[l]["langs"]);
+          // console.log(completeContext[l]["langs"][language]);
+          // console.log(completeContext[l]["langs"][language][condition]);
+          // console.log(completeContext[l]["langs"][language][condition][isFoil]);
 
           completeContext[l]["langs"][language][condition][isFoil] = price;
         }
@@ -108,9 +117,9 @@ const ShopAdminOneCard = ({ match }) => {
   }
 
   useEffect(() => {
-    //Updating Buffer if empty or if cardName changed
+    //Updating Buffer if empty or if cardName changed AND if conditions are fully loaded
     if (
-      allPricesBuffer.length === 0 ||
+      (conditions.length > 0 && allPricesBuffer.length === 0) ||
       (allPricesBuffer[0] && allPricesBuffer[0].name !== currentName)
     ) {
       //Cancel subscriptions preparation
@@ -131,7 +140,7 @@ const ShopAdminOneCard = ({ match }) => {
 
       return () => source.cancel("");
     }
-  }, [currentName]);
+  }, [currentName, conditions]);
 
   return (
     <>
