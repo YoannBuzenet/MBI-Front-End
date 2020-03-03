@@ -26,6 +26,7 @@ const ShopConditionPriceUpdate = ({
   const { lang, conditions } = useContext(GenericCardInfosContext);
 
   const priceDisplayed = priceValue === null ? "" : priceValue;
+  console.log(parseInt(cardID + "" + conditionID + "" + langID + "" + isFoil));
 
   const handlechange = (
     event,
@@ -38,6 +39,7 @@ const ShopConditionPriceUpdate = ({
     cardID
   ) => {
     //Checking the input is a number
+    console.log(event.target.value);
     if (!isNaN(parseInt(event.target.value))) {
       console.log(
         parseInt(event.target.value),
@@ -70,8 +72,14 @@ const ShopConditionPriceUpdate = ({
         } else {
           console.log("JE TE POSTE");
         }
-        //send the PUT/POST of this element
       }
+    } else if (event.target.value === "") {
+      //set the price to null in context
+      const allPricesCopy = [...allPricesBuffer];
+      allPricesCopy[index].langs[langID][conditionID][isFoil] = null;
+      setAllPricesBuffer(allPricesCopy);
+
+      console.log("delete");
     } else {
       //TODO : toast to tell to put a number
       console.log("type a number please");
@@ -85,6 +93,7 @@ const ShopConditionPriceUpdate = ({
   return (
     <p>
       <input
+        key={parseInt(cardID + "" + conditionID + "" + langID + "" + isFoil)}
         type="text"
         value={priceDisplayed}
         onChange={event => {
