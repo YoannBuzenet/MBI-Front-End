@@ -11,7 +11,7 @@ const LoggedShopRoute = ({ path, component }) => {
   component = withRouter(component);
 
   return authenticationInfos.user.roles.includes("ROLE_SHOP") ? (
-    <Route path={path} component={component} />
+    <Route path={path} render={component} />
   ) : (
     <Redirect to="/login" />
   );

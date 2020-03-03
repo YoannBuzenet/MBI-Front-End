@@ -264,9 +264,9 @@ function App() {
                         )}
                       />
                       <Route path="/login" component={LoginPage} />
-                      } />
+
                       <Route path="/register" component={RegisterPage} />
-                      } />
+
                       <Route
                         path="/my_selling_basket"
                         render={({ match, history }) => (
@@ -286,7 +286,9 @@ function App() {
                         component={mySellRequests}
                       />
                       <LoggedRoute path="/my_account" component={myAccount} />
+
                       {/* Admin Part */}
+
                       <LoggedShopRoute
                         path="/shopadmin/sell_requests/:id"
                         component={ShopAdminOneSellRequest}
@@ -311,12 +313,14 @@ function App() {
                         path="/shopadmin/settings"
                         component={ShopAdminSettings}
                       />
+
                       <PriceBufferContext.Provider value={contextPriceBuffer}>
                         <LoggedShopRoute
                           path="/shopadmin/card/:name"
                           component={ShopAdminOneCard}
                         />
                       </PriceBufferContext.Provider>
+
                       <LoggedShopRoute
                         path="/shopadmin"
                         component={ShopAdminHome}
