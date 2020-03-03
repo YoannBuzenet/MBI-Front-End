@@ -35,13 +35,7 @@ const ShopAdminOneCard = ({ match }) => {
     setCurrentNameDecoded(currentName);
   }, [currentName]);
 
-  // useEffect(() => {
-  //   if (allPricesBuffer.length !== 0) {
-  //     setAllPricesBuffer([]);
-  //   }
-  // }, [currentName, match.params.name]);
-
-  //HERE create a function that get the input from API and create the context for step 1
+  //HERE create a function that get the input from API and create the context
   //Order for the context : Lang / Condition / isFoil / Price
   function buildCompletePriceContext(
     cardList,
@@ -103,12 +97,12 @@ const ShopAdminOneCard = ({ match }) => {
       }
       // console.log(completeContext);
     }
-    //Once all synchronous for loops are done, we set the global table in context.
+    //Once all synchronous for-loops are done, we set the global table in context.
     setAllPricesBuffer(completeContext);
   }
 
   useEffect(() => {
-    //Updating Buffer if empty or if cardName changed AND if conditions are fully loaded
+    //Updating Buffer if empty OR if cardName changed AND if conditions are fully loaded
     if (
       (conditions.length > 0 && allPricesBuffer.length === 0) ||
       (allPricesBuffer[0] && allPricesBuffer[0].name !== currentName)

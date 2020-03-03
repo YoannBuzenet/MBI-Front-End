@@ -7,7 +7,9 @@ const ShopConditionPriceUpdate = ({
   langID,
   isFoil,
   priceValue,
-  isInitialized
+  isInitialized,
+  index,
+  cardID
 }) => {
   //Context - preparing the DISPLAY context format with data
   const { allPricesBuffer, setAllPricesBuffer } = useContext(
@@ -31,7 +33,9 @@ const ShopConditionPriceUpdate = ({
     langID,
     isFoil,
     isInitialized,
-    baseLang
+    baseLang,
+    index,
+    cardID
   ) => {
     //Checking the input is a number
     if (!isNaN(parseInt(event.target.value))) {
@@ -40,8 +44,13 @@ const ShopConditionPriceUpdate = ({
         conditionID,
         langID,
         isFoil,
-        isInitialized
+        isInitialized,
+        index,
+        cardID
       );
+
+      const newPrice = parseInt(event.target.value);
+
       if (conditionID === 1 && isFoil === 0 && langID === baseLang) {
         console.log("on met tout à jour pour le NON foil");
         //update all languages and condition in the current set
@@ -53,7 +62,14 @@ const ShopConditionPriceUpdate = ({
         //update all conditions in the given languages
         //send the batch
       } else {
-        console.log("on PUT/POST juste celui-là");
+        const allPricesCopy = [...allPricesBuffer];
+        allPricesCopy[index].langs[langID][conditionID][isFoil] = newPrice;
+        setAllPricesBuffer(allPricesCopy);
+        if (isInitialized === 1) {
+          console.log("JE TE PUT");
+        } else {
+          console.log("JE TE POSTE");
+        }
         //send the PUT/POST of this element
       }
     } else {
@@ -62,7 +78,9 @@ const ShopConditionPriceUpdate = ({
     }
   };
 
-  useEffect(() => {});
+  useEffect(() => {
+    // console.log(allPricesBuffer);
+  });
 
   return (
     <p>
@@ -76,7 +94,9 @@ const ShopConditionPriceUpdate = ({
             langID,
             isFoil,
             isInitialized,
-            baseLang
+            baseLang,
+            index,
+            cardID
           );
         }}
       />
