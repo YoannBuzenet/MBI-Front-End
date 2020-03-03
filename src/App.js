@@ -28,7 +28,8 @@ import SellingBasketAPI from "./services/sellingBasketAPI";
 import genericCardCharacteristicsAPI from "./services/genericCardCharacteristicsAPI";
 import CanSubmitContext from "./context/canSubmitSellRequestContext";
 import ShopNavbar from "./components/shop/ShopNavBar";
-import LoggedShopRoute from "./components/LoggedShopRoute";
+import LoggedShopRouteComponent from "./components/LoggedShopRouteComponent";
+import LoggedShopRouteRender from "./components/LoggedShopRouteRender";
 import ShopAdminHome from "./pages/shopAdmin/ShopAdminHome";
 import ShopAdminAllSellRequests from "./pages/shopAdmin/ShopAdminAllSellRequest";
 import ShopAdminAllCustomers from "./pages/shopAdmin/ShopAdminAllCustomers";
@@ -289,39 +290,39 @@ function App() {
 
                       {/* Admin Part */}
 
-                      <LoggedShopRoute
+                      <LoggedShopRouteComponent
                         path="/shopadmin/sell_requests/:id"
                         component={ShopAdminOneSellRequest}
                       />
-                      <LoggedShopRoute
+                      <LoggedShopRouteComponent
                         path="/shopadmin/sell_requests"
                         component={ShopAdminAllSellRequests}
                       />
-                      <LoggedShopRoute
+                      <LoggedShopRouteComponent
                         path="/shopadmin/customers/:id"
                         component={ShopAdminCustomer}
                       />
-                      <LoggedShopRoute
+                      <LoggedShopRouteComponent
                         path="/shopadmin/customers"
                         component={ShopAdminAllCustomers}
                       />
-                      <LoggedShopRoute
+                      <LoggedShopRouteComponent
                         path="/shopadmin/cards"
                         component={ShopAdminCards}
                       />
-                      <LoggedShopRoute
+                      <LoggedShopRouteComponent
                         path="/shopadmin/settings"
                         component={ShopAdminSettings}
                       />
 
                       <PriceBufferContext.Provider value={contextPriceBuffer}>
-                        <LoggedShopRoute
+                        <LoggedShopRouteRender
                           path="/shopadmin/card/:name"
                           component={ShopAdminOneCard}
                         />
                       </PriceBufferContext.Provider>
 
-                      <LoggedShopRoute
+                      <LoggedShopRouteComponent
                         path="/shopadmin"
                         component={ShopAdminHome}
                       />

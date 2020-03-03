@@ -3,7 +3,7 @@ import { Redirect, Route } from "react-router-dom";
 import AuthContext from "../context/authContext";
 import { withRouter } from "react-router-dom";
 
-const LoggedShopRoute = ({ path, component }) => {
+const LoggedShopRouteComponent = ({ path, component }) => {
   const { authenticationInfos, setAuthenticationInfos } = useContext(
     AuthContext
   );
@@ -11,10 +11,10 @@ const LoggedShopRoute = ({ path, component }) => {
   component = withRouter(component);
 
   return authenticationInfos.user.roles.includes("ROLE_SHOP") ? (
-    <Route path={path} render={component} />
+    <Route path={path} component={component} />
   ) : (
     <Redirect to="/login" />
   );
 };
 
-export default LoggedShopRoute;
+export default LoggedShopRouteComponent;
