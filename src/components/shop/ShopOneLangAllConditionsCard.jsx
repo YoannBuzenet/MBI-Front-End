@@ -59,7 +59,7 @@ const ShopOneLangAllConditionsCard = ({
       }
     }
 
-    console.log(array_to_display);
+    // console.log(array_to_display);
 
     return array_to_display;
   }
@@ -90,7 +90,7 @@ const ShopOneLangAllConditionsCard = ({
       }
     }
 
-    console.log(array_to_display);
+    // console.log(array_to_display);
 
     return array_to_display;
   }
@@ -124,6 +124,8 @@ const ShopOneLangAllConditionsCard = ({
                 isFoil={infoContainer.isFoilKey}
                 priceValue={infoContainer.priceValue}
                 isInitialized={infoContainer.isInitialized}
+                index={index}
+                cardID={infoContainer.cardID}
               />
             );
           })}
@@ -146,6 +148,8 @@ const ShopOneLangAllConditionsCard = ({
                 isFoil={infoContainer.isFoilKey}
                 priceValue={infoContainer.priceValue}
                 isInitialized={infoContainer.isInitialized}
+                index={index}
+                cardID={infoContainer.cardID}
               />
             );
           })}
