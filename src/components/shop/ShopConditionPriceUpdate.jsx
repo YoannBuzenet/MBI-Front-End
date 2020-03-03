@@ -14,11 +14,19 @@ const ShopConditionPriceUpdate = ({
   //DEFINED langages and Conditions
   const { lang, conditions } = useContext(GenericCardInfosContext);
 
+  const priceDisplayed = priceValue === null ? "" : priceValue;
+
   useEffect(() => {});
 
   return (
     <p>
-      <input type="text" />
+      <input
+        type="text"
+        value={priceDisplayed}
+        onChange={event => {
+          console.log(event);
+        }}
+      />
     </p>
   );
 };
