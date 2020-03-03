@@ -106,54 +106,62 @@ const ShopOneLangAllConditionsCard = ({
 
   return (
     <div>
-      <div>
-        {nonFoilArray.length > 0 && <p>Non Foil</p>}
+      <form action="">
+        <div>
+          {nonFoilArray.length > 0 && <p>Non Foil</p>}
 
-        {nonFoilArray.length !== 0 &&
-          nonFoilArray.map(infoContainer => {
-            return (
-              <ShopConditionPriceUpdate
-                key={
-                  infoContainer.cardID +
-                  infoContainer.conditionKey +
-                  infoContainer.langKey +
-                  infoContainer.isFoilKey
-                }
-                conditionID={infoContainer.conditionKey}
-                langID={infoContainer.langKey}
-                isFoil={infoContainer.isFoilKey}
-                priceValue={infoContainer.priceValue}
-                isInitialized={infoContainer.isInitialized}
-                index={index}
-                cardID={infoContainer.cardID}
-              />
-            );
-          })}
-      </div>
-      <div>
-        {foilArray.length > 0 && <p>Foil</p>}
+          {nonFoilArray.length !== 0 &&
+            nonFoilArray.map(infoContainer => {
+              return (
+                <ShopConditionPriceUpdate
+                  key={parseInt(
+                    infoContainer.cardID +
+                      "" +
+                      infoContainer.conditionKey +
+                      "" +
+                      infoContainer.langKey +
+                      "" +
+                      infoContainer.isFoilKey
+                  )}
+                  conditionID={infoContainer.conditionKey}
+                  langID={infoContainer.langKey}
+                  isFoil={infoContainer.isFoilKey}
+                  priceValue={infoContainer.priceValue}
+                  isInitialized={infoContainer.isInitialized}
+                  index={index}
+                  cardID={infoContainer.cardID}
+                />
+              );
+            })}
+        </div>
+        <div>
+          {foilArray.length > 0 && <p>Foil</p>}
 
-        {foilArray.length !== 0 &&
-          foilArray.map(infoContainer => {
-            return (
-              <ShopConditionPriceUpdate
-                key={
-                  infoContainer.cardID +
-                  infoContainer.conditionKey +
-                  infoContainer.langKey +
-                  infoContainer.isFoilKey
-                }
-                conditionID={infoContainer.conditionKey}
-                langID={infoContainer.langKey}
-                isFoil={infoContainer.isFoilKey}
-                priceValue={infoContainer.priceValue}
-                isInitialized={infoContainer.isInitialized}
-                index={index}
-                cardID={infoContainer.cardID}
-              />
-            );
-          })}
-      </div>
+          {foilArray.length !== 0 &&
+            foilArray.map(infoContainer => {
+              return (
+                <ShopConditionPriceUpdate
+                  key={parseInt(
+                    infoContainer.cardID +
+                      "" +
+                      infoContainer.conditionKey +
+                      "" +
+                      infoContainer.langKey +
+                      "" +
+                      infoContainer.isFoilKey
+                  )}
+                  conditionID={infoContainer.conditionKey}
+                  langID={infoContainer.langKey}
+                  isFoil={infoContainer.isFoilKey}
+                  priceValue={infoContainer.priceValue}
+                  isInitialized={infoContainer.isInitialized}
+                  index={index}
+                  cardID={infoContainer.cardID}
+                />
+              );
+            })}
+        </div>
+      </form>
     </div>
   );
 };
