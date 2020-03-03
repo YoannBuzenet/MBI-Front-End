@@ -25,8 +25,20 @@ const ShopConditionPriceUpdate = ({
   //DEFINED langages and Conditions
   const { lang, conditions } = useContext(GenericCardInfosContext);
 
-  const priceDisplayed = priceValue === null ? "" : priceValue;
-  console.log(parseInt(cardID + "" + conditionID + "" + langID + "" + isFoil));
+  const priceDisplayed =
+    allPricesBuffer[index].langs[langID][conditionID][isFoil] === null
+      ? ""
+      : allPricesBuffer[index].langs[langID][conditionID][isFoil];
+  console.log(allPricesBuffer);
+  console.log(
+    conditionID,
+    langID,
+    isFoil,
+    priceValue,
+    isInitialized,
+    index,
+    cardID
+  );
 
   const handlechange = (
     event,
@@ -67,6 +79,7 @@ const ShopConditionPriceUpdate = ({
         const allPricesCopy = [...allPricesBuffer];
         allPricesCopy[index].langs[langID][conditionID][isFoil] = newPrice;
         setAllPricesBuffer(allPricesCopy);
+        console.log(allPricesCopy);
         if (isInitialized === 1) {
           console.log("JE TE PUT");
         } else {
