@@ -32,15 +32,13 @@ const ShopConditionPriceUpdate = ({
       ? ""
       : allPricesBuffer[index].langs[langID][conditionID][isFoil];
   // console.log(allPricesBuffer);
-  // console.log(
-  //   conditionID,
-  //   langID,
-  //   isFoil,
-  //   priceValue,
-  //   isInitialized,
-  //   index,
-  //   cardID
-  // );
+
+  const idCardShopPrice =
+    allPricesBuffer[index].langs[langID][conditionID][
+      isFoil + "idCardShopPrice"
+    ];
+
+  console.log(idCardShopPrice);
 
   const handlechange = (
     event,
@@ -88,17 +86,11 @@ const ShopConditionPriceUpdate = ({
           };
 
           priceUpdateAPI
-            .putOnePrice(objectToSend, cardID)
+            .putOnePrice(objectToSend, idCardShopPrice)
             .then(response => console.log(response));
 
-          // {
-          // 	"price" : 11,
-          // 	"isFoil" : true,
-          // 	"shop" : "/shops/3",
-          // 	"language" : "/languages/3",
-          // 	"cardCondition" :"/card_conditions/3",
-          // 	"card" : "/cards/21349"
-          // }
+          console.log(idCardShopPrice);
+          console.log(objectToSend);
         } else {
           const objectToSend = {
             price: newPrice,
@@ -112,14 +104,6 @@ const ShopConditionPriceUpdate = ({
             .postOnePrice(objectToSend)
             .then(response => console.log(response));
           console.log("I POST YOU");
-          // {
-          // 	"price" : 11,
-          // 	"isFoil" : true,
-          // 	"shop" : "/shops/3",
-          // 	"language" : "/languages/3",
-          // 	"cardCondition" :"/card_conditions/3",
-          // 	"card" : "/cards/21349"
-          // }
         }
 
         const allPricesCopy = [...allPricesBuffer];

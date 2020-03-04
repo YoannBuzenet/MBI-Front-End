@@ -67,7 +67,9 @@ const ShopAdminOneCard = ({ match }) => {
         for (const condition in completeContext[i].langs[lang]) {
           completeContext[i].langs[lang][condition] = {};
           completeContext[i].langs[lang][condition][0] = null;
+          completeContext[i].langs[lang][condition]["0idCardShopPrice"] = null;
           completeContext[i].langs[lang][condition][1] = null;
+          completeContext[i].langs[lang][condition]["1idCardShopPrice"] = null;
         }
       }
 
@@ -83,6 +85,7 @@ const ShopAdminOneCard = ({ match }) => {
           // console.log(completeContext[l].cardShopPrices[m].language.id);
           const language = completeContext[l].cardShopPrices[m].language.id;
           const price = completeContext[l].cardShopPrices[m].price;
+          const idCardShopPrice = completeContext[l].cardShopPrices[m].id;
           // console.log(language);
           // console.log(completeContext[l]);
           // console.log(completeContext[l]["langs"]);
@@ -91,6 +94,9 @@ const ShopAdminOneCard = ({ match }) => {
           // console.log(completeContext[l]["langs"][language][condition][isFoil]);
 
           completeContext[l]["langs"][language][condition][isFoil] = price;
+          completeContext[l]["langs"][language][condition][
+            isFoil + "idCardShopPrice"
+          ] = idCardShopPrice;
         }
       }
     }
