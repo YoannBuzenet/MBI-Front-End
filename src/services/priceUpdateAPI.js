@@ -15,10 +15,9 @@ function putOnePrice(cardInfo, cardID, cleaningParam) {
   );
 }
 
-function deleteOnePrice(cardInfo, cardID, cleaningParam) {
+function deleteOnePrice(cardShopPriceID, cleaningParam) {
   return axios.delete(
-    "http://127.0.0.1:8000/card_shop_prices/" + cardID,
-    cardInfo,
+    "http://127.0.0.1:8000/card_shop_prices/" + cardShopPriceID,
     cleaningParam
   );
 }
