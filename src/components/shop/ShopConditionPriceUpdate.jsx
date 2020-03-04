@@ -116,8 +116,8 @@ const ShopConditionPriceUpdate = ({
       const allPricesCopy = [...allPricesBuffer];
       allPricesCopy[index].langs[langID][conditionID][isFoil] = null;
       setAllPricesBuffer(allPricesCopy);
-
-      console.log("delete");
+      //Delete in DB
+      priceUpdateAPI.deleteOnePrice(idCardShopPrice);
     } else {
       //TODO : toast to tell to put a number
       console.log("type a number please");
