@@ -51,7 +51,11 @@ const ShopOneLangAllConditionsCard = ({
               conditionKey: parseInt(conditionKey),
               isFoilKey: parseInt(isFoilKey),
               priceValue: priceValue,
-              cardID: context[index].id
+              cardID: context[index].id,
+              idCardShopPrice:
+                context[index].langs[idLang][conditionKey][
+                  isFoilKey + "idCardShopPrice"
+                ]
             });
           }
         }
