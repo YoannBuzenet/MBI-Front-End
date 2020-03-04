@@ -7,12 +7,20 @@ function postOnePrice(cardInfo, cleaningParam) {
     cleaningParam
   );
 }
-function putOnePrice(cardInfo, cleaningParam) {
+function putOnePrice(cardInfo, cardID, cleaningParam) {
   return axios.put(
-    "http://127.0.0.1:8000/card_shop_prices",
+    "http://127.0.0.1:8000/card_shop_prices/" + cardID,
     cardInfo,
     cleaningParam
   );
 }
 
-export default { postOnePrice, putOnePrice };
+function deleteOnePrice(cardInfo, cardID, cleaningParam) {
+  return axios.delete(
+    "http://127.0.0.1:8000/card_shop_prices/" + cardID,
+    cardInfo,
+    cleaningParam
+  );
+}
+
+export default { postOnePrice, putOnePrice, deleteOnePrice };

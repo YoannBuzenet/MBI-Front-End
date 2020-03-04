@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import GenericCardInfosContext from "../../context/genericCardInfosContext";
 import priceBufferContext from "../../context/priceBufferContext";
 import PriceUpdateAPI from "../../services/priceUpdateAPI";
+import priceUpdateAPI from "../../services/priceUpdateAPI";
 
 const ShopConditionPriceUpdate = ({
   conditionID,
@@ -21,6 +22,7 @@ const ShopConditionPriceUpdate = ({
 
   //TODO : pass this in env variable
   const baseLang = 3;
+  const shop = 1;
 
   //DEFINED langages and Conditions
   const { lang, conditions } = useContext(GenericCardInfosContext);
@@ -76,6 +78,19 @@ const ShopConditionPriceUpdate = ({
           allPricesBuffer[index].langs[langID][conditionID][isFoil] !== null
         ) {
           console.log("I PUT YOU");
+          const objectToSend = {
+            price: newPrice,
+            isFoil: isFoil === 1 ? true : false,
+            shop: "/shops/" + shop,
+            language: "/languages/" + langID,
+            cardCondition: "/card_conditions/" + conditionID,
+            card: "/cards/" + cardID
+          };
+
+          priceUpdateAPI
+            .putOnePrice(objectToSend, cardID)
+            .then(response => console.log(response));
+
           // {
           // 	"price" : 11,
           // 	"isFoil" : true,
@@ -85,6 +100,17 @@ const ShopConditionPriceUpdate = ({
           // 	"card" : "/cards/21349"
           // }
         } else {
+          const objectToSend = {
+            price: newPrice,
+            isFoil: isFoil === 1 ? true : false,
+            shop: "/shops/" + shop,
+            language: "/languages/" + langID,
+            cardCondition: "/card_conditions/" + conditionID,
+            card: "/cards/" + cardID
+          };
+          priceUpdateAPI
+            .postOnePrice(objectToSend)
+            .then(response => console.log(response));
           console.log("I POST YOU");
           // {
           // 	"price" : 11,
