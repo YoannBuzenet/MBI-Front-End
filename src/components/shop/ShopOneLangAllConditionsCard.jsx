@@ -51,7 +51,6 @@ const ShopOneLangAllConditionsCard = ({
               conditionKey: parseInt(conditionKey),
               isFoilKey: parseInt(isFoilKey),
               priceValue: priceValue,
-              isInitialized: priceValue ? 1 : 0,
               cardID: context[index].id
             });
           }
@@ -82,7 +81,6 @@ const ShopOneLangAllConditionsCard = ({
               conditionKey: parseInt(conditionKey),
               isFoilKey: parseInt(isFoilKey),
               priceValue: priceValue,
-              isInitialized: priceValue ? 1 : 0,
               cardID: context[index].id
             });
           }
@@ -127,7 +125,6 @@ const ShopOneLangAllConditionsCard = ({
                   langID={infoContainer.langKey}
                   isFoil={infoContainer.isFoilKey}
                   priceValue={infoContainer.priceValue}
-                  isInitialized={infoContainer.isInitialized}
                   index={index}
                   cardID={infoContainer.cardID}
                 />
@@ -154,7 +151,6 @@ const ShopOneLangAllConditionsCard = ({
                   langID={infoContainer.langKey}
                   isFoil={infoContainer.isFoilKey}
                   priceValue={infoContainer.priceValue}
-                  isInitialized={infoContainer.isInitialized}
                   index={index}
                   cardID={infoContainer.cardID}
                 />

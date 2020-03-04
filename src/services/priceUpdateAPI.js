@@ -1,0 +1,18 @@
+import axios from "axios";
+
+function postOnePrice(cardInfo, cleaningParam) {
+  return axios.post(
+    "http://127.0.0.1:8000/card_shop_prices",
+    cardInfo,
+    cleaningParam
+  );
+}
+function putOnePrice(cardInfo, cleaningParam) {
+  return axios.put(
+    "http://127.0.0.1:8000/card_shop_prices",
+    cardInfo,
+    cleaningParam
+  );
+}
+
+export default { postOnePrice, putOnePrice };
