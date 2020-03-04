@@ -93,9 +93,6 @@ const ShopAdminOneCard = ({ match }) => {
           completeContext[l]["langs"][language][condition][isFoil] = price;
         }
       }
-      console.log(completeContext);
-      console.log(currentName);
-      console.log(currentNameDecoded);
     }
     //Once all synchronous for-loops are done, we set the global table in context.
     setAllPricesBuffer(completeContext);
@@ -110,10 +107,6 @@ const ShopAdminOneCard = ({ match }) => {
       //Cancel subscriptions preparation
       const CancelToken = axios.CancelToken;
       const source = CancelToken.source();
-
-      console.log("you should trigger");
-      console.log(currentName);
-      console.log(currentNameDecoded);
 
       cardsAPI
         .getByName(currentNameDecoded, {

@@ -1,13 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 import GenericCardInfosContext from "../../context/genericCardInfosContext";
 import priceBufferContext from "../../context/priceBufferContext";
+import PriceUpdateAPI from "../../services/priceUpdateAPI";
 
 const ShopConditionPriceUpdate = ({
   conditionID,
   langID,
   isFoil,
   priceValue,
-  isInitialized,
   index,
   cardID
 }) => {
@@ -45,7 +45,6 @@ const ShopConditionPriceUpdate = ({
     conditionID,
     langID,
     isFoil,
-    isInitialized,
     baseLang,
     index,
     cardID
@@ -58,7 +57,6 @@ const ShopConditionPriceUpdate = ({
         conditionID,
         langID,
         isFoil,
-        isInitialized,
         index,
         cardID
       );
@@ -74,15 +72,34 @@ const ShopConditionPriceUpdate = ({
         //update all conditions in the given languages
         //send the batch
       } else {
+        if (
+          allPricesBuffer[index].langs[langID][conditionID][isFoil] !== null
+        ) {
+          console.log("I PUT YOU");
+          // {
+          // 	"price" : 11,
+          // 	"isFoil" : true,
+          // 	"shop" : "/shops/3",
+          // 	"language" : "/languages/3",
+          // 	"cardCondition" :"/card_conditions/3",
+          // 	"card" : "/cards/21349"
+          // }
+        } else {
+          console.log("I POST YOU");
+          // {
+          // 	"price" : 11,
+          // 	"isFoil" : true,
+          // 	"shop" : "/shops/3",
+          // 	"language" : "/languages/3",
+          // 	"cardCondition" :"/card_conditions/3",
+          // 	"card" : "/cards/21349"
+          // }
+        }
+
         const allPricesCopy = [...allPricesBuffer];
         allPricesCopy[index].langs[langID][conditionID][isFoil] = newPrice;
         setAllPricesBuffer(allPricesCopy);
         // console.log(allPricesCopy);
-        if (isInitialized === 1) {
-          console.log("I PUT YOU");
-        } else {
-          console.log("I POST YOU");
-        }
       }
     } else if (event.target.value === "") {
       //set the price to null in context
@@ -113,7 +130,6 @@ const ShopConditionPriceUpdate = ({
             conditionID,
             langID,
             isFoil,
-            isInitialized,
             baseLang,
             index,
             cardID
