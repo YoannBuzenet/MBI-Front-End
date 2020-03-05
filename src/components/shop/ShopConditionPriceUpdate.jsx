@@ -22,7 +22,7 @@ const ShopConditionPriceUpdate = ({
 
   //TODO : pass this in env variable
   const baseLang = 3;
-  const shop = 1;
+  const shop = 3;
 
   //DEFINED langages and Conditions
   const { lang, conditions } = useContext(GenericCardInfosContext);
@@ -87,7 +87,8 @@ const ShopConditionPriceUpdate = ({
 
           priceUpdateAPI
             .putOnePrice(objectToSend, idCardShopPrice)
-            .then(response => console.log(response));
+            .then(response => console.log("la", response))
+            .catch(error => console.log(error));
 
           console.log(idCardShopPrice);
           console.log(objectToSend);
@@ -102,7 +103,8 @@ const ShopConditionPriceUpdate = ({
           };
           priceUpdateAPI
             .postOnePrice(objectToSend)
-            .then(response => console.log(response));
+            .then(response => console.log(response))
+            .catch(error => console.log(error));
           console.log("I POST YOU");
         }
 
