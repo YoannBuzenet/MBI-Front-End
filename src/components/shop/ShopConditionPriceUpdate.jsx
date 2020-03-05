@@ -33,16 +33,12 @@ const ShopConditionPriceUpdate = ({
   //DEFINED langages and Conditions
   const { lang, conditions } = useContext(GenericCardInfosContext);
 
+  console.log(allPricesBuffer);
+
   const priceDisplayed =
     allPricesBuffer[index].langs[langID][conditionID][isFoil] === null
       ? ""
       : allPricesBuffer[index].langs[langID][conditionID][isFoil];
-  // console.log(allPricesBuffer);
-
-  const idCardShopPrice =
-    allPricesBuffer[index].langs[langID][conditionID][
-      isFoil + "idCardShopPrice"
-    ];
 
   const handlechange = (event, conditionID, langID, isFoil, index, cardID) => {
     //Checking the input is a number
@@ -138,7 +134,12 @@ const ShopConditionPriceUpdate = ({
           };
 
           priceUpdateAPI
-            .putOnePrice(objectToSend, idCardShopPrice)
+            .putOnePrice(
+              objectToSend,
+              allPricesBuffer[index].langs[langID][conditionID][
+                isFoil + "idCardShopPrice"
+              ]
+            )
             .then(response => console.log("la", response))
             .catch(error => console.log(error));
         } else {
@@ -165,6 +166,7 @@ const ShopConditionPriceUpdate = ({
         }
 
         allPricesCopy[index].langs[langID][conditionID][isFoil] = newPrice;
+        console.log(allPricesCopy);
         setAllPricesBuffer(allPricesCopy);
         // console.log(allPricesCopy);
       }
@@ -174,7 +176,11 @@ const ShopConditionPriceUpdate = ({
       allPricesCopy[index].langs[langID][conditionID][isFoil] = null;
       setAllPricesBuffer(allPricesCopy);
       //Delete in DB
-      priceUpdateAPI.deleteOnePrice(idCardShopPrice);
+      priceUpdateAPI.deleteOnePrice(
+        allPricesBuffer[index].langs[langID][conditionID][
+          isFoil + "idCardShopPrice"
+        ]
+      );
     } else {
       //TODO : toast to tell to put a number
       console.log("type a number please");
