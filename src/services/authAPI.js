@@ -45,7 +45,15 @@ function authenticate(credentials) {
           email: data.client.shop.email,
           adress: data.client.shop.adress,
           postalCode: data.client.shop.postalCode,
-          town: data.client.shop.town
+          town: data.client.shop.town,
+          shopData: data.shop.baseLang
+            ? {
+                baseLang: data.shop.baseLang,
+                PercentPerLangs: data.shop.PercentPerLangs,
+                PercentPerConditions: data.shop.PercentPerConditions,
+                PercentPerConditionFoils: data.shop.PercentPerConditionFoils
+              }
+            : null
         }
       };
     });
@@ -86,6 +94,7 @@ function userInfos() {
 
     //We get back all datas stocked in the browser about the user and put it back in memory.
     const userDatas = JSON.parse(window.localStorage.getItem("userInfos"));
+    console.log(userDatas);
 
     return {
       isAuthenticated: jwtData.exp * 1000 > new Date().getTime(),
@@ -113,7 +122,15 @@ function userInfos() {
         email: userDatas.client.shop.email,
         adress: userDatas.client.shop.adress,
         postalCode: userDatas.client.shop.postalCode,
-        town: userDatas.client.shop.town
+        town: userDatas.client.shop.town,
+        shopData: userDatas.shop
+          ? {
+              baseLang: userDatas.shop.baseLang,
+              PercentPerLangs: userDatas.shop.PercentPerLangs,
+              PercentPerConditions: userDatas.shop.PercentPerConditions,
+              PercentPerConditionFoils: userDatas.shop.PercentPerConditionFoils
+            }
+          : null
       }
     };
   } else {
@@ -143,7 +160,8 @@ function userInfos() {
         email: "",
         adress: "",
         postalCode: "",
-        town: ""
+        town: "",
+        shopData: null
       }
     };
   }

@@ -38,8 +38,6 @@ const ShopConditionPriceUpdate = ({
       isFoil + "idCardShopPrice"
     ];
 
-  console.log(idCardShopPrice);
-
   const handlechange = (
     event,
     conditionID,
@@ -75,7 +73,6 @@ const ShopConditionPriceUpdate = ({
         if (
           allPricesBuffer[index].langs[langID][conditionID][isFoil] !== null
         ) {
-          console.log("I PUT YOU");
           const objectToSend = {
             price: newPrice,
             isFoil: isFoil === 1 ? true : false,
@@ -89,9 +86,6 @@ const ShopConditionPriceUpdate = ({
             .putOnePrice(objectToSend, idCardShopPrice)
             .then(response => console.log("la", response))
             .catch(error => console.log(error));
-
-          console.log(idCardShopPrice);
-          console.log(objectToSend);
         } else {
           const objectToSend = {
             price: newPrice,
@@ -105,7 +99,6 @@ const ShopConditionPriceUpdate = ({
             .postOnePrice(objectToSend)
             .then(response => console.log(response))
             .catch(error => console.log(error));
-          console.log("I POST YOU");
         }
 
         const allPricesCopy = [...allPricesBuffer];
