@@ -7,9 +7,10 @@ function postOnePrice(cardInfo, cleaningParam) {
     cleaningParam
   );
 }
-function putOnePrice(cardInfo, cardID, cleaningParam) {
+function putOnePrice(cardInfo, cardShopPriceID, cleaningParam) {
+  console.log("http://127.0.0.1:8000/card_shop_prices/" + cardShopPriceID);
   return axios.put(
-    "http://127.0.0.1:8000/card_shop_prices/" + cardID,
+    "http://127.0.0.1:8000/card_shop_prices/" + cardShopPriceID,
     cardInfo,
     cleaningParam
   );
