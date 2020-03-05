@@ -4,7 +4,7 @@ import cardsAPI from "../services/cardsAPI";
 import { Link } from "react-router-dom";
 
 const SearchCardBar = props => {
-  console.log("render");
+  // console.log("render");
   const [currentSearch, setCurrentSearch] = useState("");
 
   const [searchResult, setSearchResult] = useState([]);
