@@ -17,7 +17,7 @@ const ShopConditionPriceUpdate = ({
     AuthContext
   );
 
-  console.log(authenticationInfos.shop.shopData);
+  // console.log(authenticationInfos.shop.shopData);
 
   //Context - preparing the DISPLAY context format with data
   const { allPricesBuffer, setAllPricesBuffer } = useContext(
@@ -123,6 +123,8 @@ const ShopConditionPriceUpdate = ({
           setAllPricesBuffer(allPricesCopy);
         }
       } else {
+        const allPricesCopy = [...allPricesBuffer];
+        //PUT
         if (
           allPricesBuffer[index].langs[langID][conditionID][isFoil] !== null
         ) {
@@ -140,6 +142,8 @@ const ShopConditionPriceUpdate = ({
             .then(response => console.log("la", response))
             .catch(error => console.log(error));
         } else {
+          //POST
+
           const objectToSend = {
             price: newPrice,
             isFoil: isFoil === 1 ? true : false,
@@ -148,13 +152,18 @@ const ShopConditionPriceUpdate = ({
             cardCondition: "/card_conditions/" + conditionID,
             card: "/cards/" + cardID
           };
+          console.log(objectToSend);
           priceUpdateAPI
             .postOnePrice(objectToSend)
-            .then(response => console.log(response))
+            .then(
+              response =>
+                (allPricesCopy[index].langs[langID][conditionID][
+                  isFoil + "idCardShopPrice"
+                ] = response.data.id)
+            )
             .catch(error => console.log(error));
         }
 
-        const allPricesCopy = [...allPricesBuffer];
         allPricesCopy[index].langs[langID][conditionID][isFoil] = newPrice;
         setAllPricesBuffer(allPricesCopy);
         // console.log(allPricesCopy);
