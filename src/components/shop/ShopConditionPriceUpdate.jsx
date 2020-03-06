@@ -148,7 +148,9 @@ const ShopConditionPriceUpdate = ({
         isFoil === 0 &&
         langID === authenticationInfos.shop.shopData.baseLang
       ) {
-        console.log("Updating everything but foil cards");
+        console.log(
+          "Updating everything in this variation index but foil cards"
+        );
         //update all languages and condition in the current set
         // send the batch
       } else if (conditionID === 1) {

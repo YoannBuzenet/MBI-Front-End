@@ -33,6 +33,8 @@ const ShopAdminOneCard = ({ match }) => {
     setCurrentNameDecoded(currentName);
   }, [currentName]);
 
+  console.log(allPricesBuffer);
+
   //HERE create a function that get the input from API and create the context
   //Order for the context : Lang / Condition / isFoil / Price
   function buildCompletePriceContext(
@@ -41,8 +43,10 @@ const ShopAdminOneCard = ({ match }) => {
     conditionDefinition
   ) {
     const completeContext = [...cardList];
+    console.log(completeContext);
 
     for (let i = 0; i < completeContext.length; i++) {
+      console.log("ahhhhhhhhhhhhhhhhhhhhhhhhhhhh");
       const allLang = [
         {
           name: completeContext[i].name,
@@ -58,6 +62,7 @@ const ShopAdminOneCard = ({ match }) => {
 
       for (const lang in completeContext[i].langs) {
         completeContext[i].langs[lang] = {};
+
         for (let k = 0; k < conditionDefinition.length; k++) {
           completeContext[i].langs[lang][conditionDefinition[k].id] = {};
         }
@@ -74,30 +79,28 @@ const ShopAdminOneCard = ({ match }) => {
       }
 
       //Parse each price and integrate in our big table
-      for (let l = 0; l < completeContext.length; l++) {
-        for (let m = 0; m < completeContext[l].cardShopPrices.length; m++) {
-          const isFoil = completeContext[l].cardShopPrices[m].isFoil ? 1 : 0;
-          const condition = parseInt(
-            completeContext[l].cardShopPrices[m].cardCondition.substr(17)
-          );
-          // console.log(completeContext[l]);
-          // console.log(completeContext[l].cardShopPrices[m]);
-          // console.log(completeContext[l].cardShopPrices[m].language.id);
-          const language = completeContext[l].cardShopPrices[m].language.id;
-          const price = completeContext[l].cardShopPrices[m].price;
-          const idCardShopPrice = completeContext[l].cardShopPrices[m].id;
-          // console.log(language);
-          // console.log(completeContext[l]);
-          // console.log(completeContext[l]["langs"]);
-          // console.log(completeContext[l]["langs"][language]);
-          // console.log(completeContext[l]["langs"][language][condition]);
-          // console.log(completeContext[l]["langs"][language][condition][isFoil]);
+      for (let m = 0; m < completeContext[i].cardShopPrices.length; m++) {
+        const isFoil = completeContext[i].cardShopPrices[m].isFoil ? 1 : 0;
+        const condition = parseInt(
+          completeContext[i].cardShopPrices[m].cardCondition.substr(17)
+        );
+        // console.log(completeContext[l]);
+        // console.log(completeContext[l].cardShopPrices[m]);
+        // console.log(completeContext[l].cardShopPrices[m].language.id);
+        const language = completeContext[i].cardShopPrices[m].language.id;
+        const price = completeContext[i].cardShopPrices[m].price;
+        const idCardShopPrice = completeContext[i].cardShopPrices[m].id;
+        // console.log(language);
+        // console.log(completeContext[l]);
+        // console.log(completeContext[l]["langs"]);
+        // console.log(completeContext[l]["langs"][language]);
+        // console.log(completeContext[l]["langs"][language][condition]);
+        // console.log(completeContext[l]["langs"][language][condition][isFoil]);
 
-          completeContext[l]["langs"][language][condition][isFoil] = price;
-          completeContext[l]["langs"][language][condition][
-            isFoil + "idCardShopPrice"
-          ] = idCardShopPrice;
-        }
+        completeContext[i]["langs"][language][condition][isFoil] = price;
+        completeContext[i]["langs"][language][condition][
+          isFoil + "idCardShopPrice"
+        ] = idCardShopPrice;
       }
     }
     //Once all synchronous for-loops are done, we set the global table in context.
