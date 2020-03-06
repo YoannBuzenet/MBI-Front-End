@@ -23,4 +23,12 @@ function deleteOnePrice(cardShopPriceID, cleaningParam) {
   );
 }
 
-export default { postOnePrice, putOnePrice, deleteOnePrice };
+function batchPriceUpdate(batch, cleaningParam) {
+  return axios.post(
+    "http://127.0.0.1:8000/batchCardShopPrice",
+    batch,
+    cleaningParam
+  );
+}
+
+export default { postOnePrice, putOnePrice, deleteOnePrice, batchPriceUpdate };
