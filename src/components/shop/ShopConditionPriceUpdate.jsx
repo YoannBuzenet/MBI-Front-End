@@ -33,12 +33,57 @@ const ShopConditionPriceUpdate = ({
   //DEFINED langages and Conditions
   const { lang, conditions } = useContext(GenericCardInfosContext);
 
-  console.log(allPricesBuffer);
+  // console.log(allPricesBuffer);
 
   const priceDisplayed =
     allPricesBuffer[index].langs[langID][conditionID][isFoil] === null
       ? ""
       : allPricesBuffer[index].langs[langID][conditionID][isFoil];
+
+  const sendSmallBatchToAPI = () => {
+    const batch = [];
+    const allPricesCopy = [...allPricesBuffer];
+    //HERE IS THE BATCH BRO (THE SMALL)
+    for (const objectToParse in allPricesCopy[index].langs[langID]) {
+      console.log(allPricesCopy[index].langs[langID][objectToParse]);
+      if (
+        allPricesCopy[index].langs[langID][objectToParse][
+          isFoil + "idCardShopPrice"
+        ]
+      ) {
+        const newPriceToSend = {
+          id:
+            allPricesCopy[index].langs[langID][objectToParse][
+              isFoil + "idCardShopPrice"
+            ],
+          price: allPricesCopy[index].langs[langID][objectToParse][isFoil],
+          isFoil: isFoil === 1 ? true : false,
+          shop: shop,
+          card: cardID,
+          language: langID,
+          cardCondition: parseInt(objectToParse)
+        };
+        batch.push(newPriceToSend);
+      } else {
+        const newPriceToSend = {
+          price: allPricesCopy[index].langs[langID][objectToParse][isFoil],
+          isFoil: isFoil === 1 ? true : false,
+          shop: shop,
+          card: cardID,
+          language: langID,
+          cardCondition: parseInt(objectToParse)
+        };
+        batch.push(newPriceToSend);
+      }
+    }
+    console.log(batch);
+    //send the batch HERE
+    try {
+      priceUpdateAPI.batchPriceUpdate(batch).then(data => console.log(data));
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const handlechange = (event, conditionID, langID, isFoil, index, cardID) => {
     //Checking the input is a number
@@ -92,7 +137,9 @@ const ShopConditionPriceUpdate = ({
 
           setAllPricesBuffer(allPricesCopy);
 
-          //send the batch
+          //Preparing the batch to update API
+
+          sendSmallBatchToAPI();
         } else if (isFoil === 1) {
           //update all conditions in the given languages
           const allPricesCopy = [...allPricesBuffer];
@@ -117,6 +164,8 @@ const ShopConditionPriceUpdate = ({
           }
 
           setAllPricesBuffer(allPricesCopy);
+
+          sendSmallBatchToAPI();
         }
       } else {
         const allPricesCopy = [...allPricesBuffer];
