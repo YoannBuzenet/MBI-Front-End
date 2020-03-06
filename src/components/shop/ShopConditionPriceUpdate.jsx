@@ -30,6 +30,8 @@ const ShopConditionPriceUpdate = ({
   //TODO : pass this in env variable
   const shop = 3;
 
+  console.log(allPricesBuffer);
+
   //DEFINED langages and Conditions
   const { lang, conditions } = useContext(GenericCardInfosContext);
 
@@ -81,7 +83,7 @@ const ShopConditionPriceUpdate = ({
     try {
       priceUpdateAPI
         .batchPriceUpdate(batch)
-        .then(data => registerSmallBatchIntoContext(data));
+        .then(data => registerSmallBatchIntoContext(data.data));
     } catch (error) {
       console.log(error);
     }
@@ -92,8 +94,38 @@ const ShopConditionPriceUpdate = ({
     const contextCopy = [...allPricesBuffer];
     //Copy context
     //Parse Data
-    //Put data into context copy
-    //set context
+    for (let i = 0; i < data.length; i++) {
+      const idCardShopPrice = data[i].id;
+      const price = data[i].price;
+      const shop = parseInt(data[i].shop.substr(7));
+      const idcard = parseInt(data[i].card.substr(7));
+      const languageID = parseInt(data[i].language.substr(11));
+      const conditionID = parseInt(data[i].cardCondition.substr(17));
+      const isFoil = data[i].isFoil === true ? 1 : 0;
+
+      console.log(
+        idCardShopPrice,
+        price,
+        shop,
+        idcard,
+        languageID,
+        conditionID,
+        isFoil,
+        index
+      );
+
+      console.log(
+        contextCopy[index].langs[languageID][conditionID][
+          isFoil + "idCardShopPrice"
+        ]
+      );
+
+      contextCopy[index].langs[languageID][conditionID][
+        isFoil + "idCardShopPrice"
+      ] = idCardShopPrice;
+    }
+    console.log("copie", contextCopy);
+    setAllPricesBuffer(contextCopy);
   };
 
   const handlechange = (event, conditionID, langID, isFoil, index, cardID) => {
@@ -226,7 +258,7 @@ const ShopConditionPriceUpdate = ({
         }
 
         allPricesCopy[index].langs[langID][conditionID][isFoil] = newPrice;
-        console.log(allPricesCopy);
+        // console.log(allPricesCopy);
         setAllPricesBuffer(allPricesCopy);
         // console.log(allPricesCopy);
       }
