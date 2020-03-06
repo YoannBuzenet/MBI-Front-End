@@ -79,10 +79,21 @@ const ShopConditionPriceUpdate = ({
     console.log(batch);
     //send the batch HERE
     try {
-      priceUpdateAPI.batchPriceUpdate(batch).then(data => console.log(data));
+      priceUpdateAPI
+        .batchPriceUpdate(batch)
+        .then(data => registerSmallBatchIntoContext(data));
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const registerSmallBatchIntoContext = data => {
+    console.log(data);
+    const contextCopy = [...allPricesBuffer];
+    //Copy context
+    //Parse Data
+    //Put data into context copy
+    //set context
   };
 
   const handlechange = (event, conditionID, langID, isFoil, index, cardID) => {
