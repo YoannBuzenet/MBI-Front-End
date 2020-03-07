@@ -1,5 +1,21 @@
 import axios from "axios";
 import jwtDecode from "jwt-decode";
+import { lang } from "moment";
+
+//Takes array of objects, returns object structured with ID
+function transformPercentPerLangArrayIntoObject(array) {
+  var objectBEAUTIFULAHAH = {};
+
+  for (let i = 0; i < array.length; i++) {
+    const langToCreate = {};
+
+    langToCreate.id = array[i].id;
+    langToCreate.percentPerLang = array[i].percent;
+    objectBEAUTIFULAHAH[array[i].language] = langToCreate;
+  }
+
+  return objectBEAUTIFULAHAH;
+}
 
 //When an user logins, if the credentials are rights, we send back data to identify him.
 //Then we store data into local storage.
@@ -49,7 +65,9 @@ function authenticate(credentials) {
           shopData: data.shop.baseLang
             ? {
                 baseLang: data.shop.baseLang,
-                PercentPerLangs: data.shop.PercentPerLangs,
+                PercentPerLangs: transformPercentPerLangArrayIntoObject(
+                  data.shop.PercentPerLangs
+                ),
                 PercentPerConditions: data.shop.PercentPerConditions,
                 PercentPerConditionFoils: data.shop.PercentPerConditionFoils
               }
@@ -126,7 +144,9 @@ function userInfos() {
         shopData: userDatas.shop
           ? {
               baseLang: userDatas.shop.baseLang,
-              PercentPerLangs: userDatas.shop.PercentPerLangs,
+              PercentPerLangs: transformPercentPerLangArrayIntoObject(
+                userDatas.shop.PercentPerLangs
+              ),
               PercentPerConditions: userDatas.shop.PercentPerConditions,
               PercentPerConditionFoils: userDatas.shop.PercentPerConditionFoils
             }

@@ -159,18 +159,55 @@ const ShopConditionPriceUpdate = ({
         //1. Copy context
         const contextCopy = [...allPricesBuffer];
         //2. Update baselang
+        var j = 1;
         for (const conditions in contextCopy[index].langs[
           authenticationInfos.shop.shopData.baseLang.id
         ]) {
-          console.log(conditions);
+          if (j === 1) {
+            contextCopy[index].langs[
+              authenticationInfos.shop.shopData.baseLang.id
+            ][conditions][isFoil] = newPrice;
+          } else {
+            contextCopy[index].langs[
+              authenticationInfos.shop.shopData.baseLang.id
+            ][conditions][isFoil] =
+              //If we want to make prices more stable integer, implement function here
+              (newPrice *
+                authenticationInfos.shop.shopData.PercentPerConditions[j - 1]
+                  .percent) /
+              100;
+          }
+          j++;
         }
 
         //3. Loop on everything, skip baselang
         for (const language in contextCopy[index]) {
           if (language.id === authenticationInfos.shop.shopData.baseLang.id) {
             //skip
+            console.log("skip");
           } else {
             //update the lang that is not baseLang
+            // var k = 1;
+            // for (const conditions in contextCopy[index].langs[
+            //   authenticationInfos.shop.shopData.baseLang.id
+            // ]) {
+            //   if (k === 1) {
+            //     contextCopy[index].langs[
+            //       authenticationInfos.shop.shopData.baseLang.id
+            //     ][conditions][isFoil] = newPrice;
+            //   } else {
+            //     contextCopy[index].langs[
+            //       authenticationInfos.shop.shopData.baseLang.id
+            //     ][conditions][isFoil] =
+            //       //If we want to make prices more stable integer, implement function here
+            //       (newPrice *
+            //         authenticationInfos.shop.shopData.PercentPerConditions[
+            //           k - 1
+            //         ].percent) /
+            //       100;
+            //   }
+            //   j++;
+            // }
           }
           console.log(language);
         }
