@@ -33,7 +33,7 @@ const ShopAdminOneCard = ({ match }) => {
     setCurrentNameDecoded(currentName);
   }, [currentName]);
 
-  console.log(allPricesBuffer);
+  // console.log(allPricesBuffer);
 
   //HERE create a function that get the input from API and create the context
   //Order for the context : Lang / Condition / isFoil / Price
@@ -43,7 +43,7 @@ const ShopAdminOneCard = ({ match }) => {
     conditionDefinition
   ) {
     const completeContext = [...cardList];
-    console.log(completeContext);
+    // console.log(completeContext);
 
     for (let i = 0; i < completeContext.length; i++) {
       const allLang = [
@@ -121,7 +121,7 @@ const ShopAdminOneCard = ({ match }) => {
           cancelToken: source.token
         })
         .then(data => {
-          console.log(data.data["hydra:member"]);
+          // console.log(data.data["hydra:member"]);
           return data;
         })
         .then(data =>
