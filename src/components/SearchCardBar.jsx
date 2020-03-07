@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import cardsAPI from "../services/cardsAPI";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const SearchCardBar = props => {
   // console.log("render");
@@ -10,13 +11,20 @@ const SearchCardBar = props => {
   const [searchResult, setSearchResult] = useState([]);
 
   useEffect(() => {
+    //Preparing cancellation
+    const CancelToken = axios.CancelToken;
+    const source = CancelToken.source();
+
     if (currentSearch.length >= 3) {
       console.log("on y va bébé");
       cardsAPI
-        .searchApproxByName(currentSearch)
+        .searchApproxByName(currentSearch, {
+          cancelToken: source.token
+        })
         .then(data => {
           console.log(data.data);
           const filteringArray = [];
+
           if (data.data.length > 0) {
             filteringArray.push(data.data[0]);
           }
@@ -40,6 +48,7 @@ const SearchCardBar = props => {
         .then(data => setSearchResult(data));
     }
     //return cancelation TO DO
+    return () => source.cancel("");
   }, [currentSearch]);
 
   const handleChange = event => {
@@ -73,7 +82,7 @@ const SearchCardBar = props => {
                   }}
                   key={cardResult.id}
                 >
-                  (<div className="card-line-result">{cardResult.name}</div>)
+                  <div className="card-line-result">{cardResult.name}</div>
                 </Link>
               );
             })}
