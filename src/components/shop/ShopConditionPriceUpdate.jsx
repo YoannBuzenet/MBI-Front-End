@@ -140,14 +140,14 @@ const ShopConditionPriceUpdate = ({
             isFoil: isFoil === 1 ? true : false,
             shop: shop,
             card: cardID,
-            language: langID,
+            language: LangToParse,
             cardCondition: parseInt(objectToParse)
           };
           batch.push(newPriceToSend);
         }
       }
     }
-    console.log(batch);
+    console.log("big batch", batch);
     try {
       priceUpdateAPI
         .batchPriceUpdate(batch)
