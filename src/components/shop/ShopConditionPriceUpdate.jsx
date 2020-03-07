@@ -30,7 +30,7 @@ const ShopConditionPriceUpdate = ({
   //TODO : pass this in env variable
   const shop = 3;
 
-  console.log(allPricesBuffer);
+  // console.log(allPricesBuffer);
 
   //DEFINED langages and Conditions
   const { lang, conditions } = useContext(GenericCardInfosContext);
@@ -128,9 +128,13 @@ const ShopConditionPriceUpdate = ({
     setAllPricesBuffer(contextCopy);
   };
 
+  //This functions allows to update price on a card.
+  // If Mint field is updated in BaseLang, we update all fields of all language in the same set, for non foil.
+  // If mint is updated for non baselang, we update all the conditions only in this lang for non foil or foil
+  // If another field is updated, we update just the field
+  // Each time we update, we must wait for server response to add the new ID to our context, to be able to modify content.
   const handlechange = (event, conditionID, langID, isFoil, index, cardID) => {
     //Checking the input is a number
-    // console.log(event.target.value);
     if (!isNaN(parseInt(event.target.value))) {
       console.log(
         parseInt(event.target.value),
@@ -146,13 +150,34 @@ const ShopConditionPriceUpdate = ({
       if (
         conditionID === 1 &&
         isFoil === 0 &&
-        langID === authenticationInfos.shop.shopData.baseLang
+        langID === authenticationInfos.shop.shopData.baseLang.id
       ) {
         console.log(
           "Updating everything in this variation index but foil cards"
         );
-        //update all languages and condition in the current set
-        // send the batch
+        //AIM - update all languages and condition in the current set
+        //1. Copy context
+        const contextCopy = [...allPricesBuffer];
+        //2. Update baselang
+        for (const conditions in contextCopy[index].langs[
+          authenticationInfos.shop.shopData.baseLang.id
+        ]) {
+          console.log(conditions);
+        }
+
+        //3. Loop on everything, skip baselang
+        for (const language in contextCopy[index]) {
+          if (language.id === authenticationInfos.shop.shopData.baseLang.id) {
+            //skip
+          } else {
+            //update the lang that is not baseLang
+          }
+          console.log(language);
+        }
+        //4. Set context
+        //5. Build the batch object
+        //6. Send the batch
+        //7. Receive the batch, update context with ID Card Shop Price
       } else if (conditionID === 1) {
         if (isFoil === 0) {
           console.log(
@@ -268,6 +293,7 @@ const ShopConditionPriceUpdate = ({
       //set the price to null in context
       const allPricesCopy = [...allPricesBuffer];
       allPricesCopy[index].langs[langID][conditionID][isFoil] = null;
+
       setAllPricesBuffer(allPricesCopy);
       //Delete in DB
       priceUpdateAPI.deleteOnePrice(
@@ -275,6 +301,9 @@ const ShopConditionPriceUpdate = ({
           isFoil + "idCardShopPrice"
         ]
       );
+      allPricesCopy[index].langs[langID][conditionID][
+        isFoil + "idCardShopPrice"
+      ] = null;
     } else {
       //TODO : toast to tell to put a number
       console.log("type a number please");
