@@ -46,7 +46,6 @@ const ShopAdminOneCard = ({ match }) => {
     console.log(completeContext);
 
     for (let i = 0; i < completeContext.length; i++) {
-      console.log("ahhhhhhhhhhhhhhhhhhhhhhhhhhhh");
       const allLang = [
         {
           name: completeContext[i].name,
