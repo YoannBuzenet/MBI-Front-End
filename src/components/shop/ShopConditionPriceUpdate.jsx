@@ -181,37 +181,50 @@ const ShopConditionPriceUpdate = ({
         }
 
         //3. Loop on everything, skip baselang
-        for (const language in contextCopy[index]) {
-          if (language.id === authenticationInfos.shop.shopData.baseLang.id) {
+        for (const language in contextCopy[index].langs) {
+          if (
+            parseInt(language) === authenticationInfos.shop.shopData.baseLang.id
+          ) {
             //skip
             console.log("skip");
           } else {
+            console.log("browsing each language");
             //update the lang that is not baseLang
-            // var k = 1;
-            // for (const conditions in contextCopy[index].langs[
-            //   authenticationInfos.shop.shopData.baseLang.id
-            // ]) {
-            //   if (k === 1) {
-            //     contextCopy[index].langs[
-            //       authenticationInfos.shop.shopData.baseLang.id
-            //     ][conditions][isFoil] = newPrice;
-            //   } else {
-            //     contextCopy[index].langs[
-            //       authenticationInfos.shop.shopData.baseLang.id
-            //     ][conditions][isFoil] =
-            //       //If we want to make prices more stable integer, implement function here
-            //       (newPrice *
-            //         authenticationInfos.shop.shopData.PercentPerConditions[
-            //           k - 1
-            //         ].percent) /
-            //       100;
-            //   }
-            //   j++;
-            // }
+            var k = 1;
+            for (const conditions in contextCopy[index].langs[
+              authenticationInfos.shop.shopData.baseLang.id
+            ]) {
+              if (k === 1) {
+                contextCopy[index].langs[parseInt(language)][conditions][
+                  isFoil
+                ] =
+                  (newPrice *
+                    authenticationInfos.shop.shopData.PercentPerLangs[
+                      parseInt(language)
+                    ].percentPerLang) /
+                  100;
+              } else {
+                contextCopy[index].langs[parseInt(language)][conditions][
+                  isFoil
+                ] =
+                  //If we want to make prices more stable integer, implement function here
+                  (((newPrice *
+                    authenticationInfos.shop.shopData.PercentPerLangs[
+                      parseInt(language)
+                    ].percentPerLang) /
+                    100) *
+                    authenticationInfos.shop.shopData.PercentPerConditions[
+                      k - 1
+                    ].percent) /
+                  100;
+              }
+              k++;
+            }
           }
-          console.log(language);
         }
+        console.log(contextCopy);
         //4. Set context
+        setAllPricesBuffer(contextCopy);
         //5. Build the batch object
         //6. Send the batch
         //7. Receive the batch, update context with ID Card Shop Price
