@@ -30,7 +30,7 @@ const ShopConditionPriceUpdate = ({
   //TODO : pass this in env variable
   const shop = 3;
 
-  // console.log(allPricesBuffer);
+  console.log(allPricesBuffer);
 
   //DEFINED langages and Conditions
   const { lang, conditions } = useContext(GenericCardInfosContext);
@@ -83,13 +83,13 @@ const ShopConditionPriceUpdate = ({
     try {
       priceUpdateAPI
         .batchPriceUpdate(batch)
-        .then(data => registerSmallBatchIntoContext(data.data));
+        .then(data => registerBatchResponseIntoContext(data.data));
     } catch (error) {
       console.log(error);
     }
   };
 
-  const registerSmallBatchIntoContext = data => {
+  const registerBatchResponseIntoContext = data => {
     console.log(data);
     const contextCopy = [...allPricesBuffer];
     //Copy context
@@ -103,29 +103,58 @@ const ShopConditionPriceUpdate = ({
       const conditionID = parseInt(data[i].cardCondition.substr(17));
       const isFoil = data[i].isFoil === true ? 1 : 0;
 
-      console.log(
-        idCardShopPrice,
-        price,
-        shop,
-        idcard,
-        languageID,
-        conditionID,
-        isFoil,
-        index
-      );
-
-      console.log(
-        contextCopy[index].langs[languageID][conditionID][
-          isFoil + "idCardShopPrice"
-        ]
-      );
-
-      contextCopy[index].langs[languageID][conditionID][
-        isFoil + "idCardShopPrice"
-      ] = idCardShopPrice;
+      setAllPricesBuffer(contextCopy);
     }
-    console.log("copie", contextCopy);
-    setAllPricesBuffer(contextCopy);
+  };
+
+  const sendBigBatchToAPI = () => {
+    const batch = [];
+    const allPricesCopy = [...allPricesBuffer];
+    //HERE IS THE BATCH BRO (THE SMALL)
+    for (const LangToParse in allPricesCopy[index].langs) {
+      for (const objectToParse in allPricesCopy[index].langs[LangToParse]) {
+        console.log(allPricesCopy[index].langs[LangToParse][objectToParse]);
+        if (
+          allPricesCopy[index].langs[LangToParse][objectToParse][
+            isFoil + "idCardShopPrice"
+          ]
+        ) {
+          const newPriceToSend = {
+            id:
+              allPricesCopy[index].langs[LangToParse][objectToParse][
+                isFoil + "idCardShopPrice"
+              ],
+            price:
+              allPricesCopy[index].langs[LangToParse][objectToParse][isFoil],
+            isFoil: isFoil === 1 ? true : false,
+            shop: shop,
+            card: cardID,
+            language: LangToParse,
+            cardCondition: parseInt(objectToParse)
+          };
+          batch.push(newPriceToSend);
+        } else {
+          const newPriceToSend = {
+            price:
+              allPricesCopy[index].langs[LangToParse][objectToParse][isFoil],
+            isFoil: isFoil === 1 ? true : false,
+            shop: shop,
+            card: cardID,
+            language: langID,
+            cardCondition: parseInt(objectToParse)
+          };
+          batch.push(newPriceToSend);
+        }
+      }
+    }
+    console.log(batch);
+    try {
+      priceUpdateAPI
+        .batchPriceUpdate(batch)
+        .then(data => registerBatchResponseIntoContext(data.data));
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   //This functions allows to update price on a card.
@@ -185,10 +214,9 @@ const ShopConditionPriceUpdate = ({
           if (
             parseInt(language) === authenticationInfos.shop.shopData.baseLang.id
           ) {
-            //skip
-            console.log("skip");
+            //If the current Lang is Baselang, we skip because we've updated it just above
           } else {
-            console.log("browsing each language");
+            //Browsing all languages
             //update the lang that is not baseLang
             var k = 1;
             for (const conditions in contextCopy[index].langs[
@@ -226,6 +254,8 @@ const ShopConditionPriceUpdate = ({
         //4. Set context
         setAllPricesBuffer(contextCopy);
         //5. Build the batch object
+        sendBigBatchToAPI();
+
         //6. Send the batch
         //7. Receive the batch, update context with ID Card Shop Price
       } else if (conditionID === 1) {
