@@ -4,6 +4,9 @@ import priceBufferContext from "../../context/priceBufferContext";
 import priceUpdateAPI from "../../services/priceUpdateAPI";
 import AuthContext from "../../context/authContext";
 
+//This component updates prices in context, send to API, and treats resp back to update context with new ID.
+//Depending if updated lang is baseLang or not, and Mint condition or not, we update several languages or fields of the form, or just one.
+
 const ShopConditionPriceUpdate = ({
   conditionID,
   langID,
