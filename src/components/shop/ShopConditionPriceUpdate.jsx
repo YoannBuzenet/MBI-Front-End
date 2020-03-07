@@ -33,7 +33,7 @@ const ShopConditionPriceUpdate = ({
   //TODO : pass this in env variable
   const shop = 3;
 
-  console.log(allPricesBuffer);
+  // console.log(allPricesBuffer);
 
   //DEFINED langages and Conditions
   const { lang, conditions } = useContext(GenericCardInfosContext);

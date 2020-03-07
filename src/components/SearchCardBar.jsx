@@ -17,7 +17,9 @@ const SearchCardBar = props => {
         .then(data => {
           console.log(data.data);
           const filteringArray = [];
-          filteringArray.push(data.data[0]);
+          if (data.data.length > 0) {
+            filteringArray.push(data.data[0]);
+          }
 
           for (let i = 0; i < data.data.length; i++) {
             var isAlreadyHere = false;
@@ -37,6 +39,7 @@ const SearchCardBar = props => {
         })
         .then(data => setSearchResult(data));
     }
+    //return cancelation TO DO
   }, [currentSearch]);
 
   const handleChange = event => {
@@ -60,6 +63,7 @@ const SearchCardBar = props => {
         <div className="search-result">
           {searchResult.length > 0 &&
             searchResult.map((cardResult, index) => {
+              console.log(searchResult);
               console.log(cardResult);
               return (
                 <Link
@@ -69,7 +73,7 @@ const SearchCardBar = props => {
                   }}
                   key={cardResult.id}
                 >
-                  <div className="card-line-result">{cardResult.name}</div>
+                  (<div className="card-line-result">{cardResult.name}</div>)
                 </Link>
               );
             })}
