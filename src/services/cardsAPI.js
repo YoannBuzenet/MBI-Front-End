@@ -7,8 +7,11 @@ function getByName(cardName, cleaningParam) {
   );
 }
 
-function searchApproxByName(cardName) {
-  return axios.get("http://127.0.0.1:8000/cardsearch?name=" + cardName);
+function searchApproxByName(cardName, cleaningParam) {
+  return axios.get(
+    "http://127.0.0.1:8000/cardsearch?name=" + cardName,
+    cleaningParam
+  );
 }
 
 export default {
