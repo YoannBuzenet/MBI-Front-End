@@ -496,6 +496,15 @@ tbody.cardLineShop {
 *********LOGIN PAGE********
 **************************/
 .connecting-button {
+  padding: 1rem;
+  margin-top: 0.5rem;
+  border-radius: 5px;
+  border: none;
+}
+
+.connecting-button:hover {
+  background-color: var(--main-bg-color-medium);
+  color: white;
 }
 
 .field-form {
@@ -507,7 +516,8 @@ tbody.cardLineShop {
 }
 
 .field-form input,
-.field-form textarea {
+.my-account textarea {
   padding: 0.5rem;
   border-radius: var(--border-radius-form-field);
+  border: 1px solid lightgrey;
 }

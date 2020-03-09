@@ -132,7 +132,9 @@ const RegisterPage = ({ history }) => {
             label="Ville"
           />
 
-          <button type="submit">Envoyer</button>
+          <button type="submit" className="connecting-button">
+            Envoyer
+          </button>
         </form>
       </div>
     </>
