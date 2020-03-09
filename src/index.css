@@ -108,8 +108,8 @@ h2 {
   top: -10%;
   right: -120%;
   left: -2000%;
-  z-index: 3;
-  background-color: black;
+  z-index: 4;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 /**************************
@@ -269,7 +269,7 @@ div.connect p {
   width: 30vw;
   right: -145px;
   background-color: white;
-  z-index: 4;
+  z-index: 5;
 }
 
 .classic_links_responsive {

@@ -25,9 +25,8 @@ const BurgerMenu = ({ history }) => {
       {currentBasket.length > 0 && (
         <div className="responsive-basket-quantity">{currentBasket.length}</div>
       )}
-      {isResponsiveMenuDisplayed && (
-          <BurgerMenuComponents history={history} />
-        ) && <BlackDiv />}
+      {isResponsiveMenuDisplayed && <BurgerMenuComponents history={history} />}
+      {isResponsiveMenuDisplayed && <BlackDiv />}
     </div>
   );
 };
