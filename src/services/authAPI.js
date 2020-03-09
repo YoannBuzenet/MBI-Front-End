@@ -62,7 +62,7 @@ function authenticate(credentials) {
           adress: data.client.shop.adress,
           postalCode: data.client.shop.postalCode,
           town: data.client.shop.town,
-          shopData: data.shop.baseLang
+          shopData: data.shop
             ? {
                 baseLang: data.shop.baseLang,
                 PercentPerLangs: transformPercentPerLangArrayIntoObject(
