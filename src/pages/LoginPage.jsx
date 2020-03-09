@@ -75,7 +75,7 @@ const LoginPage = ({ onLogin, history }) => {
           error=""
         />
         <div className="form-group">
-          <button type="submit" className="btn btn-success">
+          <button type="submit" className="connecting-button">
             Je me connecte
           </button>
         </div>

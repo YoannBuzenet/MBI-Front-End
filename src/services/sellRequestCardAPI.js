@@ -6,26 +6,26 @@ function update(
   SellRequestCardPropertyValue
 ) {
   var propertyUpdate;
-  if (SellRequestCardPropertyName == "price") {
+  if (SellRequestCardPropertyName === "price") {
     propertyUpdate = {
       price: parseInt(SellRequestCardPropertyValue)
     };
-  } else if (SellRequestCardPropertyName == "quantity") {
+  } else if (SellRequestCardPropertyName === "quantity") {
     propertyUpdate = {
       // card: "/cards/" + SellRequestCard.id,
       cardQuantity: SellRequestCardPropertyValue
     };
-  } else if (SellRequestCardPropertyName == "isFoil") {
-    if (SellRequestCardPropertyValue == "Yes") {
+  } else if (SellRequestCardPropertyName === "isFoil") {
+    if (SellRequestCardPropertyValue === "Yes") {
       propertyUpdate = { isFOil: true };
-    } else if (SellRequestCardPropertyValue == "No") {
+    } else if (SellRequestCardPropertyValue === "No") {
       propertyUpdate = { isFOil: false };
     }
-  } else if (SellRequestCardPropertyName == "lang") {
+  } else if (SellRequestCardPropertyName === "lang") {
     propertyUpdate = {
       language: "/languages/" + SellRequestCardPropertyValue
     };
-  } else if (SellRequestCardPropertyName == "condition") {
+  } else if (SellRequestCardPropertyName === "condition") {
     propertyUpdate = {
       CardCondition: "/card_conditions/" + SellRequestCardPropertyValue
     };
