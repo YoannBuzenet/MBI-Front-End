@@ -248,9 +248,11 @@ div.connect p {
   margin-left: 5px;
 }
 
+.hidden-responsive-menu {
+  color: green;
+}
+
 @media only screen and (max-width: 1000px) {
-  .navbar {
-  }
   div.connect {
     display: none;
   }
@@ -260,9 +262,19 @@ div.connect p {
     align-items: center;
   }
   .burger-menu {
+    position: relative;
     display: flex;
     align-items: center;
     cursor: pointer;
+    width: 40px;
+  }
+  .responsive-basket-quantity {
+    position: absolute;
+    bottom: -5px;
+    right: -7px;
+    background-color: red;
+    border-radius: 50%;
+    width: 20px;
   }
 }
 @media only screen and (max-width: 650px) {
