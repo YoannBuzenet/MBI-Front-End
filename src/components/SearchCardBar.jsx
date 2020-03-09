@@ -72,8 +72,8 @@ const SearchCardBar = props => {
         <div className="search-result">
           {searchResult.length > 0 &&
             searchResult.map((cardResult, index) => {
-              console.log(searchResult);
-              console.log(cardResult);
+              // console.log(searchResult);
+              // console.log(cardResult);
               return (
                 <Link
                   to={"/shopadmin/card/" + cardResult.name}
@@ -82,7 +82,11 @@ const SearchCardBar = props => {
                   }}
                   key={cardResult.id}
                 >
-                  <div className="card-line-result">{cardResult.name}</div>
+                  <div className="card-line-result">
+                    <span className="card-line-result-text">
+                      {cardResult.name}
+                    </span>
+                  </div>
                 </Link>
               );
             })}

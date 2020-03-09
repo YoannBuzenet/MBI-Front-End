@@ -55,25 +55,25 @@ const ShopNavbar = ({ history }) => {
       )}
       <nav className="navbar navbar-admin">
         <div className="container">
-          <Link to="/shopadmin/cards" className="classic-links">
-            <p>Boutique - Accès Admin</p>
-          </Link>
-          <Link to="/" className="classic-links">
-            <p>Voir le site client</p>
-          </Link>
+          <div className="menu-links-left">
+            <Link to="/shopadmin/cards" className="classic-links">
+              Boutique - Accès Admin
+            </Link>
+            <Link to="/" className="classic-links">
+              Voir le site client
+            </Link>
 
-          <SearchCardBar />
+            <SearchCardBar />
+          </div>
 
           <Link className="classic-links nav-element" to="/my_selling_basket">
-            <p>
-              Créer Rachat (
-              <span className="buying-total">
-                {currentBasket.reduce((total, card) => {
-                  return total + card.quantity;
-                }, 0)}
-              </span>
-              )
-            </p>
+            Créer Rachat (
+            <span className="buying-total">
+              {currentBasket.reduce((total, card) => {
+                return total + card.quantity;
+              }, 0)}
+            </span>
+            )
           </Link>
           {
             <div className="my_options">

@@ -250,6 +250,12 @@ div.connect p {
   background-color: orange;
 }
 
+.menu-links-left {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 /**************************
 **NAVBAR ADMIN SEARCH BAR**
 **************************/
@@ -257,14 +263,34 @@ div.connect p {
   position: relative;
 }
 
+.search-card-form input {
+  padding: 0.5rem;
+  border-radius: 8px;
+  border: none;
+}
+
 .search-card-form .search-result {
   position: absolute;
-  top: 2.2rem;
+  top: 2.5rem;
   width: 100%;
+  box-shadow: 1px 5px 5px black;
+}
+
+.search-card-form .search-result a {
+  text-decoration: none;
 }
 
 .search-card-form .search-result .card-line-result {
-  background-color: blue;
+  padding: 1rem 0;
+  background-color: white;
+}
+
+.search-card-form .search-result .card-line-result-text {
+  color: black;
+}
+
+.search-card-form .search-result .card-line-result:hover {
+  background-color: var(--main-bg-color);
 }
 /**************************
 *********FOOTER***********
