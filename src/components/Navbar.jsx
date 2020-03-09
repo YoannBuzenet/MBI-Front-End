@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import AuthContext from "../context/authContext";
 import SellingBasketContext from "../context/sellingBasket";
 import authAPI from "../services/authAPI";
+import BurgerMenu from "./BurgerMenu";
 
 const Navbar = ({ history }) => {
   //Current Authentication
@@ -58,9 +59,8 @@ const Navbar = ({ history }) => {
           </Link>
           {authenticationInfos.isAuthenticated ? (
             <div className="my_options">
-              <div className="burger-menu">
-                <img src="/public/pictures/burger-menu.png" alt="" />
-              </div>
+              <BurgerMenu history={history} />
+
               <Link
                 className="classic-links nav-element"
                 to="/my_selling_basket"
@@ -109,9 +109,8 @@ const Navbar = ({ history }) => {
             </div>
           ) : (
             <div className="not-connected-options">
-              <div className="burger-menu">
-                <img src="/pictures/burger-menu.png" alt="" />
-              </div>
+              <BurgerMenu history={history} />
+
               <div className="connect">
                 <Link
                   className="classic-links nav-element"
