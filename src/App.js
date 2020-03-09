@@ -41,6 +41,7 @@ import ShopAdminSettings from "./pages/shopAdmin/ShopAdminSettings";
 import Footer from "./components/Footer";
 import ShopAdminOneCard from "./pages/shopAdmin/ShopAdminOneCard";
 import PriceBufferContext from "./context/priceBufferContext";
+import isResponsiveMenuDisplayedContext from "./context/menuDisplayedContext";
 
 //Really Useful library to check all rerenders made on ALL components (you can setup it to check just one)
 // if (process.env.NODE_ENV === "development") {
@@ -51,7 +52,7 @@ import PriceBufferContext from "./context/priceBufferContext";
 // }
 
 function App() {
-  //Checking is the JWT token is still good, if yes, Keep it on Axios
+  //Checking is the JWT token is still good, if yes, Keep it in Axios
   const didGetTokenBack = authAPI.setup();
 
   //APP INITIALIZATION USE EFFECT
@@ -102,6 +103,11 @@ function App() {
   //STATE - Price Buffer Update State
   const [allPricesBuffer, setAllPricesBuffer] = useState([]);
 
+  //STATE - Check if responsive Menu is displayed
+  const [isResponsiveMenuDisplayed, setIsResponsiveMenuDisplayed] = useState(
+    false
+  );
+
   // CONTEXT CREATION Creating All Sets value for context
   const contextAllSets = {
     allSets: allSets,
@@ -136,6 +142,12 @@ function App() {
   const contextPriceBuffer = {
     allPricesBuffer: allPricesBuffer,
     setAllPricesBuffer: setAllPricesBuffer
+  };
+
+  //CONTEXT CREATION - Is Responsive Menu Displayed
+  const contextResponsiveMenuDisplayed = {
+    isResponsiveMenuDisplayed: isResponsiveMenuDisplayed,
+    setIsResponsiveMenuDisplayed: setIsResponsiveMenuDisplayed
   };
 
   // Each time the currentBasket (which stores what we want to sell) is updated, we save it in Local storage.
@@ -238,12 +250,16 @@ function App() {
               <CanSubmitContext.Provider value={contextSubmit}>
                 <SellRequestContext.Provider value={contextAdminSellRequest}>
                   <Router>
-                    {authenticationInfos.user.roles &&
-                    authenticationInfos.user.roles.includes("ROLE_SHOP") ? (
-                      <ShopNavbarWithRouter />
-                    ) : (
-                      <NavbarWithRouter />
-                    )}
+                    <isResponsiveMenuDisplayedContext.Provider
+                      value={contextResponsiveMenuDisplayed}
+                    >
+                      {authenticationInfos.user.roles &&
+                      authenticationInfos.user.roles.includes("ROLE_SHOP") ? (
+                        <ShopNavbarWithRouter />
+                      ) : (
+                        <NavbarWithRouter />
+                      )}
+                    </isResponsiveMenuDisplayedContext.Provider>
                     <Footer />
                     <Switch>
                       <Route

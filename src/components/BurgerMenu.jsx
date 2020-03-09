@@ -1,15 +1,18 @@
 import React, { useContext, useState } from "react";
 import SellingBasketContext from "../context/sellingBasket";
 import BurgerMenuComponents from "./BurgerMenuComponents";
+import BlackDiv from "./BlackDiv";
+import isResponsiveMenuDisplayedContext from "../context/menuDisplayedContext";
 
 const BurgerMenu = ({ history }) => {
   //Current Selling Request Basket
   const { currentBasket, setCurrentBasket } = useContext(SellingBasketContext);
 
-  //Is responsive menu displayed ?
-  const [isResponsiveMenuDisplayed, setIsResponsiveMenuDisplayed] = useState(
-    false
-  );
+  //Is Menu Responsive Displayed
+  const {
+    isResponsiveMenuDisplayed,
+    setIsResponsiveMenuDisplayed
+  } = useContext(isResponsiveMenuDisplayedContext);
 
   const handleClick = event => {
     setIsResponsiveMenuDisplayed(!isResponsiveMenuDisplayed);
@@ -22,7 +25,9 @@ const BurgerMenu = ({ history }) => {
       {currentBasket.length > 0 && (
         <div className="responsive-basket-quantity">{currentBasket.length}</div>
       )}
-      {isResponsiveMenuDisplayed && <BurgerMenuComponents history={history} />}
+      {isResponsiveMenuDisplayed && (
+          <BurgerMenuComponents history={history} />
+        ) && <BlackDiv />}
     </div>
   );
 };
