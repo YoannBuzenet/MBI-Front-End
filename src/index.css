@@ -9,6 +9,7 @@
   --main-bg-color: coral;
   --main-bg-color-medium: rgba(255, 127, 80, 0.5);
   --main-bg-color-weak: rgba(255, 127, 80, 0.3);
+  --border-radius-form-field: 8px;
 }
 
 html {
@@ -45,15 +46,19 @@ li,
 div,
 td {
   font-size: 1.6rem;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .classic-links {
+  margin: 1rem;
+  padding: 1rem;
   text-decoration: none;
   color: black;
+  border-radius: 50px;
 }
 
 .classic-links:hover {
-  text-decoration: underline;
+  background-color: var(--main-bg-color);
   cursor: pointer;
 }
 
@@ -290,8 +295,13 @@ div.connect p {
 }
 
 .setList-link {
+  padding: 0.5rem;
   text-decoration: none;
   color: black;
+}
+
+.setList-table td {
+  border-radius: 50px;
 }
 
 .setList-link:hover {
@@ -423,6 +433,7 @@ div.connect p {
 .my-account textarea {
   margin: 0.5rem auto;
   display: block;
+  border-radius: var(--border-radius-form-field);
 }
 
 .my-account button {
@@ -479,4 +490,24 @@ tbody.cardLineShop {
 .one-set {
   margin-bottom: 1rem;
   background-color: lightblue;
+}
+
+/**************************
+*********LOGIN PAGE********
+**************************/
+.connecting-button {
+}
+
+.field-form {
+  margin: 1rem;
+}
+
+.field-form label {
+  display: block;
+}
+
+.field-form input,
+.field-form textarea {
+  padding: 0.5rem;
+  border-radius: var(--border-radius-form-field);
 }

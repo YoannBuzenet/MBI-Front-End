@@ -51,9 +51,11 @@ const Navbar = ({ history }) => {
       <nav className="navbar">
         <div className="container">
           <Link to="/" className="classic-links">
-            <p>Logo Boutique</p>
+            Logo Boutique
           </Link>
-          <p>Fantasy Sphere</p>
+          <Link to="/" className="classic-links">
+            Fantasy Sphere
+          </Link>
           {authenticationInfos.isAuthenticated ? (
             <div className="my_options">
               <Link
@@ -108,21 +110,19 @@ const Navbar = ({ history }) => {
                 className="classic-links nav-element"
                 to="/my_selling_basket"
               >
-                <p>
-                  Mon Rachat (
-                  <span className="buying-total">
-                    {currentBasket.reduce((total, card) => {
-                      return total + card.quantity;
-                    }, 0)}
-                  </span>
-                  )
-                </p>
+                Mon Rachat (
+                <span className="buying-total">
+                  {currentBasket.reduce((total, card) => {
+                    return total + card.quantity;
+                  }, 0)}
+                </span>
+                )
               </Link>
               <Link className="classic-links" to="/register">
-                <p>S'inscrire</p>
+                S'inscrire
               </Link>
               <Link className="classic-links" to="/login">
-                <p>Se connecter</p>
+                Se connecter
               </Link>
             </div>
           )}

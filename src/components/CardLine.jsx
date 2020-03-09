@@ -48,7 +48,7 @@ const CardLine = ({ card, handleAddSellingBasket, index, setName }) => {
 
   const handleChange = ({ currentTarget }, currentCard) => {
     const { name, value } = currentTarget;
-    if (name == "quantity") {
+    if (name === "quantity") {
       var newValue = parseInt(value);
     } else {
       var newValue = value.toString();
