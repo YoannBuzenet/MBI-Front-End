@@ -94,7 +94,11 @@ h2 {
   overflow: hidden;
   display: block;
   position: relative;
-  padding-bottom: 60px; /* height of your footer */
+  padding-bottom: 100px; /* height of the footer */
+}
+
+.small-text {
+  font-size: 1.2rem;
 }
 
 /**************************
@@ -301,7 +305,13 @@ div.connect p {
   bottom: 0;
   right: 0;
   left: 0;
-  height: 60px;
+  height: 100px;
+  border-top: 1px solid lightgrey;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
 }
 
 /**************************
@@ -529,7 +539,7 @@ tbody.cardLineShop {
 }
 
 .connecting-button:hover {
-  background-color: var(--main-bg-color-medium);
+  background-color: var(--main-bg-color);
   color: white;
 }
 
