@@ -53,11 +53,14 @@ const Navbar = ({ history }) => {
           <Link to="/" className="classic-links">
             Logo Boutique
           </Link>
-          <Link to="/" className="classic-links">
+          <Link to="/" className="classic-links big-screen-info">
             Fantasy Sphere
           </Link>
           {authenticationInfos.isAuthenticated ? (
             <div className="my_options">
+              <div className="burger-menu">
+                <img src="/public/pictures/burger-menu.png" alt="" />
+              </div>
               <Link
                 className="classic-links nav-element"
                 to="/my_selling_basket"
@@ -105,25 +108,30 @@ const Navbar = ({ history }) => {
               </div>
             </div>
           ) : (
-            <div className="connect">
-              <Link
-                className="classic-links nav-element"
-                to="/my_selling_basket"
-              >
-                Mon Rachat (
-                <span className="buying-total">
-                  {currentBasket.reduce((total, card) => {
-                    return total + card.quantity;
-                  }, 0)}
-                </span>
-                )
-              </Link>
-              <Link className="classic-links" to="/register">
-                S'inscrire
-              </Link>
-              <Link className="classic-links" to="/login">
-                Se connecter
-              </Link>
+            <div className="not-connected-options">
+              <div className="burger-menu">
+                <img src="/pictures/burger-menu.png" alt="" />
+              </div>
+              <div className="connect">
+                <Link
+                  className="classic-links nav-element"
+                  to="/my_selling_basket"
+                >
+                  Mon Rachat (
+                  <span className="buying-total">
+                    {currentBasket.reduce((total, card) => {
+                      return total + card.quantity;
+                    }, 0)}
+                  </span>
+                  )
+                </Link>
+                <Link className="classic-links" to="/register">
+                  S'inscrire
+                </Link>
+                <Link className="classic-links" to="/login">
+                  Se connecter
+                </Link>
+              </div>
             </div>
           )}
         </div>
