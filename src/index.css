@@ -104,7 +104,7 @@ h2 {
 .blackDiv {
   position: absolute;
   height: 100vh;
-  width: 100vw;
+  width: 250vw;
   top: -10%;
   right: -120%;
   left: -2000%;
@@ -267,7 +267,7 @@ div.connect p {
   bottom: 0;
   height: 100vh;
   width: 30vw;
-  right: -145px;
+  right: -400%;
   background-color: white;
   z-index: 5;
 }
@@ -302,9 +302,33 @@ div.connect p {
     width: 20px;
   }
 }
+@media only screen and (max-width: 850px) {
+  .responsive_menu {
+    right: -320%;
+    width: 40vw;
+  }
+}
+@media only screen and (max-width: 750px) {
+  .responsive_menu {
+    right: -280%;
+    width: 40vw;
+  }
+}
 @media only screen and (max-width: 650px) {
   .big-screen-info {
     display: none;
+  }
+}
+@media only screen and (max-width: 550px) {
+  .responsive_menu {
+    right: -280%;
+    width: 50vw;
+  }
+}
+@media only screen and (max-width: 500px) {
+  .responsive_menu {
+    right: -250%;
+    width: 60vw;
   }
 }
 
