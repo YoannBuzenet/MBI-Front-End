@@ -150,6 +150,10 @@ div.connect p {
   padding-left: 2rem;
 }
 
+.burger-menu {
+  display: none;
+}
+
 .my_options {
   display: flex;
   justify-content: space-between;
@@ -244,7 +248,27 @@ div.connect p {
   margin-left: 5px;
 }
 
-@media only screen and (max-width: 930px) {
+@media only screen and (max-width: 1000px) {
+  .navbar {
+  }
+  div.connect {
+    display: none;
+  }
+
+  .not-connected-options {
+    display: flex;
+    align-items: center;
+  }
+  .burger-menu {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+}
+@media only screen and (max-width: 650px) {
+  .big-screen-info {
+    display: none;
+  }
 }
 
 /**************************
@@ -391,6 +415,12 @@ div.connect p {
 .last-modification .card .card-picture {
   width: 250px;
 }
+
+/* @media only screen and (max-width: 930px) {
+  .last-modification h2 {
+    margin-top: 3rem;
+  }
+} */
 
 /**************************
 ********ONESET PAGE*******
