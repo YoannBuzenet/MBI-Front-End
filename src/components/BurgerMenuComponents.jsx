@@ -41,10 +41,13 @@ const BurgerMenuComponents = ({ history }) => {
   };
 
   return (
-    <>
+    <div className="responsive_menu">
       {authenticationInfos.isAuthenticated ? (
-        <div className="my_options">
-          <Link className="classic-links nav-element" to="/my_selling_basket">
+        <div className="my_options_responsive">
+          <Link
+            className="classic_links_responsive nav-element"
+            to="/my_selling_basket"
+          >
             Mon Rachat (
             <span className="buying-total">
               {currentBasket.reduce((total, card) => {
@@ -88,9 +91,12 @@ const BurgerMenuComponents = ({ history }) => {
           </div>
         </div>
       ) : (
-        <div className="not-connected-options">
-          <div className="connect">
-            <Link className="classic-links nav-element" to="/my_selling_basket">
+        <div className="not_connected_options_responsive">
+          <div className="connection">
+            <Link
+              className="classic_links_responsive nav-element"
+              to="/my_selling_basket"
+            >
               Mon Rachat (
               <span className="buying-total">
                 {currentBasket.reduce((total, card) => {
@@ -99,17 +105,16 @@ const BurgerMenuComponents = ({ history }) => {
               </span>
               )
             </Link>
-            <Link className="classic-links" to="/register">
+            <Link className="classic_links_responsive" to="/register">
               S'inscrire
             </Link>
-            <Link className="classic-links" to="/login">
+            <Link className="classic_links_responsive" to="/login">
               Se connecter
             </Link>
           </div>
         </div>
       )}
-      sss
-    </>
+    </div>
   );
 };
 

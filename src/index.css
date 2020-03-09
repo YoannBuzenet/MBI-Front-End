@@ -248,15 +248,27 @@ div.connect p {
   margin-left: 5px;
 }
 
-.hidden-responsive-menu {
+/* Responsive options for Menu */
+
+.responsive_menu {
+  position: absolute;
+  top: 5.5rem;
+  bottom: 0;
+  height: 100vh;
+  width: 30vw;
+  right: -145px;
+  background-color: white;
+}
+
+.classic_links_responsive {
   color: green;
+  display: block;
 }
 
 @media only screen and (max-width: 1000px) {
   div.connect {
     display: none;
   }
-
   .not-connected-options {
     display: flex;
     align-items: center;
