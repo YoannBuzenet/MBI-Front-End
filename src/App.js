@@ -3,14 +3,23 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 import "react-super-responsive-table/dist/SuperResponsiveTableStyle.css";
 
-import Navbar from "./components/Navbar";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+import SellingBasketAPI from "./services/sellingBasketAPI";
+import AuthAPI from "./services/authAPI";
+import SetsAPI from "./services/setsAPI";
+import genericCardCharacteristicsAPI from "./services/genericCardCharacteristicsAPI";
+
 import AuthContext from "./context/authContext";
 import SetsContext from "./context/setsContext";
 import SellingBasketContext from "./context/sellingBasket";
 import SellRequestContext from "./context/adminSellRequestContext";
 import GenericContext from "./context/genericCardInfosContext";
-import AuthAPI from "./services/authAPI";
-import SetsAPI from "./services/setsAPI";
+import CanSubmitContext from "./context/canSubmitSellRequestContext";
+import PriceBufferContext from "./context/priceBufferContext";
+import isResponsiveMenuDisplayedContext from "./context/menuDisplayedContext";
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -18,6 +27,7 @@ import {
   withRouter,
   Redirect
 } from "react-router-dom";
+import Navbar from "./components/Navbar";
 import LoggedRoute from "./components/LoggedRoute";
 import LoginPage from "./pages/LoginPage";
 import Homepage from "./pages/Homepage";
@@ -27,9 +37,6 @@ import OneSet from "./pages/OneSet";
 import MySellingBasket from "./pages/MySellingBasket";
 import RegisterPage from "./pages/RegisterPage";
 import OneSellRequest from "./pages/OneSellRequest";
-import SellingBasketAPI from "./services/sellingBasketAPI";
-import genericCardCharacteristicsAPI from "./services/genericCardCharacteristicsAPI";
-import CanSubmitContext from "./context/canSubmitSellRequestContext";
 import ShopNavbar from "./components/shop/ShopNavBar";
 import LoggedShopRouteComponent from "./components/LoggedShopRouteComponent";
 import LoggedShopRouteRender from "./components/LoggedShopRouteRender";
@@ -37,14 +44,11 @@ import ShopAdminHome from "./pages/shopAdmin/ShopAdminHome";
 import ShopAdminAllSellRequests from "./pages/shopAdmin/ShopAdminAllSellRequest";
 import ShopAdminAllCustomers from "./pages/shopAdmin/ShopAdminAllCustomers";
 import ShopAdminCards from "./pages/shopAdmin/ShopAdminCards";
-import authAPI from "./services/authAPI";
 import ShopAdminCustomer from "./pages/shopAdmin/ShopAdminCustomer";
 import ShopAdminOneSellRequest from "./pages/shopAdmin/ShopAdminOneSellRequest";
 import ShopAdminSettings from "./pages/shopAdmin/ShopAdminSettings";
 import Footer from "./components/Footer";
 import ShopAdminOneCard from "./pages/shopAdmin/ShopAdminOneCard";
-import PriceBufferContext from "./context/priceBufferContext";
-import isResponsiveMenuDisplayedContext from "./context/menuDisplayedContext";
 
 //Really Useful library to check all rerenders made on ALL components (you can setup it to check just one)
 // if (process.env.NODE_ENV === "development") {
@@ -56,7 +60,7 @@ import isResponsiveMenuDisplayedContext from "./context/menuDisplayedContext";
 
 function App() {
   //Checking is the JWT token is still good, if yes, Keep it in Axios
-  const didGetTokenBack = authAPI.setup();
+  const didGetTokenBack = AuthAPI.setup();
 
   //APP INITIALIZATION USE EFFECT
   useEffect(() => {
@@ -263,6 +267,11 @@ function App() {
                         <NavbarWithRouter />
                       )}
                     </isResponsiveMenuDisplayedContext.Provider>
+                    <ToastContainer
+                      autoClose={3000}
+                      position="bottom-left"
+                      hideProgressBar={true}
+                    />
                     <Footer />
                     <Switch>
                       <Route

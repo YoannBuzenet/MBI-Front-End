@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import authAPI from "../services/authAPI";
 import AuthContext from "../context/authContext";
+import { ToastContainer, toast } from "react-toastify";
 import Field from "../components/forms/Field";
 
 const LoginPage = ({ onLogin, history }) => {
@@ -35,6 +36,7 @@ const LoginPage = ({ onLogin, history }) => {
 
       setError("");
       setAuthenticationInfos(userData);
+      toast.success("Vous êtes connecté.");
 
       if (userData.user.roles.includes("ROLE_SHOP")) {
         history.replace("/shopadmin");
@@ -43,10 +45,8 @@ const LoginPage = ({ onLogin, history }) => {
       }
     } catch (error) {
       //PARSE THE ERROR BEFORE SETTING IT
-      //TODO : NOTIFICATION
-      console.log(error);
-      setError(
-        "Aucun compte ne possède cette adresse, ou alors les informations ne correspondent pas."
+      toast.error(
+        "Le login ou le mot de passe est incorrect. Merci de réessayer."
       );
     }
   };

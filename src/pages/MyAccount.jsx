@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import AuthContext from "../context/authContext";
 import userAPI from "../services/userAPI";
 import AuthAPI from "../services/authAPI";
+import { ToastContainer, toast } from "react-toastify";
 
 const MyAccount = props => {
   //Current Authentication
@@ -44,7 +45,7 @@ const MyAccount = props => {
         credentials
       );
       //UPDATE LE STATE
-      console.log(response.data);
+      // console.log(response.data);
       setAccountInformation({
         firstName: response.data.client.prenom,
         lastName: response.data.client.nom,
@@ -123,9 +124,12 @@ const MyAccount = props => {
       };
       AuthAPI.updateUserInfosLocalStorage(newDataInLocalStorage);
 
-      //TODO : NOTIF SUCCES
+      toast.success("Votre compte a bien été mis à jour.");
     } catch (error) {
       console.log(error);
+      toast.error(
+        "Votre compte n'a pas pu être mis à jour. Merci de réessayer."
+      );
     }
   };
 
