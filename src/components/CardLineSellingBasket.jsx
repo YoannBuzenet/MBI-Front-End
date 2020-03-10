@@ -244,9 +244,9 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
           </select>
         </td>
         <td>{card.price}</td>
-        <td>
+        <td className="AddButton">
           <i
-            className="fas fa-minus-circle delete-from-selling-basket"
+            className="fas fa-minus-circle delete-from-selling-basket "
             onClick={() => {
               console.log(currentCard);
               return handleDelete(currentCard);
