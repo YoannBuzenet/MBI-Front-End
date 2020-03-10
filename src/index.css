@@ -745,10 +745,10 @@ tbody.cardLineShop {
   margin-top: 0.5rem;
   border-radius: 5px;
   border: none;
+  background-color: var(--main-bg-color);
 }
 
 .connecting-button:hover {
-  background-color: var(--main-bg-color);
   color: white;
 }
 

@@ -10,25 +10,14 @@ const ShopOneLangAllConditionsCard = ({
   index,
   variation
 }) => {
-  //DEFINED langages and Conditions
-  const { lang, conditions } = useContext(GenericCardInfosContext);
-
   //Context - building the memoization of all condition/lang possibilities
-  const { allPricesBuffer, setAllPricesBuffer } = useContext(
-    priceBufferContext
-  );
-
-  //STATE - Checking if context is fully loaded
-  const [isContextLoaded, setIsContextLoaded] = useState(false);
+  const { allPricesBuffer } = useContext(priceBufferContext);
 
   //STATE - Array to iterate and create the components for NON foil components
   const [nonFoilArray, setNonFoilArray] = useState([]);
 
   //STATE - Array to iterate and create the components for FOIL components
   const [foilArray, setfoilArray] = useState([]);
-
-  //TODO : pass this in env variable
-  const gradingArea = "nameEU";
 
   //TODO : check if logged at any load of admin page and put a toast if not logged
 

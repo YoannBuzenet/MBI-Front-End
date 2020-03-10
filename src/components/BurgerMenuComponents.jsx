@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import AuthContext from "../context/authContext";
 import SellingBasketContext from "../context/sellingBasket";
 import authAPI from "../services/authAPI";
+import { toast } from "react-toastify";
 
 const BurgerMenuComponents = ({ history }) => {
   //Current Authentication
@@ -33,6 +34,7 @@ const BurgerMenuComponents = ({ history }) => {
         SellRequests: []
       }
     });
+    toast.success("Vous êtes bien déconnecté.");
 
     history.replace("/");
   };

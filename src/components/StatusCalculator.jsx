@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 const StatusCalculator = ({ sellRequest }) => {
   // useEffect(() => console.log(sellRequest), [sellRequest]);
