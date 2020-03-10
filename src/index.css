@@ -520,12 +520,6 @@ div.connect p {
   display: block;
 }
 
-@media only screen and (max-width: 850px) {
-  /* .setList-table td {
-    text-align: center;
-  } */
-}
-
 /**************************
 ********HOMEPAGE*******
 **************************/
@@ -602,6 +596,13 @@ div.connect p {
 
   .AddButton i {
     width: 30px;
+  }
+}
+
+@media only screen and (max-width: 750px) {
+  .AddButton i {
+    font-size: 3rem;
+    width: 50px;
   }
 }
 
