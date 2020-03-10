@@ -196,6 +196,12 @@ div.connect p {
   align-items: center;
 }
 
+.desktop_menu_options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .my_options .nav-element {
   margin: 0 1rem;
 }
@@ -626,14 +632,19 @@ div.connect p {
   background-color: red !important;
 }
 
-@media only screen and (max-width: 850px) {
+@media only screen and (max-width: 1200px) {
   .all-content {
     flex-direction: column;
     align-items: center;
   }
   .all-content > .right-content {
     max-width: 60%;
-    flex-grow: 1;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .all-content > .right-content {
+    max-width: 80%;
   }
 }
 
