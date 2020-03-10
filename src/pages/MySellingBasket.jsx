@@ -52,13 +52,13 @@ const MyCurrentSellRequest = ({ history, checkForDuplicates }) => {
                 <td></td>
 
                 <td>
-                  Total cartes :
+                  <span>Total cartes : </span>
                   {currentBasket.reduce((total, card) => {
                     return total + card.quantity;
                   }, 0)}
                 </td>
                 <td>
-                  Total :
+                  <span>Total : </span>
                   {currentBasket.reduce((total, card) => {
                     return total + card.price * card.quantity;
                   }, 0)}
