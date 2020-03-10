@@ -186,7 +186,7 @@ const CardLine = ({ card, handleAddSellingBasket, index, setName }) => {
           </select>
         </td>
         <td>{card.price || 2} </td>
-        <td>
+        <td className="AddButton">
           <i
             className="fas fa-plus-circle add-item-basket"
             onClick={() => {
