@@ -41,10 +41,10 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
   return (
     <>
       <div className="container">
-        <h1>{setName}</h1>
         <div className="content-split">
           <SetList />
           <div className="last-modification">
+            <h1>{setName}</h1>
             <table className="zebra-table">
               <thead>
                 <tr>
