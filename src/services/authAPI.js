@@ -4,17 +4,19 @@ import { lang } from "moment";
 
 //Takes array of objects, returns object structured with ID
 function transformPercentPerLangArrayIntoObject(array) {
-  var objectBEAUTIFULAHAH = {};
+  var objectToReturn = {};
 
-  for (let i = 0; i < array.length; i++) {
-    const langToCreate = {};
+  if (array) {
+    for (let i = 0; i < array.length; i++) {
+      const langToCreate = {};
 
-    langToCreate.id = array[i].id;
-    langToCreate.percentPerLang = array[i].percent;
-    objectBEAUTIFULAHAH[array[i].language] = langToCreate;
+      langToCreate.id = array[i].id;
+      langToCreate.percentPerLang = array[i].percent;
+      objectToReturn[array[i].language] = langToCreate;
+    }
   }
 
-  return objectBEAUTIFULAHAH;
+  return objectToReturn;
 }
 
 //When an user logins, if the credentials are rights, we send back data to identify him.
