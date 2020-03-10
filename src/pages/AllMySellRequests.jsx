@@ -4,6 +4,7 @@ import AuthContext from "../context/authContext";
 import StatusCalculator from "../components/StatusCalculator";
 import moment from "moment";
 import DateDisplayer from "../components/DateDisplayer";
+import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 
 const AllMySellRequests = props => {
   //Current Authentication
@@ -20,62 +21,66 @@ const AllMySellRequests = props => {
   return (
     <>
       <h1>Mes demandes de rachat</h1>
-      <table className="zebra-table">
-        <thead>
-          <tr>
-            <th>Reference</th>
-            <th>Status</th>
-            <th>Date Soumission</th>
-            <th>Date Envoi</th>
-            <th>Date Réception</th>
-            <th>Date Dernier traitement</th>
-            <th>Date Attente Validation Client</th>
-            <th>Date Validation</th>
-            <th>Nombre de cartes</th>
-            <th>Montant total</th>
-          </tr>
-        </thead>
-        <tbody>
-          {authenticationInfos.customer.SellRequests &&
-            authenticationInfos.customer.SellRequests.length > 0 &&
-            authenticationInfos.customer.SellRequests.map(
-              (sellRequest, index) => (
-                <tr key={sellRequest.id}>
-                  <td>
-                    <Link to={"/my_sell_requests/" + sellRequest.id}>
-                      {sellRequest.id}
-                    </Link>
-                  </td>
-                  <td>
-                    <StatusCalculator sellRequest={sellRequest} />
-                  </td>
-                  <td>
-                    <DateDisplayer dateToHandle={sellRequest.DateSubmit} />
-                  </td>
-                  <td>
-                    <DateDisplayer dateToHandle={sellRequest.dateEnvoi} />
-                  </td>
-                  <td>
-                    <DateDisplayer dateToHandle={sellRequest.dateRecu} />
-                  </td>
-                  <td>
-                    <DateDisplayer dateToHandle={sellRequest.dateProcessing} />
-                  </td>
-                  <td>
-                    <DateDisplayer
-                      dateToHandle={sellRequest.dateApprovalPending}
-                    />
-                  </td>
-                  <td>
-                    <DateDisplayer dateToHandle={sellRequest.dateValidated} />
-                  </td>
-                  <td>{sellRequest.amount}</td>
-                  <td>{sellRequest.cardTotalQuantity}</td>
-                </tr>
-              )
-            )}
-        </tbody>
-      </table>
+      <div className="container-table-responsive">
+        <Table className="zebra-table">
+          <Thead>
+            <Tr>
+              <Th>Reference</Th>
+              <Th>Status</Th>
+              <Th>Date Soumission</Th>
+              <Th>Date Envoi</Th>
+              <Th>Date Réception</Th>
+              <Th>Date Dernier traitement</Th>
+              <Th>Date Attente Validation Client</Th>
+              <Th>Date Validation</Th>
+              <Th>Nombre de cartes</Th>
+              <Th>Montant total</Th>
+            </Tr>
+          </Thead>
+          <Tbody>
+            {authenticationInfos.customer.SellRequests &&
+              authenticationInfos.customer.SellRequests.length > 0 &&
+              authenticationInfos.customer.SellRequests.map(
+                (sellRequest, index) => (
+                  <Tr key={sellRequest.id}>
+                    <Td>
+                      <Link to={"/my_sell_requests/" + sellRequest.id}>
+                        {sellRequest.id}
+                      </Link>
+                    </Td>
+                    <Td>
+                      <StatusCalculator sellRequest={sellRequest} />
+                    </Td>
+                    <Td>
+                      <DateDisplayer dateToHandle={sellRequest.DateSubmit} />
+                    </Td>
+                    <Td>
+                      <DateDisplayer dateToHandle={sellRequest.dateEnvoi} />
+                    </Td>
+                    <Td>
+                      <DateDisplayer dateToHandle={sellRequest.dateRecu} />
+                    </Td>
+                    <Td>
+                      <DateDisplayer
+                        dateToHandle={sellRequest.dateProcessing}
+                      />
+                    </Td>
+                    <Td>
+                      <DateDisplayer
+                        dateToHandle={sellRequest.dateApprovalPending}
+                      />
+                    </Td>
+                    <Td>
+                      <DateDisplayer dateToHandle={sellRequest.dateValidated} />
+                    </Td>
+                    <Td>{sellRequest.amount}</Td>
+                    <Td>{sellRequest.cardTotalQuantity}</Td>
+                  </Tr>
+                )
+              )}
+          </Tbody>
+        </Table>
+      </div>
     </>
   );
 };
