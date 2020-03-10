@@ -112,6 +112,17 @@ h2 {
   background-color: rgba(0, 0, 0, 0.5);
 }
 
+@media only screen and (max-width: 1000px) {
+  #root {
+    padding-bottom: 200px;
+  }
+}
+@media only screen and (max-width: 850px) {
+  #root {
+    padding-bottom: 300px;
+  }
+}
+
 /**************************
 ********TABLES************
 **************************/
@@ -401,6 +412,20 @@ div.connect p {
 .footer-container {
   display: flex;
   justify-content: space-between;
+}
+
+@media only screen and (max-width: 1000px) {
+  .footer {
+    height: 200px;
+  }
+}
+@media only screen and (max-width: 850px) {
+  .footer {
+    height: 300px;
+  }
+  .footer-container {
+    flex-direction: column;
+  }
 }
 
 /**************************
