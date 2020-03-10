@@ -436,6 +436,18 @@ div.connect p {
   justify-content: space-around;
 }
 
+@media only screen and (max-width: 850px) {
+  .content-split {
+    flex-direction: column;
+  }
+  .left-div {
+    order: 2;
+  }
+  .last-modification {
+    order: 1;
+  }
+}
+
 /**************************
 ********SETLIST*******
 **************************/
