@@ -31,7 +31,7 @@ const OneSellRequest = ({ match, history }) => {
     return () => source.cancel("");
   }, [id]);
 
-  console.log(currentSellRequest.sellRequestCards);
+  // console.log(currentSellRequest.sellRequestCards);
 
   return (
     <>

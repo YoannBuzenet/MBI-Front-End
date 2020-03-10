@@ -12,7 +12,7 @@ const CardLineShopStuck = ({ card }) => {
         <td>{card.name}</td>
         <td>{card.set}</td>
         <td>/</td>
-        <td>{lang.filter(lang => lang.id == card.lang)[0].shortname}</td>
+        <td>{lang.filter(lang => lang.id === card.lang)[0].shortname}</td>
         <td>
           {
             conditions.filter(condition => condition.id == card.condition)[0]

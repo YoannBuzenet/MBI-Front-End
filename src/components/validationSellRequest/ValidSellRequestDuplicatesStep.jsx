@@ -8,7 +8,7 @@ const ValidSellRequestDuplicatesStep = ({
   checkForDuplicates
 }) => {
   //Current Basket
-  const { currentBasket, setCurrentBasket } = useContext(SellingBasketContext);
+  const { currentBasket } = useContext(SellingBasketContext);
 
   //Following errors in duplicates
   const [finalCheck, setFinalCheck] = useState(false);

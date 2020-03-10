@@ -8,8 +8,6 @@ function getSaved() {
   return JSON.parse(savedBasket);
 }
 
-function emptySellingBasket() {}
-
 export default {
   save,
   getSaved
