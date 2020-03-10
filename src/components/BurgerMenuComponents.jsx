@@ -13,9 +13,6 @@ const BurgerMenuComponents = ({ history }) => {
   //Current Selling Request Basket
   const { currentBasket, setCurrentBasket } = useContext(SellingBasketContext);
 
-  //Current toggle menu state.
-  const [toggleMenu, setToggleMenu] = useState(false);
-
   const handleLogout = () => {
     authAPI.logout();
     setAuthenticationInfos({
@@ -44,52 +41,35 @@ const BurgerMenuComponents = ({ history }) => {
     <div className="responsive_menu">
       {authenticationInfos.isAuthenticated ? (
         <div className="my_options_responsive">
-          <div className="desktop_menu_options">
-            <Link
-              className="classic_links_responsive nav-element"
-              to="/my_selling_basket"
-            >
-              Mon Rachat (
-              <span className="buying-total">
-                {currentBasket.reduce((total, card) => {
-                  return total + card.quantity;
-                }, 0)}
-              </span>
-              )
-            </Link>
-            <div className="toggle-menu-container">
-              <p
-                className="unselectable display-inline-block nav-element pointer"
-                onClick={() => setToggleMenu(!toggleMenu)}
-              >
-                {authenticationInfos.customer.prenom}
-                <span
-                  className="arrow-menu unselectable"
-                  onClick={() => setToggleMenu(!toggleMenu)}
-                ></span>
-              </p>
-              {toggleMenu && (
-                <ul className="toggle-menu">
-                  <Link
-                    to="/my_account"
-                    className="toggle-menu-links"
-                    onClick={() => setToggleMenu(!toggleMenu)}
-                  >
-                    <li>Mon compte</li>
-                  </Link>
+          <Link
+            className="classic_links_responsive nav-element"
+            to="/my_selling_basket"
+          >
+            Mon Rachat (
+            <span className="buying-total">
+              {currentBasket.reduce((total, card) => {
+                return total + card.quantity;
+              }, 0)}
+            </span>
+            )
+          </Link>
+          <div className="toggle-menu-container">
+            <p className="unselectable display-inline-block nav-element pointer">
+              {authenticationInfos.customer.prenom}
+              <span className="arrow-menu unselectable"></span>
+            </p>
 
-                  <Link
-                    to="/my_sell_requests"
-                    className="toggle-menu-links"
-                    onClick={() => setToggleMenu(!toggleMenu)}
-                  >
-                    <li>Mes rachats</li>
-                  </Link>
+            <ul className="toggle-menu">
+              <Link to="/my_account" className="toggle-menu-links">
+                <li>Mon compte</li>
+              </Link>
 
-                  <li onClick={handleLogout}>Déconnexion</li>
-                </ul>
-              )}
-            </div>
+              <Link to="/my_sell_requests" className="toggle-menu-links">
+                <li>Mes rachats</li>
+              </Link>
+
+              <li onClick={handleLogout}>Déconnexion</li>
+            </ul>
           </div>
         </div>
       ) : (
