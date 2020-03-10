@@ -124,6 +124,13 @@ h2 {
   }
 }
 
+@media only screen and (max-width: 650px) {
+  .container {
+    max-width: 95%;
+    width: 95%;
+  }
+}
+
 /**************************
 ********TABLES************
 **************************/
@@ -145,6 +152,12 @@ table {
 }
 .zebra-table tbody tr.total-line:hover {
   background-color: transparent;
+}
+
+@media only screen and (max-width: 850px) {
+  .zebra-table {
+    margin: 0 auto;
+  }
 }
 
 /**************************
@@ -446,6 +459,7 @@ div.connect p {
   }
   .last-modification {
     order: 1;
+    margin: 0 auto;
   }
 }
 
@@ -478,6 +492,12 @@ div.connect p {
 
 .setList-table td > a {
   display: block;
+}
+
+@media only screen and (max-width: 850px) {
+  /* .setList-table td {
+    text-align: center;
+  } */
 }
 
 /**************************
@@ -549,6 +569,16 @@ div.connect p {
   z-index: 2;
 }
 
+@media only screen and (max-width: 850px) {
+  .cardPictureHolder {
+    padding: 0.5rem;
+  }
+
+  .AddButton i {
+    width: 30px;
+  }
+}
+
 /**************************
 ********SELLING BASKET*******
 **************************/
@@ -594,6 +624,17 @@ div.connect p {
 
 .error-line {
   background-color: red !important;
+}
+
+@media only screen and (max-width: 850px) {
+  .all-content {
+    flex-direction: column;
+    align-items: center;
+  }
+  .all-content > .right-content {
+    max-width: 60%;
+    flex-grow: 1;
+  }
 }
 
 /**************************
