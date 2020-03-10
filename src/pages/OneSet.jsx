@@ -4,6 +4,7 @@ import SellingBasketContext from "../context/sellingBasket";
 import CardLine from "../components/CardLine";
 import SetsAPI from "../services/setsAPI";
 import SetsContext from "../context/setsContext";
+import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 
 const OneSet = ({ handleAddSellingBasket, match }) => {
   //Current Selling Request Basket
@@ -45,18 +46,18 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
           <SetList />
           <div className="last-modification">
             <h1>{setName}</h1>
-            <table className="zebra-table">
-              <thead>
-                <tr>
-                  <th>Nom de la carte</th>
-                  <th>Langue</th>
-                  <th>Condition</th>
-                  <th>Foil</th>
-                  <th>Quantité</th>
-                  <th>Prix</th>
-                </tr>
-              </thead>
-              <tbody>
+            <Table className="zebra-table">
+              <Thead>
+                <Tr>
+                  <Th>Nom de la carte</Th>
+                  <Th>Langue</Th>
+                  <Th>Condition</Th>
+                  <Th>Foil</Th>
+                  <Th>Quantité</Th>
+                  <Th>Prix</Th>
+                </Tr>
+              </Thead>
+              <Tbody>
                 {cards.map((card, index) => {
                   return (
                     <CardLine
@@ -67,8 +68,8 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
                     />
                   );
                 })}
-              </tbody>
-            </table>
+              </Tbody>
+            </Table>
           </div>
         </div>
       </div>

@@ -4,6 +4,7 @@ import axios from "axios";
 import StatusCalculator from "../components/StatusCalculator";
 import LastInformationCalculator from "../components/LastInformationCalculator";
 import SellRequestStatusUpdater from "../components/SellRequestStatusUpdater";
+import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 
 const OneSellRequest = ({ match, history }) => {
   //ENV VARIABLE TO DEFINE
@@ -35,7 +36,7 @@ const OneSellRequest = ({ match, history }) => {
   return (
     <>
       <h1>Mon Rachat</h1>
-      <div className="sellRequest-infos">
+      <div className="sellRequest-infos container">
         <p className="sellRequest-status">
           Statut
           <span className="subInfos">
@@ -49,69 +50,69 @@ const OneSellRequest = ({ match, history }) => {
           </span>
         </p>
       </div>
-      <table className="zebra-table">
-        <thead>
-          <tr>
-            <th>Nom de la carte</th>
-            <th>Edition</th>
-            <th>Etat</th>
-            <th>Langue</th>
-            <th>Foil</th>
-            <th>Prix</th>
-            <th>Quantité</th>
-            <th>Total</th>
-          </tr>
-        </thead>
-        <tbody>
+      <Table className="zebra-table">
+        <Thead>
+          <Tr>
+            <Th>Nom de la carte</Th>
+            <Th>Edition</Th>
+            <Th>Etat</Th>
+            <Th>Langue</Th>
+            <Th>Foil</Th>
+            <Th>Prix</Th>
+            <Th>Quantité</Th>
+            <Th>Total</Th>
+          </Tr>
+        </Thead>
+        <Tbody>
           {currentSellRequest.sellRequestCards.length > 0 &&
             currentSellRequest.sellRequestCards.map((card, index) => (
-              <tr key={index}>
-                <td>{card.cards.name}</td>
-                <td>{card.cards.edition.name}</td>
-                <td>
+              <Tr key={index}>
+                <Td>{card.cards.name}</Td>
+                <Td>{card.cards.edition.name}</Td>
+                <Td>
                   {gradingArea == "isEu"
                     ? card.CardCondition.shortname
                     : card.CardCondition.shortnameUS}
-                </td>
-                <td>{card.language.shortname}</td>
-                <td>{card.language.isFoil ? "Yes" : "No"}</td>
-                <td>{card.price}</td>
-                <td>{card.cardQuantity}</td>
-                <td>{card.price * card.cardQuantity}</td>
-              </tr>
+                </Td>
+                <Td>{card.language.shortname}</Td>
+                <Td>{card.language.isFoil ? "Yes" : "No"}</Td>
+                <Td>{card.price}</Td>
+                <Td>{card.cardQuantity}</Td>
+                <Td>{card.price * card.cardQuantity}</Td>
+              </Tr>
             ))}
-          <tr className="total-line">
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>NOMBRE DE CARTES</td>
-            <td>
+          <Tr className="total-line">
+            <Td></Td>
+            <Td></Td>
+            <Td></Td>
+            <Td></Td>
+            <Td></Td>
+            <Td></Td>
+            <Td>NOMBRE DE CARTES</Td>
+            <Td>
               {currentSellRequest.sellRequestCards.length > 0 &&
                 currentSellRequest.sellRequestCards.reduce((total, card) => {
                   return total + card.cardQuantity;
                 }, 0)}
-            </td>
-          </tr>
-          <tr className="total-line">
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>TOTAL</td>
-            <td>
+            </Td>
+          </Tr>
+          <Tr className="total-line">
+            <Td></Td>
+            <Td></Td>
+            <Td></Td>
+            <Td></Td>
+            <Td></Td>
+            <Td></Td>
+            <Td>TOTAL</Td>
+            <Td>
               {currentSellRequest.sellRequestCards.length > 0 &&
                 currentSellRequest.sellRequestCards.reduce((total, card) => {
                   return total + card.price * card.cardQuantity;
                 }, 0)}
-            </td>
-          </tr>
-        </tbody>
-      </table>
+            </Td>
+          </Tr>
+        </Tbody>
+      </Table>
       <SellRequestStatusUpdater
         currentSellRequest={currentSellRequest}
         setCurrentSellRequest={setCurrentSellRequest}
