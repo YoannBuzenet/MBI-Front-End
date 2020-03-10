@@ -7,7 +7,7 @@ const ValidSellRequestIsBasketEmpty = ({
   checkForDuplicates
 }) => {
   //Current Basket
-  const { currentBasket, setCurrentBasket } = useContext(SellingBasketContext);
+  const { currentBasket } = useContext(SellingBasketContext);
 
   return (
     <>
