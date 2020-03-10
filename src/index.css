@@ -29,6 +29,11 @@ body {
   margin: 0 auto;
 }
 
+.container-table-responsive {
+  max-width: 70%;
+  margin: 0 auto;
+}
+
 .center-text {
   text-align: center;
 }
@@ -116,6 +121,9 @@ h2 {
 @media only screen and (max-width: 1000px) {
   #root {
     padding-bottom: 220px;
+  }
+  .container-table-responsive {
+    max-width: 100%;
   }
 }
 @media only screen and (max-width: 850px) {
