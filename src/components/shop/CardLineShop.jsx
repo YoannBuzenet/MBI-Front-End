@@ -15,10 +15,10 @@ const CardLineShop = ({ card, indexCard }) => {
   );
 
   //Knowing if the Sell Request is OK to be submitted (no duplicate)
-  const { errorList, setErrorList } = useContext(canSubmitContext);
+  const { errorList } = useContext(canSubmitContext);
 
   //DEFINED langages and Conditions
-  const { lang, conditions } = useContext(GenericCardInfosContext);
+  const { conditions } = useContext(GenericCardInfosContext);
 
   //STATE - creating card state from parent input
   const [currentCard, setCurrentCard] = useState(card);
@@ -119,7 +119,7 @@ const CardLineShop = ({ card, indexCard }) => {
     const { name, value } = currentTarget;
     console.log(name);
     console.log(value);
-    if (name == "quantity" || name == "lang") {
+    if (name === "quantity" || name === "lang") {
       var newValue = parseInt(value);
     } else {
       var newValue = value.toString();
@@ -138,7 +138,7 @@ const CardLineShop = ({ card, indexCard }) => {
       .catch(error => console.log(error));
     // console.log(currentCard);
 
-    if (name == "quantity") {
+    if (name === "quantity") {
       const newData = {
         cardTotalQuantity: currentAdminSellRequest.sellRequests.reduce(
           (total, card) => {

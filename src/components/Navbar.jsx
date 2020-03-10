@@ -4,6 +4,7 @@ import AuthContext from "../context/authContext";
 import SellingBasketContext from "../context/sellingBasket";
 import authAPI from "../services/authAPI";
 import BurgerMenu from "./BurgerMenu";
+import { toast } from "react-toastify";
 
 const Navbar = ({ history }) => {
   //Current Authentication
@@ -37,6 +38,7 @@ const Navbar = ({ history }) => {
         SellRequests: []
       }
     });
+    toast.success("Vous êtes bien déconnecté.");
 
     history.replace("/");
   };

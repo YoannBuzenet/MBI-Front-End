@@ -42,7 +42,7 @@ const ShopSellRequestStatusValidator = props => {
   });
 
   useEffect(() => {
-    if (currentStatus == "Soumis" || currentStatus == "Envoyé") {
+    if (currentStatus == "Soumis" || currentStatus === "Envoyé") {
       setAvailableOptions([
         {
           status: "Reçu",
@@ -57,7 +57,7 @@ const ShopSellRequestStatusValidator = props => {
           value: "dateApprovalPending"
         }
       ]);
-    } else if (currentStatus == "Reçu") {
+    } else if (currentStatus === "Reçu") {
       setAvailableOptions([
         {
           status: "En traitement",
@@ -68,7 +68,7 @@ const ShopSellRequestStatusValidator = props => {
           value: "dateApprovalPending"
         }
       ]);
-    } else if (currentStatus == "En traitement") {
+    } else if (currentStatus === "En traitement") {
       setAvailableOptions([
         {
           status: "En attente de validation client",

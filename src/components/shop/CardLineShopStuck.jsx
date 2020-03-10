@@ -19,7 +19,7 @@ const CardLineShopStuck = ({ card }) => {
               .shortname
           }
         </td>
-        <td>{card.isFoil == true ? "Yes" : "No"}</td>
+        <td>{card.isFoil === true ? "Yes" : "No"}</td>
         <td>{card.quantity}</td>
         <td>{card.price}</td>
         <td>{card.quantity * card.price}</td>

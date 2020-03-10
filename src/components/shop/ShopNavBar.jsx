@@ -16,7 +16,7 @@ const ShopNavbar = ({ history }) => {
   });
 
   //Current Selling Request Basket
-  const { currentBasket, setCurrentBasket } = useContext(SellingBasketContext);
+  const { currentBasket } = useContext(SellingBasketContext);
 
   //Current toggle menu state.
   const [toggleMenu, setToggleMenu] = useState(false);
