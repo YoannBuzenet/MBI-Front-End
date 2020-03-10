@@ -95,7 +95,7 @@ h2 {
   overflow: hidden;
   display: block;
   position: relative;
-  padding-bottom: 100px; /* height of the footer */
+  padding-bottom: 120px; /* height of the footer */
 }
 
 .small-text {
@@ -115,12 +115,12 @@ h2 {
 
 @media only screen and (max-width: 1000px) {
   #root {
-    padding-bottom: 200px;
+    padding-bottom: 220px;
   }
 }
 @media only screen and (max-width: 850px) {
   #root {
-    padding-bottom: 300px;
+    padding-bottom: 320px;
   }
 }
 
@@ -329,7 +329,7 @@ div.connect p {
   }
   .responsive-basket-quantity {
     position: absolute;
-    bottom: -5px;
+    bottom: -4px;
     right: -7px;
     background-color: red;
     border-radius: 50%;
