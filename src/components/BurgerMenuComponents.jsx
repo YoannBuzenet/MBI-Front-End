@@ -41,34 +41,37 @@ const BurgerMenuComponents = ({ history }) => {
     <div className="responsive_menu">
       {authenticationInfos.isAuthenticated ? (
         <div className="my_options_responsive">
-          <Link
-            className="classic_links_responsive nav-element"
-            to="/my_selling_basket"
-          >
-            Mon Rachat (
-            <span className="buying-total">
-              {currentBasket.reduce((total, card) => {
-                return total + card.quantity;
-              }, 0)}
-            </span>
-            )
-          </Link>
-          <div className="toggle-menu-container">
-            <p className="unselectable display-inline-block nav-element pointer">
-              {authenticationInfos.customer.prenom}
-              <span className="arrow-menu unselectable"></span>
-            </p>
+          <h2 className="surname_responsive">
+            {authenticationInfos.customer.prenom}
+          </h2>
+          <div className="">
+            <ul className="">
+              <Link
+                className="classic_links_responsive"
+                to="/my_selling_basket"
+              >
+                <li>
+                  Mon Rachat (
+                  <span className="buying-total">
+                    {currentBasket.reduce((total, card) => {
+                      return total + card.quantity;
+                    }, 0)}
+                  </span>
+                  )
+                </li>
+              </Link>
 
-            <ul className="toggle-menu">
-              <Link to="/my_account" className="toggle-menu-links">
+              <Link to="/my_account" className="classic_links_responsive">
                 <li>Mon compte</li>
               </Link>
 
-              <Link to="/my_sell_requests" className="toggle-menu-links">
+              <Link to="/my_sell_requests" className="classic_links_responsive">
                 <li>Mes rachats</li>
               </Link>
 
-              <li onClick={handleLogout}>Déconnexion</li>
+              <li onClick={handleLogout} className="classic_links_responsive">
+                Déconnexion
+              </li>
             </ul>
           </div>
         </div>

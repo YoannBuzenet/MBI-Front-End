@@ -304,9 +304,12 @@ div.connect p {
 }
 
 .classic_links_responsive {
-  color: green;
+  text-decoration: none;
+  color: black;
   display: block;
-  padding: 3rem;
+  text-align: center;
+  padding: 3rem 0;
+  margin-left: 0;
 }
 
 @media only screen and (max-width: 1000px) {
@@ -336,6 +339,11 @@ div.connect p {
   .desktop_menu_options {
     display: none;
   }
+
+  .surname_responsive {
+    margin-top: 1rem;
+    font-size: 4rem;
+  }
 }
 @media only screen and (max-width: 850px) {
   .responsive_menu {
@@ -353,16 +361,20 @@ div.connect p {
   .big-screen-info {
     display: none;
   }
+  .responsive_menu {
+    right: -100%;
+    width: 40vw;
+  }
 }
 @media only screen and (max-width: 550px) {
   .responsive_menu {
-    right: -280%;
+    right: -80%;
     width: 50vw;
   }
 }
 @media only screen and (max-width: 500px) {
   .responsive_menu {
-    right: -250%;
+    right: -50%;
     width: 60vw;
   }
 }
