@@ -1,7 +1,5 @@
-MANAGE YOUR ENTIRE STOCK THROUGH OUR SOFTWARE
+React App to manage a Magic The Gathering collection
 
-- SOURCING
-- UPDATING ONLINE
-- FOLLOWING UP WITH CUSTOMERS
-
-EARN A LOT OF TIME FOR A REALLY CHEAP PRICE !
+- React, hooks, Axios
+- Responsive
+- Works with an API on Symfony (APIPlatform)
