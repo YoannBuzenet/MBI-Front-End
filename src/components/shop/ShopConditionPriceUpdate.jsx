@@ -200,10 +200,11 @@ const ShopConditionPriceUpdate = ({
             ][conditions][isFoil] =
               //If we want to make prices more stable integer, implement function here
               priceUpdateAPI.smoothNumbers(
-                newPrice *
+                (newPrice *
                   authenticationInfos.shop.shopData.PercentPerConditions[j - 1]
-                    .percent
-              ) / 100;
+                    .percent) /
+                  100
+              );
           }
           j++;
         }
@@ -224,28 +225,29 @@ const ShopConditionPriceUpdate = ({
               if (k === 1) {
                 contextCopy[index].langs[parseInt(language)][conditions][
                   isFoil
-                ] =
-                  priceUpdateAPI.smoothNumbers(
-                    newPrice *
-                      authenticationInfos.shop.shopData.PercentPerLangs[
-                        parseInt(language)
-                      ].percentPerLang
-                  ) / 100;
+                ] = priceUpdateAPI.smoothNumbers(
+                  (newPrice *
+                    authenticationInfos.shop.shopData.PercentPerLangs[
+                      parseInt(language)
+                    ].percentPerLang) /
+                    100
+                );
               } else {
                 contextCopy[index].langs[parseInt(language)][conditions][
                   isFoil
                 ] =
                   //If we want to make prices more stable integer, implement function here
                   priceUpdateAPI.smoothNumbers(
-                    ((newPrice *
+                    (((newPrice *
                       authenticationInfos.shop.shopData.PercentPerLangs[
                         parseInt(language)
                       ].percentPerLang) /
                       100) *
                       authenticationInfos.shop.shopData.PercentPerConditions[
                         k - 1
-                      ].percent
-                  ) / 100;
+                      ].percent) /
+                      100
+                  );
               }
               k++;
             }

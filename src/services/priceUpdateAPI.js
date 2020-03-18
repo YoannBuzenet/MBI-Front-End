@@ -31,17 +31,43 @@ function batchPriceUpdate(batch, cleaningParam) {
   );
 }
 
+function roundCentsHalfDecadeDown(number) {
+  return number - (number % 0.05);
+}
+
+function roundCentsQuarterUnitDown(number) {
+  return number - (number % 0.25);
+}
+
+function roundCentsHalfUnitDown(number) {
+  return number - (number % 0.5);
+}
+function roundUnitDown(number) {
+  return number - (number % 1);
+}
+function roundUnit5Down(number) {
+  return number - (number % 5);
+}
+function roundUnit25Down(number) {
+  return number - (number % 25);
+}
+
 function smoothNumbers(price) {
   if (price <= 0.05) {
     price = 0.01;
-  } else if (price > 0.05 && price <= 0.1) {
-    price = 0.05;
-  } else if (price > 0.1 && price <= 0.14) {
-    price = 0.1;
-  } else if (price > 0.14 && price < 0.2) {
-    price = 0.15;
+  } else if (price > 0.05 && price <= 1) {
+    price = roundCentsHalfDecadeDown(price);
+  } else if (price > 1 && price <= 2.5) {
+    price = roundCentsQuarterUnitDown(price);
+  } else if (price > 2.5 && price <= 10) {
+    price = roundCentsHalfUnitDown(price);
+  } else if (price > 10 && price <= 100) {
+    price = roundUnitDown(price);
+  } else if (price > 100 && price <= 300) {
+    price = roundUnit5Down(price);
+  } else if (price > 300 && price <= 500) {
+    price = roundUnit25Down(price);
   }
-
   return price;
 }
 
