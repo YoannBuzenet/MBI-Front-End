@@ -62,7 +62,7 @@ const CardLine = ({ card, handleAddSellingBasket, index, setName }) => {
 
   const hoverClassName = e => genericCardAPI.isPictureDisplayedTopOrBottom(e);
 
-  //TEMPORARY DEFAULT DEFINITION TODO : GET IT THOURGH API
+  //TEMPORARY DEFAULT DEFINITION TODO : GET IT THOURGH API OR LOCAL ENV
   //ALSO DEFINED IN CARDSELLINGBASKET
   const gradingArea = "EU";
 
@@ -81,8 +81,6 @@ const CardLine = ({ card, handleAddSellingBasket, index, setName }) => {
         <td className="cardPictureHolder">
           {card.name}
           {isOnHover && (
-            //TODO : change className following the scrolling, to know if the position must be top or bottom, to stay in window
-            //Other class CSS ready just aside this one, JS logic to make
             <div className={hoverTopOrBottom}>
               <img src={urlPictureCard} alt={card.name} />
             </div>

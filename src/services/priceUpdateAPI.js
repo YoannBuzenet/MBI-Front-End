@@ -31,4 +31,24 @@ function batchPriceUpdate(batch, cleaningParam) {
   );
 }
 
-export default { postOnePrice, putOnePrice, deleteOnePrice, batchPriceUpdate };
+function smoothNumbers(price) {
+  if (price <= 0.05) {
+    price = 0.01;
+  } else if (price > 0.05 && price <= 0.1) {
+    price = 0.05;
+  } else if (price > 0.1 && price <= 0.14) {
+    price = 0.1;
+  } else if (price > 0.14 && price < 0.2) {
+    price = 0.15;
+  }
+
+  return price;
+}
+
+export default {
+  postOnePrice,
+  putOnePrice,
+  deleteOnePrice,
+  batchPriceUpdate,
+  smoothNumbers
+};
