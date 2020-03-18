@@ -75,13 +75,8 @@ const AllMySellRequests = props => {
                     <Td>
                       <DateDisplayer dateToHandle={sellRequest.dateValidated} />
                     </Td>
-                    <span className="under-table-total">
-                      Total : {sellRequest.amount}
-                    </span>
-                    <span className="under-table-total">
-                      {" "}
-                      Total : {sellRequest.cardTotalQuantity}
-                    </span>
+                    <Td>{sellRequest.amount}</Td>
+                    <Td>{sellRequest.cardTotalQuantity}</Td>
                   </Tr>
                 )
               )}
