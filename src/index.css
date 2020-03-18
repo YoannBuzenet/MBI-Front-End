@@ -865,6 +865,10 @@ tbody.cardLineShop {
   background-color: lightblue;
 }
 
+input.updated {
+  background-color: red;
+}
+
 /**************************
 *********LOGIN PAGE********
 **************************/

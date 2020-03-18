@@ -72,8 +72,10 @@ const ShopAdminOneCard = ({ match }) => {
           completeContext[i].langs[lang][condition] = {};
           completeContext[i].langs[lang][condition][0] = null;
           completeContext[i].langs[lang][condition]["0idCardShopPrice"] = null;
+          completeContext[i].langs[lang][condition]["0wasUpdated"] = null;
           completeContext[i].langs[lang][condition][1] = null;
           completeContext[i].langs[lang][condition]["1idCardShopPrice"] = null;
+          completeContext[i].langs[lang][condition]["1wasUpdated"] = null;
         }
       }
 

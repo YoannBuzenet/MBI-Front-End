@@ -11,9 +11,9 @@ const ShopNavbar = ({ history }) => {
     AuthContext
   );
 
-  useEffect(() => {
-    console.log(authenticationInfos);
-  });
+  // useEffect(() => {
+  //   console.log(authenticationInfos);
+  // });
 
   //Current Selling Request Basket
   const { currentBasket } = useContext(SellingBasketContext);
