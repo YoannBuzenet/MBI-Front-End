@@ -423,7 +423,7 @@ div.connect p {
 
 @keyframes slidein1000 {
   from {
-    right: -1200%;
+    right: -1500%;
   }
 
   to {
@@ -432,7 +432,7 @@ div.connect p {
 }
 @keyframes slidein850 {
   from {
-    right: -1000%;
+    right: -1500%;
   }
 
   to {
@@ -441,7 +441,7 @@ div.connect p {
 }
 @keyframes slidein750 {
   from {
-    right: -1000%;
+    right: -1200%;
   }
 
   to {
@@ -450,7 +450,7 @@ div.connect p {
 }
 @keyframes slidein650 {
   from {
-    right: -1000%;
+    right: -1200%;
   }
 
   to {
@@ -459,7 +459,7 @@ div.connect p {
 }
 @keyframes slidein550 {
   from {
-    right: -1000%;
+    right: -1200%;
   }
 
   to {
@@ -468,7 +468,7 @@ div.connect p {
 }
 @keyframes slidein500 {
   from {
-    right: -1000%;
+    right: -1200%;
   }
 
   to {
