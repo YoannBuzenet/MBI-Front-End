@@ -17,7 +17,7 @@ const LastModifications = ({ handleAddSellingBasket }) => {
 
   return (
     <>
-      {lastModificationList.map(element => console.log(element))}
+      {lastModificationList.map((element, index) => console.log(element))}
       <div className="last-modification">
         <h2>Les dernières modifications</h2>
         <div className="all-cards">

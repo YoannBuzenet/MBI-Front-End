@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
-import GenericCardInfosContext from "../../context/genericCardInfosContext";
 import priceBufferContext from "../../context/priceBufferContext";
 import priceUpdateAPI from "../../services/priceUpdateAPI";
 import AuthContext from "../../context/authContext";
+import { toast } from "react-toastify";
 
 //This component updates prices in context, send to API, and treats resp back to update context with new ID.
 //Depending if updated lang is baseLang or not, and Mint condition or not, we update several languages or fields of the form, or just one.
@@ -11,14 +11,11 @@ const ShopConditionPriceUpdate = ({
   conditionID,
   langID,
   isFoil,
-  priceValue,
   index,
   cardID
 }) => {
   //Current Authentication
-  const { authenticationInfos, setAuthenticationInfos } = useContext(
-    AuthContext
-  );
+  const { authenticationInfos } = useContext(AuthContext);
 
   // console.log(authenticationInfos.shop.shopData);
 
@@ -35,11 +32,6 @@ const ShopConditionPriceUpdate = ({
 
   // console.log(allPricesBuffer);
 
-  //DEFINED langages and Conditions
-  const { lang, conditions } = useContext(GenericCardInfosContext);
-
-  // console.log(allPricesBuffer);
-
   const priceDisplayed =
     allPricesBuffer[index].langs[langID][conditionID][isFoil] === null
       ? ""
@@ -48,9 +40,9 @@ const ShopConditionPriceUpdate = ({
   const sendSmallBatchToAPI = () => {
     const batch = [];
     const allPricesCopy = [...allPricesBuffer];
-    //HERE IS THE BATCH BRO (THE SMALL)
+    //Preparing Small Batch
     for (const objectToParse in allPricesCopy[index].langs[langID]) {
-      console.log(allPricesCopy[index].langs[langID][objectToParse]);
+      // console.log(allPricesCopy[index].langs[langID][objectToParse]);
       if (
         allPricesCopy[index].langs[langID][objectToParse][
           isFoil + "idCardShopPrice"
@@ -82,13 +74,14 @@ const ShopConditionPriceUpdate = ({
       }
     }
     console.log(batch);
-    //send the batch HERE
+    //sending the batch
     try {
       priceUpdateAPI
         .batchPriceUpdate(batch)
         .then(data => registerBatchResponseIntoContext(data.data));
     } catch (error) {
       console.log(error);
+      toast.error("Une erreur est survenue. Merci de réessayer.");
     }
   };
 
@@ -113,7 +106,7 @@ const ShopConditionPriceUpdate = ({
   const sendBigBatchToAPI = () => {
     const batch = [];
     const allPricesCopy = [...allPricesBuffer];
-    //HERE IS THE BATCH BRO (THE SMALL)
+    //Preparing Batch
     for (const LangToParse in allPricesCopy[index].langs) {
       for (const objectToParse in allPricesCopy[index].langs[LangToParse]) {
         console.log(allPricesCopy[index].langs[LangToParse][objectToParse]);
@@ -157,6 +150,7 @@ const ShopConditionPriceUpdate = ({
         .then(data => registerBatchResponseIntoContext(data.data));
     } catch (error) {
       console.log(error);
+      toast.error("Une erreur est survenue. Merci de réessayer.");
     }
   };
 
@@ -195,6 +189,7 @@ const ShopConditionPriceUpdate = ({
         for (const conditions in contextCopy[index].langs[
           authenticationInfos.shop.shopData.baseLang.id
         ]) {
+          //On first condition the price is the oneuser did seize. So we just put it as it is.
           if (j === 1) {
             contextCopy[index].langs[
               authenticationInfos.shop.shopData.baseLang.id
@@ -204,10 +199,11 @@ const ShopConditionPriceUpdate = ({
               authenticationInfos.shop.shopData.baseLang.id
             ][conditions][isFoil] =
               //If we want to make prices more stable integer, implement function here
-              (newPrice *
-                authenticationInfos.shop.shopData.PercentPerConditions[j - 1]
-                  .percent) /
-              100;
+              priceUpdateAPI.smoothNumbers(
+                newPrice *
+                  authenticationInfos.shop.shopData.PercentPerConditions[j - 1]
+                    .percent
+              ) / 100;
           }
           j++;
         }
@@ -229,25 +225,27 @@ const ShopConditionPriceUpdate = ({
                 contextCopy[index].langs[parseInt(language)][conditions][
                   isFoil
                 ] =
-                  (newPrice *
-                    authenticationInfos.shop.shopData.PercentPerLangs[
-                      parseInt(language)
-                    ].percentPerLang) /
-                  100;
+                  priceUpdateAPI.smoothNumbers(
+                    newPrice *
+                      authenticationInfos.shop.shopData.PercentPerLangs[
+                        parseInt(language)
+                      ].percentPerLang
+                  ) / 100;
               } else {
                 contextCopy[index].langs[parseInt(language)][conditions][
                   isFoil
                 ] =
                   //If we want to make prices more stable integer, implement function here
-                  (((newPrice *
-                    authenticationInfos.shop.shopData.PercentPerLangs[
-                      parseInt(language)
-                    ].percentPerLang) /
-                    100) *
-                    authenticationInfos.shop.shopData.PercentPerConditions[
-                      k - 1
-                    ].percent) /
-                  100;
+                  priceUpdateAPI.smoothNumbers(
+                    ((newPrice *
+                      authenticationInfos.shop.shopData.PercentPerLangs[
+                        parseInt(language)
+                      ].percentPerLang) /
+                      100) *
+                      authenticationInfos.shop.shopData.PercentPerConditions[
+                        k - 1
+                      ].percent
+                  ) / 100;
               }
               k++;
             }
@@ -280,10 +278,12 @@ const ShopConditionPriceUpdate = ({
             } else {
               allPricesCopy[index].langs[langID][i][isFoil] =
                 //If we want to make prices more stable integer, implement function here
-                (newPrice *
-                  authenticationInfos.shop.shopData.PercentPerConditions[i - 1]
-                    .percent) /
-                100;
+                priceUpdateAPI.smoothNumbers(
+                  newPrice *
+                    authenticationInfos.shop.shopData.PercentPerConditions[
+                      i - 1
+                    ].percent
+                ) / 100;
             }
             i++;
           }
@@ -307,11 +307,12 @@ const ShopConditionPriceUpdate = ({
             } else {
               allPricesCopy[index].langs[langID][i][isFoil] =
                 //If we want to make prices more stable integer, implement function here
-                (newPrice *
-                  authenticationInfos.shop.shopData.PercentPerConditionFoils[
-                    i - 1
-                  ].percent) /
-                100;
+                priceUpdateAPI.smoothNumbers(
+                  newPrice *
+                    authenticationInfos.shop.shopData.PercentPerConditionFoils[
+                      i - 1
+                    ].percent
+                ) / 100;
             }
             i++;
           }
