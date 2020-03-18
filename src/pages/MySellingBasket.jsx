@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import SellingBasketContext from "../context/sellingBasket";
 import SellRequestValidation from "../components/validationSellRequest/SellRequestValidation";
 import CardLineSellingBasket from "../components/CardLineSellingBasket";
@@ -6,10 +6,10 @@ import canSubmitContext from "../context/canSubmitSellRequestContext";
 import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 
 const MyCurrentSellRequest = ({ history, checkForDuplicates }) => {
-  const { currentBasket, setCurrentBasket } = useContext(SellingBasketContext);
+  const { currentBasket } = useContext(SellingBasketContext);
 
   //Knowing if the Sell Request is OK to be submitted (no duplicate)
-  const { errorList, setErrorList } = useContext(canSubmitContext);
+  // const { errorList, setErrorList } = useContext(canSubmitContext);
 
   return (
     <>

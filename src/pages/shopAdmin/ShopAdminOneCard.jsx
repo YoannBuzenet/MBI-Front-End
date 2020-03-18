@@ -130,7 +130,14 @@ const ShopAdminOneCard = ({ match }) => {
 
       return () => source.cancel("");
     }
-  }, [currentNameDecoded, conditions]);
+  }, [
+    currentNameDecoded,
+    conditions,
+    allPricesBuffer,
+    currentName,
+    lang,
+    buildCompletePriceContext
+  ]);
 
   return (
     <>

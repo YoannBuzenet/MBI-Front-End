@@ -1,13 +1,23 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import SellingBasketContext from "../context/sellingBasket";
 import CardWithThumbnail from "./CardWithThumbnail";
+import axios from "axios";
 
 const LastModifications = ({ handleAddSellingBasket }) => {
   //Current Selling Request Basket
   const { currentBasket, setCurrentBasket } = useContext(SellingBasketContext);
 
+  const [lastModificationList, setLastModificationList] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://127.0.0.1:8000/lastcardsmodified?limit=10&shopid=1")
+      .then(data => setLastModificationList(data.data));
+  }, []);
+
   return (
     <>
+      {lastModificationList.map(element => console.log(element))}
       <div className="last-modification">
         <h2>Les dernières modifications</h2>
         <div className="all-cards">
@@ -56,7 +66,7 @@ const LastModifications = ({ handleAddSellingBasket }) => {
               uuid: "9215-ddfsdf-9898-dsfdi",
               currency: "euros",
               quantity: 1,
-              scryfallid: "d3c99f65-2355-444b-b49a-c6b916f268b1"
+              scryfallid: "7d9e0a23-d2a8-40a6-9076-ed6fb539141b"
             }}
           />
           <CardWithThumbnail
@@ -72,7 +82,7 @@ const LastModifications = ({ handleAddSellingBasket }) => {
               uuid: "9215-ddfsdf-9898-dsfdn",
               currency: "euros",
               quantity: 1,
-              scryfallid: "d3c99f65-2355-444b-b49a-c6b916f268b1"
+              scryfallid: "aee01e9c-0445-4228-a73a-3e5744844ed3"
             }}
           />
           <CardWithThumbnail
@@ -88,7 +98,7 @@ const LastModifications = ({ handleAddSellingBasket }) => {
               uuid: "9215-ddfsdf-9898-dsfdn",
               currency: "euros",
               quantity: 1,
-              scryfallid: "d3c99f65-2355-444b-b49a-c6b916f268b1"
+              scryfallid: "fb50813c-72df-49e7-bac5-e6e247649241"
             }}
           />
           <CardWithThumbnail

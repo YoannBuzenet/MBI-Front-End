@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import SellingBasketContext from "../context/sellingBasket";
 import GenericCardInfosContext from "../context/genericCardInfosContext";
 import genericCardAPI from "../services/genericCardAPI";
+import cardsAPI from "../services/cardsAPI";
 
 const CardLine = ({ card, handleAddSellingBasket, index, setName }) => {
   //Current Selling Request Basket
@@ -56,17 +57,8 @@ const CardLine = ({ card, handleAddSellingBasket, index, setName }) => {
     setCurrentCard({ ...currentCard, [name]: newValue });
   };
 
-  //Creating the specific link to get the scryffalID picture. It is composed of a static base, + the 2 first character of the ID, + the ID
-  const firstCharac = card.scryfallid.substr(0, 1);
-  const secondCharac = card.scryfallid.substr(1, 1);
-  const urlCard =
-    "https://img.scryfall.com/cards/small/front/" +
-    firstCharac +
-    "/" +
-    secondCharac +
-    "/" +
-    card.scryfallid +
-    ".jpg";
+  //Getting the Picture URL
+  const urlPictureCard = cardsAPI.getSmallPictureFromScryfallId(card);
 
   const hoverClassName = e => genericCardAPI.isPictureDisplayedTopOrBottom(e);
 
@@ -92,7 +84,7 @@ const CardLine = ({ card, handleAddSellingBasket, index, setName }) => {
             //TODO : change className following the scrolling, to know if the position must be top or bottom, to stay in window
             //Other class CSS ready just aside this one, JS logic to make
             <div className={hoverTopOrBottom}>
-              <img src={urlCard} alt={card.name} />
+              <img src={urlPictureCard} alt={card.name} />
             </div>
           )}
         </td>
