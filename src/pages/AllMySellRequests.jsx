@@ -27,12 +27,12 @@ const AllMySellRequests = props => {
             <Tr>
               <Th>Reference</Th>
               <Th>Status</Th>
-              <Th>Date Soumission</Th>
-              <Th>Date Envoi</Th>
-              <Th>Date Réception</Th>
-              <Th>Date Dernier traitement</Th>
-              <Th>Date Attente Validation Client</Th>
-              <Th>Date Validation</Th>
+              <Th>Soumission</Th>
+              <Th>Envoi</Th>
+              <Th>Réception</Th>
+              <Th>Dernier traitement</Th>
+              <Th>Attente Validation Client</Th>
+              <Th>Validation</Th>
               <Th>Nombre de cartes</Th>
               <Th>Montant total</Th>
             </Tr>
@@ -44,39 +44,95 @@ const AllMySellRequests = props => {
                 (sellRequest, index) => (
                   <Tr key={sellRequest.id}>
                     <Td>
-                      <Link to={"/my_sell_requests/" + sellRequest.id}>
+                      <Link
+                        to={"/my_sell_requests/" + sellRequest.id}
+                        className="sellRequest-table-link"
+                      >
                         {sellRequest.id}
                       </Link>
                     </Td>
                     <Td>
-                      <StatusCalculator sellRequest={sellRequest} />
+                      <Link
+                        to={"/my_sell_requests/" + sellRequest.id}
+                        className="sellRequest-table-link"
+                      >
+                        <StatusCalculator sellRequest={sellRequest} />
+                      </Link>
                     </Td>
                     <Td>
-                      <DateDisplayer
-                        dateToHandle={sellRequest.DateSubmit.date}
-                      />
+                      <Link
+                        to={"/my_sell_requests/" + sellRequest.id}
+                        className="sellRequest-table-link"
+                      >
+                        <DateDisplayer
+                          dateToHandle={sellRequest.DateSubmit.date}
+                        />
+                      </Link>
                     </Td>
                     <Td>
-                      <DateDisplayer dateToHandle={sellRequest.dateEnvoi} />
+                      <Link
+                        to={"/my_sell_requests/" + sellRequest.id}
+                        className="sellRequest-table-link"
+                      >
+                        <DateDisplayer
+                          dateToHandle={sellRequest.dateEnvoi.date}
+                        />
+                      </Link>
                     </Td>
                     <Td>
-                      <DateDisplayer dateToHandle={sellRequest.dateRecu} />
+                      <Link
+                        to={"/my_sell_requests/" + sellRequest.id}
+                        className="sellRequest-table-link"
+                      >
+                        <DateDisplayer dateToHandle={sellRequest.dateRecu} />
+                      </Link>
                     </Td>
                     <Td>
-                      <DateDisplayer
-                        dateToHandle={sellRequest.dateProcessing}
-                      />
+                      <Link
+                        to={"/my_sell_requests/" + sellRequest.id}
+                        className="sellRequest-table-link"
+                      >
+                        <DateDisplayer
+                          dateToHandle={sellRequest.dateProcessing}
+                        />
+                      </Link>
                     </Td>
                     <Td>
-                      <DateDisplayer
-                        dateToHandle={sellRequest.dateApprovalPending}
-                      />
+                      <Link
+                        to={"/my_sell_requests/" + sellRequest.id}
+                        className="sellRequest-table-link"
+                      >
+                        <DateDisplayer
+                          dateToHandle={sellRequest.dateApprovalPending}
+                        />
+                      </Link>
                     </Td>
                     <Td>
-                      <DateDisplayer dateToHandle={sellRequest.dateValidated} />
+                      <Link
+                        to={"/my_sell_requests/" + sellRequest.id}
+                        className="sellRequest-table-link"
+                      >
+                        <DateDisplayer
+                          dateToHandle={sellRequest.dateValidated}
+                        />
+                      </Link>
                     </Td>
-                    <Td>{sellRequest.amount}</Td>
-                    <Td>{sellRequest.cardTotalQuantity}</Td>
+                    <Td>
+                      <Link
+                        to={"/my_sell_requests/" + sellRequest.id}
+                        className="sellRequest-table-link"
+                      >
+                        {sellRequest.amount}
+                      </Link>
+                    </Td>
+                    <Td>
+                      <Link
+                        to={"/my_sell_requests/" + sellRequest.id}
+                        className="sellRequest-table-link"
+                      >
+                        {sellRequest.cardTotalQuantity}
+                      </Link>
+                    </Td>
                   </Tr>
                 )
               )}
