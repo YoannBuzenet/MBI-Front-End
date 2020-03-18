@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import AuthContext from "../context/authContext";
 import SellingBasketContext from "../context/sellingBasket";
@@ -12,7 +12,7 @@ const BurgerMenuComponents = ({ history }) => {
   );
 
   //Current Selling Request Basket
-  const { currentBasket, setCurrentBasket } = useContext(SellingBasketContext);
+  const { currentBasket } = useContext(SellingBasketContext);
 
   const handleLogout = () => {
     authAPI.logout();

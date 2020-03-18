@@ -1,16 +1,19 @@
 import React, { useState, useContext, useEffect } from "react";
 import SellingBasketContext from "../context/sellingBasket";
+import cardsAPI from "../services/cardsAPI";
 
-const CardWithThumbnail = ({ picture, handleAddSellingBasket, card }) => {
+const CardWithThumbnail = ({ handleAddSellingBasket, card }) => {
   //Current Selling Request Basket
   const { currentBasket, setCurrentBasket } = useContext(SellingBasketContext);
 
   //Using the current Card in state
   const [currentCard, setCard] = useState(card);
 
+  const picture = cardsAPI.getSmallPictureFromScryfallId(card);
+
   const handleChange = ({ currentTarget }, currentCard) => {
     const { name, value } = currentTarget;
-    if (name == "quantity") {
+    if (name === "quantity") {
       var newValue = parseInt(value);
     } else {
       var newValue = value.toString();

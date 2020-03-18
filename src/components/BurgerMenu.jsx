@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import SellingBasketContext from "../context/sellingBasket";
 import BurgerMenuComponents from "./BurgerMenuComponents";
 import BlackDiv from "./BlackDiv";
@@ -16,7 +16,7 @@ const BurgerMenu = ({ history }) => {
 
   const handleClick = event => {
     setIsResponsiveMenuDisplayed(!isResponsiveMenuDisplayed);
-    return console.log(event);
+    // return console.log(event);
   };
 
   return (

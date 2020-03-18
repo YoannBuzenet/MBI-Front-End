@@ -39,10 +39,10 @@ const ShopSellRequestStatusValidator = props => {
     if (currentAdminSellRequest && currentAdminSellRequest.dateCanceled) {
       setCurrentStatus("Cancelled");
     }
-  });
+  }, [currentAdminSellRequest]);
 
   useEffect(() => {
-    if (currentStatus == "Soumis" || currentStatus === "Envoyé") {
+    if (currentStatus === "Soumis" || currentStatus === "Envoyé") {
       setAvailableOptions([
         {
           status: "Reçu",
@@ -76,7 +76,7 @@ const ShopSellRequestStatusValidator = props => {
         }
       ]);
     }
-  }, [currentStatus]);
+  }, [currentStatus, currentAdminSellRequest]);
 
   const validateSellRequest = () => {
     // console.log("le rachat va etre validé");
