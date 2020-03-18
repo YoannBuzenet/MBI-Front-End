@@ -3,7 +3,7 @@ import userAPI from "../services/userAPI";
 import Field from "../components/forms/Field";
 
 //TODO : insert the shop ID via ENV variable
-const shopID = 3;
+const shopID = 1;
 
 const RegisterPage = ({ history }) => {
   const [credentials, setCredentials] = useState({
