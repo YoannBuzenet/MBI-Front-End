@@ -38,6 +38,8 @@ const RegisterPage = ({ history }) => {
       };
       await userAPI.register(jsonToSend);
 
+      console.log(jsonToSend);
+
       history.replace("/");
     } catch (error) {
       console.log(error);

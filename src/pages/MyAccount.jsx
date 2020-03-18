@@ -44,6 +44,8 @@ const MyAccount = props => {
         authenticationInfos.user.id,
         credentials
       );
+      console.log(response.data);
+      console.log(authenticationInfos.user.id);
       //UPDATE LE STATE
       // console.log(response.data);
       setAccountInformation({
