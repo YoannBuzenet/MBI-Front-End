@@ -160,10 +160,19 @@ const ShopConditionPriceUpdate = ({
   // If another field is updated, we update just the field
   // Each time we update, we must wait for server response to add the new ID to our context, to be able to modify content.
   const handlechange = (event, conditionID, langID, isFoil, index, cardID) => {
-    //Checking the input is a number
-    if (!isNaN(parseInt(event.target.value))) {
+    //Checking if user is typing a float number. This condition allows him to type it
+    //Without this condition, user can't type a "." to type the complete floating number
+    if (event.target.value[event.target.value.length - 1] === ".") {
+      const allPricesCopy = [...allPricesBuffer];
+      allPricesCopy[index].langs[langID][conditionID][isFoil] =
+        event.target.value;
+      setAllPricesBuffer(allPricesCopy);
+    }
+
+    //If it's a number, real logic triggers here
+    else if (!isNaN(parseFloat(event.target.value))) {
       console.log(
-        parseInt(event.target.value),
+        parseFloat(event.target.value),
         conditionID,
         langID,
         isFoil,
@@ -171,7 +180,7 @@ const ShopConditionPriceUpdate = ({
         cardID
       );
 
-      const newPrice = parseInt(event.target.value);
+      const newPrice = parseFloat(event.target.value);
 
       if (
         conditionID === 1 &&
@@ -438,8 +447,7 @@ const ShopConditionPriceUpdate = ({
         isFoil + "idCardShopPrice"
       ] = null;
     } else {
-      //TODO : toast to tell to put a number
-      console.log("type a number please");
+      toast.error("Merci de saisir un nombre.");
     }
   };
 
