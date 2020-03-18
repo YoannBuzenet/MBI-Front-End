@@ -14,9 +14,9 @@ const AllMySellRequests = props => {
 
   console.log(authenticationInfos.customer.SellRequests);
 
-  // useEffect(() => {
-  //   console.log(authenticationInfos.customer.SellRequests);
-  // });
+  useEffect(() => {
+    console.log(authenticationInfos.customer.SellRequests);
+  });
 
   return (
     <>
@@ -52,7 +52,9 @@ const AllMySellRequests = props => {
                       <StatusCalculator sellRequest={sellRequest} />
                     </Td>
                     <Td>
-                      <DateDisplayer dateToHandle={sellRequest.DateSubmit} />
+                      <DateDisplayer
+                        dateToHandle={sellRequest.DateSubmit.date}
+                      />
                     </Td>
                     <Td>
                       <DateDisplayer dateToHandle={sellRequest.dateEnvoi} />
