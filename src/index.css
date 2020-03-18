@@ -338,6 +338,11 @@ div.connect p {
     display: flex;
     align-items: center;
     cursor: pointer;
+    width: 30px;
+    margin-right: 35px;
+  }
+
+  .burger-menu img {
     width: 40px;
   }
   .responsive-basket-quantity {
@@ -687,7 +692,6 @@ div.connect p {
 }
 
 .my-account button {
-  padding: 1rem;
   margin-top: 2rem;
 }
 
@@ -769,7 +773,8 @@ tbody.cardLineShop {
 }
 
 .connecting-button {
-  padding: 1rem;
+  padding: 1.5rem;
+  font-size: 1.4rem;
   margin-top: 0.5rem;
   border-radius: 5px;
   border: none;
@@ -790,7 +795,9 @@ tbody.cardLineShop {
 
 .field-form input,
 .my-account textarea {
+  width: 30%;
   padding: 2rem;
+  font-size: 2rem;
   border-radius: var(--border-radius-form-field);
   border: 1px solid lightgrey;
 }
