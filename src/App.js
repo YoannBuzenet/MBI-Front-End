@@ -19,6 +19,7 @@ import GenericContext from "./context/genericCardInfosContext";
 import CanSubmitContext from "./context/canSubmitSellRequestContext";
 import PriceBufferContext from "./context/priceBufferContext";
 import isResponsiveMenuDisplayedContext from "./context/menuDisplayedContext";
+import axios from "axios";
 
 import {
   BrowserRouter as Router,
@@ -170,6 +171,10 @@ function App() {
 
   const NavbarWithRouter = withRouter(Navbar);
   const ShopNavbarWithRouter = withRouter(ShopNavbar);
+
+  axios
+    .get("http://127.0.0.1:8000/lastcardsmodified?limit=10")
+    .then(data => console.log(data));
 
   //VERY IMPORTANT Function to add cards to Selling Basket.
   //We put it in App component because it need the use of hooks.
