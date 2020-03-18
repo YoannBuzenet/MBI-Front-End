@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import userAPI from "../services/userAPI";
 import Field from "../components/forms/Field";
+import { ToastContainer, toast } from "react-toastify";
 
 //TODO : insert the shop ID via ENV variable
 const shopID = 1;
@@ -37,12 +38,14 @@ const RegisterPage = ({ history }) => {
         }
       };
       await userAPI.register(jsonToSend);
+      toast.success("Votre compte a bien été créé.");
 
-      console.log(jsonToSend);
+      // console.log(jsonToSend);
 
       history.replace("/");
     } catch (error) {
       console.log(error);
+      toast.error("Une erreur est survenue. Merci de réessayer.");
     }
   };
 
