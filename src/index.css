@@ -115,9 +115,9 @@ h2 {
   position: absolute;
   height: 100vh;
   width: 250vw;
-  top: -10%;
+  top: -25%;
   right: -120%;
-  left: -2000%;
+  left: -2800%;
   z-index: 4;
   background-color: rgba(0, 0, 0, 0.5);
 }
@@ -311,7 +311,7 @@ div.connect p {
   bottom: 0;
   height: 100vh;
   width: 30vw;
-  right: -400%;
+  right: -600%;
   background-color: white;
   z-index: 5;
 }
@@ -365,13 +365,13 @@ div.connect p {
 }
 @media only screen and (max-width: 850px) {
   .responsive_menu {
-    right: -320%;
+    right: -540%;
     width: 40vw;
   }
 }
 @media only screen and (max-width: 750px) {
   .responsive_menu {
-    right: -280%;
+    right: -530%;
     width: 40vw;
   }
 }
@@ -380,19 +380,19 @@ div.connect p {
     display: none;
   }
   .responsive_menu {
-    right: -100%;
+    right: -200%;
     width: 40vw;
   }
 }
 @media only screen and (max-width: 550px) {
   .responsive_menu {
-    right: -80%;
+    right: -180%;
     width: 50vw;
   }
 }
 @media only screen and (max-width: 500px) {
   .responsive_menu {
-    right: -50%;
+    right: -170%;
     width: 60vw;
   }
 }
@@ -553,7 +553,7 @@ div.connect p {
 }
 
 .last-modification .card:hover {
-  background-color: rgba(0, 0, 0, 0.05);
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 .last-modification .card .card-infos {
@@ -807,7 +807,7 @@ tbody.cardLineShop {
 .field-form input,
 .my-account textarea {
   width: 30%;
-  padding: 2rem;
+  padding: 1.8rem;
   font-size: 2rem;
   border-radius: var(--border-radius-form-field);
   border: 1px solid lightgrey;
@@ -817,7 +817,7 @@ tbody.cardLineShop {
   .field-form input,
   .my-account textarea {
     width: 80%;
-    font-size: 2rem;
+    font-size: 1.8rem;
   }
   .connecting-button {
     padding: 2rem;

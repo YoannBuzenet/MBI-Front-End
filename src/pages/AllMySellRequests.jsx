@@ -75,7 +75,11 @@ const AllMySellRequests = props => {
                         className="sellRequest-table-link"
                       >
                         <DateDisplayer
-                          dateToHandle={sellRequest.dateEnvoi.date}
+                          dateToHandle={
+                            sellRequest.dateEnvoi
+                              ? sellRequest.dateEnvoi.date
+                              : sellRequest.dateEnvoi
+                          }
                         />
                       </Link>
                     </Td>
