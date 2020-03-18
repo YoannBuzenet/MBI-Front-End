@@ -173,7 +173,7 @@ function App() {
   const ShopNavbarWithRouter = withRouter(ShopNavbar);
 
   axios
-    .get("http://127.0.0.1:8000/lastcardsmodified?limit=10")
+    .get("http://127.0.0.1:8000/lastcardsmodified?limit=10&shopid=1")
     .then(data => console.log(data));
 
   //VERY IMPORTANT Function to add cards to Selling Basket.

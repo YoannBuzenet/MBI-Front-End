@@ -39,13 +39,20 @@ const BurgerMenuComponents = ({ history }) => {
     history.replace("/");
   };
 
+  const classMenu = authenticationInfos.isAuthenticated
+    ? "responsive_menu authenticated-menu"
+    : "responsive_menu";
+
   return (
-    <div className="responsive_menu">
+    <div className={classMenu}>
       {authenticationInfos.isAuthenticated ? (
         <div className="my_options_responsive">
           <h2 className="surname_responsive">
             {authenticationInfos.customer.prenom}
           </h2>
+          <span className="divider">
+            <hr></hr>
+          </span>
           <div className="">
             <ul className="">
               <Link
