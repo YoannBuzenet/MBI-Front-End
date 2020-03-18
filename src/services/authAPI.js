@@ -81,6 +81,7 @@ function authenticate(credentials) {
 
 function logout() {
   window.localStorage.removeItem("authToken");
+  window.localStorage.removeItem("userInfos");
   delete axios.defaults.headers["Authorization"];
 }
 

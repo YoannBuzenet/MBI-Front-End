@@ -131,9 +131,7 @@ const ShopSellRequestStatusValidator = props => {
 
   return (
     <>
-      {currentAdminSellRequest.id && (
-        <p>Ceci est un menu d'options pour MAJ le statut du rachat</p>
-      )}
+      {currentAdminSellRequest.id && <p>Modifier le statut du rachat</p>}
       {availableOptions.length > 0 && (
         <select
           value="default"
