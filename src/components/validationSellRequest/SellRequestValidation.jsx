@@ -94,7 +94,7 @@ const SellRequestValidation = ({ history, checkForDuplicates }) => {
     try {
       const sendSellRequest = await sellRequestAPI.send(sellRequestData);
       setIsLoaded(true);
-      // console.log(sendSellRequest.data);
+      console.log(sendSellRequest.data);
 
       //Adding the new sell request to the STATE information
 
@@ -114,7 +114,8 @@ const SellRequestValidation = ({ history, checkForDuplicates }) => {
               dateCanceled: sendSellRequest.data.dateCanceled,
               amount: sendSellRequest.data.amount,
               cardTotalQuantity: sendSellRequest.data.cardTotalQuantity,
-              DateSubmit: sendSellRequest.data.DateSubmit
+              DateSubmit: { date: sendSellRequest.data.DateSubmit }
+              //Creating an object Date to give it the same format as what we receive from API Platform, to allow component to read it
             }
           ]
         }
