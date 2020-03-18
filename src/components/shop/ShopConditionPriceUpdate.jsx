@@ -175,7 +175,6 @@ const ShopConditionPriceUpdate = ({
 
       if (
         conditionID === 1 &&
-        isFoil === 0 &&
         langID === authenticationInfos.shop.shopData.baseLang.id
       ) {
         console.log(
