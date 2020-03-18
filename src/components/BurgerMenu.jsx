@@ -23,7 +23,11 @@ const BurgerMenu = ({ history }) => {
     <div className="burger-menu" onClick={event => handleClick(event)}>
       <img src="/pictures/burger-menu.png" alt="" />
       {currentBasket.length > 0 && (
-        <div className="responsive-basket-quantity">{currentBasket.length}</div>
+        <div className="responsive-basket-quantity">
+          {currentBasket.reduce((total, card) => {
+            return total + card.quantity;
+          }, 0)}
+        </div>
       )}
       {isResponsiveMenuDisplayed && <BurgerMenuComponents history={history} />}
       {isResponsiveMenuDisplayed && <BlackDiv />}
