@@ -52,33 +52,37 @@ const LoginPage = ({ onLogin, history }) => {
 
   return (
     <>
-      <h1>Connexion à l'application</h1>
+      <div className="login-page">
+        <div>
+          <h1>Connexion à l'application</h1>
 
-      <form action="" onSubmit={handleSubmit}>
-        <Field
-          name="email"
-          label="Adresse e-mail"
-          value={credentials.username}
-          onChange={handleChange}
-          placeholder="Adresse e-mail..."
-          error={error}
-        />
+          <form action="" onSubmit={handleSubmit}>
+            <Field
+              name="email"
+              label="Adresse e-mail"
+              value={credentials.username}
+              onChange={handleChange}
+              placeholder="Adresse e-mail..."
+              error={error}
+            />
 
-        <Field
-          name="password"
-          type="password"
-          label="Password"
-          value={credentials.password}
-          onChange={handleChange}
-          placeholder="Mot de passe"
-          error=""
-        />
-        <div className="form-group">
-          <button type="submit" className="connecting-button">
-            Je me connecte
-          </button>
+            <Field
+              name="password"
+              type="password"
+              label="Password"
+              value={credentials.password}
+              onChange={handleChange}
+              placeholder="Mot de passe"
+              error=""
+            />
+            <div className="form-group">
+              <button type="submit" className="connecting-button">
+                Je me connecte
+              </button>
+            </div>
+          </form>
         </div>
-      </form>
+      </div>
     </>
   );
 };
