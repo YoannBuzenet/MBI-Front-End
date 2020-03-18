@@ -31,7 +31,7 @@ const ShopConditionPriceUpdate = ({
   const gradingArea = "nameEU";
 
   //TODO : pass this in env variable
-  const shop = 3;
+  const shop = 1;
 
   // console.log(allPricesBuffer);
 
@@ -105,7 +105,7 @@ const ShopConditionPriceUpdate = ({
       const languageID = parseInt(data[i].language.substr(11));
       const conditionID = parseInt(data[i].cardCondition.substr(17));
       const isFoil = data[i].isFoil === true ? 1 : 0;
-
+      // TODO : check s'il y a oubli de la prise en des modifs dans le contexte
       setAllPricesBuffer(contextCopy);
     }
   };
