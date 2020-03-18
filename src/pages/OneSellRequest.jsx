@@ -81,38 +81,23 @@ const OneSellRequest = ({ match, history }) => {
                 <Td>{card.price * card.cardQuantity}</Td>
               </Tr>
             ))}
-          <Tr className="total-line">
-            <Td></Td>
-            <Td></Td>
-            <Td></Td>
-            <Td></Td>
-            <Td></Td>
-            <Td></Td>
-            <Td>NOMBRE DE CARTES</Td>
-            <Td>
-              {currentSellRequest.sellRequestCards.length > 0 &&
-                currentSellRequest.sellRequestCards.reduce((total, card) => {
-                  return total + card.cardQuantity;
-                }, 0)}
-            </Td>
-          </Tr>
-          <Tr className="total-line">
-            <Td></Td>
-            <Td></Td>
-            <Td></Td>
-            <Td></Td>
-            <Td></Td>
-            <Td></Td>
-            <Td>TOTAL</Td>
-            <Td>
-              {currentSellRequest.sellRequestCards.length > 0 &&
-                currentSellRequest.sellRequestCards.reduce((total, card) => {
-                  return total + card.price * card.cardQuantity;
-                }, 0)}
-            </Td>
-          </Tr>
         </Tbody>
       </Table>
+      <span className="under-table-total">
+        Total :
+        {currentSellRequest.sellRequestCards.length > 0 &&
+          currentSellRequest.sellRequestCards.reduce((total, card) => {
+            return total + card.cardQuantity;
+          }, 0)}
+      </span>
+
+      <span className="under-table-total">
+        Total :
+        {currentSellRequest.sellRequestCards.length > 0 &&
+          currentSellRequest.sellRequestCards.reduce((total, card) => {
+            return total + card.price * card.cardQuantity;
+          }, 0)}
+      </span>
       <SellRequestStatusUpdater
         currentSellRequest={currentSellRequest}
         setCurrentSellRequest={setCurrentSellRequest}
