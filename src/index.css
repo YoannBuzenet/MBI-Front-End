@@ -523,7 +523,7 @@ div.connect p {
 
 .setList-table {
   text-align: left;
-  background-color: var(--background-color-very-weak);
+  /* background-color: var(--background-color-very-weak); */
 }
 
 .setList-table td > a {
@@ -553,7 +553,7 @@ div.connect p {
 }
 
 .last-modification .card:hover {
-  background-color: var(--main-bg-color-weak);
+  background-color: rgba(0, 0, 0, 0.05);
 }
 
 .last-modification .card .card-infos {
@@ -712,6 +712,17 @@ div.connect p {
 /**************************
 *****ALL MY SELL REQUEST******
 **************************/
+
+.sellRequest-table-link {
+  display: block;
+  color: black;
+  text-decoration: none;
+  text-align: center;
+}
+
+.sellRequest-table-link td {
+}
+
 .under-table-total {
   display: block;
   margin-top: 0.5rem;
