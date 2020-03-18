@@ -51,6 +51,9 @@ function roundUnit5Down(number) {
 function roundUnit25Down(number) {
   return number - (number % 25);
 }
+function roundUnit50Down(number) {
+  return number - (number % 50);
+}
 
 function smoothNumbers(price) {
   if (price <= 0.05) {
@@ -67,6 +70,8 @@ function smoothNumbers(price) {
     price = roundUnit5Down(price);
   } else if (price > 300 && price <= 500) {
     price = roundUnit25Down(price);
+  } else {
+    price = roundUnit50Down(price);
   }
   return price;
 }

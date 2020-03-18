@@ -30,7 +30,7 @@ const ShopConditionPriceUpdate = ({
   //TODO : pass this in env variable
   const shop = 1;
 
-  // console.log(allPricesBuffer);
+  console.log(allPricesBuffer);
 
   const priceDisplayed =
     allPricesBuffer[index].langs[langID][conditionID][isFoil] === null
@@ -109,7 +109,7 @@ const ShopConditionPriceUpdate = ({
     //Preparing Batch
     for (const LangToParse in allPricesCopy[index].langs) {
       for (const objectToParse in allPricesCopy[index].langs[LangToParse]) {
-        console.log(allPricesCopy[index].langs[LangToParse][objectToParse]);
+        // console.log(allPricesCopy[index].langs[LangToParse][objectToParse]);
         if (
           allPricesCopy[index].langs[LangToParse][objectToParse][
             isFoil + "idCardShopPrice"
@@ -177,9 +177,9 @@ const ShopConditionPriceUpdate = ({
         conditionID === 1 &&
         langID === authenticationInfos.shop.shopData.baseLang.id
       ) {
-        console.log(
-          "Updating everything in this variation index but foil cards"
-        );
+        // console.log(
+        //   "Updating everything in this variation index but foil cards"
+        // );
         //AIM - update all languages and condition in the current set
         //1. Copy context
         const contextCopy = [...allPricesBuffer];
@@ -188,22 +188,32 @@ const ShopConditionPriceUpdate = ({
         for (const conditions in contextCopy[index].langs[
           authenticationInfos.shop.shopData.baseLang.id
         ]) {
-          //On first condition the price is the oneuser did seize. So we just put it as it is.
+          //On first condition the price is the one user did seize. So we just put it as it is.
           if (j === 1) {
+            //Updating Price on context
             contextCopy[index].langs[
               authenticationInfos.shop.shopData.baseLang.id
             ][conditions][isFoil] = newPrice;
-          } else {
+
+            //Updating Was Updated property on context to create a CSS class
             contextCopy[index].langs[
               authenticationInfos.shop.shopData.baseLang.id
-            ][conditions][isFoil] =
-              //If we want to make prices more stable integer, implement function here
-              priceUpdateAPI.smoothNumbers(
-                (newPrice *
-                  authenticationInfos.shop.shopData.PercentPerConditions[j - 1]
-                    .percent) /
-                  100
-              );
+            ][conditions][isFoil + "wasUpdated"] = true;
+          } else {
+            //Updating Prices on all non Mint conditions on BaseLang
+            contextCopy[index].langs[
+              authenticationInfos.shop.shopData.baseLang.id
+            ][conditions][isFoil] = priceUpdateAPI.smoothNumbers(
+              (newPrice *
+                authenticationInfos.shop.shopData.PercentPerConditions[j - 1]
+                  .percent) /
+                100
+            );
+
+            //Updating Was Updated property on context to create a CSS class
+            contextCopy[index].langs[
+              authenticationInfos.shop.shopData.baseLang.id
+            ][conditions][isFoil + "wasUpdated"] = true;
           }
           j++;
         }
@@ -222,6 +232,7 @@ const ShopConditionPriceUpdate = ({
               authenticationInfos.shop.shopData.baseLang.id
             ]) {
               if (k === 1) {
+                //Updating price on Mint condition on NON baseLang
                 contextCopy[index].langs[parseInt(language)][conditions][
                   isFoil
                 ] = priceUpdateAPI.smoothNumbers(
@@ -231,22 +242,31 @@ const ShopConditionPriceUpdate = ({
                     ].percentPerLang) /
                     100
                 );
+
+                //Updating Was Updated property on context to create a CSS class
+                contextCopy[index].langs[parseInt(language)][conditions][
+                  isFoil + "wasUpdated"
+                ] = true;
               } else {
+                //Updating Price on all non BaseLang languages
                 contextCopy[index].langs[parseInt(language)][conditions][
                   isFoil
-                ] =
-                  //If we want to make prices more stable integer, implement function here
-                  priceUpdateAPI.smoothNumbers(
-                    (((newPrice *
-                      authenticationInfos.shop.shopData.PercentPerLangs[
-                        parseInt(language)
-                      ].percentPerLang) /
-                      100) *
-                      authenticationInfos.shop.shopData.PercentPerConditions[
-                        k - 1
-                      ].percent) /
-                      100
-                  );
+                ] = priceUpdateAPI.smoothNumbers(
+                  (((newPrice *
+                    authenticationInfos.shop.shopData.PercentPerLangs[
+                      parseInt(language)
+                    ].percentPerLang) /
+                    100) *
+                    authenticationInfos.shop.shopData.PercentPerConditions[
+                      k - 1
+                    ].percent) /
+                    100
+                );
+
+                //Updating Was Updated property on context to create a CSS class
+                contextCopy[index].langs[parseInt(language)][conditions][
+                  isFoil + "wasUpdated"
+                ] = true;
               }
               k++;
             }
@@ -276,15 +296,26 @@ const ShopConditionPriceUpdate = ({
           for (const condition in allPricesCopy[index].langs[langID]) {
             if (i === 1) {
               allPricesCopy[index].langs[langID][i][isFoil] = newPrice;
+
+              //Updating Was Updated property on context to create a CSS class
+              allPricesCopy[index].langs[langID][i][
+                isFoil + "wasUpdated"
+              ] = true;
             } else {
               allPricesCopy[index].langs[langID][i][isFoil] =
                 //If we want to make prices more stable integer, implement function here
                 priceUpdateAPI.smoothNumbers(
-                  newPrice *
+                  (newPrice *
                     authenticationInfos.shop.shopData.PercentPerConditions[
                       i - 1
-                    ].percent
-                ) / 100;
+                    ].percent) /
+                    100
+                );
+
+              //Updating Was Updated property on context to create a CSS class
+              allPricesCopy[index].langs[langID][i][
+                isFoil + "wasUpdated"
+              ] = true;
             }
             i++;
           }
@@ -305,15 +336,25 @@ const ShopConditionPriceUpdate = ({
           for (const condition in allPricesCopy[index].langs[langID]) {
             if (i === 1) {
               allPricesCopy[index].langs[langID][i][isFoil] = newPrice;
+
+              //Updating Was Updated property on context to create a CSS class
+              allPricesCopy[index].langs[langID][i][
+                isFoil + "wasUpdated"
+              ] = true;
             } else {
               allPricesCopy[index].langs[langID][i][isFoil] =
                 //If we want to make prices more stable integer, implement function here
                 priceUpdateAPI.smoothNumbers(
-                  newPrice *
+                  (newPrice *
                     authenticationInfos.shop.shopData.PercentPerConditionFoils[
                       i - 1
-                    ].percent
-                ) / 100;
+                    ].percent) /
+                    100
+                );
+              //Updating Was Updated property on context to create a CSS class
+              allPricesCopy[index].langs[langID][i][
+                isFoil + "wasUpdated"
+              ] = true;
             }
             i++;
           }
@@ -324,7 +365,7 @@ const ShopConditionPriceUpdate = ({
         }
       } else {
         const allPricesCopy = [...allPricesBuffer];
-        //PUT
+        //If price exists already : PUT
         if (
           allPricesBuffer[index].langs[langID][conditionID][isFoil] !== null
         ) {
@@ -337,6 +378,10 @@ const ShopConditionPriceUpdate = ({
             card: "/cards/" + cardID
           };
 
+          allPricesBuffer[index].langs[langID][conditionID][
+            isFoil + "wasUpdated"
+          ] = true;
+
           priceUpdateAPI
             .putOnePrice(
               objectToSend,
@@ -347,7 +392,7 @@ const ShopConditionPriceUpdate = ({
             .then(response => console.log("la", response))
             .catch(error => console.log(error));
         } else {
-          //POST
+          //If price didn't exist : POST
 
           const objectToSend = {
             price: newPrice,
@@ -370,6 +415,9 @@ const ShopConditionPriceUpdate = ({
         }
 
         allPricesCopy[index].langs[langID][conditionID][isFoil] = newPrice;
+        allPricesBuffer[index].langs[langID][conditionID][
+          isFoil + "wasUpdated"
+        ] = true;
         // console.log(allPricesCopy);
         setAllPricesBuffer(allPricesCopy);
         // console.log(allPricesCopy);
@@ -395,10 +443,11 @@ const ShopConditionPriceUpdate = ({
     }
   };
 
-  useEffect(() => {
-    // console.log(allPricesBuffer);
-  });
-
+  const classInputUpdated = allPricesBuffer[index].langs[langID][conditionID][
+    isFoil + "wasUpdated"
+  ]
+    ? "updated"
+    : "not-updated";
   return (
     <p>
       <input
@@ -408,6 +457,7 @@ const ShopConditionPriceUpdate = ({
         onChange={event => {
           handlechange(event, conditionID, langID, isFoil, index, cardID);
         }}
+        className={classInputUpdated}
       />
     </p>
   );
