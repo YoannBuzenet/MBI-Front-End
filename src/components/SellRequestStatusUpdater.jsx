@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import sellRequestAPI from "../services/sellRequestAPI";
 import AuthContext from "../context/authContext";
 import authAPI from "../services/authAPI";
+import { ToastContainer, toast } from "react-toastify";
 
 const SellRequestStatusUpdater = ({
   currentSellRequest,
@@ -24,7 +25,7 @@ const SellRequestStatusUpdater = ({
         setHasBeenSent(false);
         console.log(currentSellRequest);
         if (!hasBeenSent) {
-          console.log("ce rachat n'a pas été envoyé");
+          // console.log("ce rachat n'a pas été envoyé");
         }
       } else {
         setHasBeenSent(true);
@@ -94,8 +95,14 @@ const SellRequestStatusUpdater = ({
           ...currentSellRequest,
           dateEnvoi: data.data.dateEnvoi
         })
-      );
-    //TODO ADD A TOAST FOR SUCCESS
+      )
+      .then(toast.success("Le rachat a été marqué comme envoyé."))
+      .catch(error => {
+        console.log(error);
+        return toast.error(
+          "Le rachat n'a pu être marqué comme envoyé. Merci de rééssayer."
+        );
+      });
   };
 
   return (

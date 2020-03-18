@@ -701,6 +701,15 @@ div.connect p {
 }
 
 /**************************
+*****ALL MY SELL REQUEST******
+**************************/
+.under-table-total {
+  display: block;
+  margin-top: 0.5rem;
+  text-align: center;
+}
+
+/**************************
 *********MODALS**********
 **************************/
 tbody.cardLineShop {
