@@ -362,17 +362,29 @@ div.connect p {
     margin-top: 1rem;
     font-size: 4rem;
   }
+  .responsive_menu {
+    animation-duration: 0.5s;
+    animation-name: slidein1000;
+  }
 }
 @media only screen and (max-width: 850px) {
   .responsive_menu {
     right: -540%;
     width: 40vw;
   }
+  .responsive_menu {
+    animation-duration: 0.5s;
+    animation-name: slidein850;
+  }
 }
 @media only screen and (max-width: 750px) {
   .responsive_menu {
     right: -530%;
     width: 40vw;
+  }
+  .responsive_menu {
+    animation-duration: 0.5s;
+    animation-name: slidein750;
   }
 }
 @media only screen and (max-width: 650px) {
@@ -383,17 +395,84 @@ div.connect p {
     right: -200%;
     width: 40vw;
   }
+  .responsive_menu {
+    animation-duration: 0.5s;
+    animation-name: slidein650;
+  }
 }
 @media only screen and (max-width: 550px) {
   .responsive_menu {
     right: -180%;
     width: 50vw;
   }
+  .responsive_menu {
+    animation-duration: 0.5s;
+    animation-name: slidein550;
+  }
 }
 @media only screen and (max-width: 500px) {
   .responsive_menu {
     right: -170%;
     width: 60vw;
+  }
+  .responsive_menu {
+    animation-duration: 0.5s;
+    animation-name: slidein500;
+  }
+}
+
+@keyframes slidein1000 {
+  from {
+    right: -1200%;
+  }
+
+  to {
+    right: -600%;
+  }
+}
+@keyframes slidein850 {
+  from {
+    right: -1000%;
+  }
+
+  to {
+    right: -540%;
+  }
+}
+@keyframes slidein750 {
+  from {
+    right: -1000%;
+  }
+
+  to {
+    right: -530%;
+  }
+}
+@keyframes slidein650 {
+  from {
+    right: -1000%;
+  }
+
+  to {
+    right: -200%;
+  }
+}
+@keyframes slidein550 {
+  from {
+    right: -1000%;
+  }
+
+  to {
+    right: -180%;
+  }
+}
+@keyframes slidein500 {
+  from {
+    right: -1000%;
+  }
+
+  to {
+    right: -170%;
   }
 }
 

@@ -94,7 +94,7 @@ const SellRequestValidation = ({ history, checkForDuplicates }) => {
     try {
       const sendSellRequest = await sellRequestAPI.send(sellRequestData);
       setIsLoaded(true);
-      console.log(sendSellRequest.data);
+      // console.log(sendSellRequest.data);
 
       //Adding the new sell request to the STATE information
 
