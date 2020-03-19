@@ -15,7 +15,7 @@ const SearchCardBar = props => {
     AuthContext
   );
 
-  console.log(authenticationInfos);
+  // console.log(authenticationInfos);
 
   useEffect(() => {
     //Preparing cancellation
