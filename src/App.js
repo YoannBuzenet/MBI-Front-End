@@ -50,6 +50,7 @@ import ShopAdminOneSellRequest from "./pages/shopAdmin/ShopAdminOneSellRequest";
 import ShopAdminSettings from "./pages/shopAdmin/ShopAdminSettings";
 import Footer from "./components/Footer";
 import ShopAdminOneCard from "./pages/shopAdmin/ShopAdminOneCard";
+import cardPage from "./pages/cardPage";
 
 //Really Useful library to check all rerenders made on ALL components (you can setup it to check just one)
 // if (process.env.NODE_ENV === "development") {
@@ -294,6 +295,7 @@ function App() {
                         )}
                       />
                       <Route path="/login" component={LoginPage} />
+                      <Route path="/card/:cardName" component={cardPage} />
 
                       <Route path="/register" component={RegisterPage} />
 

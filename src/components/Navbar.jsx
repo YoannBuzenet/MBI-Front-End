@@ -5,6 +5,7 @@ import SellingBasketContext from "../context/sellingBasket";
 import authAPI from "../services/authAPI";
 import BurgerMenu from "./BurgerMenu";
 import { toast } from "react-toastify";
+import SearchCardBar from "./SearchCardBar";
 
 const Navbar = ({ history }) => {
   //Current Authentication
@@ -61,6 +62,7 @@ const Navbar = ({ history }) => {
           <Link to="/" className="classic-links big-screen-info">
             Fantasy Sphere
           </Link>
+          <SearchCardBar />
           {authenticationInfos.isAuthenticated ? (
             <div className="my_options">
               <BurgerMenu history={history} />
