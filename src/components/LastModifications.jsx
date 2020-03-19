@@ -22,25 +22,8 @@ const LastModifications = ({ handleAddSellingBasket }) => {
         <h2>Les dernières modifications</h2>
         <div className="all-cards">
           {lastModificationList.map((card, index) => (
-            <CardWithThumbnail card={card} />
+            <CardWithThumbnail card={card} key={card.id} />
           ))}
-
-          <CardWithThumbnail
-            picture="https://img.scryfall.com/cards/small/front/5/4/5410254f-cf9d-46c2-acea-07298ae65924.jpg"
-            handleAddSellingBasket={handleAddSellingBasket}
-            card={{
-              name: "Apprenti Spinosophe",
-              set: "Invasion",
-              price: 2,
-              condition: "NM",
-              lang: "EN",
-              isFoil: "Yes",
-              uuid: "9215-ddfsdf-9898-dsfdn",
-              currency: "euros",
-              quantity: 1,
-              scryfallid: "d3c99f65-2355-444b-b49a-c6b916f268b1"
-            }}
-          />
         </div>
       </div>
     </>

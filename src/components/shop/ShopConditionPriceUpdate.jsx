@@ -16,6 +16,11 @@ const ShopConditionPriceUpdate = ({
   index,
   cardID
 }) => {
+  const WAIT_INTERVAL = 3000;
+  const ENTER_KEY = 13;
+
+  const [timer, setTimer] = useState(null);
+
   //Current Authentication
   const { authenticationInfos } = useContext(AuthContext);
 
@@ -94,9 +99,9 @@ const ShopConditionPriceUpdate = ({
     //Parse Data
     for (let i = 0; i < data.length; i++) {
       const idCardShopPrice = data[i].id;
-      const price = data[i].price;
-      const shop = parseInt(data[i].shop.substr(7));
-      const idcard = parseInt(data[i].card.substr(7));
+      // const price = data[i].price;
+      // const shop = parseInt(data[i].shop.substr(7));
+      // const idcard = parseInt(data[i].card.substr(7));
       const languageID = parseInt(data[i].language.substr(11));
       const conditionID = parseInt(data[i].cardCondition.substr(17));
       const isFoil = data[i].isFoil === true ? 1 : 0;
@@ -164,7 +169,17 @@ const ShopConditionPriceUpdate = ({
   // If mint is updated for non baselang, we update all the conditions only in this lang for non foil or foil
   // If another field is updated, we update just the field
   // Each time we update, we must wait for server response to add the new ID to our context, to be able to modify content.
-  const handlechange = (event, conditionID, langID, isFoil, index, cardID) => {
+  const handlechange = (
+    event,
+    conditionID,
+    langID,
+    isFoil,
+    index,
+    cardID,
+    timer
+  ) => {
+    setTimer(clearTimeout(timer));
+
     //Checking if user is typing a float number. This condition allows him to type it
     //Without this condition, user can't type a "." to type the complete floating number
     if (event.target.value[event.target.value.length - 1] === ".") {
@@ -289,11 +304,6 @@ const ShopConditionPriceUpdate = ({
         console.log(contextCopy);
         //4. Set context
         setAllPricesBuffer(contextCopy);
-        //5. Build the batch object
-        sendBigBatchToAPI();
-
-        //6. Send the batch
-        //7. Receive the batch, update context with ID Card Shop Price
       } else if (conditionID === 1) {
         if (isFoil === 0) {
           console.log(
@@ -335,10 +345,6 @@ const ShopConditionPriceUpdate = ({
           }
 
           setAllPricesBuffer(allPricesCopy);
-
-          //Preparing the batch to update API
-
-          sendSmallBatchToAPI();
         } else if (isFoil === 1) {
           //update all conditions in the given languages
           const allPricesCopy = [...allPricesBuffer];
@@ -374,8 +380,6 @@ const ShopConditionPriceUpdate = ({
           }
 
           setAllPricesBuffer(allPricesCopy);
-
-          sendSmallBatchToAPI();
         }
       } else {
         const allPricesCopy = [...allPricesBuffer];
@@ -383,49 +387,8 @@ const ShopConditionPriceUpdate = ({
         if (
           allPricesBuffer[index].langs[langID][conditionID][isFoil] !== null
         ) {
-          const objectToSend = {
-            price: newPrice,
-            isFoil: isFoil === 1 ? true : false,
-            shop: "/shops/" + shop,
-            language: "/languages/" + langID,
-            cardCondition: "/card_conditions/" + conditionID,
-            card: "/cards/" + cardID
-          };
-
-          allPricesBuffer[index].langs[langID][conditionID][
-            isFoil + "wasUpdated"
-          ] = true;
-
-          priceUpdateAPI
-            .putOnePrice(
-              objectToSend,
-              allPricesBuffer[index].langs[langID][conditionID][
-                isFoil + "idCardShopPrice"
-              ]
-            )
-            .then(response => console.log("la", response))
-            .catch(error => console.log(error));
         } else {
           //If price didn't exist : POST
-
-          const objectToSend = {
-            price: newPrice,
-            isFoil: isFoil === 1 ? true : false,
-            shop: "/shops/" + shop,
-            language: "/languages/" + langID,
-            cardCondition: "/card_conditions/" + conditionID,
-            card: "/cards/" + cardID
-          };
-          console.log(objectToSend);
-          priceUpdateAPI
-            .postOnePrice(objectToSend)
-            .then(
-              response =>
-                (allPricesCopy[index].langs[langID][conditionID][
-                  isFoil + "idCardShopPrice"
-                ] = response.data.id)
-            )
-            .catch(error => console.log(error));
         }
 
         allPricesCopy[index].langs[langID][conditionID][isFoil] = newPrice;
@@ -436,6 +399,22 @@ const ShopConditionPriceUpdate = ({
         setAllPricesBuffer(allPricesCopy);
         // console.log(allPricesCopy);
       }
+      console.log("hey");
+      setTimer(
+        setTimeout(
+          () =>
+            triggerAPISending(
+              event,
+              conditionID,
+              langID,
+              isFoil,
+              index,
+              cardID,
+              newPrice
+            ),
+          WAIT_INTERVAL
+        )
+      );
     } else if (event.target.value === "") {
       //set the price to null in context
       const allPricesCopy = [...allPricesBuffer];
@@ -454,6 +433,79 @@ const ShopConditionPriceUpdate = ({
     } else {
       toast.error("Merci de saisir un nombre.");
     }
+
+    const triggerAPISending = (
+      event,
+      conditionID,
+      langID,
+      isFoil,
+      index,
+      cardID,
+      newPrice
+    ) => {
+      console.log("sending");
+      if (
+        conditionID === 1 &&
+        langID === authenticationInfos.shop.shopData.baseLang.id
+      ) {
+        sendBigBatchToAPI();
+      } else if (conditionID === 1) {
+        if (isFoil === 0 || isFoil === 1) {
+          sendSmallBatchToAPI();
+        }
+      } else {
+        if (
+          allPricesBuffer[index].langs[langID][conditionID][
+            isFoil + "idCardShopPrice"
+          ] !== null
+        ) {
+          console.log(allPricesBuffer);
+          const objectToSend = {
+            price: newPrice,
+            isFoil: isFoil === 1 ? true : false,
+            shop: "/shops/" + shop,
+            language: "/languages/" + langID,
+            cardCondition: "/card_conditions/" + conditionID,
+            card: "/cards/" + cardID
+          };
+
+          allPricesBuffer[index].langs[langID][conditionID][
+            isFoil + "wasUpdated"
+          ] = true;
+
+          console.log(objectToSend);
+          // console.log(allPricesBuffer);
+          console.log();
+          priceUpdateAPI
+            .putOnePrice(
+              objectToSend,
+              allPricesBuffer[index].langs[langID][conditionID][
+                isFoil + "idCardShopPrice"
+              ]
+            )
+            .then(response => console.log("la", response))
+            .catch(error => console.log(error));
+        } else {
+          const objectToSend = {
+            price: newPrice,
+            isFoil: isFoil === 1 ? true : false,
+            shop: "/shops/" + shop,
+            language: "/languages/" + langID,
+            cardCondition: "/card_conditions/" + conditionID,
+            card: "/cards/" + cardID
+          };
+          priceUpdateAPI
+            .postOnePrice(objectToSend)
+            .then(
+              response =>
+                (allPricesBuffer[index].langs[langID][conditionID][
+                  isFoil + "idCardShopPrice"
+                ] = response.data.id)
+            )
+            .catch(error => console.log(error));
+        }
+      }
+    };
   };
 
   const classInputUpdated = allPricesBuffer[index].langs[langID][conditionID][
@@ -468,7 +520,15 @@ const ShopConditionPriceUpdate = ({
         type="text"
         value={priceDisplayed}
         onChange={event => {
-          handlechange(event, conditionID, langID, isFoil, index, cardID);
+          handlechange(
+            event,
+            conditionID,
+            langID,
+            isFoil,
+            index,
+            cardID,
+            timer
+          );
         }}
         className={classInputUpdated}
       />

@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import SellingBasketContext from "../context/sellingBasket";
 import cardsAPI from "../services/cardsAPI";
+import { Link } from "react-router-dom";
 
 const CardWithThumbnail = ({ handleAddSellingBasket, card }) => {
   console.log(card);
@@ -31,35 +32,10 @@ const CardWithThumbnail = ({ handleAddSellingBasket, card }) => {
         </div>
         <div className="card-infos">
           <div className="card-title">{card.name}</div>
-          <div className="card-language">{card.lang}</div>
-          <div className="card-condition">{card.condition}</div>
-          <div className="card-price">{card.price}€</div>
           <div className="card-set">
             {card.edition ? card.edition.name : null}
           </div>
-          <form action="">
-            QTE
-            <select
-              name="quantity"
-              id=""
-              onChange={event => {
-                handleChange(event, currentCard);
-              }}
-            >
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-            </select>
-            <p>
-              Add <span> </span>
-              <i
-                className="fas fa-plus-circle add-item-basket"
-                onClick={() =>
-                  handleAddSellingBasket(currentBasket, currentCard)
-                }
-              ></i>
-            </p>
-          </form>
+          <Link to={"/card/" + card.name}>Voir la carte</Link>
         </div>
       </div>
     </>
