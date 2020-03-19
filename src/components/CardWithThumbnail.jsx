@@ -3,6 +3,7 @@ import SellingBasketContext from "../context/sellingBasket";
 import cardsAPI from "../services/cardsAPI";
 
 const CardWithThumbnail = ({ handleAddSellingBasket, card }) => {
+  console.log(card);
   //Current Selling Request Basket
   const { currentBasket, setCurrentBasket } = useContext(SellingBasketContext);
 
@@ -33,6 +34,9 @@ const CardWithThumbnail = ({ handleAddSellingBasket, card }) => {
           <div className="card-language">{card.lang}</div>
           <div className="card-condition">{card.condition}</div>
           <div className="card-price">{card.price}€</div>
+          <div className="card-set">
+            {card.edition ? card.edition.name : null}
+          </div>
           <form action="">
             QTE
             <select

@@ -62,7 +62,7 @@ const CardLine = ({ card, handleAddSellingBasket, index, setName }) => {
 
   const hoverClassName = e => genericCardAPI.isPictureDisplayedTopOrBottom(e);
 
-  //TEMPORARY DEFAULT DEFINITION TODO : GET IT THOURGH API OR LOCAL ENV
+  //TEMPORARY DEFAULT DEFINITION TODO : GET IT THROUGH API OR LOCAL ENV
   //ALSO DEFINED IN CARDSELLINGBASKET
   const gradingArea = "EU";
 
