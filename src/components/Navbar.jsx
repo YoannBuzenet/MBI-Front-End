@@ -56,13 +56,15 @@ const Navbar = ({ history }) => {
       )}
       <nav className="navbar">
         <div className="container">
-          <Link to="/" className="classic-links">
-            Logo Boutique
-          </Link>
-          <Link to="/" className="classic-links big-screen-info">
-            Fantasy Sphere
-          </Link>
-          <SearchCardBar />
+          <div className="menu-links-left">
+            <Link to="/" className="classic-links">
+              Logo Boutique
+            </Link>
+            {/* <Link to="/" className="classic-links big-screen-info">
+              Fantasy Sphere
+            </Link> */}
+            <SearchCardBar />
+          </div>
           {authenticationInfos.isAuthenticated ? (
             <div className="my_options">
               <BurgerMenu history={history} />

@@ -284,6 +284,10 @@ div.connect p {
   background-color: white;
 }
 
+.navbar input[type="search"] {
+  border: 1px solid rgba(0, 0, 0, 0.5);
+}
+
 .margin-bottom {
   margin-bottom: 7rem;
 }
@@ -510,7 +514,9 @@ div.connect p {
 .search-card-form input {
   padding: 0.5rem;
   border-radius: 8px;
+  width: 140px;
   border: none;
+  outline: none;
 }
 
 .search-card-form .search-result {

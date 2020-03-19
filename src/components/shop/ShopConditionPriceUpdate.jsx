@@ -32,7 +32,7 @@ const ShopConditionPriceUpdate = ({
   //TODO : pass this in env variable
   const shop = 1;
 
-  console.log(allPricesBuffer);
+  // console.log(allPricesBuffer);
 
   const priceDisplayed =
     allPricesBuffer[index].langs[langID][conditionID][isFoil] === null
@@ -75,7 +75,7 @@ const ShopConditionPriceUpdate = ({
         batch.push(newPriceToSend);
       }
     }
-    console.log(batch);
+    console.log("small batch", batch);
     //sending the batch
     try {
       priceUpdateAPI
@@ -101,8 +101,11 @@ const ShopConditionPriceUpdate = ({
       const conditionID = parseInt(data[i].cardCondition.substr(17));
       const isFoil = data[i].isFoil === true ? 1 : 0;
       // TODO : check s'il y a oubli de la prise en des modifs dans le contexte
-      setAllPricesBuffer(contextCopy);
+      contextCopy[index].langs[languageID][conditionID][
+        isFoil + "idCardShopPrice"
+      ] = idCardShopPrice;
     }
+    setAllPricesBuffer(contextCopy);
   };
 
   const sendBigBatchToAPI = () => {
