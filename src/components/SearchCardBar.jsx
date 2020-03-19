@@ -1,14 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useEffect } from "react";
 import cardsAPI from "../services/cardsAPI";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import AuthContext from "../context/authContext";
 
 const SearchCardBar = props => {
   // console.log("render");
   const [currentSearch, setCurrentSearch] = useState("");
 
   const [searchResult, setSearchResult] = useState([]);
+
+  const { authenticationInfos, setAuthenticationInfos } = useContext(
+    AuthContext
+  );
+
+  console.log(authenticationInfos);
 
   useEffect(() => {
     //Preparing cancellation
@@ -56,6 +63,13 @@ const SearchCardBar = props => {
     setCurrentSearch(value);
   };
 
+  const linkSearchCardBar =
+    authenticationInfos.user &&
+    authenticationInfos.user.roles &&
+    authenticationInfos.user.roles["ROLE_SHOP"]
+      ? "/shopadmin/card/"
+      : "/card/";
+
   return (
     <>
       <form className="search-card-form">
@@ -76,7 +90,7 @@ const SearchCardBar = props => {
               // console.log(cardResult);
               return (
                 <Link
-                  to={"/shopadmin/card/" + cardResult.name}
+                  to={linkSearchCardBar + cardResult.name}
                   onClick={() => {
                     setSearchResult([]);
                   }}
