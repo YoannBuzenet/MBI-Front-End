@@ -317,12 +317,12 @@ div.connect p {
 }
 
 .authenticated-menu {
-  height: 65vh;
+  height: 60vh;
 }
 
 .divider {
   display: block;
-  width: 90%;
+  width: 65%;
   margin: auto;
 }
 
@@ -369,7 +369,7 @@ div.connect p {
   }
 
   .surname_responsive {
-    margin-top: 1rem;
+    margin: 1rem;
     font-size: 4rem;
   }
   .responsive_menu {
