@@ -16,8 +16,7 @@ const ShopConditionPriceUpdate = ({
   index,
   cardID
 }) => {
-  const WAIT_INTERVAL = 3000;
-  const ENTER_KEY = 13;
+  const WAIT_INTERVAL = 1000;
 
   const [timer, setTimer] = useState(null);
 
