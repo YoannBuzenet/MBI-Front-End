@@ -66,7 +66,7 @@ const SearchCardBar = props => {
   const linkSearchCardBar =
     authenticationInfos.user &&
     authenticationInfos.user.roles &&
-    authenticationInfos.user.roles["ROLE_SHOP"]
+    authenticationInfos.user.roles.includes("ROLE_SHOP")
       ? "/shopadmin/card/"
       : "/card/";
 
