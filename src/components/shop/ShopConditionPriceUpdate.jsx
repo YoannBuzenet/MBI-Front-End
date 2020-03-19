@@ -4,7 +4,9 @@ import priceUpdateAPI from "../../services/priceUpdateAPI";
 import AuthContext from "../../context/authContext";
 import { toast } from "react-toastify";
 
-//This component updates prices in context, send to API, and treats resp back to update context with new ID.
+//Based on context defined in page ShopAdminOneCard
+//This component updates prices in context, send some of data to API, and treats resp back to update context with new ID.
+//Data that are saved in context and NOT sent to API (was updated property) only serve display purposes for UX improvment.
 //Depending if updated lang is baseLang or not, and Mint condition or not, we update several languages or fields of the form, or just one.
 
 const ShopConditionPriceUpdate = ({
