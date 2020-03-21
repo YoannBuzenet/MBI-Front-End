@@ -23,8 +23,6 @@ const ShopConditionPriceUpdate = ({
   //Current Authentication
   const { authenticationInfos } = useContext(AuthContext);
 
-  // console.log(authenticationInfos.shop.shopData);
-
   //Context - preparing the DISPLAY context format with data
   const { allPricesBuffer, setAllPricesBuffer } = useContext(
     priceBufferContext
@@ -36,8 +34,6 @@ const ShopConditionPriceUpdate = ({
   //TODO : pass this in env variable
   const shop = 1;
 
-  // console.log(allPricesBuffer);
-
   const priceDisplayed =
     allPricesBuffer[index].langs[langID][conditionID][isFoil] === null
       ? ""
@@ -48,7 +44,6 @@ const ShopConditionPriceUpdate = ({
     const allPricesCopy = [...allPricesBuffer];
     //Preparing Small Batch
     for (const objectToParse in allPricesCopy[index].langs[langID]) {
-      // console.log(allPricesCopy[index].langs[langID][objectToParse]);
       if (
         allPricesCopy[index].langs[langID][objectToParse][
           isFoil + "idCardShopPrice"
@@ -79,20 +74,17 @@ const ShopConditionPriceUpdate = ({
         batch.push(newPriceToSend);
       }
     }
-    console.log("small batch", batch);
     //sending the batch
     try {
       priceUpdateAPI
         .batchPriceUpdate(batch)
         .then(data => registerBatchResponseIntoContext(data.data));
     } catch (error) {
-      console.log(error);
       toast.error("Une erreur est survenue. Merci de réessayer.");
     }
   };
 
   const registerBatchResponseIntoContext = data => {
-    console.log(data);
     const contextCopy = [...allPricesBuffer];
     //Copy context
     //Parse Data
@@ -118,7 +110,6 @@ const ShopConditionPriceUpdate = ({
     //Preparing Batch
     for (const LangToParse in allPricesCopy[index].langs) {
       for (const objectToParse in allPricesCopy[index].langs[LangToParse]) {
-        // console.log(allPricesCopy[index].langs[LangToParse][objectToParse]);
         if (
           allPricesCopy[index].langs[LangToParse][objectToParse][
             isFoil + "idCardShopPrice"
@@ -152,13 +143,11 @@ const ShopConditionPriceUpdate = ({
         }
       }
     }
-    console.log("big batch", batch);
     try {
       priceUpdateAPI
         .batchPriceUpdate(batch)
         .then(data => registerBatchResponseIntoContext(data.data));
     } catch (error) {
-      console.log(error);
       toast.error("Une erreur est survenue. Merci de réessayer.");
     }
   };
@@ -190,24 +179,12 @@ const ShopConditionPriceUpdate = ({
 
     //If it's a number, real logic triggers here
     else if (!isNaN(parseFloat(event.target.value))) {
-      console.log(
-        parseFloat(event.target.value),
-        conditionID,
-        langID,
-        isFoil,
-        index,
-        cardID
-      );
-
       const newPrice = parseFloat(event.target.value);
 
       if (
         conditionID === 1 &&
         langID === authenticationInfos.shop.shopData.baseLang.id
       ) {
-        // console.log(
-        //   "Updating everything in this variation index but foil cards"
-        // );
         //AIM - update all languages and condition in the current set
         //1. Copy context
         const contextCopy = [...allPricesBuffer];
@@ -300,14 +277,10 @@ const ShopConditionPriceUpdate = ({
             }
           }
         }
-        console.log(contextCopy);
         //4. Set context
         setAllPricesBuffer(contextCopy);
       } else if (conditionID === 1) {
         if (isFoil === 0) {
-          console.log(
-            "Updating all conditions in given language and isFoilKey"
-          );
           //update all conditions in the given languages
           const allPricesCopy = [...allPricesBuffer];
           allPricesCopy[index].langs[langID][1][isFoil] = newPrice;
@@ -394,11 +367,8 @@ const ShopConditionPriceUpdate = ({
         allPricesBuffer[index].langs[langID][conditionID][
           isFoil + "wasUpdated"
         ] = true;
-        // console.log(allPricesCopy);
         setAllPricesBuffer(allPricesCopy);
-        // console.log(allPricesCopy);
       }
-      console.log("hey");
       setTimer(
         setTimeout(
           () =>
@@ -442,7 +412,6 @@ const ShopConditionPriceUpdate = ({
       cardID,
       newPrice
     ) => {
-      console.log("sending");
       if (
         conditionID === 1 &&
         langID === authenticationInfos.shop.shopData.baseLang.id
@@ -458,7 +427,6 @@ const ShopConditionPriceUpdate = ({
             isFoil + "idCardShopPrice"
           ] !== null
         ) {
-          console.log(allPricesBuffer);
           const objectToSend = {
             price: newPrice,
             isFoil: isFoil === 1 ? true : false,
@@ -472,9 +440,6 @@ const ShopConditionPriceUpdate = ({
             isFoil + "wasUpdated"
           ] = true;
 
-          console.log(objectToSend);
-          // console.log(allPricesBuffer);
-          console.log();
           priceUpdateAPI
             .putOnePrice(
               objectToSend,
