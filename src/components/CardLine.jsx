@@ -3,6 +3,7 @@ import SellingBasketContext from "../context/sellingBasket";
 import GenericCardInfosContext from "../context/genericCardInfosContext";
 import genericCardAPI from "../services/genericCardAPI";
 import cardsAPI from "../services/cardsAPI";
+import CardShopPriceAPI from "../services/CardShopPriceAPI";
 
 const CardLine = ({
   card,
@@ -13,6 +14,11 @@ const CardLine = ({
 }) => {
   //Current Selling Request Basket
   const { currentBasket, setCurrentBasket } = useContext(SellingBasketContext);
+
+  // const arrayTest = [2086, 3939];
+  // CardShopPriceAPI.getArrayofPrices(arrayTest, 3).then(data =>
+  //   console.log(data)
+  // );
 
   //DEFINED langages and Conditions
   const { lang, conditions } = useContext(GenericCardInfosContext);
@@ -49,6 +55,7 @@ const CardLine = ({
   useEffect(() => {
     if (card.cardShopPrices && card.cardShopPrices.length > 0) {
       console.log("il y a des cardshopPrice bro");
+      console.log(card);
     }
   }, []);
 
