@@ -508,6 +508,12 @@ div.connect p {
   align-items: center;
 }
 
+@media only screen and (max-width: 1000px) {
+  .options_desktop {
+    display: none;
+  }
+}
+
 /**************************
 **NAVBAR ADMIN SEARCH BAR**
 **************************/
