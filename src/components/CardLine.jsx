@@ -48,12 +48,17 @@ const CardLine = ({ card, handleAddSellingBasket, index, setName }) => {
   }, [isOnHover]);
 
   const handleChange = ({ currentTarget }, currentCard) => {
+    //Updating the card following the new info
     const { name, value } = currentTarget;
     if (name === "quantity") {
       var newValue = parseInt(value);
     } else {
       var newValue = value.toString();
     }
+
+    //Checking if CardShopPrice exist
+    //If not, API call to get the relevant price
+
     setCurrentCard({ ...currentCard, [name]: newValue });
   };
 

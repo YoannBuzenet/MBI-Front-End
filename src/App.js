@@ -299,7 +299,11 @@ function App() {
                       <Route
                         path="/card/:cardName"
                         render={({ match, history }) => (
-                          <CardPage match={match} history={history} />
+                          <CardPage
+                            match={match}
+                            history={history}
+                            handleAddSellingBasket={handleAddSellingBasket}
+                          />
                         )}
                       />
 

@@ -2,8 +2,10 @@ import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import GenericCardInfosContext from "../context/genericCardInfosContext";
 import cardsAPI from "../services/cardsAPI";
+import CardLine from "../components/CardLine";
+import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 
-const CardPage = ({ match, history }) => {
+const CardPage = ({ match, handleAddSellingBasket }) => {
   //STATE - current card name
   const [currentName, setCurrentName] = useState(match.params.cardName);
 
@@ -50,9 +52,31 @@ const CardPage = ({ match, history }) => {
 
   return (
     <>
-      <h1>{currentName}</h1>
-      {allCardsDisplayed.map(element => console.log(element))}
-      CECI EST UNE PAGE MDRRRRR HAHAHHAHAHH
+      <div className="container">
+        <h1>{currentName}</h1>
+        <Table className="zebra-table">
+          <Thead>
+            <Tr>
+              <Th>Nom de la carte</Th>
+              <Th>Langue</Th>
+              <Th>Condition</Th>
+              <Th>Foil</Th>
+              <Th>Quantité</Th>
+              <Th>Prix</Th>
+            </Tr>
+          </Thead>
+          <Tbody>
+            {allCardsDisplayed.map((card, index) => (
+              <CardLine
+                card={card}
+                index={index}
+                setName={card.edition.name}
+                key={parseInt(card["@id"].substr(7))}
+              />
+            ))}
+          </Tbody>
+        </Table>
+      </div>
     </>
   );
 };
