@@ -46,6 +46,10 @@ body {
   display: none;
 }
 
+.cursor-pointer {
+  cursor: pointer;
+}
+
 .display-inline-block {
   display: inline-block;
 }

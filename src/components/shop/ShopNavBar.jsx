@@ -56,18 +56,15 @@ const ShopNavbar = ({ history }) => {
       <nav className="navbar navbar-admin">
         <div className="container">
           <div className="menu-links-left">
-            <Link to="/shopadmin/cards" className="classic-links">
-              Boutique - Accès Admin
-            </Link>
+            Accès Admin
             <Link to="/" className="classic-links">
               Voir le site client
             </Link>
-
             <SearchCardBar />
           </div>
 
           <Link className="classic-links nav-element" to="/my_selling_basket">
-            Créer Rachat (
+            Rachat (
             <span className="buying-total">
               {currentBasket.reduce((total, card) => {
                 return total + card.quantity;

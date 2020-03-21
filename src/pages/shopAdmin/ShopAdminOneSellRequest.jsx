@@ -7,6 +7,7 @@ import CardLineShop from "../../components/shop/CardLineShop";
 import CardLineShopStuck from "../../components/shop/CardLineShopStuck";
 import AdminSellRequestContext from "../../context/adminSellRequestContext";
 import ShopSellRequestStatusValidator from "../../components/shop/ShopSellRequestStatusValidator";
+import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 
 const ShopAdminOneSellRequest = ({ match }) => {
   const { id } = match.params;
@@ -150,76 +151,78 @@ const ShopAdminOneSellRequest = ({ match }) => {
           </span>
         </p>
       </div>
-      <table className="zebra-table">
-        <thead>
-          <tr>
-            <th>Nom de la carte</th>
-            <th>Edition</th>
-            <th>Changer Edition</th>
-            <th>Langue</th>
-            <th>Etat</th>
-            <th>Foil</th>
-            <th>Quantité</th>
-            <th>Prix</th>
-            <th>Total</th>
-          </tr>
-        </thead>
-        <tbody className="cardLineShop">
-          {!currentAdminSellRequest.dateValidated &&
-            currentAdminSellRequest.sellRequests &&
-            currentAdminSellRequest.sellRequests.length > 0 &&
-            currentAdminSellRequest.sellRequests.map((card, index) => {
-              return (
-                <CardLineShop key={card.id} card={card} indexCard={index} />
-              );
-            })}
-          {currentAdminSellRequest.dateValidated ||
-            (currentAdminSellRequest.dateCanceled &&
+      <div className="container">
+        <Table className="zebra-table">
+          <Thead>
+            <Tr>
+              <Th>Nom de la carte</Th>
+              <Th>Edition</Th>
+              <Th>Changer Edition</Th>
+              <Th>Langue</Th>
+              <Th>Etat</Th>
+              <Th>Foil</Th>
+              <Th>Quantité</Th>
+              <Th>Prix</Th>
+              <Th>Total</Th>
+            </Tr>
+          </Thead>
+          <Tbody className="cardLineShop">
+            {!currentAdminSellRequest.dateValidated &&
+              currentAdminSellRequest.sellRequests &&
+              currentAdminSellRequest.sellRequests.length > 0 &&
               currentAdminSellRequest.sellRequests.map((card, index) => {
                 return (
-                  <CardLineShopStuck
-                    key={card.id}
-                    card={card}
-                    indexCard={index}
-                  />
+                  <CardLineShop key={card.id} card={card} indexCard={index} />
                 );
-              }))}
-          <tr className="total-line">
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>NOMBRE DE CARTES</td>
-            <td>
-              {currentAdminSellRequest.sellRequests &&
-                currentAdminSellRequest.sellRequests.length > 0 &&
-                currentAdminSellRequest.sellRequests.reduce((total, card) => {
-                  return total + card.quantity;
-                }, 0)}
-            </td>
-          </tr>
-          <tr className="total-line">
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>TOTAL</td>
-            <td>
-              {currentAdminSellRequest.sellRequests &&
-                currentAdminSellRequest.sellRequests.length > 0 &&
-                currentAdminSellRequest.sellRequests.reduce((total, card) => {
-                  return total + card.price * card.quantity;
-                }, 0)}
-            </td>
-          </tr>
-        </tbody>
-      </table>
+              })}
+            {currentAdminSellRequest.dateValidated ||
+              (currentAdminSellRequest.dateCanceled &&
+                currentAdminSellRequest.sellRequests.map((card, index) => {
+                  return (
+                    <CardLineShopStuck
+                      key={card.id}
+                      card={card}
+                      indexCard={index}
+                    />
+                  );
+                }))}
+            <tr className="total-line">
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>NOMBRE DE CARTES</td>
+              <td>
+                {currentAdminSellRequest.sellRequests &&
+                  currentAdminSellRequest.sellRequests.length > 0 &&
+                  currentAdminSellRequest.sellRequests.reduce((total, card) => {
+                    return total + card.quantity;
+                  }, 0)}
+              </td>
+            </tr>
+            <tr className="total-line">
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>TOTAL</td>
+              <td>
+                {currentAdminSellRequest.sellRequests &&
+                  currentAdminSellRequest.sellRequests.length > 0 &&
+                  currentAdminSellRequest.sellRequests.reduce((total, card) => {
+                    return total + card.price * card.quantity;
+                  }, 0)}
+              </td>
+            </tr>
+          </Tbody>
+        </Table>
+      </div>
       <ShopSellRequestStatusValidator />
     </>
   );
