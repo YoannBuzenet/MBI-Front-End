@@ -31,7 +31,8 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
   useEffect(() => {
     if (
       match.params.cardName !== currentName ||
-      allCardsDisplayed.length === 0
+      allCardsDisplayed.length === 0 ||
+      allCardsDisplayed[0].name !== currentName
     ) {
       //Cancel subscriptions preparation
       const CancelToken = axios.CancelToken;
@@ -48,7 +49,7 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
         .then(data => setAllCardsDisplayed(data.data["hydra:member"]));
       return () => source.cancel("");
     }
-  });
+  }, [currentNameDecoded, currentName]);
 
   return (
     <>
@@ -58,6 +59,7 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
           <Thead>
             <Tr>
               <Th>Nom de la carte</Th>
+              <Th>Edition</Th>
               <Th>Langue</Th>
               <Th>Condition</Th>
               <Th>Foil</Th>
@@ -72,6 +74,7 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
                 index={index}
                 setName={card.edition.name}
                 key={parseInt(card["@id"].substr(7))}
+                displaySets={true}
               />
             ))}
           </Tbody>

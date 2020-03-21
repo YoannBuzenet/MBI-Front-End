@@ -4,7 +4,13 @@ import GenericCardInfosContext from "../context/genericCardInfosContext";
 import genericCardAPI from "../services/genericCardAPI";
 import cardsAPI from "../services/cardsAPI";
 
-const CardLine = ({ card, handleAddSellingBasket, index, setName }) => {
+const CardLine = ({
+  card,
+  handleAddSellingBasket,
+  index,
+  setName,
+  displaySets
+}) => {
   //Current Selling Request Basket
   const { currentBasket, setCurrentBasket } = useContext(SellingBasketContext);
 
@@ -91,6 +97,7 @@ const CardLine = ({ card, handleAddSellingBasket, index, setName }) => {
             </div>
           )}
         </td>
+        {displaySets && <td>{card.edition.name}</td>}
         <td>
           {/* Select will have to be refactored with a .map on a Select Component */}
           <select
