@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import customersAPI from "../../services/customersAPI";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 
 const ShopAdminAllCustomers = props => {
   const [listCustomers, setListCustomers] = useState([]);
@@ -23,36 +24,41 @@ const ShopAdminAllCustomers = props => {
   return (
     <>
       <h1>Customers</h1>
-      <table className="zebra-table">
-        <thead>
-          <tr>
-            <th>Reference</th>
-            <th>Nom</th>
-            <th>Prénom</th>
-            <th>Nombre de Rachats</th>
-          </tr>
-        </thead>
-        <tbody>
-          {listCustomers.length > 0 &&
-            listCustomers.map(customer => {
-              console.log(customer);
+      <div className="container">
+        <Table className="zebra-table">
+          <Thead>
+            <Tr>
+              <Th>Reference</Th>
+              <Th>Nom</Th>
+              <Th>Prénom</Th>
+              <Th>Nombre de Rachats</Th>
+            </Tr>
+          </Thead>
+          <Tbody>
+            {listCustomers.length > 0 &&
+              listCustomers.map(customer => {
+                console.log(customer);
 
-              return (
-                <tr key={customer.id}>
-                  <td>
-                    <Link to={"/shopadmin/customers/" + customer.id}>
-                      {customer.id}
-                    </Link>
-                  </td>
+                return (
+                  <Tr
+                    key={customer.id}
+                    onClick={() =>
+                      (window.location.href =
+                        "/shopadmin/customers/" + customer.id)
+                    }
+                    className="cursor-pointer"
+                  >
+                    <Td>{customer.id}</Td>
 
-                  <td>{customer.nom}</td>
-                  <td>{customer.prenom}</td>
-                  <td>{customer.sellrequest.length}</td>
-                </tr>
-              );
-            })}
-        </tbody>
-      </table>
+                    <Td>{customer.nom}</Td>
+                    <Td>{customer.prenom}</Td>
+                    <Td>{customer.sellrequest.length}</Td>
+                  </Tr>
+                );
+              })}
+          </Tbody>
+        </Table>
+      </div>
     </>
   );
 };

@@ -20,7 +20,10 @@ const CardLine = ({
   //State - defining if the Hover should be Top or Bottom
   const [hoverTopOrBottom, setHoverTopOrBottom] = useState();
 
-  //Using the current Card in state
+  //Saving the Hover state
+  const [isOnHover, setIsOnHover] = useState(false);
+
+  //Using the current Card in state, with default data : English, Near Mint, Non foil...
   const [currentCard, setCurrentCard] = useState({
     ...card,
     quantity: 1,
@@ -43,8 +46,11 @@ const CardLine = ({
     });
   }, [card]);
 
-  //Saving the Hover state
-  const [isOnHover, setIsOnHover] = useState(false);
+  useEffect(() => {
+    if (card.cardShopPrices && card.cardShopPrices.length > 0) {
+      console.log("il y a des cardshopPrice bro");
+    }
+  }, []);
 
   useEffect(() => {
     if (isOnHover) {
@@ -61,7 +67,7 @@ const CardLine = ({
     } else {
       var newValue = value.toString();
     }
-
+    //TODO
     //Checking if CardShopPrice exist
     //If not, API call to get the relevant price
 
