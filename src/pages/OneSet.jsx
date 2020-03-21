@@ -65,6 +65,7 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
                       handleAddSellingBasket={handleAddSellingBasket}
                       key={parseInt(card["@id"].substr(7))}
                       setName={setName}
+                      displaySets={false}
                     />
                   );
                 })}
