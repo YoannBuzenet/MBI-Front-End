@@ -3,10 +3,16 @@ import SellingBasketContext from "../context/sellingBasket";
 import BurgerMenuComponents from "./BurgerMenuComponents";
 import BlackDiv from "./BlackDiv";
 import isResponsiveMenuDisplayedContext from "../context/menuDisplayedContext";
+import AuthContext from "../context/authContext";
 
 const BurgerMenu = ({ history }) => {
   //Current Selling Request Basket
   const { currentBasket, setCurrentBasket } = useContext(SellingBasketContext);
+
+  //Current Authentication
+  const { authenticationInfos, setAuthenticationInfos } = useContext(
+    AuthContext
+  );
 
   //Is Menu Responsive Displayed
   const {
