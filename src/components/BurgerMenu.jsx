@@ -1,9 +1,10 @@
 import React, { useContext } from "react";
 import SellingBasketContext from "../context/sellingBasket";
-import BurgerMenuComponents from "./BurgerMenuComponents";
+import BurgerMenuCustomerComponents from "./BurgerMenuCustomerComponents";
 import BlackDiv from "./BlackDiv";
 import isResponsiveMenuDisplayedContext from "../context/menuDisplayedContext";
 import AuthContext from "../context/authContext";
+import BurgerMenuShop from "./shop/BurgerMenuShop";
 
 const BurgerMenu = ({ history }) => {
   //Current Selling Request Basket
@@ -35,7 +36,14 @@ const BurgerMenu = ({ history }) => {
           }, 0)}
         </div>
       )}
-      {isResponsiveMenuDisplayed && <BurgerMenuComponents history={history} />}
+      {isResponsiveMenuDisplayed &&
+        !authenticationInfos.user.roles.includes("ROLE_SHOP") && (
+          <BurgerMenuCustomerComponents history={history} />
+        )}
+      {isResponsiveMenuDisplayed &&
+        authenticationInfos.user.roles.includes("ROLE_SHOP") && (
+          <BurgerMenuShop history={history} />
+        )}
       {isResponsiveMenuDisplayed && <BlackDiv />}
     </div>
   );

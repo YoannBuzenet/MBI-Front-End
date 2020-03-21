@@ -5,7 +5,7 @@ import SellingBasketContext from "../context/sellingBasket";
 import authAPI from "../services/authAPI";
 import { toast } from "react-toastify";
 
-const BurgerMenuComponents = ({ history }) => {
+const BurgerMenuCustomerComponents = ({ history }) => {
   //Current Authentication
   const { authenticationInfos, setAuthenticationInfos } = useContext(
     AuthContext
@@ -112,4 +112,4 @@ const BurgerMenuComponents = ({ history }) => {
   );
 };
 
-export default BurgerMenuComponents;
+export default BurgerMenuCustomerComponents;
