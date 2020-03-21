@@ -42,7 +42,13 @@ const AllMySellRequests = props => {
               authenticationInfos.customer.SellRequests.length > 0 &&
               authenticationInfos.customer.SellRequests.map(
                 (sellRequest, index) => (
-                  <Tr key={sellRequest.id}>
+                  <Tr
+                    key={sellRequest.id}
+                    onClick={() =>
+                      (window.location.href =
+                        "/my_sell_requests/" + sellRequest.id)
+                    }
+                  >
                     <Td>
                       <Link
                         to={"/my_sell_requests/" + sellRequest.id}
