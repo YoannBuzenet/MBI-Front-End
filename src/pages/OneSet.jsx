@@ -23,12 +23,29 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
   //Creating a state to be able to write the set name
   const [setName, setSetName] = useState("");
 
+  const buildContextFromAPIResponse = data => {
+    for (let i = 0; i < data.length; i++) {
+      cardsContext[data[i]["@id"].substr(7)] = {
+        hasfoil: data[i].hasfoil,
+        hasnonfoil: data[i].hasnonfoil,
+        name: data[i].name,
+        scryfallid: data[i].scryfallid,
+        uuid: data[i].uuid,
+        foreignData: data[i].foreignData
+      };
+    }
+    console.log(cardsContext);
+    return console.log(data);
+    //get every array element and put it nested into object
+    //set context
+  };
+
   //Fetching data when component is mounted
   //Component update when
   //      - ID is updated (user clicked on a new set)
   //      - AllSets are updated (which allow to reload when allSets are completely loaded and to display the set name)
   useEffect(() => {
-    SetsAPI.findOneById(id).then(data => setCards(data));
+    SetsAPI.findOneById(id).then(data => buildContextFromAPIResponse(data));
 
     //We get the current set Name if all the sets are loaded
     if (allSets.length > 0) {
@@ -69,6 +86,7 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
                 </Tr>
               </Thead>
               <Tbody>
+                {/* object.keys puis .map bidule[keys] et ça déroule */}
                 {cards.map((card, index) => {
                   return (
                     <CardLineOneSet
