@@ -34,7 +34,7 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
         scryfallid: data[i].scryfallid,
         uuid: data[i].uuid,
         foreignData: data[i].foreignData,
-        price: {}
+        price: null
       };
     }
     setCardsContext(cardsContext);
@@ -44,12 +44,12 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
 
   const addFirstDisplayedPricesToContext = data => {
     for (let i = 0; i < data.length; i++) {
-      // cardsContextBuffer[data[i]].card.substr(7).price = 0;
-      // console.log(data[i]);
-      // console.log(data[i].card.substr(7));
-      // console.log(cardsContext[data[i].card.substr(7)]);
+      cardsContext[data[i].card.substr(7)].price = data[i].price;
+      cardsContext[data[i].card.substr(7)].LangOfPrice = parseInt(
+        data[i].language.substr(11)
+      );
     }
-    console.log(data);
+    setCardsContext(cardsContext);
     console.log(cardsContext);
   };
 
@@ -79,7 +79,7 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
         addFirstDisplayedPricesToContext(data.data["hydra:member"])
       );
     }
-  }, [cardsContext, buildContextFromAPIResponse]);
+  }, [cardsContext, buildContextFromAPIResponse, setCardsContext]);
 
   return (
     <>
@@ -104,7 +104,7 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
                   return (
                     <CardLineOneSet
                       card={cardsContext[cardID]}
-                      cardId={cardID}
+                      cardID={cardID}
                       index={index}
                       key={cardID}
                     />

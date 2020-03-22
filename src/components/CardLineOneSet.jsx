@@ -8,7 +8,7 @@ import cardsOneSetContext from "../context/cardsOneSetContext";
 
 const CardLine = ({
   card,
-  cardId,
+  cardID,
   handleAddSellingBasket,
   index,
   setName,
@@ -16,13 +16,6 @@ const CardLine = ({
 }) => {
   //Current Selling Request Basket
   const { currentBasket, setCurrentBasket } = useContext(SellingBasketContext);
-
-  // const arrayTest = [2086, 3939];
-  // CardShopPriceAPI.getArrayofPrices(arrayTest, 3).then(data =>
-  //   console.log(data)
-  // );
-
-  // console.log(card, cardId);
 
   //Current Cards displayed in One Set Page
   const { cardsContext, setCardsContext } = useContext(cardsOneSetContext);
@@ -53,17 +46,18 @@ const CardLine = ({
       condition: "2",
       lang: "9",
       isFoil: card.hasnonfoil ? "No" : "Yes",
-      set: setName,
-      price: ""
+      set: setName
     });
   }, [card]);
 
   useEffect(() => {
+    console.log(cardID, cardsContext[cardID]);
+    console.log(cardID, cardsContext[cardID].price);
     if (isOnHover) {
       // console.log(conditions);
       //If we neeed to change something on hover update, here it is
     }
-  }, [isOnHover]);
+  }, [isOnHover, cardsContext, setCardsContext]);
 
   const handleChange = ({ currentTarget }, currentCard) => {
     //Updating the card following the new info
@@ -198,7 +192,10 @@ const CardLine = ({
             <option value="12">12</option>
           </select>
         </td>
-        <td></td>
+        {/* PRICE */}
+
+        <td>{cardsContext[cardID].price}</td>
+
         <td className="AddButton">
           <i
             className="fas fa-plus-circle add-item-basket"
