@@ -23,6 +23,8 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
   //Creating a state to be able to write the set name
   const [setName, setSetName] = useState("");
 
+  // console.log(cardsContext);
+
   const buildContextFromAPIResponse = data => {
     for (let i = 0; i < data.length; i++) {
       cardsContext[data[i]["@id"].substr(7)] = {
@@ -31,12 +33,24 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
         name: data[i].name,
         scryfallid: data[i].scryfallid,
         uuid: data[i].uuid,
-        foreignData: data[i].foreignData
+        foreignData: data[i].foreignData,
+        price: {}
       };
     }
     setCardsContext(cardsContext);
     //Empty setState just to force re-render of component (sure hacky, must be refactored)
     setCards([]);
+  };
+
+  const addFirstDisplayedPricesToContext = data => {
+    for (let i = 0; i < data.length; i++) {
+      // cardsContextBuffer[data[i]].card.substr(7).price = 0;
+      // console.log(data[i]);
+      // console.log(data[i].card.substr(7));
+      // console.log(cardsContext[data[i].card.substr(7)]);
+    }
+    console.log(data);
+    console.log(cardsContext);
   };
 
   //Fetching data when component is mounted
@@ -56,15 +70,16 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
     window.scrollTo(0, 0);
   }, [id, allSets]);
 
-  // useEffect(() => {
-  //   if (cards.length > 0) {
-  //     const arrayOfID = cards.map(card => card["@id"].substr(7));
-  //     CardShopPriceAPI.getArrayofPrices(arrayOfID, 3).then(data =>
-  //       data.data['hydra:member'].map(card => (cards.map(cardState) => card.id === cardState.id ? cardState.price = card.price : cardState))).then(setCards(data))
-  //     );
-  //   }
-  //   // add : .then (ask API prices .then add it to the array of cards on which we .map)
-  // }, [cards]);
+  useEffect(() => {
+    if (Object.keys(cardsContext).length > 0) {
+      CardShopPriceAPI.getArrayofPrices(
+        Object.keys(cardsContext).map(id => parseInt(id)),
+        3
+      ).then(data =>
+        addFirstDisplayedPricesToContext(data.data["hydra:member"])
+      );
+    }
+  }, [cardsContext, buildContextFromAPIResponse]);
 
   return (
     <>
@@ -85,8 +100,6 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
                 </Tr>
               </Thead>
               <Tbody>
-                {/* object.keys puis .map bidule[keys] et ça déroule */}
-                <td>Object.keys length : {Object.keys(cardsContext).length}</td>
                 {Object.keys(cardsContext).map((cardID, index) => {
                   return (
                     <CardLineOneSet
