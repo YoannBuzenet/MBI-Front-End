@@ -118,7 +118,7 @@ function App() {
   );
 
   //STATE - Cards Context in One Set
-  const [cardsContext, setCardsCOntext] = useState({});
+  const [cardsContext, setCardsContext] = useState({});
 
   // CONTEXT CREATION Creating All Sets value for context
   const contextAllSets = {
@@ -165,7 +165,7 @@ function App() {
   //CONTEXT CREATION - Cards displayed in OneSet Page
   const contextCardsOneSet = {
     cardsContext: cardsContext,
-    setCardsCOntext: setCardsCOntext
+    setCardsContext: setCardsContext
   };
 
   // Each time the currentBasket (which stores what we want to sell) is updated, we save it in Local storage.
