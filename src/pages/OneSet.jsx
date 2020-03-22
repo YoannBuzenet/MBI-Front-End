@@ -1,14 +1,15 @@
 import React, { useContext, useEffect, useState } from "react";
 import SetList from "../components/SetList";
-import SellingBasketContext from "../context/sellingBasket";
-import CardLine from "../components/CardLine";
+import CardLineOneSet from "../components/CardLineOneSet";
 import SetsAPI from "../services/setsAPI";
 import SetsContext from "../context/setsContext";
 import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
+import CardShopPriceAPI from "../services/CardShopPriceAPI";
+import cardsOneSetContext from "../context/cardsOneSetContext";
 
 const OneSet = ({ handleAddSellingBasket, match }) => {
-  //Current Selling Request Basket
-  const { currentBasket, setCurrentBasket } = useContext(SellingBasketContext);
+  //Current Cards displayed in One Set Page
+  const { cardsContext, setCardsContext } = useContext(cardsOneSetContext);
 
   //State of the set, initialized as empty array, about to receive the complete card list
   const [cards, setCards] = useState([]);
@@ -28,7 +29,6 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
   //      - AllSets are updated (which allow to reload when allSets are completely loaded and to display the set name)
   useEffect(() => {
     SetsAPI.findOneById(id).then(data => setCards(data));
-    // add : .then (ask API prices .then add it to the array of cards on which we .map)
 
     //We get the current set Name if all the sets are loaded
     if (allSets.length > 0) {
@@ -39,6 +39,16 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
     //Getting user back to the top page when clicking on a set link
     window.scrollTo(0, 0);
   }, [id, allSets]);
+
+  // useEffect(() => {
+  //   if (cards.length > 0) {
+  //     const arrayOfID = cards.map(card => card["@id"].substr(7));
+  //     CardShopPriceAPI.getArrayofPrices(arrayOfID, 3).then(data =>
+  //       data.data['hydra:member'].map(card => (cards.map(cardState) => card.id === cardState.id ? cardState.price = card.price : cardState))).then(setCards(data))
+  //     );
+  //   }
+  //   // add : .then (ask API prices .then add it to the array of cards on which we .map)
+  // }, [cards]);
 
   return (
     <>
@@ -61,7 +71,7 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
               <Tbody>
                 {cards.map((card, index) => {
                   return (
-                    <CardLine
+                    <CardLineOneSet
                       card={card}
                       handleAddSellingBasket={handleAddSellingBasket}
                       key={parseInt(card["@id"].substr(7))}

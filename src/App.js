@@ -19,7 +19,7 @@ import GenericContext from "./context/genericCardInfosContext";
 import CanSubmitContext from "./context/canSubmitSellRequestContext";
 import PriceBufferContext from "./context/priceBufferContext";
 import isResponsiveMenuDisplayedContext from "./context/menuDisplayedContext";
-import axios from "axios";
+import cardsOneSetContext from "./context/cardsOneSetContext";
 
 import {
   BrowserRouter as Router,
@@ -117,6 +117,9 @@ function App() {
     false
   );
 
+  //STATE - Cards Context in One Set
+  const [cardsContext, setCardsCOntext] = useState({});
+
   // CONTEXT CREATION Creating All Sets value for context
   const contextAllSets = {
     allSets: allSets,
@@ -157,6 +160,12 @@ function App() {
   const contextResponsiveMenuDisplayed = {
     isResponsiveMenuDisplayed: isResponsiveMenuDisplayed,
     setIsResponsiveMenuDisplayed: setIsResponsiveMenuDisplayed
+  };
+
+  //CONTEXT CREATION - Cards displayed in OneSet Page
+  const contextCardsOneSet = {
+    cardsContext: cardsContext,
+    setCardsCOntext: setCardsCOntext
   };
 
   // Each time the currentBasket (which stores what we want to sell) is updated, we save it in Local storage.
@@ -285,15 +294,17 @@ function App() {
                           />
                         )}
                       />
-                      <Route
-                        path="/sets/:id"
-                        render={({ match }) => (
-                          <OneSet
-                            handleAddSellingBasket={handleAddSellingBasket}
-                            match={match}
-                          />
-                        )}
-                      />
+                      <cardsOneSetContext.Provider value={contextCardsOneSet}>
+                        <Route
+                          path="/sets/:id"
+                          render={({ match }) => (
+                            <OneSet
+                              handleAddSellingBasket={handleAddSellingBasket}
+                              match={match}
+                            />
+                          )}
+                        />
+                      </cardsOneSetContext.Provider>
                       <Route path="/login" component={LoginPage} />
 
                       <Route
