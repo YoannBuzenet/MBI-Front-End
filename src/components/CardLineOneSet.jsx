@@ -22,7 +22,7 @@ const CardLine = ({
   //   console.log(data)
   // );
 
-  console.log(card, cardId);
+  // console.log(card, cardId);
 
   //Current Cards displayed in One Set Page
   const { cardsContext, setCardsContext } = useContext(cardsOneSetContext);
@@ -43,8 +43,7 @@ const CardLine = ({
     condition: "2",
     lang: "9",
     isFoil: card.hasnonfoil ? "No" : "Yes",
-    set: setName,
-    price: 1
+    set: setName
   });
 
   useEffect(() => {
@@ -55,16 +54,9 @@ const CardLine = ({
       lang: "9",
       isFoil: card.hasnonfoil ? "No" : "Yes",
       set: setName,
-      price: 1
+      price: ""
     });
   }, [card]);
-
-  useEffect(() => {
-    if (card.cardShopPrices && card.cardShopPrices.length > 0) {
-      console.log("il y a des cardshopPrice bro");
-      console.log(card);
-    }
-  }, []);
 
   useEffect(() => {
     if (isOnHover) {
@@ -82,8 +74,7 @@ const CardLine = ({
       var newValue = value.toString();
     }
     //TODO
-    //Checking if CardShopPrice exist
-    //If not, API call to get the relevant price
+    //API call to get the relevant price
 
     setCurrentCard({ ...currentCard, [name]: newValue });
   };
@@ -207,7 +198,7 @@ const CardLine = ({
             <option value="12">12</option>
           </select>
         </td>
-        <td>{card.price || 2} </td>
+        <td></td>
         <td className="AddButton">
           <i
             className="fas fa-plus-circle add-item-basket"
