@@ -4,9 +4,11 @@ import GenericCardInfosContext from "../context/genericCardInfosContext";
 import genericCardAPI from "../services/genericCardAPI";
 import cardsAPI from "../services/cardsAPI";
 import CardShopPriceAPI from "../services/CardShopPriceAPI";
+import cardsOneSetContext from "../context/cardsOneSetContext";
 
 const CardLine = ({
   card,
+  cardId,
   handleAddSellingBasket,
   index,
   setName,
@@ -19,6 +21,11 @@ const CardLine = ({
   // CardShopPriceAPI.getArrayofPrices(arrayTest, 3).then(data =>
   //   console.log(data)
   // );
+
+  console.log(card, cardId);
+
+  //Current Cards displayed in One Set Page
+  const { cardsContext, setCardsContext } = useContext(cardsOneSetContext);
 
   //DEFINED langages and Conditions
   const { lang, conditions } = useContext(GenericCardInfosContext);

@@ -34,10 +34,9 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
         foreignData: data[i].foreignData
       };
     }
-    console.log(cardsContext);
-    return console.log(data);
-    //get every array element and put it nested into object
-    //set context
+    setCardsContext(cardsContext);
+    //Empty setState just to force re-render of component (sure hacky, must be refactored)
+    setCards([]);
   };
 
   //Fetching data when component is mounted
@@ -87,14 +86,14 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
               </Thead>
               <Tbody>
                 {/* object.keys puis .map bidule[keys] et ça déroule */}
-                {cards.map((card, index) => {
+                <td>Object.keys length : {Object.keys(cardsContext).length}</td>
+                {Object.keys(cardsContext).map((cardID, index) => {
                   return (
                     <CardLineOneSet
-                      card={card}
-                      handleAddSellingBasket={handleAddSellingBasket}
-                      key={parseInt(card["@id"].substr(7))}
-                      setName={setName}
-                      displaySets={false}
+                      card={cardsContext[cardID]}
+                      cardId={cardID}
+                      index={index}
+                      key={cardID}
                     />
                   );
                 })}
