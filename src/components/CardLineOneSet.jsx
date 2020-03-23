@@ -20,6 +20,10 @@ const CardLineOneSet = ({
   //TODO : pass it into env variable
   const shopID = 1;
 
+  const WAIT_INTERVAL = 1000;
+
+  const [timer, setTimer] = useState(null);
+
   //Current Cards displayed in One Set Page
   const { cardsContext, setCardsContext } = useContext(cardsOneSetContext);
 
@@ -35,18 +39,10 @@ const CardLineOneSet = ({
   //Using the current Card in state, with default data : English, Near Mint, Non foil...
   const [currentCard, setCurrentCard] = useState({});
 
-  useEffect(() => {
-    setCurrentCard({
-      ...card,
-      quantity: 1,
-      condition: 2,
-      lang: 9,
-      isFoil: card.hasnonfoil ? "No" : "Yes",
-      set: setName
-    });
-  }, [card]);
+  const triggerAPIRequests = () => console.log("trigger");
 
   const handleChange = ({ currentTarget }) => {
+    // setTimer(clearTimeout(timer));
     const contextCopy = { ...cardsContext };
 
     //Updating the card following the new info
@@ -75,6 +71,8 @@ const CardLineOneSet = ({
 
       setCardsContext(contextCopy);
     });
+
+    // setTimer(setTimeout(() => triggerAPIRequests(), WAIT_INTERVAL));
 
     // setCardsContext(contextCopy);
   };

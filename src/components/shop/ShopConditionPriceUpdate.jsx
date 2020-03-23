@@ -355,18 +355,12 @@ const ShopConditionPriceUpdate = ({
         }
       } else {
         const allPricesCopy = [...allPricesBuffer];
-        //If price exists already : PUT
-        if (
-          allPricesBuffer[index].langs[langID][conditionID][isFoil] !== null
-        ) {
-        } else {
-          //If price didn't exist : POST
-        }
 
         allPricesCopy[index].langs[langID][conditionID][isFoil] = newPrice;
         allPricesBuffer[index].langs[langID][conditionID][
           isFoil + "wasUpdated"
         ] = true;
+
         setAllPricesBuffer(allPricesCopy);
       }
       setTimer(
