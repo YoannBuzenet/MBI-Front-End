@@ -43,13 +43,14 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
   };
 
   const addFirstDisplayedPricesToContext = data => {
+    const contextCopy = { ...cardsContext };
     for (let i = 0; i < data.length; i++) {
-      cardsContext[data[i].card.substr(7)].price = data[i].price;
-      cardsContext[data[i].card.substr(7)].LangOfPrice = parseInt(
+      contextCopy[data[i].card.substr(7)].price = data[i].price;
+      contextCopy[data[i].card.substr(7)].LangOfPrice = parseInt(
         data[i].language.substr(11)
       );
     }
-    setCardsContext(cardsContext);
+    setCardsContext(contextCopy);
     console.log(cardsContext);
   };
 
@@ -79,7 +80,7 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
         addFirstDisplayedPricesToContext(data.data["hydra:member"])
       );
     }
-  }, [cardsContext, buildContextFromAPIResponse, setCardsContext]);
+  }, [cardsContext, buildContextFromAPIResponse]);
 
   return (
     <>
