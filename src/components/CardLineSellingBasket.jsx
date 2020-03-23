@@ -7,8 +7,7 @@ import canSubmitContext from "../context/canSubmitSellRequestContext";
 import genericCardAPI from "../services/genericCardAPI";
 import CardShopPriceAPI from "../services/CardShopPriceAPI";
 
-//In this component, following the edit of already added card was really difficult in real time in the existing array.
-//Currently, if we wee that the card edited is already in the Basket, we changed a context variable to prevent from submitting the final request.
+//TODO : finish the context full gestion without card or currentCard state tools.
 
 const CardLineSellingBasket = ({ card, indexCard }) => {
   //Current Selling Request Basket
@@ -27,7 +26,7 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
   const [isOnHover, setIsOnHover] = useState(false);
 
   //Defining loading state, to know if component is loaded
-  const [isLoaded, setIsloaded] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   //State - defining if the Hover should be Top or Bottom
   const [hoverTopOrBottom, setHoverTopOrBottom] = useState();
@@ -43,19 +42,20 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
     }
   }, [isOnHover]);
 
-  const handleChange = ({ currentTarget }, currentCard) => {
+  const handleChange = ({ currentTarget }) => {
+    setIsLoading(true);
+
+    const contextCopy = [...currentBasket];
+
     const { name, value } = currentTarget;
+
     if (name === "quantity" || name === "lang") {
       var newValue = parseInt(value);
     } else {
       var newValue = value.toString();
     }
 
-    const contextCopy = [...currentBasket];
     contextCopy[indexCard][name] = newValue;
-
-    setIsloaded(true);
-    setErrorList([]);
 
     //Updating price
     CardShopPriceAPI.getOnePrice(
@@ -72,13 +72,13 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
         contextCopy[indexCard].price = 0;
       }
 
-      setCurrentBasket(contextCopy);
-
+      setIsLoading(false);
       sellingBasketAPI.save(contextCopy);
+      setCurrentBasket(contextCopy);
     });
   };
 
-  const handleDelete = card => {
+  const handleDelete = () => {
     //We remove the card thanks to its index in the currentBasket
     const newBasket = currentBasket.filter(
       (card, index) => index !== indexCard
@@ -99,7 +99,7 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
     card.scryfallid +
     ".jpg";
 
-  //Defining the class, if it's error or not
+  //Defining the class, if it must indicate error warning or not
   const sellingBasketLine = errorList.includes(indexCard) ? "error-line" : "";
 
   //TEMPORARY DEFAULT DEFINITION TODO : GET IT THOURGH API
@@ -138,7 +138,7 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
             id={card.cardName + "id1"}
             value={card.lang}
             onChange={event => {
-              handleChange(event, currentCard);
+              handleChange(event);
             }}
           >
             {card.foreignData.length > 0 ? (
@@ -180,7 +180,7 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
             name="condition"
             id={card.cardName + "id2"}
             onChange={event => {
-              handleChange(event, currentCard);
+              handleChange(event);
             }}
             value={card.condition}
           >
@@ -213,7 +213,7 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
             id={card.cardName + "id4"}
             value={currentCard.isFoil}
             onChange={event => {
-              handleChange(event, currentCard);
+              handleChange(event);
             }}
           >
             <option value={currentCard.isFoil == "Yes" ? "Yes" : "No"}>
@@ -232,7 +232,7 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
             name="quantity"
             id={card.cardName + "id3"}
             onChange={event => {
-              handleChange(event, currentCard);
+              handleChange(event);
             }}
             value={currentCard.quantity}
           >
@@ -250,13 +250,16 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
             <option value="12">12</option>
           </select>
         </td>
-        <td>{card.price}</td>
+        <td>
+          {isLoading && <div className="loading-loop"></div>}
+          {!isLoading && card.price}
+        </td>
         <td className="AddButton">
           <i
             className="fas fa-minus-circle delete-from-selling-basket "
             onClick={() => {
               console.log(currentCard);
-              return handleDelete(currentCard);
+              return handleDelete();
             }}
           ></i>
         </td>
