@@ -20,7 +20,7 @@ const CardLineOneSet = ({
   //TODO : pass it into env variable
   const shopID = 1;
 
-  //TIMEOUT SETUP DO NOT ERASE
+  //TIMEOUT SETUP DO NOT ERASE (In case we have to implement it, it can be finished)
   // const WAIT_INTERVAL = 1000;
   // const [timer, setTimer] = useState(null);
 
