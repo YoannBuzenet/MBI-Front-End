@@ -39,11 +39,14 @@ const CardLineOneSet = ({
   //Using the current Card in state, with default data : English, Near Mint, Non foil...
   const [currentCard, setCurrentCard] = useState({});
 
+  const [isLoading, setIsLoading] = useState(false);
+
   //Began a timeout on handleChange to prevent API call to disturb themselves. Finish implementation in case of problem.
   //TIMEOUT SETUP DO NOT ERASE
   // const triggerAPIRequests = () => console.log("trigger");
 
   const handleChange = ({ currentTarget }) => {
+    setIsLoading(true);
     //TIMEOUT SETUP DO NOT ERASE
     // setTimer(clearTimeout(timer));
     const contextCopy = { ...cardsContext };
@@ -70,6 +73,7 @@ const CardLineOneSet = ({
       console.log(data);
 
       contextCopy[cardID].price = data.data["hydra:member"][0].price;
+      setIsLoading(false);
       //mutating context and not seting it to gain performance
 
       setCardsContext(contextCopy);
@@ -201,7 +205,10 @@ const CardLineOneSet = ({
         </td>
         {/* PRICE */}
 
-        <td>{cardsContext[cardID].price}</td>
+        <td>
+          {!isLoading && cardsContext[cardID].price}
+          {isLoading && <div className="loading-loop"></div>}
+        </td>
 
         <td className="AddButton">
           <i

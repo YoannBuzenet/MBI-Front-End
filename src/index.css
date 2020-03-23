@@ -126,12 +126,62 @@ h2 {
   background-color: rgba(0, 0, 0, 0.5);
 }
 
+.loading-loop {
+  display: inline-block;
+  width: 1.4rem;
+  height: 1.4rem;
+}
+.loading-loop:after {
+  content: " ";
+  display: block;
+  width: 0.6rem;
+  height: 0.6rem;
+  margin: 0;
+  border-radius: 50%;
+  border: 6px solid #000;
+  border-color: #000 transparent #000 transparent;
+  animation: lds-dual-ring 1.2s linear infinite;
+}
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 @media only screen and (max-width: 1000px) {
   #root {
     padding-bottom: 220px;
   }
   .container-table-responsive {
     max-width: 100%;
+  }
+
+  .loading-loop {
+    display: inline-block;
+    width: 1.4rem;
+    height: 1.4rem;
+  }
+  .loading-loop:after {
+    content: " ";
+    display: block;
+    width: 0.5rem;
+    height: 0.8rem;
+    margin: 0;
+    border-radius: 50%;
+    border: 6px solid #000;
+    border-color: #000 transparent #000 transparent;
+    animation: lds-dual-ring 1.2s linear infinite;
+  }
+  @keyframes lds-dual-ring {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
   }
 }
 @media only screen and (max-width: 850px) {
