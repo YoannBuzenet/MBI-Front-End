@@ -33,8 +33,8 @@ const CardLine = ({
   const [currentCard, setCurrentCard] = useState({
     ...card,
     quantity: 1,
-    condition: "2",
-    lang: "9",
+    condition: 2,
+    lang: 9,
     isFoil: card.hasnonfoil ? "No" : "Yes",
     set: setName
   });
@@ -43,8 +43,8 @@ const CardLine = ({
     setCurrentCard({
       ...card,
       quantity: 1,
-      condition: "2",
-      lang: "9",
+      condition: 2,
+      lang: 9,
       isFoil: card.hasnonfoil ? "No" : "Yes",
       set: setName
     });

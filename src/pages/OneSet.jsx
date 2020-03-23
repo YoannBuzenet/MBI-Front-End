@@ -35,6 +35,8 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
 
   // console.log(cardsContext);
 
+  //Buildling context with the API response with all cards from the set.
+  //We add also DEFAULT caracs to cards here.
   const buildContextFromAPIResponse = data => {
     console.log("building context");
     const contextCopy = { ...cardsContext };
@@ -46,7 +48,12 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
         scryfallid: data[i].scryfallid,
         uuid: data[i].uuid,
         foreignData: data[i].foreignData,
-        price: null
+        price: null,
+        quantity: 1,
+        condition: 2,
+        lang: 9,
+        isFoil: data[i].hasnonfoil ? "No" : "Yes",
+        set: setName
       };
     }
     setCardsContext(contextCopy);
