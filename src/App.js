@@ -294,17 +294,21 @@ function App() {
                           />
                         )}
                       />
-                      <cardsOneSetContext.Provider value={contextCardsOneSet}>
-                        <Route
-                          path="/sets/:id"
-                          render={({ match }) => (
+
+                      <Route
+                        path="/sets/:id"
+                        render={({ match }) => (
+                          <cardsOneSetContext.Provider
+                            value={contextCardsOneSet}
+                          >
                             <OneSet
                               handleAddSellingBasket={handleAddSellingBasket}
                               match={match}
                             />
-                          )}
-                        />
-                      </cardsOneSetContext.Provider>
+                          </cardsOneSetContext.Provider>
+                        )}
+                      />
+
                       <Route path="/login" component={LoginPage} />
 
                       <Route

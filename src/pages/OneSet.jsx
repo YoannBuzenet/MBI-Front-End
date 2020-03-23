@@ -40,20 +40,25 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
   const buildContextFromAPIResponse = data => {
     console.log("building context");
     const contextCopy = { ...cardsContext };
+
+    const currentSet = allSets.find(element => element.id == idSet);
+
     for (let i = 0; i < data.length; i++) {
       contextCopy[data[i]["@id"].substr(7)] = {
+        cardID: parseInt(data[i]["@id"].substr(7)),
         hasfoil: data[i].hasfoil,
         hasnonfoil: data[i].hasnonfoil,
         name: data[i].name,
+        cardName: data[i].name,
         scryfallid: data[i].scryfallid,
         uuid: data[i].uuid,
         foreignData: data[i].foreignData,
         price: null,
+        isFoil: data[i].hasnonfoil ? "No" : "Yes",
+        set: currentSet.name,
         quantity: 1,
         condition: 2,
-        lang: 9,
-        isFoil: data[i].hasnonfoil ? "No" : "Yes",
-        set: setName
+        lang: 9
       };
     }
     setCardsContext(contextCopy);
@@ -84,18 +89,18 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
     const CancelToken = axios.CancelToken;
     const source = CancelToken.source();
 
-    SetsAPI.findOneById(idSet, {
-      cancelToken: source.token
-    })
-      .then(data => buildContextFromAPIResponse(data))
-      .then(setHasUpdatedPrices(false));
-
     //We get the current set Name if all the sets are loaded
     if (allSets.length > 0) {
       const currentSet = allSets.find(element => element.id == idSet);
       console.log(currentSet);
       setSetName(currentSet.name);
     }
+
+    SetsAPI.findOneById(idSet, {
+      cancelToken: source.token
+    })
+      .then(data => buildContextFromAPIResponse(data))
+      .then(setHasUpdatedPrices(false));
 
     //Getting user back to the top page when clicking on a set link
     window.scrollTo(0, 0);
@@ -155,6 +160,7 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
                       cardID={cardID}
                       index={index}
                       key={cardID}
+                      handleAddSellingBasket={handleAddSellingBasket}
                     />
                   );
                 })}
