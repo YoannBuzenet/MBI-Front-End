@@ -12,6 +12,9 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
   //Current Cards displayed in One Set Page
   const { cardsContext, setCardsContext } = useContext(cardsOneSetContext);
 
+  //TODO : PASS IT IN ENVIRONMENT
+  const baseLang = 3;
+
   //State of the set, initialized as empty array, about to receive the complete card list
   const [cards, setCards] = useState([]);
 
@@ -43,13 +46,17 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
     setCards([]);
   };
 
+  //This function takes API reponse with CardShopPrices and feeds the context.
+  // If several languages are received from a single card, we prioritize baseLang price.
   const addFirstDisplayedPricesToContext = data => {
     const contextCopy = { ...cardsContext };
     for (let i = 0; i < data.length; i++) {
-      contextCopy[data[i].card.substr(7)].price = data[i].price;
-      contextCopy[data[i].card.substr(7)].LangOfPrice = parseInt(
-        data[i].language.substr(11)
-      );
+      if (contextCopy[data[i].card.substr(7)].LangOfPrice !== baseLang) {
+        contextCopy[data[i].card.substr(7)].price = data[i].price;
+        contextCopy[data[i].card.substr(7)].LangOfPrice = parseInt(
+          data[i].language.substr(11)
+        );
+      }
     }
     setCardsContext(contextCopy);
   };
@@ -68,6 +75,7 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
     //We get the current set Name if all the sets are loaded
     if (allSets.length > 0) {
       const currentSet = allSets.find(element => element.id == id);
+      console.log(currentSet);
       setSetName(currentSet.name);
     }
 
