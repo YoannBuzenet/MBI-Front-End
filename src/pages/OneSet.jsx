@@ -18,8 +18,12 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
   //State of the set, initialized as empty array, about to receive the complete card list
   const [cards, setCards] = useState([]);
 
-  //Getting the id from params
-  const { id = 1 } = match.params;
+  //ID of the current set
+  const [idSet, setIdSet] = useState(match.params.id);
+
+  useEffect(() => {
+    setIdSet(match.params.id);
+  }, [match.params.id]);
 
   //We are getting the context of all sets, to fetch the set name in the good language
   const { allSets, setAllSets } = useContext(SetsContext);
@@ -27,11 +31,15 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
   //Creating a state to be able to write the set name
   const [setName, setSetName] = useState("");
 
+  const [hasUpdatedPrices, setHasUpdatedPrices] = useState(false);
+
   // console.log(cardsContext);
 
   const buildContextFromAPIResponse = data => {
+    console.log("building context");
+    const contextCopy = { ...cardsContext };
     for (let i = 0; i < data.length; i++) {
-      cardsContext[data[i]["@id"].substr(7)] = {
+      contextCopy[data[i]["@id"].substr(7)] = {
         hasfoil: data[i].hasfoil,
         hasnonfoil: data[i].hasnonfoil,
         name: data[i].name,
@@ -41,7 +49,7 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
         price: null
       };
     }
-    setCardsContext(cardsContext);
+    setCardsContext(contextCopy);
     //Empty setState just to force re-render of component (sure hacky, must be refactored)
     setCards([]);
   };
@@ -49,6 +57,7 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
   //This function takes API reponse with CardShopPrices and feeds the context.
   // If several languages are received from a single card, we prioritize baseLang price.
   const addFirstDisplayedPricesToContext = data => {
+    console.log("addedfirstdisplayedpricetocontext");
     const contextCopy = { ...cardsContext };
     for (let i = 0; i < data.length; i++) {
       if (contextCopy[data[i].card.substr(7)].LangOfPrice !== baseLang) {
@@ -68,13 +77,15 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
     const CancelToken = axios.CancelToken;
     const source = CancelToken.source();
 
-    SetsAPI.findOneById(id, {
+    SetsAPI.findOneById(idSet, {
       cancelToken: source.token
-    }).then(data => buildContextFromAPIResponse(data));
+    })
+      .then(data => buildContextFromAPIResponse(data))
+      .then(setHasUpdatedPrices(false));
 
     //We get the current set Name if all the sets are loaded
     if (allSets.length > 0) {
-      const currentSet = allSets.find(element => element.id == id);
+      const currentSet = allSets.find(element => element.id == idSet);
       console.log(currentSet);
       setSetName(currentSet.name);
     }
@@ -82,19 +93,32 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
     //Getting user back to the top page when clicking on a set link
     window.scrollTo(0, 0);
 
-    return () => source.cancel("");
-  }, [id, allSets]);
+    return () => {
+      setCardsContext({});
+      return source.cancel("");
+    };
+  }, [idSet, setIdSet, allSets, match.params.id]);
+
+  useEffect(() => {
+    setHasUpdatedPrices(false);
+
+    return setHasUpdatedPrices(false);
+  }, []);
 
   //Fetching prices once context is set up
   useEffect(() => {
-    console.log("fetching prices");
-    if (Object.keys(cardsContext).length > 0) {
+    console.log("fetching prices, state of hasUpdated : ", hasUpdatedPrices);
+    //
+    if (Object.keys(cardsContext).length > 0 && !hasUpdatedPrices) {
+      console.log("really fetching, state of hasUpdated : ", hasUpdatedPrices);
       CardShopPriceAPI.getArrayofPrices(
         Object.keys(cardsContext).map(id => parseInt(id)),
         3
-      ).then(data =>
-        addFirstDisplayedPricesToContext(data.data["hydra:member"])
-      );
+      )
+        .then(data =>
+          addFirstDisplayedPricesToContext(data.data["hydra:member"])
+        )
+        .then(setHasUpdatedPrices(true));
     }
   }, [cardsContext, buildContextFromAPIResponse]);
 
