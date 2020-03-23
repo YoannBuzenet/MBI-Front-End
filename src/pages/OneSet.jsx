@@ -12,6 +12,8 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
   //Current Cards displayed in One Set Page
   const { cardsContext, setCardsContext } = useContext(cardsOneSetContext);
 
+  const ENGLISH_LANG_ID = 9;
+
   //TODO : PASS IT IN ENVIRONMENT
   const baseLang = 3;
 
@@ -72,7 +74,7 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
     console.log("addedfirstdisplayedpricetocontext");
     const contextCopy = { ...cardsContext };
     for (let i = 0; i < data.length; i++) {
-      if (contextCopy[data[i].card.substr(7)].LangOfPrice !== baseLang) {
+      if (contextCopy[data[i].card.substr(7)].LangOfPrice !== ENGLISH_LANG_ID) {
         contextCopy[data[i].card.substr(7)].price = data[i].price;
         contextCopy[data[i].card.substr(7)].LangOfPrice = parseInt(
           data[i].language.substr(11)

@@ -17,6 +17,9 @@ const CardLineOneSet = ({
   //Current Selling Request Basket
   const { currentBasket, setCurrentBasket } = useContext(SellingBasketContext);
 
+  //TODO : pass it into env variable
+  const shopID = 1;
+
   //Current Cards displayed in One Set Page
   const { cardsContext, setCardsContext } = useContext(cardsOneSetContext);
 
@@ -43,8 +46,6 @@ const CardLineOneSet = ({
     });
   }, [card]);
 
-  console.log(cardsContext[cardID]);
-
   const handleChange = ({ currentTarget }) => {
     const contextCopy = { ...cardsContext };
 
@@ -55,12 +56,25 @@ const CardLineOneSet = ({
     } else {
       var newValue = value.toString();
     }
+
+    contextCopy[cardID][name] = newValue;
+
     //TODO
     //API call to get the relevant price and UPDATE PRICE
-    CardShopPriceAPI.getOnePrice();
+    CardShopPriceAPI.getOnePrice(
+      shopID,
+      cardID,
+      cardsContext[cardID].lang,
+      cardsContext[cardID].condition,
+      cardsContext[cardID].isFoil
+    ).then(data => {
+      console.log(data);
 
-    //muting context and not setint it to gain performance
-    cardsContext[cardID][name] = newValue;
+      contextCopy[cardID].price = data.data["hydra:member"][0].price;
+      //mutating context and not seting it to gain performance
+
+      setCardsContext(contextCopy);
+    });
 
     // setCardsContext(contextCopy);
   };

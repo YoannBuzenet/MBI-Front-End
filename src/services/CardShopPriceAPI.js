@@ -16,8 +16,33 @@ function getArrayofPrices(arrayOfIdCards, baseLangID, cleaningParam) {
   );
 }
 
-function getOnePrice(shopID, langID, conditionID, isFoil) {
+function getOnePrice(shopID, cardID, langID, conditionID, isFoil) {
   console.log("function called");
+  isFoil = isFoil === true ? 1 : 0;
+  console.log(
+    "http://127.0.0.1:8000/card_shop_prices?shop.id" +
+      shopID +
+      "&card.id=" +
+      cardID +
+      "&language.id=" +
+      langID +
+      "&cardCondition.id=" +
+      conditionID +
+      "&isFoil=" +
+      isFoil
+  );
+  return axios.get(
+    "http://127.0.0.1:8000/card_shop_prices?shop.id" +
+      shopID +
+      "&card.id=" +
+      cardID +
+      "&language.id=" +
+      langID +
+      "&cardCondition.id=" +
+      conditionID +
+      "&isFoil=" +
+      isFoil
+  );
 }
 
 export default { getArrayofPrices, getOnePrice };
