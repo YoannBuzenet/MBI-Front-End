@@ -6,6 +6,7 @@ import SetsContext from "../context/setsContext";
 import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 import CardShopPriceAPI from "../services/CardShopPriceAPI";
 import cardsOneSetContext from "../context/cardsOneSetContext";
+import axios from "axios";
 
 const OneSet = ({ handleAddSellingBasket, match }) => {
   //Current Cards displayed in One Set Page
@@ -51,15 +52,18 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
       );
     }
     setCardsContext(contextCopy);
-    console.log(cardsContext);
   };
 
   //Fetching data when component is mounted
-  //Component update when
-  //      - ID is updated (user clicked on a new set)
-  //      - AllSets are updated (which allow to reload when allSets are completely loaded and to display the set name)
+
   useEffect(() => {
-    SetsAPI.findOneById(id).then(data => buildContextFromAPIResponse(data));
+    console.log("fetching set cards");
+    const CancelToken = axios.CancelToken;
+    const source = CancelToken.source();
+
+    SetsAPI.findOneById(id, {
+      cancelToken: source.token
+    }).then(data => buildContextFromAPIResponse(data));
 
     //We get the current set Name if all the sets are loaded
     if (allSets.length > 0) {
@@ -69,9 +73,13 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
 
     //Getting user back to the top page when clicking on a set link
     window.scrollTo(0, 0);
+
+    return () => source.cancel("");
   }, [id, allSets]);
 
+  //Fetching prices once context is set up
   useEffect(() => {
+    console.log("fetching prices");
     if (Object.keys(cardsContext).length > 0) {
       CardShopPriceAPI.getArrayofPrices(
         Object.keys(cardsContext).map(id => parseInt(id)),

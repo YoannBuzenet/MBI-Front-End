@@ -50,15 +50,6 @@ const CardLine = ({
     });
   }, [card]);
 
-  useEffect(() => {
-    console.log(cardID, cardsContext[cardID]);
-    console.log(cardID, cardsContext[cardID].price);
-    if (isOnHover) {
-      // console.log(conditions);
-      //If we neeed to change something on hover update, here it is
-    }
-  }, [isOnHover, cardsContext, setCardsContext]);
-
   const handleChange = ({ currentTarget }, currentCard) => {
     //Updating the card following the new info
     const { name, value } = currentTarget;
