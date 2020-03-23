@@ -20,9 +20,9 @@ const CardLineOneSet = ({
   //TODO : pass it into env variable
   const shopID = 1;
 
-  const WAIT_INTERVAL = 1000;
-
-  const [timer, setTimer] = useState(null);
+  //TIMEOUT SETUP DO NOT ERASE
+  // const WAIT_INTERVAL = 1000;
+  // const [timer, setTimer] = useState(null);
 
   //Current Cards displayed in One Set Page
   const { cardsContext, setCardsContext } = useContext(cardsOneSetContext);
@@ -39,9 +39,12 @@ const CardLineOneSet = ({
   //Using the current Card in state, with default data : English, Near Mint, Non foil...
   const [currentCard, setCurrentCard] = useState({});
 
-  const triggerAPIRequests = () => console.log("trigger");
+  //Began a timeout on handleChange to prevent API call to disturb themselves. Finish implementation in case of problem.
+  //TIMEOUT SETUP DO NOT ERASE
+  // const triggerAPIRequests = () => console.log("trigger");
 
   const handleChange = ({ currentTarget }) => {
+    //TIMEOUT SETUP DO NOT ERASE
     // setTimer(clearTimeout(timer));
     const contextCopy = { ...cardsContext };
 
@@ -71,7 +74,7 @@ const CardLineOneSet = ({
 
       setCardsContext(contextCopy);
     });
-
+    //TIMEOUT SETUP DO NOT ERASE
     // setTimer(setTimeout(() => triggerAPIRequests(), WAIT_INTERVAL));
 
     // setCardsContext(contextCopy);
