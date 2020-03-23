@@ -16,4 +16,8 @@ function getArrayofPrices(arrayOfIdCards, baseLangID, cleaningParam) {
   );
 }
 
-export default { getArrayofPrices };
+function getOnePrice(shopID, langID, conditionID, isFoil) {
+  console.log("function called");
+}
+
+export default { getArrayofPrices, getOnePrice };

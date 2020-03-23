@@ -30,14 +30,7 @@ const CardLineOneSet = ({
   const [isOnHover, setIsOnHover] = useState(false);
 
   //Using the current Card in state, with default data : English, Near Mint, Non foil...
-  const [currentCard, setCurrentCard] = useState({
-    ...card,
-    quantity: 1,
-    condition: 2,
-    lang: 9,
-    isFoil: card.hasnonfoil ? "No" : "Yes",
-    set: setName
-  });
+  const [currentCard, setCurrentCard] = useState({});
 
   useEffect(() => {
     setCurrentCard({
@@ -52,18 +45,24 @@ const CardLineOneSet = ({
 
   console.log(cardsContext[cardID]);
 
-  const handleChange = ({ currentTarget }, currentCard) => {
+  const handleChange = ({ currentTarget }) => {
+    const contextCopy = { ...cardsContext };
+
     //Updating the card following the new info
     const { name, value } = currentTarget;
-    if (name === "quantity") {
+    if (name === "quantity" || name === "lang") {
       var newValue = parseInt(value);
     } else {
       var newValue = value.toString();
     }
     //TODO
-    //API call to get the relevant price
+    //API call to get the relevant price and UPDATE PRICE
+    CardShopPriceAPI.getOnePrice();
 
-    setCurrentCard({ ...currentCard, [name]: newValue });
+    //muting context and not setint it to gain performance
+    cardsContext[cardID][name] = newValue;
+
+    // setCardsContext(contextCopy);
   };
 
   //Getting the Picture URL

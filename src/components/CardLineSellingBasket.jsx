@@ -69,6 +69,7 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
 
     setIsloaded(true);
     setErrorList([]);
+    //TODO call API to get new price
     setCard({ ...currentCard, [name]: newValue });
     console.log(currentCard);
   };
