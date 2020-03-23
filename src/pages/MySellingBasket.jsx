@@ -37,7 +37,11 @@ const MyCurrentSellRequest = ({ history, checkForDuplicates }) => {
                     return (
                       <CardLineSellingBasket
                         card={card}
-                        key={parseInt(card["@id"].substr(7))}
+                        key={
+                          card["@id"]
+                            ? parseInt(card["@id"].substr(7))
+                            : card.cardID
+                        }
                         indexCard={index}
                       />
                     );

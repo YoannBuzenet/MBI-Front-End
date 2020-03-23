@@ -31,6 +31,9 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
   //State - defining if the Hover should be Top or Bottom
   const [hoverTopOrBottom, setHoverTopOrBottom] = useState();
 
+  console.log(card);
+  console.log(conditions);
+
   useEffect(() => {
     if (isOnHover) {
       //If we neeed to change something on hover update, here it is
@@ -136,18 +139,18 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
             {card.foreignData.length > 0 ? (
               [
                 <option value={card.lang} key={card.id + "2"}>
-                  {card.lang == "9"
+                  {card.lang === 9
                     ? "EN"
                     : card.foreignData.filter(
                         currentlanguage =>
-                          currentlanguage.language_id.id === parseInt(card.lang)
+                          currentlanguage.language_id.id === card.lang
                       )[0].language_id.shortname}
                 </option>
               ].concat(
                 card.foreignData
                   .filter(
                     currentlanguage =>
-                      currentlanguage.language_id.id !== parseInt(card.lang)
+                      currentlanguage.language_id.id !== card.lang
                   )
                   .map((foreignData, index) => (
                     <option
@@ -180,7 +183,7 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
             {conditions.length > 0
               ? gradingArea === "EU"
                 ? conditions
-                    .filter(condition => condition.id !== card.condition)
+                    // .filter(condition => condition.id !== card.condition)
                     .map((condition, index) =>
                       condition.isEU ? (
                         <option key={index} value={condition.id}>
@@ -189,7 +192,7 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
                       ) : null
                     )
                 : conditions
-                    .filter(condition => condition.id !== card.condition)
+                    // .filter(condition => condition.id !== card.condition)
                     .map((condition, index) =>
                       condition.isUS ? (
                         <option value={condition.id} key={index}>

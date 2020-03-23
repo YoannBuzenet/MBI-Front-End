@@ -6,7 +6,7 @@ import cardsAPI from "../services/cardsAPI";
 import CardShopPriceAPI from "../services/CardShopPriceAPI";
 import cardsOneSetContext from "../context/cardsOneSetContext";
 
-const CardLine = ({
+const CardLineOneSet = ({
   card,
   cardID,
   handleAddSellingBasket,
@@ -50,6 +50,8 @@ const CardLine = ({
     });
   }, [card]);
 
+  console.log(cardsContext[cardID]);
+
   const handleChange = ({ currentTarget }, currentCard) => {
     //Updating the card following the new info
     const { name, value } = currentTarget;
@@ -86,30 +88,30 @@ const CardLine = ({
         }}
       >
         <td className="cardPictureHolder">
-          {card.name}
+          {cardsContext[cardID].name}
           {isOnHover && (
             <div className={hoverTopOrBottom}>
               <img src={urlPictureCard} alt={card.name} />
             </div>
           )}
         </td>
-        {displaySets && <td>{card.edition.name}</td>}
+        {displaySets && <td>{cardsContext[cardID].set}</td>}
         <td>
           {/* Select will have to be refactored with a .map on a Select Component */}
           <select
             name="lang"
-            id={card.name + "id1"}
+            id={cardsContext[cardID].name + "id1"}
             onChange={event => {
               handleChange(event, currentCard);
             }}
           >
-            {card.foreignData.length > 0 ? (
+            {cardsContext[cardID].foreignData.length > 0 ? (
               [
                 <option value="9" key="a">
                   EN
                 </option>
               ].concat(
-                card.foreignData.map((foreignData, index) => (
+                cardsContext[cardID].foreignData.map((foreignData, index) => (
                   <option value={foreignData.language_id.id} key={index}>
                     {foreignData.language_id.shortname}
                   </option>
@@ -123,7 +125,7 @@ const CardLine = ({
         <td>
           <select
             name="condition"
-            id={card.name + "id2"}
+            id={cardsContext[cardID].name + "id2"}
             onChange={event => {
               handleChange(event, currentCard);
             }}
@@ -157,14 +159,14 @@ const CardLine = ({
               handleChange(event, currentCard);
             }}
           >
-            {card.hasnonfoil && <option value="No">No</option>}
-            {card.hasfoil && <option value="Yes">Yes</option>}
+            {cardsContext[cardID].hasnonfoil && <option value="No">No</option>}
+            {cardsContext[cardID].hasfoil && <option value="Yes">Yes</option>}
           </select>
         </td>
         <td>
           <select
             name="quantity"
-            id={card.name + "id3"}
+            id={cardsContext[cardID].name + "id3"}
             onChange={event => {
               handleChange(event, currentCard);
             }}
@@ -192,7 +194,10 @@ const CardLine = ({
             className="fas fa-plus-circle add-item-basket"
             onClick={() => {
               console.log(currentCard);
-              return handleAddSellingBasket(currentBasket, currentCard);
+              return handleAddSellingBasket(
+                currentBasket,
+                cardsContext[cardID]
+              );
             }}
           ></i>
         </td>
@@ -201,4 +206,4 @@ const CardLine = ({
   );
 };
 
-export default CardLine;
+export default CardLineOneSet;
