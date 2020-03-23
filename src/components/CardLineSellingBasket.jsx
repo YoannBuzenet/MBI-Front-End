@@ -61,7 +61,7 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
 
   const handleChange = ({ currentTarget }, currentCard) => {
     const { name, value } = currentTarget;
-    if (name == "quantity") {
+    if (name === "quantity" || name === "lang") {
       var newValue = parseInt(value);
     } else {
       var newValue = value.toString();
@@ -141,10 +141,10 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
                 <option value={card.lang} key={card.id + "2"}>
                   {card.lang === 9
                     ? "EN"
-                    : card.foreignData.filter(
-                        currentlanguage =>
-                          currentlanguage.language_id.id === card.lang
-                      )[0].language_id.shortname}
+                    : card.foreignData.filter(currentlanguage => {
+                        console.log(currentlanguage);
+                        return currentlanguage.language_id.id === card.lang;
+                      })[0].language_id.shortname}
                 </option>
               ].concat(
                 card.foreignData
