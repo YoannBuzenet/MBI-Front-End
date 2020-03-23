@@ -5,6 +5,7 @@ import GenericCardInfosContext from "../context/genericCardInfosContext";
 import sellingBasketAPI from "../services/sellingBasketAPI";
 import canSubmitContext from "../context/canSubmitSellRequestContext";
 import genericCardAPI from "../services/genericCardAPI";
+import CardShopPriceAPI from "../services/CardShopPriceAPI";
 
 //In this component, following the edit of already added card was really difficult in real time in the existing array.
 //Currently, if we wee that the card edited is already in the Basket, we changed a context variable to prevent from submitting the final request.
@@ -31,33 +32,16 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
   //State - defining if the Hover should be Top or Bottom
   const [hoverTopOrBottom, setHoverTopOrBottom] = useState();
 
-  console.log(card);
-  console.log(conditions);
+  //TODO - PASS THIS AS ENV VARIABLE
+  const shopID = 1;
 
   useEffect(() => {
     if (isOnHover) {
       //If we neeed to change something on hover update, here it is
       console.log(currentCard);
-      // console.log(errorList);
-      // console.log(currentBasket);
       console.log(conditions);
     }
   }, [isOnHover]);
-
-  useEffect(() => {
-    if (isLoaded) {
-      //checkIfIfCardAlreadyHere(currentBasket, currentCard);
-      //We remove the card then we add it again at the same Index
-      const newBasket = currentBasket.filter(
-        (card, index) => index !== indexCard
-      );
-      newBasket.splice(indexCard, 0, currentCard);
-
-      setCurrentBasket(newBasket);
-
-      sellingBasketAPI.save(newBasket);
-    }
-  }, [currentCard]);
 
   const handleChange = ({ currentTarget }, currentCard) => {
     const { name, value } = currentTarget;
@@ -67,11 +51,31 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
       var newValue = value.toString();
     }
 
+    const contextCopy = [...currentBasket];
+    contextCopy[indexCard][name] = newValue;
+
     setIsloaded(true);
     setErrorList([]);
-    //TODO call API to get new price
-    setCard({ ...currentCard, [name]: newValue });
-    console.log(currentCard);
+
+    //Updating price
+    CardShopPriceAPI.getOnePrice(
+      shopID,
+      currentBasket[indexCard].cardID,
+      currentBasket[indexCard].lang,
+      currentBasket[indexCard].condition,
+      currentBasket[indexCard].isFoil
+    ).then(data => {
+      console.log(data);
+      if (data.data["hydra:member"].length > 0) {
+        contextCopy[indexCard].price = data.data["hydra:member"][0].price;
+      } else {
+        contextCopy[indexCard].price = 0;
+      }
+
+      setCurrentBasket(contextCopy);
+
+      sellingBasketAPI.save(contextCopy);
+    });
   };
 
   const handleDelete = card => {
@@ -143,7 +147,6 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
                   {card.lang === 9
                     ? "EN"
                     : card.foreignData.filter(currentlanguage => {
-                        console.log(currentlanguage);
                         return currentlanguage.language_id.id === card.lang;
                       })[0].language_id.shortname}
                 </option>

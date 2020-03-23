@@ -71,8 +71,11 @@ const CardLineOneSet = ({
       cardsContext[cardID].isFoil
     ).then(data => {
       console.log(data);
-
-      contextCopy[cardID].price = data.data["hydra:member"][0].price;
+      if (data.data["hydra:member"].length > 0) {
+        contextCopy[cardID].price = data.data["hydra:member"][0].price;
+      } else {
+        contextCopy[cardID].price = 0;
+      }
       setIsLoading(false);
       //mutating context and not seting it to gain performance
 

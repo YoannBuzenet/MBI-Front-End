@@ -18,7 +18,12 @@ function getArrayofPrices(arrayOfIdCards, baseLangID, cleaningParam) {
 
 function getOnePrice(shopID, cardID, langID, conditionID, isFoil) {
   console.log("function called");
-  isFoil = isFoil === true ? 1 : 0;
+
+  if (isFoil === true || isFoil === "Yes") {
+    isFoil = 1;
+  } else {
+    isFoil = 0;
+  }
   console.log(
     "http://127.0.0.1:8000/card_shop_prices?shop.id" +
       shopID +

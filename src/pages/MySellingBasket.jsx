@@ -39,8 +39,14 @@ const MyCurrentSellRequest = ({ history, checkForDuplicates }) => {
                         card={card}
                         key={
                           card["@id"]
-                            ? parseInt(card["@id"].substr(7))
-                            : card.cardID
+                            ? parseInt(
+                                card["@id"].substr(7) +
+                                  card.condition +
+                                  card.lang
+                              )
+                            : parseInt(
+                                card.cardID + "" + card.condition + card.lang
+                              )
                         }
                         indexCard={index}
                       />
