@@ -59,6 +59,7 @@ const CardLine = ({
   }, [card]);
 
   const handleChange = ({ currentTarget }, currentCard) => {
+    console.log(currentCard);
     //Updating the card following the new info
     const { name, value } = currentTarget;
     if (name === "quantity" || name === "lang" || name === "condition") {
@@ -66,8 +67,7 @@ const CardLine = ({
     } else {
       var newValue = value.toString();
     }
-    let isFoil = currentCard.isFoil === "Yes" ? 1 : 0;
-
+    var isFoil = currentCard.isFoil === "Yes" ? 1 : 0;
     var price;
     //To know how to browse the price object, we must know which property has been changed
     if (name === "lang") {
@@ -75,10 +75,11 @@ const CardLine = ({
     } else if (name === "condition") {
       price = currentCard.allPrices[currentCard.lang][newValue][isFoil];
     } else if (name === "isFoil") {
+      console.log("changement du foil");
+      console.log(isFoil);
+      isFoil = newValue === "Yes" ? 1 : 0;
       price =
-        currentCard.allPrices[currentCard.lang][currentCard.condition][
-          newValue
-        ];
+        currentCard.allPrices[currentCard.lang][currentCard.condition][isFoil];
     } else {
       price =
         currentCard.allPrices[currentCard.lang][currentCard.condition][isFoil];
