@@ -26,7 +26,10 @@ const CardWithThumbnail = ({ handleAddSellingBasket, card }) => {
 
   return (
     <>
-      <div className="card">
+      <div
+        className="card"
+        onClick={() => (window.location.href = "/card/" + card.name)}
+      >
         <div className="card-picture">
           <img src={picture} alt="" />
         </div>
