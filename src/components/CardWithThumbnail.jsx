@@ -4,7 +4,6 @@ import cardsAPI from "../services/cardsAPI";
 import { Link } from "react-router-dom";
 
 const CardWithThumbnail = ({ handleAddSellingBasket, card }) => {
-  console.log(card);
   //Current Selling Request Basket
   const { currentBasket, setCurrentBasket } = useContext(SellingBasketContext);
 
@@ -12,17 +11,6 @@ const CardWithThumbnail = ({ handleAddSellingBasket, card }) => {
   const [currentCard, setCard] = useState(card);
 
   const picture = cardsAPI.getSmallPictureFromScryfallId(card);
-
-  const handleChange = ({ currentTarget }, currentCard) => {
-    const { name, value } = currentTarget;
-    if (name === "quantity") {
-      var newValue = parseInt(value);
-    } else {
-      var newValue = value.toString();
-    }
-
-    setCard({ ...currentCard, [name]: newValue });
-  };
 
   return (
     <>
