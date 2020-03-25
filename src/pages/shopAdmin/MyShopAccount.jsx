@@ -8,13 +8,16 @@ const MyShopAccount = props => {
   );
 
   const [shopAccountInformation, setShopAccountInformation] = useState({
-    firstName: authenticationInfos.shop.prenom,
-    lastName: authenticationInfos.shop.nom,
+    legalName: authenticationInfos.shop.legalName,
+    shopmail: authenticationInfos.shop.email,
+    siret: authenticationInfos.shop.SIRET,
+    vatNumber: authenticationInfos.shop.vatNumber,
     tel: authenticationInfos.shop.tel,
-    mail: authenticationInfos.user.email,
+    mail: authenticationInfos.shop.email,
     adress: authenticationInfos.shop.adress,
     postalCode: authenticationInfos.shop.postalCode,
-    town: authenticationInfos.shop.town
+    town: authenticationInfos.shop.town,
+    buyingLegalClauses: null
   });
 
   console.log(authenticationInfos);
@@ -44,7 +47,7 @@ const MyShopAccount = props => {
             name="shopMail"
             required
             onChange={handleChange}
-            value={shopAccountInformation.shopMail}
+            value={shopAccountInformation.mail}
           />
 
           <label htmlFor="tel">Telephone</label>
@@ -116,7 +119,7 @@ const MyShopAccount = props => {
             rows="3"
             required
             onChange={handleChange}
-            value={shopAccountInformation.buyingLegalClause}
+            value={shopAccountInformation.buyingLegalClauses}
           ></textarea>
 
           <button type="submit">Modifier mes informations</button>
