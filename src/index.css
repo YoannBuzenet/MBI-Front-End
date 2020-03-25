@@ -595,9 +595,17 @@ div.connect p {
   align-items: center;
 }
 
+.classic_links_responsive_admin {
+  padding: 2rem 0;
+}
+
 @media only screen and (max-width: 1000px) {
   .options_desktop {
     display: none;
+  }
+
+  .responsive_menu_admin {
+    height: 80vh;
   }
 }
 
