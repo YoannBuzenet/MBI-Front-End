@@ -12,13 +12,13 @@ const CardLine = ({
   setName,
   displaySets
 }) => {
+  const LANGUAGE_ID_ENG = 9;
+  const CONDITION_ID_NM = 2;
+  const ISFOILTRUE = 1;
+  const ISFOILFALSE = 0;
+
   //Current Selling Request Basket
   const { currentBasket, setCurrentBasket } = useContext(SellingBasketContext);
-
-  // const arrayTest = [2086, 3939];
-  // CardShopPriceAPI.getArrayofPrices(arrayTest, 3).then(data =>
-  //   console.log(data)
-  // );
 
   //DEFINED langages and Conditions
   const { lang, conditions } = useContext(GenericCardInfosContext);
@@ -33,22 +33,28 @@ const CardLine = ({
   const [currentCard, setCurrentCard] = useState({
     ...card,
     quantity: 1,
-    condition: "2",
-    lang: "9",
+    condition: 2,
+    lang: 9,
     isFoil: card.hasnonfoil ? "No" : "Yes",
     set: setName,
-    price: 1
+    price:
+      card.hasnonfoil === 1
+        ? card.allPrices[LANGUAGE_ID_ENG][CONDITION_ID_NM][ISFOILFALSE]
+        : card.allPrices[LANGUAGE_ID_ENG][CONDITION_ID_NM][ISFOILTRUE]
   });
 
   useEffect(() => {
     setCurrentCard({
       ...card,
       quantity: 1,
-      condition: "2",
-      lang: "9",
+      condition: 2,
+      lang: 9,
       isFoil: card.hasnonfoil ? "No" : "Yes",
       set: setName,
-      price: 1
+      price:
+        card.hasnonfoil === 1
+          ? card.allPrices[LANGUAGE_ID_ENG][CONDITION_ID_NM][ISFOILFALSE]
+          : card.allPrices[LANGUAGE_ID_ENG][CONDITION_ID_NM][ISFOILTRUE]
     });
   }, [card]);
 
@@ -62,16 +68,34 @@ const CardLine = ({
   const handleChange = ({ currentTarget }, currentCard) => {
     //Updating the card following the new info
     const { name, value } = currentTarget;
-    if (name === "quantity") {
+    if (name === "quantity" || name === "lang" || name === "condition") {
       var newValue = parseInt(value);
     } else {
       var newValue = value.toString();
     }
-    //TODO
-    //Checking if CardShopPrice exist
-    //If not, API call to get the relevant price
+    let isFoil = currentCard.isFoil === "Yes" ? 1 : 0;
+    console.log(isFoil);
 
-    setCurrentCard({ ...currentCard, [name]: newValue });
+    var price;
+    //To know how to browse the price object, we must know which property has been changed
+    if (name === "lang") {
+      price = currentCard.allPrices[newValue][currentCard.condition][isFoil];
+    } else if (name === "condition") {
+      price = currentCard.allPrices[currentCard.lang][newValue][isFoil];
+    } else if (name === "isFoil") {
+      price =
+        currentCard.allPrices[currentCard.lang][currentCard.condition][
+          newValue
+        ];
+    }
+
+    console.log("newvalue", name, newValue);
+    console.log(price);
+    console.log(currentCard.allPrices);
+    console.log(currentCard.lang);
+    console.log(currentCard.condition);
+
+    setCurrentCard({ ...currentCard, [name]: newValue, price: price });
   };
 
   //Getting the Picture URL
@@ -193,7 +217,7 @@ const CardLine = ({
             <option value="12">12</option>
           </select>
         </td>
-        <td>{card.price || 2} </td>
+        <td>{currentCard.price || 0} </td>
         <td className="AddButton">
           <i
             className="fas fa-plus-circle add-item-basket"
