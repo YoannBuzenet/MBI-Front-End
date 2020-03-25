@@ -75,8 +75,6 @@ const CardLine = ({
     } else if (name === "condition") {
       price = currentCard.allPrices[currentCard.lang][newValue][isFoil];
     } else if (name === "isFoil") {
-      console.log("changement du foil");
-      console.log(isFoil);
       isFoil = newValue === "Yes" ? 1 : 0;
       price =
         currentCard.allPrices[currentCard.lang][currentCard.condition][isFoil];
