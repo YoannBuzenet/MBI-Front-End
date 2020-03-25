@@ -115,13 +115,20 @@ const ShopNavbar = ({ history }) => {
                   >
                     <li>Mon compte</li>
                   </Link>
+                  <Link
+                    to="/shopadmin/shopInfos"
+                    className="toggle-menu-links"
+                    onClick={() => setToggleMenu(!toggleMenu)}
+                  >
+                    <li>Informations Boutique</li>
+                  </Link>
 
                   <Link
                     to="/shopadmin/settings"
                     className="toggle-menu-links"
                     onClick={() => setToggleMenu(!toggleMenu)}
                   >
-                    <li>Paramètres Boutique</li>
+                    <li>Paramètres Gestion</li>
                   </Link>
 
                   <li onClick={handleLogout}>Déconnexion</li>
