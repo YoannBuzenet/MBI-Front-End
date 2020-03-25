@@ -21,8 +21,6 @@ const MyAccount = props => {
     idCustomer: authenticationInfos.customer.id
   });
 
-  useEffect(() => {});
-
   const handleSubmit = async event => {
     event.preventDefault();
 
