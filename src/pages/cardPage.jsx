@@ -47,6 +47,10 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
 
         for (let g = 1; g <= NUMBER_OF_CONDITIONS; g++) {
           array[i].allPrices[h][g] = {};
+
+          for (let f = 0; f < 2; f++) {
+            array[i].allPrices[h][g][f] = 0;
+          }
         }
       }
 
