@@ -4,6 +4,7 @@ import GenericCardInfosContext from "../context/genericCardInfosContext";
 import cardsAPI from "../services/cardsAPI";
 import CardLine from "../components/CardLine";
 import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
+import TableLoader from "../components/loaders/TableLoader";
 
 const CardPage = ({ match, handleAddSellingBasket }) => {
   const NUMBER_OF_LANGUAGES = 11;
@@ -20,8 +21,8 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
   //STATE - current cards displayed
   const [allCardsDisplayed, setAllCardsDisplayed] = useState([]);
 
-  //CONTEXT langages and Conditions
-  const { lang, conditions } = useContext(GenericCardInfosContext);
+  //STATE - Is Loading
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     setCurrentName(match.params.cardName);
@@ -86,7 +87,9 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
           return data.data["hydra:member"];
         })
         .then(data => makeCardShopPriceBrowsable(data))
-        .then(data => setAllCardsDisplayed(data));
+        .then(data => setAllCardsDisplayed(data))
+        .then(() => setIsLoading(false));
+
       return () => source.cancel("");
     }
   }, [currentNameDecoded, currentName]);
@@ -95,31 +98,34 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
     <>
       <div className="container">
         <h1>{currentName}</h1>
-        <Table className="zebra-table">
-          <Thead>
-            <Tr>
-              <Th>Nom de la carte</Th>
-              <Th>Edition</Th>
-              <Th>Langue</Th>
-              <Th>Condition</Th>
-              <Th>Foil</Th>
-              <Th>Quantité</Th>
-              <Th>Prix</Th>
-            </Tr>
-          </Thead>
-          <Tbody>
-            {allCardsDisplayed.map((card, index) => (
-              <CardLine
-                card={card}
-                index={index}
-                setName={card.edition.name}
-                key={parseInt(card["@id"].substr(7))}
-                displaySets={true}
-                handleAddSellingBasket={handleAddSellingBasket}
-              />
-            ))}
-          </Tbody>
-        </Table>
+        {isLoading && <TableLoader />}
+        {!isLoading && (
+          <Table className="zebra-table">
+            <Thead>
+              <Tr>
+                <Th>Nom de la carte</Th>
+                <Th>Edition</Th>
+                <Th>Langue</Th>
+                <Th>Condition</Th>
+                <Th>Foil</Th>
+                <Th>Quantité</Th>
+                <Th>Prix</Th>
+              </Tr>
+            </Thead>
+            <Tbody>
+              {allCardsDisplayed.map((card, index) => (
+                <CardLine
+                  card={card}
+                  index={index}
+                  setName={card.edition.name}
+                  key={parseInt(card["@id"].substr(7))}
+                  displaySets={true}
+                  handleAddSellingBasket={handleAddSellingBasket}
+                />
+              ))}
+            </Tbody>
+          </Table>
+        )}
       </div>
     </>
   );
