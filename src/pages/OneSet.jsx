@@ -7,6 +7,8 @@ import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 import CardShopPriceAPI from "../services/CardShopPriceAPI";
 import cardsOneSetContext from "../context/cardsOneSetContext";
 import axios from "axios";
+import TableLoader from "../components/loaders/TableLoader";
+import OneSetLoader from "../components/loaders/OneSetLoader";
 
 const OneSet = ({ handleAddSellingBasket, match }) => {
   //Current Cards displayed in One Set Page
@@ -23,10 +25,6 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
   //ID of the current set
   const [idSet, setIdSet] = useState(match.params.id);
 
-  useEffect(() => {
-    setIdSet(match.params.id);
-  }, [match.params.id]);
-
   //We are getting the context of all sets, to fetch the set name in the good language
   const { allSets, setAllSets } = useContext(SetsContext);
 
@@ -35,7 +33,7 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
 
   const [hasUpdatedPrices, setHasUpdatedPrices] = useState(false);
 
-  // console.log(cardsContext);
+  const [isLoading, setIsLoading] = useState(true);
 
   //Buildling context with the API response with all cards from the set.
   //We add also DEFAULT caracs to cards here.
@@ -84,10 +82,14 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
     setCardsContext(contextCopy);
   };
 
+  useEffect(() => {
+    setIdSet(match.params.id);
+  }, [match.params.id]);
+
   //Fetching data when component is mounted
 
   useEffect(() => {
-    console.log("fetching set cards");
+    setIsLoading(true);
     const CancelToken = axios.CancelToken;
     const source = CancelToken.source();
 
@@ -102,7 +104,8 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
       cancelToken: source.token
     })
       .then(data => buildContextFromAPIResponse(data))
-      .then(setHasUpdatedPrices(false));
+      .then(setHasUpdatedPrices(false))
+      .then(() => setIsLoading(false));
 
     //Getting user back to the top page when clicking on a set link
     window.scrollTo(0, 0);
@@ -121,10 +124,7 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
 
   //Fetching prices once context is set up
   useEffect(() => {
-    console.log("fetching prices, state of hasUpdated : ", hasUpdatedPrices);
-    //
     if (Object.keys(cardsContext).length > 0 && !hasUpdatedPrices) {
-      console.log("really fetching, state of hasUpdated : ", hasUpdatedPrices);
       CardShopPriceAPI.getArrayofPrices(
         Object.keys(cardsContext).map(id => parseInt(id)),
         3
@@ -143,31 +143,34 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
           <SetList />
           <div className="last-modification">
             <h1>{setName}</h1>
-            <Table className="zebra-table">
-              <Thead>
-                <Tr>
-                  <Th>Nom de la carte</Th>
-                  <Th>Langue</Th>
-                  <Th>Condition</Th>
-                  <Th>Foil</Th>
-                  <Th>Quantité</Th>
-                  <Th>Prix</Th>
-                </Tr>
-              </Thead>
-              <Tbody>
-                {Object.keys(cardsContext).map((cardID, index) => {
-                  return (
-                    <CardLineOneSet
-                      card={cardsContext[cardID]}
-                      cardID={cardID}
-                      index={index}
-                      key={cardID}
-                      handleAddSellingBasket={handleAddSellingBasket}
-                    />
-                  );
-                })}
-              </Tbody>
-            </Table>
+            {isLoading && <OneSetLoader />}
+            {!isLoading && (
+              <Table className="zebra-table">
+                <Thead>
+                  <Tr>
+                    <Th>Nom de la carte</Th>
+                    <Th>Langue</Th>
+                    <Th>Condition</Th>
+                    <Th>Foil</Th>
+                    <Th>Quantité</Th>
+                    <Th>Prix</Th>
+                  </Tr>
+                </Thead>
+                <Tbody>
+                  {Object.keys(cardsContext).map((cardID, index) => {
+                    return (
+                      <CardLineOneSet
+                        card={cardsContext[cardID]}
+                        cardID={cardID}
+                        index={index}
+                        key={cardID}
+                        handleAddSellingBasket={handleAddSellingBasket}
+                      />
+                    );
+                  })}
+                </Tbody>
+              </Table>
+            )}
           </div>
         </div>
       </div>
