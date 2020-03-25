@@ -760,11 +760,11 @@ div.connect p {
   color: white;
 }
 .last-modification .card img {
-  width: 146px;
+  transform: scale(1);
 }
 .last-modification .card:hover img {
-  transition: width 1s ease;
-  width: 156px;
+  transition: transform 1s ease;
+  transform: scale(1.1);
 }
 .last-modification .card a:hover {
   color: black;
