@@ -6,6 +6,9 @@ import CardLine from "../components/CardLine";
 import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 
 const CardPage = ({ match, handleAddSellingBasket }) => {
+  const NUMBER_OF_LANGUAGES = 11;
+  const NUMBER_OF_CONDITIONS = 7;
+
   //STATE - current card name
   const [currentName, setCurrentName] = useState(match.params.cardName);
 
@@ -35,17 +38,29 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
   const makeCardShopPriceBrowsable = array => {
     console.log("function called");
     for (let i = 0; i < array.length; i++) {
+      //Creating the allPrices object that will hold all the data.
       array[i].allPrices = {};
-      console.log("lolol" + i);
+
+      for (let h = 1; h <= NUMBER_OF_LANGUAGES; h++) {
+        array[i].allPrices[h] = {};
+
+        for (let g = 1; g <= NUMBER_OF_CONDITIONS; g++) {
+          array[i].allPrices[h][g] = {};
+        }
+      }
+
+      //Now we fill it with data from CardShopPrice array.
+
       for (let j = 0; j < array[i].cardShopPrices.length; j++) {
-        console.log(array[i].cardShopPrices[j]);
         let currentLanguage = array[i].cardShopPrices[j].language.id;
-        let currentCondition = array[i].cardShopPrices[j].cardCondition.substr(
-          17
+        let currentCondition = parseInt(
+          array[i].cardShopPrices[j].cardCondition.substr(17)
         );
+
         let isFoil = array[i].cardShopPrices[j].isFoil ? 1 : 0;
+
         //language / condition / isfoil
-        array[i].allprices[currentLanguage][currentCondition][isFoil] =
+        array[i].allPrices[currentLanguage][currentCondition][isFoil] =
           array[i].cardShopPrices[j].price;
       }
     }
