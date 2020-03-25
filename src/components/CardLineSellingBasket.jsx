@@ -254,6 +254,7 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
           {isLoading && <div className="loading-loop"></div>}
           {!isLoading && card.price}
         </td>
+        <td>{currentCard.price * currentCard.quantity}</td>
         <td className="AddButton">
           <i
             className="fas fa-minus-circle delete-from-selling-basket "

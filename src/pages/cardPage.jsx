@@ -115,6 +115,7 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
                 setName={card.edition.name}
                 key={parseInt(card["@id"].substr(7))}
                 displaySets={true}
+                handleAddSellingBasket={handleAddSellingBasket}
               />
             ))}
           </Tbody>
