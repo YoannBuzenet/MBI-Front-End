@@ -58,13 +58,6 @@ const CardLine = ({
     });
   }, [card]);
 
-  useEffect(() => {
-    if (isOnHover) {
-      // console.log(conditions);
-      //If we neeed to change something on hover update, here it is
-    }
-  }, [isOnHover]);
-
   const handleChange = ({ currentTarget }, currentCard) => {
     //Updating the card following the new info
     const { name, value } = currentTarget;
@@ -74,7 +67,6 @@ const CardLine = ({
       var newValue = value.toString();
     }
     let isFoil = currentCard.isFoil === "Yes" ? 1 : 0;
-    console.log(isFoil);
 
     var price;
     //To know how to browse the price object, we must know which property has been changed
@@ -87,13 +79,10 @@ const CardLine = ({
         currentCard.allPrices[currentCard.lang][currentCard.condition][
           newValue
         ];
+    } else {
+      price =
+        currentCard.allPrices[currentCard.lang][currentCard.condition][isFoil];
     }
-
-    console.log("newvalue", name, newValue);
-    console.log(price);
-    console.log(currentCard.allPrices);
-    console.log(currentCard.lang);
-    console.log(currentCard.condition);
 
     setCurrentCard({ ...currentCard, [name]: newValue, price: price });
   };
@@ -222,7 +211,6 @@ const CardLine = ({
           <i
             className="fas fa-plus-circle add-item-basket"
             onClick={() => {
-              console.log(currentCard);
               return handleAddSellingBasket(currentBasket, currentCard);
             }}
           ></i>
