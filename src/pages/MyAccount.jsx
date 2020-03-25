@@ -44,10 +44,8 @@ const MyAccount = props => {
         authenticationInfos.user.id,
         credentials
       );
-      console.log(response.data);
-      console.log(authenticationInfos.user.id);
       //UPDATE LE STATE
-      // console.log(response.data);
+
       setAccountInformation({
         firstName: response.data.client.prenom,
         lastName: response.data.client.nom,
@@ -79,7 +77,7 @@ const MyAccount = props => {
         },
         shop: { ...authenticationInfos.shop }
       });
-      //UPDATE INFOS IN LE LOCAL STORAGE
+      //UPDATE INFOS IN LOCAL STORAGE
       //FORMAT IN LOCAL STORAGE IS DIFFERENT FROM WHAT IS STORED IN MEMORY (maybe we should put everything is memory format)
       //Preparing data format to send, to copy what's stored in local storage
       const currentDataInLocalStorage = AuthAPI.userInfos();

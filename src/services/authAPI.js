@@ -1,6 +1,5 @@
 import axios from "axios";
 import jwtDecode from "jwt-decode";
-import { lang } from "moment";
 
 //Takes array of objects, returns object structured with ID
 function transformPercentPerLangArrayIntoObject(array) {
@@ -20,6 +19,8 @@ function transformPercentPerLangArrayIntoObject(array) {
 }
 
 //When an user logins, if the credentials are rights, we send back data to identify him.
+//DATA structure in browser memory : customer, hasShop
+//Data strcture in local storage : API like : client, client.hasShop, isShop
 //Then we store data into local storage.
 function authenticate(credentials) {
   return axios
