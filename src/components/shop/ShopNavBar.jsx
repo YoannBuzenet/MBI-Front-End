@@ -64,7 +64,7 @@ const ShopNavbar = ({ history }) => {
             <SearchCardBar />
           </div>
 
-          <BurgerMenu />
+          <BurgerMenu history={history} />
 
           <Link
             className="classic-links nav-element options_desktop"
