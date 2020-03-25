@@ -28,6 +28,30 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
     setCurrentNameDecoded(currentName);
   }, [currentName]);
 
+  /*
+   * We receive all prices as an array. To make them browsable easily, we transform it in a big object.
+   * We browse the array, build a big object, then fill it with data.
+   */
+  const makeCardShopPriceBrowsable = array => {
+    console.log("function called");
+    for (let i = 0; i < array.length; i++) {
+      array[i].allPrices = {};
+      console.log("lolol" + i);
+      for (let j = 0; j < array[i].cardShopPrices.length; j++) {
+        console.log(array[i].cardShopPrices[j]);
+        let currentLanguage = array[i].cardShopPrices[j].language.id;
+        let currentCondition = array[i].cardShopPrices[j].cardCondition.substr(
+          17
+        );
+        let isFoil = array[i].cardShopPrices[j].isFoil ? 1 : 0;
+        //language / condition / isfoil
+        array[i].allprices[currentLanguage][currentCondition][isFoil] =
+          array[i].cardShopPrices[j].price;
+      }
+    }
+    return array;
+  };
+
   useEffect(() => {
     if (
       match.params.cardName !== currentName ||
@@ -43,10 +67,11 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
           cancelToken: source.token
         })
         .then(data => {
-          // console.log(data.data["hydra:member"]);
-          return data;
+          console.log(data.data["hydra:member"]);
+          return data.data["hydra:member"];
         })
-        .then(data => setAllCardsDisplayed(data.data["hydra:member"]));
+        .then(data => makeCardShopPriceBrowsable(data))
+        .then(data => setAllCardsDisplayed(data));
       return () => source.cancel("");
     }
   }, [currentNameDecoded, currentName]);

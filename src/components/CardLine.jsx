@@ -53,13 +53,6 @@ const CardLine = ({
   }, [card]);
 
   useEffect(() => {
-    if (card.cardShopPrices && card.cardShopPrices.length > 0) {
-      console.log("il y a des cardshopPrice bro");
-      console.log(card);
-    }
-  }, []);
-
-  useEffect(() => {
     if (isOnHover) {
       // console.log(conditions);
       //If we neeed to change something on hover update, here it is
