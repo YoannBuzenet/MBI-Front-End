@@ -3,6 +3,9 @@ import AuthContext from "../../context/authContext";
 import GenericCardInfosContext from "../../context/genericCardInfosContext";
 import Field from "../../components/forms/Field";
 import { toast } from "react-toastify";
+import shopAPI from "../../services/shopAPI";
+
+//TODO : MAJ memoire vive
 
 const ShopAdminSettings = props => {
   //Current Authentication
@@ -59,20 +62,31 @@ const ShopAdminSettings = props => {
   };
 
   const triggerAPISending = () => {
-    //construite l'objet a envoyer
+    //construire l'objet a envoyer
+
+    //building array of langs
+    //building array of percentPerCondition
+    //building array of percentPerConditionFoil
+
+    const objectToSend = {
+      percentPerLangs: [],
+      percentPerCondition: [],
+      percentPerConditionFoils: []
+    };
+
+    // shopAPI.updatePercentPer(authenticationInfos.shop.id, objectToSend);
     console.log("je bombarde l'api lol");
   };
 
   const handleChange = (event, fieldModified) => {
     setTimer(clearTimeout(timer));
     var { name, value } = event.target;
-    value = parseFloat(value);
 
     if (event.target.value[event.target.value.length - 1] === ".") {
       updateState(fieldModified, name, value);
     } else if (!isNaN(parseFloat(event.target.value))) {
+      value = parseFloat(value);
       updateState(fieldModified, name, value);
-      //TODO API PUT
       setTimer(setTimeout(() => triggerAPISending(), WAIT_INTERVAL));
     } else if (event.target.value === "") {
       //We don't update on API to not create an empty field. We wait for another input to PUT.
@@ -85,10 +99,6 @@ const ShopAdminSettings = props => {
     }
 
     //TODO :
-    //1. Check l'input si que des chiffres OK
-    //2. Toastify si erreur input OK
-    //3. update la mémoire vive OK
-    //4. update local storage
     //5. update API
   };
 
@@ -96,10 +106,7 @@ const ShopAdminSettings = props => {
     <>
       <div className="container">
         <h1>Paramètres</h1>
-        <p>
-          Quel est la langue de votre site, par défaut ? (select parmi les
-          possibilités djéà implémentées)
-        </p>
+        <p>La langue par defaut du site : ENV_VARIABLE</p>
         <p>
           Quel est votre langue d'achat par défaut ? (select parmi toutes les
           langues de magic)
@@ -107,11 +114,7 @@ const ShopAdminSettings = props => {
         <select name="" id="">
           <option>{shopSettings.baseLang.shortname}</option>
         </select>
-        <p>
-          Quel est votre système de grading ? US, ou EU ? (radio l'un ou
-          l'autre)
-        </p>
-        <p>Quel format de date préférez-vous ? dd/mm/yy ou mm/dd/yy ?</p>
+        <p>Votre système de grading prédéfni : ENV_VARIABLE</p>
 
         <div className="percentSettings">
           <div className="percentPerLang">
