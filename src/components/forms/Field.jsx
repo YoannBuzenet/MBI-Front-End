@@ -6,22 +6,20 @@ const Field = ({
   value,
   onChange,
   placeholder,
-  type = "text",
-  error = ""
+  type = "text"
 }) => {
   return (
-    <div className="field-form">
+    <div className="field">
       <label htmlFor={name}>{label}</label>
       <input
         value={value}
         onChange={onChange}
         type={type}
-        className={"form-control" + (error && " is-invalid")}
+        className={""}
         placeholder={placeholder}
         name={name}
         id={name}
       />
-      {error && <p className="invalid-feedback">{error}</p>}
     </div>
   );
 };
