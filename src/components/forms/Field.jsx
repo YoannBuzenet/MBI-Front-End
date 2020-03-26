@@ -6,11 +6,12 @@ const Field = ({
   value,
   onChange,
   placeholder,
+  idNumber,
   type = "text"
 }) => {
   return (
     <div className="field">
-      <label htmlFor={name}>{label}</label>
+      <label htmlFor={idNumber}>{label}</label>
       <input
         value={value}
         onChange={onChange}
@@ -18,7 +19,7 @@ const Field = ({
         className={""}
         placeholder={placeholder}
         name={name}
-        id={name}
+        id={idNumber}
       />
     </div>
   );
