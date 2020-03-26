@@ -83,6 +83,7 @@ function App() {
     if (eventuallySavedBasket !== null) {
       setCurrentBasket(eventuallySavedBasket);
     }
+    console.log(allConditions);
   }, []);
 
   // STATE Creating the Authentication state
