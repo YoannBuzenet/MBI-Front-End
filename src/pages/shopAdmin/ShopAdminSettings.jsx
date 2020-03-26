@@ -1,11 +1,16 @@
 import React, { useContext, useState } from "react";
 import AuthContext from "../../context/authContext";
+import GenericCardInfosContext from "../../context/genericCardInfosContext";
+import Field from "../../components/forms/Field";
 
 const ShopAdminSettings = props => {
   //Current Authentication
   const { authenticationInfos, setAuthenticationInfos } = useContext(
     AuthContext
   );
+
+  //DEFINED langages and Conditions
+  const { lang, conditions } = useContext(GenericCardInfosContext);
 
   const [shopSettings, setShopSettings] = useState({
     baseLang: authenticationInfos.shop.shopData.baseLang,
@@ -56,6 +61,7 @@ const ShopAdminSettings = props => {
     switch (fieldModified) {
       case "percentPerLang":
         console.log("percentPerLang changement");
+
         break;
       case "percentPerCondition":
         console.log("percentPerCondition changement");
@@ -95,122 +101,17 @@ const ShopAdminSettings = props => {
               d'achat préférée est le repère, elle doit être à 100%.
             </span>
             <form>
-              <label htmlFor="englishPercent">Anglais</label>
-              <input
-                type="text"
-                name={ENGLISH_LANG_ID}
-                id="englishPercent"
-                value={
-                  shopSettings.percentPerLang[ENGLISH_LANG_ID].percentPerLang
-                }
-                onChange={event => handleChangePercentPerLang(event)}
-              />
-              <label htmlFor="frenchPercent">Français</label>
-              <input
-                type="text"
-                name={FRENCH_LANG_ID}
-                id="frenchPercent"
-                value={
-                  shopSettings.percentPerLang[FRENCH_LANG_ID].percentPerLang
-                }
-                onChange={event => handleChangePercentPerLang(event)}
-              />
-              <label htmlFor="germanPercent">Allemand</label>
-              <input
-                type="text"
-                name={GERMAN_LANG_ID}
-                id="germanPercent"
-                value={
-                  shopSettings.percentPerLang[GERMAN_LANG_ID].percentPerLang
-                }
-                onChange={event => handleChangePercentPerLang(event)}
-              />
-              <label htmlFor="spanishPercent">Espagnol</label>
-              <input
-                type="text"
-                name={SPANISH_LANG_ID}
-                id="spanishPercent"
-                value={
-                  shopSettings.percentPerLang[SPANISH_LANG_ID].percentPerLang
-                }
-                onChange={event => handleChangePercentPerLang(event)}
-              />
-              <label htmlFor="italianPercent">Italien</label>
-              <input
-                type="text"
-                name={ITALIAN_LANG_ID}
-                id="italianPercent"
-                value={
-                  shopSettings.percentPerLang[ITALIAN_LANG_ID].percentPerLang
-                }
-                onChange={event => handleChangePercentPerLang(event)}
-              />
-              <label htmlFor="portuguesePercent">Portuguais</label>
-              <input
-                type="text"
-                name={PORTUGUESE_LANG_ID}
-                id="portuguesePercent"
-                value={
-                  shopSettings.percentPerLang[PORTUGUESE_LANG_ID].percentPerLang
-                }
-                onChange={event => handleChangePercentPerLang(event)}
-              />
-              <label htmlFor="japanesePercent">Japonais</label>
-              <input
-                type="text"
-                name={JAPANESE_LANG_ID}
-                id="japanesePercent"
-                value={
-                  shopSettings.percentPerLang[JAPANESE_LANG_ID].percentPerLang
-                }
-                onChange={event => handleChangePercentPerLang(event)}
-              />
-              <label htmlFor="chineseTraditionalPercent">
-                Chinois Traditionnel
-              </label>
-              <input
-                type="text"
-                name={CHINESE_TRADITIONAL_LANG_ID}
-                id="chineseTraditionalPercent"
-                value={
-                  shopSettings.percentPerLang[CHINESE_TRADITIONAL_LANG_ID]
-                    .percentPerLang
-                }
-                onChange={event => handleChangePercentPerLang(event)}
-              />
-              <label htmlFor="chineseSimplifiedPercent">
-                Chinois Simplifié
-              </label>
-              <input
-                type="text"
-                name={CHINESE_SIMPLIFIED_LANG_ID}
-                id="chineseSimplifiedPercent"
-                value={
-                  shopSettings.percentPerLang[CHINESE_SIMPLIFIED_LANG_ID]
-                    .percentPerLang
-                }
-                onChange={event => handleChangePercentPerLang(event)}
-              />
-              <label htmlFor="koreanPercent">Coréen</label>
-              <input
-                type="text"
-                name={KOREAN_LANG_ID}
-                id="koreanPercent"
-                value={
-                  shopSettings.percentPerLang[KOREAN_LANG_ID].percentPerLang
-                }
-                onChange={event => handleChangePercentPerLang(event)}
-              />
-              <label htmlFor="russianPercent">Russe</label>
-              <input
-                type="text"
-                name={RUSSIAN_LANG_ID}
-                id="russianPercent"
-                value={
-                  shopSettings.percentPerLang[RUSSIAN_LANG_ID].percentPerLang
-                }
-                onChange={event => handleChangePercentPerLang(event)}
-              />
+              {lang.length > 0 &&
+                lang.map(lang => (
+                  <Field
+                    name={lang.id}
+                    label={lang.name}
+                    value={shopSettings.percentPerLang[lang.id].percentPerLang}
+                    onChange={event => handleChange(event, "percentPerLang")}
+                    placeholder="Pourcentage d'achat de la langue"
+                    key={lang.id}
+                  />
+                ))}
             </form>
           </div>
           <div className="percentPerConditions">
