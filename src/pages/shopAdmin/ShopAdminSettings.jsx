@@ -5,8 +5,6 @@ import Field from "../../components/forms/Field";
 import { toast } from "react-toastify";
 import shopAPI from "../../services/shopAPI";
 
-//TODO : MAJ memoire vive
-
 const ShopAdminSettings = props => {
   //Current Authentication
   const { authenticationInfos, setAuthenticationInfos } = useContext(
@@ -15,14 +13,6 @@ const ShopAdminSettings = props => {
 
   //DEFINED langages and Conditions
   const { lang, conditions } = useContext(GenericCardInfosContext);
-
-  // const [shopSettings, setShopSettings] = useState({
-  //   baseLang: authenticationInfos.shop.shopData.baseLang,
-  //   percentPerLang: authenticationInfos.shop.shopData.PercentPerLangs,
-  //   percentPerCondition: authenticationInfos.shop.shopData.PercentPerConditions,
-  //   percentPerConditionFoil:
-  //     authenticationInfos.shop.shopData.PercentPerConditionFoils
-  // });
 
   //We add a timer to not hit API at each user input.
   //This way there is at least WAIT_INTERVAL interval between each sending, or more if the user continues to input.
@@ -35,22 +25,10 @@ const ShopAdminSettings = props => {
     const authenticationInfosCopy = { ...authenticationInfos };
     switch (fieldModified) {
       case "percentPerLang":
-        setAuthenticationInfos({
-          ...authenticationInfos,
-          shop: {
-            ...authenticationInfos.shop,
-            shopData: {
-              ...authenticationInfos.shop.shopData,
-              PercentPerLangs: {
-                ...authenticationInfos.shop.shopData.PercentPerLangs,
-                [name]: {
-                  ...authenticationInfos.shop.shopData.PercentPerLangs[name],
-                  percentPerLang: value
-                }
-              }
-            }
-          }
-        });
+        authenticationInfosCopy.shop.shopData.PercentPerLangs[
+          name
+        ].percentPerLang = value;
+        setAuthenticationInfos(authenticationInfosCopy);
 
         break;
 
@@ -72,16 +50,38 @@ const ShopAdminSettings = props => {
 
   const triggerAPISending = () => {
     //construire l'objet a envoyer
-
+    console.log(authenticationInfos);
     //building array of langs
+    var langData = [];
+    for (const dataLang in authenticationInfos.shop.shopData.PercentPerLangs) {
+      langData = [
+        ...langData,
+        {
+          percent:
+            authenticationInfos.shop.shopData.PercentPerLangs[dataLang]
+              .percentPerLang,
+          language:
+            "/language/" +
+            authenticationInfos.shop.shopData.PercentPerLangs[dataLang].id
+        }
+      ];
+    }
     //building array of percentPerCondition
+    // {
+    //   "percent": 80,
+    //   "CardCondition": "/card_conditions/1"
+    // }
+    var conditionData = [];
     //building array of percentPerConditionFoil
+    var conditionFoilData = [];
 
     const objectToSend = {
-      percentPerLangs: [],
-      percentPerCondition: [],
-      percentPerConditionFoils: []
+      percentPerLangs: langData,
+      percentPerCondition: conditionData,
+      percentPerConditionFoils: conditionFoilData
     };
+
+    console.log(objectToSend);
 
     // shopAPI.updatePercentPer(authenticationInfos.shop.id, objectToSend);
     console.log("je bombarde l'api lol");
@@ -98,7 +98,7 @@ const ShopAdminSettings = props => {
       updateState(fieldModified, name, value);
       setTimer(setTimeout(() => triggerAPISending(), WAIT_INTERVAL));
     } else if (event.target.value === "") {
-      //We don't update on API to not create an empty field. We wait for another input to PUT.
+      //We don't update on API to not create an empty field that would create bugs. We wait for another input to PUT the data.
       updateState(fieldModified, name, value);
       toast.error(
         "Un nombre est obligatoire pour chaque langue et condition. Merci d'en indiquer un."
@@ -106,9 +106,6 @@ const ShopAdminSettings = props => {
     } else {
       toast.error("Merci de saisir un nombre.");
     }
-
-    //TODO :
-    //5. update API
   };
 
   return (
