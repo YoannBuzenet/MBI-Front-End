@@ -1,6 +1,23 @@
-import React from "react";
+import React, { useContext, useState } from "react";
+import AuthContext from "../../context/authContext";
 
 const ShopAdminSettings = props => {
+  //Current Authentication
+  const { authenticationInfos, setAuthenticationInfos } = useContext(
+    AuthContext
+  );
+
+  const [shopSettings, setShopSettings] = useState({
+    baseLang: authenticationInfos.shop.shopData.baseLang,
+    percentPerLang: authenticationInfos.shop.shopData.PercentPerLangs,
+    percentPerCondition: authenticationInfos.shop.shopData.PercentPerConditions,
+    percentPerConditionFoil:
+      authenticationInfos.shop.shopData.PercentPerConditionFoils
+  });
+
+  console.log(authenticationInfos);
+  console.log(shopSettings);
+
   return (
     <>
       <div className="container">
@@ -78,7 +95,16 @@ const ShopAdminSettings = props => {
                 name="nearMintCondition"
                 id="nearMintCondition"
               />
+              <label htmlFor="nearMintCondition">Excellent</label>
+              {/* Excellent/Slighty Played */}
+              <input
+                type="text"
+                name="excellentCondition"
+                id="excellentCondition"
+              />
               <label htmlFor="goodCondition">Good</label>
+
+              {/* Good/Moderately Played */}
               <input type="text" name="goodCondition" id="goodCondition" />
               <label htmlFor="lightPlayedCondition">Light Played</label>
               <input
@@ -87,8 +113,10 @@ const ShopAdminSettings = props => {
                 id="lightPlayedCondition"
               />
               <label htmlFor="playedCondition">Played</label>
+              {/* Played/Heavily Played */}
               <input type="text" name="playedCondition" id="playedCondition" />
               <label htmlFor="poorCondition">Poor</label>
+              {/* Poor/Damaged */}
               <input type="text" name="poorCondition" id="poorCondition" />
             </form>
           </div>
@@ -103,6 +131,8 @@ const ShopAdminSettings = props => {
               />
               <label htmlFor="nearMintFoil">Near Mint Foil</label>
               <input type="text" name="nearMintFoil" id="nearMintFoil" />
+              <label htmlFor="excellentFoil">Excellent Foil</label>
+              <input type="text" name="excellentFoil" id="excellentFoil" />
               <label htmlFor="goodFoilCondition">Good</label>
               <input
                 type="text"
