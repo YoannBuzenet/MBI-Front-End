@@ -16,13 +16,13 @@ const ShopAdminSettings = props => {
   //DEFINED langages and Conditions
   const { lang, conditions } = useContext(GenericCardInfosContext);
 
-  const [shopSettings, setShopSettings] = useState({
-    baseLang: authenticationInfos.shop.shopData.baseLang,
-    percentPerLang: authenticationInfos.shop.shopData.PercentPerLangs,
-    percentPerCondition: authenticationInfos.shop.shopData.PercentPerConditions,
-    percentPerConditionFoil:
-      authenticationInfos.shop.shopData.PercentPerConditionFoils
-  });
+  // const [shopSettings, setShopSettings] = useState({
+  //   baseLang: authenticationInfos.shop.shopData.baseLang,
+  //   percentPerLang: authenticationInfos.shop.shopData.PercentPerLangs,
+  //   percentPerCondition: authenticationInfos.shop.shopData.PercentPerConditions,
+  //   percentPerConditionFoil:
+  //     authenticationInfos.shop.shopData.PercentPerConditionFoils
+  // });
 
   //We add a timer to not hit API at each user input.
   //This way there is at least WAIT_INTERVAL interval between each sending, or more if the user continues to input.
@@ -30,19 +30,24 @@ const ShopAdminSettings = props => {
   const [timer, setTimer] = useState(null);
 
   console.log(authenticationInfos);
-  console.log(shopSettings);
 
   const updateState = (fieldModified, name, value) => {
-    const shopSettingsCopy = { ...shopSettings };
+    const authenticationInfosCopy = { ...authenticationInfos };
     switch (fieldModified) {
       case "percentPerLang":
-        setShopSettings({
-          ...shopSettings,
-          percentPerLang: {
-            ...shopSettings.percentPerLang,
-            [name]: {
-              ...shopSettings.percentPerLang[name],
-              percentPerLang: value
+        setAuthenticationInfos({
+          ...authenticationInfos,
+          shop: {
+            ...authenticationInfos.shop,
+            shopData: {
+              ...authenticationInfos.shop.shopData,
+              PercentPerLangs: {
+                ...authenticationInfos.shop.shopData.PercentPerLangs,
+                [name]: {
+                  ...authenticationInfos.shop.shopData.PercentPerLangs[name],
+                  percentPerLang: value
+                }
+              }
             }
           }
         });
@@ -50,13 +55,17 @@ const ShopAdminSettings = props => {
         break;
 
       case "percentPerCondition":
-        shopSettingsCopy.percentPerCondition[name - 1].percent = value;
-        setShopSettings(shopSettingsCopy);
+        authenticationInfosCopy.shop.shopData.PercentPerConditions[
+          name - 1
+        ].percent = value;
+        setAuthenticationInfos(authenticationInfosCopy);
         break;
 
       case "percentPerConditionFoil":
-        shopSettingsCopy.percentPerConditionFoil[name - 1].percent = value;
-        setShopSettings(shopSettingsCopy);
+        authenticationInfosCopy.shop.shopData.PercentPerConditionFoils[
+          name - 1
+        ].percent = value;
+        setAuthenticationInfos(authenticationInfosCopy);
         break;
     }
   };
@@ -112,7 +121,9 @@ const ShopAdminSettings = props => {
           langues de magic)
         </p>
         <select name="" id="">
-          <option>{shopSettings.baseLang.shortname}</option>
+          <option>
+            {authenticationInfos.shop.shopData.baseLang.shortname}
+          </option>
         </select>
         <p>Votre système de grading prédéfni : ENV_VARIABLE</p>
 
@@ -129,7 +140,10 @@ const ShopAdminSettings = props => {
                   <Field
                     name={lang.id}
                     label={lang.name}
-                    value={shopSettings.percentPerLang[lang.id].percentPerLang}
+                    value={
+                      authenticationInfos.shop.shopData.PercentPerLangs[lang.id]
+                        .percentPerLang
+                    }
                     onChange={event => handleChange(event, "percentPerLang")}
                     placeholder="Pourcentage d'achat de la langue"
                     key={lang.id + index}
@@ -147,7 +161,9 @@ const ShopAdminSettings = props => {
                     name={condition.id}
                     label={condition.nameEU}
                     value={
-                      shopSettings.percentPerCondition[condition.id - 1].percent
+                      authenticationInfos.shop.shopData.PercentPerConditions[
+                        condition.id - 1
+                      ].percent
                     }
                     onChange={event =>
                       handleChange(event, "percentPerCondition")
@@ -168,8 +184,8 @@ const ShopAdminSettings = props => {
                     name={condition.id}
                     label={condition.nameEU + " Foil"}
                     value={
-                      shopSettings.percentPerConditionFoil[condition.id - 1]
-                        .percent
+                      authenticationInfos.shop.shopData
+                        .PercentPerConditionFoils[condition.id - 1].percent
                     }
                     onChange={event =>
                       handleChange(event, "percentPerConditionFoil")

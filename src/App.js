@@ -369,7 +369,7 @@ function App() {
                         path="/shopadmin/cards"
                         component={ShopAdminCards}
                       />
-                      <LoggedShopRouteComponent
+                      <LoggedShopRouteRender
                         path="/shopadmin/settings"
                         component={ShopAdminSettings}
                       />
