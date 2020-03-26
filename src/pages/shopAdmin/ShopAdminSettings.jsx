@@ -63,6 +63,68 @@ const ShopAdminSettings = props => {
             <input type="text" name="russianPercent" id="russianPercent" />
           </form>
         </div>
+        <div className="percentPerConditions">
+          <h2>Conditions</h2>
+          <form>
+            <label htmlFor="mintCondition">Mint</label>
+            <input type="text" name="mintCondition" id="mintCondition" />
+            <label htmlFor="nearMintCondition">Near Mint</label>
+            <input
+              type="text"
+              name="nearMintCondition"
+              id="nearMintCondition"
+            />
+            <label htmlFor="goodCondition">Good</label>
+            <input type="text" name="goodCondition" id="goodCondition" />
+            <label htmlFor="lightPlayedCondition">Light Played</label>
+            <input
+              type="text"
+              name="lightPlayedCondition"
+              id="lightPlayedCondition"
+            />
+            <label htmlFor="playedCondition">Played</label>
+            <input type="text" name="playedCondition" id="playedCondition" />
+            <label htmlFor="poorCondition">Poor</label>
+            <input type="text" name="poorCondition" id="poorCondition" />
+          </form>
+        </div>
+        <div className="percentPerConditionsFoil">
+          <h2>Conditions Foil</h2>
+          <form>
+            <label htmlFor="mintFoilCondition">Mint Foil</label>
+            <input
+              type="text"
+              name="mintFoilCondition"
+              id="mintFoilCondition"
+            />
+            <label htmlFor="nearMintFoil">Near Mint Foil</label>
+            <input type="text" name="nearMintFoil" id="nearMintFoil" />
+            <label htmlFor="goodFoilCondition">Good</label>
+            <input
+              type="text"
+              name="goodFoilCondition"
+              id="goodFoilCondition"
+            />
+            <label htmlFor="lightPlayedFoilCondition">Light Played</label>
+            <input
+              type="text"
+              name="lightPlayedFoilCondition"
+              id="lightPlayedFoilCondition"
+            />
+            <label htmlFor="playedFoilCondition">Played</label>
+            <input
+              type="text"
+              name="playedFoilCondition"
+              id="playedFoilCondition"
+            />
+            <label htmlFor="poorFoilCondition">Poor</label>
+            <input
+              type="text"
+              name="poorFoilCondition"
+              id="poorFoilCondition"
+            />
+          </form>
+        </div>
       </div>
     </>
   );
