@@ -72,18 +72,56 @@ const ShopAdminSettings = props => {
     //   "CardCondition": "/card_conditions/1"
     // }
     var conditionData = [];
+    for (const dataCondition in authenticationInfos.shop.shopData
+      .PercentPerConditions) {
+      conditionData = [
+        ...conditionData,
+        {
+          percent:
+            authenticationInfos.shop.shopData.PercentPerConditions[
+              dataCondition
+            ].percent,
+          CardCondition:
+            "/card_conditions/" +
+            authenticationInfos.shop.shopData.PercentPerConditions[
+              dataCondition
+            ].id
+        }
+      ];
+    }
     //building array of percentPerConditionFoil
     var conditionFoilData = [];
+    for (const dataConditionFoil in authenticationInfos.shop.shopData
+      .PercentPerConditions) {
+      conditionFoilData = [
+        ...conditionFoilData,
+        {
+          percent:
+            authenticationInfos.shop.shopData.PercentPerConditionFoils[
+              dataConditionFoil
+            ].percent,
+          CardCondition:
+            "/card_conditions/" +
+            authenticationInfos.shop.shopData.PercentPerConditionFoils[
+              dataConditionFoil
+            ].id
+        }
+      ];
+    }
 
     const objectToSend = {
-      percentPerLangs: langData,
-      percentPerCondition: conditionData,
-      percentPerConditionFoils: conditionFoilData
+      shop: {
+        percentPerLangs: langData,
+        percentPerConditions: conditionData,
+        percentPerConditionFoils: conditionFoilData
+      }
     };
 
     console.log(objectToSend);
 
-    // shopAPI.updatePercentPer(authenticationInfos.shop.id, objectToSend);
+    shopAPI
+      .updatePercentPer(authenticationInfos.shop.id, objectToSend)
+      .then(data => console.log(data));
     console.log("je bombarde l'api lol");
   };
 
@@ -142,7 +180,7 @@ const ShopAdminSettings = props => {
                         .percentPerLang
                     }
                     onChange={event => handleChange(event, "percentPerLang")}
-                    placeholder="Pourcentage d'achat de la langue"
+                    placeholder="%"
                     key={lang.id + index}
                     idNumber={Math.random()}
                   />

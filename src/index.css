@@ -1012,9 +1012,26 @@ input.updated {
   align-items: center;
 }
 
+.percentSettings > .percentPerConditions,
+.percentSettings > .percentPerConditionsFoil {
+  margin-top: 5rem;
+}
+
+.percentSettings .field {
+  margin-top: 1rem;
+}
+
+.percentSettings label {
+  font-size: 2rem;
+  text-transform: uppercase;
+}
 .percentSettings input {
   display: block;
+  padding: 1rem;
   margin: 0 auto;
+  text-align: right;
+  font-size: 2rem;
+  width: 100px;
 }
 
 .explaination {
@@ -1051,15 +1068,15 @@ input.updated {
   color: white;
 }
 
-.field-form {
+.login-form input {
   margin: 1rem;
 }
 
-.field-form label {
+.login-form label {
   display: block;
 }
 
-.field-form input,
+.login-form input,
 .my-account textarea {
   width: 30%;
   padding: 1.8rem;

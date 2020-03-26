@@ -7,6 +7,7 @@ const Field = ({
   onChange,
   placeholder,
   idNumber,
+  className = "",
   type = "text"
 }) => {
   return (
@@ -16,7 +17,7 @@ const Field = ({
         value={value}
         onChange={onChange}
         type={type}
-        className={""}
+        className={className}
         placeholder={placeholder}
         name={name}
         id={idNumber}

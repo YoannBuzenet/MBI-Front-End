@@ -56,7 +56,7 @@ const LoginPage = ({ onLogin, history }) => {
         <div>
           <h1>Connexion à l'application</h1>
 
-          <form action="" onSubmit={handleSubmit}>
+          <form action="" onSubmit={handleSubmit} className="login-form">
             <Field
               name="email"
               label="Adresse e-mail"
@@ -64,6 +64,7 @@ const LoginPage = ({ onLogin, history }) => {
               onChange={handleChange}
               placeholder="Adresse e-mail..."
               error={error}
+              className="form-group"
             />
 
             <Field
