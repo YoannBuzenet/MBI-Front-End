@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import AuthContext from "../../context/authContext";
 import GenericCardInfosContext from "../../context/genericCardInfosContext";
 import Field from "../../components/forms/Field";
+import { toast } from "react-toastify";
 
 const ShopAdminSettings = props => {
   //Current Authentication
@@ -27,22 +28,42 @@ const ShopAdminSettings = props => {
     const shopSettingsCopy = { ...shopSettings };
     const { name, value } = event.target;
 
+    if (event.target.value[event.target.value.length - 1] === ".") {
+    } else if (!isNaN(parseFloat(event.target.value))) {
+    } else if (event.target.value === "") {
+    } else {
+      toast.error("Merci de saisir un nombre.");
+    }
+
+    //TODO :
+    //1. Check l'input si que des chiffres
+    //2.Toastify si erreur input
+    //3. update la mémoire vive
+    //4. update local storage
+    //5. update API
+
     switch (fieldModified) {
       case "percentPerLang":
         setShopSettings({
           ...shopSettings,
-          percentPerLang: { ...shopSettings.percentPerLang, [name]: value }
+          percentPerLang: {
+            ...shopSettings.percentPerLang,
+            [name]: {
+              ...shopSettings.percentPerLang[name],
+              percentPerLang: value
+            }
+          }
         });
 
         break;
 
       case "percentPerCondition":
-        shopSettingsCopy.percentPerCondition[name - 1] = value;
+        shopSettingsCopy.percentPerCondition[name - 1].percent = value;
         setShopSettings(shopSettingsCopy);
         break;
 
       case "percentPerConditionFoil":
-        shopSettingsCopy.percentPerConditionFoil[name - 1] = value;
+        shopSettingsCopy.percentPerConditionFoil[name - 1].percent = value;
         setShopSettings(shopSettingsCopy);
         break;
     }
