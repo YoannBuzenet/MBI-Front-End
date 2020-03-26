@@ -8,12 +8,10 @@ import BurgerMenuShop from "./shop/BurgerMenuShop";
 
 const BurgerMenu = ({ history }) => {
   //Current Selling Request Basket
-  const { currentBasket, setCurrentBasket } = useContext(SellingBasketContext);
+  const { currentBasket } = useContext(SellingBasketContext);
 
   //Current Authentication
-  const { authenticationInfos, setAuthenticationInfos } = useContext(
-    AuthContext
-  );
+  const { authenticationInfos } = useContext(AuthContext);
 
   //Is Menu Responsive Displayed
   const {
