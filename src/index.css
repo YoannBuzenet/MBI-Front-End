@@ -1006,10 +1006,21 @@ input.updated {
 *******SHOP SETTINGS******
 **************************/
 
-.percentPerLang input {
-  display: block;
+.percentSettings {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
+.percentSettings input {
+  display: block;
+  margin: 0 auto;
+}
+
+.explaination {
+  font-size: 1.4rem;
+  font-style: italic;
+}
 /**************************
 *********LOGIN PAGE********
 **************************/
