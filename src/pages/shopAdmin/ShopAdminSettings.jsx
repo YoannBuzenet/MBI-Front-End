@@ -21,27 +21,16 @@ const ShopAdminSettings = props => {
       authenticationInfos.shop.shopData.PercentPerConditionFoils
   });
 
+  //We add a timer to not hit API at each user input.
+  //This way there is at least WAIT_INTERVAL interval between each sending, or more if the user continues to input.
+  const WAIT_INTERVAL = 1000;
+  const [timer, setTimer] = useState(null);
+
   console.log(authenticationInfos);
   console.log(shopSettings);
 
-  const handleChange = (event, fieldModified) => {
+  const updateState = (fieldModified, name, value) => {
     const shopSettingsCopy = { ...shopSettings };
-    const { name, value } = event.target;
-
-    if (event.target.value[event.target.value.length - 1] === ".") {
-    } else if (!isNaN(parseFloat(event.target.value))) {
-    } else if (event.target.value === "") {
-    } else {
-      toast.error("Merci de saisir un nombre.");
-    }
-
-    //TODO :
-    //1. Check l'input si que des chiffres
-    //2.Toastify si erreur input
-    //3. update la mémoire vive
-    //4. update local storage
-    //5. update API
-
     switch (fieldModified) {
       case "percentPerLang":
         setShopSettings({
@@ -67,6 +56,40 @@ const ShopAdminSettings = props => {
         setShopSettings(shopSettingsCopy);
         break;
     }
+  };
+
+  const triggerAPISending = () => {
+    //construite l'objet a envoyer
+    console.log("je bombarde l'api lol");
+  };
+
+  const handleChange = (event, fieldModified) => {
+    setTimer(clearTimeout(timer));
+    var { name, value } = event.target;
+    value = parseFloat(value);
+
+    if (event.target.value[event.target.value.length - 1] === ".") {
+      updateState(fieldModified, name, value);
+    } else if (!isNaN(parseFloat(event.target.value))) {
+      updateState(fieldModified, name, value);
+      //TODO API PUT
+      setTimer(setTimeout(() => triggerAPISending(), WAIT_INTERVAL));
+    } else if (event.target.value === "") {
+      //We don't update on API to not create an empty field. We wait for another input to PUT.
+      updateState(fieldModified, name, value);
+      toast.error(
+        "Un nombre est obligatoire pour chaque langue et condition. Merci d'en indiquer un."
+      );
+    } else {
+      toast.error("Merci de saisir un nombre.");
+    }
+
+    //TODO :
+    //1. Check l'input si que des chiffres OK
+    //2. Toastify si erreur input OK
+    //3. update la mémoire vive OK
+    //4. update local storage
+    //5. update API
   };
 
   return (
