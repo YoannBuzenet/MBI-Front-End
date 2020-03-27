@@ -48,81 +48,60 @@ const ShopAdminSettings = props => {
     }
   };
 
-  const triggerAPISending = () => {
-    //construire l'objet a envoyer
-    console.log(authenticationInfos);
-    //building array of langs
-    var langData = [];
-    for (const dataLang in authenticationInfos.shop.shopData.PercentPerLangs) {
-      langData = [
-        ...langData,
-        {
-          percent:
-            authenticationInfos.shop.shopData.PercentPerLangs[dataLang]
-              .percentPerLang,
-          language:
-            "/language/" +
-            authenticationInfos.shop.shopData.PercentPerLangs[dataLang].id
-        }
-      ];
-    }
-    //building array of percentPerCondition
-    // {
-    //   "percent": 80,
-    //   "CardCondition": "/card_conditions/1"
-    // }
-    var conditionData = [];
-    for (const dataCondition in authenticationInfos.shop.shopData
-      .PercentPerConditions) {
-      conditionData = [
-        ...conditionData,
-        {
-          percent:
-            authenticationInfos.shop.shopData.PercentPerConditions[
-              dataCondition
-            ].percent,
-          CardCondition:
-            "/card_conditions/" +
-            authenticationInfos.shop.shopData.PercentPerConditions[
-              dataCondition
-            ].id
-        }
-      ];
-    }
-    //building array of percentPerConditionFoil
-    var conditionFoilData = [];
-    for (const dataConditionFoil in authenticationInfos.shop.shopData
-      .PercentPerConditions) {
-      conditionFoilData = [
-        ...conditionFoilData,
-        {
-          percent:
-            authenticationInfos.shop.shopData.PercentPerConditionFoils[
-              dataConditionFoil
-            ].percent,
-          CardCondition:
-            "/card_conditions/" +
-            authenticationInfos.shop.shopData.PercentPerConditionFoils[
-              dataConditionFoil
-            ].id
-        }
-      ];
-    }
+  const triggerAPISending = (fieldModified, name, value) => {
+    //Build object ?
+    let id;
+    let objectToSend;
+    switch (fieldModified) {
+      case "percentPerLang":
+        id = authenticationInfos.shop.shopData.PercentPerLangs[name].id;
+        objectToSend = {
+          id: id,
+          percent: value
+        };
+        shopAPI
+          .updatePercentPerLang(id, objectToSend)
+          .then(data => console.log(data))
+          .catch(data =>
+            toast.error(
+              "La donnée n'a pu être mise à jour. Merci de réessayer ou de vous reconnecter."
+            )
+          );
+        break;
+      case "percentPerCondition":
+        id =
+          authenticationInfos.shop.shopData.PercentPerConditions[name - 1].id;
+        objectToSend = {
+          id: id,
+          percent: value
+        };
+        shopAPI
+          .updatePercentPerCondition(id, objectToSend)
+          .then(data => console.log(data))
+          .catch(data =>
+            toast.error(
+              "La donnée n'a pu être mise à jour. Merci de réessayer ou de vous reconnecter."
+            )
+          );
 
-    const objectToSend = {
-      shop: {
-        percentPerLangs: langData,
-        percentPerConditions: conditionData,
-        percentPerConditionFoils: conditionFoilData
-      }
-    };
-
-    console.log(objectToSend);
-
-    shopAPI
-      .updatePercentPer(authenticationInfos.shop.id, objectToSend)
-      .then(data => console.log(data));
-    console.log("je bombarde l'api lol");
+        break;
+      case "percentPerConditionFoil":
+        id =
+          authenticationInfos.shop.shopData.PercentPerConditions[name - 1].id;
+        objectToSend = {
+          id: id,
+          percent: value
+        };
+        shopAPI
+          .updatePercentPerConditionFoil(id, objectToSend)
+          .then(data => console.log(data))
+          .catch(data =>
+            toast.error(
+              "La donnée n'a pu être mise à jour. Merci de réessayer ou de vous reconnecter."
+            )
+          );
+        break;
+    }
   };
 
   const handleChange = (event, fieldModified) => {
@@ -134,7 +113,12 @@ const ShopAdminSettings = props => {
     } else if (!isNaN(parseFloat(event.target.value))) {
       value = parseFloat(value);
       updateState(fieldModified, name, value);
-      setTimer(setTimeout(() => triggerAPISending(), WAIT_INTERVAL));
+      setTimer(
+        setTimeout(
+          () => triggerAPISending(fieldModified, name, value),
+          WAIT_INTERVAL
+        )
+      );
     } else if (event.target.value === "") {
       //We don't update on API to not create an empty field that would create bugs. We wait for another input to PUT the data.
       updateState(fieldModified, name, value);
