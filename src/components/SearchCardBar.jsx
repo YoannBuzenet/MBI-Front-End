@@ -11,9 +11,7 @@ const SearchCardBar = props => {
 
   const [searchResult, setSearchResult] = useState([]);
 
-  const { authenticationInfos, setAuthenticationInfos } = useContext(
-    AuthContext
-  );
+  const { authenticationInfos } = useContext(AuthContext);
 
   // console.log(authenticationInfos);
 
@@ -23,7 +21,6 @@ const SearchCardBar = props => {
     const source = CancelToken.source();
 
     if (currentSearch.length >= 3) {
-      console.log("on y va bébé");
       cardsAPI
         .searchApproxByName(currentSearch, {
           cancelToken: source.token
@@ -40,7 +37,7 @@ const SearchCardBar = props => {
             var isAlreadyHere = false;
 
             for (let j = 0; j < filteringArray.length; j++) {
-              if (data.data[i].name == filteringArray[j].name) {
+              if (data.data[i].name === filteringArray[j].name) {
                 isAlreadyHere = true;
               }
             }

@@ -2,6 +2,8 @@ import React, { useContext, useState } from "react";
 import AuthContext from "../../context/authContext";
 import Field from "../../components/forms/Field";
 import shopAPI from "../../services/shopAPI";
+import { toast } from "react-toastify";
+import localStorageAPI from "../../services/localStorageAPI";
 
 const MyShopAccount = props => {
   //Current Authentication
@@ -37,18 +39,28 @@ const MyShopAccount = props => {
   };
 
   const triggerAPISending = (name, value) => {
-    console.log("lol");
-    if (name === "SIRET" || name === "vatNumber") {
-      value = parseInt(value);
-    }
     const objectToSend = {
       shop: {
         id: shopID,
         [name]: value
       }
     };
-    console.log(objectToSend);
-    shopAPI.updateFields(objectToSend, shopID).then(data => console.log(data));
+
+    shopAPI
+      .updateFields(objectToSend, shopID)
+      .then(data => {
+        console.log("blib");
+        const localStorage = localStorageAPI.getLocalStorageSession();
+        localStorage.shop[name] = value;
+        localStorage.client.shop[name] = value;
+        localStorageAPI.saveLocalStorage("userInfos", localStorage);
+        console.log(localStorage);
+      })
+      .catch(data =>
+        toast.error(
+          "L'information n'a pas pu être mise à jour. Merci de recommencer ou de vous reconnecter."
+        )
+      );
   };
 
   return (
