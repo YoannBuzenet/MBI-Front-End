@@ -1,22 +1,6 @@
 import axios from "axios";
 import jwtDecode from "jwt-decode";
-
-//Takes array of objects, returns object structured with ID
-function transformPercentPerLangArrayIntoObject(array) {
-  var objectToReturn = {};
-
-  if (array) {
-    for (let i = 0; i < array.length; i++) {
-      const langToCreate = {};
-
-      langToCreate.id = array[i].id;
-      langToCreate.percentPerLang = array[i].percent;
-      objectToReturn[array[i].language] = langToCreate;
-    }
-  }
-
-  return objectToReturn;
-}
+import localStorageAPI from "./localStorageAPI";
 
 //When an user logins, if the credentials are rights, we send back data to identify him.
 //DATA structure in browser memory : customer, hasShop
@@ -29,9 +13,12 @@ function authenticate(credentials) {
       return response.data;
     })
     .then(data => {
-      // console.log(data);
+      console.log(data);
       //Stocking in local storage
       window.localStorage.setItem("authToken", data.token);
+      data.shop.PercentPerLangs = localStorageAPI.transformPercentPerLangArrayIntoObject(
+        data.shop.PercentPerLangs
+      );
       window.localStorage.setItem("userInfos", JSON.stringify(data));
 
       //Puting token into axios bearer
@@ -68,9 +55,7 @@ function authenticate(credentials) {
           shopData: data.shop
             ? {
                 baseLang: data.shop.baseLang,
-                PercentPerLangs: transformPercentPerLangArrayIntoObject(
-                  data.shop.PercentPerLangs
-                ),
+                PercentPerLangs: data.shop.PercentPerLangs,
                 PercentPerConditions: data.shop.PercentPerConditions,
                 PercentPerConditionFoils: data.shop.PercentPerConditionFoils
               }
@@ -116,7 +101,7 @@ function userInfos() {
 
     //We get back all datas stocked in the browser about the user and put it back in memory.
     const userDatas = JSON.parse(window.localStorage.getItem("userInfos"));
-    // console.log(userDatas);
+    //console.log(userDatas);
 
     return {
       isAuthenticated: jwtData.exp * 1000 > new Date().getTime(),
@@ -148,9 +133,7 @@ function userInfos() {
         shopData: userDatas.shop
           ? {
               baseLang: userDatas.shop.baseLang,
-              PercentPerLangs: transformPercentPerLangArrayIntoObject(
-                userDatas.shop.PercentPerLangs
-              ),
+              PercentPerLangs: userDatas.shop.PercentPerLangs,
               PercentPerConditions: userDatas.shop.PercentPerConditions,
               PercentPerConditionFoils: userDatas.shop.PercentPerConditionFoils
             }

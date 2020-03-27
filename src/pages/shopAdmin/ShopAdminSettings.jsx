@@ -4,6 +4,7 @@ import GenericCardInfosContext from "../../context/genericCardInfosContext";
 import Field from "../../components/forms/Field";
 import { toast } from "react-toastify";
 import shopAPI from "../../services/shopAPI";
+import localStorageAPI from "../../services/localStorageAPI";
 
 const ShopAdminSettings = props => {
   //Current Authentication
@@ -21,11 +22,10 @@ const ShopAdminSettings = props => {
 
   console.log(authenticationInfos);
 
-  const updateStateAndLocalStorage = (fieldModified, name, value) => {
+  const updateState = (fieldModified, name, value) => {
     const authenticationInfosCopy = { ...authenticationInfos };
     switch (fieldModified) {
       case "percentPerLang":
-        //Update LS
         authenticationInfosCopy.shop.shopData.PercentPerLangs[
           name
         ].percentPerLang = value;
@@ -34,7 +34,6 @@ const ShopAdminSettings = props => {
         break;
 
       case "percentPerCondition":
-        //Update LS
         authenticationInfosCopy.shop.shopData.PercentPerConditions[
           name - 1
         ].percent = value;
@@ -42,13 +41,31 @@ const ShopAdminSettings = props => {
         break;
 
       case "percentPerConditionFoil":
-        //Update LS
         authenticationInfosCopy.shop.shopData.PercentPerConditionFoils[
           name - 1
         ].percent = value;
         setAuthenticationInfos(authenticationInfosCopy);
         break;
     }
+  };
+
+  const updateLocalStorage = (fieldModified, name, value) => {
+    //Get Local Storage
+    var localStorage = localStorageAPI.getLocalStorageSession();
+    switch (fieldModified) {
+      case "percentPerLang":
+        localStorage.shop.PercentPerLangs[name].percentPerLang = value;
+        break;
+
+      case "percentPerCondition":
+        localStorage.shop.PercentPerConditions[name - 1].percent = value;
+        break;
+
+      case "percentPerConditionFoil":
+        localStorage.shop.PercentPerConditionFoils[name - 1].percent = value;
+        break;
+    }
+    localStorageAPI.saveLocalStorage("userInfos", localStorage);
   };
 
   const triggerAPISending = (fieldModified, name, value) => {
@@ -107,7 +124,8 @@ const ShopAdminSettings = props => {
       updateState(fieldModified, name, value);
     } else if (!isNaN(parseFloat(event.target.value))) {
       value = parseFloat(value);
-      updateStateAndLocalStorage(fieldModified, name, value);
+      updateState(fieldModified, name, value);
+      updateLocalStorage(fieldModified, name, value);
       setTimer(
         setTimeout(
           () => triggerAPISending(fieldModified, name, value),
