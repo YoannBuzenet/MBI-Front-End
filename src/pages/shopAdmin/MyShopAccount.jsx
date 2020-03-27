@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import AuthContext from "../../context/authContext";
+import Field from "../../components/forms/Field";
 
 const MyShopAccount = props => {
   //Current Authentication
@@ -7,77 +8,62 @@ const MyShopAccount = props => {
     AuthContext
   );
 
-  const [shopAccountInformation, setShopAccountInformation] = useState({
-    legalName: authenticationInfos.shop.legalName,
-    shopmail: authenticationInfos.shop.email,
-    siret: authenticationInfos.shop.SIRET,
-    vatNumber: authenticationInfos.shop.vatNumber,
-    tel: authenticationInfos.shop.tel,
-    mail: authenticationInfos.shop.email,
-    adress: authenticationInfos.shop.adress,
-    postalCode: authenticationInfos.shop.postalCode,
-    town: authenticationInfos.shop.town,
-    buyingLegalClauses: null
-  });
+  //We add a timer to not hit API at each user input.
+  //This way there is at least WAIT_INTERVAL interval between each sending, or more if the user continues to input.
+  const WAIT_INTERVAL = 1000;
+  const [timer, setTimer] = useState(null);
 
   console.log(authenticationInfos);
 
-  const handleSubmit = () => console.log("hey");
-  const handleChange = () => console.log("hey");
+  const handleChange = event => console.log("hey");
 
   return (
     <>
       <div className="container my-account">
         <h1>Informations Boutique</h1>
-        <form action="" onSubmit={handleSubmit}>
-          <label htmlFor="firstName">Raison Sociale</label>
-          <input
-            type="text"
-            id="legalName"
+        <form>
+          <Field
             name="legalName"
-            required
-            onChange={handleChange}
-            value={shopAccountInformation.legalName}
+            label="Raison sociale"
+            value={authenticationInfos.shop.legalName}
+            onChange={event => handleChange(event, "TODOBRO")}
+            placeholder="Merci d'indiquer la raison sociale de votre entreprise."
+            idNumber={Math.random()}
           />
-
-          <label htmlFor="lastName">Email de contact</label>
-          <input
+          <Field
+            name="email"
+            label="Email"
+            value={authenticationInfos.shop.email}
+            onChange={event => handleChange(event, "TODOBRO")}
+            placeholder="Votre mail de contact professionnel."
             type="mail"
-            id="shopMail"
-            name="shopMail"
-            required
-            onChange={handleChange}
-            value={shopAccountInformation.mail}
+            idNumber={Math.random()}
           />
 
-          <label htmlFor="tel">Telephone</label>
-          <input
-            type="tel"
-            id="tel"
+          <Field
             name="tel"
-            required
-            onChange={handleChange}
-            value={shopAccountInformation.tel}
+            label="Telephone"
+            value={authenticationInfos.shop.tel}
+            onChange={event => handleChange(event, "TODOBRO")}
+            placeholder="Votre numéro de téléphone professionnel."
+            type="tel"
+            idNumber={Math.random()}
           />
-
-          <label htmlFor="mail">SIRET</label>
-          <input
-            type="text"
-            id="siret"
-            name="siret"
-            required
-            onChange={handleChange}
-            value={shopAccountInformation.siret}
+          <Field
+            name="SIRET"
+            label="SIRET"
+            value={authenticationInfos.shop.SIRET}
+            onChange={event => handleChange(event, "TODOBRO")}
+            placeholder="Votre numéro de SIRET."
+            idNumber={Math.random()}
           />
-
-          <label htmlFor="mail">Numéro de TVA</label>
-          <input
-            type="text"
-            id="vat-number"
-            name="vat-number"
-            required
-            onChange={handleChange}
-            value={shopAccountInformation.vatNumber}
+          <Field
+            name="vatNumber"
+            label="Numéro de TVA"
+            value={authenticationInfos.shop.SIRET}
+            onChange={event => handleChange(event, "TODOBRO")}
+            placeholder="Votre numéro de TVA"
+            idNumber={Math.random()}
           />
 
           <label htmlFor="adress">Adresse</label>
@@ -88,41 +74,36 @@ const MyShopAccount = props => {
             rows="3"
             required
             onChange={handleChange}
-            value={shopAccountInformation.adress}
+            value={authenticationInfos.shop.adress}
           ></textarea>
 
-          <label htmlFor="postalCode">Code Postal</label>
-          <input
-            type="text"
-            id="postalCode"
+          <Field
             name="postalCode"
-            required
-            onChange={handleChange}
-            value={shopAccountInformation.postalCode}
+            label="Code Postal"
+            value={authenticationInfos.shop.postalCode}
+            onChange={event => handleChange(event, "TODOBRO")}
+            placeholder="Votre adresse code postal."
+            idNumber={Math.random()}
           />
-
-          <label htmlFor="town">Ville</label>
-          <input
-            type="text"
-            id="town"
+          <Field
             name="town"
-            required
-            onChange={handleChange}
-            value={shopAccountInformation.town}
+            label="Ville"
+            value={authenticationInfos.shop.town}
+            onChange={event => handleChange(event, "TODOBRO")}
+            placeholder="Votre ville."
+            idNumber={Math.random()}
           />
 
-          <label htmlFor="adress">Clauses de Rachat</label>
+          <label htmlFor="legalClausesBuying">Clauses de Rachat</label>
           <textarea
-            name="buyingLegalClause"
-            id="buyingLegalClause"
+            name="legalClausesBuying"
+            id="legalClausesBuying"
             cols="22"
             rows="3"
             required
             onChange={handleChange}
-            value={shopAccountInformation.buyingLegalClauses}
+            value={authenticationInfos.shop.legalClausesBuying}
           ></textarea>
-
-          <button type="submit">Modifier mes informations</button>
         </form>
       </div>
     </>
