@@ -49,12 +49,10 @@ const MyShopAccount = props => {
     shopAPI
       .updateFields(objectToSend, shopID)
       .then(data => {
-        console.log("blib");
         const localStorage = localStorageAPI.getLocalStorageSession();
         localStorage.shop[name] = value;
         localStorage.client.shop[name] = value;
         localStorageAPI.saveLocalStorage("userInfos", localStorage);
-        console.log(localStorage);
       })
       .catch(data =>
         toast.error(

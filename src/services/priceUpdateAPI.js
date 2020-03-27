@@ -1,16 +1,17 @@
 import axios from "axios";
+import config from "./config";
 
 function postOnePrice(cardInfo, cleaningParam) {
   return axios.post(
-    "http://127.0.0.1:8000/card_shop_prices",
+    config.URL_API + "/card_shop_prices",
     cardInfo,
     cleaningParam
   );
 }
 function putOnePrice(cardInfo, cardShopPriceID, cleaningParam) {
-  console.log("http://127.0.0.1:8000/card_shop_prices/" + cardShopPriceID);
+  // console.log(config.URL_API + "/card_shop_prices/" + cardShopPriceID);
   return axios.put(
-    "http://127.0.0.1:8000/card_shop_prices/" + cardShopPriceID,
+    config.URL_API + "/card_shop_prices/" + cardShopPriceID,
     cardInfo,
     cleaningParam
   );
@@ -18,14 +19,14 @@ function putOnePrice(cardInfo, cardShopPriceID, cleaningParam) {
 
 function deleteOnePrice(cardShopPriceID, cleaningParam) {
   return axios.delete(
-    "http://127.0.0.1:8000/card_shop_prices/" + cardShopPriceID,
+    config.URL_API + "/card_shop_prices/" + cardShopPriceID,
     cleaningParam
   );
 }
 
 function batchPriceUpdate(batch, cleaningParam) {
   return axios.post(
-    "http://127.0.0.1:8000/batchCardShopPrice",
+    config.URL_API + "/batchCardShopPrice",
     batch,
     cleaningParam
   );

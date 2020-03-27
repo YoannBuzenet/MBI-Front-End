@@ -1,6 +1,7 @@
 import axios from "axios";
 import jwtDecode from "jwt-decode";
 import localStorageAPI from "./localStorageAPI";
+import config from "./config";
 
 //When an user logins, if the credentials are rights, we send back data to identify him.
 //DATA structure in browser memory : customer, hasShop
@@ -8,7 +9,7 @@ import localStorageAPI from "./localStorageAPI";
 //Then we store data into local storage.
 function authenticate(credentials) {
   return axios
-    .post("http://127.0.0.1:8000/login", credentials)
+    .post(config.URL_API + "/login", credentials)
     .then(response => {
       return response.data;
     })

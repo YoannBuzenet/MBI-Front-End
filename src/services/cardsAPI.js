@@ -1,15 +1,13 @@
 import axios from "axios";
+import config from "./config";
 
 function getByName(cardName, cleaningParam) {
-  return axios.get(
-    "http://127.0.0.1:8000/cards?name=" + cardName,
-    cleaningParam
-  );
+  return axios.get(config.URL_API + "/cards?name=" + cardName, cleaningParam);
 }
 
 function searchApproxByName(cardName, cleaningParam) {
   return axios.get(
-    "http://127.0.0.1:8000/cardsearch?name=" + cardName,
+    config.URL_API + "/cardsearch?name=" + cardName,
     cleaningParam
   );
 }

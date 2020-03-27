@@ -1,14 +1,15 @@
 import axios from "axios";
+import config from "./config";
 
 function findAll() {
   return axios
-    .get("http://127.0.0.1:8000/sets")
+    .get(config.URL_API + "/sets")
     .then(response => response.data["hydra:member"]);
 }
 
 function findOneById(id, cleanUpParam) {
   return axios
-    .get("http://127.0.0.1:8000/sets/" + id, cleanUpParam)
+    .get(config.URL_API + "/sets/" + id, cleanUpParam)
     .then(response => response.data.cards);
 }
 
