@@ -21,10 +21,11 @@ const ShopAdminSettings = props => {
 
   console.log(authenticationInfos);
 
-  const updateState = (fieldModified, name, value) => {
+  const updateStateAndLocalStorage = (fieldModified, name, value) => {
     const authenticationInfosCopy = { ...authenticationInfos };
     switch (fieldModified) {
       case "percentPerLang":
+        //Update LS
         authenticationInfosCopy.shop.shopData.PercentPerLangs[
           name
         ].percentPerLang = value;
@@ -33,6 +34,7 @@ const ShopAdminSettings = props => {
         break;
 
       case "percentPerCondition":
+        //Update LS
         authenticationInfosCopy.shop.shopData.PercentPerConditions[
           name - 1
         ].percent = value;
@@ -40,6 +42,7 @@ const ShopAdminSettings = props => {
         break;
 
       case "percentPerConditionFoil":
+        //Update LS
         authenticationInfosCopy.shop.shopData.PercentPerConditionFoils[
           name - 1
         ].percent = value;
@@ -51,14 +54,13 @@ const ShopAdminSettings = props => {
   const triggerAPISending = (fieldModified, name, value) => {
     //Build object ?
     let id;
-    let objectToSend;
+    let objectToSend = {
+      percent: value
+    };
     switch (fieldModified) {
       case "percentPerLang":
         id = authenticationInfos.shop.shopData.PercentPerLangs[name].id;
-        objectToSend = {
-          id: id,
-          percent: value
-        };
+
         shopAPI
           .updatePercentPerLang(id, objectToSend)
           .then(data => console.log(data))
@@ -71,10 +73,6 @@ const ShopAdminSettings = props => {
       case "percentPerCondition":
         id =
           authenticationInfos.shop.shopData.PercentPerConditions[name - 1].id;
-        objectToSend = {
-          id: id,
-          percent: value
-        };
         shopAPI
           .updatePercentPerCondition(id, objectToSend)
           .then(data => console.log(data))
@@ -88,10 +86,7 @@ const ShopAdminSettings = props => {
       case "percentPerConditionFoil":
         id =
           authenticationInfos.shop.shopData.PercentPerConditions[name - 1].id;
-        objectToSend = {
-          id: id,
-          percent: value
-        };
+
         shopAPI
           .updatePercentPerConditionFoil(id, objectToSend)
           .then(data => console.log(data))
@@ -112,7 +107,7 @@ const ShopAdminSettings = props => {
       updateState(fieldModified, name, value);
     } else if (!isNaN(parseFloat(event.target.value))) {
       value = parseFloat(value);
-      updateState(fieldModified, name, value);
+      updateStateAndLocalStorage(fieldModified, name, value);
       setTimer(
         setTimeout(
           () => triggerAPISending(fieldModified, name, value),
