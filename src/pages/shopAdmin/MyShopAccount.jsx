@@ -1,12 +1,16 @@
 import React, { useContext, useState } from "react";
 import AuthContext from "../../context/authContext";
 import Field from "../../components/forms/Field";
+import shopAPI from "../../services/shopAPI";
 
 const MyShopAccount = props => {
   //Current Authentication
   const { authenticationInfos, setAuthenticationInfos } = useContext(
     AuthContext
   );
+
+  //ENV VARIABLE
+  const shopID = 1;
 
   //We add a timer to not hit API at each user input.
   //This way there is at least WAIT_INTERVAL interval between each sending, or more if the user continues to input.
@@ -15,7 +19,29 @@ const MyShopAccount = props => {
 
   console.log(authenticationInfos);
 
-  const handleChange = event => console.log("hey");
+  const handleChange = event => {
+    setTimer(clearTimeout(timer));
+
+    var { name, value } = event.target;
+
+    const contextCopy = { ...authenticationInfos };
+    contextCopy.shop[name] = value;
+
+    setAuthenticationInfos(contextCopy);
+
+    setTimer(setTimeout(() => triggerAPISending(name, value), WAIT_INTERVAL));
+  };
+
+  const triggerAPISending = (name, value) => {
+    console.log("lol");
+    const objectToSend = {
+      shop: {
+        [name]: value
+      }
+    };
+    console.log(objectToSend);
+    shopAPI.updateFields(objectToSend, shopID).then(data => console.log(data));
+  };
 
   return (
     <>
