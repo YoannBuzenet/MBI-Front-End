@@ -24,6 +24,10 @@ const MyShopAccount = props => {
 
     var { name, value } = event.target;
 
+    if (name === "SIRET" || name === "vatNumber") {
+      value = parseInt(value);
+    }
+
     const contextCopy = { ...authenticationInfos };
     contextCopy.shop[name] = value;
 
@@ -34,8 +38,12 @@ const MyShopAccount = props => {
 
   const triggerAPISending = (name, value) => {
     console.log("lol");
+    if (name === "SIRET" || name === "vatNumber") {
+      value = parseInt(value);
+    }
     const objectToSend = {
       shop: {
+        id: shopID,
         [name]: value
       }
     };
@@ -86,7 +94,7 @@ const MyShopAccount = props => {
           <Field
             name="vatNumber"
             label="Numéro de TVA"
-            value={authenticationInfos.shop.SIRET}
+            value={authenticationInfos.shop.vatNumber}
             onChange={event => handleChange(event, "TODOBRO")}
             placeholder="Votre numéro de TVA"
             idNumber={Math.random()}
