@@ -52,6 +52,11 @@ function authenticate(credentials) {
           adress: data.client.shop.adress,
           postalCode: data.client.shop.postalCode,
           town: data.client.shop.town,
+          legalClausesBuying: data.shop
+            ? data.shop.legalClausesBuying === null
+              ? ""
+              : data.shop.legalClausesBuying
+            : "",
           shopData: data.shop
             ? {
                 baseLang: data.shop.baseLang,
@@ -130,6 +135,11 @@ function userInfos() {
         adress: userDatas.client.shop.adress,
         postalCode: userDatas.client.shop.postalCode,
         town: userDatas.client.shop.town,
+        legalClausesBuying: userDatas.shop
+          ? userDatas.shop.legalClausesBuying === null
+            ? ""
+            : userDatas.shop.legalClausesBuying
+          : "",
         shopData: userDatas.shop
           ? {
               baseLang: userDatas.shop.baseLang,

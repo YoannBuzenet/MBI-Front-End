@@ -73,7 +73,7 @@ const MyShopAccount = props => {
             cols="22"
             rows="3"
             required
-            onChange={handleChange}
+            onChange={event => handleChange(event, "TODOBRO")}
             value={authenticationInfos.shop.adress}
           ></textarea>
 
@@ -101,7 +101,7 @@ const MyShopAccount = props => {
             cols="22"
             rows="3"
             required
-            onChange={handleChange}
+            onChange={event => handleChange(event, "TODOBRO")}
             value={authenticationInfos.shop.legalClausesBuying}
           ></textarea>
         </form>
