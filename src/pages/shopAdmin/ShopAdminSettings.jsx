@@ -20,8 +20,6 @@ const ShopAdminSettings = props => {
   const WAIT_INTERVAL = 1000;
   const [timer, setTimer] = useState(null);
 
-  console.log(authenticationInfos);
-
   const updateState = (fieldModified, name, value) => {
     const authenticationInfosCopy = { ...authenticationInfos };
     switch (fieldModified) {
@@ -152,13 +150,8 @@ const ShopAdminSettings = props => {
           Quel est votre langue d'achat par défaut ? (select parmi toutes les
           langues de magic)
         </p>
-        <select name="" id="">
-          <option>
-            {authenticationInfos.shop.shopData.baseLang.shortname}
-          </option>
-        </select>
+        ENV_VARIABLE
         <p>Votre système de grading prédéfni : ENV_VARIABLE</p>
-
         <div className="percentSettings">
           <div className="percentPerLang">
             <h2>Langues</h2>
