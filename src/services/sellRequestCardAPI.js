@@ -1,4 +1,5 @@
 import axios from "axios";
+import config from "./config";
 
 function update(
   SellRequestCard,
@@ -17,9 +18,9 @@ function update(
     };
   } else if (SellRequestCardPropertyName === "isFoil") {
     if (SellRequestCardPropertyValue === "Yes") {
-      propertyUpdate = { isFOil: true };
+      propertyUpdate = { isFoil: true };
     } else if (SellRequestCardPropertyValue === "No") {
-      propertyUpdate = { isFOil: false };
+      propertyUpdate = { isFoil: false };
     }
   } else if (SellRequestCardPropertyName === "lang") {
     propertyUpdate = {
@@ -34,7 +35,7 @@ function update(
   console.log(propertyUpdate);
 
   return axios.put(
-    "http://127.0.0.1:8000/sell_request_cards/" + SellRequestCard.id,
+    config.URL_API + "/sell_request_cards/" + SellRequestCard.id,
     propertyUpdate
   );
 }
@@ -47,13 +48,13 @@ function setUpdate(IRItoUpdate, newLangID, idToReach) {
   };
 
   return axios.put(
-    "http://127.0.0.1:8000/sell_request_cards/" + idToReach,
+    config.URL_API + "/sell_request_cards/" + idToReach,
     newCardProperties
   );
 }
 
 function deleteCard(id) {
-  return axios.delete("http://127.0.0.1:8000/sell_request_cards/" + id);
+  return axios.delete(config.URL_API + "/sell_request_cards/" + id);
 }
 
 export default {

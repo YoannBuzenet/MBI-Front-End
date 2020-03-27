@@ -1,12 +1,13 @@
 import axios from "axios";
+import config from "./config";
 
 function register(credentials) {
-  return axios.post("http://127.0.0.1:8000/Register", credentials);
+  return axios.post(config.URL_API + "/Register", credentials);
 }
 
 function update(id, credentials) {
   // console.log(id, credentials);
-  return axios.put("http://127.0.0.1:8000/users/" + id, credentials);
+  return axios.put(config.URL_API + "/users/" + id, credentials);
 }
 
 export default {
