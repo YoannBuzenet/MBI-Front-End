@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import priceBufferContext from "../../context/priceBufferContext";
 import priceUpdateAPI from "../../services/priceUpdateAPI";
 import AuthContext from "../../context/authContext";
