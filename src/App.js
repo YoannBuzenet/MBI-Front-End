@@ -373,7 +373,7 @@ function App() {
                         path="/shopadmin/settings"
                         component={ShopAdminSettings}
                       />
-                      <LoggedShopRouteComponent
+                      <LoggedShopRouteRender
                         path="/shopadmin/shopInfos"
                         component={MyShopAccount}
                       />

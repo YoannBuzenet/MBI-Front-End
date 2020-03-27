@@ -20,8 +20,13 @@ function updatePercentPerConditionFoil(PercentPerConditionFoilID, object) {
   );
 }
 
+function updateFields(fieldObject, shopID) {
+  return axios.put("http://127.0.0.1:8000/usersShop/" + shopID, fieldObject);
+}
+
 export default {
   updatePercentPerLang,
   updatePercentPerCondition,
-  updatePercentPerConditionFoil
+  updatePercentPerConditionFoil,
+  updateFields
 };
