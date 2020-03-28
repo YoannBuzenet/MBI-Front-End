@@ -5,6 +5,8 @@ import genericCardAPI from "../services/genericCardAPI";
 import cardsAPI from "../services/cardsAPI";
 import CardShopPriceAPI from "../services/CardShopPriceAPI";
 
+//TODO : End isSigned (handleChange not done, update context not done)
+
 const CardLine = ({
   card,
   handleAddSellingBasket,
@@ -51,6 +53,7 @@ const CardLine = ({
       lang: 9,
       isFoil: card.hasnonfoil ? "No" : "Yes",
       set: setName,
+      isSigned: false,
       price:
         card.hasnonfoil === 1
           ? card.allPrices[LANGUAGE_ID_ENG][CONDITION_ID_NM][ISFOILFALSE]
@@ -181,6 +184,12 @@ const CardLine = ({
           >
             {card.hasnonfoil && <option value="No">No</option>}
             {card.hasfoil && <option value="Yes">Yes</option>}
+          </select>
+        </td>
+        <td>
+          <select name="isSigned">
+            <option value="No">Non</option>
+            <option value="Yes">Oui</option>
           </select>
         </td>
         <td>
