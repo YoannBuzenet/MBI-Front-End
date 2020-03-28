@@ -7,6 +7,7 @@ import sellRequestCardAPI from "../../services/sellRequestCardAPI";
 import cardsAPI from "../../services/cardsAPI";
 import EditionChoosingModal from "../EditionChoosingModal";
 import sellRequestAPI from "../../services/sellRequestAPI";
+import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 
 const CardLineShop = ({ card, indexCard }) => {
   //Getting the Sell Request state by context
@@ -230,7 +231,7 @@ const CardLineShop = ({ card, indexCard }) => {
   const hoverClassName = e => genericCardAPI.isPictureDisplayedTopOrBottom(e);
   return (
     <>
-      <tr
+      <Tr
         onMouseEnter={e => {
           setIsOnHover(!isOnHover);
           setHoverTopOrBottom(hoverClassName(e));
@@ -240,7 +241,7 @@ const CardLineShop = ({ card, indexCard }) => {
         }}
         className={sellingBasketLine || ""}
       >
-        <td className="cardPictureHolder">
+        <Td className="cardPictureHolder">
           {currentCard.name}
           {isOnHover && (
             //TODO : change className following the scrolling, to know if the position must be top or bottom, to stay in window
@@ -248,8 +249,8 @@ const CardLineShop = ({ card, indexCard }) => {
               <img src={urlCard} alt={currentCard.name} />
             </div>
           )}
-        </td>
-        <td>
+        </Td>
+        <Td>
           {currentCard.set}
           {isModal && (
             <EditionChoosingModal
@@ -261,9 +262,9 @@ const CardLineShop = ({ card, indexCard }) => {
               setIsModal={setIsModal}
             />
           )}
-        </td>
-        <td onClick={event => changeEdition(event, currentCard)}>+</td>
-        <td>
+        </Td>
+        <Td onClick={event => changeEdition(event, currentCard)}>+</Td>
+        <Td>
           {/* Select will have to be refactored with a .map on a Select Component */}
           {/* Select LANG */}
           <select
@@ -310,8 +311,8 @@ const CardLineShop = ({ card, indexCard }) => {
               <option value="9">EN</option>
             )}
           </select>
-        </td>
-        <td>
+        </Td>
+        <Td>
           <select
             name="condition"
             id={currentCard.name + "id2"}
@@ -342,8 +343,8 @@ const CardLineShop = ({ card, indexCard }) => {
                     )
               : null}
           </select>
-        </td>
-        <td>
+        </Td>
+        <Td>
           <select
             name="isFoil"
             id={currentCard.name + "id4"}
@@ -361,8 +362,8 @@ const CardLineShop = ({ card, indexCard }) => {
               </option>
             )}
           </select>
-        </td>
-        <td>
+        </Td>
+        <Td>
           <select
             name="isSigned"
             value={card.isSigned}
@@ -377,8 +378,8 @@ const CardLineShop = ({ card, indexCard }) => {
               {card.isSigned === "Yes" ? "No" : "Yes"}
             </option>
           </select>
-        </td>
-        <td>
+        </Td>
+        <Td>
           <select
             name="quantity"
             id={currentCard + "id3"}
@@ -400,8 +401,8 @@ const CardLineShop = ({ card, indexCard }) => {
             <option value="11">11</option>
             <option value="12">12</option>
           </select>
-        </td>
-        <td>
+        </Td>
+        <Td>
           <input
             type="text"
             onChange={event => {
@@ -410,8 +411,8 @@ const CardLineShop = ({ card, indexCard }) => {
             name="price"
             value={currentCard.price}
           />
-        </td>
-        <td>
+        </Td>
+        <Td>
           <i
             className="fas fa-minus-circle delete-from-selling-basket"
             onClick={() => {
@@ -419,8 +420,8 @@ const CardLineShop = ({ card, indexCard }) => {
               return handleDelete(currentCard);
             }}
           ></i>
-        </td>
-      </tr>
+        </Td>
+      </Tr>
     </>
   );
 };
