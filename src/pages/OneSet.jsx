@@ -55,6 +55,7 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
         foreignData: data[i].foreignData,
         price: null,
         isFoil: data[i].hasnonfoil ? "No" : "Yes",
+        isSigned: "No",
         set: currentSet.name,
         quantity: 1,
         condition: 2,
