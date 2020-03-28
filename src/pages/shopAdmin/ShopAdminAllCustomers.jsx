@@ -12,14 +12,16 @@ const ShopAdminAllCustomers = props => {
   const source = CancelToken.source();
 
   useEffect(() => {
-    customersAPI
-      .findAll({
-        cancelToken: source.token
-      })
-      .then(response => setListCustomers(response));
-    console.log("hey");
+    if (listCustomers.length === 0) {
+      customersAPI
+        .findAll({
+          cancelToken: source.token
+        })
+        .then(response => setListCustomers(response));
+      console.log("hey");
 
-    return () => source.cancel("");
+      return () => source.cancel("");
+    }
   }, []);
   return (
     <>
@@ -37,7 +39,7 @@ const ShopAdminAllCustomers = props => {
           <Tbody>
             {listCustomers.length > 0 &&
               listCustomers.map(customer => {
-                console.log(customer);
+                // console.log(customer);
 
                 return (
                   <Tr

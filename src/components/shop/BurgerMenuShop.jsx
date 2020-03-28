@@ -65,12 +65,12 @@ const BurgerMenuShop = ({ history }) => {
               </li>
             </Link>
 
-            <Link
+            {/* <Link
               className="classic_links_responsive classic_links_responsive_admin nav-element"
               to="/shopadmin/cards"
             >
               <li>Cartes</li>
-            </Link>
+            </Link> */}
             <Link
               className="classic_links_responsive classic_links_responsive_admin nav-element"
               to="/shopadmin/sell_requests"
