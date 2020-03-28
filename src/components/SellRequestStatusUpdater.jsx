@@ -16,6 +16,8 @@ const SellRequestStatusUpdater = ({
   console.log(authenticationInfos);
   const [hasBeenSent, setHasBeenSent] = useState(true);
 
+  console.log(currentSellRequest);
+
   useEffect(() => {
     if (currentSellRequest.id) {
       if (
