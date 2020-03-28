@@ -43,6 +43,12 @@ const LoginPage = ({ onLogin, history }) => {
         history.goBack();
       }
     } catch (error) {
+      if (error.response) {
+        console.log(error.response.data);
+        console.log(error.response.data.message);
+        console.log(error.response.status);
+        console.log(error.response.headers);
+      }
       //PARSE THE ERROR BEFORE SETTING IT
       toast.error(
         "Le login ou le mot de passe est incorrect. Merci de réessayer."
