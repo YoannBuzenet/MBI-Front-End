@@ -86,9 +86,7 @@ const ShopAdminOneSellRequest = ({ match }) => {
           });
         })
         .catch(err => {
-          return toast.error("Le rachat n'a pu être chargé.", {
-            toastId: 1
-          });
+          console.log(err);
         });
     }
 

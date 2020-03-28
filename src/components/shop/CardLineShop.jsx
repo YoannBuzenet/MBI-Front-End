@@ -367,7 +367,7 @@ const CardLineShop = ({ card, indexCard }) => {
             name="isSigned"
             value={card.isSigned}
             onChange={event => {
-              handleChange(event);
+              handleChange(event, currentCard);
             }}
           >
             <option value={card.isSigned === "Yes" ? "Yes" : "No"}>
