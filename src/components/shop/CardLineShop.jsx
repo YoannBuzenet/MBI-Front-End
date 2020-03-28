@@ -362,7 +362,22 @@ const CardLineShop = ({ card, indexCard }) => {
             )}
           </select>
         </td>
-
+        <td>
+          <select
+            name="isSigned"
+            value={card.isSigned}
+            onChange={event => {
+              handleChange(event);
+            }}
+          >
+            <option value={card.isSigned === "Yes" ? "Yes" : "No"}>
+              {card.isSigned === "Yes" ? "Yes" : "No"}
+            </option>
+            <option value={card.isSigned === "Yes" ? "No" : "Yes"}>
+              {card.isSigned === "Yes" ? "No" : "Yes"}
+            </option>
+          </select>
+        </td>
         <td>
           <select
             name="quantity"

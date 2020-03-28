@@ -7,7 +7,7 @@ import canSubmitContext from "../context/canSubmitSellRequestContext";
 import genericCardAPI from "../services/genericCardAPI";
 import CardShopPriceAPI from "../services/CardShopPriceAPI";
 
-//TODO : finish the context full gestion without card or currentCard state tools.
+//TODO : REQUEST PRICE FOR IS_SIGNED
 
 const CardLineSellingBasket = ({ card, indexCard }) => {
   //Current Selling Request Basket
@@ -18,9 +18,6 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
 
   //DEFINED langages and Conditions
   const { lang, conditions } = useContext(GenericCardInfosContext);
-
-  //Using the current Card in state
-  const [currentCard, setCard] = useState(card);
 
   //Saving the Hover state
   const [isOnHover, setIsOnHover] = useState(false);
@@ -37,7 +34,7 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
   useEffect(() => {
     if (isOnHover) {
       //If we neeed to change something on hover update, here it is
-      console.log(currentCard);
+
       console.log(conditions);
     }
   }, [isOnHover]);
@@ -211,19 +208,36 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
           <select
             name="isFoil"
             id={card.cardName + "id4"}
-            value={currentCard.isFoil}
+            value={card.isFoil}
             onChange={event => {
               handleChange(event);
             }}
           >
-            <option value={currentCard.isFoil == "Yes" ? "Yes" : "No"}>
-              {currentCard.isFoil == "Yes" ? "Yes" : "No"}
+            <option value={card.isFoil === "Yes" ? "Yes" : "No"}>
+              {card.isFoil == "Yes" ? "Yes" : "No"}
             </option>
-            {card.hasfoil == 1 && card.hasnonfoil == 1 && (
-              <option value={currentCard.isFoil == "Yes" ? "No" : "Yes"}>
-                {currentCard.isFoil == "Yes" ? "No" : "Yes"}
+            {card.hasfoil === 1 && card.hasnonfoil === 1 && (
+              <option value={card.isFoil === "Yes" ? "No" : "Yes"}>
+                {card.isFoil == "Yes" ? "No" : "Yes"}
               </option>
             )}
+          </select>
+        </td>
+
+        <td>
+          <select
+            name="isSigned"
+            value={card.isSigned}
+            onChange={event => {
+              handleChange(event);
+            }}
+          >
+            <option value={card.isSigned === "Yes" ? "Yes" : "No"}>
+              {card.isSigned === "Yes" ? "Yes" : "No"}
+            </option>
+            <option value={card.isSigned === "Yes" ? "No" : "Yes"}>
+              {card.isSigned === "Yes" ? "No" : "Yes"}
+            </option>
           </select>
         </td>
 
@@ -234,7 +248,7 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
             onChange={event => {
               handleChange(event);
             }}
-            value={currentCard.quantity}
+            value={card.quantity}
           >
             <option value="1">1</option>
             <option value="2">2</option>
@@ -254,12 +268,12 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
           {isLoading && <div className="loading-loop"></div>}
           {!isLoading && card.price}
         </td>
-        <td>{currentCard.price * currentCard.quantity}</td>
+        <td>{card.price * card.quantity}</td>
         <td className="AddButton">
           <i
             className="fas fa-minus-circle delete-from-selling-basket "
             onClick={() => {
-              console.log(currentCard);
+              console.log(card);
               return handleDelete();
             }}
           ></i>

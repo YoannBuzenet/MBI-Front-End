@@ -20,6 +20,7 @@ const CardLineShopStuck = ({ card }) => {
           }
         </td>
         <td>{card.isFoil === true ? "Yes" : "No"}</td>
+        <td>{card.isSigned}</td>
         <td>{card.quantity}</td>
         <td>{card.price}</td>
         <td>{card.quantity * card.price}</td>
