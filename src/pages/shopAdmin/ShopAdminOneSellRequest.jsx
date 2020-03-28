@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import axios from "axios";
 import sellRequestAPI from "../../services/sellRequestAPI";
 import StatusCalculator from "../../components/StatusCalculator";
@@ -8,6 +8,7 @@ import CardLineShopStuck from "../../components/shop/CardLineShopStuck";
 import AdminSellRequestContext from "../../context/adminSellRequestContext";
 import ShopSellRequestStatusValidator from "../../components/shop/ShopSellRequestStatusValidator";
 import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
+import { toast } from "react-toastify";
 
 const ShopAdminOneSellRequest = ({ match }) => {
   const { id } = match.params;
@@ -82,6 +83,11 @@ const ShopAdminOneSellRequest = ({ match }) => {
                 };
               })
             ]
+          });
+        })
+        .catch(err => {
+          return toast.error("Le rachat n'a pu être chargé.", {
+            toastId: 1
           });
         });
     }

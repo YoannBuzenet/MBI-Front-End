@@ -80,9 +80,9 @@ const ShopNavbar = ({ history }) => {
           </Link>
 
           <div className="my_options options_desktop">
-            <Link className="classic-links nav-element" to="/shopadmin/cards">
+            {/* <Link className="classic-links nav-element" to="/shopadmin/cards">
               Cartes
-            </Link>
+            </Link> */}
             <Link
               className="classic-links nav-element"
               to="/shopadmin/sell_requests"
