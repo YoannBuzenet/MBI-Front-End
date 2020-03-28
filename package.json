@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^7.2.1",
     "@welldone-software/why-did-you-render": "^4.0.3",
     "axios": "^0.19.2",
+    "feather-icons-react": "^0.4.1",
     "jwt-decode": "^2.2.0",
     "moment": "^2.24.0",
     "react": "^16.12.0",
