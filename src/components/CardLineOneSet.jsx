@@ -46,6 +46,7 @@ const CardLineOneSet = ({
   // const triggerAPIRequests = () => console.log("trigger");
 
   const handleChange = ({ currentTarget }) => {
+    console.log(cardsContext[cardID]);
     setIsLoading(true);
     //TIMEOUT SETUP DO NOT ERASE
     // setTimer(clearTimeout(timer));
@@ -185,7 +186,12 @@ const CardLineOneSet = ({
           </select>
         </td>
         <td>
-          <select name="isSigned">
+          <select
+            name="isSigned"
+            onChange={event => {
+              handleChange(event, currentCard);
+            }}
+          >
             <option value="No">Non</option>
             <option value="Yes">Oui</option>
           </select>
