@@ -115,6 +115,10 @@ h2 {
   font-size: 1.2rem;
 }
 
+.featherIcon {
+  color: black;
+}
+
 .blackDiv {
   position: absolute;
   height: 100vh;
