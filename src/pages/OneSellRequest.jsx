@@ -58,6 +58,7 @@ const OneSellRequest = ({ match, history }) => {
             <Th>Etat</Th>
             <Th>Langue</Th>
             <Th>Foil</Th>
+            <Th>Signée</Th>
             <Th>Prix</Th>
             <Th>Quantité</Th>
             <Th>Total</Th>
@@ -76,6 +77,7 @@ const OneSellRequest = ({ match, history }) => {
                 </Td>
                 <Td>{card.language.shortname}</Td>
                 <Td>{card.language.isFoil ? "Yes" : "No"}</Td>
+                <Td>{card.language.isSigned ? "Yes" : "No"}</Td>
                 <Td>{card.price}</Td>
                 <Td>{card.cardQuantity}</Td>
                 <Td>{card.price * card.cardQuantity}</Td>

@@ -25,6 +25,7 @@ const MyCurrentSellRequest = ({ history, checkForDuplicates }) => {
                 <Th>Langue</Th>
                 <Th>Etat</Th>
                 <Th>Foil</Th>
+                <Th>Signée</Th>
                 <Th>Quantité</Th>
                 <Th>Prix</Th>
                 <Th>Total</Th>
@@ -55,6 +56,7 @@ const MyCurrentSellRequest = ({ history, checkForDuplicates }) => {
                 : null}
 
               <Tr className="total-line">
+                <Td></Td>
                 <Td></Td>
                 <Td></Td>
                 <Td></Td>
