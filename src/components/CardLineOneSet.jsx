@@ -185,6 +185,12 @@ const CardLineOneSet = ({
           </select>
         </td>
         <td>
+          <select name="isSigned">
+            <option value="No">Non</option>
+            <option value="Yes">Oui</option>
+          </select>
+        </td>
+        <td>
           <select
             name="quantity"
             id={cardsContext[cardID].name + "id3"}

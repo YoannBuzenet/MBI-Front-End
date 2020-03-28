@@ -152,6 +152,7 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
                     <Th>Langue</Th>
                     <Th>Condition</Th>
                     <Th>Foil</Th>
+                    <Th>Signé</Th>
                     <Th>Quantité</Th>
                     <Th>Prix</Th>
                   </Tr>
