@@ -78,7 +78,7 @@ const ShopAdminSettings = props => {
 
         shopAPI
           .updatePercentPerLang(id, objectToSend)
-          .then(data => console.log(data))
+          .then(data => updateLocalStorage(fieldModified, name, value))
           .catch(data =>
             toast.error(
               "La donnée n'a pu être mise à jour. Merci de réessayer ou de vous reconnecter."
@@ -90,7 +90,7 @@ const ShopAdminSettings = props => {
           authenticationInfos.shop.shopData.PercentPerConditions[name - 1].id;
         shopAPI
           .updatePercentPerCondition(id, objectToSend)
-          .then(data => console.log(data))
+          .then(updateLocalStorage(fieldModified, name, value))
           .catch(data =>
             toast.error(
               "La donnée n'a pu être mise à jour. Merci de réessayer ou de vous reconnecter."
@@ -104,7 +104,7 @@ const ShopAdminSettings = props => {
 
         shopAPI
           .updatePercentPerConditionFoil(id, objectToSend)
-          .then(data => console.log(data))
+          .then(data => updateLocalStorage(fieldModified, name, value))
           .catch(data =>
             toast.error(
               "La donnée n'a pu être mise à jour. Merci de réessayer ou de vous reconnecter."
@@ -123,7 +123,7 @@ const ShopAdminSettings = props => {
     } else if (!isNaN(parseFloat(event.target.value))) {
       value = parseFloat(value);
       updateState(fieldModified, name, value);
-      updateLocalStorage(fieldModified, name, value);
+
       setTimer(
         setTimeout(
           () => triggerAPISending(fieldModified, name, value),
