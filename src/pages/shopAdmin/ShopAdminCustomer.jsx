@@ -37,17 +37,14 @@ const ShopAdminCustomer = ({ match }) => {
   return (
     <>
       <h1>
-        {customerData && customerData.nom} {customerData && customerData.prenom}
+        <span className="customer_firstName">
+          {customerData && customerData.prenom}
+        </span>{" "}
+        <span className="customer_lastName">
+          {customerData && customerData.nom}
+        </span>
       </h1>
       <div className="customer-infos">
-        <p>
-          Name : {isLoading && <OneLineLoader />}
-          {!isLoading && customerData && customerData.nom}
-        </p>
-        <p>
-          Prénom : {isLoading && <OneLineLoader />}
-          {!isLoading && customerData && customerData.prenom}
-        </p>
         <p>
           Email : {isLoading && <OneLineLoader />}
           {!isLoading && customerData && customerData.user.email}

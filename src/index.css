@@ -805,12 +805,6 @@ div.connect p {
   width: 250px;
 }
 
-/* @media only screen and (max-width: 930px) {
-  .last-modification h2 {
-    margin-top: 3rem;
-  }
-} */
-
 /**************************
 ********ONESET PAGE*******
 **************************/
@@ -1012,6 +1006,17 @@ tbody.cardLineShop {
 
 input.updated {
   background-color: red;
+}
+
+/**************************
+**SHOP ADMIN ONE CUSTOMER**
+**************************/
+
+span.customer_firstName {
+  text-transform: capitalize;
+}
+span.customer_lastName {
+  text-transform: uppercase;
 }
 
 /**************************
