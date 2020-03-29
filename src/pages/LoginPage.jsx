@@ -38,7 +38,7 @@ const LoginPage = ({ onLogin, history }) => {
       toast.success("Vous êtes connecté.");
 
       if (userData.user.roles.includes("ROLE_SHOP")) {
-        history.replace("/shopadmin");
+        history.replace("/shopadmin/sell_requests");
       } else {
         history.goBack();
       }
