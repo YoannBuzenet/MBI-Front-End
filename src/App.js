@@ -355,7 +355,7 @@ function App() {
                         path="/shopadmin/sell_requests/:id"
                         component={ShopAdminOneSellRequest}
                       />
-                      <LoggedShopRouteComponent
+                      <LoggedShopRouteRender
                         path="/shopadmin/sell_requests"
                         component={ShopAdminAllSellRequests}
                       />
@@ -363,7 +363,7 @@ function App() {
                         path="/shopadmin/customers/:id"
                         component={ShopAdminCustomer}
                       />
-                      <LoggedShopRouteComponent
+                      <LoggedShopRouteRender
                         path="/shopadmin/customers"
                         component={ShopAdminAllCustomers}
                       />
