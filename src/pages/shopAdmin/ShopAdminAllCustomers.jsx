@@ -20,8 +20,8 @@ const ShopAdminAllCustomers = props => {
           cancelToken: source.token
         })
         .then(response => setListCustomers(response))
-        .then(() => setIsLoading(false));
-      console.log("hey");
+        .then(() => setIsLoading(false))
+        .catch(error => errorHandlingAPI.check401Unauthorized(error));
 
       return () => source.cancel("");
     }

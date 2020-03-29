@@ -23,14 +23,7 @@ const ShopAdminAllSellRequests = props => {
       })
       .then(response => setAllSellRequests(response.data["hydra:member"]))
       .then(() => setIsLoading(false))
-      .catch(error => {
-        if (error.response) {
-          console.log(error.response.data);
-          console.log(error.response.status);
-          console.log(error.response.headers);
-        }
-      });
-    // console.log("hey");
+      .catch(error => errorHandlingAPI.check401Unauthorized(error));
 
     return () => source.cancel("");
   }, []);
