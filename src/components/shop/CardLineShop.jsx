@@ -168,7 +168,12 @@ const CardLineShop = ({ card, indexCard }) => {
     setIsModal(true);
     cardsAPI
       .getByName(currentCard.name)
-      .then(data => setEditionInformation(data.data["hydra:member"]));
+      .then(data => setEditionInformation(data.data["hydra:member"]))
+      .catch(error => {
+        toast.error(
+          "Les éditions n'ont pu être chargées. Merci de réessayer ou de vous reconnecter."
+        );
+      });
   };
 
   const updateDBAndContextWithNewEdition = (event, index) => {
@@ -213,7 +218,12 @@ const CardLineShop = ({ card, indexCard }) => {
     //Telling the API to delete the sell request card
     sellRequestCardAPI
       .delete(card.id)
-      .then(data => setCardHasBeenDeleted(true));
+      .then(data => setCardHasBeenDeleted(true))
+      .catch(error => {
+        toast.error(
+          "La carte n'a pu être supprimée. Merci de réessayer ou de vous reconnecter."
+        );
+      });
   };
 
   //Creating the specific link to get the scryffalID picture. It is composed of a static base, + the 2 first character of the ID, + the ID
@@ -240,17 +250,21 @@ const CardLineShop = ({ card, indexCard }) => {
     <>
       <Tr
         onMouseEnter={e => {
-          setIsOnHover(!isOnHover);
-          setHoverTopOrBottom(hoverClassName(e));
+          if (!isMobile) {
+            setIsOnHover(!isOnHover);
+            setHoverTopOrBottom(hoverClassName(e));
+          }
         }}
         onMouseLeave={() => {
-          setIsOnHover(!isOnHover);
+          if (!isMobile) {
+            setIsOnHover(!isOnHover);
+          }
         }}
         className={sellingBasketLine || ""}
       >
         <Td className="cardPictureHolder">
           {currentCard.name}
-          {isOnHover && (
+          {!isMobile && isOnHover && (
             <div className={hoverTopOrBottom}>
               <img src={urlCard} alt={currentCard.name} />
             </div>

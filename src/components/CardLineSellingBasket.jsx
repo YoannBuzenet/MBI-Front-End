@@ -6,6 +6,8 @@ import sellingBasketAPI from "../services/sellingBasketAPI";
 import canSubmitContext from "../context/canSubmitSellRequestContext";
 import genericCardAPI from "../services/genericCardAPI";
 import CardShopPriceAPI from "../services/CardShopPriceAPI";
+import { isMobile } from "react-device-detect";
+import { toast } from "react-toastify";
 
 //TODO : REQUEST PRICE FOR IS_SIGNED
 
@@ -61,18 +63,24 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
       currentBasket[indexCard].lang,
       currentBasket[indexCard].condition,
       currentBasket[indexCard].isFoil
-    ).then(data => {
-      console.log(data);
-      if (data.data["hydra:member"].length > 0) {
-        contextCopy[indexCard].price = data.data["hydra:member"][0].price;
-      } else {
-        contextCopy[indexCard].price = 0;
-      }
+    )
+      .then(data => {
+        console.log(data);
+        if (data.data["hydra:member"].length > 0) {
+          contextCopy[indexCard].price = data.data["hydra:member"][0].price;
+        } else {
+          contextCopy[indexCard].price = 0;
+        }
 
-      setIsLoading(false);
-      sellingBasketAPI.save(contextCopy);
-      setCurrentBasket(contextCopy);
-    });
+        setIsLoading(false);
+        sellingBasketAPI.save(contextCopy);
+        setCurrentBasket(contextCopy);
+      })
+      .catch(error => {
+        toast.error(
+          "Le prix n'a pu être chargé. Merci d'actualiser votre page ou d'essayer plus tard."
+        );
+      });
   };
 
   const handleDelete = () => {
@@ -110,17 +118,21 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
       <tr
         key={card.id}
         onMouseEnter={e => {
-          setIsOnHover(!isOnHover);
-          setHoverTopOrBottom(hoverClassName(e));
+          if (!isMobile) {
+            setIsOnHover(!isOnHover);
+            setHoverTopOrBottom(hoverClassName(e));
+          }
         }}
         onMouseLeave={() => {
-          setIsOnHover(!isOnHover);
+          if (!isMobile) {
+            setIsOnHover(!isOnHover);
+          }
         }}
         className={sellingBasketLine || ""}
       >
         <td className="cardPictureHolder">
           {card.name}
-          {isOnHover && (
+          {!isMobile && isOnHover && (
             //TODO : change className following the scrolling, to know if the position must be top or bottom, to stay in window
             <div className={hoverTopOrBottom}>
               <img src={urlCard} alt={card.name} />
