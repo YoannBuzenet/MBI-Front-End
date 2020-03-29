@@ -46,6 +46,10 @@ body {
   display: none;
 }
 
+.display-block {
+  display: block;
+}
+
 .cursor-pointer {
   cursor: pointer;
 }

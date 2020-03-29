@@ -412,6 +412,7 @@ const CardLineShop = ({ card, indexCard }) => {
             value={currentCard.price}
           />
         </Td>
+        <Td>{currentCard.quantity * currentCard.price}</Td>
         <Td>
           <i
             className="fas fa-minus-circle delete-from-selling-basket"

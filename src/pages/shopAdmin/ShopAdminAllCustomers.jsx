@@ -3,6 +3,7 @@ import customersAPI from "../../services/customersAPI";
 import axios from "axios";
 import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 import TableLoader from "../../components/loaders/TableLoader";
+import errorHandlingAPI from "../../services/errorHandlingAPI";
 
 const ShopAdminAllCustomers = props => {
   const [listCustomers, setListCustomers] = useState([]);

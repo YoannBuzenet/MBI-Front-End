@@ -5,6 +5,7 @@ import StatusCalculator from "../../components/StatusCalculator";
 import LastInformationCalculator from "../../components/LastInformationCalculator";
 import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 import TableLoader from "../../components/loaders/TableLoader";
+import errorHandlingAPI from "../../services/errorHandlingAPI";
 
 const ShopAdminAllSellRequests = props => {
   //Variable to clean up useEffect Axios

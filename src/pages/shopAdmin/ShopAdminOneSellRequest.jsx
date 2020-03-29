@@ -97,11 +97,6 @@ const ShopAdminOneSellRequest = ({ match }) => {
     return () => source.cancel("");
   }, [id]);
 
-  useEffect(() => {
-    console.log("The global sell request did rerender");
-    console.log(currentAdminSellRequest);
-  }, []);
-
   //ENV VARIABLE TO DEFINE
   const gradingArea = "isEU";
 
@@ -161,9 +156,9 @@ const ShopAdminOneSellRequest = ({ match }) => {
           <p className="sellRequest-status">
             Statut
             {isLoading && (
-              <p className="margin-top-negative-loader">
+              <span className="margin-top-negative-loader display-block">
                 <OneBigLineLoader />
-              </p>
+              </span>
             )}
             {!isLoading && (
               <span className="subInfos">
@@ -174,9 +169,9 @@ const ShopAdminOneSellRequest = ({ match }) => {
           <p className="sellRequest-lastDate">
             Dernière information
             {isLoading && (
-              <p className="margin-top-negative-loader">
+              <span className="margin-top-negative-loader display-block">
                 <OneBigLineLoader />
-              </p>
+              </span>
             )}
             {!isLoading && (
               <span className="subInfos">

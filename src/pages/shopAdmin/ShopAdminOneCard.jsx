@@ -5,6 +5,7 @@ import axios from "axios";
 import ShopSetLangCards from "../../components/shop/ShopSetLangCards";
 import priceBufferContext from "../../context/priceBufferContext";
 import GenericCardInfosContext from "../../context/genericCardInfosContext";
+import errorHandlingAPI from "../../services/errorHandlingAPI";
 
 const ShopAdminOneCard = ({ match }) => {
   //STATE - current card name
