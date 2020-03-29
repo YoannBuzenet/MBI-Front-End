@@ -5,6 +5,7 @@ import StatusCalculator from "../../components/StatusCalculator";
 import LastInformationCalculator from "../../components/LastInformationCalculator";
 import { Link } from "react-router-dom";
 import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
+import OneLineLoader from "../../components/loaders/OneLineLoader";
 
 const ShopAdminCustomer = ({ match }) => {
   const { id } = match.params;
@@ -14,12 +15,15 @@ const ShopAdminCustomer = ({ match }) => {
 
   const [customerData, setCustomerData] = useState();
 
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
     customersAPI
       .findOneById(id, {
         cancelToken: source.token
       })
-      .then(response => setCustomerData(response.data));
+      .then(response => setCustomerData(response.data))
+      .then(() => setIsLoading(false));
 
     console.log(customerData);
 
@@ -36,13 +40,34 @@ const ShopAdminCustomer = ({ match }) => {
         {customerData && customerData.nom} {customerData && customerData.prenom}
       </h1>
       <div className="customer-infos">
-        <p>Name : {customerData && customerData.nom}</p>
-        <p>Prénom : {customerData && customerData.prenom}</p>
-        <p>Email : {customerData && customerData.user.email}</p>
-        <p>Tel : {customerData && customerData.tel}</p>
-        <p>Adress : {customerData && customerData.adress}</p>
-        <p>Postal Code : {customerData && customerData.postalCode}</p>
-        <p>Town : {customerData && customerData.town}</p>
+        <p>
+          Name : {isLoading && <OneLineLoader />}
+          {!isLoading && customerData && customerData.nom}
+        </p>
+        <p>
+          Prénom : {isLoading && <OneLineLoader />}
+          {!isLoading && customerData && customerData.prenom}
+        </p>
+        <p>
+          Email : {isLoading && <OneLineLoader />}
+          {!isLoading && customerData && customerData.user.email}
+        </p>
+        <p>
+          Tel : {isLoading && <OneLineLoader />}
+          {!isLoading && customerData && customerData.tel}
+        </p>
+        <p>
+          Adress : {isLoading && <OneLineLoader />}
+          {!isLoading && customerData && customerData.adress}
+        </p>
+        <p>
+          Postal Code : {isLoading && <OneLineLoader />}
+          {!isLoading && customerData && customerData.postalCode}
+        </p>
+        <p>
+          Town : {isLoading && <OneLineLoader />}
+          {!isLoading && customerData && customerData.town}
+        </p>
       </div>
       <div className="container">
         <Table className="zebra-table">
