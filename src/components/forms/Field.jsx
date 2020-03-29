@@ -8,7 +8,8 @@ const Field = ({
   placeholder,
   idNumber,
   className = "",
-  type = "text"
+  type = "text",
+  required = false
 }) => {
   return (
     <div className="field">
@@ -21,6 +22,7 @@ const Field = ({
         placeholder={placeholder}
         name={name}
         id={idNumber}
+        required={required}
       />
     </div>
   );

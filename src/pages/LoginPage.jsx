@@ -71,6 +71,7 @@ const LoginPage = ({ onLogin, history }) => {
               placeholder="Adresse e-mail..."
               error={error}
               className="form-group"
+              required
             />
 
             <Field
@@ -81,10 +82,11 @@ const LoginPage = ({ onLogin, history }) => {
               onChange={handleChange}
               placeholder="Mot de passe"
               error=""
+              required
             />
             <div className="form-group">
               <button type="submit" className="connecting-button">
-                Je me connecte
+                Se connecter
               </button>
             </div>
           </form>
