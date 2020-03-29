@@ -138,7 +138,7 @@ const RegisterPage = ({ history }) => {
           />
 
           <button type="submit" className="connecting-button">
-            Envoyer
+            S'inscrire
           </button>
         </form>
       </div>
