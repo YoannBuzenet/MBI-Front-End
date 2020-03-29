@@ -1026,6 +1026,16 @@ input.updated {
 }
 
 /**************************
+SHOP ADMIN ONE SELL REQUEST
+**************************/
+
+@media only screen and (max-width: 1000px) {
+  .update-set {
+    background-color: skyblue;
+  }
+}
+
+/**************************
 **SHOP ADMIN ONE CUSTOMER**
 **************************/
 

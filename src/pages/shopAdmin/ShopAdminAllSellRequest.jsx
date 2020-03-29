@@ -38,9 +38,9 @@ const ShopAdminAllSellRequests = props => {
           <Table className="zebra-table">
             <Thead>
               <Tr>
-                <Th>Numéro de Rachat</Th>
+                <Th>Numéro</Th>
                 <Th>Status</Th>
-                <Th>Date Dernier Traitement</Th>
+                <Th>Dernier Traitement</Th>
                 <Th>Nombre de cartes</Th>
                 <Th>Montant</Th>
               </Tr>
