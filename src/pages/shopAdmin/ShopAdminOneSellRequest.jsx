@@ -108,48 +108,52 @@ const ShopAdminOneSellRequest = ({ match }) => {
       <div className="container">
         <h1>One Sell Request</h1>
         <div className="customer-infos">
-          <p>
-            Prénom : {isLoading && <OneLineLoader />}
-            {!isLoading &&
-              currentAdminSellRequest.customer &&
-              currentAdminSellRequest.customer.prenom}
-          </p>
-          <p>
-            Nom : {isLoading && <OneLineLoader />}
-            {!isLoading &&
-              currentAdminSellRequest.customer &&
-              currentAdminSellRequest.customer.nom}
-          </p>
-          <p>
-            Mail : {isLoading && <OneLineLoader />}
-            {!isLoading &&
-              currentAdminSellRequest.customer &&
-              currentAdminSellRequest.customer.user.email}
-          </p>
-          <p>
-            Tel : {isLoading && <OneLineLoader />}
-            {!isLoading &&
-              currentAdminSellRequest.customer &&
-              currentAdminSellRequest.customer.tel}
-          </p>
-          <p>
-            Adresse : {isLoading && <OneLineLoader />}
-            {!isLoading &&
-              currentAdminSellRequest.customer &&
-              currentAdminSellRequest.customer.adress}
-          </p>
-          <p>
-            Code Postal : {isLoading && <OneLineLoader />}
-            {!isLoading &&
-              currentAdminSellRequest.customer &&
-              currentAdminSellRequest.customer.postalCode}
-          </p>
-          <p>
-            Ville : {isLoading && <OneLineLoader />}
-            {!isLoading &&
-              currentAdminSellRequest.customer &&
-              currentAdminSellRequest.customer.town}
-          </p>
+          <div className="customer-left-part">
+            <p>
+              Prénom : {isLoading && <OneLineLoader />}
+              {!isLoading &&
+                currentAdminSellRequest.customer &&
+                currentAdminSellRequest.customer.prenom}
+            </p>
+            <p>
+              Nom : {isLoading && <OneLineLoader />}
+              {!isLoading &&
+                currentAdminSellRequest.customer &&
+                currentAdminSellRequest.customer.nom}
+            </p>
+            <p>
+              Mail : {isLoading && <OneLineLoader />}
+              {!isLoading &&
+                currentAdminSellRequest.customer &&
+                currentAdminSellRequest.customer.user.email}
+            </p>
+            <p>
+              Tel : {isLoading && <OneLineLoader />}
+              {!isLoading &&
+                currentAdminSellRequest.customer &&
+                currentAdminSellRequest.customer.tel}
+            </p>
+          </div>
+          <div className="customer-right-part">
+            <p>
+              Adresse : {isLoading && <OneLineLoader />}
+              {!isLoading &&
+                currentAdminSellRequest.customer &&
+                currentAdminSellRequest.customer.adress}
+            </p>
+            <p>
+              Code Postal : {isLoading && <OneLineLoader />}
+              {!isLoading &&
+                currentAdminSellRequest.customer &&
+                currentAdminSellRequest.customer.postalCode}
+            </p>
+            <p>
+              Ville : {isLoading && <OneLineLoader />}
+              {!isLoading &&
+                currentAdminSellRequest.customer &&
+                currentAdminSellRequest.customer.town}
+            </p>
+          </div>
         </div>
         <div className="sellRequest-infos">
           <p className="sellRequest-status">
