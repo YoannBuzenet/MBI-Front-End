@@ -9,6 +9,8 @@ import EditionChoosingModal from "../EditionChoosingModal";
 import sellRequestAPI from "../../services/sellRequestAPI";
 import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 import FeatherIcon from "feather-icons-react";
+import { isMobile } from "react-device-detect";
+import { toast } from "react-toastify";
 
 const CardLineShop = ({ card, indexCard }) => {
   //Getting the Sell Request state by context
@@ -17,7 +19,7 @@ const CardLineShop = ({ card, indexCard }) => {
   );
 
   //Knowing if the Sell Request is OK to be submitted (no duplicate)
-  const { errorList } = useContext(canSubmitContext);
+  const { errorList, setErrorList } = useContext(canSubmitContext);
 
   //DEFINED langages and Conditions
   const { conditions } = useContext(GenericCardInfosContext);
@@ -129,7 +131,7 @@ const CardLineShop = ({ card, indexCard }) => {
     //console.log("Check SetIsLoad Passage");
     setIsLoaded(true);
     //Blocked setErrorList because cause parent to re-render. Would be good to think about passing it as a state instead of context OR make the provider as near as possible of the content
-    // setErrorList([]);
+    setErrorList([]);
     setCurrentCard({
       ...currentCard,
       [name]: newValue
@@ -189,10 +191,14 @@ const CardLineShop = ({ card, indexCard }) => {
       langNextCard = 9;
     }
 
-    //TOAST IF LANG IS CHANGED
-
     //API Request to update the card in DB
-    sellRequestCardAPI.setUpdate(IRItoUpdate, langNextCard, currentCard.id);
+    sellRequestCardAPI
+      .setUpdate(IRItoUpdate, langNextCard, currentCard.id)
+      .catch(() => {
+        toast.error(
+          "La carte n'a pu être mise à jour. Merci de réessayer ou de vous reconnecter."
+        );
+      });
 
     //Updating the context. Updating this state triggers a context update on useEffect
     setCurrentCard({
@@ -245,7 +251,6 @@ const CardLineShop = ({ card, indexCard }) => {
         <Td className="cardPictureHolder">
           {currentCard.name}
           {isOnHover && (
-            //TODO : change className following the scrolling, to know if the position must be top or bottom, to stay in window
             <div className={hoverTopOrBottom}>
               <img src={urlCard} alt={currentCard.name} />
             </div>
@@ -264,7 +269,10 @@ const CardLineShop = ({ card, indexCard }) => {
             />
           )}
         </Td>
-        <Td onClick={event => changeEdition(event, currentCard)}>
+        <Td
+          onClick={event => changeEdition(event, currentCard)}
+          className="update-set pointer"
+        >
           <FeatherIcon
             icon="refresh-ccw"
             size="20"
