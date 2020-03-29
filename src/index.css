@@ -9,7 +9,7 @@
   --main-bg-color: coral;
   --main-bg-color-medium: rgba(255, 127, 80, 0.5);
   --main-bg-color-weak: rgba(255, 127, 80, 0.3);
-  --background-color-very-weak: hsl(16, 100%, 95%);
+  --background-color: #f9f9f9;
   --border-radius-form-field: 8px;
 }
 
@@ -35,7 +35,7 @@ body {
 }
 
 #root {
-  background-color: #f9f9f9;
+  background-color: var(--background-color);
 }
 
 .center-text {
@@ -113,10 +113,6 @@ h2 {
 
 .small-text {
   font-size: 1.2rem;
-}
-
-.featherIcon {
-  color: black;
 }
 
 .blackDiv {
@@ -236,6 +232,18 @@ h2 {
       transform: rotate(360deg);
     }
   }
+}
+
+/**************************
+********ICONS************
+**************************/
+
+.featherIcon {
+  color: black;
+}
+
+.downsize-icon {
+  margin-bottom: -5px;
 }
 
 /**************************
@@ -736,7 +744,6 @@ div.connect p {
 
 .setList-table {
   text-align: left;
-  /* background-color: var(--background-color-very-weak); */
 }
 
 .setList-table td > a {
@@ -1012,11 +1019,28 @@ input.updated {
 **SHOP ADMIN ONE CUSTOMER**
 **************************/
 
+.customer-identity {
+  border: 1px solid black;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.customer-full-name {
+  text-align: left;
+  margin: 0;
+  margin-left: 0.5rem;
+}
+
 span.customer_firstName {
   text-transform: capitalize;
 }
 span.customer_lastName {
   text-transform: uppercase;
+}
+
+.customer-infos {
+  display: flex;
+  justify-content: space-evenly;
 }
 
 /**************************
