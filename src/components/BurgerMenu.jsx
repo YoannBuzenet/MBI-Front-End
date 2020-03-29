@@ -5,6 +5,7 @@ import BlackDiv from "./BlackDiv";
 import isResponsiveMenuDisplayedContext from "../context/menuDisplayedContext";
 import AuthContext from "../context/authContext";
 import BurgerMenuShop from "./shop/BurgerMenuShop";
+import BlackDivModalContext from "../context/blackDivModalContext";
 
 const BurgerMenu = ({ history }) => {
   //Current Selling Request Basket
@@ -12,6 +13,11 @@ const BurgerMenu = ({ history }) => {
 
   //Current Authentication
   const { authenticationInfos } = useContext(AuthContext);
+
+  //Black Div control
+  const { isBlackDivModalDisplayed, setIsBlackDivModalDisplayed } = useContext(
+    BlackDivModalContext
+  );
 
   //Is Menu Responsive Displayed
   const {
@@ -21,7 +27,7 @@ const BurgerMenu = ({ history }) => {
 
   const handleClick = event => {
     setIsResponsiveMenuDisplayed(!isResponsiveMenuDisplayed);
-    // return console.log(event);
+    setIsBlackDivModalDisplayed(!isBlackDivModalDisplayed);
   };
 
   return (
@@ -42,7 +48,6 @@ const BurgerMenu = ({ history }) => {
         authenticationInfos.user.roles.includes("ROLE_SHOP") && (
           <BurgerMenuShop history={history} />
         )}
-      {isResponsiveMenuDisplayed && <BlackDiv />}
     </div>
   );
 };
