@@ -187,9 +187,9 @@ const ShopAdminOneSellRequest = ({ match }) => {
           <Table className="zebra-table">
             <Thead>
               <Tr>
-                <Th>Nom de la carte</Th>
+                <Th>Nom</Th>
                 <Th>Edition</Th>
-                <Th>Changer Edition</Th>
+                <Th>Modifier</Th>
                 <Th>Langue</Th>
                 <Th>Etat</Th>
                 <Th>Foil</Th>
