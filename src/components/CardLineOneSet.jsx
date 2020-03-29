@@ -7,6 +7,7 @@ import CardShopPriceAPI from "../services/CardShopPriceAPI";
 import cardsOneSetContext from "../context/cardsOneSetContext";
 import { isMobile } from "react-device-detect";
 import { toast } from "react-toastify";
+import FeatherIcon from "feather-icons-react";
 
 const CardLineOneSet = ({
   card,
@@ -238,8 +239,10 @@ const CardLineOneSet = ({
         </td>
 
         <td className="AddButton">
-          <i
-            className="fas fa-plus-circle add-item-basket"
+          <FeatherIcon
+            icon="plus-circle"
+            size="20"
+            className="downsize-icon add-item-basket"
             onClick={() => {
               console.log(currentCard);
               return handleAddSellingBasket(
@@ -247,7 +250,7 @@ const CardLineOneSet = ({
                 cardsContext[cardID]
               );
             }}
-          ></i>
+          />
         </td>
       </tr>
     </>

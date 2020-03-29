@@ -5,6 +5,7 @@ import genericCardAPI from "../services/genericCardAPI";
 import cardsAPI from "../services/cardsAPI";
 import CardShopPriceAPI from "../services/CardShopPriceAPI";
 import { isMobile } from "react-device-detect";
+import FeatherIcon from "feather-icons-react";
 
 //TODO : End isSigned (handleChange not done, update context not done)
 
@@ -221,12 +222,15 @@ const CardLine = ({
         </td>
         <td>{currentCard.price || 0} </td>
         <td className="AddButton">
-          <i
-            className="fas fa-plus-circle add-item-basket"
+          <FeatherIcon
+            icon="plus-circle"
+            size="20"
+            className="downsize-icon add-item-basket"
             onClick={() => {
+              console.log(currentCard);
               return handleAddSellingBasket(currentBasket, currentCard);
             }}
-          ></i>
+          />
         </td>
       </tr>
     </>
