@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import axios from "axios";
 import sellRequestAPI from "../../services/sellRequestAPI";
 import StatusCalculator from "../../components/StatusCalculator";
@@ -8,14 +8,12 @@ import CardLineShopStuck from "../../components/shop/CardLineShopStuck";
 import AdminSellRequestContext from "../../context/adminSellRequestContext";
 import ShopSellRequestStatusValidator from "../../components/shop/ShopSellRequestStatusValidator";
 import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
-import { toast } from "react-toastify";
+import OneLineLoader from "../../components/loaders/OneLineLoader";
 
 const ShopAdminOneSellRequest = ({ match }) => {
   const { id } = match.params;
 
-  // const [currentSellRequest, setCurrentSellRequest] = useState({
-  //   sellRequestCards: []
-  // });
+  const [isLoading, setIsLoading] = useState(true);
 
   const { currentAdminSellRequest, setCurrentAdminSellRequest } = useContext(
     AdminSellRequestContext
@@ -85,6 +83,9 @@ const ShopAdminOneSellRequest = ({ match }) => {
             ]
           });
         })
+        .then(() => {
+          setIsLoading(false);
+        })
         .catch(err => {
           console.log(err);
         });
@@ -103,59 +104,68 @@ const ShopAdminOneSellRequest = ({ match }) => {
 
   return (
     <>
-      <h1>One Sell Request</h1>
-      <div className="customer-infos">
-        <p>
-          Prénom :{" "}
-          {currentAdminSellRequest.customer &&
-            currentAdminSellRequest.customer.prenom}
-        </p>
-        <p>
-          Nom :{" "}
-          {currentAdminSellRequest.customer &&
-            currentAdminSellRequest.customer.nom}
-        </p>
-        <p>
-          Mail :{" "}
-          {currentAdminSellRequest.customer &&
-            currentAdminSellRequest.customer.user.email}
-        </p>
-        <p>
-          Tel :{" "}
-          {currentAdminSellRequest.customer &&
-            currentAdminSellRequest.customer.tel}
-        </p>
-        <p>
-          Adresse :{" "}
-          {currentAdminSellRequest.customer &&
-            currentAdminSellRequest.customer.adress}
-        </p>
-        <p>
-          Code Postal :{" "}
-          {currentAdminSellRequest.customer &&
-            currentAdminSellRequest.customer.postalCode}
-        </p>
-        <p>
-          Ville :{" "}
-          {currentAdminSellRequest.customer &&
-            currentAdminSellRequest.customer.town}
-        </p>
-      </div>
-      <div className="sellRequest-infos">
-        <p className="sellRequest-status">
-          Statut
-          <span className="subInfos">
-            <StatusCalculator sellRequest={currentAdminSellRequest} />
-          </span>
-        </p>
-        <p className="sellRequest-lastDate">
-          Dernière information
-          <span className="subInfos">
-            <LastInformationCalculator sellRequest={currentAdminSellRequest} />
-          </span>
-        </p>
-      </div>
       <div className="container">
+        <h1>One Sell Request</h1>
+        <div className="customer-infos">
+          <p>
+            Prénom : {isLoading && <OneLineLoader />}
+            {!isLoading &&
+              currentAdminSellRequest.customer &&
+              currentAdminSellRequest.customer.prenom}
+          </p>
+          <p>
+            Nom : {isLoading && <OneLineLoader />}
+            {!isLoading &&
+              currentAdminSellRequest.customer &&
+              currentAdminSellRequest.customer.nom}
+          </p>
+          <p>
+            Mail : {isLoading && <OneLineLoader />}
+            {!isLoading &&
+              currentAdminSellRequest.customer &&
+              currentAdminSellRequest.customer.user.email}
+          </p>
+          <p>
+            Tel : {isLoading && <OneLineLoader />}
+            {!isLoading &&
+              currentAdminSellRequest.customer &&
+              currentAdminSellRequest.customer.tel}
+          </p>
+          <p>
+            Adresse : {isLoading && <OneLineLoader />}
+            {!isLoading &&
+              currentAdminSellRequest.customer &&
+              currentAdminSellRequest.customer.adress}
+          </p>
+          <p>
+            Code Postal : {isLoading && <OneLineLoader />}
+            {!isLoading &&
+              currentAdminSellRequest.customer &&
+              currentAdminSellRequest.customer.postalCode}
+          </p>
+          <p>
+            Ville : {isLoading && <OneLineLoader />}
+            {!isLoading &&
+              currentAdminSellRequest.customer &&
+              currentAdminSellRequest.customer.town}
+          </p>
+        </div>
+        <div className="sellRequest-infos">
+          <p className="sellRequest-status">
+            Statut
+            <span className="subInfos">
+              <StatusCalculator sellRequest={currentAdminSellRequest} />
+            </span>
+          </p>
+          <p className="sellRequest-lastDate">
+            Dernière information
+            <span className="subInfos">
+              <LastInformationCalculator
+                sellRequest={currentAdminSellRequest}
+              />
+            </span>
+          </p>
+        </div>
         <Table className="zebra-table">
           <Thead>
             <Tr>
@@ -227,8 +237,9 @@ const ShopAdminOneSellRequest = ({ match }) => {
             </tr>
           </Tbody>
         </Table>
+
+        <ShopSellRequestStatusValidator />
       </div>
-      <ShopSellRequestStatusValidator />
     </>
   );
 };
