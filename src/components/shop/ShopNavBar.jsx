@@ -59,7 +59,7 @@ const ShopNavbar = ({ history }) => {
           <div className="menu-links-left">
             Accès Admin
             <Link to="/" className="classic-links">
-              Voir le site client
+              Site client
             </Link>
             <SearchCardBar />
           </div>

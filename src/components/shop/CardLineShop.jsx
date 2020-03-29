@@ -8,6 +8,7 @@ import cardsAPI from "../../services/cardsAPI";
 import EditionChoosingModal from "../EditionChoosingModal";
 import sellRequestAPI from "../../services/sellRequestAPI";
 import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
+import FeatherIcon from "feather-icons-react";
 
 const CardLineShop = ({ card, indexCard }) => {
   //Getting the Sell Request state by context
@@ -263,7 +264,13 @@ const CardLineShop = ({ card, indexCard }) => {
             />
           )}
         </Td>
-        <Td onClick={event => changeEdition(event, currentCard)}>+</Td>
+        <Td onClick={event => changeEdition(event, currentCard)}>
+          <FeatherIcon
+            icon="refresh-ccw"
+            size="20"
+            className="downsize-icon pointer"
+          />
+        </Td>
         <Td>
           {/* Select will have to be refactored with a .map on a Select Component */}
           {/* Select LANG */}
