@@ -1043,6 +1043,10 @@ span.customer_lastName {
   justify-content: space-evenly;
 }
 
+.customer-infos p {
+  text-align: left;
+}
+
 /**************************
 *******SHOP SETTINGS******
 **************************/

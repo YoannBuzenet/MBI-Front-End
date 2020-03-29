@@ -69,7 +69,9 @@ const ShopAdminCustomer = ({ match }) => {
                 {!isLoading && customerData && customerData.user.email}
               </p>
               <p>
-                Tel : {isLoading && <OneLineLoader />}
+                <FeatherIcon icon="phone" size="26" className="downsize-icon" />
+                <span> </span>
+                {isLoading && <OneLineLoader />}
                 {!isLoading && customerData && customerData.tel}
               </p>
             </div>
