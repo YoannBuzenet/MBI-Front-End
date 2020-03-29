@@ -351,7 +351,7 @@ function App() {
 
                       {/* Admin Part */}
 
-                      <LoggedShopRouteComponent
+                      <LoggedShopRouteRender
                         path="/shopadmin/sell_requests/:id"
                         component={ShopAdminOneSellRequest}
                       />
