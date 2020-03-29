@@ -6,6 +6,8 @@ import LastInformationCalculator from "../../components/LastInformationCalculato
 import { Link } from "react-router-dom";
 import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 import OneLineLoader from "../../components/loaders/OneLineLoader";
+import FeatherIcon from "feather-icons-react";
+import OneBigLineLoader from "../../components/loaders/OneBigLineLoader";
 
 const ShopAdminCustomer = ({ match }) => {
   const { id } = match.params;
@@ -36,37 +38,58 @@ const ShopAdminCustomer = ({ match }) => {
 
   return (
     <>
-      <h1>
-        <span className="customer_firstName">
-          {customerData && customerData.prenom}
-        </span>{" "}
-        <span className="customer_lastName">
-          {customerData && customerData.nom}
-        </span>
-      </h1>
-      <div className="customer-infos">
-        <p>
-          Email : {isLoading && <OneLineLoader />}
-          {!isLoading && customerData && customerData.user.email}
-        </p>
-        <p>
-          Tel : {isLoading && <OneLineLoader />}
-          {!isLoading && customerData && customerData.tel}
-        </p>
-        <p>
-          Adress : {isLoading && <OneLineLoader />}
-          {!isLoading && customerData && customerData.adress}
-        </p>
-        <p>
-          Postal Code : {isLoading && <OneLineLoader />}
-          {!isLoading && customerData && customerData.postalCode}
-        </p>
-        <p>
-          Town : {isLoading && <OneLineLoader />}
-          {!isLoading && customerData && customerData.town}
-        </p>
-      </div>
       <div className="container">
+        <div className="customer-identity">
+          <h1 className="customer-full-name">
+            <span className="customer_firstName">
+              {isLoading && (
+                <>
+                  <OneBigLineLoader />
+                  <span> </span>
+                  <OneBigLineLoader />
+                </>
+              )}
+              {!isLoading && customerData && customerData.prenom}
+            </span>
+            <span> </span>
+            <span className="customer_lastName">
+              {customerData && customerData.nom}
+            </span>
+          </h1>
+          <div className="customer-infos">
+            <div className="customer-left-part">
+              <p>
+                <FeatherIcon
+                  icon="at-sign"
+                  size="26"
+                  className="downsize-icon"
+                />
+                <span> </span>
+                {isLoading && <OneLineLoader />}
+                {!isLoading && customerData && customerData.user.email}
+              </p>
+              <p>
+                Tel : {isLoading && <OneLineLoader />}
+                {!isLoading && customerData && customerData.tel}
+              </p>
+            </div>
+            <div className="customer-right-part">
+              <p>
+                Adress : {isLoading && <OneLineLoader />}
+                {!isLoading && customerData && customerData.adress}
+              </p>
+              <p>
+                Postal Code : {isLoading && <OneLineLoader />}
+                {!isLoading && customerData && customerData.postalCode}
+              </p>
+              <p>
+                Town : {isLoading && <OneLineLoader />}
+                {!isLoading && customerData && customerData.town}
+              </p>
+            </div>
+          </div>
+        </div>
+
         <Table className="zebra-table">
           <Thead>
             <Tr>
