@@ -128,7 +128,8 @@ const ShopAdminOneCard = ({ match }) => {
         })
         .then(data =>
           buildCompletePriceContext(data.data["hydra:member"], lang, conditions)
-        );
+        )
+        .catch(error => errorHandlingAPI.check401Unauthorized(error));
 
       return () => source.cancel("");
     }

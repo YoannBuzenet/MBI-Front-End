@@ -8,6 +8,7 @@ import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 import OneLineLoader from "../../components/loaders/OneLineLoader";
 import FeatherIcon from "feather-icons-react";
 import OneBigLineLoader from "../../components/loaders/OneBigLineLoader";
+import errorHandlingAPI from "../../services/errorHandlingAPI";
 
 const ShopAdminCustomer = ({ match }) => {
   const { id } = match.params;
@@ -25,7 +26,8 @@ const ShopAdminCustomer = ({ match }) => {
         cancelToken: source.token
       })
       .then(response => setCustomerData(response.data))
-      .then(() => setIsLoading(false));
+      .then(() => setIsLoading(false))
+      .catch(error => errorHandlingAPI.check401Unauthorized(error));
 
     console.log(customerData);
 
@@ -61,7 +63,7 @@ const ShopAdminCustomer = ({ match }) => {
               <p>
                 <FeatherIcon
                   icon="at-sign"
-                  size="26"
+                  size="20"
                   className="downsize-icon"
                 />
                 <span> </span>
@@ -69,7 +71,7 @@ const ShopAdminCustomer = ({ match }) => {
                 {!isLoading && customerData && customerData.user.email}
               </p>
               <p>
-                <FeatherIcon icon="phone" size="26" className="downsize-icon" />
+                <FeatherIcon icon="phone" size="20" className="downsize-icon" />
                 <span> </span>
                 {isLoading && <OneLineLoader />}
                 {!isLoading && customerData && customerData.tel}
@@ -77,7 +79,9 @@ const ShopAdminCustomer = ({ match }) => {
             </div>
             <div className="customer-right-part">
               <p>
-                Adress : {isLoading && <OneLineLoader />}
+                <FeatherIcon icon="home" size="20" className="downsize-icon" />
+                <span> </span>
+                {isLoading && <OneLineLoader />}
                 {!isLoading && customerData && customerData.adress}
               </p>
               <p>

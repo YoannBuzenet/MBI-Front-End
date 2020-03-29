@@ -254,6 +254,12 @@ h2 {
   margin-bottom: -7px;
 }
 
+.margin-top-negative-loader {
+  margin-top: 5px;
+  margin-left: 0;
+  text-align: left;
+}
+
 /**************************
 ********TABLES************
 **************************/

@@ -10,6 +10,8 @@ import ShopSellRequestStatusValidator from "../../components/shop/ShopSellReques
 import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 import OneLineLoader from "../../components/loaders/OneLineLoader";
 import TableLoader from "../../components/loaders/TableLoader";
+import OneBigLineLoader from "../../components/loaders/OneBigLineLoader";
+import errorHandlingAPI from "../../services/errorHandlingAPI";
 
 const ShopAdminOneSellRequest = ({ match }) => {
   const { id } = match.params;
@@ -88,7 +90,7 @@ const ShopAdminOneSellRequest = ({ match }) => {
           setIsLoading(false);
         })
         .catch(err => {
-          console.log(err);
+          errorHandlingAPI.check401Unauthorized(err);
         });
     }
 
@@ -158,17 +160,31 @@ const ShopAdminOneSellRequest = ({ match }) => {
         <div className="sellRequest-infos">
           <p className="sellRequest-status">
             Statut
-            <span className="subInfos">
-              <StatusCalculator sellRequest={currentAdminSellRequest} />
-            </span>
+            {isLoading && (
+              <p className="margin-top-negative-loader">
+                <OneBigLineLoader />
+              </p>
+            )}
+            {!isLoading && (
+              <span className="subInfos">
+                <StatusCalculator sellRequest={currentAdminSellRequest} />
+              </span>
+            )}
           </p>
           <p className="sellRequest-lastDate">
             Dernière information
-            <span className="subInfos">
-              <LastInformationCalculator
-                sellRequest={currentAdminSellRequest}
-              />
-            </span>
+            {isLoading && (
+              <p className="margin-top-negative-loader">
+                <OneBigLineLoader />
+              </p>
+            )}
+            {!isLoading && (
+              <span className="subInfos">
+                <LastInformationCalculator
+                  sellRequest={currentAdminSellRequest}
+                />
+              </span>
+            )}
           </p>
         </div>
         {isLoading && <TableLoader />}
