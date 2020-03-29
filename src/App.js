@@ -185,6 +185,7 @@ function App() {
   const NavbarWithRouter = withRouter(Navbar);
   const ShopNavbarWithRouter = withRouter(ShopNavbar);
 
+  //TODO : CHECK ALSO IS_SIGNED
   //VERY IMPORTANT Function to add cards to Selling Basket.
   //We put it in App component because it need the use of hooks.
   const handleAddSellingBasket = (currentBasket, card) => {
@@ -234,6 +235,7 @@ function App() {
     }
   };
 
+  //TODO : CHECK ALSO IS_SIGNED
   //This fonction should be rewritten to get O LOG N space time & complexity
   // Currenlty it is N²
   //To do this, get all the relevant information and hash them into ONE integer. Then sort this array following that integer.
