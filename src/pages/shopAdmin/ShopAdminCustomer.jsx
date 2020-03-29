@@ -29,14 +29,8 @@ const ShopAdminCustomer = ({ match }) => {
       .then(() => setIsLoading(false))
       .catch(error => errorHandlingAPI.check401Unauthorized(error));
 
-    console.log(customerData);
-
     return () => source.cancel("");
   }, []);
-
-  useEffect(() => {
-    console.log(customerData);
-  }, [customerData]);
 
   return (
     <>
