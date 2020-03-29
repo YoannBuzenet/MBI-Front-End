@@ -5,6 +5,8 @@ import genericCardAPI from "../services/genericCardAPI";
 import cardsAPI from "../services/cardsAPI";
 import CardShopPriceAPI from "../services/CardShopPriceAPI";
 import cardsOneSetContext from "../context/cardsOneSetContext";
+import { isMobile } from "react-device-detect";
+import { toast } from "react-toastify";
 
 const CardLineOneSet = ({
   card,
@@ -70,18 +72,24 @@ const CardLineOneSet = ({
       cardsContext[cardID].lang,
       cardsContext[cardID].condition,
       cardsContext[cardID].isFoil
-    ).then(data => {
-      console.log(data);
-      if (data.data["hydra:member"].length > 0) {
-        contextCopy[cardID].price = data.data["hydra:member"][0].price;
-      } else {
-        contextCopy[cardID].price = 0;
-      }
-      setIsLoading(false);
-      //mutating context and not seting it to gain performance
+    )
+      .then(data => {
+        console.log(data);
+        if (data.data["hydra:member"].length > 0) {
+          contextCopy[cardID].price = data.data["hydra:member"][0].price;
+        } else {
+          contextCopy[cardID].price = 0;
+        }
+        setIsLoading(false);
+        //mutating context and not seting it to gain performance
 
-      setCardsContext(contextCopy);
-    });
+        setCardsContext(contextCopy);
+      })
+      .catch(error => {
+        toast.error(
+          "Le prix n'a pu être chargé. Merci de réactualiser votre page ou d'essayer plus tard."
+        );
+      });
     //TIMEOUT SETUP DO NOT ERASE
     // setTimer(setTimeout(() => triggerAPIRequests(), WAIT_INTERVAL));
 
@@ -102,16 +110,20 @@ const CardLineOneSet = ({
       <tr
         key={index}
         onMouseEnter={e => {
-          setIsOnHover(!isOnHover);
-          setHoverTopOrBottom(hoverClassName(e));
+          if (!isMobile) {
+            setIsOnHover(!isOnHover);
+            setHoverTopOrBottom(hoverClassName(e));
+          }
         }}
         onMouseLeave={() => {
-          setIsOnHover(!isOnHover);
+          if (!isMobile) {
+            setIsOnHover(!isOnHover);
+          }
         }}
       >
         <td className="cardPictureHolder">
           {cardsContext[cardID].name}
-          {isOnHover && (
+          {!isMobile && isOnHover && (
             <div className={hoverTopOrBottom}>
               <img src={urlPictureCard} alt={card.name} />
             </div>

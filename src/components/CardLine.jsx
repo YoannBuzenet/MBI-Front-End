@@ -4,6 +4,7 @@ import GenericCardInfosContext from "../context/genericCardInfosContext";
 import genericCardAPI from "../services/genericCardAPI";
 import cardsAPI from "../services/cardsAPI";
 import CardShopPriceAPI from "../services/CardShopPriceAPI";
+import { isMobile } from "react-device-detect";
 
 //TODO : End isSigned (handleChange not done, update context not done)
 
@@ -103,16 +104,20 @@ const CardLine = ({
       <tr
         key={index}
         onMouseEnter={e => {
-          setIsOnHover(!isOnHover);
-          setHoverTopOrBottom(hoverClassName(e));
+          if (!isMobile) {
+            setIsOnHover(!isOnHover);
+            setHoverTopOrBottom(hoverClassName(e));
+          }
         }}
         onMouseLeave={() => {
-          setIsOnHover(!isOnHover);
+          if (!isMobile) {
+            setIsOnHover(!isOnHover);
+          }
         }}
       >
         <td className="cardPictureHolder">
           {card.name}
-          {isOnHover && (
+          {!isMobile && isOnHover && (
             <div className={hoverTopOrBottom}>
               <img src={urlPictureCard} alt={card.name} />
             </div>
