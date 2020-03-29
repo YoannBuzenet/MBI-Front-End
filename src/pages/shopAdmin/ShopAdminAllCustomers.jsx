@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import customersAPI from "../../services/customersAPI";
 import axios from "axios";
-import { Link } from "react-router-dom";
 import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 
 const ShopAdminAllCustomers = props => {
@@ -22,7 +21,7 @@ const ShopAdminAllCustomers = props => {
 
       return () => source.cancel("");
     }
-  }, []);
+  }, [listCustomers]);
   return (
     <>
       <h1>Customers</h1>

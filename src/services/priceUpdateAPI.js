@@ -74,7 +74,7 @@ function smoothNumbers(price) {
   } else {
     price = roundUnit50Down(price);
   }
-  return price;
+  return price.toFixed(2);
 }
 
 export default {
