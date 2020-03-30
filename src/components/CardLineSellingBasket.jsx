@@ -8,6 +8,9 @@ import genericCardAPI from "../services/genericCardAPI";
 import CardShopPriceAPI from "../services/CardShopPriceAPI";
 import { isMobile } from "react-device-detect";
 import { toast } from "react-toastify";
+import FeatherIcon from "feather-icons-react";
+import CardDisplayOnPageContext from "../context/cardDisplayOnPageContext";
+import BlackDivModalContext from "../context/blackDivModalContext";
 
 //TODO : REQUEST PRICE FOR IS_SIGNED
 
@@ -17,6 +20,11 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
 
   //Knowing if the Sell Request is OK to be submitted (no duplicate)
   const { errorList, setErrorList } = useContext(canSubmitContext);
+
+  //Card display on whole page
+  const { cardDisplayInformation, setCardDisplayInformation } = useContext(
+    CardDisplayOnPageContext
+  );
 
   //DEFINED langages and Conditions
   const { lang, conditions } = useContext(GenericCardInfosContext);
@@ -113,6 +121,10 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
 
   const hoverClassName = e => genericCardAPI.isPictureDisplayedTopOrBottom(e);
 
+  const displayCardPlainPage = event => {
+    console.log("yay");
+  };
+
   return (
     <>
       <tr
@@ -130,7 +142,15 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
         }}
         className={sellingBasketLine || ""}
       >
-        <td className="cardPictureHolder">
+        <td
+          className="cardPictureHolder"
+          onClick={event => {
+            if (isMobile) {
+              //FUNCTION TO DISPLAY THE CARD
+              displayCardPlainPage(event);
+            }
+          }}
+        >
           {card.name}
           {!isMobile && isOnHover && (
             //TODO : change className following the scrolling, to know if the position must be top or bottom, to stay in window
@@ -282,13 +302,15 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
         </td>
         <td>{card.price * card.quantity}</td>
         <td className="AddButton">
-          <i
-            className="fas fa-minus-circle delete-from-selling-basket "
+          <FeatherIcon
+            icon="minus-circle"
+            size="20"
+            className="downsize-icon pointer"
             onClick={() => {
               console.log(card);
               return handleDelete();
             }}
-          ></i>
+          />
         </td>
       </tr>
     </>
