@@ -8,8 +8,6 @@ import { isMobile } from "react-device-detect";
 import FeatherIcon from "feather-icons-react";
 import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 
-//TODO : End isSigned (handleChange not done, update context not done)
-
 const CardLine = ({
   card,
   handleAddSellingBasket,

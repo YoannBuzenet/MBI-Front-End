@@ -215,6 +215,8 @@ function App() {
   //VERY IMPORTANT Function to add cards to Selling Basket.
   //We put it in App component because it need the use of hooks.
   const handleAddSellingBasket = (currentBasket, card) => {
+    console.log(card);
+    console.log(currentBasket);
     //If the selling basket is empty, just add the new card.
     if (currentBasket.length === 0) {
       setCurrentBasket([card]);
@@ -229,7 +231,8 @@ function App() {
         currentBasket[i].condition === card.condition &&
         currentBasket[i].lang === card.lang &&
         currentBasket[i].isFoil === card.isFoil &&
-        currentBasket[i].uuid === card.uuid
+        currentBasket[i].uuid === card.uuid &&
+        currentBasket[i].isSigned === card.isSigned
       ) {
         var updatedCard = currentBasket[i];
         //updating quantities in the basket with destructuration (to stay tuned with async updates)
@@ -279,7 +282,8 @@ function App() {
           currentBasket[i].condition === currentBasket[j].condition &&
           currentBasket[i].lang === currentBasket[j].lang &&
           currentBasket[i].isFoil === currentBasket[j].isFoil &&
-          currentBasket[i].uuid === currentBasket[j].uuid
+          currentBasket[i].uuid === currentBasket[j].uuid &&
+          currentBasket[i].isSigned === currentBasket[j].isSigned
         ) {
           areThereDuplicate = true;
           indexItem1 = i;

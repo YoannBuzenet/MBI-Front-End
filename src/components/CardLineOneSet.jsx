@@ -8,11 +8,12 @@ import cardsOneSetContext from "../context/cardsOneSetContext";
 import { isMobile } from "react-device-detect";
 import { toast } from "react-toastify";
 import FeatherIcon from "feather-icons-react";
-import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
+import { Tr, Td } from "react-super-responsive-table";
 
 const CardLineOneSet = ({
   card,
   cardID,
+  id,
   handleAddSellingBasket,
   index,
   setName,
@@ -50,7 +51,6 @@ const CardLineOneSet = ({
   // const triggerAPIRequests = () => console.log("trigger");
 
   const handleChange = ({ currentTarget }) => {
-    console.log(cardsContext[cardID]);
     setIsLoading(true);
     //TIMEOUT SETUP DO NOT ERASE
     // setTimer(clearTimeout(timer));
