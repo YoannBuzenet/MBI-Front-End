@@ -71,7 +71,7 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
     //Updating price
     CardShopPriceAPI.getOnePrice(
       shopID,
-      currentBasket[indexCard].cardID,
+      currentBasket[indexCard].id,
       currentBasket[indexCard].lang,
       currentBasket[indexCard].condition,
       currentBasket[indexCard].isFoil
@@ -153,6 +153,7 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
         <Td
           className="cardPictureHolder"
           onClick={event => {
+            console.log(currentBasket[indexCard].id);
             if (isMobile) {
               //FUNCTION TO DISPLAY THE CARD
               displayCardPlainPage(event, urlCard);

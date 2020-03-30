@@ -45,6 +45,7 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
     for (let i = 0; i < data.length; i++) {
       contextCopy[data[i]["@id"].substr(7)] = {
         cardID: parseInt(data[i]["@id"].substr(7)),
+        id: parseInt(data[i]["@id"].substr(7)),
         hasfoil: data[i].hasfoil,
         hasnonfoil: data[i].hasnonfoil,
         name: data[i].name,

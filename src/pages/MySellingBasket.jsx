@@ -7,6 +7,7 @@ import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 
 const MyCurrentSellRequest = ({ history, checkForDuplicates }) => {
   const { currentBasket } = useContext(SellingBasketContext);
+  console.log(currentBasket);
 
   //Knowing if the Sell Request is OK to be submitted (no duplicate)
   // const { errorList, setErrorList } = useContext(canSubmitContext);
