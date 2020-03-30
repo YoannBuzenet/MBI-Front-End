@@ -11,6 +11,7 @@ import { toast } from "react-toastify";
 import FeatherIcon from "feather-icons-react";
 import CardDisplayOnPageContext from "../context/cardDisplayOnPageContext";
 import BlackDivModalContext from "../context/blackDivModalContext";
+import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 
 //TODO : REQUEST PRICE FOR IS_SIGNED
 
@@ -22,9 +23,7 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
   const { errorList, setErrorList } = useContext(canSubmitContext);
 
   //Black Div control
-  const { isBlackDivModalDisplayed, setIsBlackDivModalDisplayed } = useContext(
-    BlackDivModalContext
-  );
+  const { setIsBlackDivModalDisplayed } = useContext(BlackDivModalContext);
 
   //Card display on whole page
   const { cardDisplayInformation, setCardDisplayInformation } = useContext(
@@ -32,7 +31,7 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
   );
 
   //DEFINED langages and Conditions
-  const { lang, conditions } = useContext(GenericCardInfosContext);
+  const { conditions } = useContext(GenericCardInfosContext);
 
   //Saving the Hover state
   const [isOnHover, setIsOnHover] = useState(false);
@@ -132,13 +131,11 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
     newDisplayContext.isDisplayed = true;
     setCardDisplayInformation(newDisplayContext);
     setIsBlackDivModalDisplayed(true);
-
-    console.log("yay");
   };
 
   return (
     <>
-      <tr
+      <Tr
         key={card.id}
         onMouseEnter={e => {
           if (!isMobile) {
@@ -153,7 +150,7 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
         }}
         className={sellingBasketLine || ""}
       >
-        <td
+        <Td
           className="cardPictureHolder"
           onClick={event => {
             if (isMobile) {
@@ -169,9 +166,9 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
               <img src={urlCard} alt={card.name} />
             </div>
           )}
-        </td>
-        <td>{card.set}</td>
-        <td>
+        </Td>
+        <Td>{card.set}</Td>
+        <Td>
           {/* Select will have to be refactored with a .map on a Select Component */}
           <select
             name="lang"
@@ -214,8 +211,8 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
               <option value="9">EN</option>
             )}
           </select>
-        </td>
-        <td>
+        </Td>
+        <Td>
           <select
             name="condition"
             id={card.cardName + "id2"}
@@ -246,8 +243,8 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
                     )
               : null}
           </select>
-        </td>
-        <td>
+        </Td>
+        <Td>
           <select
             name="isFoil"
             id={card.cardName + "id4"}
@@ -265,9 +262,9 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
               </option>
             )}
           </select>
-        </td>
+        </Td>
 
-        <td>
+        <Td>
           <select
             name="isSigned"
             value={card.isSigned}
@@ -282,9 +279,9 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
               {card.isSigned === "Yes" ? "No" : "Yes"}
             </option>
           </select>
-        </td>
+        </Td>
 
-        <td>
+        <Td>
           <select
             name="quantity"
             id={card.cardName + "id3"}
@@ -306,13 +303,13 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
             <option value="11">11</option>
             <option value="12">12</option>
           </select>
-        </td>
-        <td>
+        </Td>
+        <Td>
           {isLoading && <div className="loading-loop"></div>}
           {!isLoading && card.price}
-        </td>
-        <td>{card.price * card.quantity}</td>
-        <td className="AddButton">
+        </Td>
+        <Td>{card.price * card.quantity}</Td>
+        <Td className="AddButton">
           <FeatherIcon
             icon="minus-circle"
             size="20"
@@ -322,8 +319,8 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
               return handleDelete();
             }}
           />
-        </td>
-      </tr>
+        </Td>
+      </Tr>
     </>
   );
 };

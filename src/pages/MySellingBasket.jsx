@@ -20,7 +20,7 @@ const MyCurrentSellRequest = ({ history, checkForDuplicates }) => {
           <Table className="zebra-table">
             <Thead>
               <Tr>
-                <Th>Nom de la carte</Th>
+                <Th>Nom</Th>
                 <Th>Edition</Th>
                 <Th>Langue</Th>
                 <Th>Etat</Th>

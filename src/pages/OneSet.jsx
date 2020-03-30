@@ -38,7 +38,6 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
   //Buildling context with the API response with all cards from the set.
   //We add also DEFAULT caracs to cards here.
   const buildContextFromAPIResponse = data => {
-    console.log("building context");
     const contextCopy = { ...cardsContext };
 
     const currentSet = allSets.find(element => element.id == idSet);
@@ -70,7 +69,6 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
   //This function takes API reponse with CardShopPrices and feeds the context.
   // If several languages are received from a single card, we prioritize baseLang price.
   const addFirstDisplayedPricesToContext = data => {
-    console.log("addedfirstdisplayedpricetocontext");
     const contextCopy = { ...cardsContext };
     for (let i = 0; i < data.length; i++) {
       if (contextCopy[data[i].card.substr(7)].LangOfPrice !== ENGLISH_LANG_ID) {
@@ -149,11 +147,11 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
               <Table className="zebra-table">
                 <Thead>
                   <Tr>
-                    <Th>Nom de la carte</Th>
+                    <Th>Nom</Th>
                     <Th>Langue</Th>
                     <Th>Condition</Th>
                     <Th>Foil</Th>
-                    <Th>Signé</Th>
+                    <Th>Signée</Th>
                     <Th>Quantité</Th>
                     <Th>Prix</Th>
                     <Th></Th>

@@ -8,6 +8,7 @@ import cardsOneSetContext from "../context/cardsOneSetContext";
 import { isMobile } from "react-device-detect";
 import { toast } from "react-toastify";
 import FeatherIcon from "feather-icons-react";
+import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 
 const CardLineOneSet = ({
   card,
@@ -108,7 +109,7 @@ const CardLineOneSet = ({
 
   return (
     <>
-      <tr
+      <Tr
         key={index}
         onMouseEnter={e => {
           if (!isMobile) {
@@ -122,16 +123,16 @@ const CardLineOneSet = ({
           }
         }}
       >
-        <td className="cardPictureHolder">
+        <Td className="cardPictureHolder">
           {cardsContext[cardID].name}
           {!isMobile && isOnHover && (
             <div className={hoverTopOrBottom}>
               <img src={urlPictureCard} alt={card.name} />
             </div>
           )}
-        </td>
-        {displaySets && <td>{cardsContext[cardID].set}</td>}
-        <td>
+        </Td>
+
+        <Td>
           {/* Select will have to be refactored with a .map on a Select Component */}
           <select
             name="lang"
@@ -156,8 +157,8 @@ const CardLineOneSet = ({
               <option value="9">EN</option>
             )}
           </select>
-        </td>
-        <td>
+        </Td>
+        <Td>
           <select
             name="condition"
             id={cardsContext[cardID].name + "id2"}
@@ -184,9 +185,9 @@ const CardLineOneSet = ({
                   )
               : null}
           </select>
-        </td>
+        </Td>
 
-        <td>
+        <Td>
           <select
             name="isFoil"
             id={card.name + "id4"}
@@ -197,8 +198,8 @@ const CardLineOneSet = ({
             {cardsContext[cardID].hasnonfoil && <option value="No">No</option>}
             {cardsContext[cardID].hasfoil && <option value="Yes">Yes</option>}
           </select>
-        </td>
-        <td>
+        </Td>
+        <Td>
           <select
             name="isSigned"
             onChange={event => {
@@ -208,8 +209,8 @@ const CardLineOneSet = ({
             <option value="No">Non</option>
             <option value="Yes">Oui</option>
           </select>
-        </td>
-        <td>
+        </Td>
+        <Td>
           <select
             name="quantity"
             id={cardsContext[cardID].name + "id3"}
@@ -230,15 +231,15 @@ const CardLineOneSet = ({
             <option value="11">11</option>
             <option value="12">12</option>
           </select>
-        </td>
+        </Td>
         {/* PRICE */}
 
-        <td>
-          {!isLoading && cardsContext[cardID].price}
+        <Td>
+          {(!isLoading && cardsContext[cardID].price) || (!isLoading && 0)}
           {isLoading && <div className="loading-loop"></div>}
-        </td>
+        </Td>
 
-        <td className="AddButton">
+        <Td className="AddButton">
           <FeatherIcon
             icon="plus-circle"
             size="20"
@@ -251,8 +252,8 @@ const CardLineOneSet = ({
               );
             }}
           />
-        </td>
-      </tr>
+        </Td>
+      </Tr>
     </>
   );
 };
