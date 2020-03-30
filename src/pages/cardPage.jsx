@@ -112,6 +112,7 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
                 <Th>Langue</Th>
                 <Th>Condition</Th>
                 <Th>Foil</Th>
+                <Th>Signée</Th>
                 <Th>Quantité</Th>
                 <Th>Prix</Th>
               </Tr>

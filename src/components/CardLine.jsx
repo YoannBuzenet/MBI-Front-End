@@ -6,6 +6,7 @@ import cardsAPI from "../services/cardsAPI";
 import CardShopPriceAPI from "../services/CardShopPriceAPI";
 import { isMobile } from "react-device-detect";
 import FeatherIcon from "feather-icons-react";
+import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 
 //TODO : End isSigned (handleChange not done, update context not done)
 
@@ -40,6 +41,7 @@ const CardLine = ({
     condition: 2,
     lang: 9,
     isFoil: card.hasnonfoil ? "No" : "Yes",
+    isSigned: "No",
     set: setName,
     price:
       card.hasnonfoil === 1
@@ -55,7 +57,7 @@ const CardLine = ({
       lang: 9,
       isFoil: card.hasnonfoil ? "No" : "Yes",
       set: setName,
-      isSigned: false,
+      isSigned: "No",
       price:
         card.hasnonfoil === 1
           ? card.allPrices[LANGUAGE_ID_ENG][CONDITION_ID_NM][ISFOILFALSE]
@@ -102,7 +104,7 @@ const CardLine = ({
 
   return (
     <>
-      <tr
+      <Tr
         key={index}
         onMouseEnter={e => {
           if (!isMobile) {
@@ -116,16 +118,16 @@ const CardLine = ({
           }
         }}
       >
-        <td className="cardPictureHolder">
+        <Td className="cardPictureHolder">
           {card.name}
           {!isMobile && isOnHover && (
             <div className={hoverTopOrBottom}>
               <img src={urlPictureCard} alt={card.name} />
             </div>
           )}
-        </td>
-        {displaySets && <td>{card.edition.name}</td>}
-        <td>
+        </Td>
+        <Td>{card.edition.name}</Td>
+        <Td>
           {/* Select will have to be refactored with a .map on a Select Component */}
           <select
             name="lang"
@@ -150,8 +152,8 @@ const CardLine = ({
               <option value="9">EN</option>
             )}
           </select>
-        </td>
-        <td>
+        </Td>
+        <Td>
           <select
             name="condition"
             id={card.name + "id2"}
@@ -178,9 +180,9 @@ const CardLine = ({
                   )
               : null}
           </select>
-        </td>
+        </Td>
 
-        <td>
+        <Td>
           <select
             name="isFoil"
             id={card.name + "id4"}
@@ -191,14 +193,19 @@ const CardLine = ({
             {card.hasnonfoil && <option value="No">No</option>}
             {card.hasfoil && <option value="Yes">Yes</option>}
           </select>
-        </td>
-        <td>
-          <select name="isSigned">
+        </Td>
+        <Td>
+          <select
+            name="isSigned"
+            onChange={event => {
+              handleChange(event, currentCard);
+            }}
+          >
             <option value="No">Non</option>
             <option value="Yes">Oui</option>
           </select>
-        </td>
-        <td>
+        </Td>
+        <Td>
           <select
             name="quantity"
             id={card.name + "id3"}
@@ -219,9 +226,9 @@ const CardLine = ({
             <option value="11">11</option>
             <option value="12">12</option>
           </select>
-        </td>
-        <td>{currentCard.price || 0} </td>
-        <td className="AddButton">
+        </Td>
+        <Td>{currentCard.price || 0} </Td>
+        <Td className="AddButton">
           <FeatherIcon
             icon="plus-circle"
             size="20"
@@ -231,8 +238,8 @@ const CardLine = ({
               return handleAddSellingBasket(currentBasket, currentCard);
             }}
           />
-        </td>
-      </tr>
+        </Td>
+      </Tr>
     </>
   );
 };
