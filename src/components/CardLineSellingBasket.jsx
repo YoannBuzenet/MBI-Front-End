@@ -55,6 +55,7 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
 
   const handleChange = ({ currentTarget }) => {
     setIsLoading(true);
+    setErrorList([]);
 
     const contextCopy = [...currentBasket];
 
@@ -74,7 +75,8 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
       currentBasket[indexCard].id,
       currentBasket[indexCard].lang,
       currentBasket[indexCard].condition,
-      currentBasket[indexCard].isFoil
+      currentBasket[indexCard].isFoil,
+      currentBasket[indexCard].isSigned
     )
       .then(data => {
         console.log(data);
@@ -87,7 +89,6 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
         setIsLoading(false);
         sellingBasketAPI.save(contextCopy);
         setCurrentBasket(contextCopy);
-        setErrorList([]);
       })
       .catch(error => {
         toast.error(
