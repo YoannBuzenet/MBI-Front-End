@@ -251,7 +251,8 @@ function App() {
               card.condition === updatedCard.condition &&
               card.lang === updatedCard.lang &&
               card.isFoil === updatedCard.isFoil &&
-              card.uuid === updatedCard.uuid
+              card.uuid === updatedCard.uuid &&
+              card.isSigned === updatedCard.isSigned
               ? { ...updatedCard }
               : card;
           })

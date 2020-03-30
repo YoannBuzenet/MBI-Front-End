@@ -36,20 +36,20 @@ const MyCurrentSellRequest = ({ history, checkForDuplicates }) => {
             <Tbody>
               {currentBasket.length > 0
                 ? currentBasket.map((card, index) => {
+                    const isFoil = card.isFoil === "Yes" ? 1 : 0;
+                    const isSigned = card.isSigned === "Yes" ? 1 : 0;
+
                     return (
                       <CardLineSellingBasket
                         card={card}
-                        key={
-                          card["@id"]
-                            ? parseInt(
-                                card["@id"].substr(7) +
-                                  card.condition +
-                                  card.lang
-                              )
-                            : parseInt(
-                                card.cardID + "" + card.condition + card.lang
-                              )
-                        }
+                        key={parseInt(
+                          "" +
+                            card.id +
+                            card.condition +
+                            card.lang +
+                            isFoil +
+                            isSigned
+                        )}
                         indexCard={index}
                       />
                     );
