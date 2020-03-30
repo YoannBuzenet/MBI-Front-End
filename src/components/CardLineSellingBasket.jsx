@@ -87,6 +87,7 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
         setIsLoading(false);
         sellingBasketAPI.save(contextCopy);
         setCurrentBasket(contextCopy);
+        setErrorList([]);
       })
       .catch(error => {
         toast.error(
