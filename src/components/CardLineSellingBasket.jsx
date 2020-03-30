@@ -21,6 +21,11 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
   //Knowing if the Sell Request is OK to be submitted (no duplicate)
   const { errorList, setErrorList } = useContext(canSubmitContext);
 
+  //Black Div control
+  const { isBlackDivModalDisplayed, setIsBlackDivModalDisplayed } = useContext(
+    BlackDivModalContext
+  );
+
   //Card display on whole page
   const { cardDisplayInformation, setCardDisplayInformation } = useContext(
     CardDisplayOnPageContext
@@ -121,7 +126,13 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
 
   const hoverClassName = e => genericCardAPI.isPictureDisplayedTopOrBottom(e);
 
-  const displayCardPlainPage = event => {
+  const displayCardPlainPage = (event, urlCard) => {
+    const newDisplayContext = { ...cardDisplayInformation };
+    newDisplayContext.cardPictureUrl = urlCard;
+    newDisplayContext.isDisplayed = true;
+    setCardDisplayInformation(newDisplayContext);
+    setIsBlackDivModalDisplayed(true);
+
     console.log("yay");
   };
 
@@ -147,7 +158,7 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
           onClick={event => {
             if (isMobile) {
               //FUNCTION TO DISPLAY THE CARD
-              displayCardPlainPage(event);
+              displayCardPlainPage(event, urlCard);
             }
           }}
         >

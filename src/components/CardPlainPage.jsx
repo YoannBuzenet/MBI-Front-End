@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import CardDisplayOnPageContext from "../context/cardDisplayOnPageContext";
 import BlackDivModalContext from "../context/blackDivModalContext";
 
@@ -23,7 +23,7 @@ const CardPlainPage = ({ urlPicture }) => {
         setIsBlackDivModalDisplayed(false);
       }}
     >
-      Card Plain Page <img src={cardDisplayInformation.cardPictureUrl} alt="" />
+      <img src={cardDisplayInformation.cardPictureUrl} alt="" />
     </div>
   );
 };

@@ -55,6 +55,7 @@ import ShopAdminOneCard from "./pages/shopAdmin/ShopAdminOneCard";
 import CardPage from "./pages/CardPage";
 import MyShopAccount from "./pages/shopAdmin/MyShopAccount";
 import BlackDiv from "./components/BlackDiv";
+import CardPlainPage from "./components/CardPlainPage";
 
 //Really Useful library to check all rerenders made on ALL components (you can setup it to check just one)
 // if (process.env.NODE_ENV === "development") {
@@ -132,7 +133,7 @@ function App() {
   //STATE - Is a card currently displayed on plain page, and with which information ?
 
   const [cardDisplayInformation, setCardDisplayInformation] = useState({
-    cardPicture: null,
+    cardPictureUrl: null,
     isDisplayed: false
   });
 
@@ -303,6 +304,9 @@ function App() {
                     >
                       <Router>
                         {isBlackDivModalDisplayed && <BlackDiv />}
+                        {cardDisplayInformation.isDisplayed && (
+                          <CardPlainPage />
+                        )}
                         <isResponsiveMenuDisplayedContext.Provider
                           value={contextResponsiveMenuDisplayed}
                         >
