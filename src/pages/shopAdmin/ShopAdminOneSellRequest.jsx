@@ -80,7 +80,9 @@ const ShopAdminOneSellRequest = ({ match }) => {
                   set: card.cards.edition.name,
                   price: card.price,
                   quantity: card.cardQuantity,
-                  isFoil: card.isFoil
+                  isFoil: card.isFoil,
+                  isSigned: card.isSigned,
+                  isAltered: card.isAtered
                 };
               })
             ]
