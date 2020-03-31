@@ -71,22 +71,32 @@ const ShopAdminOneCard = ({ match }) => {
           completeContext[i].langs[lang][conditionDefinition[k].id] = {};
         }
       }
-      //In each condition of each lang of each set, we add the possibility of Foil card, and the CSP id
+      //In each lang, we add all existing conditions
       for (const lang in completeContext[i].langs) {
+        //In each condition, we add an empty object to prepare for Foil object
         for (const condition in completeContext[i].langs[lang]) {
           completeContext[i].langs[lang][condition] = {};
-          completeContext[i].langs[lang][condition][0] = null;
-          completeContext[i].langs[lang][condition]["0idCardShopPrice"] = null;
-          completeContext[i].langs[lang][condition]["0wasUpdated"] = null;
-          completeContext[i].langs[lang][condition][1] = null;
-          completeContext[i].langs[lang][condition]["1idCardShopPrice"] = null;
-          completeContext[i].langs[lang][condition]["1wasUpdated"] = null;
+          //For each foil object, we add an object for isSigned
+          for (let w = 0; w < 2; w++) {
+            completeContext[i].langs[lang][condition][w] = {};
+            completeContext[i].langs[lang][condition][w][0] = null;
+            completeContext[i].langs[lang][condition][w][
+              "0idCardShopPrice"
+            ] = null;
+            completeContext[i].langs[lang][condition][w]["0wasUpdated"] = null;
+            completeContext[i].langs[lang][condition][w][1] = null;
+            completeContext[i].langs[lang][condition][w][
+              "1idCardShopPrice"
+            ] = null;
+            completeContext[i].langs[lang][condition][w]["1wasUpdated"] = null;
+          }
         }
       }
 
       //Parse each price and integrate in our big table
       for (let m = 0; m < completeContext[i].cardShopPrices.length; m++) {
         const isFoil = completeContext[i].cardShopPrices[m].isFoil ? 1 : 0;
+        const isSigned = completeContext[i].cardShopPrices[m].isSigned ? 1 : 0;
         const condition = parseInt(
           completeContext[i].cardShopPrices[m].cardCondition.substr(17)
         );
@@ -103,9 +113,11 @@ const ShopAdminOneCard = ({ match }) => {
         // console.log(completeContext[l]["langs"][language][condition]);
         // console.log(completeContext[l]["langs"][language][condition][isFoil]);
 
-        completeContext[i]["langs"][language][condition][isFoil] = price;
-        completeContext[i]["langs"][language][condition][
-          isFoil + "idCardShopPrice"
+        completeContext[i]["langs"][language][condition][isFoil][
+          isSigned
+        ] = price;
+        completeContext[i]["langs"][language][condition][isFoil][
+          isSigned + "idCardShopPrice"
         ] = idCardShopPrice;
       }
     }

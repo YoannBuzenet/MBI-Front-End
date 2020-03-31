@@ -16,8 +16,14 @@ const ShopOneLangAllConditionsCard = ({
   //STATE - Array to iterate and create the components for NON foil components
   const [nonFoilArray, setNonFoilArray] = useState([]);
 
+  //STATE - Array to iterate and create the components for NON foil components
+  const [nonFoilSignedArray, setNonFoilSignedArray] = useState([]);
+
   //STATE - Array to iterate and create the components for FOIL components
   const [foilArray, setfoilArray] = useState([]);
+
+  //STATE - Array to iterate and create the components for FOIL components
+  const [foilSignedArray, setFoilSignedArray] = useState([]);
 
   //TODO : check if logged at any load of admin page and put a toast if not logged
 
@@ -123,6 +129,7 @@ const ShopOneLangAllConditionsCard = ({
                 />
               );
             })}
+          <p>Signé</p>
         </div>
         <div>
           {foilArray.length > 0 && <p>Foil</p>}
@@ -149,6 +156,7 @@ const ShopOneLangAllConditionsCard = ({
                 />
               );
             })}
+          <p>Signé</p>
         </div>
       </form>
     </div>
