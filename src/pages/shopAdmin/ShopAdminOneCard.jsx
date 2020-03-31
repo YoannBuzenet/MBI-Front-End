@@ -46,6 +46,7 @@ const ShopAdminOneCard = ({ match }) => {
     const completeContext = [...cardList];
     // console.log(completeContext);
 
+    //Parsing each set
     for (let i = 0; i < completeContext.length; i++) {
       const allLang = [
         {
@@ -56,18 +57,21 @@ const ShopAdminOneCard = ({ match }) => {
 
       completeContext[i].langs = {};
 
+      //For each existing languages in Magic, create a lang in the context
       for (let j = 0; j < allLang.length; j++) {
         completeContext[i].langs[allLang[j].language_id.id] = null;
       }
 
+      //In each lang in each set, create an empty object
       for (const lang in completeContext[i].langs) {
         completeContext[i].langs[lang] = {};
 
+        //In each lang of each set, create all conditions and put an empty object in it
         for (let k = 0; k < conditionDefinition.length; k++) {
           completeContext[i].langs[lang][conditionDefinition[k].id] = {};
         }
       }
-
+      //In each condition of each lang of each set, we add the possibility of Foil card, and the CSP id
       for (const lang in completeContext[i].langs) {
         for (const condition in completeContext[i].langs[lang]) {
           completeContext[i].langs[lang][condition] = {};
@@ -105,6 +109,7 @@ const ShopAdminOneCard = ({ match }) => {
         ] = idCardShopPrice;
       }
     }
+    console.log(completeContext);
     //Once all synchronous for-loops are done, we set the global table in context.
     setAllPricesBuffer(completeContext);
   }
@@ -124,7 +129,7 @@ const ShopAdminOneCard = ({ match }) => {
           cancelToken: source.token
         })
         .then(data => {
-          // console.log(data.data["hydra:member"]);
+          console.log(data.data["hydra:member"]);
           return data;
         })
         .then(data =>
