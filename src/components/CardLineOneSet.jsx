@@ -71,9 +71,10 @@ const CardLineOneSet = ({
     CardShopPriceAPI.getOnePrice(
       shopID,
       cardID,
-      cardsContext[cardID].lang,
-      cardsContext[cardID].condition,
-      cardsContext[cardID].isFoil
+      contextCopy[cardID].lang,
+      contextCopy[cardID].condition,
+      contextCopy[cardID].isFoil,
+      contextCopy[cardID].isSigned
     )
       .then(data => {
         console.log(data);
