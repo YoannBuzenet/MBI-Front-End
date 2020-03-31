@@ -8,6 +8,7 @@ function check401Unauthorized(error) {
       return true;
     }
   }
+  return false;
 }
 
 export default { check401Unauthorized };
