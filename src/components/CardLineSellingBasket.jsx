@@ -311,7 +311,7 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
           {isLoading && <div className="loading-loop"></div>}
           {!isLoading && card.price}
         </Td>
-        <Td>{card.price * card.quantity}</Td>
+        <Td>{card.price * card.quantity || "0"}</Td>
         <Td className="AddButton">
           <FeatherIcon
             icon="minus-circle"
