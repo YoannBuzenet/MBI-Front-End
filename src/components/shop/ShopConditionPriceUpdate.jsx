@@ -519,21 +519,23 @@ const ShopConditionPriceUpdate = ({
         }
       } else {
         if (
-          allPricesBuffer[index].langs[langID][conditionID][
-            isFoil + "idCardShopPrice"
+          allPricesBuffer[index].langs[langID][conditionID][isFoil][
+            isSigned + "idCardShopPrice"
           ] !== null
         ) {
           const objectToSend = {
             price: newPrice,
             isFoil: isFoil === 1 ? true : false,
+            isSigned: isSigned === 1 ? true : false,
+            isAltered: false,
             shop: "/shops/" + shop,
             language: "/languages/" + langID,
             cardCondition: "/card_conditions/" + conditionID,
             card: "/cards/" + cardID
           };
 
-          allPricesBuffer[index].langs[langID][conditionID][
-            isFoil + "wasUpdated"
+          allPricesBuffer[index].langs[langID][conditionID][isFoil][
+            isSigned + "wasUpdated"
           ] = true;
 
           priceUpdateAPI
@@ -549,6 +551,8 @@ const ShopConditionPriceUpdate = ({
           const objectToSend = {
             price: newPrice,
             isFoil: isFoil === 1 ? true : false,
+            isSigned: isSigned === 1 ? true : false,
+            isAltered: false,
             shop: "/shops/" + shop,
             language: "/languages/" + langID,
             cardCondition: "/card_conditions/" + conditionID,
@@ -558,8 +562,8 @@ const ShopConditionPriceUpdate = ({
             .postOnePrice(objectToSend)
             .then(
               response =>
-                (allPricesBuffer[index].langs[langID][conditionID][
-                  isFoil + "idCardShopPrice"
+                (allPricesBuffer[index].langs[langID][conditionID][isFoil][
+                  isSigned + "idCardShopPrice"
                 ] = response.data.id)
             )
             .catch(error => console.log(error));
@@ -591,7 +595,7 @@ const ShopConditionPriceUpdate = ({
             timer
           );
         }}
-        className={classInputUpdated}
+        className={classInputUpdated + " conditionDisplay"}
       />
     </p>
   );
