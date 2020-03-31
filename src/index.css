@@ -1086,6 +1086,7 @@ span.customer_lastName {
   align-items: center;
 }
 
+.percentSettings > .percentPerLang,
 .percentSettings > .percentPerConditions,
 .percentSettings > .percentPerConditionsFoil {
   margin-top: 5rem;

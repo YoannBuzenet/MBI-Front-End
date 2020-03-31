@@ -44,12 +44,19 @@ const ShopAdminSettings = props => {
         ].percent = value;
         setAuthenticationInfos(authenticationInfosCopy);
         break;
+
+      case "percentPerSigned":
+        console.log("on update le % signed");
+        authenticationInfosCopy.shop.shopData.PercentPerSigned = value;
+        setAuthenticationInfos(authenticationInfosCopy);
+        break;
     }
   };
 
   const updateLocalStorage = (fieldModified, name, value) => {
     //Get Local Storage
     var localStorage = localStorageAPI.getLocalStorageSession();
+    console.log(localStorage);
     switch (fieldModified) {
       case "percentPerLang":
         localStorage.shop.PercentPerLangs[name].percentPerLang = value;
@@ -61,6 +68,10 @@ const ShopAdminSettings = props => {
 
       case "percentPerConditionFoil":
         localStorage.shop.PercentPerConditionFoils[name - 1].percent = value;
+        break;
+
+      case "percentPerSigned":
+        localStorage.shop.percentPerSigned = value;
         break;
     }
     localStorageAPI.saveLocalStorage("userInfos", localStorage);
@@ -111,6 +122,24 @@ const ShopAdminSettings = props => {
             )
           );
         break;
+
+      case "percentPerSigned":
+        console.log("API update signed");
+        objectToSend = {
+          shop: {
+            id: authenticationInfos.shop.id,
+            percentPerSigned: authenticationInfos.shop.shopData.PercentPerSigned
+          }
+        };
+        shopAPI
+          .updateFields(objectToSend, authenticationInfos.shop.id)
+          .then(data => updateLocalStorage(fieldModified, name, value))
+          .catch(error => {
+            toast.error(
+              "Le champ n'a pu être mis à jour. Merci de recommencer."
+            );
+          });
+        break;
     }
   };
 
@@ -153,12 +182,24 @@ const ShopAdminSettings = props => {
         ENV_VARIABLE
         <p>Votre système de grading prédéfni : ENV_VARIABLE</p>
         <div className="percentSettings">
+          <div className="percentPerSigned">
+            <h2>Cartes signées</h2>
+            <form>
+              <Field
+                name="percentPerSigned"
+                label="Pourcentage à appliquer"
+                value={authenticationInfos.shop.shopData.PercentPerSigned}
+                onChange={event => handleChange(event, "percentPerSigned")}
+              />
+            </form>
+          </div>
           <div className="percentPerLang">
             <h2>Langues</h2>
             <span className="explaination">
               Quel pourcentage voulez-vous appliquer aux langues ? Votre langue
               d'achat préférée est le repère, elle doit être à 100%.
             </span>
+
             <form>
               {lang.length > 0 &&
                 lang.map((lang, index) => (
