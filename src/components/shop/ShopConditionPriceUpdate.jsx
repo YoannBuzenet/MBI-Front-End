@@ -207,7 +207,7 @@ const ShopConditionPriceUpdate = ({
         langID === authenticationInfos.shop.shopData.baseLang.id &&
         isSigned === 0
       ) {
-        //AIM - update all languages and condition in the current set
+        //AIM - update all languages and condition in the current set (NON SIGNED AND SIGNED)
         //1. Copy context
         const contextCopy = [...allPricesBuffer];
         //2. Update baselang
@@ -360,25 +360,32 @@ const ShopConditionPriceUpdate = ({
         setAllPricesBuffer(contextCopy);
         //If we're updating Mint field NON baselang, just refresh this lang (non signed & signed)
       } else if (conditionID === 1) {
-        if (isFoil === 0) {
-          //update all conditions in the given languages
-          const allPricesCopy = [...allPricesBuffer];
-          allPricesCopy[index].langs[langID][1][isFoil] = newPrice;
+        //update all conditions in the given languages
+        const allPricesCopy = [...allPricesBuffer];
 
-          //A bit dirty
-          //Browing each condition and setting the price following the percent stored in session.
-          //As session's PercentPerConditions numbers are IN ARRAY, we are hacky and follow their index with -1. The day this order changes, this loop won't work. Solution : receinving data as object instead of array.
+        if (isSigned === 0) {
           var i = 1;
           for (const condition in allPricesCopy[index].langs[langID]) {
             if (i === 1) {
-              allPricesCopy[index].langs[langID][i][isFoil] = newPrice;
+              allPricesCopy[index].langs[langID][i][isFoil][0] = newPrice;
+
+              allPricesCopy[index].langs[langID][i][
+                isFoil
+              ][1] = priceUpdateAPI.smoothNumbers(
+                (newPrice * PercentPerSigned) / 100
+              );
 
               //Updating Was Updated property on context to create a CSS class
-              allPricesCopy[index].langs[langID][i][
-                isFoil + "wasUpdated"
+              allPricesCopy[index].langs[langID][i][isFoil][
+                0 + "wasUpdated"
+              ] = true;
+
+              //Updating Was Updated property on context to create a CSS class
+              allPricesCopy[index].langs[langID][i][isFoil][
+                1 + "wasUpdated"
               ] = true;
             } else {
-              allPricesCopy[index].langs[langID][i][isFoil] =
+              allPricesCopy[index].langs[langID][i][isFoil][0] =
                 //If we want to make prices more stable integer, implement function here
                 priceUpdateAPI.smoothNumbers(
                   (newPrice *
@@ -387,14 +394,32 @@ const ShopConditionPriceUpdate = ({
                     ].percent) /
                     100
                 );
+              allPricesCopy[index].langs[langID][i][isFoil][1] =
+                //If we want to make prices more stable integer, implement function here
+                priceUpdateAPI.smoothNumbers(
+                  (((newPrice * PercentPerSigned) / 100) *
+                    authenticationInfos.shop.shopData.PercentPerConditions[
+                      i - 1
+                    ].percent) /
+                    100
+                );
 
               //Updating Was Updated property on context to create a CSS class
-              allPricesCopy[index].langs[langID][i][
-                isFoil + "wasUpdated"
+              allPricesCopy[index].langs[langID][i][isFoil][
+                isSigned + "wasUpdated"
+              ] = true;
+
+              //Updating Was Updated property on context to create a CSS class
+              allPricesCopy[index].langs[langID][i][isFoil][
+                1 + "wasUpdated"
               ] = true;
             }
             i++;
           }
+
+          //A bit dirty
+          //Browing each condition and setting the price following the percent stored in session.
+          //As session's PercentPerConditions numbers are IN ARRAY, we are hacky and follow their index with -1. The day this order changes, this loop won't work. Solution : receinving data as object instead of array.
 
           setAllPricesBuffer(allPricesCopy);
         } else if (isFoil === 1) {
