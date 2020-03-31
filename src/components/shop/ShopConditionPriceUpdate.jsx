@@ -85,6 +85,7 @@ const ShopConditionPriceUpdate = ({
       }
     }
     //sending the batch
+    console.log(batch);
     try {
       priceUpdateAPI
         .batchPriceUpdate(batch)
@@ -204,8 +205,7 @@ const ShopConditionPriceUpdate = ({
 
       if (
         conditionID === 1 &&
-        langID === authenticationInfos.shop.shopData.baseLang.id &&
-        isSigned === 0
+        langID === authenticationInfos.shop.shopData.baseLang.id
       ) {
         //AIM - update all languages and condition in the current set (NON SIGNED AND SIGNED)
         //1. Copy context
@@ -420,7 +420,6 @@ const ShopConditionPriceUpdate = ({
 
           setAllPricesBuffer(allPricesCopy);
         } else if (isSigned === 1) {
-          console.log("là on modifie que les signées");
           var i = 1;
           for (const condition in allPricesCopy[index].langs[langID]) {
             if (i === 1) {
@@ -570,8 +569,8 @@ const ShopConditionPriceUpdate = ({
   };
 
   const classInputUpdated = allPricesBuffer[index].langs[langID][conditionID][
-    isFoil + "wasUpdated"
-  ]
+    isFoil
+  ][isSigned + "wasUpdated"]
     ? "updated"
     : "not-updated";
   return (
