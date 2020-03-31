@@ -5,6 +5,7 @@ import Field from "../../components/forms/Field";
 import { toast } from "react-toastify";
 import shopAPI from "../../services/shopAPI";
 import localStorageAPI from "../../services/localStorageAPI";
+import errorHandlingAPI from "../../services/errorHandlingAPI";
 
 const ShopAdminSettings = props => {
   //Current Authentication
@@ -90,11 +91,13 @@ const ShopAdminSettings = props => {
         shopAPI
           .updatePercentPerLang(id, objectToSend)
           .then(data => updateLocalStorage(fieldModified, name, value))
-          .catch(data =>
-            toast.error(
-              "La donnée n'a pu être mise à jour. Merci de réessayer ou de vous reconnecter."
-            )
-          );
+          .catch(data => {
+            if (!errorHandlingAPI.check401Unauthorized(data)) {
+              toast.error(
+                "La donnée n'a pu être mise à jour. Merci de réessayer ou de vous reconnecter."
+              );
+            }
+          });
         break;
       case "percentPerCondition":
         id =
@@ -102,11 +105,13 @@ const ShopAdminSettings = props => {
         shopAPI
           .updatePercentPerCondition(id, objectToSend)
           .then(updateLocalStorage(fieldModified, name, value))
-          .catch(data =>
-            toast.error(
-              "La donnée n'a pu être mise à jour. Merci de réessayer ou de vous reconnecter."
-            )
-          );
+          .catch(data => {
+            if (!errorHandlingAPI.check401Unauthorized(data)) {
+              toast.error(
+                "La donnée n'a pu être mise à jour. Merci de réessayer ou de vous reconnecter."
+              );
+            }
+          });
 
         break;
       case "percentPerConditionFoil":
@@ -116,11 +121,13 @@ const ShopAdminSettings = props => {
         shopAPI
           .updatePercentPerConditionFoil(id, objectToSend)
           .then(data => updateLocalStorage(fieldModified, name, value))
-          .catch(data =>
-            toast.error(
-              "La donnée n'a pu être mise à jour. Merci de réessayer ou de vous reconnecter."
-            )
-          );
+          .catch(data => {
+            if (!errorHandlingAPI.check401Unauthorized(data)) {
+              toast.error(
+                "La donnée n'a pu être mise à jour. Merci de réessayer ou de vous reconnecter."
+              );
+            }
+          });
         break;
 
       case "percentPerSigned":
@@ -135,9 +142,11 @@ const ShopAdminSettings = props => {
           .updateFields(objectToSend, authenticationInfos.shop.id)
           .then(data => updateLocalStorage(fieldModified, name, value))
           .catch(error => {
-            toast.error(
-              "Le champ n'a pu être mis à jour. Merci de recommencer."
-            );
+            if (!errorHandlingAPI.check401Unauthorized(error)) {
+              toast.error(
+                "La donnée n'a pu être mise à jour. Merci de réessayer ou de vous reconnecter."
+              );
+            }
           });
         break;
     }

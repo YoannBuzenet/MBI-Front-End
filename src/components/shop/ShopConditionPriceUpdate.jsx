@@ -40,23 +40,28 @@ const ShopConditionPriceUpdate = ({
       ? ""
       : allPricesBuffer[index].langs[langID][conditionID][isFoil][isSigned];
 
+  const PercentPerSigned = authenticationInfos.shop.shopData.PercentPerSigned;
+
   const sendSmallBatchToAPI = () => {
     const batch = [];
     const allPricesCopy = [...allPricesBuffer];
     //Preparing Small Batch
+    //Editing or creating the Card Shop Price if ID already exists
     for (const objectToParse in allPricesCopy[index].langs[langID]) {
       if (
-        allPricesCopy[index].langs[langID][objectToParse][
-          isFoil + "idCardShopPrice"
+        allPricesCopy[index].langs[langID][objectToParse][isFoil][
+          isSigned + "idCardShopPrice"
         ]
       ) {
         const newPriceToSend = {
           id:
-            allPricesCopy[index].langs[langID][objectToParse][
-              isFoil + "idCardShopPrice"
+            allPricesCopy[index].langs[langID][objectToParse][isFoil][
+              isSigned + "idCardShopPrice"
             ],
-          price: allPricesCopy[index].langs[langID][objectToParse][isFoil],
+          price:
+            allPricesCopy[index].langs[langID][objectToParse][isFoil][isSigned],
           isFoil: isFoil === 1 ? true : false,
+          isSigned: isSigned === 1 ? true : false,
           shop: shop,
           card: cardID,
           language: langID,
@@ -65,8 +70,10 @@ const ShopConditionPriceUpdate = ({
         batch.push(newPriceToSend);
       } else {
         const newPriceToSend = {
-          price: allPricesCopy[index].langs[langID][objectToParse][isFoil],
+          price:
+            allPricesCopy[index].langs[langID][objectToParse][isFoil][isSigned],
           isFoil: isFoil === 1 ? true : false,
+          isSigned: isSigned === 1 ? true : false,
           shop: shop,
           card: cardID,
           language: langID,
@@ -97,9 +104,10 @@ const ShopConditionPriceUpdate = ({
       const languageID = parseInt(data[i].language.substr(11));
       const conditionID = parseInt(data[i].cardCondition.substr(17));
       const isFoil = data[i].isFoil === true ? 1 : 0;
+      const isSigned = data[i].isSigned === true ? 1 : 0;
       // TODO : check s'il y a oubli de la prise en des modifs dans le contexte
-      contextCopy[index].langs[languageID][conditionID][
-        isFoil + "idCardShopPrice"
+      contextCopy[index].langs[languageID][conditionID][isFoil][
+        isSigned + "idCardShopPrice"
       ] = idCardShopPrice;
     }
     setAllPricesBuffer(contextCopy);
@@ -112,18 +120,21 @@ const ShopConditionPriceUpdate = ({
     for (const LangToParse in allPricesCopy[index].langs) {
       for (const objectToParse in allPricesCopy[index].langs[LangToParse]) {
         if (
-          allPricesCopy[index].langs[LangToParse][objectToParse][
-            isFoil + "idCardShopPrice"
+          allPricesCopy[index].langs[LangToParse][objectToParse][isFoil][
+            isSigned + "idCardShopPrice"
           ]
         ) {
           const newPriceToSend = {
             id:
-              allPricesCopy[index].langs[LangToParse][objectToParse][
-                isFoil + "idCardShopPrice"
+              allPricesCopy[index].langs[LangToParse][objectToParse][isFoil][
+                isSigned + "idCardShopPrice"
               ],
             price:
-              allPricesCopy[index].langs[LangToParse][objectToParse][isFoil],
+              allPricesCopy[index].langs[LangToParse][objectToParse][isFoil][
+                isSigned
+              ],
             isFoil: isFoil === 1 ? true : false,
+            isSigned: isSigned === 1 ? true : false,
             shop: shop,
             card: cardID,
             language: LangToParse,
@@ -133,8 +144,11 @@ const ShopConditionPriceUpdate = ({
         } else {
           const newPriceToSend = {
             price:
-              allPricesCopy[index].langs[LangToParse][objectToParse][isFoil],
+              allPricesCopy[index].langs[LangToParse][objectToParse][isFoil][
+                isSigned
+              ],
             isFoil: isFoil === 1 ? true : false,
+            isSigned: isSigned === 1 ? true : false,
             shop: shop,
             card: cardID,
             language: LangToParse,
@@ -163,6 +177,7 @@ const ShopConditionPriceUpdate = ({
     conditionID,
     langID,
     isFoil,
+    isSigned,
     index,
     cardID,
     timer
@@ -173,7 +188,7 @@ const ShopConditionPriceUpdate = ({
     //Without this condition, user can't type a "." to type the complete floating number
     if (event.target.value[event.target.value.length - 1] === ".") {
       const allPricesCopy = [...allPricesBuffer];
-      allPricesCopy[index].langs[langID][conditionID][isFoil] =
+      allPricesCopy[index].langs[langID][conditionID][isFoil][isSigned] =
         event.target.value;
       setAllPricesBuffer(allPricesCopy);
     }
@@ -184,7 +199,8 @@ const ShopConditionPriceUpdate = ({
 
       if (
         conditionID === 1 &&
-        langID === authenticationInfos.shop.shopData.baseLang.id
+        langID === authenticationInfos.shop.shopData.baseLang.id &&
+        isSigned === 0
       ) {
         //AIM - update all languages and condition in the current set
         //1. Copy context
@@ -196,21 +212,37 @@ const ShopConditionPriceUpdate = ({
         ]) {
           //On first condition the price is the one user did seize. So we just put it as it is.
           if (j === 1) {
-            //Updating Price on context
+            //Updating Price on context on NON SIGNED MINT
             contextCopy[index].langs[
               authenticationInfos.shop.shopData.baseLang.id
-            ][conditions][isFoil] = newPrice;
+            ][conditions][isFoil][isSigned] = newPrice;
 
-            //Updating Was Updated property on context to create a CSS class
+            //Updating Price on context for SIGNED MINT
             contextCopy[index].langs[
               authenticationInfos.shop.shopData.baseLang.id
-            ][conditions][isFoil + "wasUpdated"] = true;
+            ][conditions][isFoil][1] = priceUpdateAPI.smoothNumbers(
+              (newPrice * PercentPerSigned) / 100
+            );
+
+            //Updating 'Was Updated' property on context to create a CSS class
+            contextCopy[index].langs[
+              authenticationInfos.shop.shopData.baseLang.id
+            ][conditions][isFoil][isSigned + "wasUpdated"] = true;
           } else {
-            //Updating Prices on all non Mint conditions on BaseLang
+            //Updating Prices on all non Mint conditions on BaseLang on Signed and Non Signed
             contextCopy[index].langs[
               authenticationInfos.shop.shopData.baseLang.id
-            ][conditions][isFoil] = priceUpdateAPI.smoothNumbers(
+            ][conditions][isFoil][isSigned] = priceUpdateAPI.smoothNumbers(
               (newPrice *
+                authenticationInfos.shop.shopData.PercentPerConditions[j - 1]
+                  .percent) /
+                100
+            );
+
+            contextCopy[index].langs[
+              authenticationInfos.shop.shopData.baseLang.id
+            ][conditions][isFoil][1] = priceUpdateAPI.smoothNumbers(
+              (((newPrice * PercentPerSigned) / 100) *
                 authenticationInfos.shop.shopData.PercentPerConditions[j - 1]
                   .percent) /
                 100
@@ -219,7 +251,7 @@ const ShopConditionPriceUpdate = ({
             //Updating Was Updated property on context to create a CSS class
             contextCopy[index].langs[
               authenticationInfos.shop.shopData.baseLang.id
-            ][conditions][isFoil + "wasUpdated"] = true;
+            ][conditions][isFoil][isSigned + "wasUpdated"] = true;
           }
           j++;
         }
@@ -372,6 +404,7 @@ const ShopConditionPriceUpdate = ({
               conditionID,
               langID,
               isFoil,
+              isSigned,
               index,
               cardID,
               newPrice
@@ -403,6 +436,7 @@ const ShopConditionPriceUpdate = ({
       conditionID,
       langID,
       isFoil,
+      isSigned,
       index,
       cardID,
       newPrice
@@ -484,6 +518,7 @@ const ShopConditionPriceUpdate = ({
             conditionID,
             langID,
             isFoil,
+            isSigned,
             index,
             cardID,
             timer
