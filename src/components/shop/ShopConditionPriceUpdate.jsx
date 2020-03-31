@@ -228,7 +228,6 @@ const ShopConditionPriceUpdate = ({
             ][conditions][isFoil][1] = priceUpdateAPI.smoothNumbers(
               (newPrice * PercentPerSigned) / 100
             );
-
             //Updating 'Was Updated' property on context to create a CSS class
             contextCopy[index].langs[
               authenticationInfos.shop.shopData.baseLang.id
