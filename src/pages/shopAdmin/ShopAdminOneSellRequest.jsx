@@ -194,6 +194,7 @@ const ShopAdminOneSellRequest = ({ match }) => {
                 <Th>Etat</Th>
                 <Th>Foil</Th>
                 <Th>Signée</Th>
+                <Th>Altérée</Th>
                 <Th>Quantité</Th>
                 <Th>Prix</Th>
                 <Th>Total</Th>

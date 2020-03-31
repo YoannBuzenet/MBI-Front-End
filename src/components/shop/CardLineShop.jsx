@@ -395,19 +395,20 @@ const CardLineShop = ({ card, indexCard }) => {
         <Td>
           <select
             name="isSigned"
-            value={card.isSigned}
+            value={currentCard.isSigned}
             onChange={event => {
               handleChange(event, currentCard);
             }}
           >
-            <option value={card.isSigned === "Yes" ? "Yes" : "No"}>
-              {card.isSigned === "Yes" ? "Yes" : "No"}
+            <option value={card.isSigned === true ? "Yes" : "No"}>
+              {card.isSigned === true ? "Yes" : "No"}
             </option>
-            <option value={card.isSigned === "Yes" ? "No" : "Yes"}>
-              {card.isSigned === "Yes" ? "No" : "Yes"}
+            <option value={card.isSigned === true ? "No" : "Yes"}>
+              {card.isSigned === true ? "No" : "Yes"}
             </option>
           </select>
         </Td>
+        <Td>Altérée ?</Td>
         <Td>
           <select
             name="quantity"
