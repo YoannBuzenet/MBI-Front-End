@@ -48,8 +48,14 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
         for (let g = 1; g <= NUMBER_OF_CONDITIONS; g++) {
           array[i].allPrices[h][g] = {};
 
+          //Foil or Non Foil
           for (let f = 0; f < 2; f++) {
-            array[i].allPrices[h][g][f] = 0;
+            array[i].allPrices[h][g][f] = {};
+
+            //Signed or non signed
+            for (let p = 0; p < 2; p++) {
+              array[i].allPrices[h][g][f][p] = 0;
+            }
           }
         }
       }
@@ -63,10 +69,12 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
         );
 
         let isFoil = array[i].cardShopPrices[j].isFoil ? 1 : 0;
+        let isSigned = array[i].cardShopPrices[j].isSigned ? 1 : 0;
 
         //language / condition / isfoil
-        array[i].allPrices[currentLanguage][currentCondition][isFoil] =
-          array[i].cardShopPrices[j].price;
+        array[i].allPrices[currentLanguage][currentCondition][isFoil][
+          isSigned
+        ] = array[i].cardShopPrices[j].price;
       }
     }
     return array;

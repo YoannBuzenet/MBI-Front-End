@@ -19,6 +19,8 @@ const CardLine = ({
   const CONDITION_ID_NM = 2;
   const ISFOILTRUE = 1;
   const ISFOILFALSE = 0;
+  const ISSIGNEDTRUE = 1;
+  const ISSIGNEDFALSE = 0;
 
   //Current Selling Request Basket
   const { currentBasket, setCurrentBasket } = useContext(SellingBasketContext);
@@ -43,8 +45,12 @@ const CardLine = ({
     set: setName,
     price:
       card.hasnonfoil === 1
-        ? card.allPrices[LANGUAGE_ID_ENG][CONDITION_ID_NM][ISFOILFALSE]
-        : card.allPrices[LANGUAGE_ID_ENG][CONDITION_ID_NM][ISFOILTRUE]
+        ? card.allPrices[LANGUAGE_ID_ENG][CONDITION_ID_NM][ISFOILFALSE][
+            ISSIGNEDFALSE
+          ]
+        : card.allPrices[LANGUAGE_ID_ENG][CONDITION_ID_NM][ISFOILTRUE][
+            ISSIGNEDFALSE
+          ]
   });
 
   useEffect(() => {
@@ -58,8 +64,12 @@ const CardLine = ({
       isSigned: "No",
       price:
         card.hasnonfoil === 1
-          ? card.allPrices[LANGUAGE_ID_ENG][CONDITION_ID_NM][ISFOILFALSE]
-          : card.allPrices[LANGUAGE_ID_ENG][CONDITION_ID_NM][ISFOILTRUE]
+          ? card.allPrices[LANGUAGE_ID_ENG][CONDITION_ID_NM][ISFOILFALSE][
+              ISSIGNEDFALSE
+            ]
+          : card.allPrices[LANGUAGE_ID_ENG][CONDITION_ID_NM][ISFOILTRUE][
+              ISSIGNEDFALSE
+            ]
     });
   }, [card]);
 
@@ -73,16 +83,29 @@ const CardLine = ({
       var newValue = value.toString();
     }
     var isFoil = currentCard.isFoil === "Yes" ? 1 : 0;
+    var isSigned = currentCard.isSigned === "Yes" ? 1 : 0;
     var price;
     //To know how to browse the price object, we must know which property has been changed
     if (name === "lang") {
-      price = currentCard.allPrices[newValue][currentCard.condition][isFoil];
+      price =
+        currentCard.allPrices[newValue][currentCard.condition][isFoil][
+          isSigned
+        ];
     } else if (name === "condition") {
-      price = currentCard.allPrices[currentCard.lang][newValue][isFoil];
+      price =
+        currentCard.allPrices[currentCard.lang][newValue][isFoil][isSigned];
     } else if (name === "isFoil") {
       isFoil = newValue === "Yes" ? 1 : 0;
       price =
-        currentCard.allPrices[currentCard.lang][currentCard.condition][isFoil];
+        currentCard.allPrices[currentCard.lang][currentCard.condition][isFoil][
+          isSigned
+        ];
+    } else if (name === "isSigned") {
+      isSigned = newValue === "Yes" ? 1 : 0;
+      price =
+        currentCard.allPrices[currentCard.lang][currentCard.condition][isFoil][
+          isSigned
+        ];
     } else {
       price =
         currentCard.allPrices[currentCard.lang][currentCard.condition][isFoil];
