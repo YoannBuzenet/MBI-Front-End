@@ -104,7 +104,7 @@ const ShopOneLangAllConditionsCard = ({
     return array_to_display;
   }
 
-  function buildFoilDisplayArray(context, index, idLang) {
+  function buildFoilNonSignedDisplayArray(context, index, idLang) {
     var array_to_display = [];
 
     // console.log(context[index].langs[idLang]);
@@ -116,11 +116,14 @@ const ShopOneLangAllConditionsCard = ({
           // console.log(context[index].langs[idLang][conditionKey][isFoilKey]);
           if (isFoilKey === "1") {
             const priceValue =
-              context[index].langs[idLang][conditionKey][isFoilKey];
+              context[index].langs[idLang][conditionKey][isFoilKey][
+                isSignedTRUE
+              ];
             array_to_display.push({
               langKey: idLang,
               conditionKey: parseInt(conditionKey),
               isFoilKey: parseInt(isFoilKey),
+              isSignedKey: isSignedTRUE,
               priceValue: priceValue,
               cardID: context[index].id
             });
@@ -143,7 +146,11 @@ const ShopOneLangAllConditionsCard = ({
       )
     );
     setfoilArray(
-      buildFoilDisplayArray(allPricesBuffer, index, oneLang.language_id.id)
+      buildFoilNonSignedDisplayArray(
+        allPricesBuffer,
+        index,
+        oneLang.language_id.id
+      )
     );
   }, []);
 
@@ -197,6 +204,7 @@ const ShopOneLangAllConditionsCard = ({
                   conditionID={infoContainer.conditionKey}
                   langID={infoContainer.langKey}
                   isFoil={infoContainer.isFoilKey}
+                  isSigned={infoContainer.isSignedKey}
                   priceValue={infoContainer.priceValue}
                   index={index}
                   cardID={infoContainer.cardID}
