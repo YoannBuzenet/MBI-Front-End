@@ -13,6 +13,7 @@ const ShopConditionPriceUpdate = ({
   conditionID,
   langID,
   isFoil,
+  isSigned,
   index,
   cardID
 }) => {
@@ -35,9 +36,9 @@ const ShopConditionPriceUpdate = ({
   const shop = 1;
 
   const priceDisplayed =
-    allPricesBuffer[index].langs[langID][conditionID][isFoil] === null
+    allPricesBuffer[index].langs[langID][conditionID][isFoil][isSigned] === null
       ? ""
-      : allPricesBuffer[index].langs[langID][conditionID][isFoil];
+      : allPricesBuffer[index].langs[langID][conditionID][isFoil][isSigned];
 
   const sendSmallBatchToAPI = () => {
     const batch = [];

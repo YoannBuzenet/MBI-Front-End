@@ -25,9 +25,51 @@ const ShopOneLangAllConditionsCard = ({
   //STATE - Array to iterate and create the components for FOIL components
   const [foilSignedArray, setFoilSignedArray] = useState([]);
 
+  const isSignedTRUE = 1;
+  const isSignedFALSE = 0;
+
   //TODO : check if logged at any load of admin page and put a toast if not logged
 
-  function buildNonFoilDisplayArray(context, index, idLang) {
+  function buildNonFoilNonSignedDisplayArray(context, index, idLang) {
+    var array_to_display = [];
+
+    // console.log(context[index].langs[idLang]);
+
+    if (context[index].hasnonfoil === 1) {
+      for (const conditionKey in context[index].langs[idLang]) {
+        // console.log("conditionKey", conditionKey);
+        for (const isFoilKey in context[index].langs[idLang][conditionKey]) {
+          // console.log("isFoilKey", isFoilKey);
+          // console.log(context[index].langs[idLang][conditionKey][isFoilKey]);
+          if (isFoilKey === "0") {
+            const priceValue =
+              context[index].langs[idLang][conditionKey][isFoilKey][
+                isSignedFALSE
+              ];
+
+            array_to_display.push({
+              langKey: idLang,
+              conditionKey: parseInt(conditionKey),
+              isFoilKey: parseInt(isFoilKey),
+              isSignedKey: 0,
+              priceValue: priceValue,
+              cardID: context[index].id,
+              idCardShopPrice:
+                context[index].langs[idLang][conditionKey][
+                  isSignedFALSE + "idCardShopPrice"
+                ]
+            });
+          }
+        }
+      }
+    }
+
+    // console.log(array_to_display);
+
+    return array_to_display;
+  }
+
+  function buildNonFoilSignedDisplayArray(context, index, idLang) {
     var array_to_display = [];
 
     // console.log(context[index].langs[idLang]);
@@ -94,7 +136,11 @@ const ShopOneLangAllConditionsCard = ({
 
   useEffect(() => {
     setNonFoilArray(
-      buildNonFoilDisplayArray(allPricesBuffer, index, oneLang.language_id.id)
+      buildNonFoilNonSignedDisplayArray(
+        allPricesBuffer,
+        index,
+        oneLang.language_id.id
+      )
     );
     setfoilArray(
       buildFoilDisplayArray(allPricesBuffer, index, oneLang.language_id.id)
@@ -123,6 +169,7 @@ const ShopOneLangAllConditionsCard = ({
                   conditionID={infoContainer.conditionKey}
                   langID={infoContainer.langKey}
                   isFoil={infoContainer.isFoilKey}
+                  isSigned={infoContainer.isSignedKey}
                   priceValue={infoContainer.priceValue}
                   index={index}
                   cardID={infoContainer.cardID}
