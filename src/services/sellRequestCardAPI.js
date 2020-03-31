@@ -22,6 +22,18 @@ function update(
     } else if (SellRequestCardPropertyValue === "No") {
       propertyUpdate = { isFoil: false };
     }
+  } else if (SellRequestCardPropertyName === "isSigned") {
+    if (SellRequestCardPropertyValue === "Yes") {
+      propertyUpdate = { isSigned: true };
+    } else if (SellRequestCardPropertyValue === "No") {
+      propertyUpdate = { isSigned: false };
+    }
+  } else if (SellRequestCardPropertyName === "isAltered") {
+    if (SellRequestCardPropertyValue === "Yes") {
+      propertyUpdate = { isAltered: true };
+    } else if (SellRequestCardPropertyValue === "No") {
+      propertyUpdate = { isAltered: false };
+    }
   } else if (SellRequestCardPropertyName === "lang") {
     propertyUpdate = {
       language: "/languages/" + SellRequestCardPropertyValue

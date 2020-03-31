@@ -140,7 +140,7 @@ const CardLineShop = ({ card, indexCard }) => {
     sellRequestCardAPI
       .update(currentCard, name, newValue)
       .catch(error => console.log(error));
-    // console.log(currentCard);
+    console.log(currentCard);
 
     if (name === "quantity") {
       const newData = {
