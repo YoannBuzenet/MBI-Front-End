@@ -65,7 +65,8 @@ function authenticate(credentials) {
                 baseLang: data.shop.baseLang,
                 PercentPerLangs: data.shop.PercentPerLangs,
                 PercentPerConditions: data.shop.PercentPerConditions,
-                PercentPerConditionFoils: data.shop.PercentPerConditionFoils
+                PercentPerConditionFoils: data.shop.PercentPerConditionFoils,
+                PercentPerSigned: data.shop.percentPerSigned
               }
             : null
         }
@@ -148,7 +149,8 @@ function userInfos() {
               baseLang: userDatas.shop.baseLang,
               PercentPerLangs: userDatas.shop.PercentPerLangs,
               PercentPerConditions: userDatas.shop.PercentPerConditions,
-              PercentPerConditionFoils: userDatas.shop.PercentPerConditionFoils
+              PercentPerConditionFoils: userDatas.shop.PercentPerConditionFoils,
+              PercentPerSigned: userDatas.shop.percentPerSigned
             }
           : null
       }
