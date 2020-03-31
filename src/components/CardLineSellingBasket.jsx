@@ -54,8 +54,8 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
   }, [isOnHover]);
 
   const handleChange = ({ currentTarget }) => {
+    // setErrorList([]);
     setIsLoading(true);
-    setErrorList([]);
 
     const contextCopy = [...currentBasket];
 

@@ -32,7 +32,7 @@ const LoginPage = ({ onLogin, history }) => {
     event.preventDefault();
     try {
       const userData = await authAPI.authenticate(credentials);
-
+      console.log(userData);
       setError("");
       setAuthenticationInfos(userData);
       toast.success("Vous êtes connecté.");
@@ -50,6 +50,7 @@ const LoginPage = ({ onLogin, history }) => {
         console.log(error.response.headers);
       }
       //PARSE THE ERROR BEFORE SETTING IT
+      console.log(error);
       toast.error(
         "Le login ou le mot de passe est incorrect. Merci de réessayer."
       );
