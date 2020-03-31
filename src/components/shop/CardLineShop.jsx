@@ -400,11 +400,11 @@ const CardLineShop = ({ card, indexCard }) => {
               handleChange(event, currentCard);
             }}
           >
-            <option value={card.isSigned === true ? "Yes" : "No"}>
-              {card.isSigned === true ? "Yes" : "No"}
+            <option value={currentCard.isSigned === true ? "Yes" : "No"}>
+              {currentCard.isSigned === true ? "Yes" : "No"}
             </option>
-            <option value={card.isSigned === true ? "No" : "Yes"}>
-              {card.isSigned === true ? "No" : "Yes"}
+            <option value={currentCard.isSigned === true ? "No" : "Yes"}>
+              {currentCard.isSigned === true ? "No" : "Yes"}
             </option>
           </select>
         </Td>
