@@ -408,7 +408,22 @@ const CardLineShop = ({ card, indexCard }) => {
             </option>
           </select>
         </Td>
-        <Td>Altérée ?</Td>
+        <Td>
+          <select
+            name="isAltered"
+            value={currentCard.isAltered}
+            onChange={event => {
+              handleChange(event, currentCard);
+            }}
+          >
+            <option value={currentCard.isAltered === true ? "Yes" : "No"}>
+              {currentCard.isAltered === true ? "Yes" : "No"}
+            </option>
+            <option value={currentCard.isAltered === true ? "No" : "Yes"}>
+              {currentCard.isAltered === true ? "No" : "Yes"}
+            </option>
+          </select>
+        </Td>
         <Td>
           <select
             name="quantity"
