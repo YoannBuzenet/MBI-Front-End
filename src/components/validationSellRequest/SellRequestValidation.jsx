@@ -5,6 +5,7 @@ import canSubmitContext from "../../context/canSubmitSellRequestContext";
 import ValidSellRequestIsBasketEmpty from "./ValidSellRequestIsBasketEmpty";
 import sellRequestAPI from "../../services/sellRequestAPI";
 import authAPI from "../../services/authAPI";
+import { toast } from "react-toastify";
 
 const SellRequestValidation = ({ history, checkForDuplicates }) => {
   //Current Basket
@@ -86,7 +87,9 @@ const SellRequestValidation = ({ history, checkForDuplicates }) => {
           cards: card["@id"],
           cardQuantity: card.quantity,
           price: card.price,
-          isFoil: card.isFoil === "Yes" ? true : false
+          isFoil: card.isFoil === "Yes" ? true : false,
+          isSigned: card.isSigned === "Yes" ? true : false,
+          isAltered: false //False by default. Can be edited in back-office by the shop.
         };
       })
     };
@@ -123,11 +126,13 @@ const SellRequestValidation = ({ history, checkForDuplicates }) => {
 
       setCurrentBasket([]);
 
-      //TODO : NOTIF success
+      toast.success(
+        "Votre rachat a bien été posté. Merci d'envoyer les cartes à la boutique."
+      );
       history.replace("/my_sell_requests");
     } catch (error) {
       console.log(error);
-      //TODO : NOTIF ECHEC
+      toast.error("Le rachat n'a pu être validé. Merci de recommencer.");
     }
   };
 

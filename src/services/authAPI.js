@@ -14,12 +14,14 @@ function authenticate(credentials) {
       return response.data;
     })
     .then(data => {
-      console.log(data);
+      // console.log(data);
       //Stocking in local storage
       window.localStorage.setItem("authToken", data.token);
-      data.shop.PercentPerLangs = localStorageAPI.transformPercentPerLangArrayIntoObject(
-        data.shop.PercentPerLangs
-      );
+      if (data.shop) {
+        data.shop.PercentPerLangs = localStorageAPI.transformPercentPerLangArrayIntoObject(
+          data.shop.PercentPerLangs
+        );
+      }
       window.localStorage.setItem("userInfos", JSON.stringify(data));
 
       //Puting token into axios bearer

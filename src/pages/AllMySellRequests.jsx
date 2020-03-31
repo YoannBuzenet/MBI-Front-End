@@ -31,7 +31,7 @@ const AllMySellRequests = props => {
               <Th>Envoi</Th>
               <Th>Réception</Th>
               <Th>Dernier traitement</Th>
-              <Th>Attente Validation Client</Th>
+              <Th>Validation Client</Th>
               <Th>Validation</Th>
               <Th>Nombre de cartes</Th>
               <Th>Montant total</Th>
