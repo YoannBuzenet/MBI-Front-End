@@ -363,6 +363,7 @@ const ShopConditionPriceUpdate = ({
         //update all conditions in the given languages
         const allPricesCopy = [...allPricesBuffer];
 
+        //Updating NON signed, so we update NON SIGNED and SIGNED
         if (isSigned === 0) {
           var i = 1;
           for (const condition in allPricesCopy[index].langs[langID]) {
@@ -417,53 +418,18 @@ const ShopConditionPriceUpdate = ({
             i++;
           }
 
-          //A bit dirty
-          //Browing each condition and setting the price following the percent stored in session.
-          //As session's PercentPerConditions numbers are IN ARRAY, we are hacky and follow their index with -1. The day this order changes, this loop won't work. Solution : receinving data as object instead of array.
-
           setAllPricesBuffer(allPricesCopy);
-        } else if (isFoil === 1) {
-          //update all conditions in the given languages
-          const allPricesCopy = [...allPricesBuffer];
-          allPricesCopy[index].langs[langID][1][isFoil] = newPrice;
-          //A bit dirty
-          //Browing each condition and setting the price following the percent stored in session.
-          //As session's PercentPerConditions numbers are IN ARRAY, we are hacky and follow their index with -1. The day this order changes, this loop won't work. Solution : receinving data as object instead of array.
-          var i = 1;
-          for (const condition in allPricesCopy[index].langs[langID]) {
-            if (i === 1) {
-              allPricesCopy[index].langs[langID][i][isFoil] = newPrice;
-
-              //Updating Was Updated property on context to create a CSS class
-              allPricesCopy[index].langs[langID][i][
-                isFoil + "wasUpdated"
-              ] = true;
-            } else {
-              allPricesCopy[index].langs[langID][i][isFoil] =
-                //If we want to make prices more stable integer, implement function here
-                priceUpdateAPI.smoothNumbers(
-                  (newPrice *
-                    authenticationInfos.shop.shopData.PercentPerConditionFoils[
-                      i - 1
-                    ].percent) /
-                    100
-                );
-              //Updating Was Updated property on context to create a CSS class
-              allPricesCopy[index].langs[langID][i][
-                isFoil + "wasUpdated"
-              ] = true;
-            }
-            i++;
-          }
-
-          setAllPricesBuffer(allPricesCopy);
+        } else if (isSigned === 1) {
+          console.log("là on modifie que les signées");
         }
       } else {
         const allPricesCopy = [...allPricesBuffer];
 
-        allPricesCopy[index].langs[langID][conditionID][isFoil] = newPrice;
-        allPricesBuffer[index].langs[langID][conditionID][
-          isFoil + "wasUpdated"
+        allPricesCopy[index].langs[langID][conditionID][isFoil][
+          isSigned
+        ] = newPrice;
+        allPricesBuffer[index].langs[langID][conditionID][isFoil][
+          isSigned + "wasUpdated"
         ] = true;
 
         setAllPricesBuffer(allPricesCopy);
