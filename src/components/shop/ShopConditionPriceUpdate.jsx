@@ -421,6 +421,35 @@ const ShopConditionPriceUpdate = ({
           setAllPricesBuffer(allPricesCopy);
         } else if (isSigned === 1) {
           console.log("là on modifie que les signées");
+          var i = 1;
+          for (const condition in allPricesCopy[index].langs[langID]) {
+            if (i === 1) {
+              allPricesCopy[index].langs[langID][i][isFoil][1] = newPrice;
+
+              //Updating Was Updated property on context to create a CSS class
+              allPricesCopy[index].langs[langID][i][isFoil][
+                1 + "wasUpdated"
+              ] = true;
+            } else {
+              allPricesCopy[index].langs[langID][i][isFoil][1] =
+                //If we want to make prices more stable integer, implement function here
+                priceUpdateAPI.smoothNumbers(
+                  (newPrice *
+                    authenticationInfos.shop.shopData.PercentPerConditions[
+                      i - 1
+                    ].percent) /
+                    100
+                );
+
+              //Updating Was Updated property on context to create a CSS class
+              allPricesCopy[index].langs[langID][i][isFoil][
+                1 + "wasUpdated"
+              ] = true;
+            }
+            i++;
+          }
+
+          setAllPricesBuffer(allPricesCopy);
         }
       } else {
         const allPricesCopy = [...allPricesBuffer];
