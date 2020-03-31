@@ -481,17 +481,17 @@ const ShopConditionPriceUpdate = ({
     } else if (event.target.value === "") {
       //set the price to null in context
       const allPricesCopy = [...allPricesBuffer];
-      allPricesCopy[index].langs[langID][conditionID][isFoil] = null;
+      allPricesCopy[index].langs[langID][conditionID][isFoil][isSigned] = null;
 
       setAllPricesBuffer(allPricesCopy);
       //Delete in DB
       priceUpdateAPI.deleteOnePrice(
-        allPricesBuffer[index].langs[langID][conditionID][
-          isFoil + "idCardShopPrice"
+        allPricesBuffer[index].langs[langID][conditionID][isFoil][
+          isSigned + "idCardShopPrice"
         ]
       );
-      allPricesCopy[index].langs[langID][conditionID][
-        isFoil + "idCardShopPrice"
+      allPricesCopy[index].langs[langID][conditionID][isFoil][
+        isSigned + "idCardShopPrice"
       ] = null;
     } else {
       toast.error("Merci de saisir un nombre.");
