@@ -62,6 +62,7 @@ const ShopConditionPriceUpdate = ({
             allPricesCopy[index].langs[langID][objectToParse][isFoil][isSigned],
           isFoil: isFoil === 1 ? true : false,
           isSigned: isSigned === 1 ? true : false,
+          isAltered: false,
           shop: shop,
           card: cardID,
           language: langID,
@@ -74,6 +75,7 @@ const ShopConditionPriceUpdate = ({
             allPricesCopy[index].langs[langID][objectToParse][isFoil][isSigned],
           isFoil: isFoil === 1 ? true : false,
           isSigned: isSigned === 1 ? true : false,
+          isAltered: false,
           shop: shop,
           card: cardID,
           language: langID,
@@ -135,6 +137,7 @@ const ShopConditionPriceUpdate = ({
               ],
             isFoil: isFoil === 1 ? true : false,
             isSigned: isSigned === 1 ? true : false,
+            isAltered: false,
             shop: shop,
             card: cardID,
             language: LangToParse,
@@ -149,6 +152,7 @@ const ShopConditionPriceUpdate = ({
               ],
             isFoil: isFoil === 1 ? true : false,
             isSigned: isSigned === 1 ? true : false,
+            isAltered: false,
             shop: shop,
             card: cardID,
             language: LangToParse,
@@ -158,6 +162,7 @@ const ShopConditionPriceUpdate = ({
         }
       }
     }
+    console.log(batch);
     try {
       priceUpdateAPI
         .batchPriceUpdate(batch)
@@ -252,6 +257,10 @@ const ShopConditionPriceUpdate = ({
             contextCopy[index].langs[
               authenticationInfos.shop.shopData.baseLang.id
             ][conditions][isFoil][isSigned + "wasUpdated"] = true;
+
+            contextCopy[index].langs[
+              authenticationInfos.shop.shopData.baseLang.id
+            ][conditions][isFoil][1 + "wasUpdated"] = true;
           }
           j++;
         }
@@ -271,25 +280,42 @@ const ShopConditionPriceUpdate = ({
             ]) {
               if (k === 1) {
                 //Updating price on Mint condition on NON baseLang
+                //Non Signed
                 contextCopy[index].langs[parseInt(language)][conditions][
                   isFoil
-                ] = priceUpdateAPI.smoothNumbers(
+                ][isSigned] = priceUpdateAPI.smoothNumbers(
                   (newPrice *
                     authenticationInfos.shop.shopData.PercentPerLangs[
                       parseInt(language)
                     ].percentPerLang) /
                     100
                 );
-
-                //Updating Was Updated property on context to create a CSS class
-                contextCopy[index].langs[parseInt(language)][conditions][
-                  isFoil + "wasUpdated"
-                ] = true;
-              } else {
-                //Updating Price on all non BaseLang languages
+                //Signed
                 contextCopy[index].langs[parseInt(language)][conditions][
                   isFoil
-                ] = priceUpdateAPI.smoothNumbers(
+                ][1] = priceUpdateAPI.smoothNumbers(
+                  (newPrice *
+                    (PercentPerSigned / 100) *
+                    authenticationInfos.shop.shopData.PercentPerLangs[
+                      parseInt(language)
+                    ].percentPerLang) /
+                    100
+                );
+
+                //Updating Was Updated property on context to create a CSS class(non signed)
+                contextCopy[index].langs[parseInt(language)][conditions][
+                  isFoil
+                ][isSigned + "wasUpdated"] = true;
+
+                //Updating Was Updated property on context to create a CSS class(signed)
+                contextCopy[index].langs[parseInt(language)][conditions][
+                  isFoil
+                ][1 + "wasUpdated"] = true;
+              } else {
+                //Updating Price on all non BaseLang on non-Mint conditions (non signed)
+                contextCopy[index].langs[parseInt(language)][conditions][
+                  isFoil
+                ][isSigned] = priceUpdateAPI.smoothNumbers(
                   (((newPrice *
                     authenticationInfos.shop.shopData.PercentPerLangs[
                       parseInt(language)
@@ -300,11 +326,31 @@ const ShopConditionPriceUpdate = ({
                     ].percent) /
                     100
                 );
-
-                //Updating Was Updated property on context to create a CSS class
+                //Updating Price on all non BaseLang on non-Mint conditions (signed)
                 contextCopy[index].langs[parseInt(language)][conditions][
-                  isFoil + "wasUpdated"
-                ] = true;
+                  isFoil
+                ][1] = priceUpdateAPI.smoothNumbers(
+                  (((newPrice *
+                    (PercentPerSigned / 100) *
+                    authenticationInfos.shop.shopData.PercentPerLangs[
+                      parseInt(language)
+                    ].percentPerLang) /
+                    100) *
+                    authenticationInfos.shop.shopData.PercentPerConditions[
+                      k - 1
+                    ].percent) /
+                    100
+                );
+
+                //Updating Was Updated property on context to create a CSS class (non signed)
+                contextCopy[index].langs[parseInt(language)][conditions][
+                  isFoil
+                ][isSigned + "wasUpdated"] = true;
+
+                //Updating Was Updated property on context to create a CSS class (signed)
+                contextCopy[index].langs[parseInt(language)][conditions][
+                  isFoil
+                ][1 + "wasUpdated"] = true;
               }
               k++;
             }
@@ -312,6 +358,7 @@ const ShopConditionPriceUpdate = ({
         }
         //4. Set context
         setAllPricesBuffer(contextCopy);
+        //If we're updating Mint field NON baselang, just refresh this lang (non signed & signed)
       } else if (conditionID === 1) {
         if (isFoil === 0) {
           //update all conditions in the given languages
@@ -443,7 +490,8 @@ const ShopConditionPriceUpdate = ({
     ) => {
       if (
         conditionID === 1 &&
-        langID === authenticationInfos.shop.shopData.baseLang.id
+        langID === authenticationInfos.shop.shopData.baseLang.id &&
+        isSigned === 0
       ) {
         sendBigBatchToAPI();
       } else if (conditionID === 1) {
