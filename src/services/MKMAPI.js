@@ -32,7 +32,21 @@ function transformSellRequestIntoXML(sellRequest) {
   const xml_body = sellRequest.sellRequests.reduce(
     (accumulator, currentValue) => {
       const article =
-        "<article> <idProduct>100569</idProduct><idLanguage>1</idLanguage><comments>Inserted through the API</comments><count>1</count><price>4</price><condition>EX</condition><isFoil>true</isFoil><isSigned>false</isSigned><isPlayset>false</isPlayset></article>";
+        "<article> <idProduct>" +
+        currentValue.mcmId +
+        "</idProduct><idLanguage>" +
+        currentValue.lang +
+        "</idLanguage><comments>" +
+        "" + //Optional comment to post
+        "</comments><count>" +
+        currentValue.quantity +
+        "</count><price>" +
+        setSellingMKMPrice(100) +
+        "</price><condition>EX</condition><isFoil>" +
+        currentValue.isFoil +
+        "</isFoil><isSigned>" +
+        currentValue.isSigned +
+        "</isSigned><isPlayset>false</isPlayset></article>";
 
       return article + accumulator;
     },
