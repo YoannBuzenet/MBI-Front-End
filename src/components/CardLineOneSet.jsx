@@ -139,7 +139,7 @@ const CardLineOneSet = ({
             name="lang"
             id={cardsContext[cardID].name + "id1"}
             onChange={event => {
-              handleChange(event, currentCard);
+              handleChange(event);
             }}
           >
             {cardsContext[cardID].foreignData.length > 0 ? (
@@ -164,7 +164,7 @@ const CardLineOneSet = ({
             name="condition"
             id={cardsContext[cardID].name + "id2"}
             onChange={event => {
-              handleChange(event, currentCard);
+              handleChange(event);
             }}
             defaultValue="2"
           >
@@ -193,7 +193,7 @@ const CardLineOneSet = ({
             name="isFoil"
             id={card.name + "id4"}
             onChange={event => {
-              handleChange(event, currentCard);
+              handleChange(event);
             }}
           >
             {cardsContext[cardID].hasnonfoil && <option value="No">No</option>}
@@ -204,7 +204,7 @@ const CardLineOneSet = ({
           <select
             name="isSigned"
             onChange={event => {
-              handleChange(event, currentCard);
+              handleChange(event);
             }}
           >
             <option value="No">Non</option>
@@ -216,7 +216,7 @@ const CardLineOneSet = ({
             name="quantity"
             id={cardsContext[cardID].name + "id3"}
             onChange={event => {
-              handleChange(event, currentCard);
+              handleChange(event);
             }}
           >
             <option value="1">1</option>
@@ -246,7 +246,7 @@ const CardLineOneSet = ({
             size="20"
             className="downsize-icon add-item-basket"
             onClick={() => {
-              console.log(currentCard);
+              console.log(cardsContext[cardID]);
               return handleAddSellingBasket(
                 currentBasket,
                 cardsContext[cardID]
