@@ -12,6 +12,7 @@ import OneLineLoader from "../../components/loaders/OneLineLoader";
 import TableLoader from "../../components/loaders/TableLoader";
 import OneBigLineLoader from "../../components/loaders/OneBigLineLoader";
 import errorHandlingAPI from "../../services/errorHandlingAPI";
+import MKMAPI from "../../services/MKMAPI";
 
 const ShopAdminOneSellRequest = ({ match }) => {
   const { id } = match.params;
@@ -47,7 +48,7 @@ const ShopAdminOneSellRequest = ({ match }) => {
           cancelToken: source.token
         })
         .then(data => {
-          console.log(data);
+          // console.log(data);
           return data;
         })
         .then(data => {
@@ -69,6 +70,7 @@ const ShopAdminOneSellRequest = ({ match }) => {
               ...data.sellRequestCards.map(card => {
                 return {
                   id: card.id,
+                  mcmId: card.cards.mcmid,
                   name: card.cards.name,
                   scryfallid: card.cards.scryfallid,
                   hasfoil: 1,
@@ -82,7 +84,7 @@ const ShopAdminOneSellRequest = ({ match }) => {
                   quantity: card.cardQuantity,
                   isFoil: card.isFoil,
                   isSigned: card.isSigned,
-                  isAltered: card.isAtered
+                  isAltered: card.isAltered
                 };
               })
             ]
@@ -98,6 +100,9 @@ const ShopAdminOneSellRequest = ({ match }) => {
 
     return () => source.cancel("");
   }, [id]);
+
+  console.log(currentAdminSellRequest);
+  console.log(MKMAPI.transformSellRequestIntoXML(currentAdminSellRequest));
 
   //ENV VARIABLE TO DEFINE
   const gradingArea = "isEU";
