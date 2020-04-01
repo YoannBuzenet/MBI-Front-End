@@ -232,6 +232,14 @@ const ShopConditionPriceUpdate = ({
             contextCopy[index].langs[
               authenticationInfos.shop.shopData.baseLang.id
             ][conditions][isFoil][isSigned + "wasUpdated"] = true;
+
+            if (isSigned === 0) {
+              //Updating 'Was Updated' property on context to create a CSS class
+              //We add this condition becase it is skipped otherwise
+              contextCopy[index].langs[
+                authenticationInfos.shop.shopData.baseLang.id
+              ][conditions][isFoil][1 + "wasUpdated"] = true;
+            }
           } else {
             //Updating Prices on all non Mint conditions on BaseLang on Signed and Non Signed
             contextCopy[index].langs[
