@@ -18,11 +18,19 @@ import axios from "axios";
 
 const URL_MKM_ADD_STOCK = "https://api.cardmarket.com/ws/v2.0/stock";
 
-function MKM_ADD(XMLObject) {
+function transformSellRequestIntoXML(sellRequest) {
+  console.log(sellRequest);
+
+  return sellRequest;
+}
+
+function MKM_Add(XMLObject) {
   //PREPARE THE REQUEST TO SPLIT INTO SEVERAL - ONE FOR 100 OBJECTS
   return axios.post(URL_MKM_ADD_STOCK, XMLObject);
 }
 
 export default {
-  URL_MKM_ADD_STOCK
+  URL_MKM_ADD_STOCK,
+  MKM_Add,
+  transformSellRequestIntoXML
 };

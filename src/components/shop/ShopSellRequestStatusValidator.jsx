@@ -1,6 +1,8 @@
 import React, { useContext, useState, useEffect } from "react";
 import AdminSellRequestContext from "../../context/adminSellRequestContext";
 import sellRequestAPI from "../../services/sellRequestAPI";
+import { toast } from "react-toastify";
+import MKMAPI from "../../services/MKMAPI";
 
 const ShopSellRequestStatusValidator = props => {
   const { currentAdminSellRequest, setCurrentAdminSellRequest } = useContext(
@@ -78,19 +80,31 @@ const ShopSellRequestStatusValidator = props => {
     }
   }, [currentStatus, currentAdminSellRequest]);
 
-  const validateSellRequest = () => {
+  const validateSellRequest = async () => {
     // console.log("le rachat va etre validé");
     const newData = {
       dateValidated: new Date()
     };
-    sellRequestAPI
-      .updateAsShop(currentAdminSellRequest.id, newData)
-      .then(data => {
-        setCurrentAdminSellRequest({
-          ...currentAdminSellRequest,
-          dateValidated: data.data.dateValidated
-        });
+    try {
+      const API_update = await sellRequestAPI.updateAsShop(
+        currentAdminSellRequest.id,
+        newData
+      );
+      console.log("api update ok");
+      const session_update = await setCurrentAdminSellRequest({
+        ...currentAdminSellRequest,
+        dateValidated: API_update.data.dateValidated
       });
+      console.log("session update ok");
+      const MKM_update = await MKMAPI.transformSellRequestIntoXML(
+        currentAdminSellRequest
+      );
+      console.log("mkm prévenu");
+    } catch (error) {
+      toast.error(
+        "Le rachat n'a pu être validé. Merci de recommencer ultérieurement."
+      );
+    }
   };
 
   const cancelSellRequest = () => {
@@ -131,7 +145,9 @@ const ShopSellRequestStatusValidator = props => {
 
   return (
     <>
-      {currentAdminSellRequest.id && <p>Modifier le statut du rachat</p>}
+      {currentAdminSellRequest.id && currentStatus !== "Validé" && (
+        <p>Modifier le statut du rachat</p>
+      )}
       {availableOptions.length > 0 && (
         <select
           value="default"
