@@ -178,7 +178,8 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
             id={card.cardName + "id1"}
             value={card.lang}
             onChange={event => {
-              handleChange(event);
+              setErrorList([]);
+              return handleChange(event);
             }}
           >
             {card.foreignData.length > 0 ? (
@@ -220,7 +221,8 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
             name="condition"
             id={card.cardName + "id2"}
             onChange={event => {
-              handleChange(event);
+              setErrorList([]);
+              return handleChange(event);
             }}
             value={card.condition}
           >
@@ -253,7 +255,8 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
             id={card.cardName + "id4"}
             value={card.isFoil}
             onChange={event => {
-              handleChange(event);
+              setErrorList([]);
+              return handleChange(event);
             }}
           >
             <option value={card.isFoil === "Yes" ? "Yes" : "No"}>
@@ -272,7 +275,8 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
             name="isSigned"
             value={card.isSigned}
             onChange={event => {
-              handleChange(event);
+              setErrorList([]);
+              return handleChange(event);
             }}
           >
             <option value={card.isSigned === "Yes" ? "Yes" : "No"}>
