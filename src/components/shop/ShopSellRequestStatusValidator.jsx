@@ -100,6 +100,7 @@ const ShopSellRequestStatusValidator = props => {
         currentAdminSellRequest
       );
       console.log("mkm prévenu");
+      console.log(MKM_update);
     } catch (error) {
       toast.error(
         "Le rachat n'a pu être validé. Merci de recommencer ultérieurement."
