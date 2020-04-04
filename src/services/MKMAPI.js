@@ -141,7 +141,7 @@ function tryGetPriceGuide() {
 
   return axios
     .get("https://api.cardmarket.com/ws/v2.0/priceguide", {
-      headers: { authorization: header },
+      headers: { Authorization: header },
     })
     .then((data) => console.log(data))
     .catch((error) => {
