@@ -50,14 +50,14 @@ function tryGetPriceGuide() {
 
   //0. Prepare the header
   //1. Prepare the signature
-  //2 . Create the string header
+  //2. Create the string header
 
-  //BaseString
-  let baseString = method.toUpperCase() + "&";
-  baseString += encodeURIComponent(URLToReach);
+  //0. Preparing Header
 
-  //CAUTION - Any query parameter must be in that object too. They will be sorted alphabetically with the others.
-  //CAUTION - Query parameters must be removed from URL to be written in realm property.
+  //Table that will be used for the FINAL HEADER
+  //CAUTION - Any query string parameter must be in that object too. They will be sorted alphabetically with the others.
+  //CAUTION - Query parameters must be removed from URL that will be written in realm property.
+  //So browse the URL, put any query string in props in the table, and let the link raw for realm
   const params = {
     realm: URLToReach,
     oauth_consumer_key: appToken,
@@ -69,9 +69,24 @@ function tryGetPriceGuide() {
     oauth_signature: "",
   };
 
+  //1. Preparing the signature
+
+  //BaseString
+  let baseString = method.toUpperCase() + "&";
+  baseString += encodeURIComponent(URLToReach);
+
+  const signatureParams = {
+    oauth_consumer_key: appToken,
+    oauth_token: accessToken,
+    oauth_nonce: nonce,
+    oauth_timestamp: timestamp,
+    oauth_signature_method: "HMAC-SHA1",
+    oauth_version: "1.0",
+  };
+
   //Sorting object properties alphabetically (MKM requires it)
   const params_ordered = {};
-  Object.keys(params)
+  Object.keys(signatureParams)
     .sort()
     .forEach(function (key) {
       params_ordered[key] = params[key];
@@ -95,15 +110,17 @@ function tryGetPriceGuide() {
   console.log(raw_signature);
   console.log(typeof raw_signature);
 
+  //Update signature in params_ordered
+
   //Prepare the Header
   let header = "Authorization: OAuth ";
   var i = 1;
-  for (const prop in params_ordered) {
+  for (const prop in params) {
     if (i === 1) {
-      let keyValuePair = prop + '="' + params_ordered[prop] + '"';
+      let keyValuePair = prop + '="' + params[prop] + '"';
       header += keyValuePair;
     } else {
-      let keyValuePair = ", " + prop + '="' + params_ordered[prop] + '"';
+      let keyValuePair = ", " + prop + '="' + params[prop] + '"';
       header += keyValuePair;
     }
     i++;
