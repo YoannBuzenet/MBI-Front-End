@@ -25,6 +25,26 @@ function setSellingMKMPrice(number) {
   return number;
 }
 
+function tryGetPriceGuide() {
+  const app_token = "ImbvOWpgbnWN4qKA";
+  const app_secret = "76tBmByr3luWVJAEp0yB0WBpnYnhmU2X";
+  const access_token = "Cl2lfYbQr1KknVG2zIwkZLNbHE3sZWMF";
+  const access_token_secret = "Cl2lfYbQr1KknVG2zIwkZLNbHE3sZWMF";
+
+  const RandomString =
+    Math.random().toString(36).substring(2, 15) +
+    Math.random().toString(36).substring(2, 15);
+
+  const timestamp = Date.now();
+
+  console.log(RandomString);
+  console.log(timestamp);
+
+  console.log("beu");
+
+  return axios.get("https://api.cardmarket.com/ws/v1.1/account");
+}
+
 function transformSellRequestIntoXML(sellRequest) {
   console.log(sellRequest);
   const xml_start = '<?xml version="1.0" encoding="UTF-8" ?><request>';
@@ -68,5 +88,6 @@ export default {
   URL_MKM_ADD_STOCK,
   URL_MKM_SANDBOX_ADD_STOCK,
   MKM_AddToStock,
-  transformSellRequestIntoXML
+  transformSellRequestIntoXML,
+  tryGetPriceGuide,
 };
