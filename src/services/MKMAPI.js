@@ -48,6 +48,7 @@ function tryGetPriceGuide() {
   const appToken = "ImbvOWpgbnWN4qKA"; //App Token
   const accessToken = "Cl2lfYbQr1KknVG2zIwkZLNbHE3sZWMF"; //Access Token
 
+  //0. Prepare the header
   //1. Prepare the signature
   //2 . Create the string header
 
@@ -56,6 +57,7 @@ function tryGetPriceGuide() {
   baseString += encodeURIComponent(URLToReach);
 
   //CAUTION - Any query parameter must be in that object too. They will be sorted alphabetically with the others.
+  //CAUTION - Query parameters must be removed from URL to be written in realm property.
   const params = {
     realm: URLToReach,
     oauth_consumer_key: appToken,
@@ -64,6 +66,7 @@ function tryGetPriceGuide() {
     oauth_timestamp: timestamp,
     oauth_signature_method: "HMAC-SHA1",
     oauth_version: "1.0",
+    oauth_signature: "",
   };
 
   //Sorting object properties alphabetically (MKM requires it)
@@ -91,6 +94,21 @@ function tryGetPriceGuide() {
 
   console.log(raw_signature);
   console.log(typeof raw_signature);
+
+  //Prepare the Header
+  let header = "Authorization: OAuth ";
+  var i = 1;
+  for (const prop in params_ordered) {
+    if (i === 1) {
+      let keyValuePair = prop + '="' + params_ordered[prop] + '"';
+      header += keyValuePair;
+    } else {
+      let keyValuePair = ", " + prop + '="' + params_ordered[prop] + '"';
+      header += keyValuePair;
+    }
+    i++;
+  }
+  console.log("header", header);
 
   return axios.get("https://api.cardmarket.com/ws/v1.1/account");
 }
