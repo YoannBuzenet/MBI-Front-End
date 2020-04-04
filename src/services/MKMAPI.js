@@ -25,11 +25,16 @@ function setSellingMKMPrice(number) {
   return number;
 }
 
+function calculateSigningKey(appSecret, accessTokenSecret) {
+  const signingKey =
+    encodeURIComponent(appSecret) + "&" + encodeURIComponent(accessTokenSecret);
+
+  return signingKey;
+}
+
 function tryGetPriceGuide() {
-  
   const app_secret = "76tBmByr3luWVJAEp0yB0WBpnYnhmU2X";
   const access_token_secret = "Cl2lfYbQr1KknVG2zIwkZLNbHE3sZWMF";
-
 
   const realm = "https://api.cardmarket.com/ws/v1.1/account";
   const oauth_version = "1.0";
@@ -41,12 +46,13 @@ function tryGetPriceGuide() {
   const oauth_token = "Cl2lfYbQr1KknVG2zIwkZLNbHE3sZWMF"; //Access Token
   const oauth_signature_method = "HMAC-SHA1";
 
-  const oauth_signature;
+  var oauth_signature;
 
-  const header;
+  var header;
 
   console.log(oauth_nonce);
   console.log(oauth_timestamp);
+  console.log(calculateSigningKey(app_secret, access_token_secret));
 
   console.log("beu");
 
