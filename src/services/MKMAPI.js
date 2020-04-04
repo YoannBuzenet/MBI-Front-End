@@ -50,7 +50,7 @@ function tryGetPriceGuide() {
   let baseString = method.toUpperCase() + "&";
   baseString += encodeURIComponent(URLToReach);
 
-  //CAUTION - Any query parameter must be in that object too
+  //CAUTION - Any query parameter must be in that object too. They will be sorted alphabetically with the others.
   const params = {
     realm: URLToReach,
     oauth_consumer_key: appToken,
@@ -69,11 +69,16 @@ function tryGetPriceGuide() {
       params_ordered[key] = params[key];
     });
 
+  //Encoding all params, and adding them to baseString
+
+  for (const prop in params_ordered) {
+    let keyValuePair = prop + "=" + params_ordered[prop];
+    baseString = baseString + "&" + encodeURIComponent(keyValuePair);
+  }
+
   console.log(baseString);
   console.log(params_ordered);
   console.log(calculateSigningKey(app_secret, access_token_secret));
-
-  console.log("beu");
 
   return axios.get("https://api.cardmarket.com/ws/v1.1/account");
 }
