@@ -28,7 +28,7 @@ import {
   Switch,
   Route,
   withRouter,
-  Redirect
+  Redirect,
 } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import LoggedRoute from "./components/LoggedRoute";
@@ -56,6 +56,7 @@ import CardPage from "./pages/CardPage";
 import MyShopAccount from "./pages/shopAdmin/MyShopAccount";
 import BlackDiv from "./components/BlackDiv";
 import CardPlainPage from "./components/CardPlainPage";
+import MKMAPI from "./services/MKMAPI";
 
 //Really Useful library to check all rerenders made on ALL components (you can setup it to check just one)
 // if (process.env.NODE_ENV === "development") {
@@ -111,7 +112,7 @@ function App() {
 
   //STATE Creating the Admin Sell Request Context
   const [currentAdminSellRequest, setCurrentAdminSellRequest] = useState({
-    sellRequests: []
+    sellRequests: [],
   });
 
   //STATE - Price Buffer Update State
@@ -134,55 +135,55 @@ function App() {
 
   const [cardDisplayInformation, setCardDisplayInformation] = useState({
     cardPictureUrl: null,
-    isDisplayed: false
+    isDisplayed: false,
   });
 
   // CONTEXT CREATION Creating All Sets value for context
   const contextAllSets = {
     allSets: allSets,
-    setAllSets: setAllSets
+    setAllSets: setAllSets,
   };
 
   // CONTEXT CREATION Passing Authentication state in Context
   const contextValue = {
     authenticationInfos: authenticationInfos,
-    setAuthenticationInfos: setAuthenticationInfos
+    setAuthenticationInfos: setAuthenticationInfos,
   };
 
   //CONTEXT CREATION Passing Lang and condition definition
   const contextDefinition = {
     lang: langDefinition,
-    conditions: conditionDefinition
+    conditions: conditionDefinition,
   };
 
   //CONTEXT CREATION Passing Can Submit Info
   const contextSubmit = {
     errorList: errorList,
-    setErrorList: setErrorList
+    setErrorList: setErrorList,
   };
 
   //CONTEXT CREATION Passing Admin Sell Request
   const contextAdminSellRequest = {
     currentAdminSellRequest: currentAdminSellRequest,
-    setCurrentAdminSellRequest: setCurrentAdminSellRequest
+    setCurrentAdminSellRequest: setCurrentAdminSellRequest,
   };
 
   //CONTEXT CREATION - PRICE BUFFER
   const contextPriceBuffer = {
     allPricesBuffer: allPricesBuffer,
-    setAllPricesBuffer: setAllPricesBuffer
+    setAllPricesBuffer: setAllPricesBuffer,
   };
 
   //CONTEXT CREATION - Is Responsive Menu Displayed
   const contextResponsiveMenuDisplayed = {
     isResponsiveMenuDisplayed: isResponsiveMenuDisplayed,
-    setIsResponsiveMenuDisplayed: setIsResponsiveMenuDisplayed
+    setIsResponsiveMenuDisplayed: setIsResponsiveMenuDisplayed,
   };
 
   //CONTEXT CREATION - Cards displayed in OneSet Page
   const contextCardsOneSet = {
     cardsContext: cardsContext,
-    setCardsContext: setCardsContext
+    setCardsContext: setCardsContext,
   };
 
   // Each time the currentBasket (which stores what we want to sell) is updated, we save it in Local storage.
@@ -193,19 +194,19 @@ function App() {
   // Passing Basket state in Context
   const contextBasket = {
     currentBasket: currentBasket,
-    setCurrentBasket: setCurrentBasket
+    setCurrentBasket: setCurrentBasket,
   };
 
   // CONTEXT - Black Div Modal Activation
   const contextBlackDiv = {
     isBlackDivModalDisplayed: isBlackDivModalDisplayed,
-    setIsBlackDivModalDisplayed: setIsBlackDivModalDisplayed
+    setIsBlackDivModalDisplayed: setIsBlackDivModalDisplayed,
   };
 
   //CONTEXT - Card displayed Information and status
   const contextCardDisplayed = {
     cardDisplayInformation: cardDisplayInformation,
-    setCardDisplayInformation: setCardDisplayInformation
+    setCardDisplayInformation: setCardDisplayInformation,
   };
 
   const NavbarWithRouter = withRouter(Navbar);
@@ -238,13 +239,13 @@ function App() {
         //updating quantities in the basket with destructuration (to stay tuned with async updates)
         updatedCard = {
           ...updatedCard,
-          quantity: card.quantity + updatedCard.quantity
+          quantity: card.quantity + updatedCard.quantity,
         };
 
         // setCurrentbasket by adding quantity of the card currently added to the selling basket
         // Here we update the new card OBJECT into the selling basket
         setCurrentBasket(
-          currentBasket.map(card => {
+          currentBasket.map((card) => {
             return card.cardName === updatedCard.cardName &&
               card.set === updatedCard.set &&
               card.price === updatedCard.price &&
@@ -270,7 +271,7 @@ function App() {
   // Currenlty it is N²
   //To do this, get all the relevant information and hash them into ONE integer. Then sort this array following that integer.
   //Then use algoexpert.io
-  const checkForDuplicates = currentBasket => {
+  const checkForDuplicates = (currentBasket) => {
     var areThereDuplicate = false;
     var indexItem1;
     var indexItem2;
@@ -294,6 +295,10 @@ function App() {
     }
     return [areThereDuplicate, indexItem1, indexItem2];
   };
+
+  useEffect(() => {
+    MKMAPI.tryGetPriceGuide().then((data) => console.log(data));
+  });
 
   return (
     <div className="App">
@@ -334,7 +339,7 @@ function App() {
                           <Route
                             path="/"
                             exact
-                            render={props => (
+                            render={(props) => (
                               <Homepage
                                 handleAddSellingBasket={handleAddSellingBasket}
                               />
