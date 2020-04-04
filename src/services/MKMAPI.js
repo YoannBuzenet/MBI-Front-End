@@ -40,16 +40,16 @@ function calculateSigningKey(appSecret, accessTokenSecret) {
 function tryGetPriceGuide() {
   //Gathering all needed info (some will be function parameters with value hidden in a config file)
   const app_secret = "76tBmByr3luWVJAEp0yB0WBpnYnhmU2X";
-  const access_token_secret = "Cl2lfYbQr1KknVG2zIwkZLNbHE3sZWMF";
+  const access_token_secret = "0aG8CGgNcR47UwGs7cERd9iyilrdRFo2";
 
   const method = "GET";
-  const URLToReach = "https://api.cardmarket.com/ws/v1.1/account";
+  const URLToReach = "https://api.cardmarket.com/ws/v2.0/priceguide";
   const timestamp = Date.now();
   const nonce =
     Math.random().toString(36).substring(2, 15) +
     Math.random().toString(36).substring(2, 15);
-  const appToken = "ImbvOWpgbnWN4qKA"; //App Token
-  const accessToken = "Cl2lfYbQr1KknVG2zIwkZLNbHE3sZWMF"; //Access Token
+  const appToken = "ImbvOWpgbnWN4qKA";
+  const accessToken = "Cl2lfYbQr1KknVG2zIwkZLNbHE3sZWMF";
 
   //0. Prepare the header
   //1. Prepare the signature
@@ -139,7 +139,17 @@ function tryGetPriceGuide() {
   }
   console.log("header", header);
 
-  return axios.get("https://api.cardmarket.com/ws/v1.1/account");
+  return axios
+    .get("https://api.cardmarket.com/ws/v2.0/priceguide", {
+      headers: { authorization: header },
+    })
+    .then((data) => console.log(data))
+    .catch((error) => {
+      if (error.response) {
+        console.log(error.response);
+      }
+      return console.log(error);
+    });
 }
 
 function transformSellRequestIntoXML(sellRequest) {
