@@ -36,22 +36,30 @@ function tryGetPriceGuide() {
   const app_secret = "76tBmByr3luWVJAEp0yB0WBpnYnhmU2X";
   const access_token_secret = "Cl2lfYbQr1KknVG2zIwkZLNbHE3sZWMF";
 
-  const realm = "https://api.cardmarket.com/ws/v1.1/account";
-  const oauth_version = "1.0";
-  const oauth_timestamp = Date.now();
-  const oauth_nonce =
+  const method = "GET";
+  const URLToReach = "https://api.cardmarket.com/ws/v1.1/account";
+  const timestamp = Date.now();
+  const nonce =
     Math.random().toString(36).substring(2, 15) +
     Math.random().toString(36).substring(2, 15);
-  const oauth_consumer_key = "ImbvOWpgbnWN4qKA"; //App Token
-  const oauth_token = "Cl2lfYbQr1KknVG2zIwkZLNbHE3sZWMF"; //Access Token
-  const oauth_signature_method = "HMAC-SHA1";
+  const appToken = "ImbvOWpgbnWN4qKA"; //App Token
+  const accessToken = "Cl2lfYbQr1KknVG2zIwkZLNbHE3sZWMF"; //Access Token
 
-  var oauth_signature;
+  const params = {
+    realm: URLToReach,
+    oauth_consumer_key: appToken,
+    oauth_token: accessToken,
+    oath_nonce: nonce,
+    oauth_timestamp: timestamp,
+    oauth_signature_method: "HMAC-SHA1",
+    oauth_version: "1.0",
+  };
 
-  var header;
+  let baseString = method.toUpperCase() + "&";
+  baseString += encodeURIComponent(URLToReach);
 
-  console.log(oauth_nonce);
-  console.log(oauth_timestamp);
+  console.log(baseString);
+  console.log(params);
   console.log(calculateSigningKey(app_secret, access_token_secret));
 
   console.log("beu");
