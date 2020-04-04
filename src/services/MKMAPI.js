@@ -43,7 +43,7 @@ function tryGetPriceGuide() {
   const access_token_secret = "0aG8CGgNcR47UwGs7cERd9iyilrdRFo2";
 
   const method = "GET";
-  const URLToReach = "https://api.cardmarket.com/ws/v2.0/priceguide";
+  const URLToReach = "https://api.cardmarket.com/ws/v2.0/account";
   const timestamp = Date.now();
   const nonce =
     Math.random().toString(36).substring(2, 15) +
@@ -140,7 +140,7 @@ function tryGetPriceGuide() {
   console.log("header", header);
 
   return axios
-    .get("https://api.cardmarket.com/ws/v2.0/priceguide", {
+    .get("https://api.cardmarket.com/ws/v2.0/account", {
       headers: { Authorization: header },
     })
     .then((data) => console.log(data))

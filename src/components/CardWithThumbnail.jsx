@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import SellingBasketContext from "../context/sellingBasket";
 import cardsAPI from "../services/cardsAPI";
 import { Link } from "react-router-dom";
+import MKMAPI from "../services/MKMAPI";
 
 const CardWithThumbnail = ({ handleAddSellingBasket, card }) => {
   //Current Selling Request Basket
@@ -16,7 +17,10 @@ const CardWithThumbnail = ({ handleAddSellingBasket, card }) => {
     <>
       <div
         className="card"
-        onClick={() => (window.location.href = "/card/" + card.name)}
+        // onClick={() => (window.location.href = "/card/" + card.name)}
+        onClick={() =>
+          MKMAPI.tryGetPriceGuide().then((data) => console.log(data))
+        }
       >
         <div className="card-picture">
           <img src={picture} alt="" />
