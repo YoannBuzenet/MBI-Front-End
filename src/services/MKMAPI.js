@@ -26,19 +26,27 @@ function setSellingMKMPrice(number) {
 }
 
 function tryGetPriceGuide() {
-  const app_token = "ImbvOWpgbnWN4qKA";
+  
   const app_secret = "76tBmByr3luWVJAEp0yB0WBpnYnhmU2X";
-  const access_token = "Cl2lfYbQr1KknVG2zIwkZLNbHE3sZWMF";
   const access_token_secret = "Cl2lfYbQr1KknVG2zIwkZLNbHE3sZWMF";
 
-  const RandomString =
+
+  const realm = "https://api.cardmarket.com/ws/v1.1/account";
+  const oauth_version = "1.0";
+  const oauth_timestamp = Date.now();
+  const oauth_nonce =
     Math.random().toString(36).substring(2, 15) +
     Math.random().toString(36).substring(2, 15);
+  const oauth_consumer_key = "ImbvOWpgbnWN4qKA"; //App Token
+  const oauth_token = "Cl2lfYbQr1KknVG2zIwkZLNbHE3sZWMF"; //Access Token
+  const oauth_signature_method = "HMAC-SHA1";
 
-  const timestamp = Date.now();
+  const oauth_signature;
 
-  console.log(RandomString);
-  console.log(timestamp);
+  const header;
+
+  console.log(oauth_nonce);
+  console.log(oauth_timestamp);
 
   console.log("beu");
 

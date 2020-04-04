@@ -295,7 +295,7 @@ function App() {
     }
     return [areThereDuplicate, indexItem1, indexItem2];
   };
-
+  //DELETE ONCE IT WORKS
   useEffect(() => {
     MKMAPI.tryGetPriceGuide().then((data) => console.log(data));
   });
