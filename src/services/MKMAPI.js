@@ -1,4 +1,6 @@
 import axios from "axios";
+import hmacSHA1 from "crypto-js/hmac-sha1";
+import Base64 from "crypto-js/enc-base64";
 //https://api.cardmarket.com/ws/documentation/API_2.0:Stock
 
 // <?xml version="1.0" encoding="UTF-8" ?>
@@ -46,6 +48,9 @@ function tryGetPriceGuide() {
   const appToken = "ImbvOWpgbnWN4qKA"; //App Token
   const accessToken = "Cl2lfYbQr1KknVG2zIwkZLNbHE3sZWMF"; //Access Token
 
+  //1. Prepare the signature
+  //2 . Create the string header
+
   //BaseString
   let baseString = method.toUpperCase() + "&";
   baseString += encodeURIComponent(URLToReach);
@@ -76,9 +81,16 @@ function tryGetPriceGuide() {
     baseString = baseString + "&" + encodeURIComponent(keyValuePair);
   }
 
+  const signingKey = calculateSigningKey(app_secret, access_token_secret);
+
   console.log(baseString);
   console.log(params_ordered);
-  console.log(calculateSigningKey(app_secret, access_token_secret));
+  console.log(signingKey);
+
+  const raw_signature = hmacSHA1(baseString, signingKey);
+
+  console.log(raw_signature);
+  console.log(typeof raw_signature);
 
   return axios.get("https://api.cardmarket.com/ws/v1.1/account");
 }
