@@ -33,6 +33,7 @@ function calculateSigningKey(appSecret, accessTokenSecret) {
 }
 
 function tryGetPriceGuide() {
+  //Gathering all needed info (some will be function parameters with value hidden in a config file)
   const app_secret = "76tBmByr3luWVJAEp0yB0WBpnYnhmU2X";
   const access_token_secret = "Cl2lfYbQr1KknVG2zIwkZLNbHE3sZWMF";
 
@@ -45,21 +46,31 @@ function tryGetPriceGuide() {
   const appToken = "ImbvOWpgbnWN4qKA"; //App Token
   const accessToken = "Cl2lfYbQr1KknVG2zIwkZLNbHE3sZWMF"; //Access Token
 
+  //BaseString
+  let baseString = method.toUpperCase() + "&";
+  baseString += encodeURIComponent(URLToReach);
+
+  //CAUTION - Any query parameter must be in that object too
   const params = {
     realm: URLToReach,
     oauth_consumer_key: appToken,
     oauth_token: accessToken,
-    oath_nonce: nonce,
+    oauth_nonce: nonce,
     oauth_timestamp: timestamp,
     oauth_signature_method: "HMAC-SHA1",
     oauth_version: "1.0",
   };
 
-  let baseString = method.toUpperCase() + "&";
-  baseString += encodeURIComponent(URLToReach);
+  //Sorting object properties alphabetically (MKM requires it)
+  const params_ordered = {};
+  Object.keys(params)
+    .sort()
+    .forEach(function (key) {
+      params_ordered[key] = params[key];
+    });
 
   console.log(baseString);
-  console.log(params);
+  console.log(params_ordered);
   console.log(calculateSigningKey(app_secret, access_token_secret));
 
   console.log("beu");
