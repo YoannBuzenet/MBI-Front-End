@@ -34,6 +34,9 @@ function calculateSigningKey(appSecret, accessTokenSecret) {
   return signingKey;
 }
 
+//TODO : Create a function thats takes an URL to reach and return an object with
+// Raw URL, and parameters (key/value)
+
 function tryGetPriceGuide() {
   //Gathering all needed info (some will be function parameters with value hidden in a config file)
   const app_secret = "76tBmByr3luWVJAEp0yB0WBpnYnhmU2X";
@@ -105,12 +108,21 @@ function tryGetPriceGuide() {
   console.log(params_ordered);
   console.log(signingKey);
 
-  const raw_signature = hmacSHA1(baseString, signingKey);
+  //Temporary test of crypting, not working well, used StackOverFlow
+  // const raw_signature = hmacSHA1(baseString, signingKey);
+  // console.log(raw_signature);
+  // console.log(typeof raw_signature);
 
-  console.log(raw_signature);
-  console.log(typeof raw_signature);
+  //Encrypting and encoding in base 64
+  //Following https://stackoverflow.com/questions/35822552/hash-hmac-with-raw-binary-output-in-javascript
+  var crypto = require("crypto");
+  var buf1 = crypto.createHmac("sha1", "0").update(baseString).digest();
+  var buf2 = Buffer.from(signingKey);
+  console.log(Buffer.concat([buf1, buf2]).toString("base64"));
+  const signature = Buffer.concat([buf1, buf2]).toString("base64");
 
   //Update signature in params_ordered
+  params.oauth_signature = signature;
 
   //Prepare the Header
   let header = "Authorization: OAuth ";
