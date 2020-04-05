@@ -98,8 +98,8 @@ function tryGetPriceGuide() {
   //Encoding all params, and adding them to baseString
 
   for (const prop in params_ordered) {
-    let keyValuePair = prop + "=" + params_ordered[prop];
-    baseString = baseString + "&" + encodeURIComponent(keyValuePair);
+    let keyValuePair = prop + "=" + params_ordered[prop] + "&";
+    baseString = baseString + encodeURIComponent(keyValuePair);
   }
 
   const signingKey = calculateSigningKey(app_secret, access_token_secret);
@@ -120,7 +120,7 @@ function tryGetPriceGuide() {
   var buf2 = Buffer.from(signingKey);
   console.log(Buffer.concat([buf1, buf2]).toString("base64"));
   // const signature = Buffer.concat([buf1, buf2]).toString("base64");
-  const signature = "mrxdtR9EcHCalPLjxeYbrj8QPGU=";
+  const signature = "7bCaS9ud1q2289hG37VSoKzhE1Q=";
 
   //Update signature in params_ordered
   params.oauth_signature = signature;
