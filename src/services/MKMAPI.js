@@ -98,10 +98,16 @@ function tryGetPriceGuide() {
     });
 
   //Encoding all params, and adding them to baseString
-
+  var i = 1;
+  var keyValuePair;
   for (const prop in params_ordered) {
-    let keyValuePair = prop + "=" + params_ordered[prop] + "&";
+    if (i < Object.keys(params_ordered).length) {
+      keyValuePair = prop + "=" + params_ordered[prop] + "&";
+    } else {
+      keyValuePair = prop + "=" + params_ordered[prop];
+    }
     baseString = baseString + encodeURIComponent(keyValuePair);
+    i++;
   }
 
   const signingKey = calculateSigningKey(app_secret, access_token_secret);
