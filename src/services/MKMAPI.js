@@ -119,13 +119,16 @@ function tryGetPriceGuide() {
   var buf1 = crypto.createHmac("sha1", "0").update(baseString).digest();
   var buf2 = Buffer.from(signingKey);
   console.log(Buffer.concat([buf1, buf2]).toString("base64"));
-  const signature = Buffer.concat([buf1, buf2]).toString("base64");
+  // const signature = Buffer.concat([buf1, buf2]).toString("base64");
+  const signature = "mrxdtR9EcHCalPLjxeYbrj8QPGU=";
 
   //Update signature in params_ordered
   params.oauth_signature = signature;
 
   //Prepare the Header
-  let header = "Authorization: OAuth ";
+  // let header = "Authorization: OAuth ";
+  let header = "OAuth ";
+
   var i = 1;
   for (const prop in params) {
     if (i === 1) {
