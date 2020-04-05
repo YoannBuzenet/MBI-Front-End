@@ -52,6 +52,10 @@ function buildOAuthHeader(
     Math.random().toString(36).substring(2, 15) +
     Math.random().toString(36).substring(2, 15);
 
+  //Handling potentential parameters in the URL
+  let urlworking = URLToReach.split("&");
+  let urlWithoutParam = urlworking[0];
+
   //0. Prepare the header
   //1. Prepare the signature
   //2. Create the string header
@@ -63,7 +67,7 @@ function buildOAuthHeader(
   //CAUTION - Query parameters must be removed from URL that will be written in realm property.
   //So browse the URL, put any query string in props in the table, and let the link raw for realm
   const params_header = {
-    realm: URLToReach,
+    realm: urlWithoutParam,
     oauth_consumer_key: appToken,
     oauth_token: accessToken,
     oauth_nonce: nonce,
@@ -76,6 +80,7 @@ function buildOAuthHeader(
   //1. Preparing the signature
 
   //BaseString
+  //We let the query strings into the baseString because we are using API 2.0
   let baseString = method.toUpperCase() + "&";
   baseString += encodeURIComponent(URLToReach) + "&";
 
@@ -89,6 +94,16 @@ function buildOAuthHeader(
     oauth_signature_method: "HMAC-SHA1",
     oauth_version: "1.0",
   };
+
+  //Adding the potential query string parameters in the signature params that will be added to baseString
+  if (urlworking.length > 0) {
+    for (let i = 1; i < urlworking.length; i++) {
+      let keyAndValue = urlworking[i].split("=");
+      let key = keyAndValue[0];
+      let value = keyAndValue[1];
+      signatureParams[key] = value;
+    }
+  }
 
   //Sorting object properties alphabetically (MKM requires it)
   const params_ordered = {};
