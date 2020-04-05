@@ -143,17 +143,7 @@ function buildOAuthHeader(
   }
   console.log("header", header);
 
-  return axios
-    .get("https://api.cardmarket.com/ws/v2.0/account", {
-      headers: { Authorization: header },
-    })
-    .then((data) => console.log(data))
-    .catch((error) => {
-      if (error.response) {
-        console.log(error.response);
-      }
-      return console.log(error);
-    });
+  return header;
 }
 
 function transformSellRequestIntoXML(sellRequest) {

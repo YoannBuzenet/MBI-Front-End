@@ -3,6 +3,7 @@ import SellingBasketContext from "../context/sellingBasket";
 import cardsAPI from "../services/cardsAPI";
 import { Link } from "react-router-dom";
 import MKMAPI from "../services/MKMAPI";
+import axios from "axios";
 
 const CardWithThumbnail = ({ handleAddSellingBasket, card }) => {
   //Current Selling Request Basket
@@ -19,7 +20,22 @@ const CardWithThumbnail = ({ handleAddSellingBasket, card }) => {
         className="card"
         // onClick={() => (window.location.href = "/card/" + card.name)}
         onClick={() =>
-          MKMAPI.buildOAuthHeader().then((data) => console.log(data))
+          axios
+            .get("https://api.cardmarket.com/ws/v2.0/account", {
+              headers: {
+                Authorization: MKMAPI.buildOAuthHeader(
+                  "GET",
+                  "https://api.cardmarket.com/ws/v2.0/account"
+                ),
+              },
+            })
+            .then((data) => console.log(data))
+            .catch((error) => {
+              if (error.response) {
+                console.log(error.response);
+              }
+              return console.log(error);
+            })
         }
       >
         <div className="card-picture">
