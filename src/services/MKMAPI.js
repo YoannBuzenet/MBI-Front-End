@@ -78,6 +78,8 @@ function tryGetPriceGuide() {
   let baseString = method.toUpperCase() + "&";
   baseString += encodeURIComponent(URLToReach) + "&";
 
+  console.log("baseString before adding parameters", baseString);
+
   const signatureParams = {
     oauth_consumer_key: appToken,
     oauth_token: accessToken,
@@ -118,8 +120,12 @@ function tryGetPriceGuide() {
   var crypto = require("crypto");
   var buf1 = crypto.createHmac("sha1", "0").update(baseString).digest();
   var buf2 = Buffer.from(signingKey);
-  console.log(Buffer.concat([buf1, buf2]).toString("base64"));
+  console.log(
+    "failed crypting",
+    Buffer.concat([buf1, buf2]).toString("base64")
+  );
   // const signature = Buffer.concat([buf1, buf2]).toString("base64");
+  //signature calculated with the right method in PHP
   const signature = "MS3YJKjNzsQKyefHyfiAgd37hic=";
 
   //Update signature in params_ordered
