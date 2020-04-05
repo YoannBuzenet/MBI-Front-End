@@ -76,7 +76,7 @@ function tryGetPriceGuide() {
 
   //BaseString
   let baseString = method.toUpperCase() + "&";
-  baseString += encodeURIComponent(URLToReach);
+  baseString += encodeURIComponent(URLToReach) + "&";
 
   const signatureParams = {
     oauth_consumer_key: appToken,
@@ -120,7 +120,7 @@ function tryGetPriceGuide() {
   var buf2 = Buffer.from(signingKey);
   console.log(Buffer.concat([buf1, buf2]).toString("base64"));
   // const signature = Buffer.concat([buf1, buf2]).toString("base64");
-  const signature = "7bCaS9ud1q2289hG37VSoKzhE1Q=";
+  const signature = "MS3YJKjNzsQKyefHyfiAgd37hic=";
 
   //Update signature in params_ordered
   params.oauth_signature = signature;
