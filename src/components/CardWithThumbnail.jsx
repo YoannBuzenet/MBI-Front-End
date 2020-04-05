@@ -19,7 +19,7 @@ const CardWithThumbnail = ({ handleAddSellingBasket, card }) => {
         className="card"
         // onClick={() => (window.location.href = "/card/" + card.name)}
         onClick={() =>
-          MKMAPI.tryGetPriceGuide().then((data) => console.log(data))
+          MKMAPI.buildOAuthHeader().then((data) => console.log(data))
         }
       >
         <div className="card-picture">
