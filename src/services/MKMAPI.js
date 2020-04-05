@@ -110,23 +110,13 @@ function tryGetPriceGuide() {
   console.log(params_ordered);
   console.log(signingKey);
 
+  //https://stackoverflow.com/questions/12099092/javascript-equivalent-of-phps-hash-hmac-with-raw-binary-output
+  var CryptoJS = require("crypto-js");
   //Temporary test of crypting, not working well, used StackOverFlow
-  // const raw_signature = hmacSHA1(baseString, signingKey);
-  // console.log(raw_signature);
-  // console.log(typeof raw_signature);
+  const raw_signature = hmacSHA1(baseString, signingKey);
 
-  //Encrypting and encoding in base 64
-  //Following https://stackoverflow.com/questions/35822552/hash-hmac-with-raw-binary-output-in-javascript
-  var crypto = require("crypto");
-  var buf1 = crypto.createHmac("sha1", "0").update(baseString).digest();
-  var buf2 = Buffer.from(signingKey);
-  console.log(
-    "failed crypting",
-    Buffer.concat([buf1, buf2]).toString("base64")
-  );
-  // const signature = Buffer.concat([buf1, buf2]).toString("base64");
   //signature calculated with the right method in PHP
-  const signature = "MS3YJKjNzsQKyefHyfiAgd37hic=";
+  const signature = raw_signature.toString(CryptoJS.enc.Base64);
 
   //Update signature in params_ordered
   params.oauth_signature = signature;
