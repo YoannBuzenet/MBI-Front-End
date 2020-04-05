@@ -61,7 +61,7 @@ function tryGetPriceGuide() {
   //CAUTION - Any query string parameter must be in that object too. They will be sorted alphabetically with the others.
   //CAUTION - Query parameters must be removed from URL that will be written in realm property.
   //So browse the URL, put any query string in props in the table, and let the link raw for realm
-  const params = {
+  const params_header = {
     realm: URLToReach,
     oauth_consumer_key: appToken,
     oauth_token: accessToken,
@@ -94,7 +94,7 @@ function tryGetPriceGuide() {
   Object.keys(signatureParams)
     .sort()
     .forEach(function (key) {
-      params_ordered[key] = params[key];
+      params_ordered[key] = signatureParams[key];
     });
 
   //Encoding all params, and adding them to baseString
@@ -112,26 +112,24 @@ function tryGetPriceGuide() {
 
   //https://stackoverflow.com/questions/12099092/javascript-equivalent-of-phps-hash-hmac-with-raw-binary-output
   var CryptoJS = require("crypto-js");
-  //Temporary test of crypting, not working well, used StackOverFlow
   const raw_signature = hmacSHA1(baseString, signingKey);
-
-  //signature calculated with the right method in PHP
   const signature = raw_signature.toString(CryptoJS.enc.Base64);
+  console.log(signature);
 
   //Update signature in params_ordered
-  params.oauth_signature = signature;
+  params_header.oauth_signature = signature;
 
   //Prepare the Header
   // let header = "Authorization: OAuth ";
   let header = "OAuth ";
 
   var i = 1;
-  for (const prop in params) {
+  for (const prop in params_header) {
     if (i === 1) {
-      let keyValuePair = prop + '="' + params[prop] + '"';
+      let keyValuePair = prop + '="' + params_header[prop] + '"';
       header += keyValuePair;
     } else {
-      let keyValuePair = ", " + prop + '="' + params[prop] + '"';
+      let keyValuePair = ", " + prop + '="' + params_header[prop] + '"';
       header += keyValuePair;
     }
     i++;
