@@ -37,10 +37,7 @@ function calculateSigningKey(appSecret, accessTokenSecret) {
 //TODO : Create a function thats takes an URL to reach and return an object with
 // Raw URL, and parameters (key/value)
 
-function buildOAuthHeader(
-  method = "GET",
-  URLToReach = "https://api.cardmarket.com/ws/v2.0/account"
-) {
+function buildOAuthHeader(method, URLToReach) {
   //Gathering all needed info (some will be function parameters with value hidden in a config file)
   const app_secret = "76tBmByr3luWVJAEp0yB0WBpnYnhmU2X";
   const access_token_secret = "0aG8CGgNcR47UwGs7cERd9iyilrdRFo2";
@@ -63,9 +60,6 @@ function buildOAuthHeader(
   //0. Preparing Header
 
   //Table that will be used for the FINAL HEADER
-  //CAUTION - Any query string parameter must be in that object too. They will be sorted alphabetically with the others.
-  //CAUTION - Query parameters must be removed from URL that will be written in realm property.
-  //So browse the URL, put any query string in props in the table, and let the link raw for realm
   const params_header = {
     realm: urlWithoutParam,
     oauth_consumer_key: appToken,
@@ -80,12 +74,12 @@ function buildOAuthHeader(
   //1. Preparing the signature
 
   //BaseString
-  //We let the query strings into the baseString because we are using API 2.0
   let baseString = method.toUpperCase() + "&";
-  baseString += encodeURIComponent(URLToReach) + "&";
+  baseString += encodeURIComponent(urlWithoutParam) + "&";
 
   console.log("baseString before adding parameters", baseString);
 
+  //Initializing params that will be used for signature calculation. Other params may be added if there are query strings in the url.
   const signatureParams = {
     oauth_consumer_key: appToken,
     oauth_token: accessToken,
@@ -105,7 +99,7 @@ function buildOAuthHeader(
     }
   }
 
-  //Sorting object properties alphabetically (MKM requires it)
+  //Sorting signature params properties alphabetically (MKM requires it)
   const params_ordered = {};
   Object.keys(signatureParams)
     .sort()
