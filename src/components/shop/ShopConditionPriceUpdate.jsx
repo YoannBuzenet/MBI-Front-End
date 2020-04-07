@@ -3,6 +3,7 @@ import priceBufferContext from "../../context/priceBufferContext";
 import priceUpdateAPI from "../../services/priceUpdateAPI";
 import AuthContext from "../../context/authContext";
 import { toast } from "react-toastify";
+import config from "../../services/config";
 
 //Based on context defined in page ShopAdminOneCard
 //This component updates prices in context, send some of data to API, and treats resp back to update context with new ID.
@@ -15,7 +16,7 @@ const ShopConditionPriceUpdate = ({
   isFoil,
   isSigned,
   index,
-  cardID
+  cardID,
 }) => {
   const WAIT_INTERVAL = 1000;
 
@@ -28,12 +29,6 @@ const ShopConditionPriceUpdate = ({
   const { allPricesBuffer, setAllPricesBuffer } = useContext(
     priceBufferContext
   );
-
-  //TODO : pass this in env variable
-  const gradingArea = "nameEU";
-
-  //TODO : pass this in env variable
-  const shop = 1;
 
   const priceDisplayed =
     allPricesBuffer[index].langs[langID][conditionID][isFoil][isSigned] === null
@@ -63,10 +58,10 @@ const ShopConditionPriceUpdate = ({
           isFoil: isFoil === 1 ? true : false,
           isSigned: isSigned === 1 ? true : false,
           isAltered: false,
-          shop: shop,
+          shop: config.shopID,
           card: cardID,
           language: langID,
-          cardCondition: parseInt(objectToParse)
+          cardCondition: parseInt(objectToParse),
         };
         batch.push(newPriceToSend);
       } else {
@@ -76,10 +71,10 @@ const ShopConditionPriceUpdate = ({
           isFoil: isFoil === 1 ? true : false,
           isSigned: isSigned === 1 ? true : false,
           isAltered: false,
-          shop: shop,
+          shop: config.shopID,
           card: cardID,
           language: langID,
-          cardCondition: parseInt(objectToParse)
+          cardCondition: parseInt(objectToParse),
         };
         batch.push(newPriceToSend);
       }
@@ -89,13 +84,13 @@ const ShopConditionPriceUpdate = ({
     try {
       priceUpdateAPI
         .batchPriceUpdate(batch)
-        .then(data => registerBatchResponseIntoContext(data.data));
+        .then((data) => registerBatchResponseIntoContext(data.data));
     } catch (error) {
       toast.error("Une erreur est survenue. Merci de réessayer.");
     }
   };
 
-  const registerBatchResponseIntoContext = data => {
+  const registerBatchResponseIntoContext = (data) => {
     const contextCopy = [...allPricesBuffer];
     //Copy context
     //Parse Data
@@ -139,10 +134,10 @@ const ShopConditionPriceUpdate = ({
             isFoil: isFoil === 1 ? true : false,
             isSigned: isSigned === 1 ? true : false,
             isAltered: false,
-            shop: shop,
+            shop: config.shopID,
             card: cardID,
             language: LangToParse,
-            cardCondition: parseInt(objectToParse)
+            cardCondition: parseInt(objectToParse),
           };
           batch.push(newPriceToSend);
         } else {
@@ -154,10 +149,10 @@ const ShopConditionPriceUpdate = ({
             isFoil: isFoil === 1 ? true : false,
             isSigned: isSigned === 1 ? true : false,
             isAltered: false,
-            shop: shop,
+            shop: config.shopID,
             card: cardID,
             language: LangToParse,
-            cardCondition: parseInt(objectToParse)
+            cardCondition: parseInt(objectToParse),
           };
           batch.push(newPriceToSend);
         }
@@ -167,7 +162,7 @@ const ShopConditionPriceUpdate = ({
     try {
       priceUpdateAPI
         .batchPriceUpdate(batch)
-        .then(data => registerBatchResponseIntoContext(data.data));
+        .then((data) => registerBatchResponseIntoContext(data.data));
     } catch (error) {
       toast.error("Une erreur est survenue. Merci de réessayer.");
     }
@@ -535,10 +530,10 @@ const ShopConditionPriceUpdate = ({
             isFoil: isFoil === 1 ? true : false,
             isSigned: isSigned === 1 ? true : false,
             isAltered: false,
-            shop: "/shops/" + shop,
+            shop: "/shops/" + config.shopID,
             language: "/languages/" + langID,
             cardCondition: "/card_conditions/" + conditionID,
-            card: "/cards/" + cardID
+            card: "/cards/" + cardID,
           };
 
           allPricesBuffer[index].langs[langID][conditionID][isFoil][
@@ -552,28 +547,28 @@ const ShopConditionPriceUpdate = ({
                 isFoil + "idCardShopPrice"
               ]
             )
-            .then(response => console.log("la", response))
-            .catch(error => console.log(error));
+            .then((response) => console.log("la", response))
+            .catch((error) => console.log(error));
         } else {
           const objectToSend = {
             price: newPrice,
             isFoil: isFoil === 1 ? true : false,
             isSigned: isSigned === 1 ? true : false,
             isAltered: false,
-            shop: "/shops/" + shop,
+            shop: "/shops/" + config.shopID,
             language: "/languages/" + langID,
             cardCondition: "/card_conditions/" + conditionID,
-            card: "/cards/" + cardID
+            card: "/cards/" + cardID,
           };
           priceUpdateAPI
             .postOnePrice(objectToSend)
             .then(
-              response =>
+              (response) =>
                 (allPricesBuffer[index].langs[langID][conditionID][isFoil][
                   isSigned + "idCardShopPrice"
                 ] = response.data.id)
             )
-            .catch(error => console.log(error));
+            .catch((error) => console.log(error));
         }
       }
     };
@@ -590,7 +585,7 @@ const ShopConditionPriceUpdate = ({
         key={parseInt(cardID + "" + conditionID + "" + langID + "" + isFoil)}
         type="text"
         value={priceDisplayed}
-        onChange={event => {
+        onChange={(event) => {
           handlechange(
             event,
             conditionID,

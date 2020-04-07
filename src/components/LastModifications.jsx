@@ -3,6 +3,7 @@ import SellingBasketContext from "../context/sellingBasket";
 import CardWithThumbnail from "./CardWithThumbnail";
 import axios from "axios";
 import CardThumbnailLoader from "./loaders/CardThumbnailLoader";
+import config from "../services/config";
 
 const LastModifications = ({ handleAddSellingBasket }) => {
   //Current Selling Request Basket
@@ -14,8 +15,11 @@ const LastModifications = ({ handleAddSellingBasket }) => {
 
   useEffect(() => {
     axios
-      .get("http://127.0.0.1:8000/lastcardsmodified?limit=10&shopid=1")
-      .then(data => setLastModificationList(data.data))
+      .get(
+        "http://127.0.0.1:8000/lastcardsmodified?limit=10&shopid=" +
+          config.shopID
+      )
+      .then((data) => setLastModificationList(data.data))
       .then(() => setIsLoading(false));
     //ADD CANCEL EFFECT
   }, []);

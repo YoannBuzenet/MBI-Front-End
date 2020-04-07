@@ -2,9 +2,7 @@ import React, { useState } from "react";
 import userAPI from "../services/userAPI";
 import Field from "../components/forms/Field";
 import { ToastContainer, toast } from "react-toastify";
-
-//TODO : insert the shop ID via ENV variable
-const shopID = 1;
+import config from "../services/config";
 
 const RegisterPage = ({ history }) => {
   const [credentials, setCredentials] = useState({
@@ -15,10 +13,10 @@ const RegisterPage = ({ history }) => {
     tel: "",
     adress: "",
     postalCode: "",
-    town: ""
+    town: "",
   });
 
-  const handleSubmit = async event => {
+  const handleSubmit = async (event) => {
     history.replace("/");
     event.preventDefault();
 
@@ -34,8 +32,8 @@ const RegisterPage = ({ history }) => {
           postalCode: credentials.postalCode,
           town: credentials.town,
           tel: credentials.tel,
-          shop: "/shops/" + shopID
-        }
+          shop: "/shops/" + config.shopID,
+        },
       };
       await userAPI.register(jsonToSend);
       toast.success("Votre compte a bien été créé.");
@@ -49,13 +47,13 @@ const RegisterPage = ({ history }) => {
     }
   };
 
-  const handleChange = event => {
+  const handleChange = (event) => {
     const value = event.currentTarget.value;
     const name = event.currentTarget.name;
 
     setCredentials({
       ...credentials,
-      [name]: value
+      [name]: value,
     });
   };
 

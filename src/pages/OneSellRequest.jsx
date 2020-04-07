@@ -5,15 +5,13 @@ import StatusCalculator from "../components/StatusCalculator";
 import LastInformationCalculator from "../components/LastInformationCalculator";
 import SellRequestStatusUpdater from "../components/SellRequestStatusUpdater";
 import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
+import config from "../services/config";
 
 const OneSellRequest = ({ match, history }) => {
-  //ENV VARIABLE TO DEFINE
-  const gradingArea = "isEU";
-
   const { id } = match.params;
 
   const [currentSellRequest, setCurrentSellRequest] = useState({
-    sellRequestCards: []
+    sellRequestCards: [],
   });
 
   useEffect(() => {
@@ -22,9 +20,9 @@ const OneSellRequest = ({ match, history }) => {
 
     sellRequestAPI
       .findById(id, {
-        cancelToken: source.token
+        cancelToken: source.token,
       })
-      .then(data => {
+      .then((data) => {
         setCurrentSellRequest(data);
       });
 
@@ -71,7 +69,7 @@ const OneSellRequest = ({ match, history }) => {
                 <Td>{card.cards.name}</Td>
                 <Td>{card.cards.edition.name}</Td>
                 <Td>
-                  {gradingArea == "isEu"
+                  {config.gradingArea == "isEu"
                     ? card.CardCondition.shortname
                     : card.CardCondition.shortnameUS}
                 </Td>
