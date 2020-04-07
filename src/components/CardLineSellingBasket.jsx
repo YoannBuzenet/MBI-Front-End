@@ -12,6 +12,7 @@ import FeatherIcon from "feather-icons-react";
 import CardDisplayOnPageContext from "../context/cardDisplayOnPageContext";
 import BlackDivModalContext from "../context/blackDivModalContext";
 import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
+import config from "../services/config";
 
 //TODO : REQUEST PRICE FOR IS_SIGNED
 
@@ -42,9 +43,6 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
   //State - defining if the Hover should be Top or Bottom
   const [hoverTopOrBottom, setHoverTopOrBottom] = useState();
 
-  //TODO - PASS THIS AS ENV VARIABLE
-  const shopID = 1;
-
   useEffect(() => {
     if (isOnHover) {
       //If we neeed to change something on hover update, here it is
@@ -71,14 +69,14 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
 
     //Updating price
     CardShopPriceAPI.getOnePrice(
-      shopID,
+      config.shopID,
       currentBasket[indexCard].id,
       currentBasket[indexCard].lang,
       currentBasket[indexCard].condition,
       currentBasket[indexCard].isFoil,
       currentBasket[indexCard].isSigned
     )
-      .then(data => {
+      .then((data) => {
         console.log(data);
         if (data.data["hydra:member"].length > 0) {
           contextCopy[indexCard].price = data.data["hydra:member"][0].price;
@@ -90,7 +88,7 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
         sellingBasketAPI.save(contextCopy);
         setCurrentBasket(contextCopy);
       })
-      .catch(error => {
+      .catch((error) => {
         toast.error(
           "Le prix n'a pu être chargé. Merci d'actualiser votre page ou d'essayer plus tard."
         );
@@ -125,7 +123,7 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
   //ALSO DEFINED IN CARDLINE
   const gradingArea = "EU";
 
-  const hoverClassName = e => genericCardAPI.isPictureDisplayedTopOrBottom(e);
+  const hoverClassName = (e) => genericCardAPI.isPictureDisplayedTopOrBottom(e);
 
   const displayCardPlainPage = (event, urlCard) => {
     const newDisplayContext = { ...cardDisplayInformation };
@@ -139,7 +137,7 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
     <>
       <Tr
         key={card.id}
-        onMouseEnter={e => {
+        onMouseEnter={(e) => {
           if (!isMobile) {
             setIsOnHover(!isOnHover);
             setHoverTopOrBottom(hoverClassName(e));
@@ -154,7 +152,7 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
       >
         <Td
           className="cardPictureHolder"
-          onClick={event => {
+          onClick={(event) => {
             console.log(currentBasket[indexCard].id);
             if (isMobile) {
               //FUNCTION TO DISPLAY THE CARD
@@ -177,7 +175,7 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
             name="lang"
             id={card.cardName + "id1"}
             value={card.lang}
-            onChange={event => {
+            onChange={(event) => {
               setErrorList([]);
               return handleChange(event);
             }}
@@ -187,14 +185,14 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
                 <option value={card.lang} key={card.id + "2"}>
                   {card.lang === 9
                     ? "EN"
-                    : card.foreignData.filter(currentlanguage => {
+                    : card.foreignData.filter((currentlanguage) => {
                         return currentlanguage.language_id.id === card.lang;
                       })[0].language_id.shortname}
-                </option>
+                </option>,
               ].concat(
                 card.foreignData
                   .filter(
-                    currentlanguage =>
+                    (currentlanguage) =>
                       currentlanguage.language_id.id !== card.lang
                   )
                   .map((foreignData, index) => (
@@ -208,7 +206,7 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
                   .concat([
                     <option value="9" key={card.id + "3" + card.lang}>
                       EN
-                    </option>
+                    </option>,
                   ])
               )
             ) : (
@@ -220,7 +218,7 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
           <select
             name="condition"
             id={card.cardName + "id2"}
-            onChange={event => {
+            onChange={(event) => {
               setErrorList([]);
               return handleChange(event);
             }}
@@ -254,7 +252,7 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
             name="isFoil"
             id={card.cardName + "id4"}
             value={card.isFoil}
-            onChange={event => {
+            onChange={(event) => {
               setErrorList([]);
               return handleChange(event);
             }}
@@ -274,7 +272,7 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
           <select
             name="isSigned"
             value={card.isSigned}
-            onChange={event => {
+            onChange={(event) => {
               setErrorList([]);
               return handleChange(event);
             }}
@@ -292,7 +290,7 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
           <select
             name="quantity"
             id={card.cardName + "id3"}
-            onChange={event => {
+            onChange={(event) => {
               handleChange(event);
             }}
             value={card.quantity}

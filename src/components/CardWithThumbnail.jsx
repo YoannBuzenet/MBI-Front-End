@@ -9,9 +9,6 @@ const CardWithThumbnail = ({ handleAddSellingBasket, card }) => {
   //Current Selling Request Basket
   const { currentBasket, setCurrentBasket } = useContext(SellingBasketContext);
 
-  //Using the current Card in state
-  const [currentCard, setCard] = useState(card);
-
   const picture = cardsAPI.getSmallPictureFromScryfallId(card);
 
   return (

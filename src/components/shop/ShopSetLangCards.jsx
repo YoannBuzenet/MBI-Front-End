@@ -3,6 +3,7 @@ import GenericCardInfosContext from "../../context/genericCardInfosContext";
 import ShopOneLangAllConditionsCard from "./ShopOneLangAllConditionsCard";
 import cardsAPI from "../../services/cardsAPI";
 import priceBufferContext from "../../context/priceBufferContext";
+import config from "../../services/config";
 
 const ShopSetLangCards = ({ variation, index }) => {
   //DEFINED langages and Conditions
@@ -12,15 +13,6 @@ const ShopSetLangCards = ({ variation, index }) => {
   const { allPricesBuffer, setAllPricesBuffer } = useContext(
     priceBufferContext
   );
-
-  //TODO : pass this in env variable
-  const gradingArea = "isEU";
-
-  //TODO : pass this variable in session + localstorage (its given in resp to POST login)
-  const baseLang = 3;
-
-  //   console.log(lang, conditions);
-  //   console.log(variation);
 
   const Fragment = React.Fragment;
 
@@ -32,26 +24,30 @@ const ShopSetLangCards = ({ variation, index }) => {
         {[
           {
             name: variation.name,
-            language_id: { id: 9, name: "English", shortname: "EN" }
-          }
+            language_id: { id: 9, name: "English", shortname: "EN" },
+          },
         ]
           .concat(variation.foreignData)
-          .filter(currentLang => currentLang.language_id.id === baseLang)
+          .filter(
+            (currentLang) => currentLang.language_id.id === config.baseLang
+          )
           .concat(
             [
               {
                 name: variation.name,
-                language_id: { id: 9, name: "English", shortname: "EN" }
-              }
-            ].filter(currentLang => currentLang.language_id.id !== baseLang)
+                language_id: { id: 9, name: "English", shortname: "EN" },
+              },
+            ].filter(
+              (currentLang) => currentLang.language_id.id !== config.baseLang
+            )
           )
           .concat(
             variation.foreignData.filter(
-              currentLang => currentLang.language_id.id !== baseLang
+              (currentLang) => currentLang.language_id.id !== config.baseLang
             )
           )
 
-          .map(oneLang => {
+          .map((oneLang) => {
             return (
               <Fragment key={oneLang.language_id.id}>
                 <h3>{oneLang.language_id.name}</h3>

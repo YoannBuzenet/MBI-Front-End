@@ -9,6 +9,7 @@ import { isMobile } from "react-device-detect";
 import { toast } from "react-toastify";
 import FeatherIcon from "feather-icons-react";
 import { Tr, Td } from "react-super-responsive-table";
+import config from "../services/config";
 
 const CardLineOneSet = ({
   card,
@@ -17,13 +18,10 @@ const CardLineOneSet = ({
   handleAddSellingBasket,
   index,
   setName,
-  displaySets
+  displaySets,
 }) => {
   //Current Selling Request Basket
   const { currentBasket, setCurrentBasket } = useContext(SellingBasketContext);
-
-  //TODO : pass it into env variable
-  const shopID = 1;
 
   //TIMEOUT SETUP DO NOT ERASE (In case we have to implement it, it can be finished)
   // const WAIT_INTERVAL = 1000;
@@ -69,14 +67,14 @@ const CardLineOneSet = ({
     //TODO
     //API call to get the relevant price and UPDATE PRICE
     CardShopPriceAPI.getOnePrice(
-      shopID,
+      config.shopID,
       cardID,
       contextCopy[cardID].lang,
       contextCopy[cardID].condition,
       contextCopy[cardID].isFoil,
       contextCopy[cardID].isSigned
     )
-      .then(data => {
+      .then((data) => {
         console.log(data);
         if (data.data["hydra:member"].length > 0) {
           contextCopy[cardID].price = data.data["hydra:member"][0].price;
@@ -88,7 +86,7 @@ const CardLineOneSet = ({
 
         setCardsContext(contextCopy);
       })
-      .catch(error => {
+      .catch((error) => {
         toast.error(
           "Le prix n'a pu être chargé. Merci de réactualiser votre page ou d'essayer plus tard."
         );
@@ -102,7 +100,7 @@ const CardLineOneSet = ({
   //Getting the Picture URL
   const urlPictureCard = cardsAPI.getSmallPictureFromScryfallId(card);
 
-  const hoverClassName = e => genericCardAPI.isPictureDisplayedTopOrBottom(e);
+  const hoverClassName = (e) => genericCardAPI.isPictureDisplayedTopOrBottom(e);
 
   //TEMPORARY DEFAULT DEFINITION TODO : GET IT THROUGH API OR LOCAL ENV
   //ALSO DEFINED IN CARDSELLINGBASKET
@@ -112,7 +110,7 @@ const CardLineOneSet = ({
     <>
       <Tr
         key={index}
-        onMouseEnter={e => {
+        onMouseEnter={(e) => {
           if (!isMobile) {
             setIsOnHover(!isOnHover);
             setHoverTopOrBottom(hoverClassName(e));
@@ -138,7 +136,7 @@ const CardLineOneSet = ({
           <select
             name="lang"
             id={cardsContext[cardID].name + "id1"}
-            onChange={event => {
+            onChange={(event) => {
               handleChange(event);
             }}
           >
@@ -146,7 +144,7 @@ const CardLineOneSet = ({
               [
                 <option value="9" key="a">
                   EN
-                </option>
+                </option>,
               ].concat(
                 cardsContext[cardID].foreignData.map((foreignData, index) => (
                   <option value={foreignData.language_id.id} key={index}>
@@ -163,7 +161,7 @@ const CardLineOneSet = ({
           <select
             name="condition"
             id={cardsContext[cardID].name + "id2"}
-            onChange={event => {
+            onChange={(event) => {
               handleChange(event);
             }}
             defaultValue="2"
@@ -192,7 +190,7 @@ const CardLineOneSet = ({
           <select
             name="isFoil"
             id={card.name + "id4"}
-            onChange={event => {
+            onChange={(event) => {
               handleChange(event);
             }}
           >
@@ -203,7 +201,7 @@ const CardLineOneSet = ({
         <Td>
           <select
             name="isSigned"
-            onChange={event => {
+            onChange={(event) => {
               handleChange(event);
             }}
           >
@@ -215,7 +213,7 @@ const CardLineOneSet = ({
           <select
             name="quantity"
             id={cardsContext[cardID].name + "id3"}
-            onChange={event => {
+            onChange={(event) => {
               handleChange(event);
             }}
           >
