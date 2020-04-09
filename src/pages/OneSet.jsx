@@ -16,9 +16,6 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
 
   const ENGLISH_LANG_ID = 9;
 
-  //TODO : PASS IT IN ENVIRONMENT
-  const baseLang = 3;
-
   //State of the set, initialized as empty array, about to receive the complete card list
   const [cards, setCards] = useState([]);
 
@@ -37,10 +34,10 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
 
   //Buildling context with the API response with all cards from the set.
   //We add also DEFAULT caracs to cards here.
-  const buildContextFromAPIResponse = data => {
+  const buildContextFromAPIResponse = (data) => {
     const contextCopy = { ...cardsContext };
 
-    const currentSet = allSets.find(element => element.id == idSet);
+    const currentSet = allSets.find((element) => element.id == idSet);
 
     for (let i = 0; i < data.length; i++) {
       contextCopy[data[i]["@id"].substr(7)] = {
@@ -60,7 +57,7 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
         set: currentSet.name,
         quantity: 1,
         condition: 2,
-        lang: 9
+        lang: 9,
       };
     }
     setCardsContext(contextCopy);
@@ -70,7 +67,7 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
 
   //This function takes API reponse with CardShopPrices and feeds the context.
   // If several languages are received from a single card, we prioritize baseLang price.
-  const addFirstDisplayedPricesToContext = data => {
+  const addFirstDisplayedPricesToContext = (data) => {
     const contextCopy = { ...cardsContext };
     for (let i = 0; i < data.length; i++) {
       if (contextCopy[data[i].card.substr(7)].LangOfPrice !== ENGLISH_LANG_ID) {
@@ -96,15 +93,15 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
 
     //We get the current set Name if all the sets are loaded
     if (allSets.length > 0) {
-      const currentSet = allSets.find(element => element.id == idSet);
+      const currentSet = allSets.find((element) => element.id == idSet);
       console.log(currentSet);
       setSetName(currentSet.name);
     }
 
     SetsAPI.findOneById(idSet, {
-      cancelToken: source.token
+      cancelToken: source.token,
     })
-      .then(data => buildContextFromAPIResponse(data))
+      .then((data) => buildContextFromAPIResponse(data))
       .then(setHasUpdatedPrices(false))
       .then(() => setIsLoading(false));
 
@@ -127,10 +124,10 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
   useEffect(() => {
     if (Object.keys(cardsContext).length > 0 && !hasUpdatedPrices) {
       CardShopPriceAPI.getArrayofPrices(
-        Object.keys(cardsContext).map(id => parseInt(id)),
+        Object.keys(cardsContext).map((id) => parseInt(id)),
         3
       )
-        .then(data =>
+        .then((data) =>
           addFirstDisplayedPricesToContext(data.data["hydra:member"])
         )
         .then(setHasUpdatedPrices(true));

@@ -6,13 +6,8 @@ import priceBufferContext from "../../context/priceBufferContext";
 import config from "../../services/config";
 
 const ShopSetLangCards = ({ variation, index }) => {
-  //DEFINED langages and Conditions
-  const { lang, conditions } = useContext(GenericCardInfosContext);
-
   //Context - building the memoization of all condition/lang possibilities
-  const { allPricesBuffer, setAllPricesBuffer } = useContext(
-    priceBufferContext
-  );
+  const { allPricesBuffer } = useContext(priceBufferContext);
 
   const Fragment = React.Fragment;
 
