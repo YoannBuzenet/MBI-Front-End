@@ -11,7 +11,7 @@ import { toast } from "react-toastify";
 import FeatherIcon from "feather-icons-react";
 import CardDisplayOnPageContext from "../context/cardDisplayOnPageContext";
 import BlackDivModalContext from "../context/blackDivModalContext";
-import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
+import { Tr, Td } from "react-super-responsive-table";
 import config from "../services/config";
 
 //TODO : REQUEST PRICE FOR IS_SIGNED
@@ -52,12 +52,14 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
   }, [isOnHover]);
 
   const handleChange = ({ currentTarget }) => {
-    // setErrorList([]);
-    setIsLoading(true);
+    const { name, value } = currentTarget;
+
+    //If quantity is updated, we don't want to make an API call, so no loading.
+    if (name !== "quantity") {
+      setIsLoading(true);
+    }
 
     const contextCopy = [...currentBasket];
-
-    const { name, value } = currentTarget;
 
     if (name === "quantity" || name === "lang") {
       var newValue = parseInt(value);
@@ -67,32 +69,38 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
 
     contextCopy[indexCard][name] = newValue;
 
-    //Updating price
-    CardShopPriceAPI.getOnePrice(
-      config.shopID,
-      currentBasket[indexCard].id,
-      currentBasket[indexCard].lang,
-      currentBasket[indexCard].condition,
-      currentBasket[indexCard].isFoil,
-      currentBasket[indexCard].isSigned
-    )
-      .then((data) => {
-        console.log(data);
-        if (data.data["hydra:member"].length > 0) {
-          contextCopy[indexCard].price = data.data["hydra:member"][0].price;
-        } else {
-          contextCopy[indexCard].price = 0;
-        }
+    //If quantity is updated, we don't want to make an API call. We just calculate the new amount.
+    if (name !== "quantity") {
+      //Updating price
+      CardShopPriceAPI.getOnePrice(
+        config.shopID,
+        currentBasket[indexCard].id,
+        currentBasket[indexCard].lang,
+        currentBasket[indexCard].condition,
+        currentBasket[indexCard].isFoil,
+        currentBasket[indexCard].isSigned
+      )
+        .then((data) => {
+          console.log(data);
+          if (data.data["hydra:member"].length > 0) {
+            contextCopy[indexCard].price = data.data["hydra:member"][0].price;
+          } else {
+            contextCopy[indexCard].price = 0;
+          }
 
-        setIsLoading(false);
-        sellingBasketAPI.save(contextCopy);
-        setCurrentBasket(contextCopy);
-      })
-      .catch((error) => {
-        toast.error(
-          "Le prix n'a pu être chargé. Merci d'actualiser votre page ou d'essayer plus tard."
-        );
-      });
+          setIsLoading(false);
+          sellingBasketAPI.save(contextCopy);
+          setCurrentBasket(contextCopy);
+        })
+        .catch((error) => {
+          toast.error(
+            "Le prix n'a pu être chargé. Merci d'actualiser votre page ou d'essayer plus tard."
+          );
+        });
+    } else {
+      sellingBasketAPI.save(contextCopy);
+      setCurrentBasket(contextCopy);
+    }
   };
 
   const handleDelete = () => {
@@ -130,7 +138,7 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
     newDisplayContext.cardPictureUrl = urlCard;
     newDisplayContext.isDisplayed = true;
     setCardDisplayInformation(newDisplayContext);
-    setIsBlackDivModalDisplayed(true);
+    setIsBlackDivModalDisplayed("activated");
   };
 
   return (

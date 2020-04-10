@@ -4,8 +4,10 @@ import AuthContext from "../../context/authContext";
 import SellingBasketContext from "../../context/sellingBasket";
 import authAPI from "../../services/authAPI";
 import { toast } from "react-toastify";
+import BlackDivContext from "../../context/blackDivModalContext";
+import isResponsiveMenuDisplayedContext from "../../context/menuDisplayedContext";
 
-const BurgerMenuShop = ({ history }) => {
+const BurgerMenuShop = () => {
   //Current Authentication
   const { authenticationInfos, setAuthenticationInfos } = useContext(
     AuthContext
@@ -14,6 +16,22 @@ const BurgerMenuShop = ({ history }) => {
   //Current Selling Request Basket
   const { currentBasket } = useContext(SellingBasketContext);
 
+  //Black Div control
+  const { isBlackDivModalDisplayed, setIsBlackDivModalDisplayed } = useContext(
+    BlackDivContext
+  );
+
+  //Responsive Menu control
+  const {
+    isResponsiveMenuDisplayed,
+    setIsResponsiveMenuDisplayed,
+  } = useContext(isResponsiveMenuDisplayedContext);
+
+  const closeMenu = (event) => {
+    setIsBlackDivModalDisplayed("deactivated");
+    setIsResponsiveMenuDisplayed("deactivated");
+  };
+
   const handleLogout = () => {
     authAPI.logout();
     setAuthenticationInfos({
@@ -21,7 +39,7 @@ const BurgerMenuShop = ({ history }) => {
       user: {
         id: "",
         email: "",
-        roles: []
+        roles: [],
       },
       customer: {
         id: "",
@@ -31,12 +49,10 @@ const BurgerMenuShop = ({ history }) => {
         adress: "",
         postalCode: "",
         town: "",
-        SellRequests: []
-      }
+        SellRequests: [],
+      },
     });
     toast.success("Vous êtes bien déconnecté.");
-
-    history.replace("/");
   };
 
   return (
@@ -53,6 +69,7 @@ const BurgerMenuShop = ({ history }) => {
             <Link
               className="classic_links_responsive classic_links_responsive_admin"
               to="/my_selling_basket"
+              onClick={(event) => closeMenu(event)}
             >
               <li>
                 Mon Rachat (
@@ -74,12 +91,14 @@ const BurgerMenuShop = ({ history }) => {
             <Link
               className="classic_links_responsive classic_links_responsive_admin nav-element"
               to="/shopadmin/sell_requests"
+              onClick={(event) => closeMenu(event)}
             >
               <li>Rachats</li>
             </Link>
             <Link
               className="classic_links_responsive classic_links_responsive_admin nav-element"
               to="/shopadmin/customers"
+              onClick={(event) => closeMenu(event)}
             >
               <li>Clients</li>
             </Link>
@@ -87,6 +106,7 @@ const BurgerMenuShop = ({ history }) => {
             <Link
               to="/my_account"
               className="classic_links_responsive classic_links_responsive_admin"
+              onClick={(event) => closeMenu(event)}
             >
               <li>Mon compte</li>
             </Link>
@@ -94,6 +114,7 @@ const BurgerMenuShop = ({ history }) => {
             <Link
               to="/shopadmin/shopInfos"
               className="classic_links_responsive classic_links_responsive_admin nav-element"
+              onClick={(event) => closeMenu(event)}
             >
               <li>Informations Boutique</li>
             </Link>
@@ -101,6 +122,7 @@ const BurgerMenuShop = ({ history }) => {
             <Link
               to="/shopadmin/settings"
               className="classic_links_responsive classic_links_responsive_admin nav-element"
+              onClick={(event) => closeMenu(event)}
             >
               <li>Paramètres Gestion</li>
             </Link>
@@ -108,6 +130,7 @@ const BurgerMenuShop = ({ history }) => {
             <li
               onClick={handleLogout}
               className="classic_links_responsive classic_links_responsive_admin"
+              onClick={(event) => closeMenu(event)}
             >
               Déconnexion
             </li>
