@@ -130,7 +130,7 @@ h2 {
   z-index: 1;
   background-color: rgba(0, 0, 0);
   opacity: 0.5;
-  animation: blackDivAppearing 1s;
+  animation: blackDivAppearing 0.5s;
 }
 @keyframes blackDivAppearing {
   0% {
