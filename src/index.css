@@ -1046,8 +1046,16 @@ tbody.cardLineShop {
   margin: auto;
   padding: 2rem;
   z-index: 2;
-  background-color: var(--background-color);
+  /* background-color: var(--background-color); */
+  background-color: white;
   box-shadow: 1px 1px 1px black;
+}
+
+.MKM-connection-modal > div .styled-ol-number {
+  font-size: 2rem;
+  margin-right: 10px;
+}
+.MKM-connection-modal > div .syncronization-button {
 }
 
 /**************************
