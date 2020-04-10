@@ -1032,7 +1032,22 @@ tbody.cardLineShop {
   z-index: 4;
 }
 
-.card-modal img {
+.MKM-connection-modal {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.MKM-connection-modal > div {
+  margin: auto;
+  padding: 2rem;
+  z-index: 2;
+  background-color: var(--background-color);
+  box-shadow: 1px 1px 1px black;
 }
 
 /**************************
