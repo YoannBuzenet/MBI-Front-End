@@ -1056,6 +1056,29 @@ tbody.cardLineShop {
   margin-right: 10px;
 }
 .MKM-connection-modal > div .syncronization-button {
+  width: 300px;
+  padding: 1rem;
+  margin: 0 auto;
+  cursor: pointer;
+  background-color: lightgreen;
+}
+
+.MKM-connection-modal > div .syncronization-button:hover {
+  background-color: mediumspringgreen;
+  color: white;
+}
+
+.MKM-connection-modal > div .syncronization-button:hover .button-content {
+  font-size: 2rem;
+}
+.MKM-connection-modal > div .syncronization-button:hover .sync-symbol {
+  font-size: 5rem;
+}
+
+.MKM-connection-modal > div .syncronization-button .sync-symbol {
+  display: block;
+  margin-top: -10px;
+  font-size: 3rem;
 }
 
 /**************************
