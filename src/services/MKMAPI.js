@@ -1,6 +1,5 @@
 import axios from "axios";
 import hmacSHA1 from "crypto-js/hmac-sha1";
-import Base64 from "crypto-js/enc-base64";
 //https://api.cardmarket.com/ws/documentation/API_2.0:Stock
 
 // <?xml version="1.0" encoding="UTF-8" ?>
@@ -21,6 +20,10 @@ import Base64 from "crypto-js/enc-base64";
 const URL_MKM_ADD_STOCK = "https://api.cardmarket.com/ws/v2.0/stock";
 const URL_MKM_SANDBOX_ADD_STOCK =
   "https://sandbox.cardmarket.com/ws/v2.0/stock";
+
+//App token must be added after the final slash
+const MKM_AUTHENTICATION_URL_BASE =
+  "https://api.cardmarket.com/ws/v2.0/authenticate/";
 
 function setSellingMKMPrice(number) {
   //Put here any algorithms with maybe parameters to ajdust the price
@@ -197,6 +200,7 @@ function MKM_AddToStock(XMLObject) {
 export default {
   URL_MKM_ADD_STOCK,
   URL_MKM_SANDBOX_ADD_STOCK,
+  MKM_AUTHENTICATION_URL_BASE,
   MKM_AddToStock,
   transformSellRequestIntoXML,
   buildOAuthHeader,

@@ -13,6 +13,8 @@ const Navbar = ({ history }) => {
     AuthContext
   );
 
+  console.log(authenticationInfos);
+
   //Current Selling Request Basket
   const { currentBasket } = useContext(SellingBasketContext);
 
@@ -28,7 +30,7 @@ const Navbar = ({ history }) => {
       user: {
         id: "",
         email: "",
-        roles: []
+        roles: [],
       },
       customer: {
         id: "",
@@ -38,8 +40,8 @@ const Navbar = ({ history }) => {
         adress: "",
         postalCode: "",
         town: "",
-        SellRequests: []
-      }
+        SellRequests: [],
+      },
     });
     toast.success("Vous êtes bien déconnecté.");
 
