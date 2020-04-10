@@ -7,15 +7,25 @@ import sellRequestCardAPI from "../../services/sellRequestCardAPI";
 import cardsAPI from "../../services/cardsAPI";
 import EditionChoosingModal from "../EditionChoosingModal";
 import sellRequestAPI from "../../services/sellRequestAPI";
-import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
+import { Tr, Td } from "react-super-responsive-table";
 import FeatherIcon from "feather-icons-react";
 import { isMobile } from "react-device-detect";
 import { toast } from "react-toastify";
+import CardDisplayOnPageContext from "../../context/cardDisplayOnPageContext";
+import BlackDivModalContext from "../../context/blackDivModalContext";
 
 const CardLineShop = ({ card, indexCard }) => {
   //Getting the Sell Request state by context
   const { currentAdminSellRequest, setCurrentAdminSellRequest } = useContext(
     AdminSellRequestContext
+  );
+
+  //Black Div control
+  const { setIsBlackDivModalDisplayed } = useContext(BlackDivModalContext);
+
+  //Card display on whole page
+  const { cardDisplayInformation, setCardDisplayInformation } = useContext(
+    CardDisplayOnPageContext
   );
 
   //Knowing if the Sell Request is OK to be submitted (no duplicate)
@@ -76,7 +86,7 @@ const CardLineShop = ({ card, indexCard }) => {
         }, 0),
         cardTotalQuantity: newSellRequest.sellRequests.reduce((total, card) => {
           return total + card.quantity;
-        }, 0)
+        }, 0),
       });
       // console.log(currentAdminSellRequest);
     }
@@ -99,7 +109,7 @@ const CardLineShop = ({ card, indexCard }) => {
         }, 0),
         cardTotalQuantity: newSellRequest.sellRequests.reduce((total, card) => {
           return total + card.quantity;
-        }, 0)
+        }, 0),
       });
 
       const newData = {
@@ -108,14 +118,14 @@ const CardLineShop = ({ card, indexCard }) => {
         }, 0),
         amount: newSellRequest.sellRequests.reduce((total, card) => {
           return total + card.price * card.quantity;
-        }, 0)
+        }, 0),
       };
 
       //UPDATING THE WHOLE SELL REQUEST ON API
       // (ADD TOAST IF FAILURE)
       sellRequestAPI
         .updateAsShop(newSellRequest.id, newData)
-        .then(data => console.log("update OK"));
+        .then((data) => console.log("update OK"));
     }
   }, [cardHasBeenDeleted]);
 
@@ -134,12 +144,12 @@ const CardLineShop = ({ card, indexCard }) => {
     setErrorList([]);
     setCurrentCard({
       ...currentCard,
-      [name]: newValue
+      [name]: newValue,
     });
 
     sellRequestCardAPI
       .update(currentCard, name, newValue)
-      .catch(error => console.log(error));
+      .catch((error) => console.log(error));
     console.log(currentCard);
 
     if (name === "quantity") {
@@ -152,7 +162,7 @@ const CardLineShop = ({ card, indexCard }) => {
         ),
         amount: currentAdminSellRequest.sellRequests.reduce((total, card) => {
           return total + card.price * card.quantity;
-        }, 0)
+        }, 0),
       };
       console.log(newData);
 
@@ -160,7 +170,7 @@ const CardLineShop = ({ card, indexCard }) => {
       // (ADD TOAST IF FAILURE)
       sellRequestAPI
         .updateAsShop(currentAdminSellRequest.id, newData)
-        .then(data => console.log("update OK"));
+        .then((data) => console.log("update OK"));
     }
   };
 
@@ -168,8 +178,8 @@ const CardLineShop = ({ card, indexCard }) => {
     setIsModal(true);
     cardsAPI
       .getByName(currentCard.name)
-      .then(data => setEditionInformation(data.data["hydra:member"]))
-      .catch(error => {
+      .then((data) => setEditionInformation(data.data["hydra:member"]))
+      .catch((error) => {
         toast.error(
           "Les éditions n'ont pu être chargées. Merci de réessayer ou de vous reconnecter."
         );
@@ -187,7 +197,7 @@ const CardLineShop = ({ card, indexCard }) => {
     //Checking IF the current language exist in the set we're about to update. If not, we put English by default ( id 9)
     var langNextCard;
     const result = newCard.foreignData.filter(
-      lang => lang.language_id.id == currentCard.lang
+      (lang) => lang.language_id.id == currentCard.lang
     );
 
     if (result.length > 0) {
@@ -210,16 +220,16 @@ const CardLineShop = ({ card, indexCard }) => {
       ...currentCard,
       set: newCard.edition.name,
       lang: langNextCard,
-      foreignData: newCard.foreignData
+      foreignData: newCard.foreignData,
     });
   };
 
-  const handleDelete = card => {
+  const handleDelete = (card) => {
     //Telling the API to delete the sell request card
     sellRequestCardAPI
       .delete(card.id)
-      .then(data => setCardHasBeenDeleted(true))
-      .catch(error => {
+      .then((data) => setCardHasBeenDeleted(true))
+      .catch((error) => {
         toast.error(
           "La carte n'a pu être supprimée. Merci de réessayer ou de vous reconnecter."
         );
@@ -245,11 +255,20 @@ const CardLineShop = ({ card, indexCard }) => {
   //ALSO DEFINED IN CARDLINE
   const gradingArea = "EU";
 
-  const hoverClassName = e => genericCardAPI.isPictureDisplayedTopOrBottom(e);
+  const hoverClassName = (e) => genericCardAPI.isPictureDisplayedTopOrBottom(e);
+
+  const displayCardPlainPage = (event, urlCard) => {
+    const newDisplayContext = { ...cardDisplayInformation };
+    newDisplayContext.cardPictureUrl = urlCard;
+    newDisplayContext.isDisplayed = true;
+    setCardDisplayInformation(newDisplayContext);
+    setIsBlackDivModalDisplayed("activated");
+  };
+
   return (
     <>
       <Tr
-        onMouseEnter={e => {
+        onMouseEnter={(e) => {
           if (!isMobile) {
             setIsOnHover(!isOnHover);
             setHoverTopOrBottom(hoverClassName(e));
@@ -262,7 +281,15 @@ const CardLineShop = ({ card, indexCard }) => {
         }}
         className={sellingBasketLine || ""}
       >
-        <Td className="cardPictureHolder">
+        <Td
+          className="cardPictureHolder"
+          onClick={(event) => {
+            if (isMobile) {
+              //FUNCTION TO DISPLAY THE CARD
+              displayCardPlainPage(event, urlCard);
+            }
+          }}
+        >
           {currentCard.name}
           {!isMobile && isOnHover && (
             <div className={hoverTopOrBottom}>
@@ -284,7 +311,7 @@ const CardLineShop = ({ card, indexCard }) => {
           )}
         </Td>
         <Td
-          onClick={event => changeEdition(event, currentCard)}
+          onClick={(event) => changeEdition(event, currentCard)}
           className="update-set pointer"
         >
           <FeatherIcon
@@ -300,7 +327,7 @@ const CardLineShop = ({ card, indexCard }) => {
             name="lang"
             id={currentCard.name + "id1"}
             value={currentCard.lang}
-            onChange={event => {
+            onChange={(event) => {
               handleChange(event, currentCard);
             }}
           >
@@ -311,15 +338,15 @@ const CardLineShop = ({ card, indexCard }) => {
                   {currentCard.lang == "9"
                     ? "EN"
                     : currentCard.foreignData.filter(
-                        currentlanguage =>
+                        (currentlanguage) =>
                           currentlanguage.language_id.id === currentCard.lang
                       )[0].language_id.shortname}
-                </option>
+                </option>,
                 //Add the non selected languages among what's possible in this card
               ].concat(
                 currentCard.foreignData
                   .filter(
-                    currentlanguage =>
+                    (currentlanguage) =>
                       currentlanguage.language_id.id !== currentCard.lang
                   )
                   .map((foreignData, index) => (
@@ -333,7 +360,7 @@ const CardLineShop = ({ card, indexCard }) => {
                   .concat([
                     <option value="9" key={card.id + "3" + card.lang}>
                       EN
-                    </option>
+                    </option>,
                   ])
               )
             ) : (
@@ -345,7 +372,7 @@ const CardLineShop = ({ card, indexCard }) => {
           <select
             name="condition"
             id={currentCard.name + "id2"}
-            onChange={event => {
+            onChange={(event) => {
               handleChange(event, currentCard);
             }}
             value={currentCard.condition}
@@ -353,7 +380,9 @@ const CardLineShop = ({ card, indexCard }) => {
             {conditions.length > 0
               ? gradingArea === "EU"
                 ? conditions
-                    .filter(condition => condition.id !== currentCard.condition)
+                    .filter(
+                      (condition) => condition.id !== currentCard.condition
+                    )
                     .map((condition, index) =>
                       condition.isEU ? (
                         <option key={index} value={condition.id}>
@@ -362,7 +391,9 @@ const CardLineShop = ({ card, indexCard }) => {
                       ) : null
                     )
                 : conditions
-                    .filter(condition => condition.id !== currentCard.condition)
+                    .filter(
+                      (condition) => condition.id !== currentCard.condition
+                    )
                     .map((condition, index) =>
                       condition.isUS ? (
                         <option value={condition.id} key={index}>
@@ -378,7 +409,7 @@ const CardLineShop = ({ card, indexCard }) => {
             name="isFoil"
             id={currentCard.name + "id4"}
             value={currentCard.isFoil}
-            onChange={event => {
+            onChange={(event) => {
               handleChange(event, currentCard);
             }}
           >
@@ -396,7 +427,7 @@ const CardLineShop = ({ card, indexCard }) => {
           <select
             name="isSigned"
             value={currentCard.isSigned}
-            onChange={event => {
+            onChange={(event) => {
               handleChange(event, currentCard);
             }}
           >
@@ -412,7 +443,7 @@ const CardLineShop = ({ card, indexCard }) => {
           <select
             name="isAltered"
             value={currentCard.isAltered}
-            onChange={event => {
+            onChange={(event) => {
               handleChange(event, currentCard);
             }}
           >
@@ -428,7 +459,7 @@ const CardLineShop = ({ card, indexCard }) => {
           <select
             name="quantity"
             id={currentCard + "id3"}
-            onChange={event => {
+            onChange={(event) => {
               handleChange(event, currentCard);
             }}
             value={currentCard.quantity}
@@ -450,7 +481,7 @@ const CardLineShop = ({ card, indexCard }) => {
         <Td>
           <input
             type="text"
-            onChange={event => {
+            onChange={(event) => {
               handleChange(event, currentCard);
             }}
             name="price"

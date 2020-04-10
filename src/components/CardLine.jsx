@@ -3,17 +3,16 @@ import SellingBasketContext from "../context/sellingBasket";
 import GenericCardInfosContext from "../context/genericCardInfosContext";
 import genericCardAPI from "../services/genericCardAPI";
 import cardsAPI from "../services/cardsAPI";
-import CardShopPriceAPI from "../services/CardShopPriceAPI";
 import { isMobile } from "react-device-detect";
 import FeatherIcon from "feather-icons-react";
-import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
+import { Tr, Td } from "react-super-responsive-table";
 
 const CardLine = ({
   card,
   handleAddSellingBasket,
   index,
   setName,
-  displaySets
+  displaySets,
 }) => {
   const LANGUAGE_ID_ENG = 9;
   const CONDITION_ID_NM = 2;
@@ -50,7 +49,7 @@ const CardLine = ({
           ]
         : card.allPrices[LANGUAGE_ID_ENG][CONDITION_ID_NM][ISFOILTRUE][
             ISSIGNEDFALSE
-          ]
+          ],
   });
 
   useEffect(() => {
@@ -69,7 +68,7 @@ const CardLine = ({
             ]
           : card.allPrices[LANGUAGE_ID_ENG][CONDITION_ID_NM][ISFOILTRUE][
               ISSIGNEDFALSE
-            ]
+            ],
     });
   }, [card]);
 
@@ -117,7 +116,7 @@ const CardLine = ({
   //Getting the Picture URL
   const urlPictureCard = cardsAPI.getSmallPictureFromScryfallId(card);
 
-  const hoverClassName = e => genericCardAPI.isPictureDisplayedTopOrBottom(e);
+  const hoverClassName = (e) => genericCardAPI.isPictureDisplayedTopOrBottom(e);
 
   //TEMPORARY DEFAULT DEFINITION TODO : GET IT THROUGH API OR LOCAL ENV
   //ALSO DEFINED IN CARDSELLINGBASKET
@@ -127,7 +126,7 @@ const CardLine = ({
     <>
       <Tr
         key={index}
-        onMouseEnter={e => {
+        onMouseEnter={(e) => {
           if (!isMobile) {
             setIsOnHover(!isOnHover);
             setHoverTopOrBottom(hoverClassName(e));
@@ -153,7 +152,7 @@ const CardLine = ({
           <select
             name="lang"
             id={card.name + "id1"}
-            onChange={event => {
+            onChange={(event) => {
               handleChange(event, currentCard);
             }}
           >
@@ -161,7 +160,7 @@ const CardLine = ({
               [
                 <option value="9" key="a">
                   EN
-                </option>
+                </option>,
               ].concat(
                 card.foreignData.map((foreignData, index) => (
                   <option value={foreignData.language_id.id} key={index}>
@@ -178,7 +177,7 @@ const CardLine = ({
           <select
             name="condition"
             id={card.name + "id2"}
-            onChange={event => {
+            onChange={(event) => {
               handleChange(event, currentCard);
             }}
             defaultValue="2"
@@ -207,7 +206,7 @@ const CardLine = ({
           <select
             name="isFoil"
             id={card.name + "id4"}
-            onChange={event => {
+            onChange={(event) => {
               handleChange(event, currentCard);
             }}
           >
@@ -218,7 +217,7 @@ const CardLine = ({
         <Td>
           <select
             name="isSigned"
-            onChange={event => {
+            onChange={(event) => {
               handleChange(event, currentCard);
             }}
           >
@@ -230,7 +229,7 @@ const CardLine = ({
           <select
             name="quantity"
             id={card.name + "id3"}
-            onChange={event => {
+            onChange={(event) => {
               handleChange(event, currentCard);
             }}
           >

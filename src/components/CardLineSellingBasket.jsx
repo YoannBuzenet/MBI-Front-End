@@ -11,7 +11,7 @@ import { toast } from "react-toastify";
 import FeatherIcon from "feather-icons-react";
 import CardDisplayOnPageContext from "../context/cardDisplayOnPageContext";
 import BlackDivModalContext from "../context/blackDivModalContext";
-import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
+import { Tr, Td } from "react-super-responsive-table";
 import config from "../services/config";
 
 //TODO : REQUEST PRICE FOR IS_SIGNED
@@ -52,8 +52,9 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
   }, [isOnHover]);
 
   const handleChange = ({ currentTarget }) => {
-    // setErrorList([]);
     const { name, value } = currentTarget;
+
+    //If quantity is updated, we don't want to make an API call, so no loading.
     if (name !== "quantity") {
       setIsLoading(true);
     }
@@ -68,6 +69,7 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
 
     contextCopy[indexCard][name] = newValue;
 
+    //If quantity is updated, we don't want to make an API call. We just calculate the new amount.
     if (name !== "quantity") {
       //Updating price
       CardShopPriceAPI.getOnePrice(
