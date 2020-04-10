@@ -12,22 +12,29 @@ const BlackDiv = (props) => {
     BlackDivContext
   );
 
-  //Responsive Menu control
+  //Card Display control
   const { cardDisplayInformation, setCardDisplayInformation } = useContext(
     CardDisplayOnPageContext
   );
 
-  //Card Display control
+  //Responsive Menu control
   const {
     isResponsiveMenuDisplayed,
     setIsResponsiveMenuDisplayed,
   } = useContext(isResponsiveMenuDisplayedContext);
 
+  console.log(isResponsiveMenuDisplayed);
+
   const handleClick = (event) => {
     console.log("removing the div and everything on it");
+    setIsResponsiveMenuDisplayed("deactivated");
+    setIsBlackDivModalDisplayed("deactivated");
+    setCardDisplayInformation({});
   };
 
-  return <div className="blackDiv"></div>;
+  return (
+    <div className="blackDiv" onClick={(event) => handleClick(event)}></div>
+  );
 };
 
 export default BlackDiv;
