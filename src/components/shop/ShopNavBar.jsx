@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import AuthContext from "../../context/authContext";
 import SellingBasketContext from "../../context/sellingBasket";
@@ -31,7 +31,7 @@ const ShopNavbar = ({ history }) => {
       user: {
         id: "",
         email: "",
-        roles: []
+        roles: [],
       },
       customer: {
         id: "",
@@ -41,8 +41,8 @@ const ShopNavbar = ({ history }) => {
         adress: "",
         postalCode: "",
         town: "",
-        SellRequests: []
-      }
+        SellRequests: [],
+      },
     });
 
     history.replace("/");

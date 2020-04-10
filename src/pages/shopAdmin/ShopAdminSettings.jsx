@@ -7,7 +7,7 @@ import shopAPI from "../../services/shopAPI";
 import localStorageAPI from "../../services/localStorageAPI";
 import errorHandlingAPI from "../../services/errorHandlingAPI";
 
-const ShopAdminSettings = props => {
+const ShopAdminSettings = () => {
   //Current Authentication
   const { authenticationInfos, setAuthenticationInfos } = useContext(
     AuthContext
@@ -82,7 +82,7 @@ const ShopAdminSettings = props => {
     //Build object ?
     let id;
     let objectToSend = {
-      percent: value
+      percent: value,
     };
     switch (fieldModified) {
       case "percentPerLang":
@@ -90,8 +90,8 @@ const ShopAdminSettings = props => {
 
         shopAPI
           .updatePercentPerLang(id, objectToSend)
-          .then(data => updateLocalStorage(fieldModified, name, value))
-          .catch(data => {
+          .then((data) => updateLocalStorage(fieldModified, name, value))
+          .catch((data) => {
             if (!errorHandlingAPI.check401Unauthorized(data)) {
               toast.error(
                 "La donnée n'a pu être mise à jour. Merci de réessayer ou de vous reconnecter."
@@ -105,7 +105,7 @@ const ShopAdminSettings = props => {
         shopAPI
           .updatePercentPerCondition(id, objectToSend)
           .then(updateLocalStorage(fieldModified, name, value))
-          .catch(data => {
+          .catch((data) => {
             if (!errorHandlingAPI.check401Unauthorized(data)) {
               toast.error(
                 "La donnée n'a pu être mise à jour. Merci de réessayer ou de vous reconnecter."
@@ -120,8 +120,8 @@ const ShopAdminSettings = props => {
 
         shopAPI
           .updatePercentPerConditionFoil(id, objectToSend)
-          .then(data => updateLocalStorage(fieldModified, name, value))
-          .catch(data => {
+          .then((data) => updateLocalStorage(fieldModified, name, value))
+          .catch((data) => {
             if (!errorHandlingAPI.check401Unauthorized(data)) {
               toast.error(
                 "La donnée n'a pu être mise à jour. Merci de réessayer ou de vous reconnecter."
@@ -135,13 +135,14 @@ const ShopAdminSettings = props => {
         objectToSend = {
           shop: {
             id: authenticationInfos.shop.id,
-            percentPerSigned: authenticationInfos.shop.shopData.PercentPerSigned
-          }
+            percentPerSigned:
+              authenticationInfos.shop.shopData.PercentPerSigned,
+          },
         };
         shopAPI
           .updateFields(objectToSend, authenticationInfos.shop.id)
-          .then(data => updateLocalStorage(fieldModified, name, value))
-          .catch(error => {
+          .then((data) => updateLocalStorage(fieldModified, name, value))
+          .catch((error) => {
             if (!errorHandlingAPI.check401Unauthorized(error)) {
               toast.error(
                 "La donnée n'a pu être mise à jour. Merci de réessayer ou de vous reconnecter."
@@ -198,7 +199,7 @@ const ShopAdminSettings = props => {
                 name="percentPerSigned"
                 label="Pourcentage à appliquer"
                 value={authenticationInfos.shop.shopData.PercentPerSigned}
-                onChange={event => handleChange(event, "percentPerSigned")}
+                onChange={(event) => handleChange(event, "percentPerSigned")}
               />
             </form>
           </div>
@@ -219,7 +220,7 @@ const ShopAdminSettings = props => {
                       authenticationInfos.shop.shopData.PercentPerLangs[lang.id]
                         .percentPerLang
                     }
-                    onChange={event => handleChange(event, "percentPerLang")}
+                    onChange={(event) => handleChange(event, "percentPerLang")}
                     placeholder="%"
                     key={lang.id + index}
                     idNumber={Math.random()}
@@ -240,7 +241,7 @@ const ShopAdminSettings = props => {
                         condition.id - 1
                       ].percent
                     }
-                    onChange={event =>
+                    onChange={(event) =>
                       handleChange(event, "percentPerCondition")
                     }
                     placeholder="Pourcentage d'achat de la condition"
@@ -262,7 +263,7 @@ const ShopAdminSettings = props => {
                       authenticationInfos.shop.shopData
                         .PercentPerConditionFoils[condition.id - 1].percent
                     }
-                    onChange={event =>
+                    onChange={(event) =>
                       handleChange(event, "percentPerConditionFoil")
                     }
                     placeholder="Pourcentage d'achat de la condition en Foil"

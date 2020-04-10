@@ -1,14 +1,10 @@
-import React, { useState, useContext, useEffect } from "react";
-import SellingBasketContext from "../context/sellingBasket";
+import React from "react";
 import cardsAPI from "../services/cardsAPI";
 import { Link } from "react-router-dom";
 import MKMAPI from "../services/MKMAPI";
 import axios from "axios";
 
-const CardWithThumbnail = ({ handleAddSellingBasket, card }) => {
-  //Current Selling Request Basket
-  const { currentBasket, setCurrentBasket } = useContext(SellingBasketContext);
-
+const CardWithThumbnail = ({ card }) => {
   const picture = cardsAPI.getSmallPictureFromScryfallId(card);
 
   return (
