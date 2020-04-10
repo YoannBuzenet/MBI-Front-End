@@ -69,6 +69,11 @@ function authenticate(credentials) {
                 PercentPerSigned: data.shop.percentPerSigned,
               }
             : null,
+          appToken: data.shop ? data.shop.appToken : null,
+          appSecret: data.shop ? data.shop.appSecret : null,
+          accessToken: data.shop ? data.shop.accessToken : null,
+          accessSecret: data.shop ? data.shop.accessSecret : null,
+          dateReceptionMKMToken: null,
         },
       };
     });
@@ -153,6 +158,11 @@ function userInfos() {
               PercentPerSigned: userDatas.shop.percentPerSigned,
             }
           : null,
+        appToken: userDatas.shop ? userDatas.shop.appToken : null,
+        appSecret: userDatas.shop ? userDatas.shop.appSecret : null,
+        accessToken: userDatas.shop ? userDatas.shop.accessToken : null,
+        accessSecret: userDatas.shop ? userDatas.shop.accessSecret : null,
+        dateReceptionMKMToken: null,
       },
     };
   } else {
