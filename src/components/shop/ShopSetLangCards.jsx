@@ -1,7 +1,5 @@
 import React, { useContext } from "react";
-import GenericCardInfosContext from "../../context/genericCardInfosContext";
 import ShopOneLangAllConditionsCard from "./ShopOneLangAllConditionsCard";
-import cardsAPI from "../../services/cardsAPI";
 import priceBufferContext from "../../context/priceBufferContext";
 import config from "../../services/config";
 

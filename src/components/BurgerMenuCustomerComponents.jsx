@@ -5,7 +5,7 @@ import SellingBasketContext from "../context/sellingBasket";
 import authAPI from "../services/authAPI";
 import { toast } from "react-toastify";
 
-const BurgerMenuCustomerComponents = ({ history }) => {
+const BurgerMenuCustomerComponents = () => {
   //Current Authentication
   const { authenticationInfos, setAuthenticationInfos } = useContext(
     AuthContext
@@ -21,7 +21,7 @@ const BurgerMenuCustomerComponents = ({ history }) => {
       user: {
         id: "",
         email: "",
-        roles: []
+        roles: [],
       },
       customer: {
         id: "",
@@ -31,12 +31,10 @@ const BurgerMenuCustomerComponents = ({ history }) => {
         adress: "",
         postalCode: "",
         town: "",
-        SellRequests: []
-      }
+        SellRequests: [],
+      },
     });
     toast.success("Vous êtes bien déconnecté.");
-
-    history.replace("/");
   };
 
   const classMenu = authenticationInfos.isAuthenticated

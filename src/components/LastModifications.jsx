@@ -16,8 +16,7 @@ const LastModifications = ({ handleAddSellingBasket }) => {
   useEffect(() => {
     axios
       .get(
-        "http://127.0.0.1:8000/lastcardsmodified?limit=10&shopid=" +
-          config.shopID
+        config.URL_API + "/lastcardsmodified?limit=10&shopid=" + config.shopID
       )
       .then((data) => setLastModificationList(data.data))
       .then(() => setIsLoading(false));
