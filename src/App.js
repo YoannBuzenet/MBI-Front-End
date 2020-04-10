@@ -334,7 +334,7 @@ function App() {
                               <CardPlainPage />
                             )}
 
-                            {isMKMModalDisplayed === "activated" && (
+                            {isMKMModalDisplayed === "deactivated" && (
                               <MKMConnectModal />
                             )}
 
