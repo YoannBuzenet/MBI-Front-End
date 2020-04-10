@@ -28,7 +28,6 @@ import {
   Switch,
   Route,
   withRouter,
-  Redirect,
 } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import LoggedRoute from "./components/LoggedRoute";
@@ -56,7 +55,8 @@ import CardPage from "./pages/CardPage";
 import MyShopAccount from "./pages/shopAdmin/MyShopAccount";
 import BlackDiv from "./components/BlackDiv";
 import CardPlainPage from "./components/CardPlainPage";
-import MKMAPI from "./services/MKMAPI";
+import BurgerMenuShop from "./components/shop/BurgerMenuShop";
+import BurgerMenuCustomerComponents from "./components/BurgerMenuCustomerComponents";
 
 //Really Useful library to check all rerenders made on ALL components (you can setup it to check just one)
 // if (process.env.NODE_ENV === "development") {
@@ -120,7 +120,7 @@ function App() {
 
   //STATE - Check if responsive Menu is displayed
   const [isResponsiveMenuDisplayed, setIsResponsiveMenuDisplayed] = useState(
-    false
+    "deactivated"
   );
 
   //STATE - Cards Context in One Set
@@ -128,7 +128,7 @@ function App() {
 
   //STATE - is Plain Page Black Div Displayed ?
   const [isBlackDivModalDisplayed, setIsBlackDivModalDisplayed] = useState(
-    false
+    "deactivated"
   );
 
   //STATE - Is a card currently displayed on plain page, and with which information ?
@@ -309,13 +309,33 @@ function App() {
                       value={contextCardDisplayed}
                     >
                       <Router>
-                        {isBlackDivModalDisplayed && <BlackDiv />}
-                        {cardDisplayInformation.isDisplayed && (
-                          <CardPlainPage />
-                        )}
                         <isResponsiveMenuDisplayedContext.Provider
                           value={contextResponsiveMenuDisplayed}
                         >
+                          {/* Absolute positioned components */}
+                          {isBlackDivModalDisplayed === "activated" && (
+                            <BlackDiv />
+                          )}
+
+                          {cardDisplayInformation.isDisplayed && (
+                            <CardPlainPage />
+                          )}
+
+                          {/* CHOOSING WHICH BURGER MENU DISPLAY */}
+                          {/* DEPENDING ON IF SHOP OR NOT*/}
+                          {isResponsiveMenuDisplayed === "activated" &&
+                            !authenticationInfos.user.roles.includes(
+                              "ROLE_SHOP"
+                            ) && <BurgerMenuCustomerComponents />}
+
+                          {isResponsiveMenuDisplayed === "activated" &&
+                            authenticationInfos.user.roles.includes(
+                              "ROLE_SHOP"
+                            ) && <BurgerMenuShop />}
+
+                          {/* CHOOSING WHICH NAVBAR DISPLAY */}
+                          {/* DEPENDING ON IF SHOP OR NOT*/}
+
                           {authenticationInfos.user.roles &&
                           authenticationInfos.user.roles.includes(
                             "ROLE_SHOP"

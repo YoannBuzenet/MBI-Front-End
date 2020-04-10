@@ -1,18 +1,13 @@
 import React, { useContext } from "react";
 import SellingBasketContext from "../context/sellingBasket";
-import BurgerMenuCustomerComponents from "./BurgerMenuCustomerComponents";
-import BlackDiv from "./BlackDiv";
 import isResponsiveMenuDisplayedContext from "../context/menuDisplayedContext";
 import AuthContext from "../context/authContext";
-import BurgerMenuShop from "./shop/BurgerMenuShop";
 import BlackDivModalContext from "../context/blackDivModalContext";
+import CardDisplayOnPageContext from "../context/cardDisplayOnPageContext";
 
-const BurgerMenu = ({ history }) => {
+const BurgerMenu = () => {
   //Current Selling Request Basket
   const { currentBasket } = useContext(SellingBasketContext);
-
-  //Current Authentication
-  const { authenticationInfos } = useContext(AuthContext);
 
   //Black Div control
   const { isBlackDivModalDisplayed, setIsBlackDivModalDisplayed } = useContext(
@@ -22,16 +17,29 @@ const BurgerMenu = ({ history }) => {
   //Is Menu Responsive Displayed
   const {
     isResponsiveMenuDisplayed,
-    setIsResponsiveMenuDisplayed
+    setIsResponsiveMenuDisplayed,
   } = useContext(isResponsiveMenuDisplayedContext);
 
-  const handleClick = event => {
-    setIsResponsiveMenuDisplayed(!isResponsiveMenuDisplayed);
-    setIsBlackDivModalDisplayed(!isBlackDivModalDisplayed);
+  //Card Display control
+  const { cardDisplayInformation, setCardDisplayInformation } = useContext(
+    CardDisplayOnPageContext
+  );
+
+  const handleClick = (event) => {
+    console.log("hu");
+    if (isResponsiveMenuDisplayed === "deactivated") {
+      setIsResponsiveMenuDisplayed("activated");
+      setIsBlackDivModalDisplayed("activated");
+      setCardDisplayInformation({});
+    } else {
+      setIsResponsiveMenuDisplayed("deactivated");
+      setIsBlackDivModalDisplayed("deactivated");
+      setCardDisplayInformation({});
+    }
   };
 
   return (
-    <div className="burger-menu" onClick={event => handleClick(event)}>
+    <div className="burger-menu" onClick={(event) => handleClick(event)}>
       <img src="/pictures/burger-menu.png" alt="" />
       {currentBasket.length > 0 && (
         <div className="responsive-basket-quantity">
@@ -40,14 +48,6 @@ const BurgerMenu = ({ history }) => {
           }, 0)}
         </div>
       )}
-      {isResponsiveMenuDisplayed &&
-        !authenticationInfos.user.roles.includes("ROLE_SHOP") && (
-          <BurgerMenuCustomerComponents history={history} />
-        )}
-      {isResponsiveMenuDisplayed &&
-        authenticationInfos.user.roles.includes("ROLE_SHOP") && (
-          <BurgerMenuShop history={history} />
-        )}
     </div>
   );
 };

@@ -4,8 +4,10 @@ import AuthContext from "../context/authContext";
 import SellingBasketContext from "../context/sellingBasket";
 import authAPI from "../services/authAPI";
 import { toast } from "react-toastify";
+import BlackDivContext from "../context/blackDivModalContext";
+import isResponsiveMenuDisplayedContext from "../context/menuDisplayedContext";
 
-const BurgerMenuCustomerComponents = ({ history }) => {
+const BurgerMenuCustomerComponents = () => {
   //Current Authentication
   const { authenticationInfos, setAuthenticationInfos } = useContext(
     AuthContext
@@ -14,6 +16,17 @@ const BurgerMenuCustomerComponents = ({ history }) => {
   //Current Selling Request Basket
   const { currentBasket } = useContext(SellingBasketContext);
 
+  //Black Div control
+  const { isBlackDivModalDisplayed, setIsBlackDivModalDisplayed } = useContext(
+    BlackDivContext
+  );
+
+  //Is Menu Responsive Displayed
+  const {
+    isResponsiveMenuDisplayed,
+    setIsResponsiveMenuDisplayed,
+  } = useContext(isResponsiveMenuDisplayedContext);
+
   const handleLogout = () => {
     authAPI.logout();
     setAuthenticationInfos({
@@ -21,7 +34,7 @@ const BurgerMenuCustomerComponents = ({ history }) => {
       user: {
         id: "",
         email: "",
-        roles: []
+        roles: [],
       },
       customer: {
         id: "",
@@ -31,17 +44,20 @@ const BurgerMenuCustomerComponents = ({ history }) => {
         adress: "",
         postalCode: "",
         town: "",
-        SellRequests: []
-      }
+        SellRequests: [],
+      },
     });
     toast.success("Vous êtes bien déconnecté.");
-
-    history.replace("/");
   };
 
   const classMenu = authenticationInfos.isAuthenticated
     ? "responsive_menu authenticated-menu"
     : "responsive_menu";
+
+  const closeMenu = (event) => {
+    setIsBlackDivModalDisplayed("deactivated");
+    setIsResponsiveMenuDisplayed("deactivated");
+  };
 
   return (
     <div className={classMenu}>
@@ -58,6 +74,7 @@ const BurgerMenuCustomerComponents = ({ history }) => {
               <Link
                 className="classic_links_responsive"
                 to="/my_selling_basket"
+                onClick={(event) => closeMenu(event)}
               >
                 <li>
                   Mon Rachat (
@@ -70,11 +87,19 @@ const BurgerMenuCustomerComponents = ({ history }) => {
                 </li>
               </Link>
 
-              <Link to="/my_account" className="classic_links_responsive">
+              <Link
+                to="/my_account"
+                className="classic_links_responsive"
+                onClick={(event) => closeMenu(event)}
+              >
                 <li>Mon compte</li>
               </Link>
 
-              <Link to="/my_sell_requests" className="classic_links_responsive">
+              <Link
+                to="/my_sell_requests"
+                className="classic_links_responsive"
+                onClick={(event) => closeMenu(event)}
+              >
                 <li>Mes rachats</li>
               </Link>
 
@@ -90,6 +115,7 @@ const BurgerMenuCustomerComponents = ({ history }) => {
             <Link
               className="classic_links_responsive nav-element"
               to="/my_selling_basket"
+              onClick={(event) => closeMenu(event)}
             >
               Mon Rachat (
               <span className="buying-total">
@@ -99,10 +125,18 @@ const BurgerMenuCustomerComponents = ({ history }) => {
               </span>
               )
             </Link>
-            <Link className="classic_links_responsive" to="/register">
+            <Link
+              className="classic_links_responsive"
+              to="/register"
+              onClick={(event) => closeMenu(event)}
+            >
               S'inscrire
             </Link>
-            <Link className="classic_links_responsive" to="/login">
+            <Link
+              className="classic_links_responsive"
+              to="/login"
+              onClick={(event) => closeMenu(event)}
+            >
               Se connecter
             </Link>
           </div>
