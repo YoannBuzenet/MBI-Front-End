@@ -1,7 +1,7 @@
 import React from "react";
 
 const MKMConnectModal = (props) => {
-  return <>Connecte toi BRO</>;
+  return <div className="MKM-connection-modal">Connecte toi BRO</div>;
 };
 
 export default MKMConnectModal;

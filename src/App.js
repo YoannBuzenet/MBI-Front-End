@@ -58,6 +58,7 @@ import BlackDiv from "./components/BlackDiv";
 import CardPlainPage from "./components/CardPlainPage";
 import BurgerMenuShop from "./components/shop/BurgerMenuShop";
 import BurgerMenuCustomerComponents from "./components/BurgerMenuCustomerComponents";
+import MKMConnectModal from "./components/MKMConnectModal";
 
 //Really Useful library to check all rerenders made on ALL components (you can setup it to check just one)
 // if (process.env.NODE_ENV === "development") {
@@ -331,6 +332,10 @@ function App() {
 
                             {cardDisplayInformation.isDisplayed && (
                               <CardPlainPage />
+                            )}
+
+                            {isMKMModalDisplayed === "activated" && (
+                              <MKMConnectModal />
                             )}
 
                             {/* CHOOSING WHICH BURGER MENU DISPLAY */}
