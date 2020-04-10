@@ -10,6 +10,8 @@ import { toast } from "react-toastify";
 import FeatherIcon from "feather-icons-react";
 import { Tr, Td } from "react-super-responsive-table";
 import config from "../services/config";
+import CardDisplayOnPageContext from "../context/cardDisplayOnPageContext";
+import BlackDivModalContext from "../context/blackDivModalContext";
 
 const CardLineOneSet = ({ card, cardID, handleAddSellingBasket, index }) => {
   //Current Selling Request Basket
@@ -32,6 +34,14 @@ const CardLineOneSet = ({ card, cardID, handleAddSellingBasket, index }) => {
   const [isOnHover, setIsOnHover] = useState(false);
 
   const [isLoading, setIsLoading] = useState(false);
+
+  //Black Div control
+  const { setIsBlackDivModalDisplayed } = useContext(BlackDivModalContext);
+
+  //Card display on whole page
+  const { cardDisplayInformation, setCardDisplayInformation } = useContext(
+    CardDisplayOnPageContext
+  );
 
   //Began a timeout on handleChange to prevent API call to disturb themselves. Finish implementation in case of problem.
   //TIMEOUT SETUP DO NOT ERASE
@@ -102,6 +112,14 @@ const CardLineOneSet = ({ card, cardID, handleAddSellingBasket, index }) => {
   //ALSO DEFINED IN CARDSELLINGBASKET
   const gradingArea = "EU";
 
+  const displayCardPlainPage = (event, urlCard) => {
+    const newDisplayContext = { ...cardDisplayInformation };
+    newDisplayContext.cardPictureUrl = urlCard;
+    newDisplayContext.isDisplayed = true;
+    setCardDisplayInformation(newDisplayContext);
+    setIsBlackDivModalDisplayed("activated");
+  };
+
   return (
     <>
       <Tr
@@ -118,7 +136,15 @@ const CardLineOneSet = ({ card, cardID, handleAddSellingBasket, index }) => {
           }
         }}
       >
-        <Td className="cardPictureHolder">
+        <Td
+          className="cardPictureHolder"
+          onClick={(event) => {
+            if (isMobile) {
+              //FUNCTION TO DISPLAY THE CARD
+              displayCardPlainPage(event, urlPictureCard);
+            }
+          }}
+        >
           {cardsContext[cardID].name}
           {!isMobile && isOnHover && (
             <div className={hoverTopOrBottom}>
