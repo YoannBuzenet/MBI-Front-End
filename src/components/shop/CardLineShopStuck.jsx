@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import GenericCardInfosContext from "../../context/genericCardInfosContext";
+import { isMobile } from "react-device-detect";
 
 const CardLineShopStuck = ({ card }) => {
   //DEFINED langages and Conditions
@@ -12,10 +13,10 @@ const CardLineShopStuck = ({ card }) => {
         <td>{card.name}</td>
         <td>{card.set}</td>
         <td>/</td>
-        <td>{lang.filter(lang => lang.id === card.lang)[0].shortname}</td>
+        <td>{lang.filter((lang) => lang.id === card.lang)[0].shortname}</td>
         <td>
           {
-            conditions.filter(condition => condition.id == card.condition)[0]
+            conditions.filter((condition) => condition.id == card.condition)[0]
               .shortname
           }
         </td>
