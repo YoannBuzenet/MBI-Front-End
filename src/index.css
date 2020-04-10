@@ -308,7 +308,7 @@ nav > .container {
   justify-content: space-between;
 }
 
-nav ul {
+.responsive_menu ul {
   list-style-type: none;
   padding: 0;
 }

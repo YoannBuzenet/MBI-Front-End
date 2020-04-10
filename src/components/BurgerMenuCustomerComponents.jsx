@@ -100,7 +100,13 @@ const BurgerMenuCustomerComponents = () => {
                 <li>Mes rachats</li>
               </Link>
 
-              <li onClick={handleLogout} className="classic_links_responsive">
+              <li
+                onClick={() => {
+                  closeMenu();
+                  handleLogout();
+                }}
+                className="classic_links_responsive"
+              >
                 Déconnexion
               </li>
             </ul>
