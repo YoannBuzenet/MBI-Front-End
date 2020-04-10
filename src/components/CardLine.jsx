@@ -6,32 +6,35 @@ import cardsAPI from "../services/cardsAPI";
 import { isMobile } from "react-device-detect";
 import FeatherIcon from "feather-icons-react";
 import { Tr, Td } from "react-super-responsive-table";
+import CardDisplayOnPageContext from "../context/cardDisplayOnPageContext";
+import BlackDivModalContext from "../context/blackDivModalContext";
 
-const CardLine = ({
-  card,
-  handleAddSellingBasket,
-  index,
-  setName,
-  displaySets,
-}) => {
+const CardLine = ({ card, handleAddSellingBasket, index, setName }) => {
   const LANGUAGE_ID_ENG = 9;
   const CONDITION_ID_NM = 2;
   const ISFOILTRUE = 1;
   const ISFOILFALSE = 0;
-  const ISSIGNEDTRUE = 1;
   const ISSIGNEDFALSE = 0;
 
   //Current Selling Request Basket
-  const { currentBasket, setCurrentBasket } = useContext(SellingBasketContext);
+  const { currentBasket } = useContext(SellingBasketContext);
 
   //DEFINED langages and Conditions
-  const { lang, conditions } = useContext(GenericCardInfosContext);
+  const { conditions } = useContext(GenericCardInfosContext);
 
   //State - defining if the Hover should be Top or Bottom
   const [hoverTopOrBottom, setHoverTopOrBottom] = useState();
 
   //Saving the Hover state
   const [isOnHover, setIsOnHover] = useState(false);
+
+  //Black Div control
+  const { setIsBlackDivModalDisplayed } = useContext(BlackDivModalContext);
+
+  //Card display on whole page
+  const { cardDisplayInformation, setCardDisplayInformation } = useContext(
+    CardDisplayOnPageContext
+  );
 
   //Using the current Card in state, with default data : English, Near Mint, Non foil...
   const [currentCard, setCurrentCard] = useState({
@@ -107,7 +110,9 @@ const CardLine = ({
         ];
     } else {
       price =
-        currentCard.allPrices[currentCard.lang][currentCard.condition][isFoil];
+        currentCard.allPrices[currentCard.lang][currentCard.condition][isFoil][
+          isSigned
+        ];
     }
 
     setCurrentCard({ ...currentCard, [name]: newValue, price: price });
@@ -121,6 +126,14 @@ const CardLine = ({
   //TEMPORARY DEFAULT DEFINITION TODO : GET IT THROUGH API OR LOCAL ENV
   //ALSO DEFINED IN CARDSELLINGBASKET
   const gradingArea = "EU";
+
+  const displayCardPlainPage = (event, urlCard) => {
+    const newDisplayContext = { ...cardDisplayInformation };
+    newDisplayContext.cardPictureUrl = urlCard;
+    newDisplayContext.isDisplayed = true;
+    setCardDisplayInformation(newDisplayContext);
+    setIsBlackDivModalDisplayed("activated");
+  };
 
   return (
     <>
@@ -138,7 +151,15 @@ const CardLine = ({
           }
         }}
       >
-        <Td className="cardPictureHolder">
+        <Td
+          className="cardPictureHolder"
+          onClick={(event) => {
+            if (isMobile) {
+              //FUNCTION TO DISPLAY THE CARD
+              displayCardPlainPage(event, urlPictureCard);
+            }
+          }}
+        >
           {card.name}
           {!isMobile && isOnHover && (
             <div className={hoverTopOrBottom}>
