@@ -4,6 +4,8 @@ import AuthContext from "../../context/authContext";
 import SellingBasketContext from "../../context/sellingBasket";
 import authAPI from "../../services/authAPI";
 import { toast } from "react-toastify";
+import BlackDivContext from "../../context/blackDivModalContext";
+import isResponsiveMenuDisplayedContext from "../../context/menuDisplayedContext";
 
 const BurgerMenuShop = () => {
   //Current Authentication
@@ -13,6 +15,22 @@ const BurgerMenuShop = () => {
 
   //Current Selling Request Basket
   const { currentBasket } = useContext(SellingBasketContext);
+
+  //Black Div control
+  const { isBlackDivModalDisplayed, setIsBlackDivModalDisplayed } = useContext(
+    BlackDivContext
+  );
+
+  //Responsive Menu control
+  const {
+    isResponsiveMenuDisplayed,
+    setIsResponsiveMenuDisplayed,
+  } = useContext(isResponsiveMenuDisplayedContext);
+
+  const closeMenu = (event) => {
+    setIsBlackDivModalDisplayed("deactivated");
+    setIsResponsiveMenuDisplayed("deactivated");
+  };
 
   const handleLogout = () => {
     authAPI.logout();
@@ -51,6 +69,7 @@ const BurgerMenuShop = () => {
             <Link
               className="classic_links_responsive classic_links_responsive_admin"
               to="/my_selling_basket"
+              onClick={(event) => closeMenu(event)}
             >
               <li>
                 Mon Rachat (
@@ -72,12 +91,14 @@ const BurgerMenuShop = () => {
             <Link
               className="classic_links_responsive classic_links_responsive_admin nav-element"
               to="/shopadmin/sell_requests"
+              onClick={(event) => closeMenu(event)}
             >
               <li>Rachats</li>
             </Link>
             <Link
               className="classic_links_responsive classic_links_responsive_admin nav-element"
               to="/shopadmin/customers"
+              onClick={(event) => closeMenu(event)}
             >
               <li>Clients</li>
             </Link>
@@ -85,6 +106,7 @@ const BurgerMenuShop = () => {
             <Link
               to="/my_account"
               className="classic_links_responsive classic_links_responsive_admin"
+              onClick={(event) => closeMenu(event)}
             >
               <li>Mon compte</li>
             </Link>
@@ -92,6 +114,7 @@ const BurgerMenuShop = () => {
             <Link
               to="/shopadmin/shopInfos"
               className="classic_links_responsive classic_links_responsive_admin nav-element"
+              onClick={(event) => closeMenu(event)}
             >
               <li>Informations Boutique</li>
             </Link>
@@ -99,6 +122,7 @@ const BurgerMenuShop = () => {
             <Link
               to="/shopadmin/settings"
               className="classic_links_responsive classic_links_responsive_admin nav-element"
+              onClick={(event) => closeMenu(event)}
             >
               <li>Paramètres Gestion</li>
             </Link>
@@ -106,6 +130,7 @@ const BurgerMenuShop = () => {
             <li
               onClick={handleLogout}
               className="classic_links_responsive classic_links_responsive_admin"
+              onClick={(event) => closeMenu(event)}
             >
               Déconnexion
             </li>
