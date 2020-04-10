@@ -3,6 +3,7 @@ import SellingBasketContext from "../context/sellingBasket";
 import isResponsiveMenuDisplayedContext from "../context/menuDisplayedContext";
 import AuthContext from "../context/authContext";
 import BlackDivModalContext from "../context/blackDivModalContext";
+import CardDisplayOnPageContext from "../context/cardDisplayOnPageContext";
 
 const BurgerMenu = () => {
   //Current Selling Request Basket
@@ -19,13 +20,21 @@ const BurgerMenu = () => {
     setIsResponsiveMenuDisplayed,
   } = useContext(isResponsiveMenuDisplayedContext);
 
+  //Card Display control
+  const { cardDisplayInformation, setCardDisplayInformation } = useContext(
+    CardDisplayOnPageContext
+  );
+
   const handleClick = (event) => {
+    console.log("hu");
     if (isResponsiveMenuDisplayed === "deactivated") {
       setIsResponsiveMenuDisplayed("activated");
       setIsBlackDivModalDisplayed("activated");
+      setCardDisplayInformation({});
     } else {
       setIsResponsiveMenuDisplayed("deactivated");
       setIsBlackDivModalDisplayed("deactivated");
+      setCardDisplayInformation({});
     }
   };
 

@@ -71,14 +71,6 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
         let isFoil = array[i].cardShopPrices[j].isFoil ? 1 : 0;
         let isSigned = array[i].cardShopPrices[j].isSigned ? 1 : 0;
 
-        console.log(
-          "recap : ",
-          currentLanguage,
-          currentCondition,
-          isFoil,
-          isSigned
-        );
-
         //language / condition / isfoil
         array[i].allPrices[currentLanguage][currentCondition][isFoil][
           isSigned

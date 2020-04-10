@@ -309,16 +309,18 @@ function App() {
                       value={contextCardDisplayed}
                     >
                       <Router>
-                        {isBlackDivModalDisplayed === "activated" && (
-                          <BlackDiv />
-                        )}
-
-                        {cardDisplayInformation.isDisplayed && (
-                          <CardPlainPage />
-                        )}
                         <isResponsiveMenuDisplayedContext.Provider
                           value={contextResponsiveMenuDisplayed}
                         >
+                          {/* Absolute positioned components */}
+                          {isBlackDivModalDisplayed === "activated" && (
+                            <BlackDiv />
+                          )}
+
+                          {cardDisplayInformation.isDisplayed && (
+                            <CardPlainPage />
+                          )}
+
                           {/* CHOOSING WHICH BURGER MENU DISPLAY */}
                           {/* DEPENDING ON IF SHOP OR NOT*/}
                           {isResponsiveMenuDisplayed === "activated" &&

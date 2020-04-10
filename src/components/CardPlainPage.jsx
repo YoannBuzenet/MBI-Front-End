@@ -16,11 +16,11 @@ const CardPlainPage = ({ urlPicture }) => {
   return (
     <div
       className="card-modal"
-      onClick={event => {
+      onClick={(event) => {
         const newCardDisplayInformation = { ...cardDisplayInformation };
         newCardDisplayInformation.isDisplayed = false;
         setCardDisplayInformation(newCardDisplayInformation);
-        setIsBlackDivModalDisplayed(false);
+        setIsBlackDivModalDisplayed("deactivated");
       }}
     >
       <img src={cardDisplayInformation.cardPictureUrl} alt="" />
