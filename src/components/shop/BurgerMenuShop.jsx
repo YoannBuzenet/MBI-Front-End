@@ -17,15 +17,12 @@ const BurgerMenuShop = () => {
   const { currentBasket } = useContext(SellingBasketContext);
 
   //Black Div control
-  const { isBlackDivModalDisplayed, setIsBlackDivModalDisplayed } = useContext(
-    BlackDivContext
-  );
+  const { setIsBlackDivModalDisplayed } = useContext(BlackDivContext);
 
   //Responsive Menu control
-  const {
-    isResponsiveMenuDisplayed,
-    setIsResponsiveMenuDisplayed,
-  } = useContext(isResponsiveMenuDisplayedContext);
+  const { setIsResponsiveMenuDisplayed } = useContext(
+    isResponsiveMenuDisplayedContext
+  );
 
   const closeMenu = (event) => {
     setIsBlackDivModalDisplayed("deactivated");
@@ -130,7 +127,6 @@ const BurgerMenuShop = () => {
             <li
               onClick={handleLogout}
               className="classic_links_responsive classic_links_responsive_admin"
-              onClick={(event) => closeMenu(event)}
             >
               Déconnexion
             </li>

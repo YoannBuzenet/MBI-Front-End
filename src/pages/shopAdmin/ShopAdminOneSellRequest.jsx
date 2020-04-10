@@ -7,12 +7,11 @@ import CardLineShop from "../../components/shop/CardLineShop";
 import CardLineShopStuck from "../../components/shop/CardLineShopStuck";
 import AdminSellRequestContext from "../../context/adminSellRequestContext";
 import ShopSellRequestStatusValidator from "../../components/shop/ShopSellRequestStatusValidator";
-import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
+import { Table, Thead, Tbody, Tr, Th } from "react-super-responsive-table";
 import OneLineLoader from "../../components/loaders/OneLineLoader";
 import TableLoader from "../../components/loaders/TableLoader";
 import OneBigLineLoader from "../../components/loaders/OneBigLineLoader";
 import errorHandlingAPI from "../../services/errorHandlingAPI";
-import MKMAPI from "../../services/MKMAPI";
 
 const ShopAdminOneSellRequest = ({ match }) => {
   const { id } = match.params;
@@ -45,13 +44,13 @@ const ShopAdminOneSellRequest = ({ match }) => {
     ) {
       sellRequestAPI
         .findById(id, {
-          cancelToken: source.token
+          cancelToken: source.token,
         })
-        .then(data => {
+        .then((data) => {
           // console.log(data);
           return data;
         })
-        .then(data => {
+        .then((data) => {
           return setCurrentAdminSellRequest({
             id: data.id,
             DateSubmit: data.DateSubmit,
@@ -67,7 +66,7 @@ const ShopAdminOneSellRequest = ({ match }) => {
             shop: data.shop,
             idSellRequest: data.id,
             sellRequests: [
-              ...data.sellRequestCards.map(card => {
+              ...data.sellRequestCards.map((card) => {
                 return {
                   id: card.id,
                   mcmId: card.cards.mcmid,
@@ -84,28 +83,22 @@ const ShopAdminOneSellRequest = ({ match }) => {
                   quantity: card.cardQuantity,
                   isFoil: card.isFoil,
                   isSigned: card.isSigned,
-                  isAltered: card.isAltered
+                  isAltered: card.isAltered,
                 };
-              })
-            ]
+              }),
+            ],
           });
         })
         .then(() => {
           setIsLoading(false);
         })
-        .catch(err => {
+        .catch((err) => {
           errorHandlingAPI.check401Unauthorized(err);
         });
     }
 
     return () => source.cancel("");
   }, [id]);
-
-  console.log(currentAdminSellRequest);
-  console.log(MKMAPI.transformSellRequestIntoXML(currentAdminSellRequest));
-
-  //ENV VARIABLE TO DEFINE
-  const gradingArea = "isEU";
 
   return (
     <>

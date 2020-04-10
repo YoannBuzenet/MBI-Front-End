@@ -1,14 +1,10 @@
-import React, { useContext, useEffect, useState } from "react";
-import SellingBasketContext from "../context/sellingBasket";
+import React, { useEffect, useState } from "react";
 import CardWithThumbnail from "./CardWithThumbnail";
 import axios from "axios";
 import CardThumbnailLoader from "./loaders/CardThumbnailLoader";
 import config from "../services/config";
 
-const LastModifications = ({ handleAddSellingBasket }) => {
-  //Current Selling Request Basket
-  const { currentBasket, setCurrentBasket } = useContext(SellingBasketContext);
-
+const LastModifications = () => {
   const [lastModificationList, setLastModificationList] = useState([]);
 
   const [isLoading, setIsLoading] = useState(true);

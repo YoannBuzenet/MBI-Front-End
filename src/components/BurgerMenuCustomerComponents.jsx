@@ -17,15 +17,12 @@ const BurgerMenuCustomerComponents = () => {
   const { currentBasket } = useContext(SellingBasketContext);
 
   //Black Div control
-  const { isBlackDivModalDisplayed, setIsBlackDivModalDisplayed } = useContext(
-    BlackDivContext
-  );
+  const { setIsBlackDivModalDisplayed } = useContext(BlackDivContext);
 
   //Is Menu Responsive Displayed
-  const {
-    isResponsiveMenuDisplayed,
-    setIsResponsiveMenuDisplayed,
-  } = useContext(isResponsiveMenuDisplayedContext);
+  const { setIsResponsiveMenuDisplayed } = useContext(
+    isResponsiveMenuDisplayedContext
+  );
 
   const handleLogout = () => {
     authAPI.logout();
@@ -54,7 +51,7 @@ const BurgerMenuCustomerComponents = () => {
     ? "responsive_menu authenticated-menu"
     : "responsive_menu";
 
-  const closeMenu = (event) => {
+  const closeMenu = () => {
     setIsBlackDivModalDisplayed("deactivated");
     setIsResponsiveMenuDisplayed("deactivated");
   };

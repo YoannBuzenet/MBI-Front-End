@@ -1,9 +1,8 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import GenericCardInfosContext from "../context/genericCardInfosContext";
 import cardsAPI from "../services/cardsAPI";
 import CardLine from "../components/CardLine";
-import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
+import { Table, Thead, Tbody, Tr, Th } from "react-super-responsive-table";
 import TableLoader from "../components/loaders/TableLoader";
 
 const CardPage = ({ match, handleAddSellingBasket }) => {
@@ -104,7 +103,12 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
 
       return () => source.cancel("");
     }
-  }, [currentNameDecoded, currentName]);
+  }, [
+    currentNameDecoded,
+    currentName,
+    allCardsDisplayed,
+    match.params.cardName,
+  ]);
 
   return (
     <>
