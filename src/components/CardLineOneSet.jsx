@@ -11,17 +11,9 @@ import FeatherIcon from "feather-icons-react";
 import { Tr, Td } from "react-super-responsive-table";
 import config from "../services/config";
 
-const CardLineOneSet = ({
-  card,
-  cardID,
-  id,
-  handleAddSellingBasket,
-  index,
-  setName,
-  displaySets,
-}) => {
+const CardLineOneSet = ({ card, cardID, handleAddSellingBasket, index }) => {
   //Current Selling Request Basket
-  const { currentBasket, setCurrentBasket } = useContext(SellingBasketContext);
+  const { currentBasket } = useContext(SellingBasketContext);
 
   //TIMEOUT SETUP DO NOT ERASE (In case we have to implement it, it can be finished)
   // const WAIT_INTERVAL = 1000;
@@ -31,16 +23,13 @@ const CardLineOneSet = ({
   const { cardsContext, setCardsContext } = useContext(cardsOneSetContext);
 
   //DEFINED langages and Conditions
-  const { lang, conditions } = useContext(GenericCardInfosContext);
+  const { conditions } = useContext(GenericCardInfosContext);
 
   //State - defining if the Hover should be Top or Bottom
   const [hoverTopOrBottom, setHoverTopOrBottom] = useState();
 
   //Saving the Hover state
   const [isOnHover, setIsOnHover] = useState(false);
-
-  //Using the current Card in state, with default data : English, Near Mint, Non foil...
-  const [currentCard, setCurrentCard] = useState({});
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -49,13 +38,16 @@ const CardLineOneSet = ({
   // const triggerAPIRequests = () => console.log("trigger");
 
   const handleChange = ({ currentTarget }) => {
-    setIsLoading(true);
+    const { name, value } = currentTarget;
+    if (name !== "quantity") {
+      setIsLoading(true);
+    }
     //TIMEOUT SETUP DO NOT ERASE
     // setTimer(clearTimeout(timer));
     const contextCopy = { ...cardsContext };
 
     //Updating the card following the new info
-    const { name, value } = currentTarget;
+
     if (name === "quantity" || name === "lang") {
       var newValue = parseInt(value);
     } else {
@@ -64,33 +56,37 @@ const CardLineOneSet = ({
 
     contextCopy[cardID][name] = newValue;
 
-    //TODO
-    //API call to get the relevant price and UPDATE PRICE
-    CardShopPriceAPI.getOnePrice(
-      config.shopID,
-      cardID,
-      contextCopy[cardID].lang,
-      contextCopy[cardID].condition,
-      contextCopy[cardID].isFoil,
-      contextCopy[cardID].isSigned
-    )
-      .then((data) => {
-        console.log(data);
-        if (data.data["hydra:member"].length > 0) {
-          contextCopy[cardID].price = data.data["hydra:member"][0].price;
-        } else {
-          contextCopy[cardID].price = 0;
-        }
-        setIsLoading(false);
-        //mutating context and not seting it to gain performance
+    //IF anything but the quantity has been updated, we make an API call to get the new price
+    if (name !== "quantity") {
+      //API call to get the relevant price and UPDATE PRICE
+      CardShopPriceAPI.getOnePrice(
+        config.shopID,
+        cardID,
+        contextCopy[cardID].lang,
+        contextCopy[cardID].condition,
+        contextCopy[cardID].isFoil,
+        contextCopy[cardID].isSigned
+      )
+        .then((data) => {
+          console.log(data);
+          if (data.data["hydra:member"].length > 0) {
+            contextCopy[cardID].price = data.data["hydra:member"][0].price;
+          } else {
+            contextCopy[cardID].price = 0;
+          }
+          setIsLoading(false);
+          //mutating context and not seting it to gain performance
 
-        setCardsContext(contextCopy);
-      })
-      .catch((error) => {
-        toast.error(
-          "Le prix n'a pu être chargé. Merci de réactualiser votre page ou d'essayer plus tard."
-        );
-      });
+          setCardsContext(contextCopy);
+        })
+        .catch((error) => {
+          toast.error(
+            "Le prix n'a pu être chargé. Merci de réactualiser votre page ou d'essayer plus tard."
+          );
+        });
+    } else {
+      setCardsContext(contextCopy);
+    }
     //TIMEOUT SETUP DO NOT ERASE
     // setTimer(setTimeout(() => triggerAPIRequests(), WAIT_INTERVAL));
 
