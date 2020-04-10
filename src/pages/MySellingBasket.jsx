@@ -7,7 +7,7 @@ import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 
 const MyCurrentSellRequest = ({ history, checkForDuplicates }) => {
   const { currentBasket } = useContext(SellingBasketContext);
-  console.log(currentBasket);
+  // console.log(currentBasket);
 
   //Knowing if the Sell Request is OK to be submitted (no duplicate)
   // const { errorList, setErrorList } = useContext(canSubmitContext);
@@ -55,31 +55,20 @@ const MyCurrentSellRequest = ({ history, checkForDuplicates }) => {
                     );
                   })
                 : null}
-
-              <Tr className="total-line">
-                <Td></Td>
-                <Td></Td>
-                <Td></Td>
-                <Td></Td>
-                <Td></Td>
-                <Td></Td>
-
-                <Td>
-                  <span>Total cartes : </span>
-                  {currentBasket.reduce((total, card) => {
-                    return total + card.quantity;
-                  }, 0)}
-                </Td>
-                <Td>
-                  <span>Total : </span>
-                  {currentBasket.reduce((total, card) => {
-                    return total + card.price * card.quantity;
-                  }, 0)}
-                </Td>
-                <Td></Td>
-              </Tr>
             </Tbody>
           </Table>
+          <p>
+            <span>Total cartes : </span>
+            {currentBasket.reduce((total, card) => {
+              return total + card.quantity;
+            }, 0)}
+          </p>
+          <p>
+            <span>Total : </span>
+            {currentBasket.reduce((total, card) => {
+              return total + card.price * card.quantity;
+            }, 0)}
+          </p>
         </div>
         <div className="right-content">
           <SellRequestValidation
