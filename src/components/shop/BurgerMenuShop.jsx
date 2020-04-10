@@ -125,7 +125,10 @@ const BurgerMenuShop = () => {
             </Link>
 
             <li
-              onClick={handleLogout}
+              onClick={() => {
+                closeMenu();
+                handleLogout();
+              }}
               className="classic_links_responsive classic_links_responsive_admin"
             >
               Déconnexion
