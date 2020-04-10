@@ -130,7 +130,7 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
     newDisplayContext.cardPictureUrl = urlCard;
     newDisplayContext.isDisplayed = true;
     setCardDisplayInformation(newDisplayContext);
-    setIsBlackDivModalDisplayed(true);
+    setIsBlackDivModalDisplayed("activated");
   };
 
   return (

@@ -36,7 +36,7 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
    * We receive all prices as an array. To make them browsable easily, we transform it in a big object.
    * We browse the array, build a big object, then fill it with data.
    */
-  const makeCardShopPriceBrowsable = array => {
+  const makeCardShopPriceBrowsable = (array) => {
     console.log("function called");
     for (let i = 0; i < array.length; i++) {
       //Creating the allPrices object that will hold all the data.
@@ -71,6 +71,14 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
         let isFoil = array[i].cardShopPrices[j].isFoil ? 1 : 0;
         let isSigned = array[i].cardShopPrices[j].isSigned ? 1 : 0;
 
+        console.log(
+          "recap : ",
+          currentLanguage,
+          currentCondition,
+          isFoil,
+          isSigned
+        );
+
         //language / condition / isfoil
         array[i].allPrices[currentLanguage][currentCondition][isFoil][
           isSigned
@@ -92,14 +100,14 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
 
       cardsAPI
         .getByName(currentNameDecoded, {
-          cancelToken: source.token
+          cancelToken: source.token,
         })
-        .then(data => {
+        .then((data) => {
           console.log(data.data["hydra:member"]);
           return data.data["hydra:member"];
         })
-        .then(data => makeCardShopPriceBrowsable(data))
-        .then(data => setAllCardsDisplayed(data))
+        .then((data) => makeCardShopPriceBrowsable(data))
+        .then((data) => setAllCardsDisplayed(data))
         .then(() => setIsLoading(false));
 
       return () => source.cancel("");
