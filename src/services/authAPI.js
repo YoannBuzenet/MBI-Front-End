@@ -10,11 +10,11 @@ import config from "./config";
 function authenticate(credentials) {
   return axios
     .post(config.URL_API + "/login", credentials)
-    .then(response => {
+    .then((response) => {
       return response.data;
     })
-    .then(data => {
-      // console.log(data);
+    .then((data) => {
+      console.log(data);
       //Stocking in local storage
       window.localStorage.setItem("authToken", data.token);
       if (data.shop) {
@@ -33,7 +33,7 @@ function authenticate(credentials) {
         user: {
           id: data.user.id,
           email: data.user.email,
-          roles: data.user.roles
+          roles: data.user.roles,
         },
         customer: {
           id: data.client.id,
@@ -43,7 +43,7 @@ function authenticate(credentials) {
           adress: data.client.adress,
           postalCode: data.client.postalCode,
           town: data.client.town,
-          SellRequests: data.client.SellRequests
+          SellRequests: data.client.SellRequests,
         },
         shop: {
           id: data.client.shop.id,
@@ -66,10 +66,10 @@ function authenticate(credentials) {
                 PercentPerLangs: data.shop.PercentPerLangs,
                 PercentPerConditions: data.shop.PercentPerConditions,
                 PercentPerConditionFoils: data.shop.PercentPerConditionFoils,
-                PercentPerSigned: data.shop.percentPerSigned
+                PercentPerSigned: data.shop.percentPerSigned,
               }
-            : null
-        }
+            : null,
+        },
       };
     });
 }
@@ -117,7 +117,7 @@ function userInfos() {
       user: {
         id: userDatas.user.id,
         email: userDatas.user.email,
-        roles: userDatas.user.roles
+        roles: userDatas.user.roles,
       },
       customer: {
         id: userDatas.client.id,
@@ -127,7 +127,7 @@ function userInfos() {
         adress: userDatas.client.adress,
         postalCode: userDatas.client.postalCode,
         town: userDatas.client.town,
-        SellRequests: userDatas.client.SellRequests
+        SellRequests: userDatas.client.SellRequests,
       },
       shop: {
         id: userDatas.client.shop.id,
@@ -150,10 +150,10 @@ function userInfos() {
               PercentPerLangs: userDatas.shop.PercentPerLangs,
               PercentPerConditions: userDatas.shop.PercentPerConditions,
               PercentPerConditionFoils: userDatas.shop.PercentPerConditionFoils,
-              PercentPerSigned: userDatas.shop.percentPerSigned
+              PercentPerSigned: userDatas.shop.percentPerSigned,
             }
-          : null
-      }
+          : null,
+      },
     };
   } else {
     return {
@@ -161,7 +161,7 @@ function userInfos() {
       user: {
         id: "",
         email: "",
-        roles: []
+        roles: [],
       },
       customer: {
         id: "",
@@ -171,7 +171,7 @@ function userInfos() {
         adress: "",
         postalCode: "",
         town: "",
-        SellRequests: []
+        SellRequests: [],
       },
       shop: {
         id: "",
@@ -183,8 +183,8 @@ function userInfos() {
         adress: "",
         postalCode: "",
         town: "",
-        shopData: null
-      }
+        shopData: null,
+      },
     };
   }
 }
@@ -199,5 +199,5 @@ export default {
   logout: logout,
   setup: setup,
   userInfos,
-  updateUserInfosLocalStorage
+  updateUserInfosLocalStorage,
 };
