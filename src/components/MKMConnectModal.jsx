@@ -37,7 +37,10 @@ const MKMConnectModal = (props) => {
           message de validation sur www.mtgInterface.com, tu n'as plus qu'à
           cliquer sur ce bouton ci-dessous :
         </p>
-        <p className="syncronization-button">Synchroniser tous les sites</p>
+        <p className="syncronization-button">
+          <span className="sync-symbol">&#8634;</span>
+          <span className="button-content">Synchroniser tous les sites</span>
+        </p>
       </div>
     </div>
   );
