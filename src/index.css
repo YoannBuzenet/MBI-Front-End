@@ -1024,11 +1024,15 @@ tbody.cardLineShop {
 }
 
 .card-modal {
-  position: absolute;
-  top: 30%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  position: fixed;
+  top: 300px;
+  left: 0;
+  bottom: 0;
+  right: 0;
   z-index: 4;
+}
+
+.card-modal img {
 }
 
 /**************************
