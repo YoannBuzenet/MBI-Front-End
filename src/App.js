@@ -320,6 +320,7 @@ function App() {
                           value={contextResponsiveMenuDisplayed}
                         >
                           {/* CHOOSING WHICH BURGER MENU DISPLAY */}
+                          {/* DEPENDING ON IF SHOP OR NOT*/}
                           {isResponsiveMenuDisplayed === "activated" &&
                             !authenticationInfos.user.roles.includes(
                               "ROLE_SHOP"
@@ -331,6 +332,7 @@ function App() {
                             ) && <BurgerMenuShop />}
 
                           {/* CHOOSING WHICH NAVBAR DISPLAY */}
+                          {/* DEPENDING ON IF SHOP OR NOT*/}
 
                           {authenticationInfos.user.roles &&
                           authenticationInfos.user.roles.includes(
