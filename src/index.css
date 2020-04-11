@@ -1157,7 +1157,6 @@ tbody.cardLineShop {
   margin-right: 10px;
 }
 .MKM-connection-modal > div .syncronization-button {
-  position: relative;
   width: 300px;
   padding: 1rem;
   margin: 0 auto;
@@ -1231,6 +1230,9 @@ tbody.cardLineShop {
   .mkm-modal-container {
     padding: 0 5rem;
   }
+  .MKM-connection-modal {
+    bottom: 20%;
+  }
 }
 
 @media only screen and (max-width: 600px) {
@@ -1239,6 +1241,22 @@ tbody.cardLineShop {
   }
   .mkm-modal-container {
     padding: 0 2rem;
+  }
+  .MKM-connection-modal {
+    bottom: 15%;
+  }
+}
+@media only screen and (max-width: 500px) {
+  .MKM-connection-modal > div .syncronization-button {
+    width: 250px;
+  }
+}
+@media only screen and (max-width: 400px) {
+  .MKM-connection-modal > div .syncronization-button {
+    width: 200px;
+  }
+  .MKM-connection-modal {
+    bottom: 10%;
   }
 }
 
