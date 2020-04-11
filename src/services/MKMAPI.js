@@ -142,16 +142,16 @@ function buildOAuthHeader(method, URLToReach) {
   // let header = "Authorization: OAuth ";
   let header = "OAuth ";
 
-  var i = 1;
+  var j = 1;
   for (const prop in params_header) {
-    if (i === 1) {
+    if (j === 1) {
       let keyValuePair = prop + '="' + params_header[prop] + '"';
       header += keyValuePair;
     } else {
       let keyValuePair = ", " + prop + '="' + params_header[prop] + '"';
       header += keyValuePair;
     }
-    i++;
+    j++;
   }
   console.log("header", header);
 
