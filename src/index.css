@@ -793,6 +793,11 @@ div.connect p {
   justify-content: space-between;
 }
 
+.footer a {
+  text-decoration: none;
+  color: black;
+}
+
 @media only screen and (max-width: 1000px) {
   .footer {
     height: 200px;

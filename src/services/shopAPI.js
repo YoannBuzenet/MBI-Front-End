@@ -32,10 +32,17 @@ function getPublicInfos() {
     .then((data) => data.data);
 }
 
+function getBuyingClauses() {
+  return axios
+    .get(config.URL_API + "/shopClauses/" + config.shopID)
+    .then((data) => data.data);
+}
+
 export default {
   updatePercentPerLang,
   updatePercentPerCondition,
   updatePercentPerConditionFoil,
   updateFields,
   getPublicInfos,
+  getBuyingClauses,
 };

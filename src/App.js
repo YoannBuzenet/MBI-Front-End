@@ -61,6 +61,7 @@ import BurgerMenuShop from "./components/shop/BurgerMenuShop";
 import BurgerMenuCustomerComponents from "./components/BurgerMenuCustomerComponents";
 import MKMConnectModal from "./components/MKMConnectModal";
 import shopAPI from "./services/shopAPI";
+import BuyingClauses from "./pages/BuyingClauses";
 
 //Really Useful library to check all rerenders made on ALL components (you can setup it to check just one)
 // if (process.env.NODE_ENV === "development") {
@@ -431,6 +432,10 @@ function App() {
                               <Route
                                 path="/register"
                                 component={RegisterPage}
+                              />
+                              <Route
+                                path="/buyingClauses"
+                                component={BuyingClauses}
                               />
 
                               <Route

@@ -1,9 +1,10 @@
 import React from "react";
 import shopInfoContext from "../context/publicShopInfoContext";
 import { useContext } from "react";
+import { Link } from "react-router-dom";
 
-const Footer = (props) => {
-  const { shopInfos, setShopInfos } = useContext(shopInfoContext);
+const Footer = () => {
+  const { shopInfos } = useContext(shopInfoContext);
 
   console.log(shopInfos);
 
@@ -12,16 +13,20 @@ const Footer = (props) => {
       <footer className="footer">
         <div className="footer-container container">
           <div>
-            <p>Conditions Générales de Vente</p>
+            <p>
+              <Link to="buyingClauses">Conditions Générales de Vente</Link>
+            </p>
           </div>
           <div>
-            <p>Fantasy Sphere</p>
-            <p className="small-text">12, Avenue Saint Michel</p>
-            <p className="small-text">31400 Toulouse</p>
+            <p>{shopInfos.legalName}</p>
+            <p className="small-text">{shopInfos.adress}</p>
+            <p className="small-text">
+              {shopInfos.postalCode} {shopInfos.town}
+            </p>
           </div>
           <div>
-            <p>05.90.78.64.56</p>
-            <p>fantasySphere@outlook.fr</p>
+            <p>{shopInfos.tel}</p>
+            <p>{shopInfos.email}</p>
           </div>
         </div>
       </footer>
