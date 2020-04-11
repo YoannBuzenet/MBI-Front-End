@@ -22,7 +22,7 @@ const SetList = (props) => {
     <>
       <div className="left-div">
         {isMobile && <div className="margin-top-2rem"></div>}
-        <h2>Set Name</h2>
+        <h2>Les éditions</h2>
 
         {allSets.length === 0 && <SetListLoader />}
 
