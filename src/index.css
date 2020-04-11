@@ -1038,17 +1038,40 @@ tbody.cardLineShop {
   bottom: 0;
   right: 0;
   left: 0;
-  display: flex;
-  justify-content: center;
 }
 
 .MKM-connection-modal > div {
-  margin: auto;
-  padding: 2rem;
+  position: fixed;
+  left: 10%;
+  right: 10%;
+  top: 10%;
+  bottom: 25%;
+  padding: 6rem;
   z-index: 2;
   /* background-color: var(--background-color); */
   background-color: white;
-  box-shadow: 1px 1px 1px black;
+  border-radius: 8px;
+  box-shadow: 2px 2px 3px black;
+}
+
+.mkm-modal-container {
+  padding: 0 25rem;
+}
+
+.MKM-connection-modal > div h2 {
+  margin-bottom: 4rem;
+}
+
+.MKM-rule {
+  display: flex;
+  align-items: baseline;
+  justify-content: flex-start;
+  margin-bottom: 3rem;
+}
+
+.MKM-rule p {
+  margin: 0;
+  text-align: left;
 }
 
 .MKM-connection-modal > div .styled-ol-number {
@@ -1061,24 +1084,37 @@ tbody.cardLineShop {
   margin: 0 auto;
   cursor: pointer;
   background-color: lightgreen;
+  border-radius: 8px;
+  box-shadow: 1px 1px 3px black;
 }
 
 .MKM-connection-modal > div .syncronization-button:hover {
   background-color: mediumspringgreen;
   color: white;
 }
+.MKM-connection-modal > div .syncronization-button:active {
+  box-shadow: 1px 1px 1px black;
+}
 
 .MKM-connection-modal > div .syncronization-button:hover .button-content {
-  font-size: 2rem;
 }
 .MKM-connection-modal > div .syncronization-button:hover .sync-symbol {
-  font-size: 5rem;
+}
+
+.mkm_link_auth {
+  margin-top: -10px;
 }
 
 .MKM-connection-modal > div .syncronization-button .sync-symbol {
   display: block;
   margin-top: -10px;
   font-size: 3rem;
+}
+
+@media only screen and (max-width: 1000px) {
+  .MKM-connection-modal > div {
+    width: 60%;
+  }
 }
 
 /**************************
