@@ -6,22 +6,24 @@ import MKMAPI from "../../services/MKMAPI";
 import AuthContext from "../../context/authContext";
 import MKM_ModalContext from "../../context/mkmModalConnectionContext";
 import BlackDivContext from "../../context/blackDivModalContext";
+import GenericContext from "../../context/genericCardInfosContext";
 
-const ShopSellRequestStatusValidator = (props) => {
+const ShopSellRequestStatusValidator = () => {
   const { currentAdminSellRequest, setCurrentAdminSellRequest } = useContext(
     AdminSellRequestContext
   );
 
   //Current Authentication
-  const { authenticationInfos, setAuthenticationInfos } = useContext(
-    AuthContext
-  );
+  const { authenticationInfos } = useContext(AuthContext);
 
   //MKM Modal Control
   const { setIsMKMModalDisplayed } = useContext(MKM_ModalContext);
 
   //Black Div Control
   const { setIsBlackDivModalDisplayed } = useContext(BlackDivContext);
+
+  //Lang & Condition Definition
+  const { lang, conditions } = useContext(GenericContext);
 
   const [availableOptions, setAvailableOptions] = useState([]);
 
@@ -117,7 +119,11 @@ const ShopSellRequestStatusValidator = (props) => {
         console.log("session update ok");
 
         //TODO - CHECK XML IS WELL FORMED AND SENT TO MKM
-        MKMAPI.transformSellRequestIntoXML(currentAdminSellRequest);
+        MKMAPI.transformSellRequestIntoXML(
+          currentAdminSellRequest,
+          lang,
+          conditions
+        );
         console.log("mkm prévenu");
       } catch (error) {
         toast.error(

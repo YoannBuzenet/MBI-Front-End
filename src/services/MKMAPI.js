@@ -25,6 +25,30 @@ const URL_MKM_SANDBOX_ADD_STOCK =
 const MKM_AUTHENTICATION_URL_BASE =
   "https://api.cardmarket.com/ws/v2.0/authenticate/";
 
+const MKM_LANG_DEFINITION = {
+  English: 1,
+  French: 2,
+  German: 3,
+  Spanish: 4,
+  Italian: 5,
+  "Simplified Chinese": 6,
+  Japanese: 7,
+  Portuguese: 8,
+  Russian: 9,
+  Korean: 10,
+  "Traditional Chinese": 11,
+};
+
+const MKM_CONDITION_DEFINITION = {
+  1: MT,
+  2: NM,
+  3: EX,
+  4: GD,
+  5: LP,
+  6: PL,
+  7: PO,
+};
+
 function setSellingMKMPrice(number) {
   //Put here any algorithms with maybe parameters to ajdust the price
   return number;
@@ -158,7 +182,11 @@ function buildOAuthHeader(method, URLToReach) {
   return header;
 }
 
-function transformSellRequestIntoXML(sellRequest) {
+function transformSellRequestIntoXML(
+  sellRequest,
+  langDefinitionContext,
+  conditionDefinitionContext
+) {
   console.log(sellRequest);
   const xml_start = '<?xml version="1.0" encoding="UTF-8" ?><request>';
   const xml_end = "</request>";

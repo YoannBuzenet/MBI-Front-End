@@ -6,15 +6,13 @@ import { Link } from "react-router-dom";
 const Footer = () => {
   const { shopInfos } = useContext(shopInfoContext);
 
-  console.log(shopInfos);
-
   return (
     <>
       <footer className="footer">
         <div className="footer-container container">
           <div>
             <p>
-              <Link to="buyingClauses">Conditions Générales de Vente</Link>
+              <Link to="/buyingClauses">Conditions Générales de Vente</Link>
             </p>
           </div>
           <div>
