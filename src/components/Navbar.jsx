@@ -13,8 +13,6 @@ const Navbar = ({ history }) => {
     AuthContext
   );
 
-  console.log(authenticationInfos);
-
   //Current Selling Request Basket
   const { currentBasket } = useContext(SellingBasketContext);
 

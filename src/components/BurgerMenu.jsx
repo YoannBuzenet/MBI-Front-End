@@ -26,7 +26,6 @@ const BurgerMenu = () => {
   );
 
   const handleClick = (event) => {
-    console.log("hu");
     if (isResponsiveMenuDisplayed === "deactivated") {
       setIsResponsiveMenuDisplayed("activated");
       setIsBlackDivModalDisplayed("activated");

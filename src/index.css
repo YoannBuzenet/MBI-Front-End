@@ -518,7 +518,7 @@ div.connect p {
 /* Responsive options for Menu */
 
 .responsive_menu {
-  position: absolute;
+  position: fixed;
   top: 8rem;
   bottom: 0;
   height: 35vh;
@@ -1413,7 +1413,7 @@ span.customer_lastName {
   text-align: center;
 }
 
-@media only screen and (max-width: 968px) {
+@media only screen and (max-width: 1000px) {
   .field-form input,
   .login-form input,
   .my-account textarea {
