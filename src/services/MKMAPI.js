@@ -39,18 +39,32 @@ const MKM_LANG_DEFINITION = {
   "Traditional Chinese": 11,
 };
 
-const MKM_CONDITION_DEFINITION = {
-  1: MT,
-  2: NM,
-  3: EX,
-  4: GD,
-  5: LP,
-  6: PL,
-  7: PO,
+const MKM_MTG_API_LANG_TRANSLATION = {
+  1: MKM_LANG_DEFINITION.German,
+  2: MKM_LANG_DEFINITION.Spanish,
+  3: MKM_LANG_DEFINITION.French,
+  4: MKM_LANG_DEFINITION.Italian,
+  5: MKM_LANG_DEFINITION.Japanese,
+  6: MKM_LANG_DEFINITION.Portuguese,
+  7: MKM_LANG_DEFINITION.Russian,
+  8: MKM_LANG_DEFINITION["Simplified Chinese"],
+  9: MKM_LANG_DEFINITION.English,
+  10: MKM_LANG_DEFINITION.Korean,
+  11: MKM_LANG_DEFINITION["Traditional Chinese"],
+};
+
+const MKM_MTG_API_CONDITION_TRANSLATION = {
+  1: "MT",
+  2: "NM",
+  3: "EX",
+  4: "GD",
+  5: "LP",
+  6: "PL",
+  7: "PO",
 };
 
 function setSellingMKMPrice(number) {
-  //Put here any algorithms with maybe parameters to ajdust the price
+  //TODO Put here any algorithms with maybe parameters to ajdust the price
   return number;
 }
 
@@ -182,11 +196,7 @@ function buildOAuthHeader(method, URLToReach) {
   return header;
 }
 
-function transformSellRequestIntoXML(
-  sellRequest,
-  langDefinitionContext,
-  conditionDefinitionContext
-) {
+function transformSellRequestIntoXML(sellRequest) {
   console.log(sellRequest);
   const xml_start = '<?xml version="1.0" encoding="UTF-8" ?><request>';
   const xml_end = "</request>";
@@ -196,14 +206,16 @@ function transformSellRequestIntoXML(
         "<article> <idProduct>" +
         currentValue.mcmId +
         "</idProduct><idLanguage>" +
-        currentValue.lang +
+        MKM_MTG_API_LANG_TRANSLATION[currentValue.lang] +
         "</idLanguage><comments>" +
         "" + //Optional comment to post
         "</comments><count>" +
         currentValue.quantity +
         "</count><price>" +
         setSellingMKMPrice(100) +
-        "</price><condition>EX</condition><isFoil>" +
+        "</price><condition>" +
+        MKM_MTG_API_CONDITION_TRANSLATION[currentValue.condition] +
+        "</condition><isFoil>" +
         currentValue.isFoil +
         "</isFoil><isSigned>" +
         currentValue.isSigned +

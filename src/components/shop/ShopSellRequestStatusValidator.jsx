@@ -22,9 +22,6 @@ const ShopSellRequestStatusValidator = () => {
   //Black Div Control
   const { setIsBlackDivModalDisplayed } = useContext(BlackDivContext);
 
-  //Lang & Condition Definition
-  const { lang, conditions } = useContext(GenericContext);
-
   const [availableOptions, setAvailableOptions] = useState([]);
 
   //We initialize the state to Cancelled so that the button to update the Sell Request remain hidden while the real status is being computed
@@ -119,11 +116,7 @@ const ShopSellRequestStatusValidator = () => {
         console.log("session update ok");
 
         //TODO - CHECK XML IS WELL FORMED AND SENT TO MKM
-        MKMAPI.transformSellRequestIntoXML(
-          currentAdminSellRequest,
-          lang,
-          conditions
-        );
+        MKMAPI.transformSellRequestIntoXML(currentAdminSellRequest);
         console.log("mkm prévenu");
       } catch (error) {
         toast.error(
