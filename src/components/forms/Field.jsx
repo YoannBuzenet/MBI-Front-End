@@ -9,7 +9,8 @@ const Field = ({
   idNumber,
   className = "",
   type = "text",
-  required = false
+  minlength = 2,
+  required = false,
 }) => {
   return (
     <div className="field">
@@ -23,6 +24,7 @@ const Field = ({
         name={name}
         id={idNumber}
         required={required}
+        minLength={minlength}
       />
     </div>
   );

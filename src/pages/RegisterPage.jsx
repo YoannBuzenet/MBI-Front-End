@@ -92,6 +92,7 @@ const RegisterPage = ({ history }) => {
             required
             onChange={(event) => handleChange(event)}
             label="Mot de Passe"
+            minlength={6}
           />
 
           <Field
