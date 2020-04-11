@@ -30,6 +30,7 @@ function authenticate(credentials) {
       //We return an object containing all data relevant to the current user : is he logged, who is he. Of course, every access is checked on the server.
       return {
         isAuthenticated: true,
+        refresh_token: data.refresh_token,
         user: {
           id: data.user.id,
           email: data.user.email,
@@ -119,6 +120,7 @@ function userInfos() {
 
     return {
       isAuthenticated: jwtData.exp * 1000 > new Date().getTime(),
+      refresh_token: userDatas.refresh_token,
       user: {
         id: userDatas.user.id,
         email: userDatas.user.email,
@@ -204,10 +206,17 @@ function updateUserInfosLocalStorage(allUserInfos) {
   window.localStorage.setItem("userInfos", JSON.stringify(allUserInfos));
 }
 
+function refreshTokenAndInfos(refresh_token) {
+  let object_refresh_token = { refresh_token: refresh_token };
+
+  return axios.post(config.URL_API + "/token/refresh", object_refresh_token);
+}
+
 export default {
-  authenticate: authenticate,
-  logout: logout,
-  setup: setup,
+  authenticate,
+  logout,
+  setup,
   userInfos,
   updateUserInfosLocalStorage,
+  refreshTokenAndInfos,
 };

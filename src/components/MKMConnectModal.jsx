@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import MKMAPI from "../services/MKMAPI";
 import AuthContext from "../context/authContext";
+import authAPI from "../services/authAPI";
 
 const MKMConnectModal = (props) => {
   //Current Authentication
@@ -13,6 +14,9 @@ const MKMConnectModal = (props) => {
     console.log(
       "récupération des infos de l API, mise à jour de la session, disparition de cette fenetre"
     );
+    authAPI
+      .refreshTokenAndInfos(authenticationInfos.refresh_token)
+      .then((data) => console.log(data));
   };
 
   return (
@@ -22,7 +26,7 @@ const MKMConnectModal = (props) => {
           <h2>Connection à Magic Card Market</h2>
           <div className="MKM-rule">
             <span className="styled-ol-number">1.</span>
-            <p>Identifie toi sur le site MKM</p>
+            <p>S'identifier sur le site de MKM</p>
           </div>
           <p className="mkm_link_auth">
             <a

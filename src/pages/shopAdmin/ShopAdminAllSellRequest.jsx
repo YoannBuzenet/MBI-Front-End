@@ -7,7 +7,7 @@ import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 import TableLoader from "../../components/loaders/TableLoader";
 import errorHandlingAPI from "../../services/errorHandlingAPI";
 
-const ShopAdminAllSellRequests = props => {
+const ShopAdminAllSellRequests = (props) => {
   //Variable to clean up useEffect Axios
   const CancelToken = axios.CancelToken;
   const source = CancelToken.source();
@@ -20,11 +20,11 @@ const ShopAdminAllSellRequests = props => {
   useEffect(() => {
     sellRequestAPI
       .findAll({
-        cancelToken: source.token
+        cancelToken: source.token,
       })
-      .then(response => setAllSellRequests(response.data["hydra:member"]))
+      .then((response) => setAllSellRequests(response.data["hydra:member"]))
       .then(() => setIsLoading(false))
-      .catch(error => errorHandlingAPI.check401Unauthorized(error));
+      .catch((error) => errorHandlingAPI.check401Unauthorized(error));
 
     return () => source.cancel("");
   }, []);
@@ -47,8 +47,8 @@ const ShopAdminAllSellRequests = props => {
             </Thead>
             <Tbody>
               {allSellRequests.length > 0 &&
-                allSellRequests.map(sellRequest => {
-                  console.log(sellRequest);
+                allSellRequests.map((sellRequest) => {
+                  // console.log(sellRequest);
 
                   return (
                     <Tr
