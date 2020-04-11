@@ -51,7 +51,7 @@ const CardLineShop = ({ card, indexCard }) => {
   const [isModal, setIsModal] = useState(false);
 
   //STATE - stocking the different editions that are provided in the modal
-  const [editionInformations, setEditionInformation] = useState();
+  const [editionInformations, setEditionInformation] = useState([]);
 
   //STATE - knowing if a card has just been deleted
   const [cardHasBeenDeleted, setCardHasBeenDeleted] = useState(false);

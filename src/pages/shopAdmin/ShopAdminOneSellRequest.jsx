@@ -103,7 +103,7 @@ const ShopAdminOneSellRequest = ({ match }) => {
   return (
     <>
       <div className="container">
-        <h1>One Sell Request</h1>
+        <h1>Rachat n°{id}</h1>
         <div className="customer-infos">
           <div className="customer-left-part">
             <p>
