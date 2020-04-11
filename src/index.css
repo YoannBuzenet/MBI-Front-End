@@ -699,6 +699,7 @@ div.connect p {
   left: 0;
   height: 100px;
   border-top: 1px solid lightgrey;
+  z-index: 1;
 }
 
 .footer-container {
@@ -1034,24 +1035,19 @@ tbody.cardLineShop {
 
 .MKM-connection-modal {
   position: fixed;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
-}
-
-.MKM-connection-modal > div {
-  position: fixed;
   left: 10%;
   right: 10%;
   top: 10%;
   bottom: 25%;
   padding: 6rem;
-  z-index: 2;
   /* background-color: var(--background-color); */
   background-color: white;
   border-radius: 8px;
   box-shadow: 2px 2px 3px black;
+  z-index: 2;
+}
+
+.MKM-connection-modal > div {
 }
 
 .mkm-modal-container {
@@ -1096,13 +1092,15 @@ tbody.cardLineShop {
   box-shadow: 1px 1px 1px black;
 }
 
-.MKM-connection-modal > div .syncronization-button:hover .button-content {
-}
-.MKM-connection-modal > div .syncronization-button:hover .sync-symbol {
-}
-
 .mkm_link_auth {
   margin-top: -10px;
+}
+.mkm_link_auth a {
+  text-decoration: none;
+  color: black;
+}
+.mkm_link_auth a:hover {
+  text-decoration: underline;
 }
 
 .MKM-connection-modal > div .syncronization-button .sync-symbol {
@@ -1111,9 +1109,48 @@ tbody.cardLineShop {
   font-size: 3rem;
 }
 
+@media only screen and (max-width: 1200px) {
+  .MKM-connection-modal {
+    padding: 5rem;
+  }
+  .mkm-modal-container {
+    padding: 0 10rem;
+  }
+}
+
 @media only screen and (max-width: 1000px) {
-  .MKM-connection-modal > div {
-    width: 60%;
+  .MKM-connection-modal {
+    padding: 5rem;
+  }
+  .mkm-modal-container {
+    padding: 0 10rem;
+  }
+}
+@media only screen and (max-width: 900px) {
+  .MKM-connection-modal {
+    padding: 4rem;
+  }
+  .mkm-modal-container {
+    padding: 0 8rem;
+  }
+}
+@media only screen and (max-width: 800px) {
+  .mkm-modal-container {
+    padding: 0rem;
+  }
+}
+@media only screen and (max-width: 700px) {
+  .mkm-modal-container {
+    padding: 0 5rem;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .MKM-connection-modal {
+    padding: 3rem;
+  }
+  .mkm-modal-container {
+    padding: 0 2rem;
   }
 }
 

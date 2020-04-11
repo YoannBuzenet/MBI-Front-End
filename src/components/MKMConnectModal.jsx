@@ -8,6 +8,13 @@ const MKMConnectModal = (props) => {
     AuthContext
   );
 
+  const handleClick = (event) => {
+    //récupérer les infos sur l'API
+    console.log(
+      "récupération des infos de l API, mise à jour de la session, disparition de cette fenetre"
+    );
+  };
+
   return (
     <div className="MKM-connection-modal">
       <div>
@@ -25,25 +32,27 @@ const MKMConnectModal = (props) => {
               }
               target="_blank"
             >
-              &#8594; Clique ici
+              &#8594; Cliquez ici &#8592;
             </a>
           </p>
           <div className="MKM-rule">
             <span className="styled-ol-number">2.</span>
             <p>
-              Une fois l'authentification réussie, tu seras redirigé sur
-              www.mtgInterface.com. Connecte toi sur ce site.
+              Une fois l'authentification réussie, vous serez redirigé sur
+              www.mtgInterface.com. Merci de vous identifier.
             </p>
           </div>
           <div className="MKM-rule">
             <span className="styled-ol-number">3.</span>
             <p>
               Une fois identifié avec le message de validation sur
-              www.mtgInterface.com, tu n'as plus qu'à cliquer sur ce bouton
-              ci-dessous.
+              www.mtgInterface.com, il n'y a plus qu'à synchroniser.
             </p>
           </div>
-          <p className="syncronization-button">
+          <p
+            className="syncronization-button"
+            onClick={(event) => handleClick(event)}
+          >
             <span className="sync-symbol">&#8634;</span>
             <span className="button-content">Synchroniser tous les sites</span>
           </p>
