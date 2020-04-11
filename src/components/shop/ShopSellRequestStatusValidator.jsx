@@ -125,7 +125,9 @@ const ShopSellRequestStatusValidator = (props) => {
         );
       }
     } else {
-      console.log("you can't send to mkm bro");
+      toast.info(
+        "Merci de suivre la procédure de synchronisation. Vous pourrez ensuite valider votre rachat."
+      );
       setIsBlackDivModalDisplayed("activated");
       setIsMKMModalDisplayed("activated");
     }

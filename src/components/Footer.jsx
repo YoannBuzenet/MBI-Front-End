@@ -1,6 +1,12 @@
 import React from "react";
+import shopInfoContext from "../context/publicShopInfoContext";
+import { useContext } from "react";
 
-const Footer = props => {
+const Footer = (props) => {
+  const { shopInfos, setShopInfos } = useContext(shopInfoContext);
+
+  console.log(shopInfos);
+
   return (
     <>
       <footer className="footer">

@@ -26,9 +26,16 @@ function updateFields(fieldObject, shopID) {
   return axios.put(config.URL_API + "/usersShop/" + shopID, fieldObject);
 }
 
+function getPublicInfos() {
+  return axios
+    .get(config.URL_API + "/shopInfos/" + config.shopID)
+    .then((data) => data.data);
+}
+
 export default {
   updatePercentPerLang,
   updatePercentPerCondition,
   updatePercentPerConditionFoil,
-  updateFields
+  updateFields,
+  getPublicInfos,
 };

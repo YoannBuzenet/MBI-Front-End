@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 import "react-super-responsive-table/dist/SuperResponsiveTableStyle.css";
 
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import SellingBasketAPI from "./services/sellingBasketAPI";
@@ -23,6 +23,7 @@ import cardsOneSetContext from "./context/cardsOneSetContext";
 import BlackDivModal from "./context/blackDivModalContext";
 import CardDisplayOnPageContext from "./context/cardDisplayOnPageContext";
 import MKMModalContext from "./context/mkmModalConnectionContext";
+import shopPublicInfoContext from "./context/publicShopInfoContext";
 
 import {
   BrowserRouter as Router,
@@ -59,6 +60,7 @@ import CardPlainPage from "./components/CardPlainPage";
 import BurgerMenuShop from "./components/shop/BurgerMenuShop";
 import BurgerMenuCustomerComponents from "./components/BurgerMenuCustomerComponents";
 import MKMConnectModal from "./components/MKMConnectModal";
+import shopAPI from "./services/shopAPI";
 
 //Really Useful library to check all rerenders made on ALL components (you can setup it to check just one)
 // if (process.env.NODE_ENV === "development") {
@@ -70,7 +72,7 @@ import MKMConnectModal from "./components/MKMConnectModal";
 
 function App() {
   //Checking is the JWT token is still good, if yes, Keep it in Axios
-  const didGetTokenBack = AuthAPI.setup();
+  AuthAPI.setup();
 
   //APP INITIALIZATION USE EFFECT
   useEffect(() => {
@@ -78,11 +80,13 @@ function App() {
     const allSets = SetsAPI.findAll();
     const allLangs = genericCardCharacteristicsAPI.getAllLang();
     const allConditions = genericCardCharacteristicsAPI.getAllConditions();
-    Promise.all([allSets, allLangs, allConditions]).then(
-      ([allSets, allLangs, allConditions]) => {
+    const publicShopInfos = shopAPI.getPublicInfos();
+    Promise.all([allSets, allLangs, allConditions, publicShopInfos]).then(
+      ([allSets, allLangs, allConditions, publicShopInfos]) => {
         setAllSets(allSets);
         setLangDefinition(allLangs);
         setConditionDefinition(allConditions);
+        setShopInfos(publicShopInfos);
       }
     );
     //Get the optional saved Selling Basket saved in Localstorage
@@ -105,6 +109,9 @@ function App() {
 
   // STATE Creating the conditions definition state
   const [conditionDefinition, setConditionDefinition] = useState({});
+
+  // STATE Storing Shop Public Infos
+  const [shopInfos, setShopInfos] = useState({});
 
   // STATE Creating the Sell Request Basket state
   const [currentBasket, setCurrentBasket] = useState([]);
@@ -188,6 +195,12 @@ function App() {
   const contextCardsOneSet = {
     cardsContext: cardsContext,
     setCardsContext: setCardsContext,
+  };
+
+  //CONTEXT CREATION - Cards displayed in OneSet Page
+  const contextShopPublicInfos = {
+    shopInfos: shopInfos,
+    setShopInfos: setShopInfos,
   };
 
   // Each time the currentBasket (which stores what we want to sell) is updated, we save it in Local storage.
@@ -315,176 +328,183 @@ function App() {
               <CanSubmitContext.Provider value={contextSubmit}>
                 <SellRequestContext.Provider value={contextAdminSellRequest}>
                   <BlackDivModal.Provider value={contextBlackDiv}>
-                    <CardDisplayOnPageContext.Provider
-                      value={contextCardDisplayed}
+                    <shopPublicInfoContext.Provider
+                      value={contextShopPublicInfos}
                     >
-                      <MKMModalContext.Provider
-                        value={contextMKMConnectionModal}
+                      <CardDisplayOnPageContext.Provider
+                        value={contextCardDisplayed}
                       >
-                        <Router>
-                          <isResponsiveMenuDisplayedContext.Provider
-                            value={contextResponsiveMenuDisplayed}
-                          >
-                            {/* Absolute positioned components */}
-                            {isBlackDivModalDisplayed === "activated" && (
-                              <BlackDiv />
-                            )}
+                        <MKMModalContext.Provider
+                          value={contextMKMConnectionModal}
+                        >
+                          <Router>
+                            <isResponsiveMenuDisplayedContext.Provider
+                              value={contextResponsiveMenuDisplayed}
+                            >
+                              {/* Absolute positioned components */}
+                              {isBlackDivModalDisplayed === "activated" && (
+                                <BlackDiv />
+                              )}
 
-                            {cardDisplayInformation.isDisplayed && (
-                              <CardPlainPage />
-                            )}
+                              {cardDisplayInformation.isDisplayed && (
+                                <CardPlainPage />
+                              )}
 
-                            {isMKMModalDisplayed === "activated" && (
-                              <MKMConnectModal />
-                            )}
+                              {isMKMModalDisplayed === "activated" && (
+                                <MKMConnectModal />
+                              )}
 
-                            {/* CHOOSING WHICH BURGER MENU DISPLAY */}
-                            {/* DEPENDING ON IF SHOP OR NOT*/}
-                            {isResponsiveMenuDisplayed === "activated" &&
-                              !authenticationInfos.user.roles.includes(
-                                "ROLE_SHOP"
-                              ) && <BurgerMenuCustomerComponents />}
+                              {/* CHOOSING WHICH BURGER MENU DISPLAY */}
+                              {/* DEPENDING ON IF SHOP OR NOT*/}
+                              {isResponsiveMenuDisplayed === "activated" &&
+                                !authenticationInfos.user.roles.includes(
+                                  "ROLE_SHOP"
+                                ) && <BurgerMenuCustomerComponents />}
 
-                            {isResponsiveMenuDisplayed === "activated" &&
+                              {isResponsiveMenuDisplayed === "activated" &&
+                                authenticationInfos.user.roles.includes(
+                                  "ROLE_SHOP"
+                                ) && <BurgerMenuShop />}
+
+                              {/* CHOOSING WHICH NAVBAR DISPLAY */}
+                              {/* DEPENDING ON IF SHOP OR NOT*/}
+
+                              {authenticationInfos.user.roles &&
                               authenticationInfos.user.roles.includes(
                                 "ROLE_SHOP"
-                              ) && <BurgerMenuShop />}
-
-                            {/* CHOOSING WHICH NAVBAR DISPLAY */}
-                            {/* DEPENDING ON IF SHOP OR NOT*/}
-
-                            {authenticationInfos.user.roles &&
-                            authenticationInfos.user.roles.includes(
-                              "ROLE_SHOP"
-                            ) ? (
-                              <ShopNavbarWithRouter />
-                            ) : (
-                              <NavbarWithRouter />
-                            )}
-                          </isResponsiveMenuDisplayedContext.Provider>
-                          <ToastContainer
-                            autoClose={3000}
-                            position="bottom-left"
-                            hideProgressBar={true}
-                          />
-                          <Footer />
-                          <Switch>
-                            <Route
-                              path="/"
-                              exact
-                              render={(props) => (
-                                <Homepage
-                                  handleAddSellingBasket={
-                                    handleAddSellingBasket
-                                  }
-                                />
+                              ) ? (
+                                <ShopNavbarWithRouter />
+                              ) : (
+                                <NavbarWithRouter />
                               )}
+                            </isResponsiveMenuDisplayedContext.Provider>
+                            <ToastContainer
+                              autoClose={3000}
+                              position="bottom-left"
+                              hideProgressBar={true}
                             />
-
-                            <Route
-                              path="/sets/:id"
-                              render={({ match }) => (
-                                <cardsOneSetContext.Provider
-                                  value={contextCardsOneSet}
-                                >
-                                  <OneSet
+                            <Footer />
+                            <Switch>
+                              <Route
+                                path="/"
+                                exact
+                                render={(props) => (
+                                  <Homepage
                                     handleAddSellingBasket={
                                       handleAddSellingBasket
                                     }
-                                    match={match}
                                   />
-                                </cardsOneSetContext.Provider>
-                              )}
-                            />
-
-                            <Route path="/login" component={LoginPage} />
-
-                            <Route
-                              path="/card/:cardName"
-                              render={({ match, history }) => (
-                                <CardPage
-                                  match={match}
-                                  history={history}
-                                  handleAddSellingBasket={
-                                    handleAddSellingBasket
-                                  }
-                                />
-                              )}
-                            />
-
-                            <Route path="/register" component={RegisterPage} />
-
-                            <Route
-                              path="/my_selling_basket"
-                              render={({ match, history }) => (
-                                <MySellingBasket
-                                  checkForDuplicates={checkForDuplicates}
-                                  match={match}
-                                  history={history}
-                                />
-                              )}
-                            />
-                            <LoggedRoute
-                              path="/my_sell_requests/:id"
-                              component={OneSellRequest}
-                            />
-                            <LoggedRoute
-                              path="/my_sell_requests"
-                              component={mySellRequests}
-                            />
-                            <LoggedRoute
-                              path="/my_account"
-                              component={myAccount}
-                            />
-
-                            {/* Admin Part */}
-
-                            <LoggedShopRouteRender
-                              path="/shopadmin/sell_requests/:id"
-                              component={ShopAdminOneSellRequest}
-                            />
-                            <LoggedShopRouteRender
-                              path="/shopadmin/sell_requests"
-                              component={ShopAdminAllSellRequests}
-                            />
-                            <LoggedShopRouteRender
-                              path="/shopadmin/customers/:id"
-                              component={ShopAdminCustomer}
-                            />
-                            <LoggedShopRouteRender
-                              path="/shopadmin/customers"
-                              component={ShopAdminAllCustomers}
-                            />
-                            <LoggedShopRouteComponent
-                              path="/shopadmin/cards"
-                              component={ShopAdminCards}
-                            />
-                            <LoggedShopRouteRender
-                              path="/shopadmin/settings"
-                              component={ShopAdminSettings}
-                            />
-                            <LoggedShopRouteRender
-                              path="/shopadmin/shopInfos"
-                              component={MyShopAccount}
-                            />
-
-                            <PriceBufferContext.Provider
-                              value={contextPriceBuffer}
-                            >
-                              <LoggedShopRouteRender
-                                path="/shopadmin/card/:name"
-                                component={ShopAdminOneCard}
+                                )}
                               />
-                            </PriceBufferContext.Provider>
 
-                            <LoggedShopRouteComponent
-                              path="/shopadmin"
-                              component={ShopAdminHome}
-                            />
-                          </Switch>
-                        </Router>
-                      </MKMModalContext.Provider>
-                    </CardDisplayOnPageContext.Provider>
+                              <Route
+                                path="/sets/:id"
+                                render={({ match }) => (
+                                  <cardsOneSetContext.Provider
+                                    value={contextCardsOneSet}
+                                  >
+                                    <OneSet
+                                      handleAddSellingBasket={
+                                        handleAddSellingBasket
+                                      }
+                                      match={match}
+                                    />
+                                  </cardsOneSetContext.Provider>
+                                )}
+                              />
+
+                              <Route path="/login" component={LoginPage} />
+
+                              <Route
+                                path="/card/:cardName"
+                                render={({ match, history }) => (
+                                  <CardPage
+                                    match={match}
+                                    history={history}
+                                    handleAddSellingBasket={
+                                      handleAddSellingBasket
+                                    }
+                                  />
+                                )}
+                              />
+
+                              <Route
+                                path="/register"
+                                component={RegisterPage}
+                              />
+
+                              <Route
+                                path="/my_selling_basket"
+                                render={({ match, history }) => (
+                                  <MySellingBasket
+                                    checkForDuplicates={checkForDuplicates}
+                                    match={match}
+                                    history={history}
+                                  />
+                                )}
+                              />
+                              <LoggedRoute
+                                path="/my_sell_requests/:id"
+                                component={OneSellRequest}
+                              />
+                              <LoggedRoute
+                                path="/my_sell_requests"
+                                component={mySellRequests}
+                              />
+                              <LoggedRoute
+                                path="/my_account"
+                                component={myAccount}
+                              />
+
+                              {/* Admin Part */}
+
+                              <LoggedShopRouteRender
+                                path="/shopadmin/sell_requests/:id"
+                                component={ShopAdminOneSellRequest}
+                              />
+                              <LoggedShopRouteRender
+                                path="/shopadmin/sell_requests"
+                                component={ShopAdminAllSellRequests}
+                              />
+                              <LoggedShopRouteRender
+                                path="/shopadmin/customers/:id"
+                                component={ShopAdminCustomer}
+                              />
+                              <LoggedShopRouteRender
+                                path="/shopadmin/customers"
+                                component={ShopAdminAllCustomers}
+                              />
+                              <LoggedShopRouteComponent
+                                path="/shopadmin/cards"
+                                component={ShopAdminCards}
+                              />
+                              <LoggedShopRouteRender
+                                path="/shopadmin/settings"
+                                component={ShopAdminSettings}
+                              />
+                              <LoggedShopRouteRender
+                                path="/shopadmin/shopInfos"
+                                component={MyShopAccount}
+                              />
+
+                              <PriceBufferContext.Provider
+                                value={contextPriceBuffer}
+                              >
+                                <LoggedShopRouteRender
+                                  path="/shopadmin/card/:name"
+                                  component={ShopAdminOneCard}
+                                />
+                              </PriceBufferContext.Provider>
+
+                              <LoggedShopRouteComponent
+                                path="/shopadmin"
+                                component={ShopAdminHome}
+                              />
+                            </Switch>
+                          </Router>
+                        </MKMModalContext.Provider>
+                      </CardDisplayOnPageContext.Provider>
+                    </shopPublicInfoContext.Provider>
                   </BlackDivModal.Provider>
                 </SellRequestContext.Provider>
               </CanSubmitContext.Provider>
