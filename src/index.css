@@ -1096,6 +1096,7 @@ tbody.cardLineShop {
 
 .edition-modal {
   position: absolute;
+  border-radius: 5px;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -1103,6 +1104,15 @@ tbody.cardLineShop {
   height: 200px;
   width: 200px;
   background-color: white;
+}
+
+.edition-modal-loader {
+  margin-top: 4rem;
+}
+
+.edition-modal > div {
+}
+.edition-modal select {
 }
 
 .blackSheet {
