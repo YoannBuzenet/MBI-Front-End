@@ -1,10 +1,11 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import MKMAPI from "../services/MKMAPI";
 import AuthContext from "../context/authContext";
 import authAPI from "../services/authAPI";
 import { toast } from "react-toastify";
 import MKM_ModalContext from "../context/mkmModalConnectionContext";
 import BlackDivContext from "../context/blackDivModalContext";
+import CSSLoaderWaitingSpiral from "./loaders/CSSLoaderWaitingSpiral";
 
 const MKMConnectModal = (props) => {
   //Current Authentication
@@ -20,33 +21,41 @@ const MKMConnectModal = (props) => {
     BlackDivContext
   );
 
-  const handleClick = (event) => {
-    //Loading animation ?
+  //Loading
+  const [isLoading, setIsLoading] = useState(false);
 
+  const handleClick = (event) => {
     //Get info back from API to update MKM info on session to be able to do MKM API calls
     authAPI
       .refreshTokenAndInfos(authenticationInfos.refresh_token)
       .then((data) => {
         //Checker si la date de réception en session est VALIDE
         console.log(data);
-        const authenticationInfoCopy = { ...authenticationInfos };
-        authenticationInfoCopy.shop.accesToken = "updated";
-        authenticationInfoCopy.shop.accesSecret = "updated";
-        authenticationInfoCopy.shop.dateReceptionMKMToken = "updated";
-        setAuthenticationInfos(authenticationInfoCopy);
-        setIsMKMModalDisplayed("deactivated");
-        setIsBlackDivModalDisplayed("deactivated");
-
-        //Animation de validation ?
-
-        return console.log(data);
+        if (data.data.shop.dateReceptionMKMToken) {
+          const authenticationInfoCopy = { ...authenticationInfos };
+          authenticationInfoCopy.shop.accesToken = "updated";
+          authenticationInfoCopy.shop.accesSecret = "updated";
+          authenticationInfoCopy.shop.dateReceptionMKMToken = "updated";
+          setAuthenticationInfos(authenticationInfoCopy);
+          setIsMKMModalDisplayed("deactivated");
+          setIsBlackDivModalDisplayed("deactivated");
+          setIsLoading(false);
+          toast.success("Vous êtes bien connecté à MKM.");
+        } else {
+          setIsLoading(false);
+          toast.error(
+            "Les données ne sont pas à jour. Merci de bien suivre les étapes."
+          );
+        }
       })
       .catch((err) => {
         toast.error(
           "Une erreur s'est produite. Merci de recommencer. En cas d'erreur prolongée, merci de contacter le support."
         );
+        setIsLoading(false);
         return console.log(err);
       });
+    setIsLoading(false);
   };
 
   return (
@@ -83,13 +92,27 @@ const MKMConnectModal = (props) => {
               www.mtgInterface.com, il n'y a plus qu'à synchroniser.
             </p>
           </div>
-          <p
+          <div
             className="syncronization-button"
-            onClick={(event) => handleClick(event)}
+            onClick={(event) => {
+              handleClick(event);
+              return setIsLoading(true);
+            }}
           >
-            <span className="sync-symbol">&#8634;</span>
-            <span className="button-content">Synchroniser tous les sites</span>
-          </p>
+            {isLoading && (
+              <span className="CSS-Loader-MKM">
+                <CSSLoaderWaitingSpiral />
+              </span>
+            )}
+            {!isLoading && (
+              <>
+                <span className="sync-symbol">&#8634;</span>
+                <span className="button-content">
+                  Synchroniser tous les sites
+                </span>
+              </>
+            )}
+          </div>
         </div>
       </div>
     </div>
