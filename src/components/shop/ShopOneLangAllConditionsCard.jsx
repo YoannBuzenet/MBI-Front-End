@@ -1,15 +1,9 @@
 import React, { useContext, useState } from "react";
-import GenericCardInfosContext from "../../context/genericCardInfosContext";
 import ShopConditionPriceUpdate from "./ShopConditionPriceUpdate";
 import priceBufferContext from "../../context/priceBufferContext";
 import { useEffect } from "react";
 
-const ShopOneLangAllConditionsCard = ({
-  oneLang,
-  isFoil,
-  index,
-  variation
-}) => {
+const ShopOneLangAllConditionsCard = ({ oneLang, index }) => {
   //Context - building the memoization of all condition/lang possibilities
   const { allPricesBuffer } = useContext(priceBufferContext);
 
@@ -57,7 +51,7 @@ const ShopOneLangAllConditionsCard = ({
               idCardShopPrice:
                 context[index].langs[idLang][conditionKey][
                   isSignedFALSE + "idCardShopPrice"
-                ]
+                ],
             });
           }
         }
@@ -95,7 +89,7 @@ const ShopOneLangAllConditionsCard = ({
               idCardShopPrice:
                 context[index].langs[idLang][conditionKey][
                   isFoilKey + "idCardShopPrice"
-                ]
+                ],
             });
           }
         }
@@ -128,7 +122,7 @@ const ShopOneLangAllConditionsCard = ({
               isFoilKey: parseInt(isFoilKey),
               isSignedKey: isSignedFALSE,
               priceValue: priceValue,
-              cardID: context[index].id
+              cardID: context[index].id,
             });
           }
         }
@@ -161,7 +155,7 @@ const ShopOneLangAllConditionsCard = ({
               isFoilKey: parseInt(isFoilKey),
               isSignedKey: isSignedTRUE,
               priceValue: priceValue,
-              cardID: context[index].id
+              cardID: context[index].id,
             });
           }
         }
@@ -214,7 +208,7 @@ const ShopOneLangAllConditionsCard = ({
           {nonFoilNonSignedArray.length > 0 && <p>Non Foil</p>}
 
           {nonFoilNonSignedArray.length !== 0 &&
-            nonFoilNonSignedArray.map(infoContainer => {
+            nonFoilNonSignedArray.map((infoContainer) => {
               return (
                 <ShopConditionPriceUpdate
                   key={parseInt(
@@ -238,7 +232,7 @@ const ShopOneLangAllConditionsCard = ({
             })}
           {nonFoilSignedArray.length > 0 && <p>Signé</p>}
           {nonFoilSignedArray.length !== 0 &&
-            nonFoilSignedArray.map(infoContainer => {
+            nonFoilSignedArray.map((infoContainer) => {
               return (
                 <ShopConditionPriceUpdate
                   key={parseInt(
@@ -265,7 +259,7 @@ const ShopOneLangAllConditionsCard = ({
           {foilNonSignedArray.length > 0 && <p>Foil</p>}
 
           {foilNonSignedArray.length !== 0 &&
-            foilNonSignedArray.map(infoContainer => {
+            foilNonSignedArray.map((infoContainer) => {
               return (
                 <ShopConditionPriceUpdate
                   key={parseInt(
@@ -289,7 +283,7 @@ const ShopOneLangAllConditionsCard = ({
             })}
           {foilSignedArray.length > 0 && <p>Signé</p>}
           {foilSignedArray.length !== 0 &&
-            foilSignedArray.map(infoContainer => {
+            foilSignedArray.map((infoContainer) => {
               return (
                 <ShopConditionPriceUpdate
                   key={parseInt(

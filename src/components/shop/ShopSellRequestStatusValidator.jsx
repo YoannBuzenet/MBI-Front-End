@@ -3,11 +3,25 @@ import AdminSellRequestContext from "../../context/adminSellRequestContext";
 import sellRequestAPI from "../../services/sellRequestAPI";
 import { toast } from "react-toastify";
 import MKMAPI from "../../services/MKMAPI";
+import AuthContext from "../../context/authContext";
+import MKM_ModalContext from "../../context/mkmModalConnectionContext";
+import BlackDivContext from "../../context/blackDivModalContext";
 
-const ShopSellRequestStatusValidator = props => {
+const ShopSellRequestStatusValidator = (props) => {
   const { currentAdminSellRequest, setCurrentAdminSellRequest } = useContext(
     AdminSellRequestContext
   );
+
+  //Current Authentication
+  const { authenticationInfos, setAuthenticationInfos } = useContext(
+    AuthContext
+  );
+
+  //MKM Modal Control
+  const { setIsMKMModalDisplayed } = useContext(MKM_ModalContext);
+
+  //Black Div Control
+  const { setIsBlackDivModalDisplayed } = useContext(BlackDivContext);
 
   const [availableOptions, setAvailableOptions] = useState([]);
 
@@ -48,76 +62,85 @@ const ShopSellRequestStatusValidator = props => {
       setAvailableOptions([
         {
           status: "Reçu",
-          value: "dateRecu"
+          value: "dateRecu",
         },
         {
           status: "En traitement",
-          value: "dateProcessing"
+          value: "dateProcessing",
         },
         {
           status: "En attente de validation client",
-          value: "dateApprovalPending"
-        }
+          value: "dateApprovalPending",
+        },
       ]);
     } else if (currentStatus === "Reçu") {
       setAvailableOptions([
         {
           status: "En traitement",
-          value: "dateProcessing"
+          value: "dateProcessing",
         },
         {
           status: "En attente de validation client",
-          value: "dateApprovalPending"
-        }
+          value: "dateApprovalPending",
+        },
       ]);
     } else if (currentStatus === "En traitement") {
       setAvailableOptions([
         {
           status: "En attente de validation client",
-          value: "dateApprovalPending"
-        }
+          value: "dateApprovalPending",
+        },
       ]);
     }
   }, [currentStatus, currentAdminSellRequest]);
 
-  const validateSellRequest = async () => {
+  const validateSellRequest = async (event) => {
     // console.log("le rachat va etre validé");
-    const newData = {
-      dateValidated: new Date()
-    };
-    try {
-      const API_update = await sellRequestAPI.updateAsShop(
-        currentAdminSellRequest.id,
-        newData
-      );
-      console.log("api update ok");
-      const session_update = await setCurrentAdminSellRequest({
-        ...currentAdminSellRequest,
-        dateValidated: API_update.data.dateValidated
-      });
-      console.log("session update ok");
-      const MKM_update = await MKMAPI.transformSellRequestIntoXML(
-        currentAdminSellRequest
-      );
-      console.log("mkm prévenu");
-      console.log(MKM_update);
-    } catch (error) {
-      toast.error(
-        "Le rachat n'a pu être validé. Merci de recommencer ultérieurement."
-      );
+
+    //TODO : CHECK IS MKM CREDENTIALS ARE UP TO DATE
+    //CHECK IF DATE IS STILL VALID
+    if (authenticationInfos.shop.dateReceptionMKMToken) {
+      const newData = {
+        dateValidated: new Date(),
+      };
+      try {
+        const API_update = await sellRequestAPI.updateAsShop(
+          currentAdminSellRequest.id,
+          newData
+        );
+        console.log("api update ok");
+
+        setCurrentAdminSellRequest({
+          ...currentAdminSellRequest,
+          dateValidated: API_update.data.dateValidated,
+        });
+        console.log("session update ok");
+
+        //TODO - CHECK XML IS WELL FORMED AND SENT TO MKM
+        MKMAPI.transformSellRequestIntoXML(currentAdminSellRequest);
+        console.log("mkm prévenu");
+      } catch (error) {
+        toast.error(
+          "Le rachat n'a pu être validé. Merci de recommencer ultérieurement."
+        );
+      }
+    } else {
+      console.log("you can't send to mkm bro");
+      setIsBlackDivModalDisplayed("activated");
+      setIsMKMModalDisplayed("activated");
     }
   };
 
   const cancelSellRequest = () => {
     const newData = {
-      dateCanceled: new Date()
+      dateCanceled: new Date(),
     };
     sellRequestAPI
       .updateAsShop(currentAdminSellRequest.id, newData)
-      .then(data => {
+      .then((data) => {
         setCurrentAdminSellRequest({
           ...currentAdminSellRequest,
-          dateCanceled: data.data.dateCanceled
+          dateCanceled: data.data.dateCanceled,
         });
       });
   };
@@ -127,15 +150,15 @@ const ShopSellRequestStatusValidator = props => {
     // console.log(value);
 
     const newData = {
-      [value]: new Date()
+      [value]: new Date(),
     };
 
     sellRequestAPI
       .updateAsShop(currentAdminSellRequest.id, newData)
-      .then(data => {
+      .then((data) => {
         setCurrentAdminSellRequest({
           ...currentAdminSellRequest,
-          [value]: data.data[value]
+          [value]: data.data[value],
         });
         // console.log(data.data);
         // console.log(data.data[value]);
@@ -152,7 +175,7 @@ const ShopSellRequestStatusValidator = props => {
       {availableOptions.length > 0 && (
         <select
           value="default"
-          onChange={event => {
+          onChange={(event) => {
             handleChange(event);
           }}
         >
@@ -169,7 +192,9 @@ const ShopSellRequestStatusValidator = props => {
       )}
       {currentStatus !== "Validé" && currentStatus !== "Cancelled" && (
         <>
-          <button onClick={validateSellRequest}>Valider</button>
+          <button onClick={(event) => validateSellRequest(event)}>
+            Valider
+          </button>
           <button onClick={cancelSellRequest}>Annuler</button>
         </>
       )}
