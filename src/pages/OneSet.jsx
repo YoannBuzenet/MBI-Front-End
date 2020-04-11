@@ -9,6 +9,8 @@ import cardsOneSetContext from "../context/cardsOneSetContext";
 import axios from "axios";
 import OneSetLoader from "../components/loaders/OneSetLoader";
 import { isMobile } from "react-device-detect";
+import OneColumnLoader from "../components/loaders/OneColumnLoader";
+import SetListLoader from "../components/loaders/SetListLoader";
 
 const OneSet = ({ handleAddSellingBasket, match }) => {
   //Current Cards displayed in One Set Page
@@ -87,12 +89,13 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
   //Fetching data when component is mounted
 
   useEffect(() => {
-    setIsLoading(true);
     const CancelToken = axios.CancelToken;
     const source = CancelToken.source();
 
     //We get the current set Name if all the sets are loaded
     if (allSets.length > 0) {
+      setIsLoading(true);
+
       const currentSet = allSets.find((element) => element.id == idSet);
       console.log(currentSet);
       setSetName(currentSet.name);
@@ -134,6 +137,8 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
     }
   }, [cardsContext, buildContextFromAPIResponse]);
 
+  console.log(isMobile);
+
   return (
     <>
       <div className="container">
@@ -142,6 +147,11 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
           <div className="last-modification">
             <h1>{setName}</h1>
             {isLoading && !isMobile && <OneSetLoader />}
+            {isLoading && isMobile && (
+              <>
+                <SetListLoader /> <SetListLoader />
+              </>
+            )}
             {!isLoading && (
               <Table className="zebra-table">
                 <Thead>
