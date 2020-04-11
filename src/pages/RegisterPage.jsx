@@ -17,7 +17,6 @@ const RegisterPage = ({ history }) => {
   });
 
   const handleSubmit = async (event) => {
-    history.replace("/");
     event.preventDefault();
 
     try {
@@ -43,7 +42,17 @@ const RegisterPage = ({ history }) => {
       history.replace("/");
     } catch (error) {
       console.log(error);
-      toast.error("Une erreur est survenue. Merci de réessayer.");
+      if (error.response) {
+        // console.log(error.response.data["hydra:description"]);
+        if (
+          error.response.data["hydra:description"] ===
+          "email: This value is already used."
+        ) {
+          toast.error("Cet email est déjà pris.");
+        } else {
+          toast.error("Une erreur est survenue. Merci de réessayer.");
+        }
+      }
     }
   };
 
@@ -61,13 +70,13 @@ const RegisterPage = ({ history }) => {
     <>
       <div className="container my-account">
         <h1>S'inscrire</h1>
-        <form action="" onSubmit={handleSubmit}>
+        <form onSubmit={(event) => handleSubmit(event)}>
           <Field
             name="mail"
             type="mail"
             id="mail"
             required
-            onChange={handleChange}
+            onChange={(event) => handleChange(event)}
             label="Email"
           />
 
@@ -76,7 +85,7 @@ const RegisterPage = ({ history }) => {
             type="password"
             id="password"
             required
-            onChange={handleChange}
+            onChange={(event) => handleChange(event)}
             label="Mot de Passe"
           />
 
@@ -85,7 +94,7 @@ const RegisterPage = ({ history }) => {
             id="firstName"
             name="firstName"
             required
-            onChange={handleChange}
+            onChange={(event) => handleChange(event)}
             label="Prénom"
           />
 
@@ -94,7 +103,7 @@ const RegisterPage = ({ history }) => {
             id="lastName"
             name="lastName"
             required
-            onChange={handleChange}
+            onChange={(event) => handleChange(event)}
             label="Nom de Famille"
           />
 
@@ -103,18 +112,19 @@ const RegisterPage = ({ history }) => {
             id="tel"
             name="tel"
             required
-            onChange={handleChange}
+            onChange={(event) => handleChange(event)}
             label="Telephone"
           />
 
           <label htmlFor="adress">Adresse</label>
           <textarea
+            className="my-account"
             name="adress"
             id="adress"
             cols="22"
             rows="3"
             required
-            onChange={handleChange}
+            onChange={(event) => handleChange(event)}
           ></textarea>
 
           <Field
@@ -122,7 +132,7 @@ const RegisterPage = ({ history }) => {
             type="text"
             id="postalCode"
             required
-            onChange={handleChange}
+            onChange={(event) => handleChange(event)}
             label="Code Postal"
           />
 
@@ -131,7 +141,7 @@ const RegisterPage = ({ history }) => {
             type="text"
             id="town"
             required
-            onChange={handleChange}
+            onChange={(event) => handleChange(event)}
             label="Ville"
           />
 
