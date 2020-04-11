@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import userAPI from "../services/userAPI";
 import Field from "../components/forms/Field";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import config from "../services/config";
+import CSSLoaderWaitingSpiral from "../components/loaders/CSSLoaderWaitingSpiral";
 
 const RegisterPage = ({ history }) => {
   const [credentials, setCredentials] = useState({
@@ -16,7 +17,10 @@ const RegisterPage = ({ history }) => {
     town: "",
   });
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const handleSubmit = async (event) => {
+    setIsLoading(true);
     event.preventDefault();
 
     try {
@@ -38,11 +42,11 @@ const RegisterPage = ({ history }) => {
       toast.success("Votre compte a bien été créé.");
 
       // console.log(jsonToSend);
-
+      setIsLoading(false);
       history.replace("/");
     } catch (error) {
-      console.log(error);
       if (error.response) {
+        setIsLoading(false);
         // console.log(error.response.data["hydra:description"]);
         if (
           error.response.data["hydra:description"] ===
@@ -50,6 +54,7 @@ const RegisterPage = ({ history }) => {
         ) {
           toast.error("Cet email est déjà pris.");
         } else {
+          console.log(error.response.data);
           toast.error("Une erreur est survenue. Merci de réessayer.");
         }
       }
@@ -73,7 +78,7 @@ const RegisterPage = ({ history }) => {
         <form onSubmit={(event) => handleSubmit(event)}>
           <Field
             name="mail"
-            type="mail"
+            type="email"
             id="mail"
             required
             onChange={(event) => handleChange(event)}
@@ -144,10 +149,16 @@ const RegisterPage = ({ history }) => {
             onChange={(event) => handleChange(event)}
             label="Ville"
           />
-
-          <button type="submit" className="connecting-button">
-            S'inscrire
-          </button>
+          {isLoading && (
+            <div className="RegisterLoader">
+              <CSSLoaderWaitingSpiral />
+            </div>
+          )}
+          {!isLoading && (
+            <button type="submit" className="connecting-button">
+              S'inscrire
+            </button>
+          )}
         </form>
       </div>
     </>
