@@ -7,42 +7,43 @@ import MKM_ModalContext from "../context/mkmModalConnectionContext";
 import BlackDivContext from "../context/blackDivModalContext";
 import CSSLoaderWaitingSpiral from "./loaders/CSSLoaderWaitingSpiral";
 
-const MKMConnectModal = (props) => {
+const MKMConnectModal = () => {
   //Current Authentication
   const { authenticationInfos, setAuthenticationInfos } = useContext(
     AuthContext
   );
   //MKM Modal Control
-  const { isMKMModalDisplayed, setIsMKMModalDisplayed } = useContext(
-    MKM_ModalContext
-  );
+  const { setIsMKMModalDisplayed } = useContext(MKM_ModalContext);
   //Black Div Control
-  const { isBlackDivModalDisplayed, setIsBlackDivModalDisplayed } = useContext(
-    BlackDivContext
-  );
+  const { setIsBlackDivModalDisplayed } = useContext(BlackDivContext);
 
   //Loading
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleClick = (event) => {
+  const handleClick = () => {
     //Get info back from API to update MKM info on session to be able to do MKM API calls
     authAPI
       .refreshTokenAndInfos(authenticationInfos.refresh_token)
       .then((data) => {
-        //Checker si la date de réception en session est VALIDE
+        //TO DO Checker si la date de réception en session est VALIDE
         console.log(data);
+
         if (data.data.shop.dateReceptionMKMToken) {
           const authenticationInfoCopy = { ...authenticationInfos };
+
           authenticationInfoCopy.shop.accesToken = "updated";
           authenticationInfoCopy.shop.accesSecret = "updated";
           authenticationInfoCopy.shop.dateReceptionMKMToken = "updated";
+
           setAuthenticationInfos(authenticationInfoCopy);
           setIsMKMModalDisplayed("deactivated");
           setIsBlackDivModalDisplayed("deactivated");
           setIsLoading(false);
+
           toast.success("Vous êtes bien connecté à MKM.");
         } else {
           setIsLoading(false);
+
           toast.error(
             "Les données ne sont pas à jour. Merci de bien suivre les étapes."
           );

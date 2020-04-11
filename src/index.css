@@ -127,7 +127,7 @@ h2 {
   bottom: 0;
   right: 0;
   left: 0;
-  z-index: 1;
+  z-index: 2;
   background-color: rgba(0, 0, 0);
   opacity: 0.5;
   animation: blackDivAppearing 0.5s;
@@ -393,7 +393,8 @@ nav > .container {
   justify-content: space-between;
 }
 
-.responsive_menu ul {
+.responsive_menu ul,
+ul.toggle-menu {
   list-style-type: none;
   padding: 0;
 }
@@ -1172,7 +1173,7 @@ tbody.cardLineShop {
 }
 
 .MKM-connection-modal > div .syncronization-button:hover {
-  background-color: mediumspringgreen;
+  background-color: lawngreen;
   color: white;
 }
 .MKM-connection-modal > div .syncronization-button:active {
