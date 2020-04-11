@@ -3,12 +3,12 @@ import SetList from "../components/SetList";
 import CardLineOneSet from "../components/CardLineOneSet";
 import SetsAPI from "../services/setsAPI";
 import SetsContext from "../context/setsContext";
-import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
+import { Table, Thead, Tbody, Tr, Th } from "react-super-responsive-table";
 import CardShopPriceAPI from "../services/CardShopPriceAPI";
 import cardsOneSetContext from "../context/cardsOneSetContext";
 import axios from "axios";
-import TableLoader from "../components/loaders/TableLoader";
 import OneSetLoader from "../components/loaders/OneSetLoader";
+import { isMobile } from "react-device-detect";
 
 const OneSet = ({ handleAddSellingBasket, match }) => {
   //Current Cards displayed in One Set Page
@@ -141,7 +141,7 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
           <SetList />
           <div className="last-modification">
             <h1>{setName}</h1>
-            {isLoading && <OneSetLoader />}
+            {isLoading && !isMobile && <OneSetLoader />}
             {!isLoading && (
               <Table className="zebra-table">
                 <Thead>

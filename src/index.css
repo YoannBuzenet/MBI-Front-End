@@ -121,6 +121,10 @@ h2 {
   font-size: 1.2rem;
 }
 
+.margin-top-2rem {
+  margin-top: 2rem;
+}
+
 .blackDiv {
   position: absolute;
   top: 0;
@@ -1111,6 +1115,14 @@ tbody.cardLineShop {
 }
 
 .edition-modal > div {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .edition-modal select {
 }

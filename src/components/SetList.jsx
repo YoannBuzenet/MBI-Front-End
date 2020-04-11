@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import SetsContext from "../context/setsContext";
 import SetListLoader from "./loaders/SetListLoader";
+import { isMobile } from "react-device-detect";
 
 const SetList = (props) => {
   const { allSets, setAllSets } = useContext(SetsContext);
@@ -20,8 +21,11 @@ const SetList = (props) => {
   return (
     <>
       <div className="left-div">
+        {isMobile && <div className="margin-top-2rem"></div>}
         <h2>Set Name</h2>
+
         {allSets.length === 0 && <SetListLoader />}
+
         <table className="setList-table">
           <tbody>
             {allSets.length > 0 &&
