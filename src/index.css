@@ -1375,6 +1375,11 @@ span.customer_lastName {
   width: 100%;
 }
 
+div.connecting-button {
+  width: 30%;
+  margin: 2rem auto;
+}
+
 .connecting-button {
   padding: 1.5rem;
   font-size: 1.4rem;
@@ -1424,4 +1429,11 @@ span.customer_lastName {
     padding: 2rem;
     font-size: 1.4rem;
   }
+}
+
+/**************************
+*******REGISTER PAGE*******
+**************************/
+.RegisterLoader {
+  margin-top: 30px;
 }
