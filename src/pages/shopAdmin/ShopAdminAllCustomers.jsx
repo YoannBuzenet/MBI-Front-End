@@ -5,7 +5,7 @@ import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 import TableLoader from "../../components/loaders/TableLoader";
 import errorHandlingAPI from "../../services/errorHandlingAPI";
 
-const ShopAdminAllCustomers = props => {
+const ShopAdminAllCustomers = (props) => {
   const [listCustomers, setListCustomers] = useState([]);
 
   const [isLoading, setIsLoading] = useState(true);
@@ -18,15 +18,15 @@ const ShopAdminAllCustomers = props => {
     if (listCustomers.length === 0) {
       customersAPI
         .findAll({
-          cancelToken: source.token
+          cancelToken: source.token,
         })
-        .then(response => setListCustomers(response))
+        .then((response) => setListCustomers(response))
         .then(() => setIsLoading(false))
-        .catch(error => errorHandlingAPI.check401Unauthorized(error));
+        .catch((error) => errorHandlingAPI.check401Unauthorized(error));
 
       return () => source.cancel("");
     }
-  }, [listCustomers]);
+  }, [listCustomers, source]);
   return (
     <>
       <h1>Customers</h1>
@@ -44,7 +44,7 @@ const ShopAdminAllCustomers = props => {
             </Thead>
             <Tbody>
               {listCustomers.length > 0 &&
-                listCustomers.map(customer => {
+                listCustomers.map((customer) => {
                   // console.log(customer);
 
                   return (

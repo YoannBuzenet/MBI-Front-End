@@ -2,21 +2,51 @@ import React, { useContext } from "react";
 import MKMAPI from "../services/MKMAPI";
 import AuthContext from "../context/authContext";
 import authAPI from "../services/authAPI";
+import { toast } from "react-toastify";
+import MKM_ModalContext from "../context/mkmModalConnectionContext";
+import BlackDivContext from "../context/blackDivModalContext";
 
 const MKMConnectModal = (props) => {
   //Current Authentication
   const { authenticationInfos, setAuthenticationInfos } = useContext(
     AuthContext
   );
+  //MKM Modal Control
+  const { isMKMModalDisplayed, setIsMKMModalDisplayed } = useContext(
+    MKM_ModalContext
+  );
+  //Black Div Control
+  const { isBlackDivModalDisplayed, setIsBlackDivModalDisplayed } = useContext(
+    BlackDivContext
+  );
 
   const handleClick = (event) => {
-    //récupérer les infos sur l'API
-    console.log(
-      "récupération des infos de l API, mise à jour de la session, disparition de cette fenetre"
-    );
+    //Loading animation ?
+
+    //Get info back from API to update MKM info on session to be able to do MKM API calls
     authAPI
       .refreshTokenAndInfos(authenticationInfos.refresh_token)
-      .then((data) => console.log(data));
+      .then((data) => {
+        //Checker si la date de réception en session est VALIDE
+        console.log(data);
+        const authenticationInfoCopy = { ...authenticationInfos };
+        authenticationInfoCopy.shop.accesToken = "updated";
+        authenticationInfoCopy.shop.accesSecret = "updated";
+        authenticationInfoCopy.shop.dateReceptionMKMToken = "updated";
+        setAuthenticationInfos(authenticationInfoCopy);
+        setIsMKMModalDisplayed("deactivated");
+        setIsBlackDivModalDisplayed("deactivated");
+
+        //Animation de validation ?
+
+        return console.log(data);
+      })
+      .catch((err) => {
+        toast.error(
+          "Une erreur s'est produite. Merci de recommencer. En cas d'erreur prolongée, merci de contacter le support."
+        );
+        return console.log(err);
+      });
   };
 
   return (
