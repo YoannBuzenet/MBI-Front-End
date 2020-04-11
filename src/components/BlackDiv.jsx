@@ -19,7 +19,6 @@ const BlackDiv = () => {
   );
 
   const handleClick = (event) => {
-    console.log("removing the div and everything on it");
     setIsResponsiveMenuDisplayed("deactivated");
     setIsBlackDivModalDisplayed("deactivated");
     setCardDisplayInformation({});
