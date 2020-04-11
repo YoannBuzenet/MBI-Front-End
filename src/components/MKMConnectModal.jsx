@@ -107,9 +107,7 @@ const MKMConnectModal = (props) => {
             {!isLoading && (
               <>
                 <span className="sync-symbol">&#8634;</span>
-                <span className="button-content">
-                  Synchroniser tous les sites
-                </span>
+                <span className="button-content">Synchroniser</span>
               </>
             )}
           </div>
