@@ -6,7 +6,7 @@ import Field from "../components/forms/Field";
 import LoginLogOutContext from "../context/logAutoRenewOrLogout";
 import config from "../services/config";
 
-const LoginPage = ({ onLogin, history, eraseAuthContext }) => {
+const LoginPage = ({ onLogin, history, eraseAuthContext, renewJWTToken }) => {
   const { authenticationInfos, setAuthenticationInfos } = useContext(
     AuthContext
   );
@@ -44,7 +44,7 @@ const LoginPage = ({ onLogin, history, eraseAuthContext }) => {
       toast.success("Vous êtes connecté.");
 
       setTimers({
-        ...timers,
+        autoRenew: setTimeout(renewJWTToken, config.TIME_JWT_RENEW),
         autoLogOut: setTimeout(eraseAuthContext, config.TIME_TO_LOG_OUT),
       });
 

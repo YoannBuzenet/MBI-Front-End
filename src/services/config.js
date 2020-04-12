@@ -6,8 +6,19 @@ const baseLang = 3;
 
 const gradingArea = "isEU";
 
-const TIME_TO_LOG_OUT = 15 * 60 * 1000;
+//30 minutes
+const TIME_TO_LOG_OUT = 30 * 60 * 1000;
+
+//55 minutes
+const TIME_JWT_RENEW = 55 * 60 * 1000;
 
 //flag size : 25*13px
 
-export default { URL_API, shopID, baseLang, gradingArea, TIME_TO_LOG_OUT };
+export default {
+  URL_API,
+  shopID,
+  baseLang,
+  gradingArea,
+  TIME_TO_LOG_OUT,
+  TIME_JWT_RENEW,
+};
