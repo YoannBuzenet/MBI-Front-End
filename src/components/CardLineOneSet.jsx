@@ -20,6 +20,7 @@ const CardLineOneSet = ({
   handleAddSellingBasket,
   index,
   langIDToDisplay,
+  langsAvailable,
 }) => {
   //Current Selling Request Basket
   const { currentBasket } = useContext(SellingBasketContext);
@@ -137,8 +138,16 @@ const CardLineOneSet = ({
   if (userPreferences.cardsSetLang === 9) {
     cardName = cardsContext[cardID].name;
   } else {
-    cardName =
-      cardsContext[cardID].foreignDataObject[userPreferences.cardsSetLang];
+    if (
+      Object.keys(langsAvailable).includes(
+        userPreferences.cardsSetLang.toString()
+      )
+    ) {
+      cardName =
+        cardsContext[cardID].foreignDataObject[userPreferences.cardsSetLang];
+    } else {
+      cardName = cardsContext[cardID].name;
+    }
   }
 
   return (

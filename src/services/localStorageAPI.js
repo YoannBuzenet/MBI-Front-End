@@ -21,12 +21,12 @@ function getLocalStorageSession() {
   return localStorage;
 }
 
-function saveLocalStorage(nameToUpdate, localStorage) {
-  window.localStorage.setItem(nameToUpdate, JSON.stringify(localStorage));
+function saveLocalStorage(nameToUpdate, variable) {
+  window.localStorage.setItem(nameToUpdate, JSON.stringify(variable));
 }
 
 export default {
   transformPercentPerLangArrayIntoObject,
   getLocalStorageSession,
-  saveLocalStorage
+  saveLocalStorage,
 };

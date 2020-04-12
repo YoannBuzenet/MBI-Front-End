@@ -178,6 +178,19 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
     }
   }, [cardsContext, buildContextFromAPIResponse]);
 
+  var flagToDisplay = Object.keys(languagesAvailables).includes(
+    userPreferences.cardsSetLang.toString()
+  )
+    ? languagesDefinition.langDefinitionIDShortName[
+        userPreferences.cardsSetLang
+      ]
+    : languagesDefinition.langDefinitionIDShortName[9];
+
+  var classFlags = isMobile && setName.length > 10 ? "blockFlags" : "";
+  var classArrow = isMobile && setName.length > 10 ? " blockArrow" : "";
+  var classFlagsDropDown =
+    isMobile && setName.length > 10 ? " flagsDropDownMobileLongName" : "";
+
   return (
     <>
       <div className="container">
@@ -187,24 +200,22 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
             <div className="set-top-line">
               <h1>{setName}</h1>
               <div
+                className={classFlags}
                 onClick={() => setIsDisplayedLangChoice(!isDisplayedLangChoice)}
               >
                 {Object.keys(cardsContext).length > 0 && (
                   <>
-                    <img
-                      src={
-                        "/flags/25X13/" +
-                        languagesDefinition.langDefinitionIDShortName[
-                          userPreferences.cardsSetLang
-                        ] +
-                        ".png"
-                      }
-                    ></img>
-                    <span className="arrow-menu"></span>
+                    <img src={"/flags/25X13/" + flagToDisplay + ".png"}></img>
+                    {Object.keys(languagesAvailables).length > 0 && (
+                      <span className={"arrow-menu" + classArrow}></span>
+                    )}
                   </>
                 )}
                 {isDisplayedLangChoice && (
-                  <SetLangChoice langsAvailable={languagesAvailables} />
+                  <SetLangChoice
+                    langsAvailable={languagesAvailables}
+                    classFlagsDropDown={classFlagsDropDown}
+                  />
                 )}
               </div>
             </div>
@@ -238,6 +249,7 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
                         key={cardID}
                         handleAddSellingBasket={handleAddSellingBasket}
                         langIDToDisplay={langIDToDisplay}
+                        langsAvailable={languagesAvailables}
                       />
                     );
                   })}

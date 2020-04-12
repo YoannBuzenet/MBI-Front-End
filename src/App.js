@@ -153,7 +153,9 @@ function App() {
 
   //STATE - Display preferences
   //TODO - load preferences from Local Storage, if not, use default
-  const [userPreferences, setUserPreferences] = useState({ cardsSetLang: 9 });
+  const [userPreferences, setUserPreferences] = useState(
+    getUserPreferenceCardsSetLang
+  );
 
   // CONTEXT CREATION Creating All Sets value for context
   const contextAllSets = {
@@ -244,10 +246,20 @@ function App() {
     setUserPreferences: setUserPreferences,
   };
 
+  function getUserPreferenceCardsSetLang() {
+    const savedUserPreferenceCardsSetsLang = JSON.parse(
+      window.localStorage.getItem("cardsSetLang")
+    );
+    if (savedUserPreferenceCardsSetsLang) {
+      return savedUserPreferenceCardsSetsLang;
+    } else {
+      return { cardsSetLang: 9 };
+    }
+  }
+
   const NavbarWithRouter = withRouter(Navbar);
   const ShopNavbarWithRouter = withRouter(ShopNavbar);
 
-  //TODO : CHECK ALSO IS_SIGNED
   //VERY IMPORTANT Function to add cards to Selling Basket.
   //We put it in App component because it need the use of hooks.
   const handleAddSellingBasket = (currentBasket, card) => {

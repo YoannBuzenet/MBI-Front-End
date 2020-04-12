@@ -1011,6 +1011,23 @@ div.connect p {
   background-color: var(--background-color);
 }
 
+div.blockFlags {
+  display: block;
+  position: relative;
+  margin: -25px auto 15px;
+  width: 35px;
+  padding-right: 0.5rem;
+  right: 0;
+}
+
+.flagsDropDownMobileLongName {
+  right: 0;
+}
+
+div.blockFlags span.blockArrow {
+  right: -10px;
+}
+
 @media only screen and (max-width: 850px) {
   .cardPictureHolder {
     padding: 0.5rem;
