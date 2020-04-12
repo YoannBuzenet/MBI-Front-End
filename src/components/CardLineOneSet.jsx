@@ -12,6 +12,7 @@ import { Tr, Td } from "react-super-responsive-table";
 import config from "../services/config";
 import CardDisplayOnPageContext from "../context/cardDisplayOnPageContext";
 import BlackDivModalContext from "../context/blackDivModalContext";
+import userPreferencesContext from "../context/userPreferenceContext";
 
 const CardLineOneSet = ({
   card,
@@ -22,6 +23,10 @@ const CardLineOneSet = ({
 }) => {
   //Current Selling Request Basket
   const { currentBasket } = useContext(SellingBasketContext);
+
+  const { userPreferences, setUserPreferences } = useContext(
+    userPreferencesContext
+  );
 
   //TIMEOUT SETUP DO NOT ERASE (In case we have to implement it, it can be finished)
   // const WAIT_INTERVAL = 1000;
@@ -128,6 +133,14 @@ const CardLineOneSet = ({
     setIsBlackDivModalDisplayed("activated");
   };
 
+  var cardName;
+  if (userPreferences.cardsSetLang === 9) {
+    cardName = cardsContext[cardID].name;
+  } else {
+    cardName =
+      cardsContext[cardID].foreignDataObject[userPreferences.cardsSetLang];
+  }
+
   return (
     <>
       <Tr
@@ -153,7 +166,7 @@ const CardLineOneSet = ({
             }
           }}
         >
-          {cardsContext[cardID].name}
+          {cardName}
           {!isMobile && isOnHover && (
             <div className={hoverTopOrBottom}>
               <img src={urlPictureCard} alt={card.name} />

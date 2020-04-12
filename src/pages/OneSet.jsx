@@ -47,7 +47,7 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
     let langObject = {};
 
     for (let i = 0; i < array.length; i++) {
-      langObject[array[i].language_id.id] = array[i].language_id.shortname;
+      langObject[array[i].language_id.id] = array[i].name;
     }
 
     return langObject;
@@ -79,6 +79,9 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
         quantity: 1,
         condition: 2,
         lang: 9,
+        foreignDataObject: transformLanguagesArrayIntoObject(
+          data[i].foreignData
+        ),
       };
     }
     setCardsContext(contextCopy);
