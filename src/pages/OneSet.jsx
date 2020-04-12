@@ -155,7 +155,14 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
           <div className="last-modification">
             <div className="set-top-line">
               <h1>{setName}</h1>
-              <span>{Object.keys(cardsContext).length > 0 && "p"}</span>
+              <p>
+                {Object.keys(cardsContext).length > 0 && (
+                  <>
+                    <img src="/flags/25X13/EN.png"></img>
+                    <span className="arrow-menu"></span>
+                  </>
+                )}
+              </p>
             </div>
             {isLoading && !isMobile && <OneSetLoader />}
             {isLoading && isMobile && (

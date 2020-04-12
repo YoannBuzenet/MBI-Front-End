@@ -937,10 +937,26 @@ div.connect p {
   position: relative;
 }
 
-.set-top-line span {
+.set-top-line p {
+  margin: 0;
   position: absolute;
-  right: 20px;
-  top: 15px;
+  right: 25px;
+  top: 8px;
+  padding: 0.5rem;
+  padding-right: 1.5rem;
+  padding-bottom: 0.4rem;
+  border-radius: 10px;
+}
+.set-top-line p:hover {
+  background-color: rgba(0, 0, 0, 0.15);
+}
+.set-top-line p:hover .arrow-menu {
+  color: white;
+}
+.set-top-line p span {
+  position: absolute;
+  top: 12px;
+  right: 2px;
 }
 .add-item-basket {
   cursor: pointer;
