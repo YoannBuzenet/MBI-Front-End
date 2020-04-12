@@ -6,6 +6,8 @@ import LastInformationCalculator from "../../components/LastInformationCalculato
 import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 import TableLoader from "../../components/loaders/TableLoader";
 import errorHandlingAPI from "../../services/errorHandlingAPI";
+import { isMobile } from "react-device-detect";
+import SetListLoader from "../../components/loaders/SetListLoader";
 
 const ShopAdminAllSellRequests = (props) => {
   //Variable to clean up useEffect Axios
@@ -33,7 +35,13 @@ const ShopAdminAllSellRequests = (props) => {
     <>
       <div className="container">
         <h1>Tous les rachats</h1>
-        {isLoading && <TableLoader />}
+        {isLoading && !isMobile && <TableLoader />}
+        {isLoading && isMobile && (
+          <>
+            <SetListLoader />
+            <SetListLoader />
+          </>
+        )}
         {!isLoading && (
           <Table className="zebra-table">
             <Thead>
