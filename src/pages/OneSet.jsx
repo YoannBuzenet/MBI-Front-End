@@ -12,12 +12,18 @@ import { isMobile } from "react-device-detect";
 import SetListLoader from "../components/loaders/SetListLoader";
 import config from "../services/config";
 import SetLangChoice from "../components/SetLangChoice";
+import languagesDefinition from "../definitions/languagesDefinition";
+import userPreferencesContext from "../context/userPreferenceContext";
 
 const OneSet = ({ handleAddSellingBasket, match }) => {
   //Current Cards displayed in One Set Page
   const { cardsContext, setCardsContext } = useContext(cardsOneSetContext);
 
-  console.log(cardsContext);
+  const { userPreferences, setUserPreferences } = useContext(
+    userPreferencesContext
+  );
+
+  // console.log(cardsContext);
 
   const ENGLISH_LANG_ID = 9;
 
@@ -185,7 +191,15 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
               >
                 {Object.keys(cardsContext).length > 0 && (
                   <>
-                    <img src="/flags/25X13/EN.png"></img>
+                    <img
+                      src={
+                        "/flags/25X13/" +
+                        languagesDefinition.langDefinitionIDShortName[
+                          userPreferences.cardsSetLang
+                        ] +
+                        ".png"
+                      }
+                    ></img>
                     <span className="arrow-menu"></span>
                   </>
                 )}
