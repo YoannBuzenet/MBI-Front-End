@@ -11,6 +11,7 @@ import OneSetLoader from "../components/loaders/OneSetLoader";
 import { isMobile } from "react-device-detect";
 import SetListLoader from "../components/loaders/SetListLoader";
 import config from "../services/config";
+import SetLangChoice from "../components/SetLangChoice";
 
 const OneSet = ({ handleAddSellingBasket, match }) => {
   //Current Cards displayed in One Set Page
@@ -37,6 +38,20 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   const [langIDToDisplay, setLangIDToDisplay] = useState(config.baseLang);
+
+  const [isDisplayedLangChoice, setIsDisplayedLangChoice] = useState(false);
+
+  const [languagesAvailables, setLanguagesAvailaibles] = useState([]);
+
+  const transformLanguagesArrayIntoObject = (array) => {
+    let langObject = {};
+
+    for (let i = 0; i < array.length; i++) {
+      langObject[array[i].language_id.id] = array[i].language_id.shortname;
+    }
+
+    return langObject;
+  };
 
   //Buildling context with the API response with all cards from the set.
   //We add also DEFAULT caracs to cards here.
@@ -69,6 +84,11 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
     setCardsContext(contextCopy);
 
     //Choosing lang to display
+    //The list of available foreign data :
+    const list_of_set_foreign_languages = [...data[0].foreignData];
+    console.log(
+      transformLanguagesArrayIntoObject(list_of_set_foreign_languages)
+    );
     //Check is there's a preference in localStorage -> check if it exists here, else EN
     //if not, check if baselang exist, else, EN
     //EN
@@ -155,14 +175,19 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
           <div className="last-modification">
             <div className="set-top-line">
               <h1>{setName}</h1>
-              <p>
+              <div
+                onClick={() => setIsDisplayedLangChoice(!isDisplayedLangChoice)}
+              >
                 {Object.keys(cardsContext).length > 0 && (
                   <>
                     <img src="/flags/25X13/EN.png"></img>
                     <span className="arrow-menu"></span>
                   </>
                 )}
-              </p>
+                {isDisplayedLangChoice && (
+                  <SetLangChoice langsAvailable={languagesAvailables} />
+                )}
+              </div>
             </div>
             {isLoading && !isMobile && <OneSetLoader />}
             {isLoading && isMobile && (

@@ -125,6 +125,15 @@ h2 {
   margin-top: 2rem;
 }
 
+.transparent-div {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 2;
+}
+
 .blackDiv {
   position: absolute;
   top: 0;
@@ -937,7 +946,7 @@ div.connect p {
   position: relative;
 }
 
-.set-top-line p {
+.set-top-line div {
   margin: 0;
   position: absolute;
   right: 25px;
@@ -947,13 +956,13 @@ div.connect p {
   padding-bottom: 0.4rem;
   border-radius: 10px;
 }
-.set-top-line p:hover {
+.set-top-line div:hover {
   background-color: rgba(0, 0, 0, 0.15);
 }
-.set-top-line p:hover .arrow-menu {
+.set-top-line div:hover .arrow-menu {
   color: white;
 }
-.set-top-line p span {
+.set-top-line div span {
   position: absolute;
   top: 12px;
   right: 2px;
@@ -976,6 +985,9 @@ div.connect p {
   position: absolute;
   top: 60px;
   z-index: 2;
+}
+
+.set-lang-choosing {
 }
 
 @media only screen and (max-width: 850px) {
