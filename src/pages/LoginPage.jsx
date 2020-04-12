@@ -3,30 +3,33 @@ import authAPI from "../services/authAPI";
 import AuthContext from "../context/authContext";
 import { toast } from "react-toastify";
 import Field from "../components/forms/Field";
+import LoginLogOutContext from "../context/logAutoRenewOrLogout";
 
 const LoginPage = ({ onLogin, history }) => {
   const { authenticationInfos, setAuthenticationInfos } = useContext(
     AuthContext
   );
+  //Timers control for auto login renew or auto logout
+  const { timers, setTimers } = useContext(LoginLogOutContext);
 
   const [credentials, setCredentials] = useState({
     email: "",
-    password: ""
+    password: "",
   });
 
   const [error, setError] = useState("");
 
-  const handleChange = event => {
+  const handleChange = (event) => {
     const value = event.currentTarget.value;
     const name = event.currentTarget.name;
 
     setCredentials({
       ...credentials,
-      [name]: value
+      [name]: value,
     });
   };
 
-  const handleSubmit = async event => {
+  const handleSubmit = async (event) => {
     //Remove that line when going live
     // setIsAuthenticated(true);
     event.preventDefault();
