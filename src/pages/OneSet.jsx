@@ -86,11 +86,11 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
     //Choosing lang to display
     //The list of available foreign data :
     const arrayList_of_set_foreign_languages = [...data[0].foreignData];
-    const objectsorted_List_of_set_foreign_languages = transformLanguagesArrayIntoObject(
+    const objectSorted_List_of_set_foreign_languages = transformLanguagesArrayIntoObject(
       arrayList_of_set_foreign_languages
     );
 
-    setLanguagesAvailaibles(objectsorted_List_of_set_foreign_languages);
+    setLanguagesAvailaibles(objectSorted_List_of_set_foreign_languages);
     //Check is there's a preference in localStorage -> check if it exists here, else EN
     //if not, check if baselang exist, else, EN
     //EN
