@@ -7,10 +7,21 @@ const SetLangChoice = ({ langsAvailable }) => {
     userPreferencesContext
   );
 
+  console.log(userPreferences);
+
   return (
     <div className="set-lang-choosing">
       {Object.keys(langsAvailable).map((lang, index) => (
-        <div className="flag-drop-down" key={lang}>
+        <div
+          className="flag-drop-down"
+          key={lang}
+          onClick={(event) =>
+            setUserPreferences({
+              ...userPreferences,
+              cardsSetLang: parseInt(lang),
+            })
+          }
+        >
           <img
             src={
               "/flags/25X13/" +
