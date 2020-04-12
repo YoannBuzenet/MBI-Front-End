@@ -10,10 +10,10 @@ const langDefinitionIDShortName = {
   5: "JP",
   6: "PT",
   7: "RU",
-  8: "CH",
+  8: "CHI",
   9: "EN",
   10: "KO",
-  11: "CH",
+  11: "CHI",
 };
 
 export default {
