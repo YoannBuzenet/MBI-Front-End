@@ -1,17 +1,26 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import languagesDefinition from "../definitions/languagesDefinition";
 import userPreferencesContext from "../context/userPreferenceContext";
+import { useEffect } from "react";
 
 const SetLangChoice = ({ langsAvailable }) => {
   const { userPreferences, setUserPreferences } = useContext(
     userPreferencesContext
   );
 
-  console.log(userPreferences);
+  const [arrayLangAvailables, setArrayLangAvailables] = useState(
+    Object.keys(langsAvailable)
+  );
+
+  useEffect(() => {
+    if (userPreferences.cardsSetLang !== 9) {
+      setArrayLangAvailables([...arrayLangAvailables, 9]);
+    }
+  }, [userPreferences]);
 
   return (
     <div className="set-lang-choosing">
-      {Object.keys(langsAvailable).map((lang, index) => (
+      {arrayLangAvailables.map((lang, index) => (
         <div
           className="flag-drop-down"
           key={lang}
