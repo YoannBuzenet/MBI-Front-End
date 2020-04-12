@@ -281,10 +281,24 @@ function App() {
   const restartLogOutCountDown = () => {
     clearTimeout(timers.autoLogOut);
 
-    console.log("restart timer");
-    console.log(timers);
+    setTimers({
+      ...timers,
+      autoLogOut: setTimeout(eraseAuthContext, config.TIME_TO_LOG_OUT),
+    });
+  };
 
-    setTimeout(eraseAuthContext, config.TIME_TO_LOG_OUT);
+  const renewJWTToken = () => {
+    if (authenticationInfos.isAuthenticated) {
+      AuthAPI.refreshTokenAndInfos(authenticationInfos.refresh_token).then(
+        setAuthenticationInfos(data)
+      );
+      setTimers({
+        ...timers,
+        autoRenew: setTimeout(renewJWTToken, config.TIME_JWT_RENEW),
+      });
+    } else {
+      return;
+    }
   };
 
   const NavbarWithRouter = withRouter(Navbar);
@@ -484,6 +498,7 @@ function App() {
                                         match={match}
                                         history={history}
                                         eraseAuthContext={eraseAuthContext}
+                                        renewJWTToken={renewJWTToken}
                                       />
                                     </LoginRenewOrLogOutContext.Provider>
                                   )}
