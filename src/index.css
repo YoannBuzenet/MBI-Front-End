@@ -946,7 +946,7 @@ div.connect p {
   position: relative;
 }
 
-.set-top-line div {
+.set-top-line > div {
   margin: 0;
   position: absolute;
   right: 25px;
@@ -956,7 +956,8 @@ div.connect p {
   padding-bottom: 0.4rem;
   border-radius: 10px;
 }
-.set-top-line div:hover {
+
+.set-top-line > div:hover {
   background-color: rgba(0, 0, 0, 0.15);
 }
 .set-top-line div:hover .arrow-menu {
@@ -988,6 +989,21 @@ div.connect p {
 }
 
 .set-lang-choosing {
+  position: absolute;
+  top: 25px;
+  bottom: 0;
+  right: 8px;
+  left: 0;
+}
+
+.set-lang-choosing .flag-drop-down:last-child {
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.flag-drop-down {
+  padding: 3px;
+  background-color: var(--background-color);
 }
 
 @media only screen and (max-width: 850px) {
