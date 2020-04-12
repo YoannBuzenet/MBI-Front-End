@@ -99,8 +99,12 @@ function setup() {
       axios.defaults.headers["Authorization"] = "Bearer " + token;
 
       return true;
+    } else {
+      logout();
+      return false;
     }
   } else {
+    logout();
     return false;
   }
 }

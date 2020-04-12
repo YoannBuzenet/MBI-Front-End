@@ -31,6 +31,7 @@ import {
   Switch,
   Route,
   withRouter,
+  useHistory,
 } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import LoggedRoute from "./components/LoggedRoute";
@@ -63,6 +64,7 @@ import BurgerMenuCustomerComponents from "./components/BurgerMenuCustomerCompone
 import MKMConnectModal from "./components/MKMConnectModal";
 import shopAPI from "./services/shopAPI";
 import BuyingClauses from "./pages/BuyingClauses";
+import config from "./services/config";
 
 //Really Useful library to check all rerenders made on ALL components (you can setup it to check just one)
 // if (process.env.NODE_ENV === "development") {
@@ -253,7 +255,7 @@ function App() {
     if (savedUserPreferenceCardsSetsLang) {
       return savedUserPreferenceCardsSetsLang;
     } else {
-      return { cardsSetLang: 9 };
+      return { cardsSetLang: config.baseLang };
     }
   }
 
