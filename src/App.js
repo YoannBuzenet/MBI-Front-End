@@ -289,9 +289,9 @@ function App() {
 
   const renewJWTToken = () => {
     if (authenticationInfos.isAuthenticated) {
-      AuthAPI.refreshTokenAndInfos(authenticationInfos.refresh_token).then(
-        setAuthenticationInfos(data)
-      );
+      AuthAPI.refreshTokenAndInfos(
+        authenticationInfos.refresh_token
+      ).then((data) => setAuthenticationInfos(data));
       setTimers({
         ...timers,
         autoRenew: setTimeout(renewJWTToken, config.TIME_JWT_RENEW),
