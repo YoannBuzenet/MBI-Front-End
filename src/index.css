@@ -932,6 +932,16 @@ div.connect p {
 /**************************
 ********ONESET PAGE*******
 **************************/
+
+.set-top-line {
+  position: relative;
+}
+
+.set-top-line span {
+  position: absolute;
+  right: 20px;
+  top: 15px;
+}
 .add-item-basket {
   cursor: pointer;
 }

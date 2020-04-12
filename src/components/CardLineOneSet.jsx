@@ -13,7 +13,13 @@ import config from "../services/config";
 import CardDisplayOnPageContext from "../context/cardDisplayOnPageContext";
 import BlackDivModalContext from "../context/blackDivModalContext";
 
-const CardLineOneSet = ({ card, cardID, handleAddSellingBasket, index }) => {
+const CardLineOneSet = ({
+  card,
+  cardID,
+  handleAddSellingBasket,
+  index,
+  langIDToDisplay,
+}) => {
   //Current Selling Request Basket
   const { currentBasket } = useContext(SellingBasketContext);
 
@@ -34,6 +40,8 @@ const CardLineOneSet = ({ card, cardID, handleAddSellingBasket, index }) => {
   const [isOnHover, setIsOnHover] = useState(false);
 
   const [isLoading, setIsLoading] = useState(false);
+
+  console.log(langIDToDisplay);
 
   //Black Div control
   const { setIsBlackDivModalDisplayed } = useContext(BlackDivModalContext);
