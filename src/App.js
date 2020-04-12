@@ -65,6 +65,7 @@ import MKMConnectModal from "./components/MKMConnectModal";
 import shopAPI from "./services/shopAPI";
 import BuyingClauses from "./pages/BuyingClauses";
 import config from "./services/config";
+import authAPI from "./services/authAPI";
 
 //Really Useful library to check all rerenders made on ALL components (you can setup it to check just one)
 // if (process.env.NODE_ENV === "development") {
@@ -160,7 +161,7 @@ function App() {
   );
 
   //STATE - Auto Renew LogIn or Auto Log Out
-  const [timers, setTimers] = useState([]);
+  const [timers, setTimers] = useState({ autoRenew: "", autoLogOut: "" });
 
   // CONTEXT CREATION Creating All Sets value for context
   const contextAllSets = {
@@ -252,7 +253,7 @@ function App() {
   };
 
   //CONTEXT - Auto login/LogOut
-  const loginLogOut = {
+  const ContextloginLogOut = {
     timers: timers,
     setTimers: setTimers,
   };
@@ -267,6 +268,24 @@ function App() {
       return { cardsSetLang: config.baseLang };
     }
   }
+
+  const eraseAuthContext = () => {
+    setAuthenticationInfos({
+      ...authenticationInfos,
+      isAuthenticated: false,
+      user: { ...authenticationInfos.user, roles: [] },
+    });
+    authAPI.logout();
+  };
+
+  const restartLogOutCountDown = () => {
+    clearTimeout(timers.autoLogOut);
+
+    console.log("restart timer");
+    console.log(timers);
+
+    setTimeout(eraseAuthContext, config.TIME_TO_LOG_OUT);
+  };
 
   const NavbarWithRouter = withRouter(Navbar);
   const ShopNavbarWithRouter = withRouter(ShopNavbar);
@@ -355,7 +374,11 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <div
+      className="App"
+      onMouseMove={() => restartLogOutCountDown()}
+      onTouchMove={() => restartLogOutCountDown()}
+    >
       <AuthContext.Provider value={contextValue}>
         <SellingBasketContext.Provider value={contextBasket}>
           <SetsContext.Provider value={contextAllSets}>
@@ -451,11 +474,20 @@ function App() {
                                   )}
                                 />
 
-                                <LoginRenewOrLogOutContext.Provider
-                                  value={loginLogOut}
-                                >
-                                  <Route path="/login" component={LoginPage} />
-                                </LoginRenewOrLogOutContext.Provider>
+                                <Route
+                                  path="/login"
+                                  render={({ match, history }) => (
+                                    <LoginRenewOrLogOutContext.Provider
+                                      value={ContextloginLogOut}
+                                    >
+                                      <LoginPage
+                                        match={match}
+                                        history={history}
+                                        eraseAuthContext={eraseAuthContext}
+                                      />
+                                    </LoginRenewOrLogOutContext.Provider>
+                                  )}
+                                />
 
                                 <Route
                                   path="/card/:cardName"
