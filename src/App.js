@@ -25,13 +25,13 @@ import CardDisplayOnPageContext from "./context/cardDisplayOnPageContext";
 import MKMModalContext from "./context/mkmModalConnectionContext";
 import shopPublicInfoContext from "./context/publicShopInfoContext";
 import UserPreferenceContext from "./context/userPreferenceContext";
+import LoginRenewOrLogOutContext from "./context/logAutoRenewOrLogout";
 
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   withRouter,
-  useHistory,
 } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import LoggedRoute from "./components/LoggedRoute";
@@ -75,6 +75,11 @@ import config from "./services/config";
 // }
 
 function App() {
+  // STATE Creating the Authentication state
+  const [authenticationInfos, setAuthenticationInfos] = useState(
+    AuthAPI.userInfos()
+  );
+
   //Checking is the JWT token is still good, if yes, Keep it in Axios
   AuthAPI.setup();
 
@@ -99,11 +104,6 @@ function App() {
       setCurrentBasket(eventuallySavedBasket);
     }
   }, []);
-
-  // STATE Creating the Authentication state
-  const [authenticationInfos, setAuthenticationInfos] = useState(
-    AuthAPI.userInfos()
-  );
 
   // STATE Creating the AllSets state
   const [allSets, setAllSets] = useState([]);
@@ -154,10 +154,13 @@ function App() {
   });
 
   //STATE - Display preferences
-  //TODO - load preferences from Local Storage, if not, use default
+  //Default : Local Storage
   const [userPreferences, setUserPreferences] = useState(
     getUserPreferenceCardsSetLang
   );
+
+  //STATE - Auto Renew LogIn or Auto Log Out
+  const [timers, setTimers] = useState([]);
 
   // CONTEXT CREATION Creating All Sets value for context
   const contextAllSets = {
@@ -246,6 +249,12 @@ function App() {
   const ContentUserPreferences = {
     userPreferences: userPreferences,
     setUserPreferences: setUserPreferences,
+  };
+
+  //CONTEXT - Auto login/LogOut
+  const loginLogOut = {
+    timers: timers,
+    setTimers: setTimers,
   };
 
   function getUserPreferenceCardsSetLang() {
@@ -442,7 +451,11 @@ function App() {
                                   )}
                                 />
 
-                                <Route path="/login" component={LoginPage} />
+                                <LoginRenewOrLogOutContext.Provider
+                                  value={loginLogOut}
+                                >
+                                  <Route path="/login" component={LoginPage} />
+                                </LoginRenewOrLogOutContext.Provider>
 
                                 <Route
                                   path="/card/:cardName"
