@@ -12,6 +12,8 @@ import OneLineLoader from "../../components/loaders/OneLineLoader";
 import TableLoader from "../../components/loaders/TableLoader";
 import OneBigLineLoader from "../../components/loaders/OneBigLineLoader";
 import errorHandlingAPI from "../../services/errorHandlingAPI";
+import { isMobile } from "react-device-detect";
+import SetListLoader from "../../components/loaders/SetListLoader";
 
 const ShopAdminOneSellRequest = ({ match }) => {
   const { id } = match.params;
@@ -182,7 +184,13 @@ const ShopAdminOneSellRequest = ({ match }) => {
             )}
           </p>
         </div>
-        {isLoading && <TableLoader />}
+        {isLoading && !isMobile && <TableLoader />}
+        {isLoading && isMobile && (
+          <>
+            <SetListLoader />
+            <SetListLoader />
+          </>
+        )}
         {!isLoading && (
           <Table className="zebra-table">
             <Thead>

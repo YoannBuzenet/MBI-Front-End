@@ -4,6 +4,8 @@ import axios from "axios";
 import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 import TableLoader from "../../components/loaders/TableLoader";
 import errorHandlingAPI from "../../services/errorHandlingAPI";
+import { isMobile } from "react-device-detect";
+import SetListLoader from "../../components/loaders/SetListLoader";
 
 const ShopAdminAllCustomers = (props) => {
   const [listCustomers, setListCustomers] = useState([]);
@@ -31,7 +33,13 @@ const ShopAdminAllCustomers = (props) => {
     <>
       <h1>Customers</h1>
       <div className="container">
-        {isLoading && <TableLoader />}
+        {isLoading && !isMobile && <TableLoader />}
+        {isLoading && isMobile && (
+          <>
+            <SetListLoader />
+            <SetListLoader />
+          </>
+        )}
         {!isLoading && (
           <Table className="zebra-table">
             <Thead>

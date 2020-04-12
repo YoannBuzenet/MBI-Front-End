@@ -9,7 +9,6 @@ import cardsOneSetContext from "../context/cardsOneSetContext";
 import axios from "axios";
 import OneSetLoader from "../components/loaders/OneSetLoader";
 import { isMobile } from "react-device-detect";
-import OneColumnLoader from "../components/loaders/OneColumnLoader";
 import SetListLoader from "../components/loaders/SetListLoader";
 
 const OneSet = ({ handleAddSellingBasket, match }) => {
