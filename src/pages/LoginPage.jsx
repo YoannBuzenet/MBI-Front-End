@@ -4,8 +4,9 @@ import AuthContext from "../context/authContext";
 import { toast } from "react-toastify";
 import Field from "../components/forms/Field";
 import LoginLogOutContext from "../context/logAutoRenewOrLogout";
+import config from "../services/config";
 
-const LoginPage = ({ onLogin, history }) => {
+const LoginPage = ({ onLogin, history, eraseAuthContext }) => {
   const { authenticationInfos, setAuthenticationInfos } = useContext(
     AuthContext
   );
@@ -16,6 +17,8 @@ const LoginPage = ({ onLogin, history }) => {
     email: "",
     password: "",
   });
+
+  // console.log(eraseAuthContext);
 
   const [error, setError] = useState("");
 
@@ -39,6 +42,11 @@ const LoginPage = ({ onLogin, history }) => {
       setError("");
       setAuthenticationInfos(userData);
       toast.success("Vous êtes connecté.");
+
+      setTimers({
+        ...timers,
+        autoLogOut: setTimeout(eraseAuthContext, config.TIME_TO_LOG_OUT),
+      });
 
       if (userData.user.roles.includes("ROLE_SHOP")) {
         history.replace("/shopadmin/sell_requests");
