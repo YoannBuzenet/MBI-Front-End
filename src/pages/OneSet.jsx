@@ -10,10 +10,13 @@ import axios from "axios";
 import OneSetLoader from "../components/loaders/OneSetLoader";
 import { isMobile } from "react-device-detect";
 import SetListLoader from "../components/loaders/SetListLoader";
+import config from "../services/config";
 
 const OneSet = ({ handleAddSellingBasket, match }) => {
   //Current Cards displayed in One Set Page
   const { cardsContext, setCardsContext } = useContext(cardsOneSetContext);
+
+  console.log(cardsContext);
 
   const ENGLISH_LANG_ID = 9;
 
@@ -32,6 +35,8 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
   const [hasUpdatedPrices, setHasUpdatedPrices] = useState(false);
 
   const [isLoading, setIsLoading] = useState(true);
+
+  const [langIDToDisplay, setLangIDToDisplay] = useState(config.baseLang);
 
   //Buildling context with the API response with all cards from the set.
   //We add also DEFAULT caracs to cards here.
@@ -62,6 +67,12 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
       };
     }
     setCardsContext(contextCopy);
+
+    //Choosing lang to display
+    //Check is there's a preference in localStorage -> check if it exists here, else EN
+    //if not, check if baselang exist, else, EN
+    //EN
+
     //Empty setState just to force re-render of component (sure hacky, must be refactored)
     setCards([]);
   };
@@ -136,15 +147,16 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
     }
   }, [cardsContext, buildContextFromAPIResponse]);
 
-  console.log(isMobile);
-
   return (
     <>
       <div className="container">
         <div className="content-split">
           <SetList />
           <div className="last-modification">
-            <h1>{setName}</h1>
+            <div className="set-top-line">
+              <h1>{setName}</h1>
+              <span>{Object.keys(cardsContext).length > 0 && "p"}</span>
+            </div>
             {isLoading && !isMobile && <OneSetLoader />}
             {isLoading && isMobile && (
               <>
@@ -174,6 +186,7 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
                         index={index}
                         key={cardID}
                         handleAddSellingBasket={handleAddSellingBasket}
+                        langIDToDisplay={langIDToDisplay}
                       />
                     );
                   })}
