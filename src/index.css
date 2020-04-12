@@ -955,6 +955,7 @@ div.connect p {
   padding-right: 1.5rem;
   padding-bottom: 0.4rem;
   border-radius: 10px;
+  cursor: pointer;
 }
 
 .set-top-line > div:hover {
@@ -990,10 +991,13 @@ div.connect p {
 
 .set-lang-choosing {
   position: absolute;
-  top: 25px;
-  bottom: 0;
+  top: 28px;
   right: 8px;
   left: 0;
+  box-shadow: 1px 1px 1px black;
+  z-index: 2;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
 
 .set-lang-choosing .flag-drop-down:last-child {
@@ -1002,6 +1006,7 @@ div.connect p {
 }
 
 .flag-drop-down {
+  cursor: pointer;
   padding: 3px;
   background-color: var(--background-color);
 }

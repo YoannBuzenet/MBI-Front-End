@@ -1,7 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import languagesDefinition from "../definitions/languagesDefinition";
+import userPreferencesContext from "../context/userPreferenceContext";
 
 const SetLangChoice = ({ langsAvailable }) => {
+  const { userPreferences, setUserPreferences } = useContext(
+    userPreferencesContext
+  );
+
   return (
     <div className="set-lang-choosing">
       {Object.keys(langsAvailable).map((lang, index) => (
