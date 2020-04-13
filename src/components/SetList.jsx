@@ -1,11 +1,15 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import SetsContext from "../context/setsContext";
 import SetListLoader from "./loaders/SetListLoader";
 import { isMobile } from "react-device-detect";
+import { useEffect } from "react";
+import setsAPI from "../services/setsAPI";
 
 const SetList = (props) => {
   const { allSets, setAllSets } = useContext(SetsContext);
+
+  const [isLoading, setIsLoading] = useState(false);
 
   //sorting sets by their name before displaying them
   allSets.sort(function (a, b) {
@@ -18,30 +22,51 @@ const SetList = (props) => {
     return 0;
   });
 
+  useEffect(() => {
+    setIsLoading(true);
+    //Check if last modification cookie is here and not EXP
+    const localStorageAllSets = JSON.parse(
+      window.localStorage.getItem("allSets")
+    );
+    const now = new Date().getTime();
+
+    if (localStorageAllSets && localStorageAllSets.expirationDate > now) {
+      setAllSets(localStorageAllSets.data);
+      setIsLoading(false);
+    } else {
+      setsAPI
+        .findAll()
+        .then((data) => setAllSets(data))
+        .then(() => setIsLoading(false));
+    }
+  }, []);
+
   return (
     <>
       <div className="left-div">
         {isMobile && <div className="margin-top-2rem"></div>}
         <h2>Les éditions</h2>
 
-        {allSets.length === 0 && <SetListLoader />}
+        {isLoading && <SetListLoader />}
 
-        <table className="setList-table">
-          <tbody>
-            {allSets.length > 0 &&
-              allSets.map((set) => {
-                return (
-                  <tr key={set.id}>
-                    <td>
-                      <Link to={"/sets/" + set.id} className="setList-link">
-                        {set.name}
-                      </Link>
-                    </td>
-                  </tr>
-                );
-              })}
-          </tbody>
-        </table>
+        {!isLoading && (
+          <table className="setList-table">
+            <tbody>
+              {allSets.length > 0 &&
+                allSets.map((set) => {
+                  return (
+                    <tr key={set.id}>
+                      <td>
+                        <Link to={"/sets/" + set.id} className="setList-link">
+                          {set.name}
+                        </Link>
+                      </td>
+                    </tr>
+                  );
+                })}
+            </tbody>
+          </table>
+        )}
       </div>
     </>
   );
