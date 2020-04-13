@@ -2,6 +2,8 @@ const URL_API = "http://mtgapi.local:8888";
 
 const shopID = 1;
 
+const shopName = "Fantasy Sphere FTW";
+
 const baseLang = 3;
 
 const gradingArea = "isEU";
