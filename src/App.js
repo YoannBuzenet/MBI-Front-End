@@ -82,7 +82,18 @@ function App() {
   );
 
   //Checking is the JWT token is still good, if yes, Keep it in Axios
-  AuthAPI.setup();
+  //If not, log out
+  useEffect(() => {
+    const didLogBack = AuthAPI.setup();
+
+    if (!didLogBack) {
+      setAuthenticationInfos({
+        ...authenticationInfos,
+        isAuthenticated: false,
+        user: { ...authenticationInfos.user, roles: [] },
+      });
+    }
+  }, []);
 
   //APP INITIALIZATION USE EFFECT
   useEffect(() => {
