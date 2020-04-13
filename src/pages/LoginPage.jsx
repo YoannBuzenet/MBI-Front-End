@@ -43,6 +43,9 @@ const LoginPage = ({ onLogin, history, eraseAuthContext, renewJWTToken }) => {
       setAuthenticationInfos(userData);
       toast.success("Vous êtes connecté.");
 
+      clearTimeout(timers.autoRenew);
+      clearTimeout(timers.autoLogOut);
+
       setTimers({
         autoRenew: setTimeout(renewJWTToken, config.TIME_JWT_RENEW),
         autoLogOut: setTimeout(eraseAuthContext, config.TIME_TO_LOG_OUT),

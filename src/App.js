@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 
 import "./App.css";
 import "react-super-responsive-table/dist/SuperResponsiveTableStyle.css";
@@ -278,14 +278,45 @@ function App() {
     authAPI.logout();
   };
 
+  function throttle(callback, wait, immediate = false) {
+    console.log("throttling");
+    let timeout = null;
+    let initialCall = true;
+
+    return function () {
+      const callNow = immediate && initialCall;
+      const next = () => {
+        callback.apply(this, arguments);
+        timeout = null;
+      };
+
+      if (callNow) {
+        initialCall = false;
+        next();
+      }
+
+      if (!timeout) {
+        timeout = setTimeout(next, wait);
+      }
+    };
+  }
+
   const restartLogOutCountDown = () => {
     clearTimeout(timers.autoLogOut);
-
+    console.log("actually restarting timer");
     setTimers({
       ...timers,
       autoLogOut: setTimeout(eraseAuthContext, config.TIME_TO_LOG_OUT),
     });
   };
+
+  /*
+   * We keep track of the timer reference through renders thanks to useCallback
+   */
+  const delayedQuery = useCallback(
+    throttle(() => restartLogOutCountDown(), 120000),
+    []
+  );
 
   const renewJWTToken = () => {
     if (authenticationInfos.isAuthenticated) {
@@ -390,8 +421,8 @@ function App() {
   return (
     <div
       className="App"
-      onMouseMove={() => restartLogOutCountDown()}
-      onTouchMove={() => restartLogOutCountDown()}
+      onMouseMove={() => delayedQuery()}
+      onTouchMove={() => delayedQuery()}
     >
       <AuthContext.Provider value={contextValue}>
         <SellingBasketContext.Provider value={contextBasket}>
