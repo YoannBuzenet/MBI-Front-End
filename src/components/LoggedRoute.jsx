@@ -18,7 +18,9 @@ const LoggedRoute = ({ path, component, match, history }) => {
       isAuthenticated: false,
       user: { ...authenticationInfos.user, roles: [] },
     });
-    toast.error("Vous n'êtes plus connecté. Merci de vous reconnecter.");
+    toast.error("Vous n'êtes plus connecté. Merci de vous reconnecter.", {
+      toastId: 13,
+    });
   }
 
   component = withRouter(component);
