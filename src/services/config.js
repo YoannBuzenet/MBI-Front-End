@@ -15,6 +15,9 @@ const TIME_JWT_RENEW = 55 * 60 * 1000;
 //4 minutes
 const TIME_THROTTLE = 240000;
 
+//30 minutes
+const TIME_TO_EXPIRE_LAST_MODIFICATION = 30 * 60 * 1000;
+
 //flag size : 25*13px
 
 export default {
@@ -25,4 +28,5 @@ export default {
   TIME_TO_LOG_OUT,
   TIME_JWT_RENEW,
   TIME_THROTTLE,
+  TIME_TO_EXPIRE_LAST_MODIFICATION,
 };
