@@ -279,7 +279,7 @@ function App() {
   };
 
   function throttle(callback, wait, immediate = false) {
-    console.log("throttling");
+    // console.log("throttling");
     let timeout = null;
     let initialCall = true;
 
@@ -303,7 +303,7 @@ function App() {
 
   const restartLogOutCountDown = () => {
     clearTimeout(timers.autoLogOut);
-    console.log("actually restarting timer");
+    // console.log("actually restarting timer");
     setTimers({
       ...timers,
       autoLogOut: setTimeout(eraseAuthContext, config.TIME_TO_LOG_OUT),
