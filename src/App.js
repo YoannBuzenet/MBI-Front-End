@@ -87,13 +87,12 @@ function App() {
   //APP INITIALIZATION USE EFFECT
   useEffect(() => {
     //Load all the sets on App first Load
-    const allSets = SetsAPI.findAll();
+
     const allLangs = genericCardCharacteristicsAPI.getAllLang();
     const allConditions = genericCardCharacteristicsAPI.getAllConditions();
     const publicShopInfos = shopAPI.getPublicInfos();
-    Promise.all([allSets, allLangs, allConditions, publicShopInfos]).then(
-      ([allSets, allLangs, allConditions, publicShopInfos]) => {
-        setAllSets(allSets);
+    Promise.all([allLangs, allConditions, publicShopInfos]).then(
+      ([allLangs, allConditions, publicShopInfos]) => {
         setLangDefinition(allLangs);
         setConditionDefinition(allConditions);
         setShopInfos(publicShopInfos);
