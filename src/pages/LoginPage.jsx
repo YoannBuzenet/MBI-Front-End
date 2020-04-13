@@ -6,7 +6,7 @@ import Field from "../components/forms/Field";
 import LoginLogOutContext from "../context/logAutoRenewOrLogout";
 import config from "../services/config";
 
-const LoginPage = ({ onLogin, history, eraseAuthContext, renewJWTToken }) => {
+const LoginPage = ({ history, eraseAuthContext, renewJWTToken }) => {
   const { authenticationInfos, setAuthenticationInfos } = useContext(
     AuthContext
   );
@@ -50,9 +50,6 @@ const LoginPage = ({ onLogin, history, eraseAuthContext, renewJWTToken }) => {
         autoRenew: setTimeout(renewJWTToken, config.TIME_JWT_RENEW),
         autoLogOut: setTimeout(eraseAuthContext, config.TIME_TO_LOG_OUT),
       });
-
-      //Getting user back to the top page
-      window.scrollTo(0, 0);
 
       if (userData.user.roles.includes("ROLE_SHOP")) {
         history.replace("/shopadmin/sell_requests");

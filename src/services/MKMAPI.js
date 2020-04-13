@@ -163,9 +163,9 @@ function buildOAuthHeader(method, URLToReach) {
 
   const signingKey = calculateSigningKey(app_secret, access_token_secret);
 
-  console.log(baseString);
-  console.log(params_ordered);
-  console.log(signingKey);
+  // console.log(baseString);
+  // console.log(params_ordered);
+  // console.log(signingKey);
 
   //https://stackoverflow.com/questions/12099092/javascript-equivalent-of-phps-hash-hmac-with-raw-binary-output
   var CryptoJS = require("crypto-js");

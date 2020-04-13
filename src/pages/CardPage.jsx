@@ -4,6 +4,8 @@ import cardsAPI from "../services/cardsAPI";
 import CardLine from "../components/CardLine";
 import { Table, Thead, Tbody, Tr, Th } from "react-super-responsive-table";
 import TableLoader from "../components/loaders/TableLoader";
+import { isMobile } from "react-device-detect";
+import SetListLoader from "../components/loaders/SetListLoader";
 
 const CardPage = ({ match, handleAddSellingBasket }) => {
   const NUMBER_OF_LANGUAGES = 11;
@@ -36,7 +38,7 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
    * We browse the array, build a big object, then fill it with data.
    */
   const makeCardShopPriceBrowsable = (array) => {
-    console.log("function called");
+    // console.log("function called");
     for (let i = 0; i < array.length; i++) {
       //Creating the allPrices object that will hold all the data.
       array[i].allPrices = {};
@@ -94,7 +96,7 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
           cancelToken: source.token,
         })
         .then((data) => {
-          console.log(data.data["hydra:member"]);
+          // console.log(data.data["hydra:member"]);
           return data.data["hydra:member"];
         })
         .then((data) => makeCardShopPriceBrowsable(data))
@@ -114,7 +116,14 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
     <>
       <div className="container">
         <h1>{currentName}</h1>
-        {isLoading && <TableLoader />}
+        {isLoading && !isMobile && <TableLoader />}
+
+        {isLoading && isMobile && (
+          <>
+            <SetListLoader />
+            <SetListLoader />
+          </>
+        )}
         {!isLoading && (
           <Table className="zebra-table">
             <Thead>

@@ -12,8 +12,8 @@ const TIME_TO_LOG_OUT = 30 * 60 * 1000;
 //55 minutes
 const TIME_JWT_RENEW = 55 * 60 * 1000;
 
-//2 minutes
-const TIME_THROTTLE = 120000;
+//4 minutes
+const TIME_THROTTLE = 240000;
 
 //flag size : 25*13px
 
