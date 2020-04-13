@@ -16,23 +16,18 @@ const LastModifications = () => {
       window.localStorage.getItem("last-modifications")
     );
 
-    console.log(localStorageLastModifications);
-
     const now = new Date().getTime();
-
-    console.log(now);
-
-    console.log(localStorageLastModifications.expirationDate > now);
 
     if (
       localStorageLastModifications &&
       localStorageLastModifications.expirationDate > now
     ) {
-      console.log(localStorageLastModifications.expirationDate);
-      console.log(now);
+      // console.log(localStorageLastModifications.expirationDate);
+      // console.log(now);
       setLastModificationList(localStorageLastModifications.data);
       setIsLoading(false);
     } else {
+      //If cookie is expired, we call API
       axios
         .get(
           config.URL_API + "/lastcardsmodified?limit=10&shopid=" + config.shopID
@@ -43,16 +38,18 @@ const LastModifications = () => {
         })
         .then((data) => {
           let lastModifications = {
-            expirationDate: new Date().getTime() + 60 * 1000 * 5,
+            expirationDate:
+              new Date().getTime() + config.TIME_TO_EXPIRE_LAST_MODIFICATION,
             data: data.data,
           };
           localStorageAPI.saveLocalStorage(
             "last-modifications",
             lastModifications
           );
-          return console.log(data.data);
+          return data.data;
         })
-        .then(() => setIsLoading(false));
+        .then(() => setIsLoading(false))
+        .catch(() => setIsLoading(false));
     }
 
     //ADD CANCEL EFFECT

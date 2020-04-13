@@ -118,7 +118,7 @@ function buildOAuthHeader(method, URLToReach) {
   let baseString = method.toUpperCase() + "&";
   baseString += encodeURIComponent(urlWithoutParam) + "&";
 
-  console.log("baseString before adding parameters", baseString);
+  // console.log("baseString before adding parameters", baseString);
 
   //Initializing params that will be used for signature calculation. Other params may be added if there are query strings in the url.
   const signatureParams = {
@@ -171,7 +171,7 @@ function buildOAuthHeader(method, URLToReach) {
   var CryptoJS = require("crypto-js");
   const raw_signature = hmacSHA1(baseString, signingKey);
   const signature = raw_signature.toString(CryptoJS.enc.Base64);
-  console.log(signature);
+  // console.log(signature);
 
   //Update signature in params_ordered
   params_header.oauth_signature = signature;
@@ -191,7 +191,7 @@ function buildOAuthHeader(method, URLToReach) {
     }
     j++;
   }
-  console.log("header", header);
+  // console.log("header", header);
 
   return header;
 }
