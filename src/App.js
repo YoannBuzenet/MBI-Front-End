@@ -312,9 +312,11 @@ function App() {
 
   /*
    * We keep track of the timer reference through renders thanks to useCallback
+   * https://medium.com/@rajeshnaroth/using-throttle-and-debounce-in-a-react-function-component-5489fc3461b3
+   * See the answer with useCallback exemple
    */
   const delayedQuery = useCallback(
-    throttle(() => restartLogOutCountDown(), 120000),
+    throttle(() => restartLogOutCountDown(), config.TIME_THROTTLE),
     []
   );
 

@@ -12,6 +12,9 @@ const TIME_TO_LOG_OUT = 30 * 60 * 1000;
 //55 minutes
 const TIME_JWT_RENEW = 55 * 60 * 1000;
 
+//2 minutes
+const TIME_THROTTLE = 120000;
+
 //flag size : 25*13px
 
 export default {
@@ -21,4 +24,5 @@ export default {
   gradingArea,
   TIME_TO_LOG_OUT,
   TIME_JWT_RENEW,
+  TIME_THROTTLE,
 };
