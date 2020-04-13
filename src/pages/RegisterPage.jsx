@@ -43,6 +43,10 @@ const RegisterPage = ({ history }) => {
 
       // console.log(jsonToSend);
       setIsLoading(false);
+
+      //Getting user back to the top page
+      window.scrollTo(0, 0);
+
       history.replace("/");
     } catch (error) {
       if (error.response) {

@@ -2,13 +2,15 @@ import React, { useState, useContext } from "react";
 import AuthContext from "../context/authContext";
 import userAPI from "../services/userAPI";
 import AuthAPI from "../services/authAPI";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 
-const MyAccount = props => {
+const MyAccount = () => {
   //Current Authentication
   const { authenticationInfos, setAuthenticationInfos } = useContext(
     AuthContext
   );
+
+  const [timer, setTimer] = useState();
 
   const [accountInformation, setAccountInformation] = useState({
     firstName: authenticationInfos.customer.prenom,
@@ -18,11 +20,11 @@ const MyAccount = props => {
     adress: authenticationInfos.customer.adress,
     postalCode: authenticationInfos.customer.postalCode,
     town: authenticationInfos.customer.town,
-    idCustomer: authenticationInfos.customer.id
+    idCustomer: authenticationInfos.customer.id,
   });
 
-  const handleSubmit = async event => {
-    event.preventDefault();
+  const APIupdate = async () => {
+    // console.log("update");
 
     const credentials = {
       client: {
@@ -32,9 +34,9 @@ const MyAccount = props => {
         adress: accountInformation.adress,
         postalCode: accountInformation.postalCode,
         town: accountInformation.town,
-        tel: accountInformation.tel
+        tel: accountInformation.tel,
       },
-      nickname: ""
+      nickname: "",
     };
 
     try {
@@ -52,7 +54,7 @@ const MyAccount = props => {
         adress: response.data.client.adress,
         postalCode: response.data.client.postalCode,
         town: response.data.client.town,
-        idCustomer: response.data.client.id
+        idCustomer: response.data.client.id,
       });
 
       //UPDATE LES INFOS EN MEMOIRE VIVE
@@ -61,7 +63,7 @@ const MyAccount = props => {
         user: {
           id: response.data.id,
           email: response.data.email,
-          roles: response.data.roles
+          roles: response.data.roles,
         },
         customer: {
           id: response.data.client.id,
@@ -71,12 +73,11 @@ const MyAccount = props => {
           adress: response.data.client.adress,
           postalCode: response.data.client.postalCode,
           town: response.data.client.town,
-          SellRequests: authenticationInfos.customer.SellRequests
+          SellRequests: authenticationInfos.customer.SellRequests,
         },
-        shop: { ...authenticationInfos.shop }
+        shop: { ...authenticationInfos.shop },
       });
-      //UPDATE INFOS IN LOCAL STORAGE
-      //FORMAT IN LOCAL STORAGE IS DIFFERENT FROM WHAT IS STORED IN MEMORY (maybe we should put everything is memory format)
+
       //Preparing data format to send, to copy what's stored in local storage
       const currentDataInLocalStorage = AuthAPI.userInfos();
       const newDataInLocalStorage = {
@@ -84,7 +85,7 @@ const MyAccount = props => {
         user: {
           id: response.data.id,
           email: response.data.email,
-          roles: response.data.roles
+          roles: response.data.roles,
         },
         client: {
           id: response.data.client.id,
@@ -104,8 +105,8 @@ const MyAccount = props => {
             email: authenticationInfos.shop.email,
             adress: authenticationInfos.shop.adress,
             postalCode: authenticationInfos.shop.postalCode,
-            town: authenticationInfos.shop.town
-          }
+            town: authenticationInfos.shop.town,
+          },
         },
         //
         shop: {
@@ -117,8 +118,8 @@ const MyAccount = props => {
           email: "",
           adress: "",
           postalCode: "",
-          town: ""
-        }
+          town: "",
+        },
       };
       AuthAPI.updateUserInfosLocalStorage(newDataInLocalStorage);
 
@@ -131,21 +132,26 @@ const MyAccount = props => {
     }
   };
 
-  const handleChange = event => {
+  const handleChange = (event) => {
+    clearTimeout(timer);
+    // console.log("change");
+
     const value = event.currentTarget.value;
     const name = event.currentTarget.name;
 
     setAccountInformation({
       ...accountInformation,
-      [name]: value
+      [name]: value,
     });
+
+    setTimer(setTimeout(APIupdate, 2000));
   };
 
   return (
     <>
       <div className="container my-account">
         <h1>Mon compte</h1>
-        <form action="" onSubmit={handleSubmit}>
+        <form>
           <label htmlFor="firstName">Prénom</label>
           <input
             type="text"
@@ -216,8 +222,6 @@ const MyAccount = props => {
             onChange={handleChange}
             value={accountInformation.town}
           />
-
-          <button type="submit">Modifier mes informations</button>
         </form>
       </div>
     </>
