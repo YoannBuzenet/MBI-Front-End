@@ -17,6 +17,9 @@ function authenticate(credentials) {
       console.log(data);
       //Stocking in local storage
       window.localStorage.setItem("authToken", data.token);
+
+      //Changing one data structure before saving it into session & local storage
+      //This modification is what prevent total refactorization of transformAPIdataIntoAppData function
       if (data.shop) {
         data.shop.PercentPerLangs = localStorageAPI.transformPercentPerLangArrayIntoObject(
           data.shop.PercentPerLangs
@@ -122,55 +125,7 @@ function userInfos() {
     const userDatas = JSON.parse(window.localStorage.getItem("userInfos"));
     //console.log(userDatas);
 
-    return {
-      isAuthenticated: jwtData.exp * 1000 > new Date().getTime(),
-      refresh_token: userDatas.refresh_token,
-      user: {
-        id: userDatas.user.id,
-        email: userDatas.user.email,
-        roles: userDatas.user.roles,
-      },
-      customer: {
-        id: userDatas.client.id,
-        prenom: userDatas.client.prenom,
-        nom: userDatas.client.nom,
-        tel: userDatas.client.tel,
-        adress: userDatas.client.adress,
-        postalCode: userDatas.client.postalCode,
-        town: userDatas.client.town,
-        SellRequests: userDatas.client.SellRequests,
-      },
-      shop: {
-        id: userDatas.client.shop.id,
-        legalName: userDatas.client.shop.legalName,
-        SIRET: userDatas.client.shop.SIRET,
-        vatNumber: userDatas.client.shop.vatNumber,
-        tel: userDatas.client.shop.tel,
-        email: userDatas.client.shop.email,
-        adress: userDatas.client.shop.adress,
-        postalCode: userDatas.client.shop.postalCode,
-        town: userDatas.client.shop.town,
-        legalClausesBuying: userDatas.shop
-          ? userDatas.shop.legalClausesBuying === null
-            ? ""
-            : userDatas.shop.legalClausesBuying
-          : "",
-        shopData: userDatas.shop
-          ? {
-              baseLang: userDatas.shop.baseLang,
-              PercentPerLangs: userDatas.shop.PercentPerLangs,
-              PercentPerConditions: userDatas.shop.PercentPerConditions,
-              PercentPerConditionFoils: userDatas.shop.PercentPerConditionFoils,
-              PercentPerSigned: userDatas.shop.percentPerSigned,
-            }
-          : null,
-        appToken: userDatas.shop ? userDatas.shop.appToken : null,
-        appSecret: userDatas.shop ? userDatas.shop.appSecret : null,
-        accessToken: userDatas.shop ? userDatas.shop.accessToken : null,
-        accessSecret: userDatas.shop ? userDatas.shop.accessSecret : null,
-        dateReceptionMKMToken: null,
-      },
-    };
+    return transformAPIdataIntoAppData(userDatas);
   } else {
     return {
       isAuthenticated: false,
