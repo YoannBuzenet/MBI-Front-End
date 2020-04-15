@@ -23,8 +23,6 @@ const LoginPage = ({ history, eraseAuthContext, renewJWTToken }) => {
 
   // console.log(eraseAuthContext);
 
-  const [error, setError] = useState("");
-
   const handleChange = (event) => {
     const value = event.currentTarget.value;
     const name = event.currentTarget.name;
@@ -44,7 +42,6 @@ const LoginPage = ({ history, eraseAuthContext, renewJWTToken }) => {
     try {
       const userData = await authAPI.authenticate(credentials);
       console.log(userData);
-      setError("");
       setAuthenticationInfos(userData);
       setIsLoading(false);
       toast.success("Vous êtes connecté.");
@@ -91,7 +88,6 @@ const LoginPage = ({ history, eraseAuthContext, renewJWTToken }) => {
               value={credentials.username}
               onChange={handleChange}
               placeholder="Adresse e-mail..."
-              error={error}
               className="form-group"
               required
             />

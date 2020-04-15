@@ -411,7 +411,6 @@ function App() {
     }
   };
 
-  //TODO : CHECK ALSO IS_SIGNED
   //This fonction should be rewritten to get O LOG N space time & complexity
   // Currenlty it is N²
   //To do this, get all the relevant information and hash them into ONE integer. Then sort this array following that integer.
@@ -451,211 +450,213 @@ function App() {
         <SellingBasketContext.Provider value={contextBasket}>
           <SetsContext.Provider value={contextAllSets}>
             <GenericContext.Provider value={contextDefinition}>
-              <CanSubmitContext.Provider value={contextSubmit}>
-                <SellRequestContext.Provider value={contextAdminSellRequest}>
-                  <BlackDivModal.Provider value={contextBlackDiv}>
-                    <shopPublicInfoContext.Provider
-                      value={contextShopPublicInfos}
+              <SellRequestContext.Provider value={contextAdminSellRequest}>
+                <BlackDivModal.Provider value={contextBlackDiv}>
+                  <shopPublicInfoContext.Provider
+                    value={contextShopPublicInfos}
+                  >
+                    <CardDisplayOnPageContext.Provider
+                      value={contextCardDisplayed}
                     >
-                      <CardDisplayOnPageContext.Provider
-                        value={contextCardDisplayed}
+                      <UserPreferenceContext.Provider
+                        value={ContentUserPreferences}
                       >
-                        <UserPreferenceContext.Provider
-                          value={ContentUserPreferences}
+                        <MKMModalContext.Provider
+                          value={contextMKMConnectionModal}
                         >
-                          <MKMModalContext.Provider
-                            value={contextMKMConnectionModal}
-                          >
-                            <Router>
-                              <isResponsiveMenuDisplayedContext.Provider
-                                value={contextResponsiveMenuDisplayed}
-                              >
-                                {/* Absolute positioned components */}
-                                {isBlackDivModalDisplayed === "activated" && (
-                                  <BlackDiv />
-                                )}
+                          <Router>
+                            <isResponsiveMenuDisplayedContext.Provider
+                              value={contextResponsiveMenuDisplayed}
+                            >
+                              {/* Absolute positioned components */}
+                              {isBlackDivModalDisplayed === "activated" && (
+                                <BlackDiv />
+                              )}
 
-                                {cardDisplayInformation.isDisplayed && (
-                                  <CardPlainPage />
-                                )}
+                              {cardDisplayInformation.isDisplayed && (
+                                <CardPlainPage />
+                              )}
 
-                                {isMKMModalDisplayed === "activated" && (
-                                  <MKMConnectModal />
-                                )}
+                              {isMKMModalDisplayed === "activated" && (
+                                <MKMConnectModal />
+                              )}
 
-                                {/* CHOOSING WHICH BURGER MENU DISPLAY */}
-                                {/* DEPENDING ON IF SHOP OR NOT*/}
-                                {isResponsiveMenuDisplayed === "activated" &&
-                                  !authenticationInfos.user.roles.includes(
-                                    "ROLE_SHOP"
-                                  ) && <BurgerMenuCustomerComponents />}
+                              {/* CHOOSING WHICH BURGER MENU DISPLAY */}
+                              {/* DEPENDING ON IF SHOP OR NOT*/}
+                              {isResponsiveMenuDisplayed === "activated" &&
+                                !authenticationInfos.user.roles.includes(
+                                  "ROLE_SHOP"
+                                ) && <BurgerMenuCustomerComponents />}
 
-                                {isResponsiveMenuDisplayed === "activated" &&
-                                  authenticationInfos.user.roles.includes(
-                                    "ROLE_SHOP"
-                                  ) && <BurgerMenuShop />}
-
-                                {/* CHOOSING WHICH NAVBAR DISPLAY */}
-                                {/* DEPENDING ON IF SHOP OR NOT*/}
-
-                                {authenticationInfos.user.roles &&
+                              {isResponsiveMenuDisplayed === "activated" &&
                                 authenticationInfos.user.roles.includes(
                                   "ROLE_SHOP"
-                                ) ? (
-                                  <ShopNavbarWithRouter />
-                                ) : (
-                                  <NavbarWithRouter />
+                                ) && <BurgerMenuShop />}
+
+                              {/* CHOOSING WHICH NAVBAR DISPLAY */}
+                              {/* DEPENDING ON IF SHOP OR NOT*/}
+
+                              {authenticationInfos.user.roles &&
+                              authenticationInfos.user.roles.includes(
+                                "ROLE_SHOP"
+                              ) ? (
+                                <ShopNavbarWithRouter />
+                              ) : (
+                                <NavbarWithRouter />
+                              )}
+                            </isResponsiveMenuDisplayedContext.Provider>
+                            <ToastContainer
+                              autoClose={3000}
+                              position="bottom-left"
+                              hideProgressBar={true}
+                            />
+                            <Footer />
+                            <Switch>
+                              <Route
+                                path="/"
+                                exact
+                                render={(props) => (
+                                  <Homepage
+                                    handleAddSellingBasket={
+                                      handleAddSellingBasket
+                                    }
+                                  />
                                 )}
-                              </isResponsiveMenuDisplayedContext.Provider>
-                              <ToastContainer
-                                autoClose={3000}
-                                position="bottom-left"
-                                hideProgressBar={true}
                               />
-                              <Footer />
-                              <Switch>
-                                <Route
-                                  path="/"
-                                  exact
-                                  render={(props) => (
-                                    <Homepage
+
+                              <Route
+                                path="/sets/:id"
+                                render={({ match }) => (
+                                  <cardsOneSetContext.Provider
+                                    value={contextCardsOneSet}
+                                  >
+                                    <OneSet
                                       handleAddSellingBasket={
                                         handleAddSellingBasket
                                       }
+                                      match={match}
                                     />
-                                  )}
-                                />
+                                  </cardsOneSetContext.Provider>
+                                )}
+                              />
 
-                                <Route
-                                  path="/sets/:id"
-                                  render={({ match }) => (
-                                    <cardsOneSetContext.Provider
-                                      value={contextCardsOneSet}
-                                    >
-                                      <OneSet
-                                        handleAddSellingBasket={
-                                          handleAddSellingBasket
-                                        }
-                                        match={match}
-                                      />
-                                    </cardsOneSetContext.Provider>
-                                  )}
-                                />
-
-                                <Route
-                                  path="/login"
-                                  render={({ match, history }) => (
-                                    <LoginRenewOrLogOutContext.Provider
-                                      value={ContextloginLogOut}
-                                    >
-                                      <LoginPage
-                                        match={match}
-                                        history={history}
-                                        eraseAuthContext={eraseAuthContext}
-                                        renewJWTToken={renewJWTToken}
-                                      />
-                                    </LoginRenewOrLogOutContext.Provider>
-                                  )}
-                                />
-
-                                <Route
-                                  path="/card/:cardName"
-                                  render={({ match, history }) => (
-                                    <CardPage
+                              <Route
+                                path="/login"
+                                render={({ match, history }) => (
+                                  <LoginRenewOrLogOutContext.Provider
+                                    value={ContextloginLogOut}
+                                  >
+                                    <LoginPage
                                       match={match}
                                       history={history}
-                                      handleAddSellingBasket={
-                                        handleAddSellingBasket
-                                      }
+                                      eraseAuthContext={eraseAuthContext}
+                                      renewJWTToken={renewJWTToken}
                                     />
-                                  )}
-                                />
+                                  </LoginRenewOrLogOutContext.Provider>
+                                )}
+                              />
 
-                                <Route
-                                  path="/register"
-                                  component={RegisterPage}
-                                />
-                                <Route
-                                  path="/buyingClauses"
-                                  component={BuyingClauses}
-                                />
+                              <Route
+                                path="/card/:cardName"
+                                render={({ match, history }) => (
+                                  <CardPage
+                                    match={match}
+                                    history={history}
+                                    handleAddSellingBasket={
+                                      handleAddSellingBasket
+                                    }
+                                  />
+                                )}
+                              />
 
-                                <Route
-                                  path="/my_selling_basket"
-                                  render={({ match, history }) => (
+                              <Route
+                                path="/register"
+                                component={RegisterPage}
+                              />
+                              <Route
+                                path="/buyingClauses"
+                                component={BuyingClauses}
+                              />
+
+                              <Route
+                                path="/my_selling_basket"
+                                render={({ match, history }) => (
+                                  <CanSubmitContext.Provider
+                                    value={contextSubmit}
+                                  >
                                     <MySellingBasket
                                       checkForDuplicates={checkForDuplicates}
                                       match={match}
                                       history={history}
                                     />
-                                  )}
-                                />
-                                <LoggedRoute
-                                  path="/my_sell_requests/:id"
-                                  component={OneSellRequest}
-                                />
-                                <LoggedRoute
-                                  path="/my_sell_requests"
-                                  component={mySellRequests}
-                                />
-                                <LoggedRoute
-                                  path="/my_account"
-                                  component={myAccount}
-                                />
+                                  </CanSubmitContext.Provider>
+                                )}
+                              />
+                              <LoggedRoute
+                                path="/my_sell_requests/:id"
+                                component={OneSellRequest}
+                              />
+                              <LoggedRoute
+                                path="/my_sell_requests"
+                                component={mySellRequests}
+                              />
+                              <LoggedRoute
+                                path="/my_account"
+                                component={myAccount}
+                              />
 
-                                {/* Admin Part */}
+                              {/* Admin Part */}
 
-                                <LoggedShopRouteRender
-                                  path="/shopadmin/sell_requests/:id"
-                                  component={ShopAdminOneSellRequest}
-                                />
-                                <LoggedShopRouteRender
-                                  path="/shopadmin/sell_requests"
-                                  component={ShopAdminAllSellRequests}
-                                />
-                                <LoggedShopRouteRender
-                                  path="/shopadmin/customers/:id"
-                                  component={ShopAdminCustomer}
-                                />
-                                <LoggedShopRouteRender
-                                  path="/shopadmin/customers"
-                                  component={ShopAdminAllCustomers}
-                                />
-                                <LoggedShopRouteComponent
-                                  path="/shopadmin/cards"
-                                  component={ShopAdminCards}
-                                />
-                                <LoggedShopRouteRender
-                                  path="/shopadmin/settings"
-                                  component={ShopAdminSettings}
-                                />
-                                <LoggedShopRouteRender
-                                  path="/shopadmin/shopInfos"
-                                  component={MyShopAccount}
-                                />
+                              <LoggedShopRouteRender
+                                path="/shopadmin/sell_requests/:id"
+                                component={ShopAdminOneSellRequest}
+                              />
+                              <LoggedShopRouteRender
+                                path="/shopadmin/sell_requests"
+                                component={ShopAdminAllSellRequests}
+                              />
+                              <LoggedShopRouteRender
+                                path="/shopadmin/customers/:id"
+                                component={ShopAdminCustomer}
+                              />
+                              <LoggedShopRouteRender
+                                path="/shopadmin/customers"
+                                component={ShopAdminAllCustomers}
+                              />
+                              <LoggedShopRouteComponent
+                                path="/shopadmin/cards"
+                                component={ShopAdminCards}
+                              />
+                              <LoggedShopRouteRender
+                                path="/shopadmin/settings"
+                                component={ShopAdminSettings}
+                              />
+                              <LoggedShopRouteRender
+                                path="/shopadmin/shopInfos"
+                                component={MyShopAccount}
+                              />
 
-                                <PriceBufferContext.Provider
-                                  value={contextPriceBuffer}
-                                >
-                                  <LoggedShopRouteRender
-                                    path="/shopadmin/card/:name"
-                                    component={ShopAdminOneCard}
-                                  />
-                                </PriceBufferContext.Provider>
-
-                                <LoggedShopRouteComponent
-                                  path="/shopadmin"
-                                  component={ShopAdminHome}
+                              <PriceBufferContext.Provider
+                                value={contextPriceBuffer}
+                              >
+                                <LoggedShopRouteRender
+                                  path="/shopadmin/card/:name"
+                                  component={ShopAdminOneCard}
                                 />
-                              </Switch>
-                            </Router>
-                          </MKMModalContext.Provider>
-                        </UserPreferenceContext.Provider>
-                      </CardDisplayOnPageContext.Provider>
-                    </shopPublicInfoContext.Provider>
-                  </BlackDivModal.Provider>
-                </SellRequestContext.Provider>
-              </CanSubmitContext.Provider>
+                              </PriceBufferContext.Provider>
+
+                              <LoggedShopRouteComponent
+                                path="/shopadmin"
+                                component={ShopAdminHome}
+                              />
+                            </Switch>
+                          </Router>
+                        </MKMModalContext.Provider>
+                      </UserPreferenceContext.Provider>
+                    </CardDisplayOnPageContext.Provider>
+                  </shopPublicInfoContext.Provider>
+                </BlackDivModal.Provider>
+              </SellRequestContext.Provider>
             </GenericContext.Provider>
           </SetsContext.Provider>
         </SellingBasketContext.Provider>
