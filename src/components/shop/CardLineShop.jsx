@@ -13,6 +13,7 @@ import { isMobile } from "react-device-detect";
 import { toast } from "react-toastify";
 import CardDisplayOnPageContext from "../../context/cardDisplayOnPageContext";
 import BlackDivModalContext from "../../context/blackDivModalContext";
+import config from "../../services/config";
 
 const CardLineShop = ({ card, indexCard }) => {
   //Getting the Sell Request state by context
@@ -251,10 +252,6 @@ const CardLineShop = ({ card, indexCard }) => {
   //Defining the class, if it's error or not
   const sellingBasketLine = errorList.includes(indexCard) ? "error-line" : "";
 
-  //TEMPORARY DEFAULT DEFINITION TODO : GET IT THOURGH API
-  //ALSO DEFINED IN CARDLINE
-  const gradingArea = "EU";
-
   const hoverClassName = (e) => genericCardAPI.isPictureDisplayedTopOrBottom(e);
 
   const displayCardPlainPage = (event, urlCard) => {
@@ -378,7 +375,7 @@ const CardLineShop = ({ card, indexCard }) => {
             value={currentCard.condition}
           >
             {conditions.length > 0
-              ? gradingArea === "EU"
+              ? config.gradingArea === "isEU"
                 ? conditions
                     .filter(
                       (condition) => condition.id !== currentCard.condition

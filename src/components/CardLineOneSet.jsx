@@ -47,7 +47,7 @@ const CardLineOneSet = ({
 
   const [isLoading, setIsLoading] = useState(false);
 
-  console.log(langIDToDisplay);
+  // console.log(langIDToDisplay);
 
   //Black Div control
   const { setIsBlackDivModalDisplayed } = useContext(BlackDivModalContext);
@@ -121,10 +121,6 @@ const CardLineOneSet = ({
   const urlPictureCard = cardsAPI.getSmallPictureFromScryfallId(card);
 
   const hoverClassName = (e) => genericCardAPI.isPictureDisplayedTopOrBottom(e);
-
-  //TEMPORARY DEFAULT DEFINITION TODO : GET IT THROUGH API OR LOCAL ENV
-  //ALSO DEFINED IN CARDSELLINGBASKET
-  const gradingArea = "EU";
 
   const displayCardPlainPage = (event, urlCard) => {
     const newDisplayContext = { ...cardDisplayInformation };
@@ -219,7 +215,7 @@ const CardLineOneSet = ({
             defaultValue="2"
           >
             {conditions.length > 0
-              ? gradingArea === "EU"
+              ? config.gradingArea === "isEU"
                 ? conditions.map((condition, index) =>
                     condition.isEU ? (
                       <option key={index} value={condition.id}>

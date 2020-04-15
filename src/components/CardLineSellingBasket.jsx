@@ -127,10 +127,6 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
   //Defining the class, if it must indicate error warning or not
   const sellingBasketLine = errorList.includes(indexCard) ? "error-line" : "";
 
-  //TEMPORARY DEFAULT DEFINITION TODO : GET IT THOURGH API
-  //ALSO DEFINED IN CARDLINE
-  const gradingArea = "EU";
-
   const hoverClassName = (e) => genericCardAPI.isPictureDisplayedTopOrBottom(e);
 
   const displayCardPlainPage = (event, urlCard) => {
@@ -233,7 +229,7 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
             value={card.condition}
           >
             {conditions.length > 0
-              ? gradingArea === "EU"
+              ? config.gradingArea === "isEU"
                 ? conditions
                     // .filter(condition => condition.id !== card.condition)
                     .map((condition, index) =>

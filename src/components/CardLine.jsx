@@ -8,6 +8,7 @@ import FeatherIcon from "feather-icons-react";
 import { Tr, Td } from "react-super-responsive-table";
 import CardDisplayOnPageContext from "../context/cardDisplayOnPageContext";
 import BlackDivModalContext from "../context/blackDivModalContext";
+import config from "../services/config";
 
 const CardLine = ({ card, handleAddSellingBasket, index, setName }) => {
   const LANGUAGE_ID_ENG = 9;
@@ -123,10 +124,6 @@ const CardLine = ({ card, handleAddSellingBasket, index, setName }) => {
 
   const hoverClassName = (e) => genericCardAPI.isPictureDisplayedTopOrBottom(e);
 
-  //TEMPORARY DEFAULT DEFINITION TODO : GET IT THROUGH API OR LOCAL ENV
-  //ALSO DEFINED IN CARDSELLINGBASKET
-  const gradingArea = "EU";
-
   const displayCardPlainPage = (event, urlCard) => {
     const newDisplayContext = { ...cardDisplayInformation };
     newDisplayContext.cardPictureUrl = urlCard;
@@ -204,7 +201,7 @@ const CardLine = ({ card, handleAddSellingBasket, index, setName }) => {
             defaultValue="2"
           >
             {conditions.length > 0
-              ? gradingArea === "EU"
+              ? config.gradingArea === "isEU"
                 ? conditions.map((condition, index) =>
                     condition.isEU ? (
                       <option key={index} value={condition.id}>
