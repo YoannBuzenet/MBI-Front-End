@@ -80,7 +80,7 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
         scryfallid: data[i].scryfallid,
         uuid: data[i].uuid,
         foreignData: data[i].foreignData,
-        price: null,
+        price: 0,
         isFoil: data[i].hasnonfoil ? "No" : "Yes",
         isSigned: "No",
         set: currentSet ? currentSet.name : null,
@@ -280,17 +280,10 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
                     {Object.keys(cardsContext)
                       .filter((cardID) => {
                         if (priceFilter > 0) {
-                          console.log("y'a un filtre");
-                          console.log(cardsContext[cardID]);
-                          console.log(cardsContext[cardID].name);
-                          console.log(parseFloat(cardsContext[cardID].price));
-                          console.log(parseFloat(priceFilter));
                           if (
-                            parseFloat(cardsContext[cardID].price) >=
+                            parseFloat(cardsContext[cardID].price) <=
                             parseFloat(priceFilter)
                           ) {
-                            console.log("filtre cette merde");
-
                             return;
                           } else {
                             return cardID;
