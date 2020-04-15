@@ -2,13 +2,13 @@ import React, { useState, useEffect, useCallback } from "react";
 
 import "./App.css";
 import "react-super-responsive-table/dist/SuperResponsiveTableStyle.css";
+import jwtDecode from "jwt-decode";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import SellingBasketAPI from "./services/sellingBasketAPI";
 import AuthAPI from "./services/authAPI";
-import SetsAPI from "./services/setsAPI";
 import genericCardCharacteristicsAPI from "./services/genericCardCharacteristicsAPI";
 
 import AuthContext from "./context/authContext";
@@ -81,17 +81,21 @@ function App() {
     AuthAPI.userInfos()
   );
 
-  //Checking is the JWT token is still good, if yes, Keep it in Axios
+  //Checking is the JWT token is still good, if yes, Keep it in Axios + Launch JWT Renew setTimeout
   //If not, log out
   useEffect(() => {
     const didLogBack = AuthAPI.setup();
 
     if (!didLogBack) {
+      //Log out if token is not up to date
       setAuthenticationInfos({
         ...authenticationInfos,
         isAuthenticated: false,
         user: { ...authenticationInfos.user, roles: [] },
       });
+    } else {
+      //Renew JWT token + setTimeout
+      renewJWTToken();
     }
   }, []);
 
