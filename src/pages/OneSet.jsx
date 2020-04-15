@@ -196,7 +196,15 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
   const handleChange = (event) => {
     console.log(event);
     const value = event.target.value;
-    setPriceFilter(value);
+
+    if (event.target.value[event.target.value.length - 1] === ".") {
+      setPriceFilter(value);
+    } else if (!isNaN(parseFloat(event.target.value))) {
+      const newPrice = parseFloat(value);
+      setPriceFilter(newPrice);
+    } else if (event.target.value === "") {
+      setPriceFilter(value);
+    }
   };
 
   return (
