@@ -125,6 +125,8 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
     setCardsContext(contextCopy);
   };
 
+  // console.log(cardsContext);
+
   useEffect(() => {
     setIdSet(match.params.id);
   }, [match.params.id]);
@@ -194,7 +196,6 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
     isMobile && setName.length > 10 ? " flagsDropDownMobileLongName" : "";
 
   const handleChange = (event) => {
-    console.log(event);
     const value = event.target.value;
 
     if (event.target.value[event.target.value.length - 1] === ".") {
@@ -206,6 +207,8 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
       setPriceFilter(value);
     }
   };
+
+  //Filtrer sur card.price du context
 
   return (
     <>
@@ -274,19 +277,41 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
                     </Tr>
                   </Thead>
                   <Tbody>
-                    {Object.keys(cardsContext).map((cardID, index) => {
-                      return (
-                        <CardLineOneSet
-                          card={cardsContext[cardID]}
-                          cardID={cardID}
-                          index={index}
-                          key={cardID}
-                          handleAddSellingBasket={handleAddSellingBasket}
-                          langIDToDisplay={langIDToDisplay}
-                          langsAvailable={languagesAvailables}
-                        />
-                      );
-                    })}
+                    {Object.keys(cardsContext)
+                      .filter((cardID) => {
+                        if (priceFilter > 0) {
+                          console.log("y'a un filtre");
+                          console.log(cardsContext[cardID]);
+                          console.log(cardsContext[cardID].name);
+                          console.log(parseFloat(cardsContext[cardID].price));
+                          console.log(parseFloat(priceFilter));
+                          if (
+                            parseFloat(cardsContext[cardID].price) >=
+                            parseFloat(priceFilter)
+                          ) {
+                            console.log("filtre cette merde");
+
+                            return;
+                          } else {
+                            return cardID;
+                          }
+                        } else {
+                          return cardID;
+                        }
+                      })
+                      .map((cardID, index) => {
+                        return (
+                          <CardLineOneSet
+                            card={cardsContext[cardID]}
+                            cardID={cardID}
+                            index={index}
+                            key={cardID}
+                            handleAddSellingBasket={handleAddSellingBasket}
+                            langIDToDisplay={langIDToDisplay}
+                            langsAvailable={languagesAvailables}
+                          />
+                        );
+                      })}
                   </Tbody>
                 </Table>
               </>
