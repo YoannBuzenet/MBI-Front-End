@@ -49,6 +49,8 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
 
   const [languagesAvailables, setLanguagesAvailaibles] = useState({});
 
+  const [priceFilter, setPriceFilter] = useState("");
+
   const transformLanguagesArrayIntoObject = (array) => {
     let langObject = {};
 
@@ -191,6 +193,12 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
   var classFlagsDropDown =
     isMobile && setName.length > 10 ? " flagsDropDownMobileLongName" : "";
 
+  const handleChange = (event) => {
+    console.log(event);
+    const value = event.target.value;
+    setPriceFilter(value);
+  };
+
   return (
     <>
       <div className="container">
@@ -199,6 +207,7 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
           <div className="last-modification">
             <div className="set-top-line">
               <h1>{setName}</h1>
+
               <div
                 className={classFlags}
                 onClick={() => setIsDisplayedLangChoice(!isDisplayedLangChoice)}
@@ -232,35 +241,47 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
               </>
             )}
             {!isLoading && (
-              <Table className="zebra-table">
-                <Thead>
-                  <Tr>
-                    <Th>Nom</Th>
-                    <Th>Langue</Th>
-                    <Th>Condition</Th>
-                    <Th>Foil</Th>
-                    <Th>Signée</Th>
-                    <Th>Quantité</Th>
-                    <Th>Prix</Th>
-                    <Th></Th>
-                  </Tr>
-                </Thead>
-                <Tbody>
-                  {Object.keys(cardsContext).map((cardID, index) => {
-                    return (
-                      <CardLineOneSet
-                        card={cardsContext[cardID]}
-                        cardID={cardID}
-                        index={index}
-                        key={cardID}
-                        handleAddSellingBasket={handleAddSellingBasket}
-                        langIDToDisplay={langIDToDisplay}
-                        langsAvailable={languagesAvailables}
-                      />
-                    );
-                  })}
-                </Tbody>
-              </Table>
+              <>
+                <div className="filter-cards">
+                  <p>Filtrer par prix</p>
+                  <input
+                    type="text"
+                    placeholder="Prix minimum..."
+                    value={priceFilter}
+                    onChange={(event) => handleChange(event)}
+                  />
+                </div>
+
+                <Table className="zebra-table">
+                  <Thead>
+                    <Tr>
+                      <Th>Nom</Th>
+                      <Th>Langue</Th>
+                      <Th>Condition</Th>
+                      <Th>Foil</Th>
+                      <Th>Signée</Th>
+                      <Th>Quantité</Th>
+                      <Th>Prix</Th>
+                      <Th></Th>
+                    </Tr>
+                  </Thead>
+                  <Tbody>
+                    {Object.keys(cardsContext).map((cardID, index) => {
+                      return (
+                        <CardLineOneSet
+                          card={cardsContext[cardID]}
+                          cardID={cardID}
+                          index={index}
+                          key={cardID}
+                          handleAddSellingBasket={handleAddSellingBasket}
+                          langIDToDisplay={langIDToDisplay}
+                          langsAvailable={languagesAvailables}
+                        />
+                      );
+                    })}
+                  </Tbody>
+                </Table>
+              </>
             )}
           </div>
         </div>
