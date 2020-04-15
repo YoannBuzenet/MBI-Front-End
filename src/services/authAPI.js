@@ -226,6 +226,64 @@ function refreshTokenAndInfos(refresh_token) {
     });
 }
 
+function transformAPIdataIntoAppData(data) {
+  const token = window.localStorage.getItem("authToken");
+
+  //Vérifier si la date d'exp du token est bonne, si oui on considère que connecté ( le serveur fait le vrai check derrière)
+  if (token) {
+    var jwtData = jwtDecode(token);
+  }
+  return {
+    isAuthenticated: jwtData.exp * 1000 > new Date().getTime(),
+    refresh_token: data.refresh_token,
+    user: {
+      id: data.user.id,
+      email: data.user.email,
+      roles: data.user.roles,
+    },
+    customer: {
+      id: data.client.id,
+      prenom: data.client.prenom,
+      nom: data.client.nom,
+      tel: data.client.tel,
+      adress: data.client.adress,
+      postalCode: data.client.postalCode,
+      town: data.client.town,
+      SellRequests: data.client.SellRequests,
+    },
+    shop: {
+      id: data.client.shop.id,
+      legalName: data.client.shop.legalName,
+      SIRET: data.client.shop.SIRET,
+      vatNumber: data.client.shop.vatNumber,
+      tel: data.client.shop.tel,
+      email: data.client.shop.email,
+      adress: data.client.shop.adress,
+      postalCode: data.client.shop.postalCode,
+      town: data.client.shop.town,
+      legalClausesBuying: data.shop
+        ? data.shop.legalClausesBuying === null
+          ? ""
+          : data.shop.legalClausesBuying
+        : "",
+      shopData: data.shop
+        ? {
+            baseLang: data.shop.baseLang,
+            PercentPerLangs: data.shop.PercentPerLangs,
+            PercentPerConditions: data.shop.PercentPerConditions,
+            PercentPerConditionFoils: data.shop.PercentPerConditionFoils,
+            PercentPerSigned: data.shop.percentPerSigned,
+          }
+        : null,
+      appToken: data.shop ? data.shop.appToken : null,
+      appSecret: data.shop ? data.shop.appSecret : null,
+      accessToken: data.shop ? data.shop.accessToken : null,
+      accessSecret: data.shop ? data.shop.accessSecret : null,
+      dateReceptionMKMToken: null,
+    },
+  };
+}
+
 export default {
   authenticate,
   logout,
@@ -233,4 +291,5 @@ export default {
   userInfos,
   updateUserInfosLocalStorage,
   refreshTokenAndInfos,
+  transformAPIdataIntoAppData,
 };
