@@ -2,6 +2,8 @@ const URL_API = "http://mtgapi.local:8888";
 
 const shopID = 1;
 
+const avatarShopURL = "";
+
 const shopName = "Fantasy Sphere - Nous rachetons toutes vos cartes";
 
 const baseLang = 3;
@@ -16,6 +18,7 @@ const TIME_TO_LOG_OUT = 30 * 60 * 1000;
 const TIME_JWT_RENEW = 55 * 60 * 1000;
 
 //4 minutes
+//Throttling time between autologOut timer refresh
 const TIME_THROTTLE = 240000;
 
 //30 minutes
@@ -37,4 +40,5 @@ export default {
   TIME_THROTTLE,
   TIME_TO_EXPIRE_LAST_MODIFICATION,
   TIME_TO_EXPIRE_SET_LIST,
+  avatarShopURL,
 };
