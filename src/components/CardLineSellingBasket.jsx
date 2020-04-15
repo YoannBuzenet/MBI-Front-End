@@ -91,6 +91,7 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
           setIsLoading(false);
           sellingBasketAPI.save(contextCopy);
           setCurrentBasket(contextCopy);
+          setErrorList([]);
         })
         .catch((error) => {
           toast.error(
@@ -180,7 +181,7 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
             id={card.cardName + "id1"}
             value={card.lang}
             onChange={(event) => {
-              setErrorList([]);
+              setIsLoading(true);
               return handleChange(event);
             }}
           >
@@ -223,7 +224,7 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
             name="condition"
             id={card.cardName + "id2"}
             onChange={(event) => {
-              setErrorList([]);
+              setIsLoading(true);
               return handleChange(event);
             }}
             value={card.condition}
@@ -257,7 +258,7 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
             id={card.cardName + "id4"}
             value={card.isFoil}
             onChange={(event) => {
-              setErrorList([]);
+              setIsLoading(true);
               return handleChange(event);
             }}
           >
@@ -277,7 +278,7 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
             name="isSigned"
             value={card.isSigned}
             onChange={(event) => {
-              setErrorList([]);
+              setIsLoading(true);
               return handleChange(event);
             }}
           >

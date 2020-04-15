@@ -86,7 +86,7 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
         set: currentSet ? currentSet.name : null,
         quantity: 1,
         condition: 2,
-        lang: 9,
+        lang: ENGLISH_LANG_ID,
         foreignDataObject: transformLanguagesArrayIntoObject(
           data[i].foreignData
         ),
@@ -173,7 +173,7 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
     if (Object.keys(cardsContext).length > 0 && !hasUpdatedPrices) {
       CardShopPriceAPI.getArrayofPrices(
         Object.keys(cardsContext).map((id) => parseInt(id)),
-        3
+        config.baseLang
       )
         .then((data) =>
           addFirstDisplayedPricesToContext(data.data["hydra:member"])
@@ -188,7 +188,7 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
     ? languagesDefinition.langDefinitionIDShortName[
         userPreferences.cardsSetLang
       ]
-    : languagesDefinition.langDefinitionIDShortName[9];
+    : languagesDefinition.langDefinitionIDShortName[ENGLISH_LANG_ID];
 
   var classFlags = isMobile && setName.length > 10 ? "blockFlags" : "";
   var classArrow = isMobile && setName.length > 10 ? " blockArrow" : "";
@@ -198,6 +198,7 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
   const handleChange = (event) => {
     const value = event.target.value;
 
+    //Checking if user is entering a coma for decimal input
     if (event.target.value[event.target.value.length - 1] === ".") {
       setPriceFilter(value);
     } else if (!isNaN(parseFloat(event.target.value))) {
@@ -207,8 +208,6 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
       setPriceFilter(value);
     }
   };
-
-  //Filtrer sur card.price du context
 
   return (
     <>

@@ -2,10 +2,11 @@ import React, { useContext, useEffect, useState } from "react";
 import ValidSellRequestAuthenticatedStep from "./ValidSellRequestAuthenticatedStep";
 import canSubmitContext from "../../context/canSubmitSellRequestContext";
 import SellingBasketContext from "../../context/sellingBasket";
+import { toast } from "react-toastify";
 
 const ValidSellRequestDuplicatesStep = ({
   handleSubmit,
-  checkForDuplicates
+  checkForDuplicates,
 }) => {
   //Current Basket
   const { currentBasket } = useContext(SellingBasketContext);
@@ -24,9 +25,8 @@ const ValidSellRequestDuplicatesStep = ({
     // console.log("check1", check[1]);
     // console.log("check2", check[2]);
     if (check[1] !== undefined && check[2] !== undefined) {
-      //TODO NOTIFICATION
       setErrorList([check[1], check[2]]);
-      console.log("they are dupliacte");
+      toast.error("Merci de retirer les doublons.");
     }
   }, [currentBasket]);
 
