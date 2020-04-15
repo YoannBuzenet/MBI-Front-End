@@ -219,6 +219,12 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
                 )}
               </div>
             </div>
+            {isDisplayedLangChoice && (
+              <div
+                className="unclick"
+                onClick={() => setIsDisplayedLangChoice(!isDisplayedLangChoice)}
+              ></div>
+            )}
             {isLoading && !isMobile && <OneSetLoader />}
             {isLoading && isMobile && (
               <>
