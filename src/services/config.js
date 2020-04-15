@@ -6,6 +6,7 @@ const shopName = "Fantasy Sphere FTW";
 
 const baseLang = 3;
 
+//isEU or isUS
 const gradingArea = "isEU";
 
 //30 minutes
