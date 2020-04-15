@@ -31,55 +31,7 @@ function authenticate(credentials) {
       axios.defaults.headers["Authorization"] = "Bearer " + data.token;
 
       //We return an object containing all data relevant to the current user : is he logged, who is he. Of course, every access is checked on the server.
-      return {
-        isAuthenticated: true,
-        refresh_token: data.refresh_token,
-        user: {
-          id: data.user.id,
-          email: data.user.email,
-          roles: data.user.roles,
-        },
-        customer: {
-          id: data.client.id,
-          prenom: data.client.prenom,
-          nom: data.client.nom,
-          tel: data.client.tel,
-          adress: data.client.adress,
-          postalCode: data.client.postalCode,
-          town: data.client.town,
-          SellRequests: data.client.SellRequests,
-        },
-        shop: {
-          id: data.client.shop.id,
-          legalName: data.client.shop.legalName,
-          SIRET: data.client.shop.SIRET,
-          vatNumber: data.client.shop.vatNumber,
-          tel: data.client.shop.tel,
-          email: data.client.shop.email,
-          adress: data.client.shop.adress,
-          postalCode: data.client.shop.postalCode,
-          town: data.client.shop.town,
-          legalClausesBuying: data.shop
-            ? data.shop.legalClausesBuying === null
-              ? ""
-              : data.shop.legalClausesBuying
-            : "",
-          shopData: data.shop
-            ? {
-                baseLang: data.shop.baseLang,
-                PercentPerLangs: data.shop.PercentPerLangs,
-                PercentPerConditions: data.shop.PercentPerConditions,
-                PercentPerConditionFoils: data.shop.PercentPerConditionFoils,
-                PercentPerSigned: data.shop.percentPerSigned,
-              }
-            : null,
-          appToken: data.shop ? data.shop.appToken : null,
-          appSecret: data.shop ? data.shop.appSecret : null,
-          accessToken: data.shop ? data.shop.accessToken : null,
-          accessSecret: data.shop ? data.shop.accessSecret : null,
-          dateReceptionMKMToken: null,
-        },
-      };
+      return transformAPIdataIntoAppData(data);
     });
 }
 
@@ -224,7 +176,9 @@ function transformAPIdataIntoAppData(data) {
       shopData: data.shop
         ? {
             baseLang: data.shop.baseLang,
-            PercentPerLangs: data.shop.PercentPerLangs,
+            PercentPerLangs: localStorageAPI.transformPercentPerLangArrayIntoObject(
+              data.shop.PercentPerLangs
+            ),
             PercentPerConditions: data.shop.PercentPerConditions,
             PercentPerConditionFoils: data.shop.PercentPerConditionFoils,
             PercentPerSigned: data.shop.percentPerSigned,
