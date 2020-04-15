@@ -1028,6 +1028,22 @@ div.blockFlags span.blockArrow {
   right: -10px;
 }
 
+.filter-cards {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.filter-cards p {
+  margin-right: 10px;
+}
+
+.filter-cards input {
+  height: 1.6rem;
+  padding: 1rem 0.5rem;
+  border-radius: 5px;
+}
+
 @media only screen and (max-width: 850px) {
   .cardPictureHolder {
     padding: 0.5rem;
