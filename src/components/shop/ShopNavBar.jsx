@@ -46,6 +46,7 @@ const ShopNavbar = ({ history }) => {
       },
     });
     toast.success("Vous êtes bien déconnecté.");
+
     history.replace("/");
   };
 

@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import Field from "../components/forms/Field";
 import LoginLogOutContext from "../context/logAutoRenewOrLogout";
 import config from "../services/config";
+import CSSLoaderWaitingSpiral from "../components/loaders/CSSLoaderWaitingSpiral";
 
 const LoginPage = ({ history, eraseAuthContext, renewJWTToken }) => {
   const { authenticationInfos, setAuthenticationInfos } = useContext(
@@ -17,6 +18,8 @@ const LoginPage = ({ history, eraseAuthContext, renewJWTToken }) => {
     email: "",
     password: "",
   });
+
+  const [isLoading, setIsLoading] = useState(false);
 
   // console.log(eraseAuthContext);
 
@@ -36,11 +39,14 @@ const LoginPage = ({ history, eraseAuthContext, renewJWTToken }) => {
     //Remove that line when going live
     // setIsAuthenticated(true);
     event.preventDefault();
+    setIsLoading(true);
+
     try {
       const userData = await authAPI.authenticate(credentials);
       console.log(userData);
       setError("");
       setAuthenticationInfos(userData);
+      setIsLoading(false);
       toast.success("Vous êtes connecté.");
 
       clearTimeout(timers.autoRenew);
@@ -65,6 +71,7 @@ const LoginPage = ({ history, eraseAuthContext, renewJWTToken }) => {
       }
       //PARSE THE ERROR BEFORE SETTING IT
       console.log(error);
+      setIsLoading(false);
       toast.error(
         "Le login ou le mot de passe est incorrect. Merci de réessayer."
       );
@@ -100,9 +107,16 @@ const LoginPage = ({ history, eraseAuthContext, renewJWTToken }) => {
               required
             />
             <div className="form-group">
-              <button type="submit" className="connecting-button">
-                Se connecter
-              </button>
+              {isLoading && (
+                <div className="RegisterLoader">
+                  <CSSLoaderWaitingSpiral />
+                </div>
+              )}
+              {!isLoading && (
+                <button type="submit" className="connecting-button">
+                  Se connecter
+                </button>
+              )}
             </div>
           </form>
         </div>

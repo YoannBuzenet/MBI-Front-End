@@ -18,13 +18,6 @@ function authenticate(credentials) {
       //Stocking in local storage
       window.localStorage.setItem("authToken", data.token);
 
-      //Changing one data structure before saving it into session & local storage
-      //This modification is what prevent total refactorization of transformAPIdataIntoAppData function
-      if (data.shop) {
-        data.shop.PercentPerLangs = localStorageAPI.transformPercentPerLangArrayIntoObject(
-          data.shop.PercentPerLangs
-        );
-      }
       window.localStorage.setItem("userInfos", JSON.stringify(data));
 
       //Puting token into axios bearer
