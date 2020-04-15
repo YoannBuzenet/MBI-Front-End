@@ -76,6 +76,8 @@ import authAPI from "./services/authAPI";
 // }
 
 function App() {
+  document.title = config.shopName;
+
   // STATE Creating the Authentication state
   const [authenticationInfos, setAuthenticationInfos] = useState(
     AuthAPI.userInfos()

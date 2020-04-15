@@ -2,7 +2,7 @@ const URL_API = "http://mtgapi.local:8888";
 
 const shopID = 1;
 
-const shopName = "Fantasy Sphere FTW";
+const shopName = "Fantasy Sphere - Nous rachetons toutes vos cartes";
 
 const baseLang = 3;
 
@@ -29,6 +29,7 @@ const TIME_TO_EXPIRE_SET_LIST = 1000 * 60 * 60 * 24 * 2;
 export default {
   URL_API,
   shopID,
+  shopName,
   baseLang,
   gradingArea,
   TIME_TO_LOG_OUT,
