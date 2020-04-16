@@ -8,9 +8,7 @@ import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 
 const AllMySellRequests = (props) => {
   //Current Authentication
-  const { authenticationInfos, setAuthenticationInfos } = useContext(
-    AuthContext
-  );
+  const { authenticationInfos } = useContext(AuthContext);
 
   // console.log(authenticationInfos.customer.SellRequests);
 

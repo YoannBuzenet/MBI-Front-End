@@ -9,9 +9,7 @@ import CSSLoaderWaitingSpiral from "../components/loaders/CSSLoaderWaitingSpiral
 import { FormattedMessage } from "react-intl";
 
 const LoginPage = ({ history, eraseAuthContext, renewJWTToken }) => {
-  const { authenticationInfos, setAuthenticationInfos } = useContext(
-    AuthContext
-  );
+  const { setAuthenticationInfos } = useContext(AuthContext);
   //Timers control for auto login renew or auto logout
   const { timers, setTimers } = useContext(LoginLogOutContext);
 

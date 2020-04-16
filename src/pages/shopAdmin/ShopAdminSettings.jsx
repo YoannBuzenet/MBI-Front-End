@@ -51,6 +51,9 @@ const ShopAdminSettings = () => {
         authenticationInfosCopy.shop.shopData.PercentPerSigned = value;
         setAuthenticationInfos(authenticationInfosCopy);
         break;
+
+      default:
+        return;
     }
   };
 
@@ -74,6 +77,8 @@ const ShopAdminSettings = () => {
       case "percentPerSigned":
         localStorage.shop.percentPerSigned = value;
         break;
+      default:
+        return;
     }
     localStorageAPI.saveLocalStorage("userInfos", localStorage);
   };
@@ -139,6 +144,7 @@ const ShopAdminSettings = () => {
               authenticationInfos.shop.shopData.PercentPerSigned,
           },
         };
+
         shopAPI
           .updateFields(objectToSend, authenticationInfos.shop.id)
           .then((data) => updateLocalStorage(fieldModified, name, value))
@@ -150,6 +156,9 @@ const ShopAdminSettings = () => {
             }
           });
         break;
+
+      default:
+        return;
     }
   };
 

@@ -126,7 +126,7 @@ const OneSellRequest = ({ match, history }) => {
                 <Td>{card.cards.name}</Td>
                 <Td>{card.cards.edition.name}</Td>
                 <Td>
-                  {config.gradingArea == "isEu"
+                  {config.gradingArea === "isEu"
                     ? card.CardCondition.shortname
                     : card.CardCondition.shortnameUS}
                 </Td>

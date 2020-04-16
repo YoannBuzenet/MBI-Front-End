@@ -6,6 +6,7 @@ import TableLoader from "../../components/loaders/TableLoader";
 import errorHandlingAPI from "../../services/errorHandlingAPI";
 import { isMobile } from "react-device-detect";
 import SetListLoader from "../../components/loaders/SetListLoader";
+import { FormattedMessage } from "react-intl";
 
 const ShopAdminAllCustomers = (props) => {
   const [listCustomers, setListCustomers] = useState([]);
@@ -44,10 +45,30 @@ const ShopAdminAllCustomers = (props) => {
           <Table className="zebra-table">
             <Thead>
               <Tr>
-                <Th>Reference</Th>
-                <Th>Nom</Th>
-                <Th>Prénom</Th>
-                <Th>Nombre de Rachats</Th>
+                <Th>
+                  <FormattedMessage
+                    id="app.shop.AllCustomers.reference"
+                    defaultMessage={`Reference`}
+                  />
+                </Th>
+                <Th>
+                  <FormattedMessage
+                    id="app.shop.AllCustomers.customerLastName"
+                    defaultMessage={`Last Name`}
+                  />
+                </Th>
+                <Th>
+                  <FormattedMessage
+                    id="app.shop.AllCustomers.customerFirstName"
+                    defaultMessage={`First Name`}
+                  />
+                </Th>
+                <Th>
+                  <FormattedMessage
+                    id="app.shop.AllCustomers.NumberOfSellRequests"
+                    defaultMessage={`Sell Requests`}
+                  />
+                </Th>
               </Tr>
             </Thead>
             <Tbody>

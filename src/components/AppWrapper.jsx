@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { IntlProvider } from "react-intl";
 import SelectAppLangContext from "../context/selectedAppLang";
 import English from "../translations/English.json";

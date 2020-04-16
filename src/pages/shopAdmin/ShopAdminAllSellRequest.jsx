@@ -8,6 +8,7 @@ import TableLoader from "../../components/loaders/TableLoader";
 import errorHandlingAPI from "../../services/errorHandlingAPI";
 import { isMobile } from "react-device-detect";
 import SetListLoader from "../../components/loaders/SetListLoader";
+import { FormattedMessage } from "react-intl";
 
 const ShopAdminAllSellRequests = (props) => {
   //Variable to clean up useEffect Axios
@@ -46,11 +47,36 @@ const ShopAdminAllSellRequests = (props) => {
           <Table className="zebra-table">
             <Thead>
               <Tr>
-                <Th>Numéro</Th>
-                <Th>Status</Th>
-                <Th>Dernier Traitement</Th>
-                <Th>Nombre de cartes</Th>
-                <Th>Montant</Th>
+                <Th>
+                  <FormattedMessage
+                    id="app.shop.AllSellRequests.reference"
+                    defaultMessage={`Reference`}
+                  />
+                </Th>
+                <Th>
+                  <FormattedMessage
+                    id="app.shop.AllSellRequests.status"
+                    defaultMessage={`Status`}
+                  />
+                </Th>
+                <Th>
+                  <FormattedMessage
+                    id="app.shop.AllSellRequests.lastInformation"
+                    defaultMessage={`Last Information`}
+                  />
+                </Th>
+                <Th>
+                  <FormattedMessage
+                    id="app.shop.AllSellRequests.numberOfCards"
+                    defaultMessage={`Number of cards`}
+                  />
+                </Th>
+                <Th>
+                  <FormattedMessage
+                    id="app.shop.AllSellRequests.totalAmount"
+                    defaultMessage={`Total : `}
+                  />
+                </Th>
               </Tr>
             </Thead>
             <Tbody>
