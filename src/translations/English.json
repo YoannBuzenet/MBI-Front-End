@@ -120,5 +120,16 @@
   "app.shop.myAccount.placeholder.postalCode": "Postal Code...",
   "app.shop.myAccount.placeholder.town": "Your Town...",
   "app.shop.myAccount.buyingClauses.title": "Buying Clauses",
-  "app.shop.myAccount.toast.failure": "The information couldn't be updated. Please try again."
+  "app.shop.myAccount.toast.failure": "The information couldn't be updated. Please try again.",
+
+  "app.shop.AllCustomers.reference": "Reference",
+  "app.shop.AllCustomers.customerLastName": "Last Name",
+  "app.shop.AllCustomers.customerFirstName": "First Name",
+  "app.shop.AllCustomers.NumberOfSellRequests": "Sell Requests",
+
+  "app.shop.AllSellRequests.reference": "Reference",
+  "app.shop.AllSellRequests.status": "Status",
+  "app.shop.AllSellRequests.lastInformation": "Last Information",
+  "app.shop.AllSellRequests.numberOfCards": "Number of cards",
+  "app.shop.AllSellRequests.totalAmount": "Total : "
 }
