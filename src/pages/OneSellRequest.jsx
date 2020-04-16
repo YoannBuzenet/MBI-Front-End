@@ -6,6 +6,7 @@ import LastInformationCalculator from "../components/LastInformationCalculator";
 import SellRequestStatusUpdater from "../components/SellRequestStatusUpdater";
 import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 import config from "../services/config";
+import { FormattedMessage } from "react-intl";
 
 const OneSellRequest = ({ match, history }) => {
   const { id } = match.params;
@@ -33,16 +34,27 @@ const OneSellRequest = ({ match, history }) => {
 
   return (
     <>
-      <h1>Mon Rachat</h1>
+      <h1>
+        <FormattedMessage
+          id="app.OneSellRequest.title"
+          defaultMessage={`My Sell Request`}
+        />
+      </h1>
       <div className="sellRequest-infos container">
         <p className="sellRequest-status">
-          Statut
+          <FormattedMessage
+            id="app.OneSellRequest.status"
+            defaultMessage={`Status`}
+          />
           <span className="subInfos">
             <StatusCalculator sellRequest={currentSellRequest} />
           </span>
         </p>
         <p className="sellRequest-lastDate">
-          Dernière information
+          <FormattedMessage
+            id="app.OneSellRequest.lastInformation"
+            defaultMessage={`Last Information`}
+          />
           <span className="subInfos">
             <LastInformationCalculator sellRequest={currentSellRequest} />
           </span>
@@ -51,15 +63,60 @@ const OneSellRequest = ({ match, history }) => {
       <Table className="zebra-table">
         <Thead>
           <Tr>
-            <Th>Nom de la carte</Th>
-            <Th>Edition</Th>
-            <Th>Etat</Th>
-            <Th>Langue</Th>
-            <Th>Foil</Th>
-            <Th>Signée</Th>
-            <Th>Prix</Th>
-            <Th>Quantité</Th>
-            <Th>Total</Th>
+            <Th>
+              <FormattedMessage
+                id="app.OneSellRequest.cardName"
+                defaultMessage={`Card`}
+              />
+            </Th>
+            <Th>
+              <FormattedMessage
+                id="app.OneSellRequest.set"
+                defaultMessage={`Set`}
+              />
+            </Th>
+            <Th>
+              <FormattedMessage
+                id="app.OneSellRequest.condition"
+                defaultMessage={`Condition`}
+              />
+            </Th>
+            <Th>
+              <FormattedMessage
+                id="app.OneSellRequest.language"
+                defaultMessage={`Language`}
+              />
+            </Th>
+            <Th>
+              <FormattedMessage
+                id="app.OneSellRequest.foil"
+                defaultMessage={`Foil`}
+              />
+            </Th>
+            <Th>
+              <FormattedMessage
+                id="app.OneSellRequest.signed"
+                defaultMessage={`Signed`}
+              />
+            </Th>
+            <Th>
+              <FormattedMessage
+                id="app.OneSellRequest.price"
+                defaultMessage={`Price`}
+              />
+            </Th>
+            <Th>
+              <FormattedMessage
+                id="app.OneSellRequest.quantity"
+                defaultMessage={`Quantity`}
+              />
+            </Th>
+            <Th>
+              <FormattedMessage
+                id="app.OneSellRequest.totalAmount"
+                defaultMessage={`Total : `}
+              />
+            </Th>
           </Tr>
         </Thead>
         <Tbody>
@@ -84,7 +141,10 @@ const OneSellRequest = ({ match, history }) => {
         </Tbody>
       </Table>
       <span className="under-table-total">
-        Total :
+        <FormattedMessage
+          id="app.OneSellRequest.totalCardSellRequest"
+          defaultMessage={`Total : `}
+        />
         {currentSellRequest.sellRequestCards.length > 0 &&
           currentSellRequest.sellRequestCards.reduce((total, card) => {
             return total + card.cardQuantity;
@@ -92,7 +152,10 @@ const OneSellRequest = ({ match, history }) => {
       </span>
 
       <span className="under-table-total">
-        Total :
+        <FormattedMessage
+          id="app.OneSellRequest.totalAmountSellRequest"
+          defaultMessage={`Total : `}
+        />
         {currentSellRequest.sellRequestCards.length > 0 &&
           currentSellRequest.sellRequestCards.reduce((total, card) => {
             return total + card.price * card.cardQuantity;

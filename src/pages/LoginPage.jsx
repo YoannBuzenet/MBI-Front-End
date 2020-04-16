@@ -6,6 +6,7 @@ import Field from "../components/forms/Field";
 import LoginLogOutContext from "../context/logAutoRenewOrLogout";
 import config from "../services/config";
 import CSSLoaderWaitingSpiral from "../components/loaders/CSSLoaderWaitingSpiral";
+import { FormattedMessage } from "react-intl";
 
 const LoginPage = ({ history, eraseAuthContext, renewJWTToken }) => {
   const { authenticationInfos, setAuthenticationInfos } = useContext(
@@ -44,7 +45,12 @@ const LoginPage = ({ history, eraseAuthContext, renewJWTToken }) => {
       console.log(userData);
       setAuthenticationInfos(userData);
       setIsLoading(false);
-      toast.success("Vous êtes connecté.");
+      toast.success(
+        <FormattedMessage
+          id="app.LoginPage.toast.success"
+          defaultMessage={`You are connected.`}
+        />
+      );
 
       clearTimeout(timers.autoRenew);
       clearTimeout(timers.autoLogOut);
@@ -70,7 +76,10 @@ const LoginPage = ({ history, eraseAuthContext, renewJWTToken }) => {
       console.log(error);
       setIsLoading(false);
       toast.error(
-        "Le login ou le mot de passe est incorrect. Merci de réessayer."
+        <FormattedMessage
+          id="app.LoginPage.toast.failure"
+          defaultMessage={`Login or password incorrect. Please try again.`}
+        />
       );
     }
   };
@@ -79,7 +88,12 @@ const LoginPage = ({ history, eraseAuthContext, renewJWTToken }) => {
     <>
       <div className="login-page">
         <div>
-          <h1>Connexion à l'application</h1>
+          <h1>
+            <FormattedMessage
+              id="app.LoginPage.title"
+              defaultMessage={`Connect`}
+            />
+          </h1>
 
           <form action="" onSubmit={handleSubmit} className="login-form">
             <Field
@@ -87,7 +101,12 @@ const LoginPage = ({ history, eraseAuthContext, renewJWTToken }) => {
               label="Adresse e-mail"
               value={credentials.username}
               onChange={handleChange}
-              placeholder="Adresse e-mail..."
+              placeholder={
+                <FormattedMessage
+                  id="app.LoginPage.placeholder.email"
+                  defaultMessage={`Connect`}
+                />
+              }
               className="form-group"
               required
             />
@@ -98,7 +117,12 @@ const LoginPage = ({ history, eraseAuthContext, renewJWTToken }) => {
               label="Password"
               value={credentials.password}
               onChange={handleChange}
-              placeholder="Mot de passe"
+              placeholder={
+                <FormattedMessage
+                  id="app.LoginPage.placeholder.password"
+                  defaultMessage={`Connect`}
+                />
+              }
               error=""
               required
             />
@@ -110,7 +134,10 @@ const LoginPage = ({ history, eraseAuthContext, renewJWTToken }) => {
               )}
               {!isLoading && (
                 <button type="submit" className="connecting-button">
-                  Se connecter
+                  <FormattedMessage
+                    id="app.LoginPage.button.connect"
+                    defaultMessage={`Connect`}
+                  />
                 </button>
               )}
             </div>
