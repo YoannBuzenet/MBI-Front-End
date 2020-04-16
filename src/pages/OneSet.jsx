@@ -14,6 +14,7 @@ import config from "../services/config";
 import SetLangChoice from "../components/SetLangChoice";
 import languagesDefinition from "../definitions/languagesDefinition";
 import userPreferencesContext from "../context/userPreferenceContext";
+import { FormattedMessage } from "react-intl";
 
 const OneSet = ({ handleAddSellingBasket, match }) => {
   //Current Cards displayed in One Set Page
@@ -253,7 +254,12 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
             {!isLoading && (
               <>
                 <div className="filter-cards">
-                  <p>Filtrer par prix</p>
+                  <p>
+                    <FormattedMessage
+                      id="app.OneSet.filterByPrice"
+                      defaultMessage={`Filtrer By Price`}
+                    />
+                  </p>
                   <input
                     type="text"
                     placeholder="Prix minimum..."
@@ -265,13 +271,48 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
                 <Table className="zebra-table">
                   <Thead>
                     <Tr>
-                      <Th>Nom</Th>
-                      <Th>Langue</Th>
-                      <Th>Condition</Th>
-                      <Th>Foil</Th>
-                      <Th>Signée</Th>
-                      <Th>Quantité</Th>
-                      <Th>Prix</Th>
+                      <Th>
+                        <FormattedMessage
+                          id="app.OneSet.cardName"
+                          defaultMessage={`Card`}
+                        />
+                      </Th>
+                      <Th>
+                        <FormattedMessage
+                          id="app.OneSet.language"
+                          defaultMessage={`Language`}
+                        />
+                      </Th>
+                      <Th>
+                        <FormattedMessage
+                          id="app.OneSet.condition"
+                          defaultMessage={`Condition`}
+                        />
+                      </Th>
+                      <Th>
+                        <FormattedMessage
+                          id="app.OneSet.foil"
+                          defaultMessage={`Foil`}
+                        />
+                      </Th>
+                      <Th>
+                        <FormattedMessage
+                          id="app.OneSet.signed"
+                          defaultMessage={`Signed`}
+                        />
+                      </Th>
+                      <Th>
+                        <FormattedMessage
+                          id="app.OneSet.quantity"
+                          defaultMessage={`Quantity`}
+                        />
+                      </Th>
+                      <Th>
+                        <FormattedMessage
+                          id="app.OneSet.price"
+                          defaultMessage={`Price`}
+                        />
+                      </Th>
                       <Th></Th>
                     </Tr>
                   </Thead>
