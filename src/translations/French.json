@@ -13,5 +13,27 @@
   "app.allMySellRequests.table.customerValidation": "Validation Client",
   "app.allMySellRequests.table.Validation": "Validation",
   "app.allMySellRequests.table.numberOfCards": "Nombre de cartes",
-  "app.allMySellRequests.table.totalAmount": "Montant total"
+  "app.allMySellRequests.table.totalAmount": "Montant total",
+
+  "app.BuyingClauses.title": "Conditions de rachat",
+
+  "app.cardPage.cardName": "Carte",
+  "app.cardPage.set": "Edition",
+  "app.cardPage.language": "Langue",
+  "app.cardPage.condition": "Etat",
+  "app.cardPage.foil": "Foil",
+  "app.cardPage.signed": "Signée",
+  "app.cardPage.quantity": "Quantité",
+  "app.cardPage.price": "Prix",
+
+  "app.myAccountPage.title": "Mon compte",
+  "app.myAccountPage.FirstName": "Prénom",
+  "app.myAccountPage.LastName": "Nom de famille",
+  "app.myAccountPage.Telephone": "Téléphone",
+  "app.myAccountPage.mail": "Email",
+  "app.myAccountPage.adress": "Adresse",
+  "app.myAccountPage.postalCode": "Code Postal",
+  "app.myAccountPage.town": "Ville",
+  "app.myAccountPage.edition.success": "Votre compte a bien été mis à jour.",
+  "app.myAccountPage.edition.failure": "Votre compte n'a pu être mis à jour. Merci de réessayer."
 }

@@ -13,5 +13,27 @@
   "app.allMySellRequests.table.customerValidation": "Cust. Validation",
   "app.allMySellRequests.table.Validation": "Validation",
   "app.allMySellRequests.table.numberOfCards": "Number of cards",
-  "app.allMySellRequests.table.totalAmount": "Total Amount"
+  "app.allMySellRequests.table.totalAmount": "Total Amount",
+
+  "app.BuyingClauses.title": "Buying clauses",
+
+  "app.cardPage.cardName": "Card Name",
+  "app.cardPage.set": "Set",
+  "app.cardPage.language": "Language",
+  "app.cardPage.condition": "Condition",
+  "app.cardPage.foil": "Foil",
+  "app.cardPage.signed": "Signed",
+  "app.cardPage.quantity": "Quantity",
+  "app.cardPage.price": "Price",
+
+  "app.myAccountPage.title": "My Account",
+  "app.myAccountPage.FirstName": "First Name",
+  "app.myAccountPage.LastName": "Last Name",
+  "app.myAccountPage.Telephone": "Telephone",
+  "app.myAccountPage.mail": "Email",
+  "app.myAccountPage.adress": "Adress",
+  "app.myAccountPage.postalCode": "Postal Code",
+  "app.myAccountPage.town": "Town",
+  "app.myAccountPage.edition.success": "Your account has been updated.",
+  "app.myAccountPage.edition.failure": "Your account couldn't be updated. Please try again."
 }
