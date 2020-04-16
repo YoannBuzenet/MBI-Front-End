@@ -70,5 +70,25 @@
   "app.OneSellRequest.quantity": "Quantity",
   "app.OneSellRequest.totalAmount": "Total : ",
   "app.OneSellRequest.totalCardSellRequest": "Total : ",
-  "app.OneSellRequest.totalAmountSellRequest": "Total : "
+  "app.OneSellRequest.totalAmountSellRequest": "Total : ",
+
+  "app.OneSet.cardName": "Card",
+  "app.OneSet.language": "Language",
+  "app.OneSet.condition": "Condition",
+  "app.OneSet.foil": "Foil",
+  "app.OneSet.signed": "Signed",
+  "app.OneSet.quantity": "Quantity",
+  "app.OneSet.price": "Price",
+  "app.OneSet.filterByPrice": "Filter by Price",
+
+  "app.RegisterPage.title": "Register",
+  "app.RegisterPage.placeholder.mail": "Mail Adress...",
+  "app.RegisterPage.placeholder.password": "Your password",
+  "app.RegisterPage.placeholder.firstName": "First Name",
+  "app.RegisterPage.placeholder.lastName": "Last Name",
+  "app.RegisterPage.placeholder.telephone": "Telephone",
+  "app.RegisterPage.placeholder.adress": "Your adress...",
+  "app.RegisterPage.placeholder.postalCode": "Postal Code",
+  "app.RegisterPage.placeholder.town": "Town",
+  "app.RegisterPage.button.register": "Create Account"
 }

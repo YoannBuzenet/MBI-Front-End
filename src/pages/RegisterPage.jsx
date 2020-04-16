@@ -4,6 +4,7 @@ import Field from "../components/forms/Field";
 import { toast } from "react-toastify";
 import config from "../services/config";
 import CSSLoaderWaitingSpiral from "../components/loaders/CSSLoaderWaitingSpiral";
+import { FormattedMessage } from "react-intl";
 
 const RegisterPage = ({ history }) => {
   const [credentials, setCredentials] = useState({
@@ -78,11 +79,22 @@ const RegisterPage = ({ history }) => {
   return (
     <>
       <div className="container my-account">
-        <h1>S'inscrire</h1>
+        <h1>
+          <FormattedMessage
+            id="app.RegisterPage.title"
+            defaultMessage={`Register`}
+          />
+        </h1>
         <form onSubmit={(event) => handleSubmit(event)}>
           <Field
             name="mail"
             type="email"
+            placeholder={
+              <FormattedMessage
+                id="app.RegisterPage.placeholder.mail"
+                defaultMessage={`Mail Adress...`}
+              />
+            }
             id="mail"
             required
             onChange={(event) => handleChange(event)}
@@ -93,6 +105,12 @@ const RegisterPage = ({ history }) => {
             name="password"
             type="password"
             id="password"
+            placeholder={
+              <FormattedMessage
+                id="app.RegisterPage.placeholder.password"
+                defaultMessage={`Your Password`}
+              />
+            }
             required
             onChange={(event) => handleChange(event)}
             label="Mot de Passe"
@@ -103,6 +121,12 @@ const RegisterPage = ({ history }) => {
             type="text"
             id="firstName"
             name="firstName"
+            placeholder={
+              <FormattedMessage
+                id="app.RegisterPage.placeholder.firstName"
+                defaultMessage={`First Name`}
+              />
+            }
             required
             onChange={(event) => handleChange(event)}
             label="Prénom"
@@ -112,6 +136,12 @@ const RegisterPage = ({ history }) => {
             type="text"
             id="lastName"
             name="lastName"
+            placeholder={
+              <FormattedMessage
+                id="app.RegisterPage.placeholder.lastName"
+                defaultMessage={`Last Name`}
+              />
+            }
             required
             onChange={(event) => handleChange(event)}
             label="Nom de Famille"
@@ -121,6 +151,12 @@ const RegisterPage = ({ history }) => {
             type="tel"
             id="tel"
             name="tel"
+            placeholder={
+              <FormattedMessage
+                id="app.RegisterPage.placeholder.telephone"
+                defaultMessage={`Telephone`}
+              />
+            }
             required
             onChange={(event) => handleChange(event)}
             label="Telephone"
@@ -131,6 +167,12 @@ const RegisterPage = ({ history }) => {
             className="my-account"
             name="adress"
             id="adress"
+            placeholder={
+              <FormattedMessage
+                id="app.RegisterPage.placeholder.adress"
+                defaultMessage={`Your adress...`}
+              />
+            }
             cols="22"
             rows="3"
             required
@@ -141,6 +183,12 @@ const RegisterPage = ({ history }) => {
             name="postalCode"
             type="text"
             id="postalCode"
+            placeholder={
+              <FormattedMessage
+                id="app.RegisterPage.placeholder.postalCode"
+                defaultMessage={`Postal Code`}
+              />
+            }
             required
             onChange={(event) => handleChange(event)}
             label="Code Postal"
@@ -151,6 +199,12 @@ const RegisterPage = ({ history }) => {
             type="text"
             id="town"
             required
+            placeholder={
+              <FormattedMessage
+                id="app.RegisterPage.placeholder.town"
+                defaultMessage={`Town`}
+              />
+            }
             onChange={(event) => handleChange(event)}
             label="Ville"
           />
@@ -161,7 +215,10 @@ const RegisterPage = ({ history }) => {
           )}
           {!isLoading && (
             <button type="submit" className="connecting-button">
-              S'inscrire
+              <FormattedMessage
+                id="app.RegisterPage.button.register"
+                defaultMessage={`Create Account`}
+              />
             </button>
           )}
         </form>
