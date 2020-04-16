@@ -104,6 +104,21 @@
 
   "app.shop.myAccount.title": "Informations Boutique",
   "app.shop.myAccount.label.legalName": "Raison Sociale",
+  "app.shop.myAccount.label.mail": "Email",
+  "app.shop.myAccount.label.telephone": "Téléphone",
+  "app.shop.myAccount.label.RegistrationNumber": "Numéro de SIRET",
+  "app.shop.myAccount.label.vatNumber": "Numéro de TVA",
+  "app.shop.myAccount.label.adress": "Adresse",
+  "app.shop.myAccount.label.postalCode": "Code Postal",
+  "app.shop.myAccount.label.town": "Ville",
   "app.shop.myAccount.placeholder.legalName": "Raison sociale...",
+  "app.shop.myAccount.placeholder.mail": "Votre email pro",
+  "app.shop.myAccount.placeholder.telephone": "Votre téléphone profesionnel",
+  "app.shop.myAccount.placeholder.RegistrationNumber": "Votre numéro de SIRET...",
+  "app.shop.myAccount.placeholder.vatNumber": "Votre numéro de TVA...",
+  "app.shop.myAccount.placeholder.adress": "Votre adresse...",
+  "app.shop.myAccount.placeholder.postalCode": "Code Postal",
+  "app.shop.myAccount.placeholder.town": "Ville...",
+  "app.shop.myAccount.buyingClauses.title": "Conditions de rachat",
   "app.shop.myAccount.toast.failure": "Les informations n'ont pas pu être mises à jour. Merci de réessayer."
 }

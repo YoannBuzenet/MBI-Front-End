@@ -46,7 +46,7 @@ const MyShopAccount = (props) => {
     };
 
     shopAPI
-      .updateFields(objectToSend, shopID)
+      .updateFields(objectToSend, config.shopID)
       .then((data) => {
         const localStorage = localStorageAPI.getLocalStorageSession();
         localStorage.shop[name] = value;
@@ -82,7 +82,7 @@ const MyShopAccount = (props) => {
               />
             }
             value={authenticationInfos.shop.legalName}
-            onChange={(event) => handleChange(event, "TODOBRO")}
+            onChange={(event) => handleChange(event)}
             placeholder={
               <FormattedMessage
                 id="app.shop.myAccount.placeholder.legalName"
@@ -93,69 +93,147 @@ const MyShopAccount = (props) => {
           />
           <Field
             name="email"
-            label="Email"
+            label={
+              <FormattedMessage
+                id="app.shop.myAccount.label.mail"
+                defaultMessage={`Email`}
+              />
+            }
             value={authenticationInfos.shop.email}
-            onChange={(event) => handleChange(event, "TODOBRO")}
-            placeholder="Votre mail de contact professionnel."
+            onChange={(event) => handleChange(event)}
+            placeholder={
+              <FormattedMessage
+                id="app.shop.myAccount.placeholder.mail"
+                defaultMessage={`Your Professional Email`}
+              />
+            }
             type="mail"
             idNumber={Math.random()}
           />
 
           <Field
             name="tel"
-            label="Telephone"
+            label={
+              <FormattedMessage
+                id="app.shop.myAccount.label.telephone"
+                defaultMessage={`Phone Number`}
+              />
+            }
             value={authenticationInfos.shop.tel}
-            onChange={(event) => handleChange(event, "TODOBRO")}
-            placeholder="Votre numéro de téléphone professionnel."
+            onChange={(event) => handleChange(event)}
+            placeholder={
+              <FormattedMessage
+                id="app.shop.myAccount.placeholder.telephone"
+                defaultMessage={`Your Profesionnal Phone Number`}
+              />
+            }
             type="tel"
             idNumber={Math.random()}
           />
           <Field
             name="SIRET"
-            label="SIRET"
+            label={
+              <FormattedMessage
+                id="app.shop.myAccount.label.RegistrationNumber"
+                defaultMessage={`Company Registration Number`}
+              />
+            }
             value={authenticationInfos.shop.SIRET}
-            onChange={(event) => handleChange(event, "TODOBRO")}
-            placeholder="Votre numéro de SIRET."
+            onChange={(event) => handleChange(event)}
+            placeholder={
+              <FormattedMessage
+                id="app.shop.myAccount.placeholder.RegistrationNumber"
+                defaultMessage={`Company Registration Number...`}
+              />
+            }
             idNumber={Math.random()}
           />
           <Field
             name="vatNumber"
-            label="Numéro de TVA"
+            label={
+              <FormattedMessage
+                id="app.shop.myAccount.label.vatNumber"
+                defaultMessage={`VAT Number`}
+              />
+            }
             value={authenticationInfos.shop.vatNumber}
-            onChange={(event) => handleChange(event, "TODOBRO")}
-            placeholder="Votre numéro de TVA"
+            onChange={(event) => handleChange(event)}
+            placeholder={
+              <FormattedMessage
+                id="app.shop.myAccount.placeholder.vatNumber"
+                defaultMessage={`VAT Number...`}
+              />
+            }
             idNumber={Math.random()}
           />
 
-          <label htmlFor="adress">Adresse</label>
+          <label htmlFor="adress">
+            {
+              <FormattedMessage
+                id="app.shop.myAccount.label.adress"
+                defaultMessage={`Adress`}
+              />
+            }
+          </label>
           <textarea
             name="adress"
             id="adress"
             cols="22"
             rows="3"
             required
-            onChange={(event) => handleChange(event, "TODOBRO")}
+            placeholder={
+              <FormattedMessage
+                id="app.shop.myAccount.placeholder.adress"
+                defaultMessage={`Your Adress...`}
+              />
+            }
+            onChange={(event) => handleChange(event)}
             value={authenticationInfos.shop.adress}
           ></textarea>
 
           <Field
             name="postalCode"
-            label="Code Postal"
+            label={
+              <FormattedMessage
+                id="app.shop.myAccount.label.postalCode"
+                defaultMessage={`Postal Code`}
+              />
+            }
             value={authenticationInfos.shop.postalCode}
-            onChange={(event) => handleChange(event, "TODOBRO")}
-            placeholder="Votre adresse code postal."
+            onChange={(event) => handleChange(event)}
+            placeholder={
+              <FormattedMessage
+                id="app.shop.myAccount.placeholder.postalCode"
+                defaultMessage={`Postal Code...`}
+              />
+            }
             idNumber={Math.random()}
           />
           <Field
             name="town"
-            label="Ville"
+            label={
+              <FormattedMessage
+                id="app.shop.myAccount.label.town"
+                defaultMessage={`Town`}
+              />
+            }
             value={authenticationInfos.shop.town}
-            onChange={(event) => handleChange(event, "TODOBRO")}
-            placeholder="Votre ville."
+            onChange={(event) => handleChange(event)}
+            placeholder={
+              <FormattedMessage
+                id="app.shop.myAccount.placeholder.town"
+                defaultMessage={`Your Town...`}
+              />
+            }
             idNumber={Math.random()}
           />
 
-          <label htmlFor="legalClausesBuying">Clauses de Rachat</label>
+          <label htmlFor="legalClausesBuying">
+            <FormattedMessage
+              id="app.shop.myAccount.buyingClauses.title"
+              defaultMessage={`Buying Clauses`}
+            />
+          </label>
           <textarea
             name="legalClausesBuying"
             id="legalClausesBuying"
