@@ -104,6 +104,21 @@
 
   "app.shop.myAccount.title": "Shop Informations",
   "app.shop.myAccount.label.legalName": "Legal Name",
+  "app.shop.myAccount.label.mail": "Email",
+  "app.shop.myAccount.label.telephone": "Telephone",
+  "app.shop.myAccount.label.RegistrationNumber": "Company Registration Number",
+  "app.shop.myAccount.label.vatNumber": "VAT Number",
+  "app.shop.myAccount.label.adress": "Adress",
+  "app.shop.myAccount.label.postalCode": "Postal Code",
+  "app.shop.myAccount.label.town": "Town",
   "app.shop.myAccount.placeholder.legalName": "Please indicate your business legal name.",
+  "app.shop.myAccount.placeholder.mail": "Your Professional email",
+  "app.shop.myAccount.placeholder.telephone": "Your Professional Phone Number",
+  "app.shop.myAccount.placeholder.RegistrationNumber": "Company Registration Number...",
+  "app.shop.myAccount.placeholder.vatNumber": "Your VAT Number",
+  "app.shop.myAccount.placeholder.adress": "Your adress...",
+  "app.shop.myAccount.placeholder.postalCode": "Postal Code...",
+  "app.shop.myAccount.placeholder.town": "Your Town...",
+  "app.shop.myAccount.buyingClauses.title": "Buying Clauses",
   "app.shop.myAccount.toast.failure": "The information couldn't be updated. Please try again."
 }
