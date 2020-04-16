@@ -1,10 +1,11 @@
 import React, { useState, useContext } from "react";
-
 import { IntlProvider } from "react-intl";
 import SelectAppLangContext from "../context/selectedAppLang";
+import English from "../translations/English.json";
+import French from "../translations/French.json";
 
 const AppWrapper = (props) => {
-  const translationsForUsersLocale = "bro";
+  const translationsForUsersLocale = French;
 
   //STATE - App Lang
   const [currentLang, setCurrentLang] = useState("fr-FR");
