@@ -340,7 +340,7 @@ function App() {
       AuthAPI.refreshTokenAndInfos(authenticationInfos.refresh_token)
         .then((data) => {
           //TO DO Transform data to make it app friendly
-          console.log(data);
+          // console.log(data);
           return authAPI.transformAPIdataIntoAppData(data.data);
         })
         .then((data) => setAuthenticationInfos(data));
@@ -360,8 +360,8 @@ function App() {
   //VERY IMPORTANT Function to add cards to Selling Basket.
   //We put it in App component because it need the use of hooks.
   const handleAddSellingBasket = (currentBasket, card) => {
-    console.log(card);
-    console.log(currentBasket);
+    // console.log(card);
+    // console.log(currentBasket);
     //If the selling basket is empty, just add the new card.
     if (currentBasket.length === 0) {
       setCurrentBasket([card]);

@@ -1,6 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import shopAPI from "../services/shopAPI";
+import { FormattedMessage } from "react-intl";
 
 const BuyingClauses = () => {
   const [buyingClauses, setBuyingClauses] = useState("");
@@ -13,7 +14,12 @@ const BuyingClauses = () => {
 
   return (
     <>
-      <h2>Buying Clauses</h2>
+      <h2>
+        <FormattedMessage
+          id="app.BuyingClauses.title"
+          defaultMessage={`Buying clauses`}
+        />
+      </h2>
       <p>{buyingClauses}</p>
     </>
   );

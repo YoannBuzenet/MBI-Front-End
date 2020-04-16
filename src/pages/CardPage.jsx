@@ -6,6 +6,7 @@ import { Table, Thead, Tbody, Tr, Th } from "react-super-responsive-table";
 import TableLoader from "../components/loaders/TableLoader";
 import { isMobile } from "react-device-detect";
 import SetListLoader from "../components/loaders/SetListLoader";
+import { FormattedMessage } from "react-intl";
 
 const CardPage = ({ match, handleAddSellingBasket }) => {
   const NUMBER_OF_LANGUAGES = 11;
@@ -128,14 +129,54 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
           <Table className="zebra-table">
             <Thead>
               <Tr>
-                <Th>Nom de la carte</Th>
-                <Th>Edition</Th>
-                <Th>Langue</Th>
-                <Th>Condition</Th>
-                <Th>Foil</Th>
-                <Th>Signée</Th>
-                <Th>Quantité</Th>
-                <Th>Prix</Th>
+                <Th>
+                  <FormattedMessage
+                    id="app.cardPage.cardName"
+                    defaultMessage={`Card Name`}
+                  />
+                </Th>
+                <Th>
+                  <FormattedMessage
+                    id="app.cardPage.set"
+                    defaultMessage={`Set`}
+                  />
+                </Th>
+                <Th>
+                  <FormattedMessage
+                    id="app.cardPage.language"
+                    defaultMessage={`Language`}
+                  />
+                </Th>
+                <Th>
+                  <FormattedMessage
+                    id="app.cardPage.condition"
+                    defaultMessage={`Condition`}
+                  />
+                </Th>
+                <Th>
+                  <FormattedMessage
+                    id="app.cardPage.foil"
+                    defaultMessage={`Foil`}
+                  />
+                </Th>
+                <Th>
+                  <FormattedMessage
+                    id="app.cardPage.signed"
+                    defaultMessage={`Signed`}
+                  />
+                </Th>
+                <Th>
+                  <FormattedMessage
+                    id="app.cardPage.quantity"
+                    defaultMessage={`Quantity`}
+                  />
+                </Th>
+                <Th>
+                  <FormattedMessage
+                    id="app.cardPage.price"
+                    defaultMessage={`Price`}
+                  />
+                </Th>
               </Tr>
             </Thead>
             <Tbody>

@@ -12,10 +12,10 @@ const AllMySellRequests = (props) => {
     AuthContext
   );
 
-  console.log(authenticationInfos.customer.SellRequests);
+  // console.log(authenticationInfos.customer.SellRequests);
 
   useEffect(() => {
-    console.log(authenticationInfos.customer.SellRequests);
+    // console.log(authenticationInfos.customer.SellRequests);
   });
 
   return (

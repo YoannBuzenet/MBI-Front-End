@@ -3,6 +3,7 @@ import AuthContext from "../context/authContext";
 import userAPI from "../services/userAPI";
 import AuthAPI from "../services/authAPI";
 import { toast } from "react-toastify";
+import { FormattedMessage } from "react-intl";
 
 const MyAccount = () => {
   //Current Authentication
@@ -123,11 +124,19 @@ const MyAccount = () => {
       };
       AuthAPI.updateUserInfosLocalStorage(newDataInLocalStorage);
 
-      toast.success("Votre compte a bien été mis à jour.");
+      toast.success(
+        <FormattedMessage
+          id="app.myAccountPage.edition.success"
+          defaultMessage={`Your account has been updated.`}
+        />
+      );
     } catch (error) {
       console.log(error);
       toast.error(
-        "Votre compte n'a pas pu être mis à jour. Merci de réessayer."
+        <FormattedMessage
+          id="app.myAccountPage.edition.failure"
+          defaultMessage={`Your account couldn't be updated. Please try again.`}
+        />
       );
     }
   };
@@ -150,9 +159,19 @@ const MyAccount = () => {
   return (
     <>
       <div className="container my-account">
-        <h1>Mon compte</h1>
+        <h1>
+          <FormattedMessage
+            id="app.myAccountPage.title"
+            defaultMessage={`My Account`}
+          />
+        </h1>
         <form>
-          <label htmlFor="firstName">Prénom</label>
+          <label htmlFor="firstName">
+            <FormattedMessage
+              id="app.myAccountPage.FirstName"
+              defaultMessage={`First Name`}
+            />
+          </label>
           <input
             type="text"
             id="firstName"
@@ -162,7 +181,12 @@ const MyAccount = () => {
             value={accountInformation.firstName}
           />
 
-          <label htmlFor="lastName">Nom</label>
+          <label htmlFor="lastName">
+            <FormattedMessage
+              id="app.myAccountPage.LastName"
+              defaultMessage={`Last Name`}
+            />
+          </label>
           <input
             type="text"
             id="lastName"
@@ -172,7 +196,12 @@ const MyAccount = () => {
             value={accountInformation.lastName}
           />
 
-          <label htmlFor="tel">Telephone</label>
+          <label htmlFor="tel">
+            <FormattedMessage
+              id="app.myAccountPage.Telephone"
+              defaultMessage={`Telephone`}
+            />
+          </label>
           <input
             type="tel"
             id="tel"
@@ -182,7 +211,12 @@ const MyAccount = () => {
             value={accountInformation.tel}
           />
 
-          <label htmlFor="mail">Email</label>
+          <label htmlFor="mail">
+            <FormattedMessage
+              id="app.myAccountPage.mail"
+              defaultMessage={`Email`}
+            />
+          </label>
           <input
             type="mail"
             id="mail"
@@ -192,7 +226,12 @@ const MyAccount = () => {
             value={accountInformation.mail}
           />
 
-          <label htmlFor="adress">Adresse</label>
+          <label htmlFor="adress">
+            <FormattedMessage
+              id="app.myAccountPage.adress"
+              defaultMessage={`Adress`}
+            />
+          </label>
           <textarea
             name="adress"
             id="adress"
@@ -203,7 +242,12 @@ const MyAccount = () => {
             value={accountInformation.adress}
           ></textarea>
 
-          <label htmlFor="postalCode">Code Postal</label>
+          <label htmlFor="postalCode">
+            <FormattedMessage
+              id="app.myAccountPage.postalCode"
+              defaultMessage={`Postal Code`}
+            />
+          </label>
           <input
             type="text"
             id="postalCode"
@@ -213,7 +257,12 @@ const MyAccount = () => {
             value={accountInformation.postalCode}
           />
 
-          <label htmlFor="town">Ville</label>
+          <label htmlFor="town">
+            <FormattedMessage
+              id="app.myAccountPage.town"
+              defaultMessage={`Town`}
+            />
+          </label>
           <input
             type="text"
             id="town"
