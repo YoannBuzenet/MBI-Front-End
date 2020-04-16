@@ -62,14 +62,11 @@ function userInfos() {
   //1. Voir si on a un token
   const token = window.localStorage.getItem("authToken");
 
+  //We get back all datas stocked in the browser about the user and put it back in memory.
+  const userDatas = JSON.parse(window.localStorage.getItem("userInfos"));
+
   //Vérifier si la date d'exp du token est bonne, si oui on considère que connecté ( le serveur fait le vrai check derrière)
-  if (token) {
-    const jwtData = jwtDecode(token);
-
-    //We get back all datas stocked in the browser about the user and put it back in memory.
-    const userDatas = JSON.parse(window.localStorage.getItem("userInfos"));
-    //console.log(userDatas);
-
+  if (token && userDatas) {
     return transformAPIdataIntoAppData(userDatas);
   } else {
     return {
