@@ -5,6 +5,7 @@ import SetListLoader from "./loaders/SetListLoader";
 import { isMobile } from "react-device-detect";
 import { useEffect } from "react";
 import setsAPI from "../services/setsAPI";
+import { FormattedMessage } from "react-intl";
 
 const SetList = (props) => {
   const { allSets, setAllSets } = useContext(SetsContext);
@@ -45,7 +46,12 @@ const SetList = (props) => {
     <>
       <div className="left-div">
         {isMobile && <div className="margin-top-2rem"></div>}
-        <h2>Les éditions</h2>
+        <h2>
+          <FormattedMessage
+            id="app.setList.title"
+            defaultMessage={`All sets`}
+          />
+        </h2>
 
         {isLoading && <SetListLoader />}
 

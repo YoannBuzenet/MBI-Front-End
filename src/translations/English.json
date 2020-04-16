@@ -1,3 +1,17 @@
 {
-  "app.lastModification.title": "Last updated cards"
+  "app.lastModification.title": "Last updated cards",
+
+  "app.setList.title": "All Sets",
+
+  "app.allMySellRequests.title": "My Sell Requests",
+  "app.allMySellRequests.table.reference": "Reference",
+  "app.allMySellRequests.table.status": "Status",
+  "app.allMySellRequests.table.submit": "Submit",
+  "app.allMySellRequests.table.sent": "Sent",
+  "app.allMySellRequests.table.reception": "Reception",
+  "app.allMySellRequests.table.lastModification": "Last Modification",
+  "app.allMySellRequests.table.customerValidation": "Cust. Validation",
+  "app.allMySellRequests.table.Validation": "Validation",
+  "app.allMySellRequests.table.numberOfCards": "Number of cards",
+  "app.allMySellRequests.table.totalAmount": "Total Amount"
 }

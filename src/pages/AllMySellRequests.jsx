@@ -2,11 +2,11 @@ import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import AuthContext from "../context/authContext";
 import StatusCalculator from "../components/StatusCalculator";
-import moment from "moment";
+import { FormattedMessage } from "react-intl";
 import DateDisplayer from "../components/DateDisplayer";
 import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 
-const AllMySellRequests = props => {
+const AllMySellRequests = (props) => {
   //Current Authentication
   const { authenticationInfos, setAuthenticationInfos } = useContext(
     AuthContext
@@ -20,21 +20,76 @@ const AllMySellRequests = props => {
 
   return (
     <>
-      <h1>Mes demandes de rachat</h1>
+      <h1>
+        <FormattedMessage
+          id="app.allMySellRequests.title"
+          defaultMessage={`My Sell Requests`}
+        />
+      </h1>
       <div className="container-table-responsive">
         <Table className="zebra-table">
           <Thead>
             <Tr>
-              <Th>Reference</Th>
-              <Th>Status</Th>
-              <Th>Soumission</Th>
-              <Th>Envoi</Th>
-              <Th>Réception</Th>
-              <Th>Dernier traitement</Th>
-              <Th>Validation Client</Th>
-              <Th>Validation</Th>
-              <Th>Nombre de cartes</Th>
-              <Th>Montant total</Th>
+              <Th>
+                <FormattedMessage
+                  id="app.allMySellRequests.table.reference"
+                  defaultMessage={`Reference`}
+                />
+              </Th>
+              <Th>
+                <FormattedMessage
+                  id="app.allMySellRequests.table.status"
+                  defaultMessage={`Status`}
+                />
+              </Th>
+              <Th>
+                <FormattedMessage
+                  id="app.allMySellRequests.table.submit"
+                  defaultMessage={`Submit`}
+                />
+              </Th>
+              <Th>
+                <FormattedMessage
+                  id="app.allMySellRequests.table.sent"
+                  defaultMessage={`Sent`}
+                />
+              </Th>
+              <Th>
+                <FormattedMessage
+                  id="app.allMySellRequests.table.reception"
+                  defaultMessage={`Reception`}
+                />
+              </Th>
+              <Th>
+                <FormattedMessage
+                  id="app.allMySellRequests.table.lastModification"
+                  defaultMessage={`Last Modification`}
+                />
+              </Th>
+              <Th>
+                <FormattedMessage
+                  id="app.allMySellRequests.table.customerValidation"
+                  defaultMessage={`Cust. Validation`}
+                />
+              </Th>
+              <Th>
+                <FormattedMessage
+                  id="app.allMySellRequests.table.Validation"
+                  defaultMessage={`Validation`}
+                />
+              </Th>
+              <Th>
+                <FormattedMessage
+                  id="app.allMySellRequests.table.numberOfCards"
+                  defaultMessage={`Number of cards`}
+                />
+              </Th>
+              <Th>
+                <FormattedMessage
+                  id="app.allMySellRequests.table.totalAmount"
+                  defaultMessage={`Total Amount`}
+                />
+              </Th>
             </Tr>
           </Thead>
           <Tbody>

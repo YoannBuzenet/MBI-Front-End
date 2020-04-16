@@ -62,7 +62,7 @@ const LastModifications = () => {
         <h2>
           <FormattedMessage
             id="app.lastModification.title"
-            defaultMessage={`Les dernières modifications`}
+            defaultMessage={`Last updated cards`}
           />
         </h2>
         <div className="all-cards">
