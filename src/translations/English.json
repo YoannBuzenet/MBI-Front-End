@@ -38,6 +38,8 @@
   "app.myAccountPage.edition.failure": "Your account couldn't be updated. Please try again.",
 
   "app.LoginPage.title": "Connect",
+  "app.LoginPage.loginPage.email": "Mail Adress",
+  "app.LoginPage.loginPage.password": "Password",
   "app.LoginPage.placeholder.email": "Mail adress...",
   "app.LoginPage.placeholder.password": "Password",
   "app.LoginPage.button.connect": "Connect",
@@ -82,6 +84,14 @@
   "app.OneSet.filterByPrice": "Filter by Price",
 
   "app.RegisterPage.title": "Register",
+  "app.RegisterPage.label.mail": "Email",
+  "app.RegisterPage.label.password": "Password",
+  "app.RegisterPage.label.firstName": "First Name",
+  "app.RegisterPage.label.lastName": "Last Name",
+  "app.RegisterPage.label.telephone": "Telephone",
+  "app.RegisterPage.label.adress": "Adress",
+  "app.RegisterPage.label.postalCode": "Postal Code",
+  "app.RegisterPage.label.town": "Town",
   "app.RegisterPage.placeholder.mail": "Mail Adress...",
   "app.RegisterPage.placeholder.password": "Your password",
   "app.RegisterPage.placeholder.firstName": "First Name",
@@ -90,5 +100,10 @@
   "app.RegisterPage.placeholder.adress": "Your adress...",
   "app.RegisterPage.placeholder.postalCode": "Postal Code",
   "app.RegisterPage.placeholder.town": "Town",
-  "app.RegisterPage.button.register": "Create Account"
+  "app.RegisterPage.button.register": "Create Account",
+
+  "app.shop.myAccount.title": "Shop Informations",
+  "app.shop.myAccount.label.legalName": "Legal Name",
+  "app.shop.myAccount.placeholder.legalName": "Please indicate your business legal name.",
+  "app.shop.myAccount.toast.failure": "The information couldn't be updated. Please try again."
 }

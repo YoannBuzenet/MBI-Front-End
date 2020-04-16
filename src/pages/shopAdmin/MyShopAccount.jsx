@@ -4,15 +4,14 @@ import Field from "../../components/forms/Field";
 import shopAPI from "../../services/shopAPI";
 import { toast } from "react-toastify";
 import localStorageAPI from "../../services/localStorageAPI";
+import { FormattedMessage } from "react-intl";
+import config from "../../services/config";
 
-const MyShopAccount = props => {
+const MyShopAccount = (props) => {
   //Current Authentication
   const { authenticationInfos, setAuthenticationInfos } = useContext(
     AuthContext
   );
-
-  //ENV VARIABLE
-  const shopID = 1;
 
   //We add a timer to not hit API at each user input.
   //This way there is at least WAIT_INTERVAL interval between each sending, or more if the user continues to input.
@@ -21,7 +20,7 @@ const MyShopAccount = props => {
 
   console.log(authenticationInfos);
 
-  const handleChange = event => {
+  const handleChange = (event) => {
     setTimer(clearTimeout(timer));
 
     var { name, value } = event.target;
@@ -41,22 +40,25 @@ const MyShopAccount = props => {
   const triggerAPISending = (name, value) => {
     const objectToSend = {
       shop: {
-        id: shopID,
-        [name]: value
-      }
+        id: config.shopID,
+        [name]: value,
+      },
     };
 
     shopAPI
       .updateFields(objectToSend, shopID)
-      .then(data => {
+      .then((data) => {
         const localStorage = localStorageAPI.getLocalStorageSession();
         localStorage.shop[name] = value;
         localStorage.client.shop[name] = value;
         localStorageAPI.saveLocalStorage("userInfos", localStorage);
       })
-      .catch(data =>
+      .catch((data) =>
         toast.error(
-          "L'information n'a pas pu être mise à jour. Merci de recommencer ou de vous reconnecter."
+          <FormattedMessage
+            id="app.shop.myAccount.toast.failure"
+            defaultMessage={`Register`}
+          />
         )
       );
   };
@@ -64,21 +66,36 @@ const MyShopAccount = props => {
   return (
     <>
       <div className="container my-account">
-        <h1>Informations Boutique</h1>
+        <h1>
+          <FormattedMessage
+            id="app.shop.myAccount.title"
+            defaultMessage={`Register`}
+          />
+        </h1>
         <form>
           <Field
             name="legalName"
-            label="Raison sociale"
+            label={
+              <FormattedMessage
+                id="app.shop.myAccount.label.legalName"
+                defaultMessage={`Legal Name`}
+              />
+            }
             value={authenticationInfos.shop.legalName}
-            onChange={event => handleChange(event, "TODOBRO")}
-            placeholder="Merci d'indiquer la raison sociale de votre entreprise."
+            onChange={(event) => handleChange(event, "TODOBRO")}
+            placeholder={
+              <FormattedMessage
+                id="app.shop.myAccount.placeholder.legalName"
+                defaultMessage={`Business legal name...`}
+              />
+            }
             idNumber={Math.random()}
           />
           <Field
             name="email"
             label="Email"
             value={authenticationInfos.shop.email}
-            onChange={event => handleChange(event, "TODOBRO")}
+            onChange={(event) => handleChange(event, "TODOBRO")}
             placeholder="Votre mail de contact professionnel."
             type="mail"
             idNumber={Math.random()}
@@ -88,7 +105,7 @@ const MyShopAccount = props => {
             name="tel"
             label="Telephone"
             value={authenticationInfos.shop.tel}
-            onChange={event => handleChange(event, "TODOBRO")}
+            onChange={(event) => handleChange(event, "TODOBRO")}
             placeholder="Votre numéro de téléphone professionnel."
             type="tel"
             idNumber={Math.random()}
@@ -97,7 +114,7 @@ const MyShopAccount = props => {
             name="SIRET"
             label="SIRET"
             value={authenticationInfos.shop.SIRET}
-            onChange={event => handleChange(event, "TODOBRO")}
+            onChange={(event) => handleChange(event, "TODOBRO")}
             placeholder="Votre numéro de SIRET."
             idNumber={Math.random()}
           />
@@ -105,7 +122,7 @@ const MyShopAccount = props => {
             name="vatNumber"
             label="Numéro de TVA"
             value={authenticationInfos.shop.vatNumber}
-            onChange={event => handleChange(event, "TODOBRO")}
+            onChange={(event) => handleChange(event, "TODOBRO")}
             placeholder="Votre numéro de TVA"
             idNumber={Math.random()}
           />
@@ -117,7 +134,7 @@ const MyShopAccount = props => {
             cols="22"
             rows="3"
             required
-            onChange={event => handleChange(event, "TODOBRO")}
+            onChange={(event) => handleChange(event, "TODOBRO")}
             value={authenticationInfos.shop.adress}
           ></textarea>
 
@@ -125,7 +142,7 @@ const MyShopAccount = props => {
             name="postalCode"
             label="Code Postal"
             value={authenticationInfos.shop.postalCode}
-            onChange={event => handleChange(event, "TODOBRO")}
+            onChange={(event) => handleChange(event, "TODOBRO")}
             placeholder="Votre adresse code postal."
             idNumber={Math.random()}
           />
@@ -133,7 +150,7 @@ const MyShopAccount = props => {
             name="town"
             label="Ville"
             value={authenticationInfos.shop.town}
-            onChange={event => handleChange(event, "TODOBRO")}
+            onChange={(event) => handleChange(event, "TODOBRO")}
             placeholder="Votre ville."
             idNumber={Math.random()}
           />
@@ -145,7 +162,7 @@ const MyShopAccount = props => {
             cols="22"
             rows="3"
             required
-            onChange={event => handleChange(event, "TODOBRO")}
+            onChange={(event) => handleChange(event, "TODOBRO")}
             value={authenticationInfos.shop.legalClausesBuying}
           ></textarea>
         </form>

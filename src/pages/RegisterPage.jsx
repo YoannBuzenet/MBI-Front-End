@@ -98,7 +98,12 @@ const RegisterPage = ({ history }) => {
             id="mail"
             required
             onChange={(event) => handleChange(event)}
-            label="Email"
+            label={
+              <FormattedMessage
+                id="app.RegisterPage.label.mail"
+                defaultMessage={`Email`}
+              />
+            }
           />
 
           <Field
@@ -113,7 +118,12 @@ const RegisterPage = ({ history }) => {
             }
             required
             onChange={(event) => handleChange(event)}
-            label="Mot de Passe"
+            label={
+              <FormattedMessage
+                id="app.RegisterPage.label.password"
+                defaultMessage={`Password`}
+              />
+            }
             minlength={6}
           />
 
@@ -129,7 +139,12 @@ const RegisterPage = ({ history }) => {
             }
             required
             onChange={(event) => handleChange(event)}
-            label="Prénom"
+            label={
+              <FormattedMessage
+                id="app.RegisterPage.label.firstName"
+                defaultMessage={`First Name`}
+              />
+            }
           />
 
           <Field
@@ -144,7 +159,12 @@ const RegisterPage = ({ history }) => {
             }
             required
             onChange={(event) => handleChange(event)}
-            label="Nom de Famille"
+            label={
+              <FormattedMessage
+                id="app.RegisterPage.label.lastName"
+                defaultMessage={`Last Name`}
+              />
+            }
           />
 
           <Field
@@ -159,10 +179,20 @@ const RegisterPage = ({ history }) => {
             }
             required
             onChange={(event) => handleChange(event)}
-            label="Telephone"
+            label={
+              <FormattedMessage
+                id="app.RegisterPage.label.telephone"
+                defaultMessage={`Telephone`}
+              />
+            }
           />
 
-          <label htmlFor="adress">Adresse</label>
+          <label htmlFor="adress">
+            <FormattedMessage
+              id="app.RegisterPage.label.adress"
+              defaultMessage={`Adress`}
+            />
+          </label>
           <textarea
             className="my-account"
             name="adress"
@@ -191,7 +221,12 @@ const RegisterPage = ({ history }) => {
             }
             required
             onChange={(event) => handleChange(event)}
-            label="Code Postal"
+            label={
+              <FormattedMessage
+                id="app.RegisterPage.label.postalCode"
+                defaultMessage={`Postal Code`}
+              />
+            }
           />
 
           <Field
@@ -206,7 +241,12 @@ const RegisterPage = ({ history }) => {
               />
             }
             onChange={(event) => handleChange(event)}
-            label="Ville"
+            label={
+              <FormattedMessage
+                id="app.RegisterPage.label.town"
+                defaultMessage={`Town`}
+              />
+            }
           />
           {isLoading && (
             <div className="RegisterLoader">

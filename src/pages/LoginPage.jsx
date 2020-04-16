@@ -98,7 +98,12 @@ const LoginPage = ({ history, eraseAuthContext, renewJWTToken }) => {
           <form action="" onSubmit={handleSubmit} className="login-form">
             <Field
               name="email"
-              label="Adresse e-mail"
+              label={
+                <FormattedMessage
+                  id="app.LoginPage.loginPage.email"
+                  defaultMessage={`Mail Adress`}
+                />
+              }
               value={credentials.username}
               onChange={handleChange}
               placeholder={
@@ -114,7 +119,12 @@ const LoginPage = ({ history, eraseAuthContext, renewJWTToken }) => {
             <Field
               name="password"
               type="password"
-              label="Password"
+              label={
+                <FormattedMessage
+                  id="app.LoginPage.loginPage.password"
+                  defaultMessage={`Password`}
+                />
+              }
               value={credentials.password}
               onChange={handleChange}
               placeholder={

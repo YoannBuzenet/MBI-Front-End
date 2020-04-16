@@ -38,6 +38,8 @@
   "app.myAccountPage.edition.failure": "Votre compte n'a pu être mis à jour. Merci de réessayer.",
 
   "app.LoginPage.title": "Connexion à l'application",
+  "app.LoginPage.loginPage.email": "Adresse Mail",
+  "app.LoginPage.loginPage.password": "Mot de passe",
   "app.LoginPage.placeholder.email": "Adresse mail...",
   "app.LoginPage.placeholder.password": "Mot de passe",
   "app.LoginPage.button.connect": "Se connecter",
@@ -82,6 +84,14 @@
   "app.OneSet.filterByPrice": "Filtrer par prix",
 
   "app.RegisterPage.title": "Créer un compte",
+  "app.RegisterPage.label.mail": "Email",
+  "app.RegisterPage.label.password": "Password",
+  "app.RegisterPage.label.firstName": "Prénom",
+  "app.RegisterPage.label.lastName": "Nom de famille",
+  "app.RegisterPage.label.telephone": "Téléphone",
+  "app.RegisterPage.label.adress": "Adresse",
+  "app.RegisterPage.label.postalCode": "Code Postal",
+  "app.RegisterPage.label.town": "Ville",
   "app.RegisterPage.placeholder.mail": "Adresse mail...",
   "app.RegisterPage.placeholder.password": "Mot de passe",
   "app.RegisterPage.placeholder.firstName": "Prénom",
@@ -90,5 +100,10 @@
   "app.RegisterPage.placeholder.adress": "Votre adresse...",
   "app.RegisterPage.placeholder.postalCode": "Code Postal",
   "app.RegisterPage.placeholder.town": "Ville",
-  "app.RegisterPage.button.register": "S'inscrire"
+  "app.RegisterPage.button.register": "S'inscrire",
+
+  "app.shop.myAccount.title": "Informations Boutique",
+  "app.shop.myAccount.label.legalName": "Raison Sociale",
+  "app.shop.myAccount.placeholder.legalName": "Raison sociale...",
+  "app.shop.myAccount.toast.failure": "Les informations n'ont pas pu être mises à jour. Merci de réessayer."
 }
