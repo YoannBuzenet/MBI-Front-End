@@ -2,7 +2,6 @@ import React, { useState, useEffect, useCallback } from "react";
 
 import "./App.css";
 import "react-super-responsive-table/dist/SuperResponsiveTableStyle.css";
-import jwtDecode from "jwt-decode";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
