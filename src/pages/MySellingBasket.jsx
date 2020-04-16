@@ -2,8 +2,8 @@ import React, { useContext } from "react";
 import SellingBasketContext from "../context/sellingBasket";
 import SellRequestValidation from "../components/validationSellRequest/SellRequestValidation";
 import CardLineSellingBasket from "../components/CardLineSellingBasket";
-import canSubmitContext from "../context/canSubmitSellRequestContext";
 import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
+import { FormattedMessage } from "react-intl";
 
 const MyCurrentSellRequest = ({ history, checkForDuplicates }) => {
   const { currentBasket } = useContext(SellingBasketContext);
@@ -17,19 +17,69 @@ const MyCurrentSellRequest = ({ history, checkForDuplicates }) => {
       <div className="all-content sell-request">
         <div className="left-content"></div>
         <div className="main-content">
-          <h1>Ma demande de rachat</h1>
+          <h1>
+            <FormattedMessage
+              id="app.Basket.title"
+              defaultMessage={`My Sell Request`}
+            />
+          </h1>
           <Table className="zebra-table">
             <Thead>
               <Tr>
-                <Th>Nom</Th>
-                <Th>Edition</Th>
-                <Th>Langue</Th>
-                <Th>Etat</Th>
-                <Th>Foil</Th>
-                <Th>Signée</Th>
-                <Th>Quantité</Th>
-                <Th>Prix</Th>
-                <Th>Total</Th>
+                <Th>
+                  <FormattedMessage
+                    id="app.Basket.cardName"
+                    defaultMessage={`Card`}
+                  />
+                </Th>
+                <Th>
+                  <FormattedMessage
+                    id="app.Basket.set"
+                    defaultMessage={`Set`}
+                  />
+                </Th>
+                <Th>
+                  <FormattedMessage
+                    id="app.Basket.language"
+                    defaultMessage={`Language`}
+                  />
+                </Th>
+                <Th>
+                  <FormattedMessage
+                    id="app.Basket.condition"
+                    defaultMessage={`Condition`}
+                  />
+                </Th>
+                <Th>
+                  <FormattedMessage
+                    id="app.Basket.foil"
+                    defaultMessage={`Foil`}
+                  />
+                </Th>
+                <Th>
+                  <FormattedMessage
+                    id="app.Basket.signed"
+                    defaultMessage={`Signed`}
+                  />
+                </Th>
+                <Th>
+                  <FormattedMessage
+                    id="app.Basket.quantity"
+                    defaultMessage={`Quantity`}
+                  />
+                </Th>
+                <Th>
+                  <FormattedMessage
+                    id="app.Basket.price"
+                    defaultMessage={`Price`}
+                  />
+                </Th>
+                <Th>
+                  <FormattedMessage
+                    id="app.Basket.totalAmount"
+                    defaultMessage={`Total`}
+                  />
+                </Th>
                 <Th></Th>
               </Tr>
             </Thead>
@@ -58,13 +108,23 @@ const MyCurrentSellRequest = ({ history, checkForDuplicates }) => {
             </Tbody>
           </Table>
           <p>
-            <span>Total cartes : </span>
+            <span>
+              <FormattedMessage
+                id="app.Basket.totalNumberCards"
+                defaultMessage={`Number of cards : `}
+              />
+            </span>
             {currentBasket.reduce((total, card) => {
               return total + card.quantity;
             }, 0)}
           </p>
           <p>
-            <span>Total : </span>
+            <span>
+              <FormattedMessage
+                id="app.Basket.totalBasketAmount"
+                defaultMessage={`Total : `}
+              />
+            </span>
             {currentBasket.reduce((total, card) => {
               return total + card.price * card.quantity;
             }, 0)}
