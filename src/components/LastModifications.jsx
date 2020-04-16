@@ -4,6 +4,7 @@ import axios from "axios";
 import CardThumbnailLoader from "./loaders/CardThumbnailLoader";
 import config from "../services/config";
 import localStorageAPI from "../services/localStorageAPI";
+import { FormattedMessage } from "react-intl";
 
 const LastModifications = () => {
   const [lastModificationList, setLastModificationList] = useState([]);
@@ -58,7 +59,12 @@ const LastModifications = () => {
   return (
     <>
       <div className="last-modification">
-        <h2>Les dernières modifications</h2>
+        <h2>
+          <FormattedMessage
+            id="app.lastModification.title"
+            defaultMessage={`Les dernières modifications`}
+          />
+        </h2>
         <div className="all-cards">
           {isLoading && (
             <>
