@@ -1,3 +1,17 @@
 {
-  "app.lastModification.title": "Les dernières modifications"
+  "app.lastModification.title": "Les dernières modifications",
+
+  "app.setList.title": "Les éditions",
+
+  "app.allMySellRequests.title": "Mes demandes de rachat",
+  "app.allMySellRequests.table.reference": "Reference",
+  "app.allMySellRequests.table.status": "Statut",
+  "app.allMySellRequests.table.submit": "Soumission",
+  "app.allMySellRequests.table.sent": "Envoi",
+  "app.allMySellRequests.table.reception": "Réception",
+  "app.allMySellRequests.table.lastModification": "Dernier traitement",
+  "app.allMySellRequests.table.customerValidation": "Validation Client",
+  "app.allMySellRequests.table.Validation": "Validation",
+  "app.allMySellRequests.table.numberOfCards": "Nombre de cartes",
+  "app.allMySellRequests.table.totalAmount": "Montant total"
 }
