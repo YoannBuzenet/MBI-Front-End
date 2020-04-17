@@ -14,6 +14,7 @@ import { toast } from "react-toastify";
 import CardDisplayOnPageContext from "../../context/cardDisplayOnPageContext";
 import BlackDivModalContext from "../../context/blackDivModalContext";
 import config from "../../services/config";
+import { FormattedMessage } from "react-intl";
 
 const CardLineShop = ({ card, indexCard }) => {
   //Getting the Sell Request state by context
@@ -182,7 +183,10 @@ const CardLineShop = ({ card, indexCard }) => {
       .then((data) => setEditionInformation(data.data["hydra:member"]))
       .catch((error) => {
         toast.error(
-          "Les éditions n'ont pu être chargées. Merci de réessayer ou de vous reconnecter."
+          <FormattedMessage
+            id="app.cardline.loadingSets.toast.failure"
+            defaultMessage={`Sets couldn't be loaded. Please reload the page or login again.`}
+          />
         );
       });
   };

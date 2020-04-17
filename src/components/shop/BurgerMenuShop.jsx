@@ -6,6 +6,7 @@ import authAPI from "../../services/authAPI";
 import { toast } from "react-toastify";
 import BlackDivContext from "../../context/blackDivModalContext";
 import isResponsiveMenuDisplayedContext from "../../context/menuDisplayedContext";
+import { FormattedMessage } from "react-intl";
 
 const BurgerMenuShop = () => {
   //Current Authentication
@@ -69,7 +70,11 @@ const BurgerMenuShop = () => {
               onClick={(event) => closeMenu(event)}
             >
               <li>
-                Mon Rachat (
+                <FormattedMessage
+                  id="app.shop.burgerMenu.mySellRequest"
+                  defaultMessage={`My Sell Request`}
+                />
+                (
                 <span className="buying-total">
                   {currentBasket.reduce((total, card) => {
                     return total + card.quantity;
@@ -90,14 +95,24 @@ const BurgerMenuShop = () => {
               to="/shopadmin/sell_requests"
               onClick={(event) => closeMenu(event)}
             >
-              <li>Rachats</li>
+              <li>
+                <FormattedMessage
+                  id="app.shop.burgerMenu.sellRequests"
+                  defaultMessage={`SellRequests`}
+                />
+              </li>
             </Link>
             <Link
               className="classic_links_responsive classic_links_responsive_admin nav-element"
               to="/shopadmin/customers"
               onClick={(event) => closeMenu(event)}
             >
-              <li>Clients</li>
+              <li>
+                <FormattedMessage
+                  id="app.shop.burgerMenu.customers"
+                  defaultMessage={`Customers`}
+                />
+              </li>
             </Link>
 
             <Link
@@ -105,7 +120,12 @@ const BurgerMenuShop = () => {
               className="classic_links_responsive classic_links_responsive_admin"
               onClick={(event) => closeMenu(event)}
             >
-              <li>Mon compte</li>
+              <li>
+                <FormattedMessage
+                  id="app.shop.burgerMenu.myAccount"
+                  defaultMessage={`My Account`}
+                />
+              </li>
             </Link>
 
             <Link
@@ -113,7 +133,12 @@ const BurgerMenuShop = () => {
               className="classic_links_responsive classic_links_responsive_admin nav-element"
               onClick={(event) => closeMenu(event)}
             >
-              <li>Informations Boutique</li>
+              <li>
+                <FormattedMessage
+                  id="app.shop.burgerMenu.shopInfos"
+                  defaultMessage={`Shop Informations`}
+                />
+              </li>
             </Link>
 
             <Link
@@ -121,7 +146,12 @@ const BurgerMenuShop = () => {
               className="classic_links_responsive classic_links_responsive_admin nav-element"
               onClick={(event) => closeMenu(event)}
             >
-              <li>Paramètres Gestion</li>
+              <li>
+                <FormattedMessage
+                  id="app.shop.burgerMenu.shopSettings"
+                  defaultMessage={`Settings`}
+                />
+              </li>
             </Link>
 
             <li
@@ -131,7 +161,10 @@ const BurgerMenuShop = () => {
               }}
               className="classic_links_responsive classic_links_responsive_admin"
             >
-              Déconnexion
+              <FormattedMessage
+                id="app.shop.burgerMenu.logOut"
+                defaultMessage={`Log Out`}
+              />
             </li>
           </ul>
         </div>
