@@ -5,7 +5,7 @@ import English from "../translations/English.json";
 import French from "../translations/French.json";
 
 const AppWrapper = (props) => {
-  const translationsForUsersLocale = English;
+  const translationsForUsersLocale = French;
 
   //STATE - App Lang
   const [currentLang, setCurrentLang] = useState("en-FR");

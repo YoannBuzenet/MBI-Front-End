@@ -179,6 +179,17 @@
   "app.shop.shopSettings.toast.input.failure": "Un nombre est obligatoire pour chaque langue et condition. Merci d'en indiquer un.",
   "app.shop.shopSettings.toast.input.number.failure": "Merci de saisir un nombre.",
 
+  "app.shop.burgerMenu.mySellRequest": "Mon Rachat",
+  "app.shop.burgerMenu.sellRequests": "Rachats",
+  "app.shop.burgerMenu.customers": "Clients",
+  "app.shop.burgerMenu.myAccount": "Mon compte",
+  "app.shop.burgerMenu.shopInfos": "Informations Boutique",
+  "app.shop.burgerMenu.shopSettings": "Paramètres",
+  "app.shop.burgerMenu.logOut": "Déconnexion",
+
+  "app.cardline": "",
+  "app.cardline.loadingSets.toast.failure": "Les éditions n'ont pu être chargées. Merci de réessayer ou de vous reconnecter.",
+
   "config.definition.lang.german": "Allemand",
   "config.definition.lang.spanish": "Espagnol",
   "config.definition.lang.french": "Français",

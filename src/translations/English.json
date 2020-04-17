@@ -179,6 +179,17 @@
   "app.shop.shopSettings.toast.input.failure": "A number is mandatory for each language and condition. Please indicate one.",
   "app.shop.shopSettings.toast.input.number.failure": "Please indicate a number.",
 
+  "app.shop.burgerMenu.mySellRequest": "My Sell Request",
+  "app.shop.burgerMenu.sellRequests": "Sell Requests",
+  "app.shop.burgerMenu.customers": "Customers",
+  "app.shop.burgerMenu.myAccount": "My Account",
+  "app.shop.burgerMenu.shopInfos": "Shop Informations",
+  "app.shop.burgerMenu.shopSettings": "Settings",
+  "app.shop.burgerMenu.logOut": "Log Out",
+
+  "app.cardline": "",
+  "app.cardline.loadingSets.toast.failure": "Sets couldn't be loaded. Please reload the page or login again.",
+
   "config.definition.lang.german": "German",
   "config.definition.lang.spanish": "Spanish",
   "config.definition.lang.french": "French",
