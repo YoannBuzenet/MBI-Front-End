@@ -201,7 +201,7 @@ const CardLine = ({ card, handleAddSellingBasket, index, setName }) => {
             defaultValue="2"
           >
             {conditions.length > 0
-              ? config.gradingArea === "isEU"
+              ? config.gradingArea === "EU"
                 ? conditions.map((condition, index) =>
                     condition.isEU ? (
                       <option key={index} value={condition.id}>

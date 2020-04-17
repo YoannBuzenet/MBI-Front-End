@@ -239,25 +239,42 @@ const ShopAdminSettings = () => {
             id="app.shop.shopSettings.defaultGradingSystem"
             defaultMessage={`Grading System : `}
           />{" "}
-          ENV_VARIABLE
+          {config.gradingArea}
         </p>
         <div className="percentSettings">
           <div className="percentPerSigned">
-            <h2>Cartes signées</h2>
+            <h2>
+              <FormattedMessage
+                id="app.shop.shopSettings.signedCards"
+                defaultMessage={`Signed Cards`}
+              />
+            </h2>
             <form>
               <Field
                 name="percentPerSigned"
-                label="Pourcentage à appliquer"
+                label={
+                  <FormattedMessage
+                    id="app.shop.shopSettings.labelPercentToApply"
+                    defaultMessage={`Percent to Apply`}
+                  />
+                }
                 value={authenticationInfos.shop.shopData.PercentPerSigned}
                 onChange={(event) => handleChange(event, "percentPerSigned")}
               />
             </form>
           </div>
           <div className="percentPerLang">
-            <h2>Langues</h2>
+            <h2>
+              <FormattedMessage
+                id="app.shop.shopSettings.languages"
+                defaultMessage={`Languages`}
+              />
+            </h2>
             <span className="explaination">
-              Quel pourcentage voulez-vous appliquer aux langues ? Votre langue
-              d'achat préférée est le repère, elle doit être à 100%.
+              <FormattedMessage
+                id="app.shop.shopSettings.percentExplaination"
+                defaultMessage={`Choose which percentage you wish to pay per language. Your default buying language should be 100%.`}
+              />
             </span>
 
             <form>
@@ -279,7 +296,12 @@ const ShopAdminSettings = () => {
             </form>
           </div>
           <div className="percentPerConditions">
-            <h2>Conditions</h2>
+            <h2>
+              <FormattedMessage
+                id="app.shop.shopSettings.conditions"
+                defaultMessage={`Conditions`}
+              />
+            </h2>
             <form>
               {conditions.length > 0 &&
                 conditions.map((condition, index) => (
@@ -302,7 +324,12 @@ const ShopAdminSettings = () => {
             </form>
           </div>
           <div className="percentPerConditionsFoil">
-            <h2>Conditions Foil</h2>
+            <h2>
+              <FormattedMessage
+                id="app.shop.shopSettings.conditionsFoil"
+                defaultMessage={`Foil Conditions`}
+              />
+            </h2>
             <form>
               {conditions.length > 0 &&
                 conditions.map((condition, index) => (
