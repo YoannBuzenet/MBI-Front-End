@@ -187,6 +187,17 @@
   "app.shop.burgerMenu.shopSettings": "Paramètres",
   "app.shop.burgerMenu.logOut": "Déconnexion",
 
+  "app.shop.navBar.logout.success": "Vous êtes bien déconnecté.",
+  "app.shop.navBar.clientWebsite": "Accès Client",
+  "app.shop.navBar.title": "Accès Admin",
+  "app.shop.navBar.SellRequest": "Rachat ",
+  "app.shop.navBar.sellRequests": "Rachats",
+  "app.shop.navBar.customers": "Clients",
+  "app.shop.navBar.myAccount": "Mon compte",
+  "app.shop.navBar.shopInfos": "Informations Boutique",
+  "app.shop.navBar.settings": "Paramètres",
+  "app.shop.navBar.logOut": "Déconnexion",
+
   "app.cardline": "",
   "app.cardline.loadingSets.toast.failure": "Les éditions n'ont pu être chargées. Merci de réessayer ou de vous reconnecter.",
   "app.cardline.shop.updateCard.toast.failure": "La carte n'a pu être mise à jour. Merci de réessayer ou de vous reconnecter.",
