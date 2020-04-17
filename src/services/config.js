@@ -7,6 +7,7 @@ const avatarShopURL = "";
 const shopName = "Fantasy Sphere - Nous rachetons toutes vos cartes";
 
 const baseLang = 3;
+const websiteDefaultLanguage = 3;
 
 const langDefinition = {
   1: "German",
@@ -48,6 +49,7 @@ export default {
   shopID,
   shopName,
   baseLang,
+  websiteDefaultLanguage,
   langDefinition,
   gradingArea,
   TIME_TO_LOG_OUT,

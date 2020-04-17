@@ -166,6 +166,8 @@
   "app.shop.OneSellRequest.total": "TOTAL",
 
   "app.shop.shopSettings.title": "Paramètres",
+  "app.shop.shopSettings.defaultWebsiteLanguage": "Langue du site par défaut : ",
+  "app.shop.shopSettings.defaultBuyingLanguage": "Langue d'achat par défaut : ",
   "app.shop.shopSettings.toast.failure": "Les données n'ont pu être mises à jour. Merci de réessayer.",
   "app.shop.shopSettings.toast.input.failure": "Un nombre est obligatoire pour chaque langue et condition. Merci d'en indiquer un.",
   "app.shop.shopSettings.toast.input.number.failure": "Merci de saisir un nombre.",
