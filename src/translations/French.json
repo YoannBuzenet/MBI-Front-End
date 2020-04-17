@@ -189,6 +189,11 @@
 
   "app.cardline": "",
   "app.cardline.loadingSets.toast.failure": "Les éditions n'ont pu être chargées. Merci de réessayer ou de vous reconnecter.",
+  "app.cardline.shop.updateCard.toast.failure": "La carte n'a pu être mise à jour. Merci de réessayer ou de vous reconnecter.",
+  "app.cardline.shop.deleteCard.toast.failure": "La carte n'a pu être supprimée. Merci de réessayer ou de vous reconnecter.",
+
+  "app.generics.yes": "Oui",
+  "app.generics.no": "Non",
 
   "config.definition.lang.german": "Allemand",
   "config.definition.lang.spanish": "Espagnol",

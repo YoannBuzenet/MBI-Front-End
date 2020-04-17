@@ -15,6 +15,7 @@ import CardDisplayOnPageContext from "../../context/cardDisplayOnPageContext";
 import BlackDivModalContext from "../../context/blackDivModalContext";
 import config from "../../services/config";
 import { FormattedMessage } from "react-intl";
+import { useIntl } from "react-intl";
 
 const CardLineShop = ({ card, indexCard }) => {
   //Getting the Sell Request state by context
@@ -57,6 +58,9 @@ const CardLineShop = ({ card, indexCard }) => {
 
   //STATE - knowing if a card has just been deleted
   const [cardHasBeenDeleted, setCardHasBeenDeleted] = useState(false);
+
+  //Translation Hook
+  const intl = useIntl();
 
   useEffect(() => {
     if (isOnHover) {
@@ -184,7 +188,7 @@ const CardLineShop = ({ card, indexCard }) => {
       .catch((error) => {
         toast.error(
           <FormattedMessage
-            id="app.cardline.loadingSets.toast.failure"
+            id="app.cardline.shop.loadingSets.toast.failure"
             defaultMessage={`Sets couldn't be loaded. Please reload the page or login again.`}
           />
         );
@@ -216,7 +220,10 @@ const CardLineShop = ({ card, indexCard }) => {
       .setUpdate(IRItoUpdate, langNextCard, currentCard.id)
       .catch(() => {
         toast.error(
-          "La carte n'a pu être mise à jour. Merci de réessayer ou de vous reconnecter."
+          <FormattedMessage
+            id="app.cardline.shop.updateCard.toast.failure"
+            defaultMessage={`The courd couldn't be updated. Please try again.`}
+          />
         );
       });
 
@@ -236,7 +243,10 @@ const CardLineShop = ({ card, indexCard }) => {
       .then((data) => setCardHasBeenDeleted(true))
       .catch((error) => {
         toast.error(
-          "La carte n'a pu être supprimée. Merci de réessayer ou de vous reconnecter."
+          <FormattedMessage
+            id="app.cardline.shop.deleteCard.toast.failure"
+            defaultMessage={`The courd couldn't be deleted. Please try again.`}
+          />
         );
       });
   };
@@ -265,6 +275,15 @@ const CardLineShop = ({ card, indexCard }) => {
     setCardDisplayInformation(newDisplayContext);
     setIsBlackDivModalDisplayed("activated");
   };
+
+  const yesWordTranslated = intl.formatMessage({
+    id: "app.generics.yes",
+    defaultMessage: "Yes",
+  });
+  const noWordTranslated = intl.formatMessage({
+    id: "app.generics.no",
+    defaultMessage: "No",
+  });
 
   return (
     <>
@@ -414,12 +433,28 @@ const CardLineShop = ({ card, indexCard }) => {
               handleChange(event, currentCard);
             }}
           >
-            <option value={currentCard.isFoil == true ? "Yes" : "No"}>
-              {currentCard.isFoil == true ? "Yes" : "No"}
+            <option
+              value={
+                currentCard.isFoil === true
+                  ? yesWordTranslated
+                  : noWordTranslated
+              }
+            >
+              {currentCard.isFoil == true
+                ? yesWordTranslated
+                : noWordTranslated}
             </option>
-            {card.hasfoil == 1 && card.hasnonfoil == 1 && (
-              <option value={currentCard.isFoil == true ? "No" : "Yes"}>
-                {currentCard.isFoil == true ? "No" : "Yes"}
+            {card.hasfoil === 1 && card.hasnonfoil === 1 && (
+              <option
+                value={
+                  currentCard.isFoil === true
+                    ? noWordTranslated
+                    : yesWordTranslated
+                }
+              >
+                {currentCard.isFoil === true
+                  ? noWordTranslated
+                  : yesWordTranslated}
               </option>
             )}
           </select>
@@ -432,11 +467,27 @@ const CardLineShop = ({ card, indexCard }) => {
               handleChange(event, currentCard);
             }}
           >
-            <option value={currentCard.isSigned === true ? "Yes" : "No"}>
-              {currentCard.isSigned === true ? "Yes" : "No"}
+            <option
+              value={
+                currentCard.isSigned === true
+                  ? yesWordTranslated
+                  : noWordTranslated
+              }
+            >
+              {currentCard.isSigned === true
+                ? yesWordTranslated
+                : noWordTranslated}
             </option>
-            <option value={currentCard.isSigned === true ? "No" : "Yes"}>
-              {currentCard.isSigned === true ? "No" : "Yes"}
+            <option
+              value={
+                currentCard.isSigned === true
+                  ? noWordTranslated
+                  : yesWordTranslated
+              }
+            >
+              {currentCard.isSigned === true
+                ? noWordTranslated
+                : yesWordTranslated}
             </option>
           </select>
         </Td>
@@ -448,11 +499,27 @@ const CardLineShop = ({ card, indexCard }) => {
               handleChange(event, currentCard);
             }}
           >
-            <option value={currentCard.isAltered === true ? "Yes" : "No"}>
-              {currentCard.isAltered === true ? "Yes" : "No"}
+            <option
+              value={
+                currentCard.isAltered === true
+                  ? yesWordTranslated
+                  : noWordTranslated
+              }
+            >
+              {currentCard.isAltered === true
+                ? yesWordTranslated
+                : noWordTranslated}
             </option>
-            <option value={currentCard.isAltered === true ? "No" : "Yes"}>
-              {currentCard.isAltered === true ? "No" : "Yes"}
+            <option
+              value={
+                currentCard.isAltered === true
+                  ? noWordTranslated
+                  : yesWordTranslated
+              }
+            >
+              {currentCard.isAltered === true
+                ? noWordTranslated
+                : yesWordTranslated}
             </option>
           </select>
         </Td>

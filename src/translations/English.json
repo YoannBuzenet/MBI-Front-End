@@ -188,7 +188,12 @@
   "app.shop.burgerMenu.logOut": "Log Out",
 
   "app.cardline": "",
-  "app.cardline.loadingSets.toast.failure": "Sets couldn't be loaded. Please reload the page or login again.",
+  "app.cardline.shop.loadingSets.toast.failure": "Sets couldn't be loaded. Please reload the page or login again.",
+  "app.cardline.shop.updateCard.toast.failure": "The courd couldn't be updated. Please try again.",
+  "app.cardline.shop.deleteCard.toast.failure": "The courd couldn't be deleted. Please try again.",
+
+  "app.generics.yes": "Yes",
+  "app.generics.no": "No",
 
   "config.definition.lang.german": "German",
   "config.definition.lang.spanish": "Spanish",
