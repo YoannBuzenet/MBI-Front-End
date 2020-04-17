@@ -375,7 +375,7 @@ const CardLineShop = ({ card, indexCard }) => {
             value={currentCard.condition}
           >
             {conditions.length > 0
-              ? config.gradingArea === "isEU"
+              ? config.gradingArea === "EU"
                 ? conditions
                     .filter(
                       (condition) => condition.id !== currentCard.condition

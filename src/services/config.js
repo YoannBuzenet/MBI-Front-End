@@ -23,8 +23,8 @@ const langDefinition = {
   11: "Traditionnal Chinese",
 };
 
-//isEU or isUS
-const gradingArea = "isEU";
+//EU or US
+const gradingArea = "EU";
 
 //30 minutes
 const TIME_TO_LOG_OUT = 30 * 60 * 1000;
