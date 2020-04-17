@@ -7,6 +7,7 @@ import shopAPI from "../../services/shopAPI";
 import localStorageAPI from "../../services/localStorageAPI";
 import errorHandlingAPI from "../../services/errorHandlingAPI";
 import { FormattedMessage } from "react-intl";
+import LanguageNameDisplay from "../../components/LanguageNameDisplay";
 
 const ShopAdminSettings = () => {
   //Current Authentication
@@ -218,7 +219,9 @@ const ShopAdminSettings = () => {
             defaultMessage={`Settings`}
           />
         </h1>
-        <p>La langue par defaut du site : ENV_VARIABLE</p>
+        <p>
+          La langue par defaut du site : <LanguageNameDisplay />
+        </p>
         <p>
           Quel est votre langue d'achat par défaut ? (select parmi toutes les
           langues de magic)

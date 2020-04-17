@@ -38,8 +38,8 @@
   "app.myAccountPage.edition.failure": "Your account couldn't be updated. Please try again.",
 
   "app.LoginPage.title": "Connect",
-  "app.LoginPage.loginPage.email": "Mail Adress",
-  "app.LoginPage.loginPage.password": "Password",
+  "app.LoginPage.label.email": "Mail Adress",
+  "app.LoginPage.label.password": "Password",
   "app.LoginPage.placeholder.email": "Mail adress...",
   "app.LoginPage.placeholder.password": "Password",
   "app.LoginPage.button.connect": "Connect",
@@ -168,5 +168,17 @@
   "app.shop.shopSettings.title": "Settings",
   "app.shop.shopSettings.toast.failure": "The data couldn't be updated. Please try again.",
   "app.shop.shopSettings.toast.input.failure": "A number is mandatory for each language and condition. Please indicate one.",
-  "app.shop.shopSettings.toast.input.number.failure": "Please indicate a number."
+  "app.shop.shopSettings.toast.input.number.failure": "Please indicate a number.",
+
+  "config.definition.lang.german": "German",
+  "config.definition.lang.spanish": "Spanish",
+  "config.definition.lang.french": "French",
+  "config.definition.lang.italian": "Italian",
+  "config.definition.lang.japanese": "Japanese",
+  "config.definition.lang.portuguese": "Portuguese",
+  "config.definition.lang.russian": "Russian",
+  "config.definition.lang.simplifiedChinese": "Simplified Chinese",
+  "config.definition.lang.english": "English",
+  "config.definition.lang.korean": "Korean",
+  "config.definition.lang.traditionnalChinese": "Traditionnal Chinese"
 }

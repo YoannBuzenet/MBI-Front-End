@@ -38,8 +38,8 @@
   "app.myAccountPage.edition.failure": "Votre compte n'a pu être mis à jour. Merci de réessayer.",
 
   "app.LoginPage.title": "Connexion à l'application",
-  "app.LoginPage.loginPage.email": "Adresse Mail",
-  "app.LoginPage.loginPage.password": "Mot de passe",
+  "app.LoginPage.label.email": "Adresse Mail",
+  "app.LoginPage.label.password": "Mot de passe",
   "app.LoginPage.placeholder.email": "Adresse mail...",
   "app.LoginPage.placeholder.password": "Mot de passe",
   "app.LoginPage.button.connect": "Se connecter",
@@ -168,5 +168,17 @@
   "app.shop.shopSettings.title": "Paramètres",
   "app.shop.shopSettings.toast.failure": "Les données n'ont pu être mises à jour. Merci de réessayer.",
   "app.shop.shopSettings.toast.input.failure": "Un nombre est obligatoire pour chaque langue et condition. Merci d'en indiquer un.",
-  "app.shop.shopSettings.toast.input.number.failure": "Merci de saisir un nombre."
+  "app.shop.shopSettings.toast.input.number.failure": "Merci de saisir un nombre.",
+
+  "config.definition.lang.german": "Allemand",
+  "config.definition.lang.spanish": "Espagnol",
+  "config.definition.lang.french": "Français",
+  "config.definition.lang.italian": "Italien",
+  "config.definition.lang.japanese": "Japonais",
+  "config.definition.lang.portuguese": "Portugais",
+  "config.definition.lang.russian": "Russe",
+  "config.definition.lang.simplifiedChinese": "Chinois Simplifié",
+  "config.definition.lang.english": "Anglais",
+  "config.definition.lang.korean": "Coréen",
+  "config.definition.lang.traditionnalChinese": "Chinois Traditionnel"
 }
