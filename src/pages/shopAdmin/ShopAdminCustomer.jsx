@@ -3,12 +3,12 @@ import customersAPI from "../../services/customersAPI";
 import axios from "axios";
 import StatusCalculator from "../../components/StatusCalculator";
 import LastInformationCalculator from "../../components/LastInformationCalculator";
-import { Link } from "react-router-dom";
 import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 import OneLineLoader from "../../components/loaders/OneLineLoader";
 import FeatherIcon from "feather-icons-react";
 import OneBigLineLoader from "../../components/loaders/OneBigLineLoader";
 import errorHandlingAPI from "../../services/errorHandlingAPI";
+import { FormattedMessage } from "react-intl";
 
 const ShopAdminCustomer = ({ match }) => {
   const { id } = match.params;
@@ -23,11 +23,11 @@ const ShopAdminCustomer = ({ match }) => {
   useEffect(() => {
     customersAPI
       .findOneById(id, {
-        cancelToken: source.token
+        cancelToken: source.token,
       })
-      .then(response => setCustomerData(response.data))
+      .then((response) => setCustomerData(response.data))
       .then(() => setIsLoading(false))
-      .catch(error => errorHandlingAPI.check401Unauthorized(error));
+      .catch((error) => errorHandlingAPI.check401Unauthorized(error));
 
     return () => source.cancel("");
   }, []);
@@ -79,11 +79,19 @@ const ShopAdminCustomer = ({ match }) => {
                 {!isLoading && customerData && customerData.adress}
               </p>
               <p>
-                Postal Code : {isLoading && <OneLineLoader />}
+                <FormattedMessage
+                  id="app.shop.customer.postalCode"
+                  defaultMessage={`Postal Code : `}
+                />{" "}
+                {isLoading && <OneLineLoader />}
                 {!isLoading && customerData && customerData.postalCode}
               </p>
               <p>
-                Town : {isLoading && <OneLineLoader />}
+                <FormattedMessage
+                  id="app.shop.customer.town"
+                  defaultMessage={`Town : `}
+                />
+                {isLoading && <OneLineLoader />}
                 {!isLoading && customerData && customerData.town}
               </p>
             </div>
@@ -93,18 +101,43 @@ const ShopAdminCustomer = ({ match }) => {
         <Table className="zebra-table">
           <Thead>
             <Tr>
-              <Th>Numéro de Rachat</Th>
-              <Th>Status</Th>
-              <Th>Date Dernier Traitement</Th>
-              <Th>Nombre de cartes</Th>
-              <Th>Montant</Th>
+              <Th>
+                <FormattedMessage
+                  id="app.shop.customer.SellRequestReference"
+                  defaultMessage={`Sell Request Reference`}
+                />
+              </Th>
+              <Th>
+                <FormattedMessage
+                  id="app.shop.customer.status"
+                  defaultMessage={`Status`}
+                />
+              </Th>
+              <Th>
+                <FormattedMessage
+                  id="app.shop.customer.lastInformation"
+                  defaultMessage={`Last Information`}
+                />
+              </Th>
+              <Th>
+                <FormattedMessage
+                  id="app.shop.customer.numberOfCards"
+                  defaultMessage={`Number of cards`}
+                />
+              </Th>
+              <Th>
+                <FormattedMessage
+                  id="app.shop.customer.amount"
+                  defaultMessage={`Amount`}
+                />
+              </Th>
             </Tr>
           </Thead>
           <Tbody>
             {customerData &&
               customerData.sellrequest &&
               customerData.sellrequest.length > 0 &&
-              customerData.sellrequest.map(sellRequest => {
+              customerData.sellrequest.map((sellRequest) => {
                 return (
                   <Tr
                     key={sellRequest.id}
