@@ -187,6 +187,17 @@
   "app.shop.burgerMenu.shopSettings": "Settings",
   "app.shop.burgerMenu.logOut": "Log Out",
 
+  "app.shop.navBar.logout.success": "You logged out successfully.",
+  "app.shop.navBar.clientWebsite": "Cust. Access",
+  "app.shop.navBar.title": "Admin Access",
+  "app.shop.navBar.sellRequest": "Sell Request ",
+  "app.shop.navBar.sellRequests": "Sell Requests ",
+  "app.shop.navBar.customers": "Customers",
+  "app.shop.navBar.myAccount": "My Account",
+  "app.shop.navBar.shopInfos": "Shop Informations",
+  "app.shop.navBar.settings": "Settings",
+  "app.shop.navBar.logOut": "Log Out",
+
   "app.cardline": "",
   "app.cardline.shop.loadingSets.toast.failure": "Sets couldn't be loaded. Please reload the page or login again.",
   "app.cardline.shop.updateCard.toast.failure": "The courd couldn't be updated. Please try again.",

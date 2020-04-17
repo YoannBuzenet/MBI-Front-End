@@ -6,6 +6,7 @@ import authAPI from "../../services/authAPI";
 import SearchCardBar from "../SearchCardBar";
 import BurgerMenu from "../BurgerMenu";
 import { toast } from "react-toastify";
+import { FormattedMessage } from "react-intl";
 
 const ShopNavbar = ({ history }) => {
   //Current Authentication
@@ -13,7 +14,7 @@ const ShopNavbar = ({ history }) => {
     AuthContext
   );
 
-  console.log(authenticationInfos);
+  // console.log(authenticationInfos);
 
   // useEffect(() => {
   //   console.log(authenticationInfos);
@@ -45,7 +46,12 @@ const ShopNavbar = ({ history }) => {
         SellRequests: [],
       },
     });
-    toast.success("Vous êtes bien déconnecté.");
+    toast.success(
+      <FormattedMessage
+        id="app.shop.navBar.logout.success"
+        defaultMessage={`You logged out successfully.`}
+      />
+    );
 
     history.replace("/");
   };
@@ -61,9 +67,15 @@ const ShopNavbar = ({ history }) => {
       <nav className="navbar navbar-admin">
         <div className="container">
           <div className="menu-links-left">
-            Accès Admin
+            <FormattedMessage
+              id="app.shop.navBar.title"
+              defaultMessage={`Admin Access`}
+            />
             <Link to="/" className="classic-links">
-              Site client
+              <FormattedMessage
+                id="app.shop.navBar.clientWebsite"
+                defaultMessage={`Cust. Access`}
+              />
             </Link>
             <SearchCardBar />
           </div>
@@ -74,7 +86,11 @@ const ShopNavbar = ({ history }) => {
             className="classic-links nav-element options_desktop"
             to="/my_selling_basket"
           >
-            Rachat (
+            <FormattedMessage
+              id="app.shop.navBar.sellRequest"
+              defaultMessage={`Sell Request`}
+            />
+            (
             <span className="buying-total">
               {currentBasket.reduce((total, card) => {
                 return total + card.quantity;
@@ -91,13 +107,19 @@ const ShopNavbar = ({ history }) => {
               className="classic-links nav-element"
               to="/shopadmin/sell_requests"
             >
-              Rachats
+              <FormattedMessage
+                id="app.shop.navBar.sellRequests"
+                defaultMessage={`Sell Requests`}
+              />
             </Link>
             <Link
               className="classic-links nav-element"
               to="/shopadmin/customers"
             >
-              Clients
+              <FormattedMessage
+                id="app.shop.navBar.customers"
+                defaultMessage={`Customers`}
+              />
             </Link>
             <div className="toggle-menu-container">
               <p
@@ -117,14 +139,24 @@ const ShopNavbar = ({ history }) => {
                     className="toggle-menu-links"
                     onClick={() => setToggleMenu(!toggleMenu)}
                   >
-                    <li>Mon compte</li>
+                    <li>
+                      <FormattedMessage
+                        id="app.shop.navBar.myAccount"
+                        defaultMessage={`My Account`}
+                      />
+                    </li>
                   </Link>
                   <Link
                     to="/shopadmin/shopInfos"
                     className="toggle-menu-links"
                     onClick={() => setToggleMenu(!toggleMenu)}
                   >
-                    <li>Informations Boutique</li>
+                    <li>
+                      <FormattedMessage
+                        id="app.shop.navBar.shopInfos"
+                        defaultMessage={`Shop Informations`}
+                      />
+                    </li>
                   </Link>
 
                   <Link
@@ -132,10 +164,20 @@ const ShopNavbar = ({ history }) => {
                     className="toggle-menu-links"
                     onClick={() => setToggleMenu(!toggleMenu)}
                   >
-                    <li>Paramètres Gestion</li>
+                    <li>
+                      <FormattedMessage
+                        id="app.shop.navBar.settings"
+                        defaultMessage={`Settings`}
+                      />
+                    </li>
                   </Link>
 
-                  <li onClick={handleLogout}>Déconnexion</li>
+                  <li onClick={handleLogout}>
+                    <FormattedMessage
+                      id="app.shop.navBar.logOut"
+                      defaultMessage={`Log Out`}
+                    />
+                  </li>
                 </ul>
               )}
             </div>
