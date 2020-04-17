@@ -8,6 +8,20 @@ const shopName = "Fantasy Sphere - Nous rachetons toutes vos cartes";
 
 const baseLang = 3;
 
+const langDefinition = {
+  1: "German",
+  2: "Spanish",
+  3: "French",
+  4: "Italian",
+  5: "Japanese",
+  6: "Portuguese",
+  7: "Russian",
+  8: "Simplified Chinese",
+  9: "English",
+  10: "Korean",
+  11: "Traditionnal Chinese",
+};
+
 //isEU or isUS
 const gradingArea = "isEU";
 
@@ -34,6 +48,7 @@ export default {
   shopID,
   shopName,
   baseLang,
+  langDefinition,
   gradingArea,
   TIME_TO_LOG_OUT,
   TIME_JWT_RENEW,

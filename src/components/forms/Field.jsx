@@ -1,4 +1,5 @@
 import React from "react";
+import { FormattedMessage } from "react-intl";
 
 const Field = ({
   name,
@@ -12,6 +13,8 @@ const Field = ({
   minlength = 2,
   required = false,
 }) => {
+  console.log(placeholder);
+
   return (
     <div className="field">
       <label htmlFor={idNumber}>{label}</label>

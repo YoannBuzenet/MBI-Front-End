@@ -98,7 +98,7 @@ const LoginPage = ({ history, eraseAuthContext, renewJWTToken }) => {
               name="email"
               label={
                 <FormattedMessage
-                  id="app.LoginPage.loginPage.email"
+                  id="app.LoginPage.label.email"
                   defaultMessage={`Mail Adress`}
                 />
               }
@@ -107,7 +107,7 @@ const LoginPage = ({ history, eraseAuthContext, renewJWTToken }) => {
               placeholder={
                 <FormattedMessage
                   id="app.LoginPage.placeholder.email"
-                  defaultMessage={`Connect`}
+                  defaultMessage={`Mail`}
                 />
               }
               className="form-group"
@@ -119,7 +119,7 @@ const LoginPage = ({ history, eraseAuthContext, renewJWTToken }) => {
               type="password"
               label={
                 <FormattedMessage
-                  id="app.LoginPage.loginPage.password"
+                  id="app.LoginPage.label.password"
                   defaultMessage={`Password`}
                 />
               }
@@ -128,7 +128,7 @@ const LoginPage = ({ history, eraseAuthContext, renewJWTToken }) => {
               placeholder={
                 <FormattedMessage
                   id="app.LoginPage.placeholder.password"
-                  defaultMessage={`Connect`}
+                  defaultMessage={`Password...`}
                 />
               }
               error=""
