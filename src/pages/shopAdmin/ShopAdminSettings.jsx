@@ -8,6 +8,7 @@ import localStorageAPI from "../../services/localStorageAPI";
 import errorHandlingAPI from "../../services/errorHandlingAPI";
 import { FormattedMessage } from "react-intl";
 import LanguageNameDisplay from "../../components/LanguageNameDisplay";
+import config from "../../services/config";
 
 const ShopAdminSettings = () => {
   //Current Authentication
@@ -220,14 +221,26 @@ const ShopAdminSettings = () => {
           />
         </h1>
         <p>
-          La langue par defaut du site : <LanguageNameDisplay />
+          <FormattedMessage
+            id="app.shop.shopSettings.defaultWebsiteLanguage"
+            defaultMessage={`Website Default Language : `}
+          />
+          <LanguageNameDisplay langID={config.baseLang} />
         </p>
         <p>
-          Quel est votre langue d'achat par défaut ? (select parmi toutes les
-          langues de magic)
+          <FormattedMessage
+            id="app.shop.shopSettings.defaultBuyingLanguage"
+            defaultMessage={`Default Buying Language : `}
+          />
+          <LanguageNameDisplay langID={config.websiteDefaultLanguage} />
         </p>
-        ENV_VARIABLE
-        <p>Votre système de grading prédéfni : ENV_VARIABLE</p>
+        <p>
+          <FormattedMessage
+            id="app.shop.shopSettings.defaultGradingSystem"
+            defaultMessage={`Grading System : `}
+          />{" "}
+          ENV_VARIABLE
+        </p>
         <div className="percentSettings">
           <div className="percentPerSigned">
             <h2>Cartes signées</h2>

@@ -1,5 +1,6 @@
 import React from "react";
 import { FormattedMessage } from "react-intl";
+import { useIntl } from "react-intl";
 
 const Field = ({
   name,
@@ -13,7 +14,8 @@ const Field = ({
   minlength = 2,
   required = false,
 }) => {
-  console.log(placeholder);
+  //Hook Intl to translate an attribute
+  const intl = useIntl();
 
   return (
     <div className="field">
@@ -23,7 +25,16 @@ const Field = ({
         onChange={onChange}
         type={type}
         className={className}
-        placeholder={placeholder}
+        placeholder={
+          placeholder
+            ? placeholder.props
+              ? intl.formatMessage({
+                  id: placeholder.props.id,
+                  defaultMessage: placeholder.props.defaultMessage,
+                })
+              : placeholder
+            : null
+        }
         name={name}
         id={idNumber}
         required={required}

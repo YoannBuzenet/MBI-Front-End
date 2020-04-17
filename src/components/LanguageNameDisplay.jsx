@@ -2,14 +2,13 @@ import React from "react";
 import { FormattedMessage } from "react-intl";
 import config from "../services/config";
 
-const LanguageNameDisplay = (props) => {
+const LanguageNameDisplay = ({ langID }) => {
   return (
     <FormattedMessage
       id={
-        "config.definition.lang." +
-        config.langDefinition[config.baseLang].toLowerCase()
+        "config.definition.lang." + config.langDefinition[langID].toLowerCase()
       }
-      defaultMessage={config.langDefinition[config.baseLang].toLowerCase()}
+      defaultMessage={config.langDefinition[langID].toLowerCase()}
     />
   );
 };
