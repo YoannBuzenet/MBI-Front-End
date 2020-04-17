@@ -14,6 +14,7 @@ import OneBigLineLoader from "../../components/loaders/OneBigLineLoader";
 import errorHandlingAPI from "../../services/errorHandlingAPI";
 import { isMobile } from "react-device-detect";
 import SetListLoader from "../../components/loaders/SetListLoader";
+import { FormattedMessage } from "react-intl";
 
 const ShopAdminOneSellRequest = ({ match }) => {
   const { id } = match.params;
@@ -105,29 +106,51 @@ const ShopAdminOneSellRequest = ({ match }) => {
   return (
     <>
       <div className="container">
-        <h1>Rachat n°{id}</h1>
+        <h1>
+          <FormattedMessage
+            id="app.shop.OneSellRequest.number"
+            defaultMessage={`N° `}
+          />
+          {id}
+        </h1>
         <div className="customer-infos">
           <div className="customer-left-part">
             <p>
-              Prénom : {isLoading && <OneLineLoader />}
+              <FormattedMessage
+                id="app.shop.OneSellRequest.firstName"
+                defaultMessage={`First Name : `}
+              />
+              {isLoading && <OneLineLoader />}
               {!isLoading &&
                 currentAdminSellRequest.customer &&
                 currentAdminSellRequest.customer.prenom}
             </p>
             <p>
-              Nom : {isLoading && <OneLineLoader />}
+              <FormattedMessage
+                id="app.shop.OneSellRequest.lastName"
+                defaultMessage={`Last Name : `}
+              />
+              {isLoading && <OneLineLoader />}
               {!isLoading &&
                 currentAdminSellRequest.customer &&
                 currentAdminSellRequest.customer.nom}
             </p>
             <p>
-              Mail : {isLoading && <OneLineLoader />}
+              <FormattedMessage
+                id="app.shop.OneSellRequest.mail"
+                defaultMessage={`Mail : `}
+              />
+              {isLoading && <OneLineLoader />}
               {!isLoading &&
                 currentAdminSellRequest.customer &&
                 currentAdminSellRequest.customer.user.email}
             </p>
             <p>
-              Tel : {isLoading && <OneLineLoader />}
+              <FormattedMessage
+                id="app.shop.OneSellRequest.telephone"
+                defaultMessage={`Tel : `}
+              />
+              {isLoading && <OneLineLoader />}
               {!isLoading &&
                 currentAdminSellRequest.customer &&
                 currentAdminSellRequest.customer.tel}
@@ -135,19 +158,31 @@ const ShopAdminOneSellRequest = ({ match }) => {
           </div>
           <div className="customer-right-part">
             <p>
-              Adresse : {isLoading && <OneLineLoader />}
+              <FormattedMessage
+                id="app.shop.OneSellRequest.adress"
+                defaultMessage={`Adress : `}
+              />
+              {isLoading && <OneLineLoader />}
               {!isLoading &&
                 currentAdminSellRequest.customer &&
                 currentAdminSellRequest.customer.adress}
             </p>
             <p>
-              Code Postal : {isLoading && <OneLineLoader />}
+              <FormattedMessage
+                id="app.shop.OneSellRequest.postalCode"
+                defaultMessage={`Postal Code : `}
+              />
+              {isLoading && <OneLineLoader />}
               {!isLoading &&
                 currentAdminSellRequest.customer &&
                 currentAdminSellRequest.customer.postalCode}
             </p>
             <p>
-              Ville : {isLoading && <OneLineLoader />}
+              <FormattedMessage
+                id="app.shop.OneSellRequest.town"
+                defaultMessage={`Town : `}
+              />
+              {isLoading && <OneLineLoader />}
               {!isLoading &&
                 currentAdminSellRequest.customer &&
                 currentAdminSellRequest.customer.town}
@@ -156,7 +191,10 @@ const ShopAdminOneSellRequest = ({ match }) => {
         </div>
         <div className="sellRequest-infos">
           <p className="sellRequest-status">
-            Statut
+            <FormattedMessage
+              id="app.shop.OneSellRequest.status"
+              defaultMessage={`Status`}
+            />
             {isLoading && (
               <span className="margin-top-negative-loader display-block">
                 <OneBigLineLoader />
@@ -169,7 +207,10 @@ const ShopAdminOneSellRequest = ({ match }) => {
             )}
           </p>
           <p className="sellRequest-lastDate">
-            Dernière information
+            <FormattedMessage
+              id="app.shop.OneSellRequest.lastInformation"
+              defaultMessage={`Last Information`}
+            />
             {isLoading && (
               <span className="margin-top-negative-loader display-block">
                 <OneBigLineLoader />
@@ -195,17 +236,72 @@ const ShopAdminOneSellRequest = ({ match }) => {
           <Table className="zebra-table">
             <Thead>
               <Tr>
-                <Th>Nom</Th>
-                <Th>Edition</Th>
-                <Th>Modifier</Th>
-                <Th>Langue</Th>
-                <Th>Etat</Th>
-                <Th>Foil</Th>
-                <Th>Signée</Th>
-                <Th>Altérée</Th>
-                <Th>Quantité</Th>
-                <Th>Prix</Th>
-                <Th>Total</Th>
+                <Th>
+                  <FormattedMessage
+                    id="app.shop.OneSellRequest.card"
+                    defaultMessage={`Card`}
+                  />
+                </Th>
+                <Th>
+                  <FormattedMessage
+                    id="app.shop.OneSellRequest.set"
+                    defaultMessage={`Set`}
+                  />
+                </Th>
+                <Th>
+                  <FormattedMessage
+                    id="app.shop.OneSellRequest.edit"
+                    defaultMessage={`Edit`}
+                  />
+                </Th>
+                <Th>
+                  <FormattedMessage
+                    id="app.shop.OneSellRequest.language"
+                    defaultMessage={`Language`}
+                  />
+                </Th>
+                <Th>
+                  <FormattedMessage
+                    id="app.shop.OneSellRequest.condition"
+                    defaultMessage={`Condition`}
+                  />
+                </Th>
+                <Th>
+                  <FormattedMessage
+                    id="app.shop.OneSellRequest.foil"
+                    defaultMessage={`Foil`}
+                  />
+                </Th>
+                <Th>
+                  <FormattedMessage
+                    id="app.shop.OneSellRequest.signed"
+                    defaultMessage={`Signed`}
+                  />
+                </Th>
+                <Th>
+                  <FormattedMessage
+                    id="app.shop.OneSellRequest.altered"
+                    defaultMessage={`Altered`}
+                  />
+                </Th>
+                <Th>
+                  <FormattedMessage
+                    id="app.shop.OneSellRequest.quantity"
+                    defaultMessage={`Quantity`}
+                  />
+                </Th>
+                <Th>
+                  <FormattedMessage
+                    id="app.shop.OneSellRequest.price"
+                    defaultMessage={`Price`}
+                  />
+                </Th>
+                <Th>
+                  <FormattedMessage
+                    id="app.shop.OneSellRequest.totaltable"
+                    defaultMessage={`Total`}
+                  />
+                </Th>
               </Tr>
             </Thead>
             <Tbody className="cardLineShop">
@@ -236,7 +332,12 @@ const ShopAdminOneSellRequest = ({ match }) => {
                 <td></td>
                 <td></td>
                 <td></td>
-                <td>NOMBRE DE CARTES</td>
+                <td>
+                  <FormattedMessage
+                    id="app.shop.OneSellRequest.numberOfCards"
+                    defaultMessage={`NUMBER OF CARDS`}
+                  />
+                </td>
                 <td>
                   {currentAdminSellRequest.sellRequests &&
                     currentAdminSellRequest.sellRequests.length > 0 &&
@@ -256,7 +357,12 @@ const ShopAdminOneSellRequest = ({ match }) => {
                 <td></td>
                 <td></td>
                 <td></td>
-                <td>TOTAL</td>
+                <td>
+                  <FormattedMessage
+                    id="app.shop.OneSellRequest.total"
+                    defaultMessage={`TOTAL`}
+                  />
+                </td>
                 <td>
                   {currentAdminSellRequest.sellRequests &&
                     currentAdminSellRequest.sellRequests.length > 0 &&

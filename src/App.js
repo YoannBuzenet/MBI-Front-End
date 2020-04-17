@@ -622,10 +622,6 @@ function App() {
                                 path="/shopadmin/customers"
                                 component={ShopAdminAllCustomers}
                               />
-                              <LoggedShopRouteComponent
-                                path="/shopadmin/cards"
-                                component={ShopAdminCards}
-                              />
                               <LoggedShopRouteRender
                                 path="/shopadmin/settings"
                                 component={ShopAdminSettings}

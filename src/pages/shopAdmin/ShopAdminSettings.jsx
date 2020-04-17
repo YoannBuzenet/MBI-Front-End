@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import shopAPI from "../../services/shopAPI";
 import localStorageAPI from "../../services/localStorageAPI";
 import errorHandlingAPI from "../../services/errorHandlingAPI";
+import { FormattedMessage } from "react-intl";
 
 const ShopAdminSettings = () => {
   //Current Authentication
@@ -47,7 +48,6 @@ const ShopAdminSettings = () => {
         break;
 
       case "percentPerSigned":
-        console.log("on update le % signed");
         authenticationInfosCopy.shop.shopData.PercentPerSigned = value;
         setAuthenticationInfos(authenticationInfosCopy);
         break;
@@ -60,7 +60,7 @@ const ShopAdminSettings = () => {
   const updateLocalStorage = (fieldModified, name, value) => {
     //Get Local Storage
     var localStorage = localStorageAPI.getLocalStorageSession();
-    console.log(localStorage);
+    // console.log(localStorage);
     switch (fieldModified) {
       case "percentPerLang":
         localStorage.shop.PercentPerLangs[name].percentPerLang = value;
@@ -99,7 +99,10 @@ const ShopAdminSettings = () => {
           .catch((data) => {
             if (!errorHandlingAPI.check401Unauthorized(data)) {
               toast.error(
-                "La donnée n'a pu être mise à jour. Merci de réessayer ou de vous reconnecter."
+                <FormattedMessage
+                  id="app.shop.shopSettings.toast.failure"
+                  defaultMessage={`The data couldn't be updated. Please try again.`}
+                />
               );
             }
           });
@@ -113,7 +116,10 @@ const ShopAdminSettings = () => {
           .catch((data) => {
             if (!errorHandlingAPI.check401Unauthorized(data)) {
               toast.error(
-                "La donnée n'a pu être mise à jour. Merci de réessayer ou de vous reconnecter."
+                <FormattedMessage
+                  id="app.shop.shopSettings.toast.failure"
+                  defaultMessage={`The data couldn't be updated. Please try again.`}
+                />
               );
             }
           });
@@ -129,7 +135,10 @@ const ShopAdminSettings = () => {
           .catch((data) => {
             if (!errorHandlingAPI.check401Unauthorized(data)) {
               toast.error(
-                "La donnée n'a pu être mise à jour. Merci de réessayer ou de vous reconnecter."
+                <FormattedMessage
+                  id="app.shop.shopSettings.toast.failure"
+                  defaultMessage={`The data couldn't be updated. Please try again.`}
+                />
               );
             }
           });
@@ -151,7 +160,10 @@ const ShopAdminSettings = () => {
           .catch((error) => {
             if (!errorHandlingAPI.check401Unauthorized(error)) {
               toast.error(
-                "La donnée n'a pu être mise à jour. Merci de réessayer ou de vous reconnecter."
+                <FormattedMessage
+                  id="app.shop.shopSettings.toast.failure"
+                  defaultMessage={`The data couldn't be updated. Please try again.`}
+                />
               );
             }
           });
@@ -182,17 +194,30 @@ const ShopAdminSettings = () => {
       //We don't update on API to not create an empty field that would create bugs. We wait for another input to PUT the data.
       updateState(fieldModified, name, value);
       toast.error(
-        "Un nombre est obligatoire pour chaque langue et condition. Merci d'en indiquer un."
+        <FormattedMessage
+          id="app.shop.shopSettings.toast.input.failure"
+          defaultMessage={`A number is mandatory for each language and condition. Please indicate one.`}
+        />
       );
     } else {
-      toast.error("Merci de saisir un nombre.");
+      toast.error(
+        <FormattedMessage
+          id="app.shop.shopSettings.toast.input.number.failure"
+          defaultMessage={`A number is mandatory for each language and condition. Please indicate one.`}
+        />
+      );
     }
   };
 
   return (
     <>
       <div className="container">
-        <h1>Paramètres</h1>
+        <h1>
+          <FormattedMessage
+            id="app.shop.shopSettings.title"
+            defaultMessage={`Settings`}
+          />
+        </h1>
         <p>La langue par defaut du site : ENV_VARIABLE</p>
         <p>
           Quel est votre langue d'achat par défaut ? (select parmi toutes les
