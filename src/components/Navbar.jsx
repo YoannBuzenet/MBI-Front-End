@@ -6,6 +6,7 @@ import authAPI from "../services/authAPI";
 import BurgerMenu from "./BurgerMenu";
 import { toast } from "react-toastify";
 import SearchCardBar from "./SearchCardBar";
+import { FormattedMessage } from "react-intl";
 
 const Navbar = ({ history }) => {
   //Current Authentication
@@ -41,7 +42,12 @@ const Navbar = ({ history }) => {
         SellRequests: [],
       },
     });
-    toast.success("Vous êtes bien déconnecté.");
+    toast.success(
+      <FormattedMessage
+        id="app.navbar.logOut.toast.success"
+        defaultMessage={`You logged out succesfully.`}
+      />
+    );
 
     history.replace("/");
   };
@@ -73,7 +79,11 @@ const Navbar = ({ history }) => {
                   className="classic-links nav-element"
                   to="/my_selling_basket"
                 >
-                  Mon Rachat (
+                  <FormattedMessage
+                    id="app.navbar.mySellRequest"
+                    defaultMessage={`Sell Request`}
+                  />
+                  (
                   <span className="buying-total">
                     {currentBasket.reduce((total, card) => {
                       return total + card.quantity;
@@ -99,7 +109,12 @@ const Navbar = ({ history }) => {
                         className="toggle-menu-links"
                         onClick={() => setToggleMenu(!toggleMenu)}
                       >
-                        <li>Mon compte</li>
+                        <li>
+                          <FormattedMessage
+                            id="app.navbar.myAccount"
+                            defaultMessage={`My Account`}
+                          />
+                        </li>
                       </Link>
 
                       <Link
@@ -107,10 +122,20 @@ const Navbar = ({ history }) => {
                         className="toggle-menu-links"
                         onClick={() => setToggleMenu(!toggleMenu)}
                       >
-                        <li>Mes rachats</li>
+                        <li>
+                          <FormattedMessage
+                            id="app.navbar.mySellRequests"
+                            defaultMessage={`My Sell Requests`}
+                          />
+                        </li>
                       </Link>
 
-                      <li onClick={handleLogout}>Déconnexion</li>
+                      <li onClick={handleLogout}>
+                        <FormattedMessage
+                          id="app.navbar.logOut"
+                          defaultMessage={`Log out`}
+                        />
+                      </li>
                     </ul>
                   )}
                 </div>
@@ -125,7 +150,11 @@ const Navbar = ({ history }) => {
                   className="classic-links nav-element"
                   to="/my_selling_basket"
                 >
-                  Mon Rachat (
+                  <FormattedMessage
+                    id="app.navbar.mySellRequest"
+                    defaultMessage={`My Sell Request`}
+                  />
+                  (
                   <span className="buying-total">
                     {currentBasket.reduce((total, card) => {
                       return total + card.quantity;
@@ -134,10 +163,16 @@ const Navbar = ({ history }) => {
                   )
                 </Link>
                 <Link className="classic-links" to="/register">
-                  S'inscrire
+                  <FormattedMessage
+                    id="app.navbar.register"
+                    defaultMessage={`Register`}
+                  />
                 </Link>
                 <Link className="classic-links" to="/login">
-                  Se connecter
+                  <FormattedMessage
+                    id="app.navbar.connect"
+                    defaultMessage={`Connect`}
+                  />
                 </Link>
               </div>
             </div>

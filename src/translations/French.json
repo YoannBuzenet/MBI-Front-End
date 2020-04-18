@@ -215,6 +215,16 @@
   "app.shop.editionUpdateModal": "CHANGER L'EDITION",
   "app.shop.editionUpdateModal.chooseSet": "Choisir une édition",
 
+  "app.shop.MKMConnect.toast.success": "Vous êtes bien connecté à MKM.",
+  "app.shop.MKMConnect.shouldConnect.toast.failure": "Les données ne sont pas à jour. Merci de bien suivre les étapes.",
+  "app.shop.MKMConnect.toast.failure": "Une erreur s'est produite. Merci de recommencer. En cas d'erreur prolongée, merci de contacter le support.",
+  "app.shop.MKMConnect.title": "Connection à Magic Card Market",
+  "app.shop.MKMConnect.stepConnect": "S'identifier sur le site de MKM",
+  "app.shop.MKMConnect.stepConnectClick": "Cliquez ici",
+  "app.shop.MKMConnect.stepMTGI": "Une fois l'authentification réussie, vous serez redirigé sur www.mtgInterface.com. Merci de vous identifier sur ce site également.",
+  "app.shop.MKMConnect.stepSynchronize": "Une fois identifié avec le message de validation sur www.mtgInterface.com, il n'y a plus qu'à synchroniser.",
+  "app.shop.MKMConnect.stepSynchronizeButton": "Synchroniser",
+
   "app.sellRequestValidation.validationCTA": "Valider mon rachat",
   "app.sellRequestValidation.toast.success": "Votre rachat a bien été posté. Merci d'envoyer les cartes à la boutique.",
   "app.sellRequestValidation.toast.failure": "Le rachat n'a pu être validé. Merci de recommencer.",
@@ -232,6 +242,14 @@
   "app.burgerMenu.customer.register": "S'inscrire",
   "app.burgerMenu.customer.connect": "Se connecter",
   "app.burgerMenu.customer.logOut.toast.success": "Vous êtes bien déconnecté.",
+
+  "app.navbar.logOut.toast.success": "Vous êtes bien déconnecté.",
+  "app.navbar.mySellRequest": "Rachat",
+  "app.navbar.myAccount": "Mon Compte",
+  "app.navbar.mySellRequests": "Mes Rachats",
+  "app.navbar.logOut": "Déconnexion",
+  "app.navbar.register": "S'inscrire",
+  "app.navbar.connect": "Se connecter",
 
   "app.footer.legalBuyingClauses": "Conditions de rachat",
 
