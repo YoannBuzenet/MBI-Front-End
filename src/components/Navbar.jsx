@@ -133,6 +133,18 @@ const Navbar = ({ history }) => {
                           />
                         </li>
                       </Link>
+                      <Link
+                        to="/settings"
+                        className="toggle-menu-links"
+                        onClick={() => setToggleMenu(!toggleMenu)}
+                      >
+                        <li>
+                          <FormattedMessage
+                            id="app.navbar.settings"
+                            defaultMessage={`Settings`}
+                          />
+                        </li>
+                      </Link>
 
                       <li onClick={handleLogout}>
                         <FormattedMessage

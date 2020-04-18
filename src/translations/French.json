@@ -251,6 +251,7 @@
   "app.navbar.mySellRequest": "Rachat ",
   "app.navbar.myAccount": "Mon Compte",
   "app.navbar.mySellRequests": "Mes Rachats",
+  "app.navbar.settings": "Paramètres",
   "app.navbar.logOut": "Déconnexion",
   "app.navbar.register": "S'inscrire",
   "app.navbar.connect": "Se connecter",
@@ -268,6 +269,8 @@
   "app.sellRequest.statusDefinition.awaitingYourValidation": "En attente de votre validation",
   "app.sellRequest.statusDefinition.validated": "Validé",
   "app.sellRequest.statusDefinition.cancelled": "Annulé",
+
+  "app.settings.title": "Paramètres",
 
   "app.footer.legalBuyingClauses": "Conditions de rachat",
 

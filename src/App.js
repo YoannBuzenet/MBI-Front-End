@@ -65,6 +65,7 @@ import shopAPI from "./services/shopAPI";
 import BuyingClauses from "./pages/BuyingClauses";
 import config from "./services/config";
 import authAPI from "./services/authAPI";
+import Settings from "./pages/Settings";
 
 //Really Useful library to check all rerenders made on ALL components (you can setup it to check just one)
 // if (process.env.NODE_ENV === "development") {
@@ -603,7 +604,10 @@ function App() {
                                 path="/my_account"
                                 component={myAccount}
                               />
-
+                              <LoggedRoute
+                                path="/settings"
+                                component={Settings}
+                              />
                               {/* Admin Part */}
 
                               <LoggedShopRouteRender

@@ -251,6 +251,7 @@
   "app.navbar.mySellRequest": "Sell Request ",
   "app.navbar.myAccount": "My Account",
   "app.navbar.mySellRequests": "My Sell Requests",
+  "app.navbar.settings": "Settings",
   "app.navbar.logOut": "Log out",
   "app.navbar.register": "Register",
   "app.navbar.connect": "Connect",
@@ -268,6 +269,8 @@
   "app.sellRequest.statusDefinition.awaitingYourValidation": "Awaiting your Validation",
   "app.sellRequest.statusDefinition.validated": "Validated",
   "app.sellRequest.statusDefinition.cancelled": "Cancelled",
+
+  "app.settings.title": "Settings",
 
   "app.footer.legalBuyingClauses": "Buying Clauses",
 
