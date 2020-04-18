@@ -13,6 +13,7 @@ const CardWithThumbnail = ({ card }) => {
       <div
         className="card"
         // onClick={() => (window.location.href = "/card/" + card.name)}
+        //Comment thi onClick on Prod
         onClick={() =>
           axios
             .get("https://api.cardmarket.com/ws/v2.0/account", {
