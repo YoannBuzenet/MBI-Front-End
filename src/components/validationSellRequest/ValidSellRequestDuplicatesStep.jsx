@@ -33,7 +33,7 @@ const ValidSellRequestDuplicatesStep = ({
 
   return (
     <>
-      {(!finalCheck && errorList.length == 0 && (
+      {(!finalCheck && errorList.length === 0 && (
         <ValidSellRequestAuthenticatedStep handleSubmit={handleSubmit} />
       )) || (
         <div>

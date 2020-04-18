@@ -7,6 +7,7 @@ import BurgerMenu from "./BurgerMenu";
 import { toast } from "react-toastify";
 import SearchCardBar from "./SearchCardBar";
 import { FormattedMessage } from "react-intl";
+import AppLangChoice from "./AppLangChoice";
 
 const Navbar = ({ history }) => {
   //Current Authentication
@@ -180,6 +181,7 @@ const Navbar = ({ history }) => {
                     defaultMessage={`Connect`}
                   />
                 </Link>
+                <AppLangChoice />
               </div>
             </div>
           )}
