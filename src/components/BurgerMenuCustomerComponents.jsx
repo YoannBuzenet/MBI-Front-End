@@ -9,10 +9,6 @@ import isResponsiveMenuDisplayedContext from "../context/menuDisplayedContext";
 import { FormattedMessage } from "react-intl";
 
 const BurgerMenuCustomerComponents = () => {
-  // <FormattedMessage
-  //           id="app.sellRequestValidation.warningBasketIsEmpty"
-  //           defaultMessage={`Your basket is empty.`}
-  //         />
   //Current Authentication
   const { authenticationInfos, setAuthenticationInfos } = useContext(
     AuthContext
@@ -79,7 +75,11 @@ const BurgerMenuCustomerComponents = () => {
                 onClick={(event) => closeMenu(event)}
               >
                 <li>
-                  Mon Rachat (
+                  <FormattedMessage
+                    id="app.burgerMenu.customer.mySellRequest"
+                    defaultMessage={`Sell Request`}
+                  />
+                  (
                   <span className="buying-total">
                     {currentBasket.reduce((total, card) => {
                       return total + card.quantity;
@@ -94,7 +94,12 @@ const BurgerMenuCustomerComponents = () => {
                 className="classic_links_responsive"
                 onClick={(event) => closeMenu(event)}
               >
-                <li>Mon compte</li>
+                <li>
+                  <FormattedMessage
+                    id="app.burgerMenu.customer.myAccount"
+                    defaultMessage={`My Account`}
+                  />
+                </li>
               </Link>
 
               <Link
@@ -102,7 +107,12 @@ const BurgerMenuCustomerComponents = () => {
                 className="classic_links_responsive"
                 onClick={(event) => closeMenu(event)}
               >
-                <li>Mes rachats</li>
+                <li>
+                  <FormattedMessage
+                    id="app.burgerMenu.customer.mySellRequests"
+                    defaultMessage={`My Sell Requests`}
+                  />
+                </li>
               </Link>
 
               <li
@@ -112,7 +122,10 @@ const BurgerMenuCustomerComponents = () => {
                 }}
                 className="classic_links_responsive"
               >
-                Déconnexion
+                <FormattedMessage
+                  id="app.burgerMenu.customer.logOut"
+                  defaultMessage={`Log Out`}
+                />
               </li>
             </ul>
           </div>
@@ -125,7 +138,11 @@ const BurgerMenuCustomerComponents = () => {
               to="/my_selling_basket"
               onClick={(event) => closeMenu(event)}
             >
-              Mon Rachat (
+              <FormattedMessage
+                id="app.burgerMenu.customer.mySellRequest"
+                defaultMessage={`Sell Request`}
+              />
+              (
               <span className="buying-total">
                 {currentBasket.reduce((total, card) => {
                   return total + card.quantity;
@@ -138,14 +155,20 @@ const BurgerMenuCustomerComponents = () => {
               to="/register"
               onClick={(event) => closeMenu(event)}
             >
-              S'inscrire
+              <FormattedMessage
+                id="app.burgerMenu.customer.register"
+                defaultMessage={`Register`}
+              />
             </Link>
             <Link
               className="classic_links_responsive"
               to="/login"
               onClick={(event) => closeMenu(event)}
             >
-              Se connecter
+              <FormattedMessage
+                id="app.burgerMenu.customer.connect"
+                defaultMessage={`Connect`}
+              />
             </Link>
           </div>
         </div>

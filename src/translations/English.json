@@ -222,6 +222,13 @@
   "app.sellRequestValidation.removeDuplicatesFrombasket": "Please remove duplicated cards from your basket.",
   "app.sellRequestValidation.warningBasketIsEmpty": "Your basket is empty.",
 
+  "app.burgerMenu.customer.mySellRequest": "My Sell Request",
+  "app.burgerMenu.customer.myAccount": "My Account",
+  "app.burgerMenu.customer.mySellRequests": "My Sell Request",
+  "app.burgerMenu.customer.logOut": "Log Out",
+  "app.burgerMenu.customer.register": "Register",
+  "app.burgerMenu.customer.connect": "Connect",
+
   "app.cardline": "",
   "app.cardline.shop.loadingSets.toast.failure": "Sets couldn't be loaded. Please reload the page or login again.",
   "app.cardline.shop.updateCard.toast.failure": "The courd couldn't be updated. Please try again.",
