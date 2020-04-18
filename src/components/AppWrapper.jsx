@@ -8,7 +8,8 @@ const AppWrapper = (props) => {
   const translationsForUsersLocale = English;
 
   //STATE - App Lang
-  const [currentLang, setCurrentLang] = useState("en-FR");
+  //Test that : : fr-FR, en-US, en-GB
+  const [currentLang, setCurrentLang] = useState("fr-FR");
 
   //CONTEXT CREATION
   const AppLangContext = {
