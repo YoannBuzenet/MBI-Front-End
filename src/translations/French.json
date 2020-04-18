@@ -251,6 +251,12 @@
   "app.navbar.register": "S'inscrire",
   "app.navbar.connect": "Se connecter",
 
+  "app.searchCardBar.placeholder": "Rechercher une carte...",
+
+  "app.sellRequest.statusUpdate.toast.success": "Le rachat a été marqué comme envoyé.",
+  "app.sellRequest.statusUpdate.toast.failure": "Le rachat n'a pu être marqué comme envoyé. Merci de rééssayer.",
+  "app.sellRequest.statusUpdate.button": "Marquer comme Envoyé",
+
   "app.footer.legalBuyingClauses": "Conditions de rachat",
 
   "app.cardline": "",

@@ -2,12 +2,13 @@ import React, { useState, useEffect, useContext } from "react";
 import sellRequestAPI from "../services/sellRequestAPI";
 import AuthContext from "../context/authContext";
 import authAPI from "../services/authAPI";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
+import { FormattedMessage } from "react-intl";
 
 const SellRequestStatusUpdater = ({
   currentSellRequest,
   setCurrentSellRequest,
-  id
+  id,
 }) => {
   //Current Authentication
   const { authenticationInfos, setAuthenticationInfos } = useContext(
@@ -41,7 +42,7 @@ const SellRequestStatusUpdater = ({
         hasBeenSent &&
         authenticationInfos.customer.SellRequests &&
         authenticationInfos.customer.SellRequests.find(
-          sellrequest => sellrequest.id == id
+          (sellrequest) => sellrequest.id == id
         ).dateEnvoi == null
       ) {
         setAuthenticationInfos({
@@ -49,15 +50,15 @@ const SellRequestStatusUpdater = ({
           customer: {
             ...authenticationInfos.customer,
             SellRequests: authenticationInfos.customer.SellRequests.map(
-              sellrequest =>
+              (sellrequest) =>
                 sellrequest.id == id
                   ? (sellrequest = {
                       ...sellrequest,
-                      dateEnvoi: currentSellRequest.dateEnvoi
+                      dateEnvoi: currentSellRequest.dateEnvoi,
                     })
                   : sellrequest
-            )
-          }
+            ),
+          },
         });
       }
     }
@@ -74,15 +75,15 @@ const SellRequestStatusUpdater = ({
         client: {
           ...dataToUpdateOnLocalStorage.client,
           SellRequests: dataToUpdateOnLocalStorage.client.SellRequests.map(
-            sellrequest =>
+            (sellrequest) =>
               sellrequest.id == id
                 ? (sellrequest = {
                     ...sellrequest,
-                    dateEnvoi: currentSellRequest.dateEnvoi
+                    dateEnvoi: currentSellRequest.dateEnvoi,
                   })
                 : sellrequest
-          )
-        }
+          ),
+        },
       };
       authAPI.updateUserInfosLocalStorage(dataToUpdateOnLocalStorage);
     }
@@ -92,17 +93,27 @@ const SellRequestStatusUpdater = ({
   const handleClick = (event, currentSellRequest) => {
     sellRequestAPI
       .update(currentSellRequest.id, { dateEnvoi: new Date() })
-      .then(data =>
+      .then((data) =>
         setCurrentSellRequest({
           ...currentSellRequest,
-          dateEnvoi: data.data.dateEnvoi
+          dateEnvoi: data.data.dateEnvoi,
         })
       )
-      .then(toast.success("Le rachat a été marqué comme envoyé."))
-      .catch(error => {
+      .then(
+        toast.success(
+          <FormattedMessage
+            id="app.sellRequest.statusUpdate.toast.success"
+            defaultMessage={`This Sell Request has been flagged as Sent.`}
+          />
+        )
+      )
+      .catch((error) => {
         console.log(error);
         return toast.error(
-          "Le rachat n'a pu être marqué comme envoyé. Merci de rééssayer."
+          <FormattedMessage
+            id="app.sellRequest.statusUpdate.toast.failure"
+            defaultMessage={`The sell request couldn't ne updated. Please try again.`}
+          />
         );
       });
   };
@@ -111,11 +122,14 @@ const SellRequestStatusUpdater = ({
     <>
       {currentSellRequest && !hasBeenSent ? (
         <button
-          onClick={event => {
+          onClick={(event) => {
             handleClick(event, currentSellRequest);
           }}
         >
-          Marquer ce rachat comme envoyé
+          <FormattedMessage
+            id="app.sellRequest.statusUpdate.button"
+            defaultMessage={`This Sell Request has been flagged as Sent.`}
+          />
         </button>
       ) : null}
     </>

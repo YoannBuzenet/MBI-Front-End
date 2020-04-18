@@ -4,8 +4,9 @@ import cardsAPI from "../services/cardsAPI";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import AuthContext from "../context/authContext";
+import { useIntl } from "react-intl";
 
-const SearchCardBar = props => {
+const SearchCardBar = (props) => {
   // console.log("render");
   const [currentSearch, setCurrentSearch] = useState("");
 
@@ -23,9 +24,9 @@ const SearchCardBar = props => {
     if (currentSearch.length >= 3) {
       cardsAPI
         .searchApproxByName(currentSearch, {
-          cancelToken: source.token
+          cancelToken: source.token,
         })
-        .then(data => {
+        .then((data) => {
           console.log(data.data);
           const filteringArray = [];
 
@@ -49,13 +50,13 @@ const SearchCardBar = props => {
           return filteringArray;
           // return data.data;
         })
-        .then(data => setSearchResult(data));
+        .then((data) => setSearchResult(data));
     }
     //return cancelation TO DO
     return () => source.cancel("");
   }, [currentSearch]);
 
-  const handleChange = event => {
+  const handleChange = (event) => {
     const value = event.currentTarget.value;
     setCurrentSearch(value);
   };
@@ -67,15 +68,23 @@ const SearchCardBar = props => {
       ? "/shopadmin/card/"
       : "/card/";
 
+  //Hook Intl to translate an attribute
+  const intl = useIntl();
+
+  const searchCardBarPlaceholderTranslated = intl.formatMessage({
+    id: "app.searchCardBar.placeholder",
+    defaultMessage: "Search...",
+  });
+
   return (
     <>
       <form className="search-card-form">
         <input
           type="search"
-          placeholder="Rechercher une carte..."
+          placeholder={searchCardBarPlaceholderTranslated}
           value={currentSearch}
-          onChange={event => handleChange(event)}
-          onClick={event => {
+          onChange={(event) => handleChange(event)}
+          onClick={(event) => {
             setSearchResult([]);
             handleChange(event);
           }}
