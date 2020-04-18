@@ -239,7 +239,7 @@
   "app.sellRequestValidation.removeDuplicatesFrombasket": "Merci de retirer les doublons de votre rachat avant de le soumettre.",
   "app.sellRequestValidation.warningBasketIsEmpty": "Votre panier est vide.",
 
-  "app.burgerMenu.customer.mySellRequest": "Rachat",
+  "app.burgerMenu.customer.mySellRequest": "Rachat ",
   "app.burgerMenu.customer.myAccount": "Mon compte",
   "app.burgerMenu.customer.mySellRequests": "Mes rachats",
   "app.burgerMenu.customer.logOut": "Déconnexion",

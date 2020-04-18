@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import BlackDivContext from "../context/blackDivModalContext";
 import isResponsiveMenuDisplayedContext from "../context/menuDisplayedContext";
 import { FormattedMessage } from "react-intl";
+import AppLangChoice from "./AppLangChoice";
 
 const BurgerMenuCustomerComponents = () => {
   //Current Authentication
@@ -65,6 +66,9 @@ const BurgerMenuCustomerComponents = () => {
   return (
     <div className={classMenu}>
       {authenticationInfos.isAuthenticated ? (
+        /////////////////////
+        //AUTHENTICATED
+        /////////////////////
         <div className="my_options_responsive">
           <h2 className="surname_responsive">
             {authenticationInfos.customer.prenom}
@@ -120,6 +124,19 @@ const BurgerMenuCustomerComponents = () => {
                 </li>
               </Link>
 
+              <Link
+                to="/settings"
+                className="classic_links_responsive"
+                onClick={(event) => closeMenu(event)}
+              >
+                <li>
+                  <FormattedMessage
+                    id="app.navbar.settings"
+                    defaultMessage={`Settings`}
+                  />
+                </li>
+              </Link>
+
               <li
                 onClick={() => {
                   closeMenu();
@@ -136,6 +153,9 @@ const BurgerMenuCustomerComponents = () => {
           </div>
         </div>
       ) : (
+        /////////////////////
+        //NON AUTHENTICATED
+        /////////////////////
         <div className="not_connected_options_responsive">
           <div className="connection">
             <Link
@@ -175,6 +195,9 @@ const BurgerMenuCustomerComponents = () => {
                 defaultMessage={`Connect`}
               />
             </Link>
+            <div className="burgerMenuCustomer-select-lang">
+              <AppLangChoice />
+            </div>
           </div>
         </div>
       )}

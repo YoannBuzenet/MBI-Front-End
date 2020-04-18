@@ -46,7 +46,7 @@
   "app.LoginPage.toast.success": "You are connected.",
   "app.LoginPage.toast.failure": "Login or password incorrect. Please try again.",
 
-  "app.Basket.title": "My Sell Request",
+  "app.Basket.title": "My Sell Request ",
   "app.Basket.cardName": "Card",
   "app.Basket.set": "Set",
   "app.Basket.language": "Language",
@@ -183,7 +183,7 @@
   "app.shop.shopSettings.toast.input.failure": "A number is mandatory for each language and condition. Please indicate one.",
   "app.shop.shopSettings.toast.input.number.failure": "Please indicate a number.",
 
-  "app.shop.burgerMenu.mySellRequest": "My Sell Request",
+  "app.shop.burgerMenu.mySellRequest": "My Sell Request ",
   "app.shop.burgerMenu.sellRequests": "Sell Requests",
   "app.shop.burgerMenu.customers": "Customers",
   "app.shop.burgerMenu.myAccount": "My Account",
@@ -239,7 +239,7 @@
   "app.sellRequestValidation.removeDuplicatesFrombasket": "Please remove duplicated cards from your basket.",
   "app.sellRequestValidation.warningBasketIsEmpty": "Your basket is empty.",
 
-  "app.burgerMenu.customer.mySellRequest": "My Sell Request",
+  "app.burgerMenu.customer.mySellRequest": "My Sell Request ",
   "app.burgerMenu.customer.myAccount": "My Account",
   "app.burgerMenu.customer.mySellRequests": "My Sell Request",
   "app.burgerMenu.customer.logOut": "Log Out",

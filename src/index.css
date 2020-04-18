@@ -522,7 +522,7 @@ div.connect p {
 
 .current-lang-flag {
   position: absolute;
-  top: 20px;
+  top: 22px;
   cursor: pointer;
 }
 
@@ -560,7 +560,7 @@ div.lang-select-applevel {
   position: fixed;
   top: 8rem;
   bottom: 0;
-  height: 35vh;
+  height: 45vh;
   width: 30vw;
   right: 0;
   background-color: white;
@@ -568,7 +568,7 @@ div.lang-select-applevel {
 }
 
 .authenticated-menu {
-  height: 60vh;
+  height: 70vh;
 }
 
 .divider {
@@ -584,6 +584,13 @@ div.lang-select-applevel {
   text-align: center;
   padding: 3rem 0;
   margin-left: 0;
+}
+
+.burgerMenuCustomer-select-lang {
+  width: 100%;
+  height: 40px;
+  display: flex;
+  justify-content: center;
 }
 
 @media only screen and (max-width: 1000px) {
@@ -631,7 +638,6 @@ div.lang-select-applevel {
 }
 @media only screen and (max-width: 850px) {
   .responsive_menu {
-    right: 0;
     width: 40vw;
   }
   .responsive_menu {
@@ -641,10 +647,6 @@ div.lang-select-applevel {
 }
 @media only screen and (max-width: 750px) {
   .responsive_menu {
-    right: 0;
-    width: 40vw;
-  }
-  .responsive_menu {
     animation-duration: 0.25s;
     animation-name: slidein750;
   }
@@ -653,10 +655,7 @@ div.lang-select-applevel {
   .big-screen-info {
     display: none;
   }
-  .responsive_menu {
-    right: 0;
-    width: 40vw;
-  }
+
   .responsive_menu {
     animation-duration: 0.25s;
     animation-name: slidein650;
@@ -664,7 +663,6 @@ div.lang-select-applevel {
 }
 @media only screen and (max-width: 550px) {
   .responsive_menu {
-    right: 0;
     width: 50vw;
   }
   .responsive_menu {
@@ -674,19 +672,12 @@ div.lang-select-applevel {
 }
 @media only screen and (max-width: 500px) {
   .responsive_menu {
-    right: 0;
     width: 60vw;
-  }
-  .responsive_menu {
     animation-duration: 0.25s;
     animation-name: slidein500;
   }
 }
 @media only screen and (max-width: 450px) {
-  .responsive_menu {
-    right: 0;
-    width: 60vw;
-  }
   .responsive_menu {
     animation-duration: 0.25s;
     animation-name: slidein500;
