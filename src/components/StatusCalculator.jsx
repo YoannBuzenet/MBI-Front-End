@@ -1,7 +1,13 @@
 import React from "react";
+import { FormattedMessage } from "react-intl";
 
 const StatusCalculator = ({ sellRequest }) => {
   // useEffect(() => console.log(sellRequest), [sellRequest]);
+
+  // <FormattedMessage
+  //           id="app.sellRequest.statusUpdate.toast.success"
+  //           defaultMessage={`This Sell Request has been flagged as Sent.`}
+  //         />
 
   var status = "";
   //Keep this one for submit prop
