@@ -257,6 +257,14 @@
   "app.sellRequest.statusUpdate.toast.failure": "The sell request couldn't ne updated. Please try again.",
   "app.sellRequest.statusUpdate.button": "Mark as Sent",
 
+  "app.sellRequest.statusDefinition.submitted": "Submitted",
+  "app.sellRequest.statusDefinition.sent": "Sent",
+  "app.sellRequest.statusDefinition.received": "Received",
+  "app.sellRequest.statusDefinition.beingProcessed": "Being Processed",
+  "app.sellRequest.statusDefinition.awaitingYourValidation": "Awaiting your Validation",
+  "app.sellRequest.statusDefinition.validated": "Validated",
+  "app.sellRequest.statusDefinition.cancelled": "Cancelled",
+
   "app.footer.legalBuyingClauses": "Buying Clauses",
 
   "app.cardline": "",

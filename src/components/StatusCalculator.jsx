@@ -4,34 +4,64 @@ import { FormattedMessage } from "react-intl";
 const StatusCalculator = ({ sellRequest }) => {
   // useEffect(() => console.log(sellRequest), [sellRequest]);
 
-  // <FormattedMessage
-  //           id="app.sellRequest.statusUpdate.toast.success"
-  //           defaultMessage={`This Sell Request has been flagged as Sent.`}
-  //         />
-
   var status = "";
   //Keep this one for submit prop
   if (sellRequest && sellRequest.DateSubmit) {
-    status = "Soumis";
+    status = (
+      <FormattedMessage
+        id="app.sellRequest.statusDefinition.submitted"
+        defaultMessage={`Submitted`}
+      />
+    );
   }
 
   if (sellRequest && sellRequest.dateEnvoi) {
-    status = "Envoyé";
+    status = (
+      <FormattedMessage
+        id="app.sellRequest.statusDefinition.sent"
+        defaultMessage={`Sent`}
+      />
+    );
   }
   if (sellRequest && sellRequest.dateRecu) {
-    status = "Reçu";
+    status = (
+      <FormattedMessage
+        id="app.sellRequest.statusDefinition.received"
+        defaultMessage={`Received`}
+      />
+    );
   }
   if (sellRequest && sellRequest.dateProcessing) {
-    status = "En traitement";
+    status = (
+      <FormattedMessage
+        id="app.sellRequest.statusDefinition.beingProcessed"
+        defaultMessage={`Being Processed`}
+      />
+    );
   }
   if (sellRequest && sellRequest.dateApprovalPending) {
-    status = "En attente de votre validation";
+    status = (
+      <FormattedMessage
+        id="app.sellRequest.statusDefinition.awaitingYourValidation"
+        defaultMessage={`Awaiting your Validation`}
+      />
+    );
   }
   if (sellRequest && sellRequest.dateValidated) {
-    status = "Validé";
+    status = (
+      <FormattedMessage
+        id="app.sellRequest.statusDefinition.validated"
+        defaultMessage={`Validated`}
+      />
+    );
   }
   if (sellRequest && sellRequest.dateCanceled) {
-    status = "Cancelled";
+    status = (
+      <FormattedMessage
+        id="app.sellRequest.statusDefinition.cancelled"
+        defaultMessage={`Cancelled`}
+      />
+    );
   }
 
   return <>{status}</>;
