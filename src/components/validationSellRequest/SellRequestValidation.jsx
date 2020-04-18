@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import SellingBasketContext from "../../context/sellingBasket";
 import AuthContext from "../../context/authContext";
-import canSubmitContext from "../../context/canSubmitSellRequestContext";
 import ValidSellRequestIsBasketEmpty from "./ValidSellRequestIsBasketEmpty";
 import sellRequestAPI from "../../services/sellRequestAPI";
 import authAPI from "../../services/authAPI";

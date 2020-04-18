@@ -3,6 +3,7 @@ import ValidSellRequestAuthenticatedStep from "./ValidSellRequestAuthenticatedSt
 import canSubmitContext from "../../context/canSubmitSellRequestContext";
 import SellingBasketContext from "../../context/sellingBasket";
 import { toast } from "react-toastify";
+import { FormattedMessage } from "react-intl";
 
 const ValidSellRequestDuplicatesStep = ({
   handleSubmit,
@@ -36,7 +37,10 @@ const ValidSellRequestDuplicatesStep = ({
         <ValidSellRequestAuthenticatedStep handleSubmit={handleSubmit} />
       )) || (
         <div>
-          Merci de retirer les doublons de votre rachat avant de le soumettre.
+          <FormattedMessage
+            id="app.sellRequestValidation.removeDuplicatesFrombasket"
+            defaultMessage={`To submit your sell request, you must connect first.`}
+          />
         </div>
       )}
     </>

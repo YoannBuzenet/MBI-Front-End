@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import SellingBasketContext from "../context/sellingBasket";
 import isResponsiveMenuDisplayedContext from "../context/menuDisplayedContext";
-import AuthContext from "../context/authContext";
 import BlackDivModalContext from "../context/blackDivModalContext";
 import CardDisplayOnPageContext from "../context/cardDisplayOnPageContext";
 
@@ -10,9 +9,7 @@ const BurgerMenu = () => {
   const { currentBasket } = useContext(SellingBasketContext);
 
   //Black Div control
-  const { isBlackDivModalDisplayed, setIsBlackDivModalDisplayed } = useContext(
-    BlackDivModalContext
-  );
+  const { setIsBlackDivModalDisplayed } = useContext(BlackDivModalContext);
 
   //Is Menu Responsive Displayed
   const {
@@ -21,9 +18,7 @@ const BurgerMenu = () => {
   } = useContext(isResponsiveMenuDisplayedContext);
 
   //Card Display control
-  const { cardDisplayInformation, setCardDisplayInformation } = useContext(
-    CardDisplayOnPageContext
-  );
+  const { setCardDisplayInformation } = useContext(CardDisplayOnPageContext);
 
   const handleClick = (event) => {
     if (isResponsiveMenuDisplayed === "deactivated") {

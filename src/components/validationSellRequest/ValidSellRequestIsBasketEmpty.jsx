@@ -1,10 +1,11 @@
 import React, { useContext } from "react";
 import ValidSellRequestDuplicatesStep from "./ValidSellRequestDuplicatesStep";
 import SellingBasketContext from "../../context/sellingBasket";
+import { FormattedMessage } from "react-intl";
 
 const ValidSellRequestIsBasketEmpty = ({
   handleSubmit,
-  checkForDuplicates
+  checkForDuplicates,
 }) => {
   //Current Basket
   const { currentBasket } = useContext(SellingBasketContext);
@@ -20,8 +21,10 @@ const ValidSellRequestIsBasketEmpty = ({
         </div>
       )) || (
         <div className="isCurrentBasketEmpty">
-          Votre panier est vide. Pour le valider, merci d'ajouter des cartes à
-          votre rachat.
+          <FormattedMessage
+            id="app.sellRequestValidation.warningBasketIsEmpty"
+            defaultMessage={`Your basket is empty.`}
+          />
         </div>
       )}
     </>

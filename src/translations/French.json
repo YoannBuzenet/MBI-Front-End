@@ -215,6 +215,12 @@
   "app.sellRequestValidation.validationCTA": "Valider mon rachat",
   "app.sellRequestValidation.toast.success": "Votre rachat a bien été posté. Merci d'envoyer les cartes à la boutique.",
   "app.sellRequestValidation.toast.failure": "Le rachat n'a pu être validé. Merci de recommencer.",
+  "app.sellRequestValidation.legalConditionsAccepting": "J'accepte les conditions générales de rachat.",
+  "app.sellRequestValidation.acceptCTA": "Valider",
+  "app.sellRequestValidation.mustConnectMessage": "Pour soumettre complètement votre rachat, vous devez vous inscrire ou vous connecter.",
+  "app.sellRequestValidation.reminderMessageBasketWontBeLost": "Votre panier ne sera pas perdu",
+  "app.sellRequestValidation.removeDuplicatesFrombasket": "Merci de retirer les doublons de votre rachat avant de le soumettre.",
+  "app.sellRequestValidation.warningBasketIsEmpty": "Votre panier est vide.",
 
   "app.cardline": "",
   "app.cardline.loadingSets.toast.failure": "Les éditions n'ont pu être chargées. Merci de réessayer ou de vous reconnecter.",
