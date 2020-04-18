@@ -222,6 +222,13 @@
   "app.sellRequestValidation.removeDuplicatesFrombasket": "Merci de retirer les doublons de votre rachat avant de le soumettre.",
   "app.sellRequestValidation.warningBasketIsEmpty": "Votre panier est vide.",
 
+  "app.burgerMenu.customer.mySellRequest": "Rachat",
+  "app.burgerMenu.customer.myAccount": "Mon compte",
+  "app.burgerMenu.customer.mySellRequests": "Mes rachats",
+  "app.burgerMenu.customer.logOut": "Déconnexion",
+  "app.burgerMenu.customer.register": "S'inscrire",
+  "app.burgerMenu.customer.connect": "Se connecter",
+
   "app.cardline": "",
   "app.cardline.loadingSets.toast.failure": "Les éditions n'ont pu être chargées. Merci de réessayer ou de vous reconnecter.",
   "app.cardline.shop.updateCard.toast.failure": "La carte n'a pu être mise à jour. Merci de réessayer ou de vous reconnecter.",
