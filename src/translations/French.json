@@ -228,11 +228,15 @@
   "app.burgerMenu.customer.logOut": "Déconnexion",
   "app.burgerMenu.customer.register": "S'inscrire",
   "app.burgerMenu.customer.connect": "Se connecter",
+  "app.burgerMenu.customer.logOut.toast.success": "Vous êtes bien déconnecté.",
 
   "app.cardline": "",
   "app.cardline.loadingSets.toast.failure": "Les éditions n'ont pu être chargées. Merci de réessayer ou de vous reconnecter.",
   "app.cardline.shop.updateCard.toast.failure": "La carte n'a pu être mise à jour. Merci de réessayer ou de vous reconnecter.",
   "app.cardline.shop.deleteCard.toast.failure": "La carte n'a pu être supprimée. Merci de réessayer ou de vous reconnecter.",
+  "app.cardLineOneSet.priceUpdate.toast.failure": "Le prix n'a pu être chargé. Merci de réactualiser votre page ou d'essayer plus tard.",
+
+  "app.cardThumbnail.seeCardDetails": "Voir la carte",
 
   "app.generics.yes": "Oui",
   "app.generics.no": "Non",

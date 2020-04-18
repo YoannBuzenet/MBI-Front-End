@@ -9,6 +9,7 @@ import { Tr, Td } from "react-super-responsive-table";
 import CardDisplayOnPageContext from "../context/cardDisplayOnPageContext";
 import BlackDivModalContext from "../context/blackDivModalContext";
 import config from "../services/config";
+import { FormattedMessage } from "react-intl";
 
 const CardLine = ({ card, handleAddSellingBasket, index, setName }) => {
   const LANGUAGE_ID_ENG = 9;
@@ -77,7 +78,7 @@ const CardLine = ({ card, handleAddSellingBasket, index, setName }) => {
   }, [card]);
 
   const handleChange = ({ currentTarget }, currentCard) => {
-    console.log(currentCard);
+    // console.log(currentCard);
     //Updating the card following the new info
     const { name, value } = currentTarget;
     if (name === "quantity" || name === "lang" || name === "condition") {
@@ -228,8 +229,19 @@ const CardLine = ({ card, handleAddSellingBasket, index, setName }) => {
               handleChange(event, currentCard);
             }}
           >
-            {card.hasnonfoil && <option value="No">No</option>}
-            {card.hasfoil && <option value="Yes">Yes</option>}
+            {card.hasnonfoil && (
+              <option value="No">
+                <FormattedMessage id="app.generics.no" defaultMessage={`No`} />
+              </option>
+            )}
+            {card.hasfoil && (
+              <option value="Yes">
+                <FormattedMessage
+                  id="app.generics.yes"
+                  defaultMessage={`Yes`}
+                />
+              </option>
+            )}
           </select>
         </Td>
         <Td>
@@ -239,8 +251,12 @@ const CardLine = ({ card, handleAddSellingBasket, index, setName }) => {
               handleChange(event, currentCard);
             }}
           >
-            <option value="No">Non</option>
-            <option value="Yes">Oui</option>
+            <option value="No">
+              <FormattedMessage id="app.generics.no" defaultMessage={`No`} />
+            </option>
+            <option value="Yes">
+              <FormattedMessage id="app.generics.yes" defaultMessage={`Yes`} />
+            </option>
           </select>
         </Td>
         <Td>

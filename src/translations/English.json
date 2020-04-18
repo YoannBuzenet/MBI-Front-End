@@ -228,11 +228,15 @@
   "app.burgerMenu.customer.logOut": "Log Out",
   "app.burgerMenu.customer.register": "Register",
   "app.burgerMenu.customer.connect": "Connect",
+  "app.burgerMenu.customer.logOut.toast.success": "You logged out successfully.",
 
   "app.cardline": "",
   "app.cardline.shop.loadingSets.toast.failure": "Sets couldn't be loaded. Please reload the page or login again.",
-  "app.cardline.shop.updateCard.toast.failure": "The courd couldn't be updated. Please try again.",
-  "app.cardline.shop.deleteCard.toast.failure": "The courd couldn't be deleted. Please try again.",
+  "app.cardline.shop.updateCard.toast.failure": "The card couldn't be updated. Please try again.",
+  "app.cardline.shop.deleteCard.toast.failure": "The card couldn't be deleted. Please try again.",
+  "app.cardLineOneSet.priceUpdate.toast.failure": "Price couldn't be loaded. Please try again.",
+
+  "app.cardThumbnail.seeCardDetails": "See More",
 
   "app.generics.yes": "Yes",
   "app.generics.no": "No",

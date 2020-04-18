@@ -3,6 +3,7 @@ import cardsAPI from "../services/cardsAPI";
 import { Link } from "react-router-dom";
 import MKMAPI from "../services/MKMAPI";
 import axios from "axios";
+import { FormattedMessage } from "react-intl";
 
 const CardWithThumbnail = ({ card }) => {
   const picture = cardsAPI.getSmallPictureFromScryfallId(card);
@@ -39,7 +40,12 @@ const CardWithThumbnail = ({ card }) => {
           <div className="card-set">
             {card.edition ? card.edition.name : null}
           </div>
-          <Link to={"/card/" + card.name}>Voir la carte</Link>
+          <Link to={"/card/" + card.name}>
+            <FormattedMessage
+              id="app.cardThumbnail.seeCardDetails"
+              defaultMessage={`See More`}
+            />
+          </Link>
         </div>
       </div>
     </>

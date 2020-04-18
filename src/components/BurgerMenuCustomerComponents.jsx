@@ -45,7 +45,12 @@ const BurgerMenuCustomerComponents = () => {
         SellRequests: [],
       },
     });
-    toast.success("Vous êtes bien déconnecté.");
+    toast.success(
+      <FormattedMessage
+        id="app.burgerMenu.customer.logOut.toast.success"
+        defaultMessage={`You logged out successfully.`}
+      />
+    );
   };
 
   const classMenu = authenticationInfos.isAuthenticated
