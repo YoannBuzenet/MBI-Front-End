@@ -13,7 +13,7 @@ const ShopSetLangCards = ({ variation, index }) => {
     <>
       <div className="one-set">
         <h2>{allPricesBuffer[index].edition.name}</h2>
-        {/* All these operations are made to : integrate English in the lang array, and then putting the BaseLang on top by filtering arrays */}
+        {/* integrate English in the lang array, and then put the BaseLang on top by filtering arrays */}
         {[
           {
             name: variation.name,

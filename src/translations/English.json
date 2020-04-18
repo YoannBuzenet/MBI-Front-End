@@ -212,6 +212,10 @@
   "app.shop.sellrequestValidator.validationCTA": "Validate",
   "app.shop.sellrequestValidator.cancelCTA": "Cancel",
 
+  "app.sellRequestValidation.validationCTA": "Validate my Sell Request",
+  "app.sellRequestValidation.toast.success": "Your sell request has been posted. You can send the cards to the shop.",
+  "app.sellRequestValidation.toast.failure": "The sell Request couldn't be posted. Please try again.",
+
   "app.cardline": "",
   "app.cardline.shop.loadingSets.toast.failure": "Sets couldn't be loaded. Please reload the page or login again.",
   "app.cardline.shop.updateCard.toast.failure": "The courd couldn't be updated. Please try again.",
