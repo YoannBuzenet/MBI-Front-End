@@ -515,6 +515,27 @@ div.connect p {
 
 .current-app-lang {
   position: relative;
+  width: 40px;
+  outline: none;
+}
+
+.current-lang-flag {
+  position: absolute;
+  top: 20px;
+  cursor: pointer;
+}
+
+.arrow-app-lang {
+  position: absolute;
+  right: -10px;
+  top: 8px;
+}
+
+div.lang-select-applevel {
+  width: 35px;
+  right: 12px;
+  left: -5px;
+  outline: none;
 }
 
 /* Arrow to toggle menu */

@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import config from "../services/config";
 import CSSLoaderWaitingSpiral from "../components/loaders/CSSLoaderWaitingSpiral";
 import { FormattedMessage } from "react-intl";
+import { useIntl } from "react-intl";
 
 const RegisterPage = ({ history }) => {
   const [credentials, setCredentials] = useState({
@@ -90,6 +91,9 @@ const RegisterPage = ({ history }) => {
       [name]: value,
     });
   };
+
+  //Hook Intl to translate an attribute
+  const intl = useIntl();
 
   return (
     <>
@@ -212,12 +216,10 @@ const RegisterPage = ({ history }) => {
             className="my-account"
             name="adress"
             id="adress"
-            placeholder={
-              <FormattedMessage
-                id="app.RegisterPage.placeholder.adress"
-                defaultMessage={`Your adress...`}
-              />
-            }
+            placeholder={intl.formatMessage({
+              id: "app.RegisterPage.placeholder.adress",
+              defaultMessage: `Your adress...`,
+            })}
             cols="22"
             rows="3"
             required
