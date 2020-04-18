@@ -25,9 +25,7 @@ const CardLineOneSet = ({
   //Current Selling Request Basket
   const { currentBasket } = useContext(SellingBasketContext);
 
-  const { userPreferences, setUserPreferences } = useContext(
-    userPreferencesContext
-  );
+  const { userPreferences } = useContext(userPreferencesContext);
 
   //TIMEOUT SETUP DO NOT ERASE (In case we have to implement it, it can be finished)
   // const WAIT_INTERVAL = 1000;

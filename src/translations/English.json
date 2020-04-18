@@ -203,6 +203,15 @@
   "app.shop.priceFormUpdate.foil": "Foil",
   "app.shop.priceFormUpdate.signed": "Signed",
 
+  "app.shop.sellrequestValidator.title": "Update current status",
+  "app.shop.sellrequestValidator.defaultOption": "Select a status",
+  "app.shop.sellrequestValidator.receivedStatus": "Received",
+  "app.shop.sellrequestValidator.awaitingProcessing": "Awaiting Processing",
+  "app.shop.sellrequestValidator.awaitingCustomerValidation": "Awaiting Customer Validation",
+  "app.shop.sellrequestValidator.beingProcessed": "Being Processed",
+  "app.shop.sellrequestValidator.validationCTA": "Validate",
+  "app.shop.sellrequestValidator.cancelCTA": "Cancel",
+
   "app.cardline": "",
   "app.cardline.shop.loadingSets.toast.failure": "Sets couldn't be loaded. Please reload the page or login again.",
   "app.cardline.shop.updateCard.toast.failure": "The courd couldn't be updated. Please try again.",
