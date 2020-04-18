@@ -467,6 +467,7 @@ div.connect p {
 .toggle-menu li {
   padding: 1rem;
   text-align: left;
+  cursor: pointer;
 }
 
 .toggle-menu li:hover {
