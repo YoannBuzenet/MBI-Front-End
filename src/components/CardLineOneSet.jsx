@@ -13,6 +13,7 @@ import config from "../services/config";
 import CardDisplayOnPageContext from "../context/cardDisplayOnPageContext";
 import BlackDivModalContext from "../context/blackDivModalContext";
 import userPreferencesContext from "../context/userPreferenceContext";
+import { FormattedMessage } from "react-intl";
 
 const CardLineOneSet = ({
   card,
@@ -103,7 +104,10 @@ const CardLineOneSet = ({
         })
         .catch((error) => {
           toast.error(
-            "Le prix n'a pu être chargé. Merci de réactualiser votre page ou d'essayer plus tard."
+            <FormattedMessage
+              id="app.cardLineOneSet.priceUpdate.toast.failure"
+              defaultMessage={`Price couldn't be loaded. Please try again.`}
+            />
           );
         });
     } else {
@@ -240,8 +244,19 @@ const CardLineOneSet = ({
               handleChange(event);
             }}
           >
-            {cardsContext[cardID].hasnonfoil && <option value="No">No</option>}
-            {cardsContext[cardID].hasfoil && <option value="Yes">Yes</option>}
+            {cardsContext[cardID].hasnonfoil && (
+              <option value="No">
+                <FormattedMessage id="app.generics.no" defaultMessage={`No`} />
+              </option>
+            )}
+            {cardsContext[cardID].hasfoil && (
+              <option value="Yes">
+                <FormattedMessage
+                  id="app.generics.yes"
+                  defaultMessage={`Yes`}
+                />
+              </option>
+            )}
           </select>
         </Td>
         <Td>
@@ -251,8 +266,12 @@ const CardLineOneSet = ({
               handleChange(event);
             }}
           >
-            <option value="No">Non</option>
-            <option value="Yes">Oui</option>
+            <option value="No">
+              <FormattedMessage id="app.generics.no" defaultMessage={`No`} />
+            </option>
+            <option value="Yes">
+              <FormattedMessage id="app.generics.yes" defaultMessage={`Yes`} />
+            </option>
           </select>
         </Td>
         <Td>

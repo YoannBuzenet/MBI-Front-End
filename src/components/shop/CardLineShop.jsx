@@ -433,25 +433,13 @@ const CardLineShop = ({ card, indexCard }) => {
               handleChange(event, currentCard);
             }}
           >
-            <option
-              value={
-                currentCard.isFoil === true
-                  ? yesWordTranslated
-                  : noWordTranslated
-              }
-            >
+            <option value={currentCard.isFoil === true ? "Yes" : "No"}>
               {currentCard.isFoil == true
                 ? yesWordTranslated
                 : noWordTranslated}
             </option>
             {card.hasfoil === 1 && card.hasnonfoil === 1 && (
-              <option
-                value={
-                  currentCard.isFoil === true
-                    ? noWordTranslated
-                    : yesWordTranslated
-                }
-              >
+              <option value={currentCard.isFoil === true ? "No" : "Yes"}>
                 {currentCard.isFoil === true
                   ? noWordTranslated
                   : yesWordTranslated}
@@ -467,13 +455,7 @@ const CardLineShop = ({ card, indexCard }) => {
               handleChange(event, currentCard);
             }}
           >
-            <option
-              value={
-                currentCard.isSigned === true
-                  ? yesWordTranslated
-                  : noWordTranslated
-              }
-            >
+            <option value={currentCard.isSigned === true ? "Yes" : "No"}>
               {currentCard.isSigned === true
                 ? yesWordTranslated
                 : noWordTranslated}
@@ -499,24 +481,12 @@ const CardLineShop = ({ card, indexCard }) => {
               handleChange(event, currentCard);
             }}
           >
-            <option
-              value={
-                currentCard.isAltered === true
-                  ? yesWordTranslated
-                  : noWordTranslated
-              }
-            >
+            <option value={currentCard.isAltered === true ? "Yes" : "No"}>
               {currentCard.isAltered === true
                 ? yesWordTranslated
                 : noWordTranslated}
             </option>
-            <option
-              value={
-                currentCard.isAltered === true
-                  ? noWordTranslated
-                  : yesWordTranslated
-              }
-            >
+            <option value={currentCard.isAltered === true ? "No" : "Yes"}>
               {currentCard.isAltered === true
                 ? noWordTranslated
                 : yesWordTranslated}
