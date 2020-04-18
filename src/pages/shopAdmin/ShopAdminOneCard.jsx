@@ -51,8 +51,8 @@ const ShopAdminOneCard = ({ match }) => {
       const allLang = [
         {
           name: completeContext[i].name,
-          language_id: { id: 9, name: "English", shortname: "EN" }
-        }
+          language_id: { id: 9, name: "English", shortname: "EN" },
+        },
       ].concat(completeContext[i].foreignData);
 
       completeContext[i].langs = {};
@@ -138,16 +138,16 @@ const ShopAdminOneCard = ({ match }) => {
 
       cardsAPI
         .getByName(currentNameDecoded, {
-          cancelToken: source.token
+          cancelToken: source.token,
         })
-        .then(data => {
+        .then((data) => {
           console.log(data.data["hydra:member"]);
           return data;
         })
-        .then(data =>
+        .then((data) =>
           buildCompletePriceContext(data.data["hydra:member"], lang, conditions)
         )
-        .catch(error => errorHandlingAPI.check401Unauthorized(error));
+        .catch((error) => errorHandlingAPI.check401Unauthorized(error));
 
       return () => source.cancel("");
     }
@@ -157,7 +157,7 @@ const ShopAdminOneCard = ({ match }) => {
     allPricesBuffer,
     currentName,
     lang,
-    buildCompletePriceContext
+    buildCompletePriceContext,
   ]);
 
   return (

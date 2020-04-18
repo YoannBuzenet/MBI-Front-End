@@ -271,7 +271,6 @@
 
   "app.footer.legalBuyingClauses": "Buying Clauses",
 
-  "app.cardline": "",
   "app.cardline.shop.loadingSets.toast.failure": "Sets couldn't be loaded. Please reload the page or login again.",
   "app.cardline.shop.updateCard.toast.failure": "The card couldn't be updated. Please try again.",
   "app.cardline.shop.deleteCard.toast.failure": "The card couldn't be deleted. Please try again.",
@@ -280,6 +279,8 @@
   "app.cardThumbnail.seeCardDetails": "See More",
 
   "app.dateDisplayer.dateNotKnownYet": "N/A",
+
+  "app.loginOutdated.toast.failure": "You are not connected anymore. Please log again.",
 
   "app.generics.yes": "Yes",
   "app.generics.no": "No",
