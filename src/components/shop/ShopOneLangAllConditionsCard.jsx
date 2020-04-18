@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import ShopConditionPriceUpdate from "./ShopConditionPriceUpdate";
 import priceBufferContext from "../../context/priceBufferContext";
 import { useEffect } from "react";
+import { FormattedMessage } from "react-intl";
 
 const ShopOneLangAllConditionsCard = ({ oneLang, index }) => {
   //Context - building the memoization of all condition/lang possibilities
@@ -203,9 +204,16 @@ const ShopOneLangAllConditionsCard = ({ oneLang, index }) => {
 
   return (
     <div>
-      <form action="">
+      <form>
         <div>
-          {nonFoilNonSignedArray.length > 0 && <p>Non Foil</p>}
+          {nonFoilNonSignedArray.length > 0 && (
+            <p>
+              <FormattedMessage
+                id="app.shop.priceFormUpdate.nonFoil"
+                defaultMessage={`Regular`}
+              />
+            </p>
+          )}
 
           {nonFoilNonSignedArray.length !== 0 &&
             nonFoilNonSignedArray.map((infoContainer) => {
@@ -230,7 +238,14 @@ const ShopOneLangAllConditionsCard = ({ oneLang, index }) => {
                 />
               );
             })}
-          {nonFoilSignedArray.length > 0 && <p>Signé</p>}
+          {nonFoilSignedArray.length > 0 && (
+            <p>
+              <FormattedMessage
+                id="app.shop.priceFormUpdate.nonSigned"
+                defaultMessage={`Non Signed`}
+              />
+            </p>
+          )}
           {nonFoilSignedArray.length !== 0 &&
             nonFoilSignedArray.map((infoContainer) => {
               return (
@@ -256,7 +271,14 @@ const ShopOneLangAllConditionsCard = ({ oneLang, index }) => {
             })}
         </div>
         <div>
-          {foilNonSignedArray.length > 0 && <p>Foil</p>}
+          {foilNonSignedArray.length > 0 && (
+            <p>
+              <FormattedMessage
+                id="app.shop.priceFormUpdate.foil"
+                defaultMessage={`Foil`}
+              />
+            </p>
+          )}
 
           {foilNonSignedArray.length !== 0 &&
             foilNonSignedArray.map((infoContainer) => {
@@ -281,7 +303,14 @@ const ShopOneLangAllConditionsCard = ({ oneLang, index }) => {
                 />
               );
             })}
-          {foilSignedArray.length > 0 && <p>Signé</p>}
+          {foilSignedArray.length > 0 && (
+            <p>
+              <FormattedMessage
+                id="app.shop.priceFormUpdate.signed"
+                defaultMessage={`Signed`}
+              />
+            </p>
+          )}
           {foilSignedArray.length !== 0 &&
             foilSignedArray.map((infoContainer) => {
               return (

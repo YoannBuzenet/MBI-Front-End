@@ -6,7 +6,7 @@ import MKMAPI from "../../services/MKMAPI";
 import AuthContext from "../../context/authContext";
 import MKM_ModalContext from "../../context/mkmModalConnectionContext";
 import BlackDivContext from "../../context/blackDivModalContext";
-import GenericContext from "../../context/genericCardInfosContext";
+import { FormattedMessage } from "react-intl";
 
 const ShopSellRequestStatusValidator = () => {
   const { currentAdminSellRequest, setCurrentAdminSellRequest } = useContext(
