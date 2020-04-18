@@ -14,6 +14,7 @@ import CardDisplayOnPageContext from "../context/cardDisplayOnPageContext";
 import BlackDivModalContext from "../context/blackDivModalContext";
 import userPreferencesContext from "../context/userPreferenceContext";
 import { FormattedMessage } from "react-intl";
+import { useIntl } from "react-intl";
 
 const CardLineOneSet = ({
   card,
@@ -148,6 +149,9 @@ const CardLineOneSet = ({
     }
   }
 
+  //Hook Intl to translate an attribute
+  const intl = useIntl();
+
   return (
     <>
       <Tr
@@ -246,15 +250,18 @@ const CardLineOneSet = ({
           >
             {cardsContext[cardID].hasnonfoil && (
               <option value="No">
-                <FormattedMessage id="app.generics.no" defaultMessage={`No`} />
+                {intl.formatMessage({
+                  id: "app.generics.no",
+                  defaultMessage: "No",
+                })}
               </option>
             )}
             {cardsContext[cardID].hasfoil && (
               <option value="Yes">
-                <FormattedMessage
-                  id="app.generics.yes"
-                  defaultMessage={`Yes`}
-                />
+                {intl.formatMessage({
+                  id: "app.generics.yes",
+                  defaultMessage: "Yes",
+                })}
               </option>
             )}
           </select>
@@ -267,10 +274,16 @@ const CardLineOneSet = ({
             }}
           >
             <option value="No">
-              <FormattedMessage id="app.generics.no" defaultMessage={`No`} />
+              {intl.formatMessage({
+                id: "app.generics.no",
+                defaultMessage: "No",
+              })}
             </option>
             <option value="Yes">
-              <FormattedMessage id="app.generics.yes" defaultMessage={`Yes`} />
+              {intl.formatMessage({
+                id: "app.generics.yes",
+                defaultMessage: "Yes",
+              })}
             </option>
           </select>
         </Td>
