@@ -6,8 +6,13 @@ import authAPI from "../services/authAPI";
 import { toast } from "react-toastify";
 import BlackDivContext from "../context/blackDivModalContext";
 import isResponsiveMenuDisplayedContext from "../context/menuDisplayedContext";
+import { FormattedMessage } from "react-intl";
 
 const BurgerMenuCustomerComponents = () => {
+  // <FormattedMessage
+  //           id="app.sellRequestValidation.warningBasketIsEmpty"
+  //           defaultMessage={`Your basket is empty.`}
+  //         />
   //Current Authentication
   const { authenticationInfos, setAuthenticationInfos } = useContext(
     AuthContext

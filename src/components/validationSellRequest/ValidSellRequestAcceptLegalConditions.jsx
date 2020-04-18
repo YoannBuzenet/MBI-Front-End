@@ -1,15 +1,22 @@
 import React from "react";
+import { FormattedMessage } from "react-intl";
 
-const ValidSellRequestAcceptLegalConditions = props => {
+const ValidSellRequestAcceptLegalConditions = (props) => {
   return (
     <div className="isUserAuthenticated">
       <form action="" onSubmit={props.handleSubmit}>
         <input type="checkbox" required id="checkbox-compliance" />
         <label htmlFor="checkbox-compliance">
-          J'accepte les conditions générales de ventes.
+          <FormattedMessage
+            id="app.sellRequestValidation.legalConditionsAccepting"
+            defaultMessage={`I accept the shop buying clauses.`}
+          />
         </label>
         <button className="sellRequest-validation-button" type="submit">
-          Valider mon rachat
+          <FormattedMessage
+            id="app.sellRequestValidation.acceptCTA"
+            defaultMessage={`Validate`}
+          />
         </button>
       </form>
     </div>
