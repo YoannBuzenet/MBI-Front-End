@@ -198,6 +198,11 @@
   "app.shop.navBar.settings": "Settings",
   "app.shop.navBar.logOut": "Log Out",
 
+  "app.shop.priceFormUpdate.nonFoil": "Regular",
+  "app.shop.priceFormUpdate.nonSigned": "Non signed",
+  "app.shop.priceFormUpdate.foil": "Foil",
+  "app.shop.priceFormUpdate.signed": "Signed",
+
   "app.cardline": "",
   "app.cardline.shop.loadingSets.toast.failure": "Sets couldn't be loaded. Please reload the page or login again.",
   "app.cardline.shop.updateCard.toast.failure": "The courd couldn't be updated. Please try again.",
