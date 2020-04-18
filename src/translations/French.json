@@ -212,6 +212,10 @@
   "app.shop.sellrequestValidator.validationCTA": "Valider",
   "app.shop.sellrequestValidator.cancelCTA": "Annuler",
 
+  "app.sellRequestValidation.validationCTA": "Valider mon rachat",
+  "app.sellRequestValidation.toast.success": "Votre rachat a bien été posté. Merci d'envoyer les cartes à la boutique.",
+  "app.sellRequestValidation.toast.failure": "Le rachat n'a pu être validé. Merci de recommencer.",
+
   "app.cardline": "",
   "app.cardline.loadingSets.toast.failure": "Les éditions n'ont pu être chargées. Merci de réessayer ou de vous reconnecter.",
   "app.cardline.shop.updateCard.toast.failure": "La carte n'a pu être mise à jour. Merci de réessayer ou de vous reconnecter.",

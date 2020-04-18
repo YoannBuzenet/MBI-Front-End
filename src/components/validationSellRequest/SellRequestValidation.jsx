@@ -6,6 +6,7 @@ import ValidSellRequestIsBasketEmpty from "./ValidSellRequestIsBasketEmpty";
 import sellRequestAPI from "../../services/sellRequestAPI";
 import authAPI from "../../services/authAPI";
 import { toast } from "react-toastify";
+import { FormattedMessage } from "react-intl";
 
 const SellRequestValidation = ({ history, checkForDuplicates }) => {
   //Current Basket
@@ -27,7 +28,7 @@ const SellRequestValidation = ({ history, checkForDuplicates }) => {
         user: {
           id: authenticationInfos.user.id,
           email: authenticationInfos.user.email,
-          roles: authenticationInfos.user.roles
+          roles: authenticationInfos.user.roles,
         },
         client: {
           id: authenticationInfos.customer.id,
@@ -47,8 +48,8 @@ const SellRequestValidation = ({ history, checkForDuplicates }) => {
             email: authenticationInfos.shop.email,
             adress: authenticationInfos.shop.adress,
             postalCode: authenticationInfos.shop.postalCode,
-            town: authenticationInfos.shop.town
-          }
+            town: authenticationInfos.shop.town,
+          },
         },
         shop: {
           id: authenticationInfos.shop.id,
@@ -59,16 +60,13 @@ const SellRequestValidation = ({ history, checkForDuplicates }) => {
           email: authenticationInfos.shop.email,
           adress: authenticationInfos.shop.adress,
           postalCode: authenticationInfos.shop.postalCode,
-          town: authenticationInfos.shop.town
-        }
+          town: authenticationInfos.shop.town,
+        },
       });
     }
   }, [authenticationInfos]);
 
-  //Knowing if the Sell Request is OK to be submitted (no duplicate)
-  const { errorList, setErrorList } = useContext(canSubmitContext);
-
-  const handleSubmit = async event => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     const sellRequestData = {
@@ -80,7 +78,7 @@ const SellRequestValidation = ({ history, checkForDuplicates }) => {
       cardTotalQuantity: currentBasket.reduce((total, card) => {
         return total + card.quantity;
       }, 0),
-      sellRequestCards: currentBasket.map(card => {
+      sellRequestCards: currentBasket.map((card) => {
         return {
           language: "/languages/" + card.lang,
           CardCondition: "/card_conditions/" + card.condition,
@@ -89,9 +87,9 @@ const SellRequestValidation = ({ history, checkForDuplicates }) => {
           price: card.price,
           isFoil: card.isFoil === "Yes" ? true : false,
           isSigned: card.isSigned === "Yes" ? true : false,
-          isAltered: false //False by default. Can be edited in back-office by the shop.
+          isAltered: false, //False by default. Can only be edited in back-office by the shop.
         };
-      })
+      }),
     };
 
     try {
@@ -117,28 +115,40 @@ const SellRequestValidation = ({ history, checkForDuplicates }) => {
               dateCanceled: sendSellRequest.data.dateCanceled,
               amount: sendSellRequest.data.amount,
               cardTotalQuantity: sendSellRequest.data.cardTotalQuantity,
-              DateSubmit: { date: sendSellRequest.data.DateSubmit }
-              //Creating an object Date to give it the same format as what we receive from API Platform, to allow component to read it
-            }
-          ]
-        }
+              DateSubmit: { date: sendSellRequest.data.DateSubmit },
+            },
+          ],
+        },
       });
 
       setCurrentBasket([]);
 
       toast.success(
-        "Votre rachat a bien été posté. Merci d'envoyer les cartes à la boutique."
+        <FormattedMessage
+          id="app.sellRequestValidation.toast.success"
+          defaultMessage={`Validate my Sell Request`}
+        />
       );
       history.replace("/my_sell_requests");
     } catch (error) {
       console.log(error);
-      toast.error("Le rachat n'a pu être validé. Merci de recommencer.");
+      toast.error(
+        <FormattedMessage
+          id="app.sellRequestValidation.toast.failure"
+          defaultMessage={`The sell Request couldn't be posted. Please try again.`}
+        />
+      );
     }
   };
 
   return (
     <div className="sellRequest-validation-block">
-      <h2>Valider mon rachat</h2>
+      <h2>
+        <FormattedMessage
+          id="app.sellRequestValidation.validationCTA"
+          defaultMessage={`Validate my Sell Request`}
+        />
+      </h2>
       <ValidSellRequestIsBasketEmpty
         handleSubmit={handleSubmit}
         checkForDuplicates={checkForDuplicates}
