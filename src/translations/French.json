@@ -257,6 +257,14 @@
   "app.sellRequest.statusUpdate.toast.failure": "Le rachat n'a pu être marqué comme envoyé. Merci de rééssayer.",
   "app.sellRequest.statusUpdate.button": "Marquer comme Envoyé",
 
+  "app.sellRequest.statusDefinition.submitted": "Soumis",
+  "app.sellRequest.statusDefinition.sent": "Envoyé",
+  "app.sellRequest.statusDefinition.received": "Reçu",
+  "app.sellRequest.statusDefinition.beingProcessed": "En traitement",
+  "app.sellRequest.statusDefinition.awaitingYourValidation": "En attente de votre validation",
+  "app.sellRequest.statusDefinition.validated": "Validé",
+  "app.sellRequest.statusDefinition.cancelled": "Annulé",
+
   "app.footer.legalBuyingClauses": "Conditions de rachat",
 
   "app.cardline": "",
