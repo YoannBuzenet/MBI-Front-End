@@ -1,14 +1,12 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import SelectAppLangContext from "../context/selectedAppLang";
-import English from "../translations/English.json";
-import French from "../translations/French.json";
 import config from "../services/config";
 
 const AppLangChoice = () => {
   const { currentLang, setCurrentLang } = useContext(SelectAppLangContext);
 
   const [arrayLangAvailables, setArrayLangAvailables] = useState(
-    config.websiteDefaultLanguagearrayLangAvailables
+    config.websiteDefaultLanguageArrayLangAvailables
   );
 
   const handleClick = (event, lang) => {
@@ -20,7 +18,7 @@ const AppLangChoice = () => {
 
   return (
     <div className="current-app-lang">
-      <div className={"set-lang-choosing" + classFlagsDropDown}>
+      <div className={"set-lang-choosing"}>
         {arrayLangAvailables.map((lang, index) => (
           <div
             className="flag-drop-down"
