@@ -215,6 +215,16 @@
   "app.shop.editionUpdateModal": "UPDATE CURRENT SET",
   "app.shop.editionUpdateModal.chooseSet": "Choose a set",
 
+  "app.shop.MKMConnect.toast.success": "You logged succesfully to MCM.",
+  "app.shop.MKMConnect.shouldConnect.toast.failure": "Data seems to not be up to date. Please try again.",
+  "app.shop.MKMConnect.toast.failure": "Error. Please try again.",
+  "app.shop.MKMConnect.title": "Connect to Magic Card Market",
+  "app.shop.MKMConnect.stepConnect": "Login on Magic Card Market website",
+  "app.shop.MKMConnect.stepConnectClick": "Click Here",
+  "app.shop.MKMConnect.stepMTGI": "Once Authentication completed, you will be redirected to www.mtgInterface.com. Please login there too.",
+  "app.shop.MKMConnect.stepSynchronize": "nce you have the confirmation message on www.mtgInterface.com, you can sync data.",
+  "app.shop.MKMConnect.stepSynchronizeButton": "Sync",
+
   "app.sellRequestValidation.validationCTA": "Validate my Sell Request",
   "app.sellRequestValidation.toast.success": "Your sell request has been posted. You can send the cards to the shop.",
   "app.sellRequestValidation.toast.failure": "The sell Request couldn't be posted. Please try again.",
@@ -232,6 +242,14 @@
   "app.burgerMenu.customer.register": "Register",
   "app.burgerMenu.customer.connect": "Connect",
   "app.burgerMenu.customer.logOut.toast.success": "You logged out successfully.",
+
+  "app.navbar.logOut.toast.success": "You logged out successfully.",
+  "app.navbar.mySellRequest": "Sell Request",
+  "app.navbar.myAccount": "My Account",
+  "app.navbar.mySellRequests": "My Sell Requests",
+  "app.navbar.logOut": "Log out",
+  "app.navbar.register": "Register",
+  "app.navbar.connect": "Connect",
 
   "app.footer.legalBuyingClauses": "Buying Clauses",
 
