@@ -248,7 +248,7 @@
   "app.burgerMenu.customer.logOut.toast.success": "Vous êtes bien déconnecté.",
 
   "app.navbar.logOut.toast.success": "Vous êtes bien déconnecté.",
-  "app.navbar.mySellRequest": "Rachat",
+  "app.navbar.mySellRequest": "Rachat ",
   "app.navbar.myAccount": "Mon Compte",
   "app.navbar.mySellRequests": "Mes Rachats",
   "app.navbar.logOut": "Déconnexion",

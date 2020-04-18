@@ -72,6 +72,9 @@ const Navbar = ({ history }) => {
             <SearchCardBar />
           </div>
           {authenticationInfos.isAuthenticated ? (
+            /////////////////////////
+            // Authenticated Menu
+            /////////////////////////
             <div className="my_options">
               <BurgerMenu history={history} />
               <div className="desktop_menu_options">
@@ -142,6 +145,9 @@ const Navbar = ({ history }) => {
               </div>
             </div>
           ) : (
+            /////////////////////////
+            // Not Authenticated Menu
+            /////////////////////////
             <div className="not-connected-options">
               <BurgerMenu history={history} />
 

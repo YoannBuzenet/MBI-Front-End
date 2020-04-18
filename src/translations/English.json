@@ -248,7 +248,7 @@
   "app.burgerMenu.customer.logOut.toast.success": "You logged out successfully.",
 
   "app.navbar.logOut.toast.success": "You logged out successfully.",
-  "app.navbar.mySellRequest": "Sell Request",
+  "app.navbar.mySellRequest": "Sell Request ",
   "app.navbar.myAccount": "My Account",
   "app.navbar.mySellRequests": "My Sell Requests",
   "app.navbar.logOut": "Log out",
