@@ -1,9 +1,11 @@
 import React from "react";
-import moment from "moment";
+import { useIntl } from "react-intl";
 
 const LastInformationCalculator = ({ sellRequest }) => {
-  //TODO GIVE A FORMAT FOLLOWING THE AREA (EN date, EU/FR date)
   var lastDate = "";
+
+  //Hook Intl to translate an attribute
+  const intl = useIntl();
 
   //Keep this one for submit prop
   if (sellRequest.DateSubmit) {
@@ -31,20 +33,10 @@ const LastInformationCalculator = ({ sellRequest }) => {
 
   if (lastDate.length > 0) {
     lastDate = new Date(lastDate);
-    lastDate = moment(lastDate);
-    lastDate = lastDate.format("YYYY-MM-DD");
+    lastDate = intl.formatDate(lastDate);
   }
 
-  return (
-    <>
-      {lastDate}
-      {/* {lastDate.getFullYear() +
-        " " +
-        lastDate.getFullYear() +
-        " " +
-        lastDate.getFullYear()} */}
-    </>
-  );
+  return <>{lastDate}</>;
 };
 
 export default LastInformationCalculator;

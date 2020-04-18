@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import MKM_ModalContext from "../context/mkmModalConnectionContext";
 import BlackDivContext from "../context/blackDivModalContext";
 import CSSLoaderWaitingSpiral from "./loaders/CSSLoaderWaitingSpiral";
+import { FormattedMessage } from "react-intl";
 
 const MKMConnectModal = () => {
   //Current Authentication

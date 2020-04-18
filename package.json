@@ -11,7 +11,6 @@
     "crypto-js": "^4.0.0",
     "feather-icons-react": "^0.4.1",
     "jwt-decode": "^2.2.0",
-    "moment": "^2.24.0",
     "react": "^16.13.1",
     "react-content-loader": "^5.0.2",
     "react-device-detect": "^1.11.14",
