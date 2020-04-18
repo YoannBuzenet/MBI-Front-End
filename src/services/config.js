@@ -66,6 +66,7 @@ const baseLang = 3;
 const websiteDefaultLanguageContext = {
   locale: "en-US",
   translationsForUsersLocale: English,
+  picture: "EN",
 };
 
 export default {
