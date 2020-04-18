@@ -1,6 +1,6 @@
 import React from "react";
 
 export default React.createContext({
-  currentLang: "fr-FR",
+  currentLang: {},
   setCurrentLang: (value) => {},
 });

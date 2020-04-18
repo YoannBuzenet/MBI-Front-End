@@ -26,7 +26,7 @@ const ShopAdminAllCustomers = (props) => {
         .then((response) => setListCustomers(response))
         .then(() => setIsLoading(false))
         .catch((error) => {
-          errorHandlingAPI.check401Unauthorized(error);
+          return errorHandlingAPI.check401Unauthorized(error);
         });
 
       return () => source.cancel("");

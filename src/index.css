@@ -513,6 +513,10 @@ div.connect p {
   margin-bottom: 7rem;
 }
 
+.current-app-lang {
+  position: relative;
+}
+
 /* Arrow to toggle menu */
 .arrow-menu {
   display: inline-block;

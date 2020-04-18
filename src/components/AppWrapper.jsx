@@ -5,11 +5,12 @@ import English from "../translations/English.json";
 import French from "../translations/French.json";
 
 const AppWrapper = (props) => {
-  const translationsForUsersLocale = English;
-
   //STATE - App Lang
   //Test that : : fr-FR, en-US, en-GB
-  const [currentLang, setCurrentLang] = useState("fr-FR");
+  const [currentLang, setCurrentLang] = useState({
+    locale: "fr-FR",
+    translationsForUsersLocale: English,
+  });
 
   //CONTEXT CREATION
   const AppLangContext = {
@@ -19,7 +20,10 @@ const AppWrapper = (props) => {
 
   return (
     <SelectAppLangContext.Provider value={AppLangContext}>
-      <IntlProvider locale={currentLang} messages={translationsForUsersLocale}>
+      <IntlProvider
+        locale={currentLang.locale}
+        messages={currentLang.translationsForUsersLocale}
+      >
         {props.children}
       </IntlProvider>
     </SelectAppLangContext.Provider>

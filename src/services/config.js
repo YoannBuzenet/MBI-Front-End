@@ -44,6 +44,12 @@ const TIME_TO_EXPIRE_SET_LIST = 1000 * 60 * 60 * 24 * 2;
 
 //flag size : 25*13px
 
+// TRANSLATION AVAILABLE
+const websiteDefaultLanguagearrayLangAvailables = [
+  { locale: "fr-FR", translationsForUsersLocale: French, picture: "FR" },
+  { locale: "en-US", translationsForUsersLocale: English, picture: "EN" },
+];
+
 export default {
   URL_API,
   shopID,
@@ -58,4 +64,5 @@ export default {
   TIME_TO_EXPIRE_LAST_MODIFICATION,
   TIME_TO_EXPIRE_SET_LIST,
   avatarShopURL,
+  websiteDefaultLanguagearrayLangAvailables,
 };
