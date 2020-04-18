@@ -203,6 +203,15 @@
   "app.shop.priceFormUpdate.foil": "Foil",
   "app.shop.priceFormUpdate.signed": "Signé",
 
+  "app.shop.sellrequestValidator.title": "Modifier le statut",
+  "app.shop.sellrequestValidator.defaultOption": "Choisir un statut",
+  "app.shop.sellrequestValidator.receivedStatus": "Reçu",
+  "app.shop.sellrequestValidator.awaitingProcessing": "En attente de traitement",
+  "app.shop.sellrequestValidator.awaitingCustomerValidation": "En attente de validation client",
+  "app.shop.sellrequestValidator.beingProcessed": "En traitement",
+  "app.shop.sellrequestValidator.validationCTA": "Valider",
+  "app.shop.sellrequestValidator.cancelCTA": "Annuler",
+
   "app.cardline": "",
   "app.cardline.loadingSets.toast.failure": "Les éditions n'ont pu être chargées. Merci de réessayer ou de vous reconnecter.",
   "app.cardline.shop.updateCard.toast.failure": "La carte n'a pu être mise à jour. Merci de réessayer ou de vous reconnecter.",

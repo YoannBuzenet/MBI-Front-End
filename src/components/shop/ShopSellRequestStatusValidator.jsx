@@ -7,6 +7,7 @@ import AuthContext from "../../context/authContext";
 import MKM_ModalContext from "../../context/mkmModalConnectionContext";
 import BlackDivContext from "../../context/blackDivModalContext";
 import { FormattedMessage } from "react-intl";
+import { useIntl } from "react-intl";
 
 const ShopSellRequestStatusValidator = () => {
   const { currentAdminSellRequest, setCurrentAdminSellRequest } = useContext(
@@ -26,6 +27,33 @@ const ShopSellRequestStatusValidator = () => {
 
   //We initialize the state to Cancelled so that the button to update the Sell Request remain hidden while the real status is being computed
   const [currentStatus, setCurrentStatus] = useState("Cancelled");
+
+  // TRANSLATION
+
+  //Hook Intl to translate an attribute
+  const intl = useIntl();
+
+  const defaultOptionTranslation = intl.formatMessage({
+    id: "app.shop.sellrequestValidator.defaultOption",
+    defaultMessage: "Select a status",
+  });
+
+  const receivedStatusTranslation = intl.formatMessage({
+    id: "app.shop.sellrequestValidator.receivedStatus",
+    defaultMessage: "Received",
+  });
+  const awaitingProcessingStatusTranslation = intl.formatMessage({
+    id: "app.shop.sellrequestValidator.awaitingProcessing",
+    defaultMessage: "Awaiting Processing",
+  });
+  const awaitingCustomerValidationStatusTranslation = intl.formatMessage({
+    id: "app.shop.sellrequestValidator.awaitingCustomerValidation",
+    defaultMessage: "Awaiting Customer Validation",
+  });
+  const beingProcessedValidationStatusTranslation = intl.formatMessage({
+    id: "app.shop.sellrequestValidator.beingProcessed",
+    defaultMessage: "Being Processed",
+  });
 
   useEffect(() => {
     //Keep this one for submit prop
@@ -60,33 +88,33 @@ const ShopSellRequestStatusValidator = () => {
     if (currentStatus === "Soumis" || currentStatus === "Envoyé") {
       setAvailableOptions([
         {
-          status: "Reçu",
+          status: receivedStatusTranslation,
           value: "dateRecu",
         },
         {
-          status: "En traitement",
+          status: awaitingProcessingStatusTranslation,
           value: "dateProcessing",
         },
         {
-          status: "En attente de validation client",
+          status: awaitingCustomerValidationStatusTranslation,
           value: "dateApprovalPending",
         },
       ]);
     } else if (currentStatus === "Reçu") {
       setAvailableOptions([
         {
-          status: "En traitement",
+          status: beingProcessedValidationStatusTranslation,
           value: "dateProcessing",
         },
         {
-          status: "En attente de validation client",
+          status: awaitingCustomerValidationStatusTranslation,
           value: "dateApprovalPending",
         },
       ]);
     } else if (currentStatus === "En traitement") {
       setAvailableOptions([
         {
-          status: "En attente de validation client",
+          status: awaitingCustomerValidationStatusTranslation,
           value: "dateApprovalPending",
         },
       ]);
@@ -166,12 +194,15 @@ const ShopSellRequestStatusValidator = () => {
       });
   };
 
-  // console.log(currentAdminSellRequest);
-
   return (
     <>
       {currentAdminSellRequest.id && currentStatus !== "Validé" && (
-        <p>Modifier le statut du rachat</p>
+        <p>
+          <FormattedMessage
+            id="app.shop.sellrequestValidator.title"
+            defaultMessage={`Update current status`}
+          />
+        </p>
       )}
       {availableOptions.length > 0 && (
         <select
@@ -181,7 +212,7 @@ const ShopSellRequestStatusValidator = () => {
           }}
         >
           {availableOptions
-            .concat({ status: "Choisir un statut", value: "default" })
+            .concat({ status: defaultOptionTranslation, value: "default" })
             .map((option, index) => {
               return (
                 <option value={option.value} key={index}>
@@ -194,9 +225,17 @@ const ShopSellRequestStatusValidator = () => {
       {currentStatus !== "Validé" && currentStatus !== "Cancelled" && (
         <>
           <button onClick={(event) => validateSellRequest(event)}>
-            Valider
+            <FormattedMessage
+              id="app.shop.sellrequestValidator.validationCTA"
+              defaultMessage={`Validate`}
+            />
           </button>
-          <button onClick={cancelSellRequest}>Annuler</button>
+          <button onClick={cancelSellRequest}>
+            <FormattedMessage
+              id="app.shop.sellrequestValidator.cancelCTA"
+              defaultMessage={`Cancel`}
+            />
+          </button>
         </>
       )}
     </>

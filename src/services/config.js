@@ -20,7 +20,7 @@ const langDefinition = {
   8: "Simplified Chinese",
   9: "English",
   10: "Korean",
-  11: "Traditionnal Chinese",
+  11: "Traditional Chinese",
 };
 
 //EU or US
