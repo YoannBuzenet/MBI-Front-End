@@ -40,7 +40,12 @@ const RegisterPage = ({ history }) => {
         },
       };
       await userAPI.register(jsonToSend);
-      toast.success("Votre compte a bien été créé.");
+      toast.success(
+        <FormattedMessage
+          id="app.RegisterPage.accountCreation.toast.success"
+          defaultMessage={`Your account has been created.`}
+        />
+      );
 
       // console.log(jsonToSend);
       setIsLoading(false);
@@ -57,10 +62,20 @@ const RegisterPage = ({ history }) => {
           error.response.data["hydra:description"] ===
           "email: This value is already used."
         ) {
-          toast.error("Cet email est déjà pris.");
+          toast.error(
+            <FormattedMessage
+              id="app.RegisterPage.accountCreation.mailAlreadyTaken.toast.failure"
+              defaultMessage={`This email is already taken. Please choose another one.`}
+            />
+          );
         } else {
           console.log(error.response.data);
-          toast.error("Une erreur est survenue. Merci de réessayer.");
+          toast.error(
+            <FormattedMessage
+              id="app.RegisterPage.accountCreation.toast.failure"
+              defaultMessage={`An error has occured. Please try again.`}
+            />
+          );
         }
       }
     }

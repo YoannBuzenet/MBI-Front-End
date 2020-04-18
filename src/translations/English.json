@@ -101,6 +101,9 @@
   "app.RegisterPage.placeholder.postalCode": "Postal Code",
   "app.RegisterPage.placeholder.town": "Town",
   "app.RegisterPage.button.register": "Create Account",
+  "app.RegisterPage.accountCreation.toast.success": "Your account has been created.",
+  "app.RegisterPage.accountCreation.mailAlreadyTaken.toast.failure": "This email is already taken. Please choose another one.",
+  "app.RegisterPage.accountCreation.toast.failure": "An error has occured. Please try again.",
 
   "app.shop.myAccount.title": "Shop Informations",
   "app.shop.myAccount.label.legalName": "Legal Name",
@@ -127,11 +130,12 @@
   "app.shop.AllCustomers.customerFirstName": "First Name",
   "app.shop.AllCustomers.NumberOfSellRequests": "Sell Requests",
 
+  "app.shop.AllSellRequests.title": "All sell requests",
   "app.shop.AllSellRequests.reference": "Reference",
   "app.shop.AllSellRequests.status": "Status",
   "app.shop.AllSellRequests.lastInformation": "Last Information",
   "app.shop.AllSellRequests.numberOfCards": "Number of cards",
-  "app.shop.AllSellRequests.totalAmount": "Total : ",
+  "app.shop.AllSellRequests.totalAmount": "Total",
 
   "app.shop.customer.postalCode": "Postal Code : ",
   "app.shop.customer.town": "Town : ",

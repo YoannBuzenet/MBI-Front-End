@@ -35,7 +35,12 @@ const ShopAdminAllSellRequests = (props) => {
   return (
     <>
       <div className="container">
-        <h1>Tous les rachats</h1>
+        <h1>
+          <FormattedMessage
+            id="app.shop.AllSellRequests.title"
+            defaultMessage={`All sell requests`}
+          />
+        </h1>
         {isLoading && !isMobile && <TableLoader />}
         {isLoading && isMobile && (
           <>
