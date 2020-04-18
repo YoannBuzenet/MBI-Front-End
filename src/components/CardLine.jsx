@@ -10,6 +10,7 @@ import CardDisplayOnPageContext from "../context/cardDisplayOnPageContext";
 import BlackDivModalContext from "../context/blackDivModalContext";
 import config from "../services/config";
 import { FormattedMessage } from "react-intl";
+import { useIntl } from "react-intl";
 
 const CardLine = ({ card, handleAddSellingBasket, index, setName }) => {
   const LANGUAGE_ID_ENG = 9;
@@ -133,6 +134,9 @@ const CardLine = ({ card, handleAddSellingBasket, index, setName }) => {
     setIsBlackDivModalDisplayed("activated");
   };
 
+  //Hook Intl to translate an attribute
+  const intl = useIntl();
+
   return (
     <>
       <Tr
@@ -231,15 +235,18 @@ const CardLine = ({ card, handleAddSellingBasket, index, setName }) => {
           >
             {card.hasnonfoil && (
               <option value="No">
-                <FormattedMessage id="app.generics.no" defaultMessage={`No`} />
+                {intl.formatMessage({
+                  id: "app.generics.no",
+                  defaultMessage: "No",
+                })}
               </option>
             )}
             {card.hasfoil && (
               <option value="Yes">
-                <FormattedMessage
-                  id="app.generics.yes"
-                  defaultMessage={`Yes`}
-                />
+                {intl.formatMessage({
+                  id: "app.generics.yes",
+                  defaultMessage: "Yes",
+                })}
               </option>
             )}
           </select>
@@ -252,10 +259,16 @@ const CardLine = ({ card, handleAddSellingBasket, index, setName }) => {
             }}
           >
             <option value="No">
-              <FormattedMessage id="app.generics.no" defaultMessage={`No`} />
+              {intl.formatMessage({
+                id: "app.generics.no",
+                defaultMessage: "No",
+              })}
             </option>
             <option value="Yes">
-              <FormattedMessage id="app.generics.yes" defaultMessage={`Yes`} />
+              {intl.formatMessage({
+                id: "app.generics.yes",
+                defaultMessage: "Yes",
+              })}
             </option>
           </select>
         </Td>
