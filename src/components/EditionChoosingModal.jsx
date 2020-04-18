@@ -1,5 +1,6 @@
 import React from "react";
 import CSSLoaderWaitingSpiral from "./loaders/CSSLoaderWaitingSpiral";
+import { FormattedMessage } from "react-intl";
 
 const EditionChoosingModal = ({
   editionInformations,
@@ -13,7 +14,12 @@ const EditionChoosingModal = ({
       {/* TODO METTRE UN ONCLICK DISABLE PARENT STATE ON MODAL */}
       <div className="blackSheet" onClick={() => setIsModal(false)}></div>
       <div className="edition-modal">
-        <p>CHANGER L'EDITION</p>
+        <p>
+          <FormattedMessage
+            id="app.shop.editionUpdateModal"
+            defaultMessage={`UPDATE CURRENT SET`}
+          />
+        </p>
         {editionInformations.length === 0 && (
           <div className="edition-modal-loader">
             <CSSLoaderWaitingSpiral />
@@ -32,7 +38,14 @@ const EditionChoosingModal = ({
                       {card.edition.name}
                     </option>
                   ))
-                  .concat([<option key={40000}>Choose a set</option>])}
+                  .concat([
+                    <option key={40000}>
+                      <FormattedMessage
+                        id="app.shop.editionUpdateModal.chooseSet"
+                        defaultMessage={`Choose a set`}
+                      />
+                    </option>,
+                  ])}
             </select>
           )}
         </div>

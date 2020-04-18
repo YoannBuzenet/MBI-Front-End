@@ -212,6 +212,9 @@
   "app.shop.sellrequestValidator.validationCTA": "Valider",
   "app.shop.sellrequestValidator.cancelCTA": "Annuler",
 
+  "app.shop.editionUpdateModal": "CHANGER L'EDITION",
+  "app.shop.editionUpdateModal.chooseSet": "Choisir une édition",
+
   "app.sellRequestValidation.validationCTA": "Valider mon rachat",
   "app.sellRequestValidation.toast.success": "Votre rachat a bien été posté. Merci d'envoyer les cartes à la boutique.",
   "app.sellRequestValidation.toast.failure": "Le rachat n'a pu être validé. Merci de recommencer.",
@@ -229,6 +232,8 @@
   "app.burgerMenu.customer.register": "S'inscrire",
   "app.burgerMenu.customer.connect": "Se connecter",
   "app.burgerMenu.customer.logOut.toast.success": "Vous êtes bien déconnecté.",
+
+  "app.footer.legalBuyingClauses": "Conditions de rachat",
 
   "app.cardline": "",
   "app.cardline.loadingSets.toast.failure": "Les éditions n'ont pu être chargées. Merci de réessayer ou de vous reconnecter.",
