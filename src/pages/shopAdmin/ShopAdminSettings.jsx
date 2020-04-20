@@ -244,7 +244,9 @@ const ShopAdminSettings = () => {
             id="app.shop.shopSettings.defaultBuyingLanguage"
             defaultMessage={`Default Buying Language : `}
           />
-          <LanguageNameDisplay langID={config.websiteDefaultLanguage} />
+          <LanguageNameDisplay
+            langID={config.websiteDefaultLanguageContext.langID}
+          />
         </p>
         <p>
           <FormattedMessage

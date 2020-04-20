@@ -16,6 +16,7 @@ const AppLangChoice = () => {
       locale: lang.locale,
       translationsForUsersLocale: lang.translationsForUsersLocale,
       picture: lang.picture,
+      langID: lang.langID,
     });
   };
 
@@ -36,7 +37,10 @@ const AppLangChoice = () => {
           className="current-lang-flag"
           onClick={(e) => handleClickDisplayFlags(e)}
         >
-          <img src={"/flags/25X13/" + currentLang.picture + ".png"} alt="" />
+          <img
+            src={"/flags/25X13/" + currentLang.picture + ".png"}
+            alt={currentLang.picture + " flag"}
+          />
           <span className="arrow-menu arrow-app-lang"></span>
 
           {areFlagsDisplayed && (
@@ -47,7 +51,10 @@ const AppLangChoice = () => {
                   key={index}
                   onClick={(event) => handleClick(event, lang)}
                 >
-                  <img src={"/flags/25X13/" + lang.picture + ".png"} alt="" />
+                  <img
+                    src={"/flags/25X13/" + lang.picture + ".png"}
+                    alt={lang.picture + " flag"}
+                  />
                 </div>
               ))}
             </div>
