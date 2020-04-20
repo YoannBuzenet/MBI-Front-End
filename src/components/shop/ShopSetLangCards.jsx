@@ -43,7 +43,17 @@ const ShopSetLangCards = ({ variation, index }) => {
           .map((oneLang) => {
             return (
               <Fragment key={oneLang.language_id.id}>
-                <h3>{oneLang.language_id.name}</h3>
+                <h3>
+                  {oneLang.language_id.name}
+                  <span className="price-update-flag-lang">
+                    <img
+                      src={
+                        "/flags/25X13/" + oneLang.language_id.shortname + ".png"
+                      }
+                      alt=""
+                    />
+                  </span>
+                </h3>
                 <ShopOneLangAllConditionsCard
                   oneLang={oneLang}
                   index={index}

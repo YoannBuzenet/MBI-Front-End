@@ -1443,6 +1443,10 @@ input.updated {
   background-color: red;
 }
 
+.price-update-flag-lang {
+  margin-left: 10px;
+}
+
 @media only screen and (max-width: 1000px) {
   .price-update-form {
     flex-direction: column;

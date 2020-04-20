@@ -121,7 +121,7 @@ const ShopAdminOneCard = ({ match }) => {
         ] = idCardShopPrice;
       }
     }
-    console.log(completeContext);
+    // console.log(completeContext);
     //Once all synchronous for-loops are done, we set the global table in context.
     setAllPricesBuffer(completeContext);
   }
