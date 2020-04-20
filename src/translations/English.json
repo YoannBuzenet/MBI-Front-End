@@ -209,6 +209,8 @@
   "app.shop.priceFormUpdate.nonSigned": "Non signed",
   "app.shop.priceFormUpdate.foil": "Foil",
   "app.shop.priceFormUpdate.foil-signed": "Foil Signed",
+  "app.shop.priceFormUpdate.inputNumer.toast.error": "Please indicate a number.",
+  "app.shop.priceFormUpdate.toast.error": "An error occured. Please try again.",
 
   "app.shop.sellrequestValidator.title": "Update current status",
   "app.shop.sellrequestValidator.defaultOption": "Select a status",

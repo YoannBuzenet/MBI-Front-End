@@ -4,6 +4,7 @@ import priceUpdateAPI from "../../services/priceUpdateAPI";
 import AuthContext from "../../context/authContext";
 import { toast } from "react-toastify";
 import config from "../../services/config";
+import { FormattedMessage } from "react-intl";
 
 //Based on context defined in page ShopAdminOneCard
 //This component updates prices in context, send some of data to API, and treats resp back to update context with new ID.
@@ -86,7 +87,12 @@ const ShopConditionPriceUpdate = ({
         .batchPriceUpdate(batch)
         .then((data) => registerBatchResponseIntoContext(data.data));
     } catch (error) {
-      toast.error("Une erreur est survenue. Merci de réessayer.");
+      toast.error(
+        <FormattedMessage
+          id="app.shop.priceFormUpdate.toast.error"
+          defaultMessage={"An error occured. Please try again."}
+        />
+      );
     }
   };
 
@@ -164,7 +170,12 @@ const ShopConditionPriceUpdate = ({
         .batchPriceUpdate(batch)
         .then((data) => registerBatchResponseIntoContext(data.data));
     } catch (error) {
-      toast.error("Une erreur est survenue. Merci de réessayer.");
+      toast.error(
+        <FormattedMessage
+          id="app.shop.priceFormUpdate.toast.error"
+          defaultMessage={"An error occured. Please try again."}
+        />
+      );
       //TODO TRanslate Toast
     }
   };
@@ -508,8 +519,12 @@ const ShopConditionPriceUpdate = ({
         isSigned + "idCardShopPrice"
       ] = null;
     } else {
-      toast.error("Merci de saisir un nombre.");
-      //TODO Translate the error message
+      toast.error(
+        <FormattedMessage
+          id="app.shop.priceFormUpdate.inputNumer.toast.error"
+          defaultMessage={`Please indicate a number.`}
+        />
+      );
     }
 
     const triggerAPISending = (

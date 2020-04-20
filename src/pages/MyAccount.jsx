@@ -12,8 +12,6 @@ const MyAccount = () => {
   );
   //TODO - mettre un loader pour le traitement de requete
 
-  console.log(authenticationInfos);
-
   const [timer, setTimer] = useState(null);
 
   const APIupdate = async (authCopy) => {
@@ -105,8 +103,6 @@ const MyAccount = () => {
 
     const value = event.currentTarget.value;
     const name = event.currentTarget.name;
-
-    console.log("here");
 
     const authCopy = { ...authenticationInfos };
     authCopy.customer[name] = value;
