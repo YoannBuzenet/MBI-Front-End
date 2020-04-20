@@ -9,7 +9,7 @@ import isResponsiveMenuDisplayedContext from "../context/menuDisplayedContext";
 import { FormattedMessage } from "react-intl";
 import AppLangChoice from "./AppLangChoice";
 
-const BurgerMenuCustomerComponents = () => {
+const BurgerMenuCustomerComponents = ({ history }) => {
   //Current Authentication
   const { authenticationInfos, setAuthenticationInfos } = useContext(
     AuthContext
@@ -27,6 +27,7 @@ const BurgerMenuCustomerComponents = () => {
   );
 
   const handleLogout = () => {
+    history.replace("/");
     authAPI.logout();
     setAuthenticationInfos({
       isAuthenticated: false,
