@@ -1568,3 +1568,18 @@ div.connecting-button {
 .RegisterLoader {
   margin-top: 30px;
 }
+
+/**************************
+*******SETTINGS PAGE*******
+**************************/
+.settings-language-choice {
+  display: flex;
+  justify-content: center;
+}
+.settings-language-choice p {
+  margin-right: 20px;
+}
+
+.settings-language-choice .current-lang-flag {
+  top: 18px;
+}
