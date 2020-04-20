@@ -82,6 +82,7 @@
   "app.OneSet.quantity": "Quantité",
   "app.OneSet.price": "Prix",
   "app.OneSet.filterByPrice": "Filtrer par prix",
+  "app.OneSet.filter.placeholder": "Prix minimum...",
 
   "app.RegisterPage.title": "Créer un compte",
   "app.RegisterPage.label.mail": "Email",
