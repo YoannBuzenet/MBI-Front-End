@@ -165,6 +165,7 @@ const ShopConditionPriceUpdate = ({
         .then((data) => registerBatchResponseIntoContext(data.data));
     } catch (error) {
       toast.error("Une erreur est survenue. Merci de réessayer.");
+      //TODO TRanslate Toast
     }
   };
 
@@ -197,6 +198,7 @@ const ShopConditionPriceUpdate = ({
     //If it's a number, real logic triggers here
     else if (!isNaN(parseFloat(event.target.value))) {
       const newPrice = parseFloat(event.target.value);
+      console.log("here");
 
       if (
         conditionID === 1 &&
@@ -217,12 +219,15 @@ const ShopConditionPriceUpdate = ({
               authenticationInfos.shop.shopData.baseLang.id
             ][conditions][isFoil][isSigned] = newPrice;
 
-            //Updating Price on context for SIGNED MINT
-            contextCopy[index].langs[
-              authenticationInfos.shop.shopData.baseLang.id
-            ][conditions][isFoil][1] = priceUpdateAPI.smoothNumbers(
-              (newPrice * PercentPerSigned) / 100
-            );
+            //Updating signed cards with specifics only if non signed was completed (else it does it twice)
+            if (isSigned === 0) {
+              //Updating Price on context for SIGNED MINT
+              contextCopy[index].langs[
+                authenticationInfos.shop.shopData.baseLang.id
+              ][conditions][isFoil][1] = priceUpdateAPI.smoothNumbers(
+                (newPrice * PercentPerSigned) / 100
+              );
+            }
             //Updating 'Was Updated' property on context to create a CSS class
             contextCopy[index].langs[
               authenticationInfos.shop.shopData.baseLang.id
