@@ -9,6 +9,7 @@ import errorHandlingAPI from "../../services/errorHandlingAPI";
 import { FormattedMessage } from "react-intl";
 import LanguageNameDisplay from "../../components/LanguageNameDisplay";
 import config from "../../services/config";
+import AppLangChoice from "../../components/AppLangChoice";
 
 const ShopAdminSettings = () => {
   //Current Authentication
@@ -220,6 +221,17 @@ const ShopAdminSettings = () => {
             defaultMessage={`Settings`}
           />
         </h1>
+        <div className="settings-language-choice">
+          <p>
+            <FormattedMessage
+              id="app.settings.language"
+              defaultMessage={`Language`}
+            />
+          </p>
+          <div className="language-select">
+            <AppLangChoice />
+          </div>
+        </div>
         <p>
           <FormattedMessage
             id="app.shop.shopSettings.defaultWebsiteLanguage"
