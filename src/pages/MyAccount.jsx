@@ -11,61 +11,31 @@ const MyAccount = () => {
     AuthContext
   );
 
-  const [timer, setTimer] = useState();
+  // console.log(authenticationInfos);
 
-  const [accountInformation, setAccountInformation] = useState({
-    firstName: authenticationInfos.customer.prenom,
-    lastName: authenticationInfos.customer.nom,
-    tel: authenticationInfos.customer.tel,
-    mail: authenticationInfos.user.email,
-    adress: authenticationInfos.customer.adress,
-    postalCode: authenticationInfos.customer.postalCode,
-    town: authenticationInfos.customer.town,
-    idCustomer: authenticationInfos.customer.id,
-  });
+  const [timer, setTimer] = useState();
 
   const APIupdate = async () => {
     // console.log("update");
 
-    const credentials = {
-      client: {
-        id: accountInformation.idCustomer,
-        nom: accountInformation.lastName,
-        prenom: accountInformation.firstName,
-        adress: accountInformation.adress,
-        postalCode: accountInformation.postalCode,
-        town: accountInformation.town,
-        tel: accountInformation.tel,
-      },
-      nickname: "",
-    };
+    console.log(authenticationInfos);
 
     try {
-      const response = await userAPI.update(
-        authenticationInfos.user.id,
-        credentials
-      );
-      //UPDATE LE STATE
-
-      setAccountInformation({
-        firstName: response.data.client.prenom,
-        lastName: response.data.client.nom,
-        tel: response.data.client.tel,
-        mail: response.data.email,
-        adress: response.data.client.adress,
-        postalCode: response.data.client.postalCode,
-        town: response.data.client.town,
-        idCustomer: response.data.client.id,
+      const response = await userAPI.update(authenticationInfos.user.id, {
+        client: {
+          id: authenticationInfos.customer.id,
+          prenom: authenticationInfos.customer.prenom,
+          nom: authenticationInfos.customer.nom,
+          tel: authenticationInfos.customer.tel,
+          adress: authenticationInfos.customer.adress,
+          postalCode: authenticationInfos.customer.postalCode,
+          town: authenticationInfos.customer.town,
+        },
       });
 
       //UPDATE LES INFOS EN MEMOIRE VIVE
       setAuthenticationInfos({
-        isAuthenticated: true,
-        user: {
-          id: response.data.id,
-          email: response.data.email,
-          roles: response.data.roles,
-        },
+        ...authenticationInfos,
         customer: {
           id: response.data.client.id,
           prenom: response.data.client.prenom,
@@ -76,13 +46,13 @@ const MyAccount = () => {
           town: response.data.client.town,
           SellRequests: authenticationInfos.customer.SellRequests,
         },
-        shop: { ...authenticationInfos.shop },
       });
 
-      //Preparing data format to send, to copy what's stored in local storage
+      //Preparing data format to save, to copy what's stored in local storage
       const currentDataInLocalStorage = AuthAPI.userInfos();
       const newDataInLocalStorage = {
         token: currentDataInLocalStorage.token,
+        refresh_token: currentDataInLocalStorage.refresh_token,
         user: {
           id: response.data.id,
           email: response.data.email,
@@ -98,15 +68,7 @@ const MyAccount = () => {
           town: response.data.client.town,
           SellRequests: response.data.client.SellRequests,
           shop: {
-            id: authenticationInfos.shop.id,
-            legalName: authenticationInfos.shop.legalName,
-            SIRET: authenticationInfos.shop.SIRET,
-            vatNumber: authenticationInfos.shop.vatNumber,
-            tel: authenticationInfos.shop.tel,
-            email: authenticationInfos.shop.email,
-            adress: authenticationInfos.shop.adress,
-            postalCode: authenticationInfos.shop.postalCode,
-            town: authenticationInfos.shop.town,
+            ...authenticationInfos.shop,
           },
         },
         //
@@ -132,6 +94,7 @@ const MyAccount = () => {
       );
     } catch (error) {
       console.log(error);
+      console.log(error.response);
       toast.error(
         <FormattedMessage
           id="app.myAccountPage.edition.failure"
@@ -148,12 +111,14 @@ const MyAccount = () => {
     const value = event.currentTarget.value;
     const name = event.currentTarget.name;
 
-    setAccountInformation({
-      ...accountInformation,
-      [name]: value,
+    console.log("here");
+
+    setAuthenticationInfos({
+      ...authenticationInfos,
+      customer: { ...authenticationInfos.customer, [name]: value },
     });
 
-    setTimer(setTimeout(APIupdate, 2000));
+    setTimer(setTimeout(APIupdate, 1000));
   };
 
   return (
@@ -166,7 +131,7 @@ const MyAccount = () => {
           />
         </h1>
         <form>
-          <label htmlFor="firstName">
+          <label htmlFor="prenom">
             <FormattedMessage
               id="app.myAccountPage.FirstName"
               defaultMessage={`First Name`}
@@ -174,14 +139,14 @@ const MyAccount = () => {
           </label>
           <input
             type="text"
-            id="firstName"
-            name="firstName"
+            id="prenom"
+            name="prenom"
             required
-            onChange={handleChange}
-            value={accountInformation.firstName}
+            onChange={(e) => handleChange(e)}
+            value={authenticationInfos.customer.prenom}
           />
 
-          <label htmlFor="lastName">
+          <label htmlFor="nom">
             <FormattedMessage
               id="app.myAccountPage.LastName"
               defaultMessage={`Last Name`}
@@ -189,11 +154,11 @@ const MyAccount = () => {
           </label>
           <input
             type="text"
-            id="lastName"
-            name="lastName"
+            id="nom"
+            name="nom"
             required
-            onChange={handleChange}
-            value={accountInformation.lastName}
+            onChange={(e) => handleChange(e)}
+            value={authenticationInfos.customer.nom}
           />
 
           <label htmlFor="tel">
@@ -207,23 +172,8 @@ const MyAccount = () => {
             id="tel"
             name="tel"
             required
-            onChange={handleChange}
-            value={accountInformation.tel}
-          />
-
-          <label htmlFor="mail">
-            <FormattedMessage
-              id="app.myAccountPage.mail"
-              defaultMessage={`Email`}
-            />
-          </label>
-          <input
-            type="mail"
-            id="mail"
-            name="mail"
-            required
-            onChange={handleChange}
-            value={accountInformation.mail}
+            onChange={(e) => handleChange(e)}
+            value={authenticationInfos.customer.tel}
           />
 
           <label htmlFor="adress">
@@ -238,8 +188,8 @@ const MyAccount = () => {
             cols="22"
             rows="3"
             required
-            onChange={handleChange}
-            value={accountInformation.adress}
+            onChange={(e) => handleChange(e)}
+            value={authenticationInfos.customer.adress}
           ></textarea>
 
           <label htmlFor="postalCode">
@@ -253,8 +203,8 @@ const MyAccount = () => {
             id="postalCode"
             name="postalCode"
             required
-            onChange={handleChange}
-            value={accountInformation.postalCode}
+            onChange={(e) => handleChange(e)}
+            value={authenticationInfos.customer.postalCode}
           />
 
           <label htmlFor="town">
@@ -268,8 +218,8 @@ const MyAccount = () => {
             id="town"
             name="town"
             required
-            onChange={handleChange}
-            value={accountInformation.town}
+            onChange={(e) => handleChange(e)}
+            value={authenticationInfos.customer.town}
           />
         </form>
       </div>

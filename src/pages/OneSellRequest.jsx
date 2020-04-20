@@ -33,7 +33,7 @@ const OneSellRequest = ({ match, history }) => {
   // console.log(currentSellRequest.sellRequestCards);
 
   return (
-    <>
+    <div className="container">
       <h1>
         <FormattedMessage
           id="app.OneSellRequest.title"
@@ -166,7 +166,7 @@ const OneSellRequest = ({ match, history }) => {
         setCurrentSellRequest={setCurrentSellRequest}
         id={id}
       />
-    </>
+    </div>
   );
 };
 

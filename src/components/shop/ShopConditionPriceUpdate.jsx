@@ -198,7 +198,7 @@ const ShopConditionPriceUpdate = ({
     //If it's a number, real logic triggers here
     else if (!isNaN(parseFloat(event.target.value))) {
       const newPrice = parseFloat(event.target.value);
-      console.log("here");
+      // console.log("here");
       if (
         conditionID === 1 &&
         langID === authenticationInfos.shop.shopData.baseLang.id
