@@ -11,7 +11,7 @@ const MyAccount = () => {
     AuthContext
   );
 
-  // console.log(authenticationInfos);
+  console.log(authenticationInfos);
 
   const [timer, setTimer] = useState();
 

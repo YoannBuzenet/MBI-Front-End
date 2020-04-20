@@ -8,7 +8,7 @@ import BlackDivContext from "../../context/blackDivModalContext";
 import isResponsiveMenuDisplayedContext from "../../context/menuDisplayedContext";
 import { FormattedMessage } from "react-intl";
 
-const BurgerMenuShop = () => {
+const BurgerMenuShop = ({ history }) => {
   //Current Authentication
   const { authenticationInfos, setAuthenticationInfos } = useContext(
     AuthContext
@@ -31,6 +31,7 @@ const BurgerMenuShop = () => {
   };
 
   const handleLogout = () => {
+    history.replace("/");
     authAPI.logout();
     setAuthenticationInfos({
       isAuthenticated: false,

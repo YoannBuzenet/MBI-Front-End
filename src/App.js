@@ -345,7 +345,8 @@ function App() {
           // console.log(data);
           return authAPI.transformAPIdataIntoAppData(data.data);
         })
-        .then((data) => setAuthenticationInfos(data));
+        .then((data) => setAuthenticationInfos(data))
+        .catch((error) => console.log(error.response));
 
       setTimers({
         ...timers,
@@ -358,6 +359,10 @@ function App() {
 
   const NavbarWithRouter = withRouter(Navbar);
   const ShopNavbarWithRouter = withRouter(ShopNavbar);
+  const BurgerMenuCustomerComponentsWithRouter = withRouter(
+    BurgerMenuCustomerComponents
+  );
+  const BurgerMenuShopWithRouter = withRouter(BurgerMenuShop);
 
   //VERY IMPORTANT Function to add cards to Selling Basket.
   //We put it in App component because it need the use of hooks.
@@ -487,12 +492,12 @@ function App() {
                               {isResponsiveMenuDisplayed === "activated" &&
                                 !authenticationInfos.user.roles.includes(
                                   "ROLE_SHOP"
-                                ) && <BurgerMenuCustomerComponents />}
+                                ) && <BurgerMenuCustomerComponentsWithRouter />}
 
                               {isResponsiveMenuDisplayed === "activated" &&
                                 authenticationInfos.user.roles.includes(
                                   "ROLE_SHOP"
-                                ) && <BurgerMenuShop />}
+                                ) && <BurgerMenuShopWithRouter />}
 
                               {/* CHOOSING WHICH NAVBAR DISPLAY */}
                               {/* DEPENDING ON IF SHOP OR NOT*/}

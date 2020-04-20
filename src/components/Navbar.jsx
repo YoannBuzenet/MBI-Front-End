@@ -24,6 +24,7 @@ const Navbar = ({ history }) => {
   // console.log(authenticationInfos);
 
   const handleLogout = () => {
+    history.replace("/");
     authAPI.logout();
     setAuthenticationInfos({
       isAuthenticated: false,
@@ -49,8 +50,6 @@ const Navbar = ({ history }) => {
         defaultMessage={`You logged out succesfully.`}
       />
     );
-
-    history.replace("/");
   };
 
   return (
