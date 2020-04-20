@@ -219,6 +219,15 @@ const ShopConditionPriceUpdate = ({
               authenticationInfos.shop.shopData.baseLang.id
             ][conditions][isFoil][isSigned] = newPrice;
 
+            //Updating 'Was Updated' property on context to create a CSS class
+            contextCopy[index].langs[
+              authenticationInfos.shop.shopData.baseLang.id
+            ][conditions][isFoil][isSigned + "wasUpdated"] = true;
+
+            //////////////////////
+            //NON SIGNED SPECIFICS
+            //////////////////////
+
             //Updating signed cards with specifics only if non signed was completed (else it does it twice)
             if (isSigned === 0) {
               //Updating Price on context for SIGNED MINT
@@ -227,13 +236,7 @@ const ShopConditionPriceUpdate = ({
               ][conditions][isFoil][1] = priceUpdateAPI.smoothNumbers(
                 (newPrice * PercentPerSigned) / 100
               );
-            }
-            //Updating 'Was Updated' property on context to create a CSS class
-            contextCopy[index].langs[
-              authenticationInfos.shop.shopData.baseLang.id
-            ][conditions][isFoil][isSigned + "wasUpdated"] = true;
 
-            if (isSigned === 0) {
               //Updating 'Was Updated' property on context to create a CSS class
               //We add this condition becase it is skipped otherwise
               contextCopy[index].langs[
@@ -251,23 +254,28 @@ const ShopConditionPriceUpdate = ({
                 100
             );
 
-            contextCopy[index].langs[
-              authenticationInfos.shop.shopData.baseLang.id
-            ][conditions][isFoil][1] = priceUpdateAPI.smoothNumbers(
-              (((newPrice * PercentPerSigned) / 100) *
-                authenticationInfos.shop.shopData.PercentPerConditions[j - 1]
-                  .percent) /
-                100
-            );
-
             //Updating Was Updated property on context to create a CSS class
             contextCopy[index].langs[
               authenticationInfos.shop.shopData.baseLang.id
             ][conditions][isFoil][isSigned + "wasUpdated"] = true;
 
-            contextCopy[index].langs[
-              authenticationInfos.shop.shopData.baseLang.id
-            ][conditions][isFoil][1 + "wasUpdated"] = true;
+            //////////////////////
+            //NON SIGNED SPECIFICS
+            //////////////////////
+
+            if (isSigned === 0) {
+              contextCopy[index].langs[
+                authenticationInfos.shop.shopData.baseLang.id
+              ][conditions][isFoil][1] = priceUpdateAPI.smoothNumbers(
+                (((newPrice * PercentPerSigned) / 100) *
+                  authenticationInfos.shop.shopData.PercentPerConditions[j - 1]
+                    .percent) /
+                  100
+              );
+              contextCopy[index].langs[
+                authenticationInfos.shop.shopData.baseLang.id
+              ][conditions][isFoil][1 + "wasUpdated"] = true;
+            }
           }
           j++;
         }
