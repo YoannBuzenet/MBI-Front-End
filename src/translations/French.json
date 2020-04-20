@@ -209,6 +209,8 @@
   "app.shop.priceFormUpdate.nonSigned": "Non Signé",
   "app.shop.priceFormUpdate.foil": "Foil",
   "app.shop.priceFormUpdate.foil-signed": "Foil Signé",
+  "app.shop.priceFormUpdate.inputNumer.toast.error": "Merci de saisir un nombre.",
+  "app.shop.priceFormUpdate.toast.error": "Une erreur est survenue. Merci de réessayer.",
 
   "app.shop.sellrequestValidator.title": "Modifier le statut",
   "app.shop.sellrequestValidator.defaultOption": "Choisir un statut",
