@@ -50,31 +50,38 @@ const TIME_TO_EXPIRE_SET_LIST = 1000 * 60 * 60 * 24 * 2;
 
 //flag size : 25*13px
 
-// TRANSLATION AVAILABLE
+// TRANSLATIONS AVAILABLE
 const websiteDefaultLanguageArrayLangAvailables = [
-  { locale: "fr-FR", translationsForUsersLocale: French, picture: "FR" },
-  { locale: "en-US", translationsForUsersLocale: English, picture: "EN" },
+  {
+    locale: "fr-FR",
+    translationsForUsersLocale: French,
+    picture: "FR",
+    langID: 3,
+  },
+  {
+    locale: "en-US",
+    translationsForUsersLocale: English,
+    picture: "EN",
+    langID: 9,
+  },
 ];
-
-//Default website Language ID
-const websiteDefaultLanguage = 3;
-
-//Default Buying Language ID
-const baseLang = 3;
 
 //Default language on the website
 const websiteDefaultLanguageContext = {
   locale: "en-US",
   translationsForUsersLocale: English,
   picture: "EN",
+  langID: 9,
 };
+
+//Default Buying Language ID
+const baseLang = 3;
 
 export default {
   URL_API,
   shopID,
   shopName,
   baseLang,
-  websiteDefaultLanguage,
   websiteDefaultLanguageContext,
   langDefinition,
   gradingArea,
