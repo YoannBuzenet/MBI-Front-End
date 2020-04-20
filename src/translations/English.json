@@ -204,9 +204,10 @@
   "app.shop.navBar.logOut": "Log Out",
 
   "app.shop.priceFormUpdate.nonFoil": "Regular",
+  "app.shop.priceFormUpdate.regular-signed": "Regular Signed",
   "app.shop.priceFormUpdate.nonSigned": "Non signed",
   "app.shop.priceFormUpdate.foil": "Foil",
-  "app.shop.priceFormUpdate.signed": "Signed",
+  "app.shop.priceFormUpdate.foil-signed": "Foil Signed",
 
   "app.shop.sellrequestValidator.title": "Update current status",
   "app.shop.sellrequestValidator.defaultOption": "Select a status",

@@ -1413,6 +1413,11 @@ tbody.cardLineShop {
   background-color: lightblue;
 }
 
+.price-update-form {
+  display: flex;
+  justify-content: center;
+}
+
 .regular-cards,
 .foil-cards {
   display: flex;
@@ -1423,7 +1428,8 @@ tbody.cardLineShop {
   margin-right: 2rem;
 }
 
-.regular-non-signed {
+.regular-signed {
+  margin-right: 2rem;
 }
 
 .foil-non-signed {
@@ -1435,6 +1441,12 @@ tbody.cardLineShop {
 
 input.updated {
   background-color: red;
+}
+
+@media only screen and (max-width: 1000px) {
+  .price-update-form {
+    flex-direction: column;
+  }
 }
 
 /**************************
