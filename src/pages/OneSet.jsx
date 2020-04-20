@@ -15,14 +15,13 @@ import SetLangChoice from "../components/SetLangChoice";
 import languagesDefinition from "../definitions/languagesDefinition";
 import userPreferencesContext from "../context/userPreferenceContext";
 import { FormattedMessage } from "react-intl";
+import { useIntl } from "react-intl";
 
 const OneSet = ({ handleAddSellingBasket, match }) => {
   //Current Cards displayed in One Set Page
   const { cardsContext, setCardsContext } = useContext(cardsOneSetContext);
 
-  const { userPreferences, setUserPreferences } = useContext(
-    userPreferencesContext
-  );
+  const { userPreferences } = useContext(userPreferencesContext);
 
   // console.log(cardsContext);
 
@@ -210,6 +209,9 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
     }
   };
 
+  //Hook Intl to translate an attribute
+  const intl = useIntl();
+
   return (
     <>
       <div className="container">
@@ -262,7 +264,10 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
                   </p>
                   <input
                     type="text"
-                    placeholder="Prix minimum..."
+                    placeholder={intl.formatMessage({
+                      id: "app.OneSet.filter.placeholder",
+                      defaultMessage: "Minimum price...",
+                    })}
                     value={priceFilter}
                     onChange={(event) => handleChange(event)}
                   />
