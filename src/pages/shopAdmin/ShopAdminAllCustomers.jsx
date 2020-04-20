@@ -34,7 +34,12 @@ const ShopAdminAllCustomers = (props) => {
   }, [listCustomers, source]);
   return (
     <>
-      <h1>Customers</h1>
+      <h1>
+        <FormattedMessage
+          id="app.shop.AllCustomers.title"
+          defaultMessage={`All Customers`}
+        />
+      </h1>
       <div className="container">
         {isLoading && !isMobile && <TableLoader />}
         {isLoading && isMobile && (
