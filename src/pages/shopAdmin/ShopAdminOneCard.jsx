@@ -6,6 +6,9 @@ import ShopSetLangCards from "../../components/shop/ShopSetLangCards";
 import priceBufferContext from "../../context/priceBufferContext";
 import GenericCardInfosContext from "../../context/genericCardInfosContext";
 import errorHandlingAPI from "../../services/errorHandlingAPI";
+import TableLoader from "../../components/loaders/TableLoader";
+import SetListLoader from "../../components/loaders/SetListLoader";
+import { isMobile } from "react-device-detect";
 
 const ShopAdminOneCard = ({ match }) => {
   //STATE - current card name
@@ -15,6 +18,9 @@ const ShopAdminOneCard = ({ match }) => {
   const [currentNameDecoded, setCurrentNameDecoded] = useState(
     decodeURI(currentName)
   );
+
+  //STATE - Loading
+  const [isLoading, setIsLoading] = useState(false);
 
   //Context - preparing the DISPLAY context format with data
   const { allPricesBuffer, setAllPricesBuffer } = useContext(
@@ -132,6 +138,7 @@ const ShopAdminOneCard = ({ match }) => {
       (conditions.length > 0 && allPricesBuffer.length === 0) ||
       (allPricesBuffer[0] && allPricesBuffer[0].name !== currentName)
     ) {
+      setIsLoading(true);
       //Cancel subscriptions preparation
       const CancelToken = axios.CancelToken;
       const source = CancelToken.source();
@@ -147,6 +154,7 @@ const ShopAdminOneCard = ({ match }) => {
         .then((data) =>
           buildCompletePriceContext(data.data["hydra:member"], lang, conditions)
         )
+        .then(() => setIsLoading(false))
         .catch((error) => errorHandlingAPI.check401Unauthorized(error));
 
       return () => source.cancel("");
@@ -164,15 +172,23 @@ const ShopAdminOneCard = ({ match }) => {
     <>
       <div className="container">
         <h1>{currentNameDecoded}</h1>
-        {allPricesBuffer.map((variation, index) => {
-          return (
-            <ShopSetLangCards
-              variation={variation}
-              key={variation.id}
-              index={index}
-            />
-          );
-        })}
+        {isLoading && !isMobile && <TableLoader />}
+        {isLoading && isMobile && (
+          <>
+            <SetListLoader />
+            <SetListLoader />
+          </>
+        )}
+        {!isLoading &&
+          allPricesBuffer.map((variation, index) => {
+            return (
+              <ShopSetLangCards
+                variation={variation}
+                key={variation.id}
+                index={index}
+              />
+            );
+          })}
       </div>
     </>
   );
