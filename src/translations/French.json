@@ -126,6 +126,7 @@
   "app.shop.myAccount.buyingClauses.title": "Conditions de rachat",
   "app.shop.myAccount.toast.failure": "Les informations n'ont pas pu être mises à jour. Merci de réessayer.",
 
+  "app.shop.AllCustomers.title": "Clients",
   "app.shop.AllCustomers.reference": "Reference",
   "app.shop.AllCustomers.customerLastName": "Nom",
   "app.shop.AllCustomers.customerFirstName": "Prénom",

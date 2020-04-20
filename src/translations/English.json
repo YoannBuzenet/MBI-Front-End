@@ -126,6 +126,7 @@
   "app.shop.myAccount.buyingClauses.title": "Buying Clauses",
   "app.shop.myAccount.toast.failure": "The information couldn't be updated. Please try again.",
 
+  "app.shop.AllCustomers.title": "All Customers",
   "app.shop.AllCustomers.reference": "Reference",
   "app.shop.AllCustomers.customerLastName": "Last Name",
   "app.shop.AllCustomers.customerFirstName": "First Name",
