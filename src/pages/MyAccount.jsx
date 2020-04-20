@@ -10,26 +10,23 @@ const MyAccount = () => {
   const { authenticationInfos, setAuthenticationInfos } = useContext(
     AuthContext
   );
+  //TODO - mettre un loader pour le traitement de requete
 
   console.log(authenticationInfos);
 
-  const [timer, setTimer] = useState();
+  const [timer, setTimer] = useState(null);
 
-  const APIupdate = async () => {
-    // console.log("update");
-
-    console.log(authenticationInfos);
-
+  const APIupdate = async (authCopy) => {
     try {
       const response = await userAPI.update(authenticationInfos.user.id, {
         client: {
-          id: authenticationInfos.customer.id,
-          prenom: authenticationInfos.customer.prenom,
-          nom: authenticationInfos.customer.nom,
-          tel: authenticationInfos.customer.tel,
-          adress: authenticationInfos.customer.adress,
-          postalCode: authenticationInfos.customer.postalCode,
-          town: authenticationInfos.customer.town,
+          id: authCopy.customer.id,
+          prenom: authCopy.customer.prenom,
+          nom: authCopy.customer.nom,
+          tel: authCopy.customer.tel,
+          adress: authCopy.customer.adress,
+          postalCode: authCopy.customer.postalCode,
+          town: authCopy.customer.town,
         },
       });
 
@@ -37,6 +34,7 @@ const MyAccount = () => {
       setAuthenticationInfos({
         ...authenticationInfos,
         customer: {
+          ...authenticationInfos.customer,
           id: response.data.client.id,
           prenom: response.data.client.prenom,
           nom: response.data.client.nom,
@@ -44,7 +42,6 @@ const MyAccount = () => {
           adress: response.data.client.adress,
           postalCode: response.data.client.postalCode,
           town: response.data.client.town,
-          SellRequests: authenticationInfos.customer.SellRequests,
         },
       });
 
@@ -54,9 +51,7 @@ const MyAccount = () => {
         token: currentDataInLocalStorage.token,
         refresh_token: currentDataInLocalStorage.refresh_token,
         user: {
-          id: response.data.id,
-          email: response.data.email,
-          roles: response.data.roles,
+          ...authenticationInfos.user,
         },
         client: {
           id: response.data.client.id,
@@ -105,7 +100,7 @@ const MyAccount = () => {
   };
 
   const handleChange = (event) => {
-    clearTimeout(timer);
+    setTimer(clearTimeout(timer));
     // console.log("change");
 
     const value = event.currentTarget.value;
@@ -113,12 +108,15 @@ const MyAccount = () => {
 
     console.log("here");
 
+    const authCopy = { ...authenticationInfos };
+    authCopy.customer[name] = value;
+
     setAuthenticationInfos({
       ...authenticationInfos,
       customer: { ...authenticationInfos.customer, [name]: value },
     });
 
-    setTimer(setTimeout(APIupdate, 1000));
+    setTimer(setTimeout(() => APIupdate(authCopy), 1000));
   };
 
   return (

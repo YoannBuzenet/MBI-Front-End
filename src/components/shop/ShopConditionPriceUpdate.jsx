@@ -509,6 +509,7 @@ const ShopConditionPriceUpdate = ({
       ] = null;
     } else {
       toast.error("Merci de saisir un nombre.");
+      //TODO Translate the error message
     }
 
     const triggerAPISending = (
