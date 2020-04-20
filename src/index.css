@@ -529,11 +529,12 @@ div.connect p {
   position: absolute;
   top: 22px;
   cursor: pointer;
+  padding-right: 1rem;
 }
 
 .arrow-app-lang {
   position: absolute;
-  right: -10px;
+  right: 0px;
   top: 8px;
 }
 
