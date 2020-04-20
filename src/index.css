@@ -1413,6 +1413,26 @@ tbody.cardLineShop {
   background-color: lightblue;
 }
 
+.regular-cards,
+.foil-cards {
+  display: flex;
+  justify-content: center;
+}
+
+.regular-non-signed {
+  margin-right: 2rem;
+}
+
+.regular-non-signed {
+}
+
+.foil-non-signed {
+  margin-right: 2rem;
+}
+
+.foil-signed {
+}
+
 input.updated {
   background-color: red;
 }
