@@ -204,76 +204,74 @@ const ShopOneLangAllConditionsCard = ({ oneLang, index }) => {
 
   return (
     <div>
-      <form>
-        <div>
-          <div className="regular-cards">
-            <div className="regular-non-signed">
-              {nonFoilNonSignedArray.length > 0 && (
-                <p>
-                  <FormattedMessage
-                    id="app.shop.priceFormUpdate.nonFoil"
-                    defaultMessage={`Regular`}
-                  />
-                </p>
-              )}
+      <form className="price-update-form">
+        <div className="regular-cards">
+          <div className="regular-non-signed">
+            {nonFoilNonSignedArray.length > 0 && (
+              <p>
+                <FormattedMessage
+                  id="app.shop.priceFormUpdate.nonFoil"
+                  defaultMessage={`Regular`}
+                />
+              </p>
+            )}
 
-              {nonFoilNonSignedArray.length !== 0 &&
-                nonFoilNonSignedArray.map((infoContainer) => {
-                  return (
-                    <ShopConditionPriceUpdate
-                      key={parseInt(
-                        infoContainer.cardID +
-                          "" +
-                          infoContainer.conditionKey +
-                          "" +
-                          infoContainer.langKey +
-                          "" +
-                          infoContainer.isFoilKey
-                      )}
-                      conditionID={infoContainer.conditionKey}
-                      langID={infoContainer.langKey}
-                      isFoil={infoContainer.isFoilKey}
-                      isSigned={infoContainer.isSignedKey}
-                      priceValue={infoContainer.priceValue}
-                      index={index}
-                      cardID={infoContainer.cardID}
-                    />
-                  );
-                })}
-            </div>
-            <div className="regular-signed">
-              {nonFoilSignedArray.length > 0 && (
-                <p>
-                  <FormattedMessage
-                    id="app.shop.priceFormUpdate.signed"
-                    defaultMessage={`Signed`}
+            {nonFoilNonSignedArray.length !== 0 &&
+              nonFoilNonSignedArray.map((infoContainer) => {
+                return (
+                  <ShopConditionPriceUpdate
+                    key={parseInt(
+                      infoContainer.cardID +
+                        "" +
+                        infoContainer.conditionKey +
+                        "" +
+                        infoContainer.langKey +
+                        "" +
+                        infoContainer.isFoilKey
+                    )}
+                    conditionID={infoContainer.conditionKey}
+                    langID={infoContainer.langKey}
+                    isFoil={infoContainer.isFoilKey}
+                    isSigned={infoContainer.isSignedKey}
+                    priceValue={infoContainer.priceValue}
+                    index={index}
+                    cardID={infoContainer.cardID}
                   />
-                </p>
-              )}
-              {nonFoilSignedArray.length !== 0 &&
-                nonFoilSignedArray.map((infoContainer) => {
-                  return (
-                    <ShopConditionPriceUpdate
-                      key={parseInt(
-                        infoContainer.cardID +
-                          "" +
-                          infoContainer.conditionKey +
-                          "" +
-                          infoContainer.langKey +
-                          "" +
-                          infoContainer.isFoilKey
-                      )}
-                      conditionID={infoContainer.conditionKey}
-                      langID={infoContainer.langKey}
-                      isFoil={infoContainer.isFoilKey}
-                      isSigned={infoContainer.isSignedKey}
-                      priceValue={infoContainer.priceValue}
-                      index={index}
-                      cardID={infoContainer.cardID}
-                    />
-                  );
-                })}
-            </div>
+                );
+              })}
+          </div>
+          <div className="regular-signed">
+            {nonFoilSignedArray.length > 0 && (
+              <p>
+                <FormattedMessage
+                  id="app.shop.priceFormUpdate.regular-signed"
+                  defaultMessage={`Regular Signed`}
+                />
+              </p>
+            )}
+            {nonFoilSignedArray.length !== 0 &&
+              nonFoilSignedArray.map((infoContainer) => {
+                return (
+                  <ShopConditionPriceUpdate
+                    key={parseInt(
+                      infoContainer.cardID +
+                        "" +
+                        infoContainer.conditionKey +
+                        "" +
+                        infoContainer.langKey +
+                        "" +
+                        infoContainer.isFoilKey
+                    )}
+                    conditionID={infoContainer.conditionKey}
+                    langID={infoContainer.langKey}
+                    isFoil={infoContainer.isFoilKey}
+                    isSigned={infoContainer.isSignedKey}
+                    priceValue={infoContainer.priceValue}
+                    index={index}
+                    cardID={infoContainer.cardID}
+                  />
+                );
+              })}
           </div>
         </div>
         <div className="foil-cards">
@@ -315,7 +313,7 @@ const ShopOneLangAllConditionsCard = ({ oneLang, index }) => {
             {foilSignedArray.length > 0 && (
               <p>
                 <FormattedMessage
-                  id="app.shop.priceFormUpdate.signed"
+                  id="app.shop.priceFormUpdate.foil-signed"
                   defaultMessage={`Signed`}
                 />
               </p>

@@ -204,9 +204,10 @@
   "app.shop.navBar.logOut": "Déconnexion",
 
   "app.shop.priceFormUpdate.nonFoil": "Non Foil",
+  "app.shop.priceFormUpdate.regular-signed": "Non Foil Signé",
   "app.shop.priceFormUpdate.nonSigned": "Non Signé",
   "app.shop.priceFormUpdate.foil": "Foil",
-  "app.shop.priceFormUpdate.signed": "Signé",
+  "app.shop.priceFormUpdate.foil-signed": "Foil Signé",
 
   "app.shop.sellrequestValidator.title": "Modifier le statut",
   "app.shop.sellrequestValidator.defaultOption": "Choisir un statut",
