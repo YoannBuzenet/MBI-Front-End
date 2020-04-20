@@ -520,6 +520,11 @@ div.connect p {
   outline: none;
 }
 
+.current-app-lang img {
+  border-radius: 3px;
+  outline: none;
+}
+
 .current-lang-flag {
   position: absolute;
   top: 22px;
@@ -1153,6 +1158,7 @@ div.blockFlags span.blockArrow {
   padding: 1.8rem;
   font-size: 2rem;
   text-align: center;
+  width: 30%;
 }
 
 .my-account button {
@@ -1539,8 +1545,7 @@ div.connecting-button {
   display: block;
 }
 
-.login-form input,
-.my-account textarea {
+.login-form input {
   width: 30%;
   padding: 1.8rem;
   font-size: 2rem;
