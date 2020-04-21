@@ -4,7 +4,9 @@ import config from "./config";
 function getArrayofPrices(arrayOfIdCards, baseLangID, cleaningParam) {
   return axios.get(
     config.URL_API +
-      "/card_shop_prices?shop.id=1&language.id[]=9&cardCondition.id=2&language.id[]=" +
+      "/card_shop_prices?shop.id=" +
+      config.shopID +
+      "&language.id[]=9&cardCondition.id=2&language.id[]=" +
       baseLangID +
       "&" +
       arrayOfIdCards.map((cardID) => "card.id[]=" + cardID + "&").join(""),
@@ -27,7 +29,7 @@ function getOnePrice(shopID, cardID, langID, conditionID, isFoil, isSigned) {
   }
   console.log(
     config.URL_API +
-      "/card_shop_prices?shop.id" +
+      "/card_shop_prices?shop.id=" +
       shopID +
       "&card.id=" +
       cardID +
