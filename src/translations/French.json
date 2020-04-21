@@ -27,6 +27,7 @@
   "app.cardPage.price": "Prix",
 
   "app.myAccountPage.title": "Mon compte",
+  "app.myAccountPage.myEmail": "Email : ",
   "app.myAccountPage.FirstName": "Prénom",
   "app.myAccountPage.LastName": "Nom de famille",
   "app.myAccountPage.Telephone": "Téléphone",
@@ -261,7 +262,7 @@
   "app.navbar.register": "S'inscrire",
   "app.navbar.connect": "Se connecter",
 
-  "app.searchCardBar.placeholder": "Rechercher une carte...",
+  "app.searchCardBar.placeholder": "Rechercher...",
 
   "app.sellRequest.statusUpdate.toast.success": "Le rachat a été marqué comme envoyé.",
   "app.sellRequest.statusUpdate.toast.failure": "Le rachat n'a pu être marqué comme envoyé. Merci de rééssayer.",
