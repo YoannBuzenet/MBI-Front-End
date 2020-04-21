@@ -9,6 +9,7 @@
   --main-bg-color: coral;
   --main-bg-color-darker: hsl(16, 90%, 66%);
   --main-bg-color-almost: rgba(255, 127, 80, 0.9);
+  --main-bg-color-more: rgba(255, 127, 80, 0.7);
   --main-bg-color-medium: rgba(255, 127, 80, 0.5);
   --main-bg-color-weak: rgba(255, 127, 80, 0.3);
   --background-color: #f9f9f9;
@@ -1185,6 +1186,26 @@ div.blockFlags span.blockArrow {
 .sellRequest-lastDate {
   text-transform: uppercase;
   text-align: left;
+}
+
+.sellRequest-sending-button {
+  margin: auto;
+  cursor: pointer;
+  margin-top: 3rem;
+  padding: 2rem;
+  width: 100px;
+  background-color: var(--main-bg-color-more);
+  border-radius: 5px;
+  box-shadow: 1px 1px 5px black;
+  text-transform: uppercase;
+}
+
+.sellRequest-sending-button:hover {
+  background-color: var(--main-bg-color);
+}
+
+.sellRequest-sending-button:active {
+  box-shadow: -1px -1px 1px black;
 }
 
 /**************************

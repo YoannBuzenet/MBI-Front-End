@@ -14,7 +14,7 @@ const SellRequestStatusUpdater = ({
   const { authenticationInfos, setAuthenticationInfos } = useContext(
     AuthContext
   );
-  console.log(authenticationInfos);
+  // console.log(authenticationInfos);
   const [hasBeenSent, setHasBeenSent] = useState(true);
 
   console.log(currentSellRequest);
@@ -26,7 +26,7 @@ const SellRequestStatusUpdater = ({
         currentSellRequest.dateRecu == null
       ) {
         setHasBeenSent(false);
-        console.log(currentSellRequest);
+        // console.log(currentSellRequest);
         if (!hasBeenSent) {
           // console.log("ce rachat n'a pas été envoyé");
         }
@@ -121,16 +121,17 @@ const SellRequestStatusUpdater = ({
   return (
     <>
       {currentSellRequest && !hasBeenSent ? (
-        <button
+        <p
+          className="sellRequest-sending-button"
           onClick={(event) => {
             handleClick(event, currentSellRequest);
           }}
         >
           <FormattedMessage
             id="app.sellRequest.statusUpdate.button"
-            defaultMessage={`This Sell Request has been flagged as Sent.`}
+            defaultMessage={`Sent.`}
           />
-        </button>
+        </p>
       ) : null}
     </>
     // TODO : ADD A TRACKING NUMBER
