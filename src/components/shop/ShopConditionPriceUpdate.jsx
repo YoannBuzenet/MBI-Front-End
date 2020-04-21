@@ -39,6 +39,7 @@ const ShopConditionPriceUpdate = ({
   const PercentPerSigned = authenticationInfos.shop.shopData.PercentPerSigned;
 
   const sendSmallBatchToAPI = () => {
+    console.log("small batch)");
     const batch = [];
     const allPricesCopy = [...allPricesBuffer];
     //Preparing Small Batch
@@ -118,49 +119,56 @@ const ShopConditionPriceUpdate = ({
   };
 
   const sendBigBatchToAPI = () => {
+    console.log("big batch)");
     const batch = [];
     const allPricesCopy = [...allPricesBuffer];
     //Preparing Batch
     for (const LangToParse in allPricesCopy[index].langs) {
       for (const objectToParse in allPricesCopy[index].langs[LangToParse]) {
-        if (
-          allPricesCopy[index].langs[LangToParse][objectToParse][isFoil][
-            isSigned + "idCardShopPrice"
-          ]
-        ) {
-          const newPriceToSend = {
-            id:
-              allPricesCopy[index].langs[LangToParse][objectToParse][isFoil][
-                isSigned + "idCardShopPrice"
-              ],
-            price:
-              allPricesCopy[index].langs[LangToParse][objectToParse][isFoil][
-                isSigned
-              ],
-            isFoil: isFoil === 1 ? true : false,
-            isSigned: isSigned === 1 ? true : false,
-            isAltered: false,
-            shop: config.shopID,
-            card: cardID,
-            language: LangToParse,
-            cardCondition: parseInt(objectToParse),
-          };
-          batch.push(newPriceToSend);
-        } else {
-          const newPriceToSend = {
-            price:
-              allPricesCopy[index].langs[LangToParse][objectToParse][isFoil][
-                isSigned
-              ],
-            isFoil: isFoil === 1 ? true : false,
-            isSigned: isSigned === 1 ? true : false,
-            isAltered: false,
-            shop: config.shopID,
-            card: cardID,
-            language: LangToParse,
-            cardCondition: parseInt(objectToParse),
-          };
-          batch.push(newPriceToSend);
+        for (let i = 0; i < 2; i++) {
+          isSigned = i === 0 ? 0 : 1;
+          console.log(isSigned);
+          //Does the object has an ID or not
+          if (
+            allPricesCopy[index].langs[LangToParse][objectToParse][isFoil][
+              isSigned + "idCardShopPrice"
+            ]
+          ) {
+            const newPriceToSend = {
+              id:
+                allPricesCopy[index].langs[LangToParse][objectToParse][isFoil][
+                  isSigned + "idCardShopPrice"
+                ],
+              price:
+                allPricesCopy[index].langs[LangToParse][objectToParse][isFoil][
+                  isSigned
+                ],
+              isFoil: isFoil === 1 ? true : false,
+              isSigned: isSigned === 1 ? true : false,
+              isAltered: false,
+              shop: config.shopID,
+              card: cardID,
+              language: LangToParse,
+              cardCondition: parseInt(objectToParse),
+            };
+            batch.push(newPriceToSend);
+            //If no ID :
+          } else {
+            const newPriceToSend = {
+              price:
+                allPricesCopy[index].langs[LangToParse][objectToParse][isFoil][
+                  isSigned
+                ],
+              isFoil: isFoil === 1 ? true : false,
+              isSigned: i === isSigned ? true : false,
+              isAltered: false,
+              shop: config.shopID,
+              card: cardID,
+              language: LangToParse,
+              cardCondition: parseInt(objectToParse),
+            };
+            batch.push(newPriceToSend);
+          }
         }
       }
     }
@@ -544,9 +552,7 @@ const ShopConditionPriceUpdate = ({
       ) {
         sendBigBatchToAPI();
       } else if (conditionID === 1) {
-        if (isFoil === 0 || isFoil === 1) {
-          sendSmallBatchToAPI();
-        }
+        sendSmallBatchToAPI();
       } else {
         if (
           allPricesBuffer[index].langs[langID][conditionID][isFoil][
