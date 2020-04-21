@@ -59,13 +59,15 @@ const CardLineShop = ({ card, indexCard }) => {
   //STATE - knowing if a card has just been deleted
   const [cardHasBeenDeleted, setCardHasBeenDeleted] = useState(false);
 
+  const [timer, setTimer] = useState(null);
+
   //Translation Hook
   const intl = useIntl();
 
   useEffect(() => {
     if (isOnHover) {
       //If we neeed to change something on hover update, here it is
-      console.log(currentCard);
+      // console.log(currentCard);
       // console.log(errorList);
       // console.log(currentBasket);
       //console.log(conditions);
@@ -136,9 +138,11 @@ const CardLineShop = ({ card, indexCard }) => {
   }, [cardHasBeenDeleted]);
 
   const handleChange = ({ currentTarget }, currentCard) => {
+    setTimer(clearTimeout(timer));
+
     const { name, value } = currentTarget;
-    console.log(name);
-    console.log(value);
+    // console.log(name);
+    // console.log(value);
     if (name === "quantity" || name === "lang") {
       var newValue = parseInt(value);
     } else {
@@ -146,38 +150,48 @@ const CardLineShop = ({ card, indexCard }) => {
     }
     //console.log("Check SetIsLoad Passage");
     setIsLoaded(true);
-    //Blocked setErrorList because cause parent to re-render. Would be good to think about passing it as a state instead of context OR make the provider as near as possible of the content
     setErrorList([]);
     setCurrentCard({
       ...currentCard,
       [name]: newValue,
     });
 
+    //Beginnig of copying item to mutate it, maybe take it back later
+    // const card_copy = { ...currentCard };
+    // card_copy[name] = value;
+
     sellRequestCardAPI
       .update(currentCard, name, newValue)
       .catch((error) => console.log(error));
     console.log(currentCard);
 
-    if (name === "quantity") {
-      const newData = {
-        cardTotalQuantity: currentAdminSellRequest.sellRequests.reduce(
-          (total, card) => {
-            return total + card.quantity;
-          },
-          0
-        ),
-        amount: currentAdminSellRequest.sellRequests.reduce((total, card) => {
-          return total + card.price * card.quantity;
-        }, 0),
-      };
-      console.log(newData);
+    //mutating to get local change immediatly
+    currentAdminSellRequest.sellRequests[indexCard][name] = value;
 
-      //UPDATING THE WHOLE SELL REQUEST ON API
-      // (ADD TOAST IF FAILURE)
-      sellRequestAPI
-        .updateAsShop(currentAdminSellRequest.id, newData)
-        .then((data) => console.log("update OK"));
-    }
+    console.log(currentAdminSellRequest);
+
+    const newData = {
+      cardTotalQuantity: currentAdminSellRequest.sellRequests.reduce(
+        (total, card) => {
+          return total + card.quantity;
+        },
+        0
+      ),
+      amount: currentAdminSellRequest.sellRequests.reduce((total, card) => {
+        return total + card.price * card.quantity;
+      }, 0),
+    };
+    console.log(newData);
+
+    //UPDATING THE WHOLE SELL REQUEST ON API
+    // (ADD TOAST IF FAILURE)
+    setTimer(
+      () =>
+        sellRequestAPI
+          .updateAsShop(currentAdminSellRequest.id, newData)
+          .then((data) => console.log("update OK")),
+      2000
+    );
   };
 
   const changeEdition = (event, currentCard) => {
