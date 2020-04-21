@@ -266,7 +266,7 @@
 
   "app.sellRequest.statusUpdate.toast.success": "Le rachat a été marqué comme envoyé.",
   "app.sellRequest.statusUpdate.toast.failure": "Le rachat n'a pu être marqué comme envoyé. Merci de rééssayer.",
-  "app.sellRequest.statusUpdate.button": "Marquer comme Envoyé",
+  "app.sellRequest.statusUpdate.button": "Envoyé",
 
   "app.sellRequest.statusDefinition.submitted": "Soumis",
   "app.sellRequest.statusDefinition.sent": "Envoyé",

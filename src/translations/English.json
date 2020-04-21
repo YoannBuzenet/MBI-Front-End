@@ -266,7 +266,7 @@
 
   "app.sellRequest.statusUpdate.toast.success": "This Sell Request has been flagged as Sent.",
   "app.sellRequest.statusUpdate.toast.failure": "The sell request couldn't ne updated. Please try again.",
-  "app.sellRequest.statusUpdate.button": "Mark as Sent",
+  "app.sellRequest.statusUpdate.button": "Sent",
 
   "app.sellRequest.statusDefinition.submitted": "Submitted",
   "app.sellRequest.statusDefinition.sent": "Sent",
