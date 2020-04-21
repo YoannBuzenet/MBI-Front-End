@@ -96,7 +96,7 @@ const ShopAdminAllCustomers = (props) => {
 
                       <Td>{customer.nom}</Td>
                       <Td>{customer.prenom}</Td>
-                      <Td>{customer.sellrequest.length}</Td>
+                      <Td>{customer.sellrequest.length || "0"}</Td>
                     </Tr>
                   );
                 })}
