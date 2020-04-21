@@ -38,6 +38,9 @@ const ShopConditionPriceUpdate = ({
 
   const PercentPerSigned = authenticationInfos.shop.shopData.PercentPerSigned;
 
+  /*
+   * Update just the language passed
+   */
   const sendSmallBatchToAPI = () => {
     console.log("small batch)");
     const batch = [];
@@ -118,6 +121,10 @@ const ShopConditionPriceUpdate = ({
     setAllPricesBuffer(contextCopy);
   };
 
+  /*
+   * Browsing all languages on the 'foil' data passed
+   * Creating the batch with potentiel ID lareadi implemented
+   */
   const sendBigBatchToAPI = () => {
     console.log("big batch)");
     const batch = [];
@@ -125,10 +132,53 @@ const ShopConditionPriceUpdate = ({
     //Preparing Batch
     for (const LangToParse in allPricesCopy[index].langs) {
       for (const objectToParse in allPricesCopy[index].langs[LangToParse]) {
-        for (let i = 0; i < 2; i++) {
-          isSigned = i === 0 ? 0 : 1;
-          console.log(isSigned);
-          //Does the object has an ID or not
+        if (isSigned === 0) {
+          for (let i = 0; i < 2; i++) {
+            isSigned = i === 0 ? 0 : 1;
+            console.log(isSigned);
+            //Does the object has an ID or not
+            if (
+              allPricesCopy[index].langs[LangToParse][objectToParse][isFoil][
+                isSigned + "idCardShopPrice"
+              ]
+            ) {
+              const newPriceToSend = {
+                id:
+                  allPricesCopy[index].langs[LangToParse][objectToParse][
+                    isFoil
+                  ][isSigned + "idCardShopPrice"],
+                price:
+                  allPricesCopy[index].langs[LangToParse][objectToParse][
+                    isFoil
+                  ][isSigned],
+                isFoil: isFoil === 1 ? true : false,
+                isSigned: isSigned === 1 ? true : false,
+                isAltered: false,
+                shop: config.shopID,
+                card: cardID,
+                language: LangToParse,
+                cardCondition: parseInt(objectToParse),
+              };
+              batch.push(newPriceToSend);
+              //If no ID :
+            } else {
+              const newPriceToSend = {
+                price:
+                  allPricesCopy[index].langs[LangToParse][objectToParse][
+                    isFoil
+                  ][isSigned],
+                isFoil: isFoil === 1 ? true : false,
+                isSigned: i === isSigned ? true : false,
+                isAltered: false,
+                shop: config.shopID,
+                card: cardID,
+                language: LangToParse,
+                cardCondition: parseInt(objectToParse),
+              };
+              batch.push(newPriceToSend);
+            }
+          }
+        } else {
           if (
             allPricesCopy[index].langs[LangToParse][objectToParse][isFoil][
               isSigned + "idCardShopPrice"
@@ -547,8 +597,7 @@ const ShopConditionPriceUpdate = ({
     ) => {
       if (
         conditionID === 1 &&
-        langID === authenticationInfos.shop.shopData.baseLang.id &&
-        isSigned === 0
+        langID === authenticationInfos.shop.shopData.baseLang.id
       ) {
         sendBigBatchToAPI();
       } else if (conditionID === 1) {
