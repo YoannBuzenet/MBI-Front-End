@@ -24,7 +24,7 @@ const ShopAdminOneSellRequest = ({ match }) => {
   const { currentAdminSellRequest, setCurrentAdminSellRequest } = useContext(
     AdminSellRequestContext
   );
-  console.log(currentAdminSellRequest);
+  // console.log(currentAdminSellRequest);
 
   useEffect(() => {
     if (
