@@ -290,13 +290,13 @@ const CardLineShop = ({ card, indexCard }) => {
       <Tr
         onMouseEnter={(e) => {
           if (!isMobile) {
-            setIsOnHover(!isOnHover);
+            setIsOnHover(true);
             setHoverTopOrBottom(hoverClassName(e));
           }
         }}
         onMouseLeave={() => {
           if (!isMobile) {
-            setIsOnHover(!isOnHover);
+            setIsOnHover(false);
           }
         }}
         className={sellingBasketLine || ""}

@@ -144,13 +144,13 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
         key={card.id}
         onMouseEnter={(e) => {
           if (!isMobile) {
-            setIsOnHover(!isOnHover);
+            setIsOnHover(true);
             setHoverTopOrBottom(hoverClassName(e));
           }
         }}
         onMouseLeave={() => {
           if (!isMobile) {
-            setIsOnHover(!isOnHover);
+            setIsOnHover(false);
           }
         }}
         className={sellingBasketLine || ""}
