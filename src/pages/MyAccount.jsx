@@ -28,21 +28,6 @@ const MyAccount = () => {
         },
       });
 
-      //UPDATE LES INFOS EN MEMOIRE VIVE
-      setAuthenticationInfos({
-        ...authenticationInfos,
-        customer: {
-          ...authenticationInfos.customer,
-          id: response.data.client.id,
-          prenom: response.data.client.prenom,
-          nom: response.data.client.nom,
-          tel: response.data.client.tel,
-          adress: response.data.client.adress,
-          postalCode: response.data.client.postalCode,
-          town: response.data.client.town,
-        },
-      });
-
       //Preparing data format to save, to copy what's stored in local storage
       const currentDataInLocalStorage = AuthAPI.userInfos();
       const newDataInLocalStorage = {
@@ -112,7 +97,7 @@ const MyAccount = () => {
       customer: { ...authenticationInfos.customer, [name]: value },
     });
 
-    setTimer(setTimeout(() => APIupdate(authCopy), 1000));
+    setTimer(setTimeout(() => APIupdate(authCopy), 1500));
   };
 
   return (
@@ -124,6 +109,13 @@ const MyAccount = () => {
             defaultMessage={`My Account`}
           />
         </h1>
+        <p>
+          <FormattedMessage
+            id="app.myAccountPage.myEmail"
+            defaultMessage={`Email : `}
+          />
+          <span> {authenticationInfos.user.email}</span>
+        </p>
         <form>
           <label htmlFor="prenom">
             <FormattedMessage

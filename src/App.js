@@ -419,8 +419,8 @@ function App() {
 
   //This fonction should be rewritten to get O LOG N space time & complexity
   // Currenlty it is N²
-  //To do this, get all the relevant information and hash them into ONE integer. Then sort this array following that integer.
-  //Then use algoexpert.io
+  //To do it into N, each element should be stored as a unique has key, then compare each element of array with memoized hash key
+  //use Potential Match algorithm (algoexpert.io)
   const checkForDuplicates = (currentBasket) => {
     var areThereDuplicate = false;
     var indexItem1;
