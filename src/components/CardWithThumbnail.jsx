@@ -12,26 +12,26 @@ const CardWithThumbnail = ({ card }) => {
     <>
       <div
         className="card"
-        // onClick={() => (window.location.href = "/card/" + card.name)}
-        //Comment thi onClick on Prod
-        onClick={() =>
-          axios
-            .get("https://api.cardmarket.com/ws/v2.0/account", {
-              headers: {
-                Authorization: MKMAPI.buildOAuthHeader(
-                  "GET",
-                  "https://api.cardmarket.com/ws/v2.0/account"
-                ),
-              },
-            })
-            .then((data) => console.log(data))
-            .catch((error) => {
-              if (error.response) {
-                console.log(error.response);
-              }
-              return console.log(error);
-            })
-        }
+        onClick={() => (window.location.href = "/card/" + card.name)}
+        //TEST MKM CONNECTION
+        // onClick={() =>
+        //   axios
+        //     .get("https://api.cardmarket.com/ws/v2.0/account", {
+        //       headers: {
+        //         Authorization: MKMAPI.buildOAuthHeader(
+        //           "GET",
+        //           "https://api.cardmarket.com/ws/v2.0/account"
+        //         ),
+        //       },
+        //     })
+        //     .then((data) => console.log(data))
+        //     .catch((error) => {
+        //       if (error.response) {
+        //         console.log(error.response);
+        //       }
+        //       return console.log(error);
+        //     })
+        // }
       >
         <div className="card-picture">
           <img src={picture} alt="" />

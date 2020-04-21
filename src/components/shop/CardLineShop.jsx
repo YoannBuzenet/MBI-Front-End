@@ -163,12 +163,12 @@ const CardLineShop = ({ card, indexCard }) => {
     sellRequestCardAPI
       .update(currentCard, name, newValue)
       .catch((error) => console.log(error));
-    console.log(currentCard);
+    // console.log(currentCard);
 
     //mutating to get local change immediatly
     currentAdminSellRequest.sellRequests[indexCard][name] = value;
 
-    console.log(currentAdminSellRequest);
+    // console.log(currentAdminSellRequest);
 
     const newData = {
       cardTotalQuantity: currentAdminSellRequest.sellRequests.reduce(
@@ -181,15 +181,13 @@ const CardLineShop = ({ card, indexCard }) => {
         return total + card.price * card.quantity;
       }, 0),
     };
-    console.log(newData);
+    // console.log(newData);
 
     //UPDATING THE WHOLE SELL REQUEST ON API
     // (ADD TOAST IF FAILURE)
     setTimer(
-      () =>
-        sellRequestAPI
-          .updateAsShop(currentAdminSellRequest.id, newData)
-          .then((data) => console.log("update OK")),
+      () => sellRequestAPI.updateAsShop(currentAdminSellRequest.id, newData),
+      // .then((data) => console.log("update OK")),
       2000
     );
   };
@@ -545,7 +543,7 @@ const CardLineShop = ({ card, indexCard }) => {
           <i
             className="fas fa-minus-circle delete-from-selling-basket"
             onClick={() => {
-              console.log(currentCard);
+              // console.log(currentCard);
               return handleDelete(currentCard);
             }}
           ></i>
