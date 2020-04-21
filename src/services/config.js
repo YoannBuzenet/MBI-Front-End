@@ -2,7 +2,7 @@ import English from "../translations/English.json";
 import French from "../translations/French.json";
 
 // const URL_API = "http://mtgapi.local:8888";
-const URL_API = "http://ec2-63-35-201-16.eu-west-1.compute.amazonaws.com";
+const URL_API = "http://ec2-34-245-7-241.eu-west-1.compute.amazonaws.com";
 
 const shopID = 1;
 

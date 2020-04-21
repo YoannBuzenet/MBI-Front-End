@@ -25,6 +25,7 @@ function deleteOnePrice(cardShopPriceID, cleaningParam) {
 }
 
 function batchPriceUpdate(batch, cleaningParam) {
+  console.log("batch sent");
   return axios.post(
     config.URL_API + "/batchCardShopPrice",
     batch,

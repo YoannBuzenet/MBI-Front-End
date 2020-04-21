@@ -19,7 +19,7 @@ const ShopConditionPriceUpdate = ({
   index,
   cardID,
 }) => {
-  const WAIT_INTERVAL = 1000;
+  const WAIT_INTERVAL = 2000;
 
   const [timer, setTimer] = useState(null);
 
@@ -48,6 +48,7 @@ const ShopConditionPriceUpdate = ({
     //Preparing Small Batch
     //Editing or creating the Card Shop Price if ID already exists
     for (const objectToParse in allPricesCopy[index].langs[langID]) {
+      //TODO double the if here : is card was signed or not. If not, we updte the signed one too and put it into batch.
       if (
         allPricesCopy[index].langs[langID][objectToParse][isFoil][
           isSigned + "idCardShopPrice"
@@ -133,26 +134,28 @@ const ShopConditionPriceUpdate = ({
     for (const LangToParse in allPricesCopy[index].langs) {
       for (const objectToParse in allPricesCopy[index].langs[LangToParse]) {
         if (isSigned === 0) {
+          //If isSigned was 0, we have to loop twice :
+          // - One for update non Signed cards
+          // - The other to update signed cards
+          // variable i will indicate if the card is signed, in this block
           for (let i = 0; i < 2; i++) {
-            isSigned = i === 0 ? 0 : 1;
-            console.log(isSigned);
             //Does the object has an ID or not
             if (
               allPricesCopy[index].langs[LangToParse][objectToParse][isFoil][
-                isSigned + "idCardShopPrice"
+                i + "idCardShopPrice"
               ]
             ) {
               const newPriceToSend = {
                 id:
                   allPricesCopy[index].langs[LangToParse][objectToParse][
                     isFoil
-                  ][isSigned + "idCardShopPrice"],
+                  ][i + "idCardShopPrice"],
                 price:
                   allPricesCopy[index].langs[LangToParse][objectToParse][
                     isFoil
-                  ][isSigned],
+                  ][i],
                 isFoil: isFoil === 1 ? true : false,
-                isSigned: isSigned === 1 ? true : false,
+                isSigned: i === 1 ? true : false,
                 isAltered: false,
                 shop: config.shopID,
                 card: cardID,
@@ -166,9 +169,9 @@ const ShopConditionPriceUpdate = ({
                 price:
                   allPricesCopy[index].langs[LangToParse][objectToParse][
                     isFoil
-                  ][isSigned],
+                  ][i],
                 isFoil: isFoil === 1 ? true : false,
-                isSigned: i === isSigned ? true : false,
+                isSigned: i === 1 ? true : false,
                 isAltered: false,
                 shop: config.shopID,
                 card: cardID,
@@ -178,6 +181,8 @@ const ShopConditionPriceUpdate = ({
               batch.push(newPriceToSend);
             }
           }
+          console.log("là on a mis à jour les NON signed ET SIGNED en théorie");
+          //If we're updating only the signed cards
         } else {
           if (
             allPricesCopy[index].langs[LangToParse][objectToParse][isFoil][
@@ -210,7 +215,7 @@ const ShopConditionPriceUpdate = ({
                   isSigned
                 ],
               isFoil: isFoil === 1 ? true : false,
-              isSigned: i === isSigned ? true : false,
+              isSigned: isSigned === 1 ? true : false,
               isAltered: false,
               shop: config.shopID,
               card: cardID,
@@ -219,9 +224,11 @@ const ShopConditionPriceUpdate = ({
             };
             batch.push(newPriceToSend);
           }
+          console.log("là on a mis à jour que les signed en théorie");
         }
       }
     }
+    console.log(JSON.stringify(batch));
     console.log(batch);
     try {
       priceUpdateAPI
