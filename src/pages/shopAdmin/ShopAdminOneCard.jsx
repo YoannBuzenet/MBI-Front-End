@@ -40,7 +40,10 @@ const ShopAdminOneCard = ({ match }) => {
     setCurrentNameDecoded(currentName);
   }, [currentName]);
 
-  // console.log(allPricesBuffer);
+  //Once Context has been built, we need to make all the API calls
+  const makeAPIcallsAsync = () => {
+    //for loop on each set
+  };
 
   //HERE create a function that get the input from API and create the context
   //Order for the context : Lang / Condition / isFoil / Price
@@ -53,6 +56,7 @@ const ShopAdminOneCard = ({ match }) => {
     // console.log(completeContext);
 
     //Parsing each set
+    //We create an object for each set that will contains its info
     for (let i = 0; i < completeContext.length; i++) {
       const allLang = [
         {
@@ -63,7 +67,7 @@ const ShopAdminOneCard = ({ match }) => {
 
       completeContext[i].langs = {};
 
-      //For each existing languages in Magic, create a lang in the context
+      //For each existing languages in Magic, create a lang in the context for this set
       for (let j = 0; j < allLang.length; j++) {
         completeContext[i].langs[allLang[j].language_id.id] = null;
       }
