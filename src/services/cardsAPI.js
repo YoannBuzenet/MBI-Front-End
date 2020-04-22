@@ -12,6 +12,10 @@ function searchApproxByName(cardName, cleaningParam) {
   );
 }
 
+function getById(id) {
+  return axios.get(config.URL_API + "/cards/" + id);
+}
+
 function getSmallPictureFromScryfallId(card) {
   const firstCharac = card.scryfallid.substr(0, 1);
   const secondCharac = card.scryfallid.substr(1, 1);
@@ -28,6 +32,7 @@ function getSmallPictureFromScryfallId(card) {
 
 export default {
   getByName,
+  getById,
   searchApproxByName,
-  getSmallPictureFromScryfallId
+  getSmallPictureFromScryfallId,
 };
