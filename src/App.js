@@ -48,7 +48,6 @@ import LoggedShopRouteRender from "./components/LoggedShopRouteRender";
 import ShopAdminHome from "./pages/shopAdmin/ShopAdminHome";
 import ShopAdminAllSellRequests from "./pages/shopAdmin/ShopAdminAllSellRequest";
 import ShopAdminAllCustomers from "./pages/shopAdmin/ShopAdminAllCustomers";
-import ShopAdminCards from "./pages/shopAdmin/ShopAdminCards";
 import ShopAdminCustomer from "./pages/shopAdmin/ShopAdminCustomer";
 import ShopAdminOneSellRequest from "./pages/shopAdmin/ShopAdminOneSellRequest";
 import ShopAdminSettings from "./pages/shopAdmin/ShopAdminSettings";
