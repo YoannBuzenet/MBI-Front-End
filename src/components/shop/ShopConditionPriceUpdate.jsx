@@ -48,7 +48,45 @@ const ShopConditionPriceUpdate = ({
     //Preparing Small Batch
     //Editing or creating the Card Shop Price if ID already exists
     for (const objectToParse in allPricesCopy[index].langs[langID]) {
-      //TODO double the if here : is card was signed or not. If not, we updte the signed one too and put it into batch.
+      //If the modified card is not signed, we modifiy the signed too.
+      // This block of codes creates the signed card and put it into the batch
+      if (isSigned === 0) {
+        if (
+          allPricesCopy[index].langs[langID][objectToParse][isFoil][
+            1 + "idCardShopPrice"
+          ]
+        ) {
+          const newPriceToSend = {
+            id:
+              allPricesCopy[index].langs[langID][objectToParse][isFoil][
+                1 + "idCardShopPrice"
+              ],
+            price: allPricesCopy[index].langs[langID][objectToParse][isFoil][1],
+            isFoil: isFoil === 1 ? true : false,
+            isSigned: true,
+            isAltered: false,
+            shop: config.shopID,
+            card: cardID,
+            language: langID,
+            cardCondition: parseInt(objectToParse),
+          };
+          batch.push(newPriceToSend);
+        } else {
+          const newPriceToSend = {
+            price: allPricesCopy[index].langs[langID][objectToParse][isFoil][1],
+            isFoil: isFoil === 1 ? true : false,
+            isSigned: true,
+            isAltered: false,
+            shop: config.shopID,
+            card: cardID,
+            language: langID,
+            cardCondition: parseInt(objectToParse),
+          };
+          batch.push(newPriceToSend);
+        }
+      }
+
+      //This second blocks takes the modified cards and put into the batch, signed or not.
       if (
         allPricesCopy[index].langs[langID][objectToParse][isFoil][
           isSigned + "idCardShopPrice"
