@@ -9,6 +9,7 @@ import errorHandlingAPI from "../../services/errorHandlingAPI";
 import TableLoader from "../../components/loaders/TableLoader";
 import SetListLoader from "../../components/loaders/SetListLoader";
 import { isMobile } from "react-device-detect";
+import CardShopPriceAPI from "../../services/CardShopPriceAPI";
 
 const ShopAdminOneCard = ({ match }) => {
   //STATE - current card name
@@ -51,29 +52,19 @@ const ShopAdminOneCard = ({ match }) => {
 
   //Once Context has been built, we need to make all the API calls
   const makeAPIcallsAsync = async () => {
-    const promises = allPricesBuffer.map((set) => {
+    const promises = allPricesBuffer.map((card) => {
       // console.log("calling");
-      return cardsAPI.getById(set.id);
+
+      return CardShopPriceAPI.getAllCSPFromOneEdition(card.id);
     });
 
     const res = await Promise.all(promises);
-    console.log(res);
+    // console.log(res);
     res.forEach((response, index) => parseCSPinResponse(response.data, index));
 
     setAllPricesBuffer([...allPricesBuffer]);
     setIsLoading(false);
   };
-  // const makeAPIcallsAsync = () => {
-  //   //for loop on each set
-  //   for (let i = 0; i < allPricesBuffer.length; i++) {
-  //     cardsAPI.getById(allPricesBuffer[i].id).then((data) => {
-  //       console.log(i);
-  //       console.log(data.data.cardShopPrices);
-  //       parseCSPinResponse(data.data, i);
-  //     });
-  //     console.log("calling");
-  //   }
-  // };
 
   const parseCSPinResponse = (response, index) => {
     //Parse each price and integrate in our big table
