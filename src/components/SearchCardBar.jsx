@@ -16,6 +16,8 @@ const SearchCardBar = (props) => {
 
   const [timer, setTimer] = useState(null);
 
+  const WAIT_INTERVAL = 200;
+
   // console.log(authenticationInfos);
 
   const handleChange = (event) => {
@@ -53,9 +55,11 @@ const SearchCardBar = (props) => {
                 // return data.data;
               })
               .then((data) => setSearchResult(data)),
-          200
+          WAIT_INTERVAL
         )
       );
+    } else {
+      setSearchResult([]);
     }
   };
 
