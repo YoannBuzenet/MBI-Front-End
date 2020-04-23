@@ -48,7 +48,7 @@ function getAllCSPFromOneEdition(cardID) {
     config.URL_API +
       "/card_shop_prices.json?shop.id=" +
       config.shopID +
-      "card.id[]=" +
+      "&card.id=" +
       cardID
   );
 }

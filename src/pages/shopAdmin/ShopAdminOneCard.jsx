@@ -59,15 +59,13 @@ const ShopAdminOneCard = ({ match }) => {
     });
 
     const res = await Promise.all(promises);
-    //console.log(res);
+
     res.forEach((response, index) => parseCSPinResponse(response.data, index));
-    console.log("res", res);
     setAllPricesBuffer([...allPricesBuffer]);
     setIsLoading(false);
   };
 
   const parseCSPinResponse = (response, index) => {
-    console.log(response);
     //Parse each price and integrate in our big table
     for (let m = 0; m < response.length; m++) {
       const isFoil = response[m].isFoil ? 1 : 0;
@@ -77,22 +75,6 @@ const ShopAdminOneCard = ({ match }) => {
       const language = parseInt(response[m].language.substr(11));
       const price = response[m].price;
       const idCardShopPrice = response[m].id;
-      console.log(
-        "index",
-        index,
-        "isFoil",
-        isFoil,
-        "isSigned",
-        isSigned,
-        "condition",
-        condition,
-        "language",
-        language,
-        "price",
-        price,
-        "idCardShopPrice",
-        idCardShopPrice
-      );
 
       allPricesBuffer[index]["langs"][language][condition][isFoil][
         isSigned
