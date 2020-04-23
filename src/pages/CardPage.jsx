@@ -26,7 +26,7 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
   const { cardsCardPageContext, setCardsCardPageContext } = useContext(
     CardPageContext
   );
-  console.log(cardsCardPageContext);
+
   //STATE - Is Loading
   const [isLoading, setIsLoading] = useState(true);
 
@@ -41,10 +41,10 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
   const ENGLISH_LANG_ID = 9;
 
   const buildContextFromAPIResponse = (data) => {
-    const contextCopy = { ...cardsCardPageContext };
+    const contextEmpty = {};
 
     for (let i = 0; i < data.length; i++) {
-      contextCopy[data[i]["@id"].substr(7)] = {
+      contextEmpty[data[i]["@id"].substr(7)] = {
         cardID: parseInt(data[i]["@id"].substr(7)),
         id: parseInt(data[i]["@id"].substr(7)),
         ["@id"]: "/cards/" + parseInt(data[i]["@id"].substr(7)),
@@ -67,7 +67,7 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
         ),
       };
     }
-    setCardsCardPageContext(contextCopy);
+    setCardsCardPageContext(contextEmpty);
   };
 
   const transformLanguagesArrayIntoObject = (array) => {
@@ -98,28 +98,14 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
   useEffect(() => {
     if (
       match.params.cardName !== currentName ||
-      Object.keys(cardsCardPageContext).length === 0
-      // ||
-      // (Object.keys(cardsCardPageContext)[0] &&
-      //   Object.keys(cardsCardPageContext)[0].name !== currentName)
+      Object.keys(cardsCardPageContext).length === 0 ||
+      (Object.keys(cardsCardPageContext).length > 0 &&
+        cardsCardPageContext[Object.keys(cardsCardPageContext)[0]].name !==
+          currentName)
     ) {
       //Cancel subscriptions preparation
       const CancelToken = axios.CancelToken;
       const source = CancelToken.source();
-      console.log(Object.keys(cardsCardPageContext));
-      console.log(
-        "match.params.cardName !== currentName",
-        match.params.cardName !== currentName
-      );
-      console.log(
-        "Object.keys(cardsCardPageContext).length === 0",
-        Object.keys(cardsCardPageContext).length === 0
-      );
-      console.log(
-        "Object.keys(cardsCardPageContext)[0] && Object.keys(cardsCardPageContext)[0].name !== currentName",
-        Object.keys(cardsCardPageContext)[0] &&
-          Object.keys(cardsCardPageContext)[0].name !== currentName
-      );
 
       cardsAPI
         .getByName(currentNameDecoded, {

@@ -15,8 +15,6 @@ function getArrayofPrices(arrayOfIdCards, baseLangID, cleaningParam) {
 }
 
 function getOnePrice(shopID, cardID, langID, conditionID, isFoil, isSigned) {
-  console.log("function called");
-
   if (isFoil === true || isFoil === "Yes") {
     isFoil = 1;
   } else {
@@ -27,21 +25,6 @@ function getOnePrice(shopID, cardID, langID, conditionID, isFoil, isSigned) {
   } else {
     isSigned = 0;
   }
-  console.log(
-    config.URL_API +
-      "/card_shop_prices?shop.id=" +
-      shopID +
-      "&card.id=" +
-      cardID +
-      "&language.id=" +
-      langID +
-      "&cardCondition.id=" +
-      conditionID +
-      "&isFoil=" +
-      isFoil +
-      "&isSigned=" +
-      isSigned
-  );
 
   return axios.get(
     config.URL_API +
