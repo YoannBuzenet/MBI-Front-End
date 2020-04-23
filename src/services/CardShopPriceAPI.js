@@ -6,7 +6,7 @@ function getArrayofPrices(arrayOfIdCards, baseLangID, cleaningParam) {
     config.URL_API +
       "/card_shop_prices?shop.id=" +
       config.shopID +
-      "&language.id[]=9&cardCondition.id=2&language.id[]=" +
+      "&language.id[]=9&cardCondition.id=2&isSigned=false&language.id[]=" +
       baseLangID +
       "&" +
       arrayOfIdCards.map((cardID) => "card.id[]=" + cardID + "&").join(""),
@@ -43,4 +43,8 @@ function getOnePrice(shopID, cardID, langID, conditionID, isFoil, isSigned) {
   );
 }
 
-export default { getArrayofPrices, getOnePrice };
+function getAllCSPFromOneEdition(cardID) {
+  return axios.get(config.URL_API + "/cardcsp/" + cardID + ".json");
+}
+
+export default { getArrayofPrices, getOnePrice, getAllCSPFromOneEdition };
