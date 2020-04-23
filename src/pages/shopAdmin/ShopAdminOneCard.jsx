@@ -9,6 +9,7 @@ import errorHandlingAPI from "../../services/errorHandlingAPI";
 import TableLoader from "../../components/loaders/TableLoader";
 import SetListLoader from "../../components/loaders/SetListLoader";
 import { isMobile } from "react-device-detect";
+import CardShopPriceAPI from "../../services/CardShopPriceAPI";
 
 const ShopAdminOneCard = ({ match }) => {
   //STATE - current card name
@@ -22,6 +23,9 @@ const ShopAdminOneCard = ({ match }) => {
   //STATE - Loading
   const [isLoading, setIsLoading] = useState(false);
 
+  //STATE - Ask API for each set of the card
+  const [canAskEachSet, setCanAskEachSet] = useState(false);
+
   //Context - preparing the DISPLAY context format with data
   const { allPricesBuffer, setAllPricesBuffer } = useContext(
     priceBufferContext
@@ -29,10 +33,9 @@ const ShopAdminOneCard = ({ match }) => {
 
   //DEFINED langages and Conditions
   const { lang, conditions } = useContext(GenericCardInfosContext);
-
+  // console.log(allPricesBuffer);
   useEffect(() => {
     setCurrentName(match.params.name);
-    // console.log(allPricesBuffer);
     // console.log("rerender CARD");
   }, [match.params.name]);
 
@@ -40,7 +43,47 @@ const ShopAdminOneCard = ({ match }) => {
     setCurrentNameDecoded(currentName);
   }, [currentName]);
 
-  // console.log(allPricesBuffer);
+  useEffect(() => {
+    if (canAskEachSet) {
+      makeAPIcallsAsync();
+      setCanAskEachSet(false);
+    }
+  }, [allPricesBuffer, setAllPricesBuffer, canAskEachSet, setCanAskEachSet]);
+
+  //Once Context has been built, we need to make all the API calls
+  const makeAPIcallsAsync = async () => {
+    const promises = allPricesBuffer.map((card) => {
+      // console.log("calling");
+
+      return CardShopPriceAPI.getAllCSPFromOneEdition(card.id);
+    });
+
+    const res = await Promise.all(promises);
+
+    res.forEach((response, index) => parseCSPinResponse(response.data, index));
+    setAllPricesBuffer([...allPricesBuffer]);
+    setIsLoading(false);
+  };
+
+  const parseCSPinResponse = (response, index) => {
+    //Parse each price and integrate in our big table
+    for (let m = 0; m < response.length; m++) {
+      const isFoil = response[m].isFoil ? 1 : 0;
+      const isSigned = response[m].isSigned ? 1 : 0;
+      const condition = parseInt(response[m].cardCondition.substr(17));
+
+      const language = parseInt(response[m].language.substr(11));
+      const price = response[m].price;
+      const idCardShopPrice = response[m].id;
+
+      allPricesBuffer[index]["langs"][language][condition][isFoil][
+        isSigned
+      ] = price;
+      allPricesBuffer[index]["langs"][language][condition][isFoil][
+        isSigned + "idCardShopPrice"
+      ] = idCardShopPrice;
+    }
+  };
 
   //HERE create a function that get the input from API and create the context
   //Order for the context : Lang / Condition / isFoil / Price
@@ -53,6 +96,7 @@ const ShopAdminOneCard = ({ match }) => {
     // console.log(completeContext);
 
     //Parsing each set
+    //We create an object for each set that will contains its info
     for (let i = 0; i < completeContext.length; i++) {
       const allLang = [
         {
@@ -63,7 +107,7 @@ const ShopAdminOneCard = ({ match }) => {
 
       completeContext[i].langs = {};
 
-      //For each existing languages in Magic, create a lang in the context
+      //For each existing languages in Magic, create a lang in the context for this set
       for (let j = 0; j < allLang.length; j++) {
         completeContext[i].langs[allLang[j].language_id.id] = null;
       }
@@ -98,34 +142,6 @@ const ShopAdminOneCard = ({ match }) => {
           }
         }
       }
-
-      //Parse each price and integrate in our big table
-      for (let m = 0; m < completeContext[i].cardShopPrices.length; m++) {
-        const isFoil = completeContext[i].cardShopPrices[m].isFoil ? 1 : 0;
-        const isSigned = completeContext[i].cardShopPrices[m].isSigned ? 1 : 0;
-        const condition = parseInt(
-          completeContext[i].cardShopPrices[m].cardCondition.substr(17)
-        );
-        // console.log(completeContext[l]);
-        // console.log(completeContext[l].cardShopPrices[m]);
-        // console.log(completeContext[l].cardShopPrices[m].language.id);
-        const language = completeContext[i].cardShopPrices[m].language.id;
-        const price = completeContext[i].cardShopPrices[m].price;
-        const idCardShopPrice = completeContext[i].cardShopPrices[m].id;
-        // console.log(language);
-        // console.log(completeContext[l]);
-        // console.log(completeContext[l]["langs"]);
-        // console.log(completeContext[l]["langs"][language]);
-        // console.log(completeContext[l]["langs"][language][condition]);
-        // console.log(completeContext[l]["langs"][language][condition][isFoil]);
-
-        completeContext[i]["langs"][language][condition][isFoil][
-          isSigned
-        ] = price;
-        completeContext[i]["langs"][language][condition][isFoil][
-          isSigned + "idCardShopPrice"
-        ] = idCardShopPrice;
-      }
     }
     // console.log(completeContext);
     //Once all synchronous for-loops are done, we set the global table in context.
@@ -154,7 +170,7 @@ const ShopAdminOneCard = ({ match }) => {
         .then((data) =>
           buildCompletePriceContext(data.data["hydra:member"], lang, conditions)
         )
-        .then(() => setIsLoading(false))
+        .then(() => setCanAskEachSet(true))
         .catch((error) => errorHandlingAPI.check401Unauthorized(error));
 
       return () => source.cancel("");

@@ -6,7 +6,7 @@ function getArrayofPrices(arrayOfIdCards, baseLangID, cleaningParam) {
     config.URL_API +
       "/card_shop_prices?shop.id=" +
       config.shopID +
-      "&language.id[]=9&cardCondition.id=2&language.id[]=" +
+      "&language.id[]=9&cardCondition.id=2&isSigned=false&language.id[]=" +
       baseLangID +
       "&" +
       arrayOfIdCards.map((cardID) => "card.id[]=" + cardID + "&").join(""),
@@ -15,8 +15,6 @@ function getArrayofPrices(arrayOfIdCards, baseLangID, cleaningParam) {
 }
 
 function getOnePrice(shopID, cardID, langID, conditionID, isFoil, isSigned) {
-  console.log("function called");
-
   if (isFoil === true || isFoil === "Yes") {
     isFoil = 1;
   } else {
@@ -27,7 +25,8 @@ function getOnePrice(shopID, cardID, langID, conditionID, isFoil, isSigned) {
   } else {
     isSigned = 0;
   }
-  console.log(
+
+  return axios.get(
     config.URL_API +
       "/card_shop_prices?shop.id=" +
       shopID +
@@ -42,22 +41,16 @@ function getOnePrice(shopID, cardID, langID, conditionID, isFoil, isSigned) {
       "&isSigned=" +
       isSigned
   );
+}
 
+function getAllCSPFromOneEdition(cardID) {
   return axios.get(
     config.URL_API +
-      "/card_shop_prices?shop.id" +
-      shopID +
+      "/card_shop_prices.json?shop.id=" +
+      config.shopID +
       "&card.id=" +
-      cardID +
-      "&language.id=" +
-      langID +
-      "&cardCondition.id=" +
-      conditionID +
-      "&isFoil=" +
-      isFoil +
-      "&isSigned=" +
-      isSigned
+      cardID
   );
 }
 
-export default { getArrayofPrices, getOnePrice };
+export default { getArrayofPrices, getOnePrice, getAllCSPFromOneEdition };

@@ -25,6 +25,7 @@ import MKMModalContext from "./context/mkmModalConnectionContext";
 import shopPublicInfoContext from "./context/publicShopInfoContext";
 import UserPreferenceContext from "./context/userPreferenceContext";
 import LoginRenewOrLogOutContext from "./context/logAutoRenewOrLogout";
+import CardsCardPageContext from "./context/cardsCardPageContext";
 
 import {
   BrowserRouter as Router,
@@ -48,7 +49,6 @@ import LoggedShopRouteRender from "./components/LoggedShopRouteRender";
 import ShopAdminHome from "./pages/shopAdmin/ShopAdminHome";
 import ShopAdminAllSellRequests from "./pages/shopAdmin/ShopAdminAllSellRequest";
 import ShopAdminAllCustomers from "./pages/shopAdmin/ShopAdminAllCustomers";
-import ShopAdminCards from "./pages/shopAdmin/ShopAdminCards";
 import ShopAdminCustomer from "./pages/shopAdmin/ShopAdminCustomer";
 import ShopAdminOneSellRequest from "./pages/shopAdmin/ShopAdminOneSellRequest";
 import ShopAdminSettings from "./pages/shopAdmin/ShopAdminSettings";
@@ -154,7 +154,7 @@ function App() {
     "deactivated"
   );
 
-  //STATE - Cards Context in One Set
+  //STATE - Cards Context in One Set Page
   const [cardsContext, setCardsContext] = useState({});
 
   //STATE - is Plain Page Black Div Displayed ?
@@ -170,6 +170,9 @@ function App() {
     cardPictureUrl: null,
     isDisplayed: false,
   });
+
+  //STATE - Cards Context for CardPage components (public search result)
+  const [cardsCardPageContext, setCardsCardPageContext] = useState({});
 
   //STATE - Display preferences
   //Default : Local Storage
@@ -273,6 +276,12 @@ function App() {
   const ContextloginLogOut = {
     timers: timers,
     setTimers: setTimers,
+  };
+
+  //CONTEXT - CardPage Result (public search)
+  const ContextCardPage = {
+    cardsCardPageContext: cardsCardPageContext,
+    setCardsCardPageContext: setCardsCardPageContext,
   };
 
   function getUserPreferenceCardsSetLang() {
@@ -565,13 +574,17 @@ function App() {
                               <Route
                                 path="/card/:cardName"
                                 render={({ match, history }) => (
-                                  <CardPage
-                                    match={match}
-                                    history={history}
-                                    handleAddSellingBasket={
-                                      handleAddSellingBasket
-                                    }
-                                  />
+                                  <CardsCardPageContext.Provider
+                                    value={ContextCardPage}
+                                  >
+                                    <CardPage
+                                      match={match}
+                                      history={history}
+                                      handleAddSellingBasket={
+                                        handleAddSellingBasket
+                                      }
+                                    />
+                                  </CardsCardPageContext.Provider>
                                 )}
                               />
 
