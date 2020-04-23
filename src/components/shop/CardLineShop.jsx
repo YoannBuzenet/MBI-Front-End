@@ -90,9 +90,11 @@ const CardLineShop = ({ card, indexCard }) => {
 
       setCurrentAdminSellRequest({
         ...newSellRequest,
-        amount: newSellRequest.sellRequests.reduce((total, card) => {
-          return total + card.quantity * card.price;
-        }, 0),
+        amount: priceUpdateAPI.smoothFloatKeepEntireComplete(
+          newSellRequest.sellRequests.reduce((total, card) => {
+            return total + card.quantity * card.price;
+          }, 0)
+        ),
         cardTotalQuantity: newSellRequest.sellRequests.reduce((total, card) => {
           return total + card.quantity;
         }, 0),
@@ -113,9 +115,11 @@ const CardLineShop = ({ card, indexCard }) => {
 
       setCurrentAdminSellRequest({
         ...newSellRequest,
-        amount: newSellRequest.sellRequests.reduce((total, card) => {
-          return total + card.quantity * card.price;
-        }, 0),
+        amount: priceUpdateAPI.smoothFloatKeepEntireComplete(
+          newSellRequest.sellRequests.reduce((total, card) => {
+            return total + card.quantity * card.price;
+          }, 0)
+        ),
         cardTotalQuantity: newSellRequest.sellRequests.reduce((total, card) => {
           return total + card.quantity;
         }, 0),
@@ -125,9 +129,11 @@ const CardLineShop = ({ card, indexCard }) => {
         cardTotalQuantity: newSellRequest.sellRequests.reduce((total, card) => {
           return total + card.quantity;
         }, 0),
-        amount: newSellRequest.sellRequests.reduce((total, card) => {
-          return total + card.price * card.quantity;
-        }, 0),
+        amount: priceUpdateAPI.smoothFloatKeepEntireComplete(
+          newSellRequest.sellRequests.reduce((total, card) => {
+            return total + card.price * card.quantity;
+          }, 0)
+        ),
       };
 
       //UPDATING THE WHOLE SELL REQUEST ON API
@@ -178,9 +184,11 @@ const CardLineShop = ({ card, indexCard }) => {
         },
         0
       ),
-      amount: currentAdminSellRequest.sellRequests.reduce((total, card) => {
-        return total + card.price * card.quantity;
-      }, 0),
+      amount: priceUpdateAPI.smoothFloatKeepEntireComplete(
+        currentAdminSellRequest.sellRequests.reduce((total, card) => {
+          return total + card.price * card.quantity;
+        }, 0)
+      ),
     };
     // console.log(newData);
 
