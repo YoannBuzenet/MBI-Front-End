@@ -10,7 +10,10 @@ import CardDisplayOnPageContext from "../context/cardDisplayOnPageContext";
 import BlackDivModalContext from "../context/blackDivModalContext";
 import config from "../services/config";
 import { useIntl } from "react-intl";
+import CardShopPriceAPI from "../services/CardShopPriceAPI";
 import CardPageContext from "../context/cardsCardPageContext";
+import { toast } from "react-toastify";
+import { FormattedMessage } from "react-intl";
 
 const CardLine = ({ card, handleAddSellingBasket, index, cardID }) => {
   //Current Selling Request Basket
@@ -23,6 +26,8 @@ const CardLine = ({ card, handleAddSellingBasket, index, cardID }) => {
   const { cardsCardPageContext, setCardsCardPageContext } = useContext(
     CardPageContext
   );
+
+  const [isLoading, setIsLoading] = useState(false);
 
   //State - defining if the Hover should be Top or Bottom
   const [hoverTopOrBottom, setHoverTopOrBottom] = useState();
@@ -38,50 +43,59 @@ const CardLine = ({ card, handleAddSellingBasket, index, cardID }) => {
     CardDisplayOnPageContext
   );
 
-  const handleChange = ({ currentTarget }, currentCard) => {
-    // console.log(currentCard);
-    //Updating the card following the new info
+  const handleChange = ({ currentTarget }) => {
     const { name, value } = currentTarget;
-    if (name === "quantity" || name === "lang" || name === "condition") {
+    if (name !== "quantity") {
+      setIsLoading(true);
+    }
+
+    const contextCopy = { ...cardsCardPageContext };
+
+    //Updating the card following the new info
+
+    if (name === "quantity" || name === "lang") {
       var newValue = parseInt(value);
     } else {
       var newValue = value.toString();
     }
-    var isFoil = currentCard.isFoil === "Yes" ? 1 : 0;
-    var isSigned = currentCard.isSigned === "Yes" ? 1 : 0;
-    var price;
-    //To know how to browse the price object, we must know which property has been changed
-    if (name === "lang") {
-      price =
-        currentCard.allPrices[newValue][currentCard.condition][isFoil][
-          isSigned
-        ];
-    } else if (name === "condition") {
-      price =
-        currentCard.allPrices[currentCard.lang][newValue][isFoil][isSigned];
-    } else if (name === "isFoil") {
-      isFoil = newValue === "Yes" ? 1 : 0;
-      price =
-        currentCard.allPrices[currentCard.lang][currentCard.condition][isFoil][
-          isSigned
-        ];
-    } else if (name === "isSigned") {
-      isSigned = newValue === "Yes" ? 1 : 0;
-      price =
-        currentCard.allPrices[currentCard.lang][currentCard.condition][isFoil][
-          isSigned
-        ];
-    } else {
-      price =
-        currentCard.allPrices[currentCard.lang][currentCard.condition][isFoil][
-          isSigned
-        ];
-    }
-    // Set context Here
-    // handlechange to do entirely
-    // setCurrentCard({ ...currentCard, [name]: newValue, price: price });
-  };
 
+    contextCopy[cardID][name] = newValue;
+
+    //IF anything but the quantity has been updated, we make an API call to get the new price
+    if (name !== "quantity") {
+      //API call to get the relevant price and UPDATE PRICE
+      CardShopPriceAPI.getOnePrice(
+        config.shopID,
+        cardID,
+        contextCopy[cardID].lang,
+        contextCopy[cardID].condition,
+        contextCopy[cardID].isFoil,
+        contextCopy[cardID].isSigned
+      )
+        .then((data) => {
+          
+          if (data.data["hydra:member"].length > 0) {
+            contextCopy[cardID].price = data.data["hydra:member"][0].price;
+          } else {
+            contextCopy[cardID].price = 0;
+          }
+          setIsLoading(false);
+          //mutating context and not seting it to gain performance
+
+          setCardsCardPageContext(contextCopy);
+        })
+        .catch((error) => {
+          toast.error(
+            <FormattedMessage
+              id="app.cardLineOneSet.priceUpdate.toast.failure"
+              defaultMessage={`Price couldn't be loaded. Please try again.`}
+            />
+          );
+        });
+    } else {
+      setCardsCardPageContext(contextCopy);
+    }
+  };
   //Getting the Picture URL
   const urlPictureCard = cardsAPI.getSmallPictureFromScryfallId(
     cardsCardPageContext[cardID]
@@ -262,7 +276,11 @@ const CardLine = ({ card, handleAddSellingBasket, index, cardID }) => {
             <option value="12">12</option>
           </select>
         </Td>
-        <Td>{cardsCardPageContext[cardID].price || 0} </Td>
+        <Td>
+          {(!isLoading && cardsCardPageContext[cardID].price) ||
+            (!isLoading && 0)}
+          {isLoading && <div className="loading-loop"></div>}
+        </Td>
         <Td className="AddButton">
           <FeatherIcon
             icon="plus-circle"
