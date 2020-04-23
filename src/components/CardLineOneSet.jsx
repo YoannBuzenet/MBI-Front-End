@@ -21,17 +21,12 @@ const CardLineOneSet = ({
   cardID,
   handleAddSellingBasket,
   index,
-  langIDToDisplay,
   langsAvailable,
 }) => {
   //Current Selling Request Basket
   const { currentBasket } = useContext(SellingBasketContext);
 
   const { userPreferences } = useContext(userPreferencesContext);
-
-  //TIMEOUT SETUP DO NOT ERASE (In case we have to implement it, it can be finished)
-  // const WAIT_INTERVAL = 1000;
-  // const [timer, setTimer] = useState(null);
 
   //Current Cards displayed in One Set Page
   const { cardsContext, setCardsContext } = useContext(cardsOneSetContext);
@@ -57,17 +52,12 @@ const CardLineOneSet = ({
     CardDisplayOnPageContext
   );
 
-  //Began a timeout on handleChange to prevent API call to disturb themselves. Finish implementation in case of problem.
-  //TIMEOUT SETUP DO NOT ERASE
-  // const triggerAPIRequests = () => console.log("trigger");
-
   const handleChange = ({ currentTarget }) => {
     const { name, value } = currentTarget;
     if (name !== "quantity") {
       setIsLoading(true);
     }
-    //TIMEOUT SETUP DO NOT ERASE
-    // setTimer(clearTimeout(timer));
+
     const contextCopy = { ...cardsContext };
 
     //Updating the card following the new info
@@ -114,10 +104,6 @@ const CardLineOneSet = ({
     } else {
       setCardsContext(contextCopy);
     }
-    //TIMEOUT SETUP DO NOT ERASE
-    // setTimer(setTimeout(() => triggerAPIRequests(), WAIT_INTERVAL));
-
-    // setCardsContext(contextCopy);
   };
 
   //Getting the Picture URL
@@ -133,6 +119,7 @@ const CardLineOneSet = ({
     setIsBlackDivModalDisplayed("activated");
   };
 
+  //Updating the card Name in foreign Language if user does so
   var cardName;
   if (userPreferences.cardsSetLang === 9) {
     cardName = cardsContext[cardID].name;

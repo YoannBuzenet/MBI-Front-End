@@ -10,19 +10,19 @@ import CardDisplayOnPageContext from "../context/cardDisplayOnPageContext";
 import BlackDivModalContext from "../context/blackDivModalContext";
 import config from "../services/config";
 import { useIntl } from "react-intl";
+import CardPageContext from "../context/cardsCardPageContext";
 
 const CardLine = ({ card, handleAddSellingBasket, index, setName }) => {
-  const LANGUAGE_ID_ENG = 9;
-  const CONDITION_ID_NM = 2;
-  const ISFOILTRUE = 1;
-  const ISFOILFALSE = 0;
-  const ISSIGNEDFALSE = 0;
-
   //Current Selling Request Basket
   const { currentBasket } = useContext(SellingBasketContext);
 
   //DEFINED langages and Conditions
   const { conditions } = useContext(GenericCardInfosContext);
+
+  //CONTEXT - All cards displayed
+  const { cardsCardPageContext, setCardsCardPageContext } = useContext(
+    CardPageContext
+  );
 
   //State - defining if the Hover should be Top or Bottom
   const [hoverTopOrBottom, setHoverTopOrBottom] = useState();
@@ -37,31 +37,6 @@ const CardLine = ({ card, handleAddSellingBasket, index, setName }) => {
   const { cardDisplayInformation, setCardDisplayInformation } = useContext(
     CardDisplayOnPageContext
   );
-
-  //Using the current Card in state, with default data : English, Near Mint, Non foil...
-  const [currentCard, setCurrentCard] = useState({
-    ...card,
-    quantity: 1,
-    condition: 2,
-    lang: 9,
-    isFoil: card.hasnonfoil ? "No" : "Yes",
-    isSigned: "No",
-    set: setName,
-    price: 0,
-  });
-
-  useEffect(() => {
-    setCurrentCard({
-      ...card,
-      quantity: 1,
-      condition: 2,
-      lang: 9,
-      isFoil: card.hasnonfoil ? "No" : "Yes",
-      set: setName,
-      isSigned: "No",
-      price: 0,
-    });
-  }, [card]);
 
   const handleChange = ({ currentTarget }, currentCard) => {
     // console.log(currentCard);
@@ -102,8 +77,9 @@ const CardLine = ({ card, handleAddSellingBasket, index, setName }) => {
           isSigned
         ];
     }
-
-    setCurrentCard({ ...currentCard, [name]: newValue, price: price });
+    // Set context Here
+    // handlechange to do entirely
+    // setCurrentCard({ ...currentCard, [name]: newValue, price: price });
   };
 
   //Getting the Picture URL
@@ -161,20 +137,22 @@ const CardLine = ({ card, handleAddSellingBasket, index, setName }) => {
             name="lang"
             id={card.name + "id1"}
             onChange={(event) => {
-              handleChange(event, currentCard);
+              handleChange(event);
             }}
           >
-            {card.foreignData.length > 0 ? (
+            {cardsCardPageContext[index].foreignData.length > 0 ? (
               [
                 <option value="9" key="a">
                   EN
                 </option>,
               ].concat(
-                card.foreignData.map((foreignData, index) => (
-                  <option value={foreignData.language_id.id} key={index}>
-                    {foreignData.language_id.shortname}
-                  </option>
-                ))
+                cardsCardPageContext[index].foreignData.map(
+                  (foreignData, index) => (
+                    <option value={foreignData.language_id.id} key={index}>
+                      {foreignData.language_id.shortname}
+                    </option>
+                  )
+                )
               )
             ) : (
               <option value="9">EN</option>
@@ -184,9 +162,9 @@ const CardLine = ({ card, handleAddSellingBasket, index, setName }) => {
         <Td>
           <select
             name="condition"
-            id={card.name + "id2"}
+            id={cardsCardPageContext[index].name + "id2"}
             onChange={(event) => {
-              handleChange(event, currentCard);
+              handleChange(event);
             }}
             defaultValue="2"
           >
@@ -213,12 +191,12 @@ const CardLine = ({ card, handleAddSellingBasket, index, setName }) => {
         <Td>
           <select
             name="isFoil"
-            id={card.name + "id4"}
+            id={cardsCardPageContext[index].name + "id4"}
             onChange={(event) => {
-              handleChange(event, currentCard);
+              handleChange(event);
             }}
           >
-            {card.hasnonfoil && (
+            {cardsCardPageContext[index].hasnonfoil && (
               <option value="No">
                 {intl.formatMessage({
                   id: "app.generics.no",
@@ -226,7 +204,7 @@ const CardLine = ({ card, handleAddSellingBasket, index, setName }) => {
                 })}
               </option>
             )}
-            {card.hasfoil && (
+            {cardsCardPageContext[index].hasfoil && (
               <option value="Yes">
                 {intl.formatMessage({
                   id: "app.generics.yes",
@@ -240,7 +218,7 @@ const CardLine = ({ card, handleAddSellingBasket, index, setName }) => {
           <select
             name="isSigned"
             onChange={(event) => {
-              handleChange(event, currentCard);
+              handleChange(event);
             }}
           >
             <option value="No">
@@ -260,9 +238,9 @@ const CardLine = ({ card, handleAddSellingBasket, index, setName }) => {
         <Td>
           <select
             name="quantity"
-            id={card.name + "id3"}
+            id={cardsCardPageContext[index].name + "id3"}
             onChange={(event) => {
-              handleChange(event, currentCard);
+              handleChange(event);
             }}
           >
             <option value="1">1</option>
@@ -279,15 +257,17 @@ const CardLine = ({ card, handleAddSellingBasket, index, setName }) => {
             <option value="12">12</option>
           </select>
         </Td>
-        <Td>{currentCard.price || 0} </Td>
+        <Td>{cardsCardPageContext[index].price || 0} </Td>
         <Td className="AddButton">
           <FeatherIcon
             icon="plus-circle"
             size="20"
             className="downsize-icon add-item-basket"
             onClick={() => {
-              console.log(currentCard);
-              return handleAddSellingBasket(currentBasket, currentCard);
+              return handleAddSellingBasket(
+                currentBasket,
+                cardsCardPageContext[index]
+              );
             }}
           />
         </Td>
