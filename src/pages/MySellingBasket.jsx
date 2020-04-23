@@ -4,6 +4,7 @@ import SellRequestValidation from "../components/validationSellRequest/SellReque
 import CardLineSellingBasket from "../components/CardLineSellingBasket";
 import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 import { FormattedMessage } from "react-intl";
+import priceUpdateAPI from "../services/priceUpdateAPI";
 
 const MyCurrentSellRequest = ({ history, checkForDuplicates }) => {
   const { currentBasket } = useContext(SellingBasketContext);
@@ -125,9 +126,11 @@ const MyCurrentSellRequest = ({ history, checkForDuplicates }) => {
                 defaultMessage={`Total : `}
               />
             </span>
-            {currentBasket.reduce((total, card) => {
-              return total + card.price * card.quantity;
-            }, 0)}
+            {priceUpdateAPI.smoothFloatKeepEntireComplete(
+              currentBasket.reduce((total, card) => {
+                return total + card.price * card.quantity;
+              }, 0)
+            )}
           </p>
         </div>
         <div className="right-content">

@@ -16,6 +16,7 @@ import BlackDivModalContext from "../../context/blackDivModalContext";
 import config from "../../services/config";
 import { FormattedMessage } from "react-intl";
 import { useIntl } from "react-intl";
+import priceUpdateAPI from "../../services/priceUpdateAPI";
 
 const CardLineShop = ({ card, indexCard }) => {
   //Getting the Sell Request state by context
@@ -538,7 +539,11 @@ const CardLineShop = ({ card, indexCard }) => {
             value={currentCard.price}
           />
         </Td>
-        <Td>{currentCard.quantity * currentCard.price}</Td>
+        <Td>
+          {priceUpdateAPI.smoothFloatKeepEntireComplete(
+            currentCard.quantity * currentCard.price
+          )}
+        </Td>
         <Td>
           <i
             className="fas fa-minus-circle delete-from-selling-basket"

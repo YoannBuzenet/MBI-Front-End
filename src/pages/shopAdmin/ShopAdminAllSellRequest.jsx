@@ -9,6 +9,7 @@ import errorHandlingAPI from "../../services/errorHandlingAPI";
 import { isMobile } from "react-device-detect";
 import SetListLoader from "../../components/loaders/SetListLoader";
 import { FormattedMessage } from "react-intl";
+import priceUpdateAPI from "../../services/priceUpdateAPI";
 
 const ShopAdminAllSellRequests = (props) => {
   //Variable to clean up useEffect Axios
@@ -106,7 +107,11 @@ const ShopAdminAllSellRequests = (props) => {
                         <LastInformationCalculator sellRequest={sellRequest} />
                       </Td>
                       <Td>{sellRequest.cardTotalQuantity}</Td>
-                      <Td>{sellRequest.amount}</Td>
+                      <Td>
+                        {priceUpdateAPI.smoothFloatKeepEntireComplete(
+                          sellRequest.amount
+                        )}
+                      </Td>
                     </Tr>
                   );
                 })}
