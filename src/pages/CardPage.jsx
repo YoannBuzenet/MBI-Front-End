@@ -58,12 +58,28 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
   useEffect(() => {
     if (
       match.params.cardName !== currentName ||
-      Object.keys(cardsCardPageContext).length === 0 ||
-      Object.keys(cardsCardPageContext)[0].name !== currentName
+      Object.keys(cardsCardPageContext).length === 0
+      // ||
+      // (Object.keys(cardsCardPageContext)[0] &&
+      //   Object.keys(cardsCardPageContext)[0].name !== currentName)
     ) {
       //Cancel subscriptions preparation
       const CancelToken = axios.CancelToken;
       const source = CancelToken.source();
+      console.log(Object.keys(cardsCardPageContext));
+      console.log(
+        "match.params.cardName !== currentName",
+        match.params.cardName !== currentName
+      );
+      console.log(
+        "Object.keys(cardsCardPageContext).length === 0",
+        Object.keys(cardsCardPageContext).length === 0
+      );
+      console.log(
+        "Object.keys(cardsCardPageContext)[0] && Object.keys(cardsCardPageContext)[0].name !== currentName",
+        Object.keys(cardsCardPageContext)[0] &&
+          Object.keys(cardsCardPageContext)[0].name !== currentName
+      );
 
       cardsAPI
         .getByName(currentNameDecoded, {
@@ -73,7 +89,10 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
           // console.log(data.data["hydra:member"]);
           return data.data["hydra:member"];
         })
-        .then((data) => setCardsCardPageContext(data))
+        .then((data) => {
+          console.log(data);
+          setCardsCardPageContext(data);
+        })
         .then(setHasUpdatedPrices(false))
         .then(() => setIsLoading(false));
 
@@ -167,16 +186,18 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
               </Tr>
             </Thead>
             <Tbody>
-              {cardsCardPageContext.map((card, index) => (
-                <CardLine
-                  card={card}
-                  index={index}
-                  setName={card.edition.name}
-                  key={parseInt(card["@id"].substr(7))}
-                  displaySets={true}
-                  handleAddSellingBasket={handleAddSellingBasket}
-                />
-              ))}
+              {Object.keys(cardsCardPageContext) &&
+                Object.keys(cardsCardPageContext).length > 0 &&
+                Object.keys(cardsCardPageContext).map((card, index) => (
+                  <CardLine
+                    card={card}
+                    index={index}
+                    setName={card.edition ? card.edition.name : null}
+                    key={index}
+                    displaySets={true}
+                    handleAddSellingBasket={handleAddSellingBasket}
+                  />
+                ))}
             </Tbody>
           </Table>
         )}

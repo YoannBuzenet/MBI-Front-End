@@ -83,7 +83,9 @@ const CardLine = ({ card, handleAddSellingBasket, index, setName }) => {
   };
 
   //Getting the Picture URL
-  const urlPictureCard = cardsAPI.getSmallPictureFromScryfallId(card);
+  const urlPictureCard = cardsAPI.getSmallPictureFromScryfallId(
+    cardsCardPageContext[index]
+  );
 
   const hoverClassName = (e) => genericCardAPI.isPictureDisplayedTopOrBottom(e);
 
@@ -123,14 +125,21 @@ const CardLine = ({ card, handleAddSellingBasket, index, setName }) => {
             }
           }}
         >
-          {card.name}
+          {cardsCardPageContext[index].name}
           {!isMobile && isOnHover && (
             <div className={hoverTopOrBottom}>
-              <img src={urlPictureCard} alt={card.name} />
+              <img
+                src={urlPictureCard}
+                alt={cardsCardPageContext[index].name}
+              />
             </div>
           )}
         </Td>
-        <Td>{card.edition.name}</Td>
+        <Td>
+          {cardsCardPageContext[index].edition
+            ? cardsCardPageContext[index].edition.name
+            : null}
+        </Td>
         <Td>
           {/* Select will have to be refactored with a .map on a Select Component */}
           <select
