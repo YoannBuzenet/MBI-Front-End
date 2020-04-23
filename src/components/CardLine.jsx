@@ -9,21 +9,25 @@ import { Tr, Td } from "react-super-responsive-table";
 import CardDisplayOnPageContext from "../context/cardDisplayOnPageContext";
 import BlackDivModalContext from "../context/blackDivModalContext";
 import config from "../services/config";
-import { FormattedMessage } from "react-intl";
 import { useIntl } from "react-intl";
+import CardShopPriceAPI from "../services/CardShopPriceAPI";
+import CardPageContext from "../context/cardsCardPageContext";
+import { toast } from "react-toastify";
+import { FormattedMessage } from "react-intl";
 
-const CardLine = ({ card, handleAddSellingBasket, index, setName }) => {
-  const LANGUAGE_ID_ENG = 9;
-  const CONDITION_ID_NM = 2;
-  const ISFOILTRUE = 1;
-  const ISFOILFALSE = 0;
-  const ISSIGNEDFALSE = 0;
-
+const CardLine = ({ card, handleAddSellingBasket, index, cardID }) => {
   //Current Selling Request Basket
   const { currentBasket } = useContext(SellingBasketContext);
 
   //DEFINED langages and Conditions
   const { conditions } = useContext(GenericCardInfosContext);
+
+  //CONTEXT - All cards displayed
+  const { cardsCardPageContext, setCardsCardPageContext } = useContext(
+    CardPageContext
+  );
+
+  const [isLoading, setIsLoading] = useState(false);
 
   //State - defining if the Hover should be Top or Bottom
   const [hoverTopOrBottom, setHoverTopOrBottom] = useState();
@@ -39,90 +43,63 @@ const CardLine = ({ card, handleAddSellingBasket, index, setName }) => {
     CardDisplayOnPageContext
   );
 
-  //Using the current Card in state, with default data : English, Near Mint, Non foil...
-  const [currentCard, setCurrentCard] = useState({
-    ...card,
-    quantity: 1,
-    condition: 2,
-    lang: 9,
-    isFoil: card.hasnonfoil ? "No" : "Yes",
-    isSigned: "No",
-    set: setName,
-    price:
-      card.hasnonfoil === 1
-        ? card.allPrices[LANGUAGE_ID_ENG][CONDITION_ID_NM][ISFOILFALSE][
-            ISSIGNEDFALSE
-          ]
-        : card.allPrices[LANGUAGE_ID_ENG][CONDITION_ID_NM][ISFOILTRUE][
-            ISSIGNEDFALSE
-          ],
-  });
-
-  useEffect(() => {
-    setCurrentCard({
-      ...card,
-      quantity: 1,
-      condition: 2,
-      lang: 9,
-      isFoil: card.hasnonfoil ? "No" : "Yes",
-      set: setName,
-      isSigned: "No",
-      price:
-        card.hasnonfoil === 1
-          ? card.allPrices[LANGUAGE_ID_ENG][CONDITION_ID_NM][ISFOILFALSE][
-              ISSIGNEDFALSE
-            ]
-          : card.allPrices[LANGUAGE_ID_ENG][CONDITION_ID_NM][ISFOILTRUE][
-              ISSIGNEDFALSE
-            ],
-    });
-  }, [card]);
-
-  const handleChange = ({ currentTarget }, currentCard) => {
-    // console.log(currentCard);
-    //Updating the card following the new info
+  const handleChange = ({ currentTarget }) => {
     const { name, value } = currentTarget;
-    if (name === "quantity" || name === "lang" || name === "condition") {
+    if (name !== "quantity") {
+      setIsLoading(true);
+    }
+
+    const contextCopy = { ...cardsCardPageContext };
+
+    //Updating the card following the new info
+
+    if (name === "quantity" || name === "lang") {
       var newValue = parseInt(value);
     } else {
       var newValue = value.toString();
     }
-    var isFoil = currentCard.isFoil === "Yes" ? 1 : 0;
-    var isSigned = currentCard.isSigned === "Yes" ? 1 : 0;
-    var price;
-    //To know how to browse the price object, we must know which property has been changed
-    if (name === "lang") {
-      price =
-        currentCard.allPrices[newValue][currentCard.condition][isFoil][
-          isSigned
-        ];
-    } else if (name === "condition") {
-      price =
-        currentCard.allPrices[currentCard.lang][newValue][isFoil][isSigned];
-    } else if (name === "isFoil") {
-      isFoil = newValue === "Yes" ? 1 : 0;
-      price =
-        currentCard.allPrices[currentCard.lang][currentCard.condition][isFoil][
-          isSigned
-        ];
-    } else if (name === "isSigned") {
-      isSigned = newValue === "Yes" ? 1 : 0;
-      price =
-        currentCard.allPrices[currentCard.lang][currentCard.condition][isFoil][
-          isSigned
-        ];
+
+    contextCopy[cardID][name] = newValue;
+
+    //IF anything but the quantity has been updated, we make an API call to get the new price
+    if (name !== "quantity") {
+      //API call to get the relevant price and UPDATE PRICE
+      CardShopPriceAPI.getOnePrice(
+        config.shopID,
+        cardID,
+        contextCopy[cardID].lang,
+        contextCopy[cardID].condition,
+        contextCopy[cardID].isFoil,
+        contextCopy[cardID].isSigned
+      )
+        .then((data) => {
+          
+          if (data.data["hydra:member"].length > 0) {
+            contextCopy[cardID].price = data.data["hydra:member"][0].price;
+          } else {
+            contextCopy[cardID].price = 0;
+          }
+          setIsLoading(false);
+          //mutating context and not seting it to gain performance
+
+          setCardsCardPageContext(contextCopy);
+        })
+        .catch((error) => {
+          toast.error(
+            <FormattedMessage
+              id="app.cardLineOneSet.priceUpdate.toast.failure"
+              defaultMessage={`Price couldn't be loaded. Please try again.`}
+            />
+          );
+        });
     } else {
-      price =
-        currentCard.allPrices[currentCard.lang][currentCard.condition][isFoil][
-          isSigned
-        ];
+      setCardsCardPageContext(contextCopy);
     }
-
-    setCurrentCard({ ...currentCard, [name]: newValue, price: price });
   };
-
   //Getting the Picture URL
-  const urlPictureCard = cardsAPI.getSmallPictureFromScryfallId(card);
+  const urlPictureCard = cardsAPI.getSmallPictureFromScryfallId(
+    cardsCardPageContext[cardID]
+  );
 
   const hoverClassName = (e) => genericCardAPI.isPictureDisplayedTopOrBottom(e);
 
@@ -162,34 +139,39 @@ const CardLine = ({ card, handleAddSellingBasket, index, setName }) => {
             }
           }}
         >
-          {card.name}
+          {cardsCardPageContext[cardID].name}
           {!isMobile && isOnHover && (
             <div className={hoverTopOrBottom}>
-              <img src={urlPictureCard} alt={card.name} />
+              <img
+                src={urlPictureCard}
+                alt={cardsCardPageContext[cardID].name}
+              />
             </div>
           )}
         </Td>
-        <Td>{card.edition.name}</Td>
+        <Td>{cardsCardPageContext[cardID].set}</Td>
         <Td>
           {/* Select will have to be refactored with a .map on a Select Component */}
           <select
             name="lang"
             id={card.name + "id1"}
             onChange={(event) => {
-              handleChange(event, currentCard);
+              handleChange(event);
             }}
           >
-            {card.foreignData.length > 0 ? (
+            {cardsCardPageContext[cardID].foreignData.length > 0 ? (
               [
                 <option value="9" key="a">
                   EN
                 </option>,
               ].concat(
-                card.foreignData.map((foreignData, index) => (
-                  <option value={foreignData.language_id.id} key={index}>
-                    {foreignData.language_id.shortname}
-                  </option>
-                ))
+                cardsCardPageContext[cardID].foreignData.map(
+                  (foreignData, index) => (
+                    <option value={foreignData.language_id.id} key={index}>
+                      {foreignData.language_id.shortname}
+                    </option>
+                  )
+                )
               )
             ) : (
               <option value="9">EN</option>
@@ -199,9 +181,9 @@ const CardLine = ({ card, handleAddSellingBasket, index, setName }) => {
         <Td>
           <select
             name="condition"
-            id={card.name + "id2"}
+            id={cardsCardPageContext[cardID].name + "id2"}
             onChange={(event) => {
-              handleChange(event, currentCard);
+              handleChange(event);
             }}
             defaultValue="2"
           >
@@ -228,12 +210,12 @@ const CardLine = ({ card, handleAddSellingBasket, index, setName }) => {
         <Td>
           <select
             name="isFoil"
-            id={card.name + "id4"}
+            id={cardsCardPageContext[cardID].name + "id4"}
             onChange={(event) => {
-              handleChange(event, currentCard);
+              handleChange(event);
             }}
           >
-            {card.hasnonfoil && (
+            {cardsCardPageContext[cardID].hasnonfoil && (
               <option value="No">
                 {intl.formatMessage({
                   id: "app.generics.no",
@@ -241,7 +223,7 @@ const CardLine = ({ card, handleAddSellingBasket, index, setName }) => {
                 })}
               </option>
             )}
-            {card.hasfoil && (
+            {cardsCardPageContext[cardID].hasfoil && (
               <option value="Yes">
                 {intl.formatMessage({
                   id: "app.generics.yes",
@@ -255,7 +237,7 @@ const CardLine = ({ card, handleAddSellingBasket, index, setName }) => {
           <select
             name="isSigned"
             onChange={(event) => {
-              handleChange(event, currentCard);
+              handleChange(event);
             }}
           >
             <option value="No">
@@ -275,9 +257,9 @@ const CardLine = ({ card, handleAddSellingBasket, index, setName }) => {
         <Td>
           <select
             name="quantity"
-            id={card.name + "id3"}
+            id={cardsCardPageContext[cardID].name + "id3"}
             onChange={(event) => {
-              handleChange(event, currentCard);
+              handleChange(event);
             }}
           >
             <option value="1">1</option>
@@ -294,15 +276,21 @@ const CardLine = ({ card, handleAddSellingBasket, index, setName }) => {
             <option value="12">12</option>
           </select>
         </Td>
-        <Td>{currentCard.price || 0} </Td>
+        <Td>
+          {(!isLoading && cardsCardPageContext[cardID].price) ||
+            (!isLoading && 0)}
+          {isLoading && <div className="loading-loop"></div>}
+        </Td>
         <Td className="AddButton">
           <FeatherIcon
             icon="plus-circle"
             size="20"
             className="downsize-icon add-item-basket"
             onClick={() => {
-              console.log(currentCard);
-              return handleAddSellingBasket(currentBasket, currentCard);
+              return handleAddSellingBasket(
+                currentBasket,
+                cardsCardPageContext[cardID]
+              );
             }}
           />
         </Td>

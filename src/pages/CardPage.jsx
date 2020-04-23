@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import cardsAPI from "../services/cardsAPI";
 import CardLine from "../components/CardLine";
@@ -7,11 +7,11 @@ import TableLoader from "../components/loaders/TableLoader";
 import { isMobile } from "react-device-detect";
 import SetListLoader from "../components/loaders/SetListLoader";
 import { FormattedMessage } from "react-intl";
+import CardPageContext from "../context/cardsCardPageContext";
+import CardShopPriceAPI from "../services/CardShopPriceAPI";
+import config from "../services/config";
 
 const CardPage = ({ match, handleAddSellingBasket }) => {
-  const NUMBER_OF_LANGUAGES = 11;
-  const NUMBER_OF_CONDITIONS = 7;
-
   //STATE - current card name
   const [currentName, setCurrentName] = useState(match.params.cardName);
 
@@ -20,8 +20,12 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
     decodeURI(currentName)
   );
 
-  //STATE - current cards displayed
-  const [allCardsDisplayed, setAllCardsDisplayed] = useState([]);
+  const [hasUpdatedPrices, setHasUpdatedPrices] = useState(false);
+
+  //CONTEXT - All cards displayed
+  const { cardsCardPageContext, setCardsCardPageContext } = useContext(
+    CardPageContext
+  );
 
   //STATE - Is Loading
   const [isLoading, setIsLoading] = useState(true);
@@ -34,59 +38,70 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
     setCurrentNameDecoded(currentName);
   }, [currentName]);
 
-  /*
-   * We receive all prices as an array. To make them browsable easily, we transform it in a big object.
-   * We browse the array, build a big object, then fill it with data.
-   */
-  const makeCardShopPriceBrowsable = (array) => {
-    // console.log("function called");
+  const ENGLISH_LANG_ID = 9;
+
+  const buildContextFromAPIResponse = (data) => {
+    const contextEmpty = {};
+
+    for (let i = 0; i < data.length; i++) {
+      contextEmpty[data[i]["@id"].substr(7)] = {
+        cardID: parseInt(data[i]["@id"].substr(7)),
+        id: parseInt(data[i]["@id"].substr(7)),
+        ["@id"]: "/cards/" + parseInt(data[i]["@id"].substr(7)),
+        hasfoil: data[i].hasfoil,
+        hasnonfoil: data[i].hasnonfoil,
+        name: data[i].name,
+        cardName: data[i].name,
+        scryfallid: data[i].scryfallid,
+        uuid: data[i].uuid,
+        foreignData: data[i].foreignData,
+        price: 0,
+        isFoil: data[i].hasnonfoil ? "No" : "Yes",
+        isSigned: "No",
+        set: data[i].edition.name,
+        quantity: 1,
+        condition: 2,
+        lang: ENGLISH_LANG_ID,
+        foreignDataObject: transformLanguagesArrayIntoObject(
+          data[i].foreignData
+        ),
+      };
+    }
+    setCardsCardPageContext(contextEmpty);
+  };
+
+  const transformLanguagesArrayIntoObject = (array) => {
+    let langObject = {};
+
     for (let i = 0; i < array.length; i++) {
-      //Creating the allPrices object that will hold all the data.
-      array[i].allPrices = {};
+      langObject[array[i].language_id.id] = array[i].name;
+    }
 
-      for (let h = 1; h <= NUMBER_OF_LANGUAGES; h++) {
-        array[i].allPrices[h] = {};
+    return langObject;
+  };
 
-        for (let g = 1; g <= NUMBER_OF_CONDITIONS; g++) {
-          array[i].allPrices[h][g] = {};
-
-          //Foil or Non Foil
-          for (let f = 0; f < 2; f++) {
-            array[i].allPrices[h][g][f] = {};
-
-            //Signed or non signed
-            for (let p = 0; p < 2; p++) {
-              array[i].allPrices[h][g][f][p] = 0;
-            }
-          }
-        }
-      }
-
-      //Now we fill it with data from CardShopPrice array.
-
-      for (let j = 0; j < array[i].cardShopPrices.length; j++) {
-        let currentLanguage = array[i].cardShopPrices[j].language.id;
-        let currentCondition = parseInt(
-          array[i].cardShopPrices[j].cardCondition.substr(17)
+  //This function takes API reponse with CardShopPrices and feeds the context.
+  // If several languages are received from a single card, we prioritize baseLang price.
+  const addFirstDisplayedPricesToContext = (data) => {
+    const contextCopy = { ...cardsCardPageContext };
+    for (let i = 0; i < data.length; i++) {
+      if (contextCopy[data[i].card.substr(7)].LangOfPrice !== ENGLISH_LANG_ID) {
+        contextCopy[data[i].card.substr(7)].price = data[i].price;
+        contextCopy[data[i].card.substr(7)].LangOfPrice = parseInt(
+          data[i].language.substr(11)
         );
-
-        let isFoil = array[i].cardShopPrices[j].isFoil ? 1 : 0;
-        let isSigned = array[i].cardShopPrices[j].isSigned ? 1 : 0;
-
-        //language / condition / isfoil
-        array[i].allPrices[currentLanguage][currentCondition][isFoil][
-          isSigned
-        ] = array[i].cardShopPrices[j].price;
       }
     }
-    return array;
+    setCardsCardPageContext(contextCopy);
   };
 
   useEffect(() => {
     if (
       match.params.cardName !== currentName ||
-      allCardsDisplayed.length === 0 ||
-      allCardsDisplayed[0].name !== currentName
+      Object.keys(cardsCardPageContext).length === 0 ||
+      (Object.keys(cardsCardPageContext).length > 0 &&
+        cardsCardPageContext[Object.keys(cardsCardPageContext)[0]].name !==
+          currentName)
     ) {
       //Cancel subscriptions preparation
       const CancelToken = axios.CancelToken;
@@ -100,8 +115,11 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
           // console.log(data.data["hydra:member"]);
           return data.data["hydra:member"];
         })
-        .then((data) => makeCardShopPriceBrowsable(data))
-        .then((data) => setAllCardsDisplayed(data))
+        .then((data) => {
+          console.log(data);
+          buildContextFromAPIResponse(data);
+        })
+        .then(setHasUpdatedPrices(false))
         .then(() => setIsLoading(false));
 
       return () => source.cancel("");
@@ -109,9 +127,24 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
   }, [
     currentNameDecoded,
     currentName,
-    allCardsDisplayed,
+    cardsCardPageContext,
     match.params.cardName,
   ]);
+
+  //Fetching prices once context is set up
+  useEffect(() => {
+    if (Object.keys(cardsCardPageContext).length > 0 && !hasUpdatedPrices) {
+      CardShopPriceAPI.getArrayofPrices(
+        Object.keys(cardsCardPageContext).map((id) => parseInt(id)),
+        config.baseLang
+      )
+        .then((data) => {
+          // console.log(data);
+          addFirstDisplayedPricesToContext(data.data["hydra:member"]);
+        })
+        .then(setHasUpdatedPrices(true));
+    }
+  }, [cardsCardPageContext, setCardsCardPageContext]);
 
   return (
     <>
@@ -180,16 +213,18 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
               </Tr>
             </Thead>
             <Tbody>
-              {allCardsDisplayed.map((card, index) => (
-                <CardLine
-                  card={card}
-                  index={index}
-                  setName={card.edition.name}
-                  key={parseInt(card["@id"].substr(7))}
-                  displaySets={true}
-                  handleAddSellingBasket={handleAddSellingBasket}
-                />
-              ))}
+              {Object.keys(cardsCardPageContext) &&
+                Object.keys(cardsCardPageContext).length > 0 &&
+                Object.keys(cardsCardPageContext).map((id, index) => (
+                  <CardLine
+                    card={cardsCardPageContext[id]}
+                    cardID={id}
+                    index={index}
+                    key={index}
+                    displaySets={true}
+                    handleAddSellingBasket={handleAddSellingBasket}
+                  />
+                ))}
             </Tbody>
           </Table>
         )}
