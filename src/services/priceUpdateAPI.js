@@ -78,10 +78,19 @@ function smoothNumbers(price) {
   return parseFloat(price.toFixed(2));
 }
 
+function smoothFloatKeepEntireComplete(number) {
+  if (number % 1 !== 0) {
+    return number.toFixed(2);
+  } else {
+    return number;
+  }
+}
+
 export default {
   postOnePrice,
   putOnePrice,
   deleteOnePrice,
   batchPriceUpdate,
   smoothNumbers,
+  smoothFloatKeepEntireComplete,
 };
