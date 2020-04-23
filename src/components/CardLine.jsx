@@ -12,7 +12,7 @@ import config from "../services/config";
 import { useIntl } from "react-intl";
 import CardPageContext from "../context/cardsCardPageContext";
 
-const CardLine = ({ card, handleAddSellingBasket, index, setName }) => {
+const CardLine = ({ card, handleAddSellingBasket, index, cardID }) => {
   //Current Selling Request Basket
   const { currentBasket } = useContext(SellingBasketContext);
 
@@ -84,7 +84,7 @@ const CardLine = ({ card, handleAddSellingBasket, index, setName }) => {
 
   //Getting the Picture URL
   const urlPictureCard = cardsAPI.getSmallPictureFromScryfallId(
-    cardsCardPageContext[index]
+    cardsCardPageContext[cardID]
   );
 
   const hoverClassName = (e) => genericCardAPI.isPictureDisplayedTopOrBottom(e);
@@ -125,21 +125,17 @@ const CardLine = ({ card, handleAddSellingBasket, index, setName }) => {
             }
           }}
         >
-          {cardsCardPageContext[index].name}
+          {cardsCardPageContext[cardID].name}
           {!isMobile && isOnHover && (
             <div className={hoverTopOrBottom}>
               <img
                 src={urlPictureCard}
-                alt={cardsCardPageContext[index].name}
+                alt={cardsCardPageContext[cardID].name}
               />
             </div>
           )}
         </Td>
-        <Td>
-          {cardsCardPageContext[index].edition
-            ? cardsCardPageContext[index].edition.name
-            : null}
-        </Td>
+        <Td>{cardsCardPageContext[cardID].set}</Td>
         <Td>
           {/* Select will have to be refactored with a .map on a Select Component */}
           <select
@@ -149,13 +145,13 @@ const CardLine = ({ card, handleAddSellingBasket, index, setName }) => {
               handleChange(event);
             }}
           >
-            {cardsCardPageContext[index].foreignData.length > 0 ? (
+            {cardsCardPageContext[cardID].foreignData.length > 0 ? (
               [
                 <option value="9" key="a">
                   EN
                 </option>,
               ].concat(
-                cardsCardPageContext[index].foreignData.map(
+                cardsCardPageContext[cardID].foreignData.map(
                   (foreignData, index) => (
                     <option value={foreignData.language_id.id} key={index}>
                       {foreignData.language_id.shortname}
@@ -171,7 +167,7 @@ const CardLine = ({ card, handleAddSellingBasket, index, setName }) => {
         <Td>
           <select
             name="condition"
-            id={cardsCardPageContext[index].name + "id2"}
+            id={cardsCardPageContext[cardID].name + "id2"}
             onChange={(event) => {
               handleChange(event);
             }}
@@ -200,12 +196,12 @@ const CardLine = ({ card, handleAddSellingBasket, index, setName }) => {
         <Td>
           <select
             name="isFoil"
-            id={cardsCardPageContext[index].name + "id4"}
+            id={cardsCardPageContext[cardID].name + "id4"}
             onChange={(event) => {
               handleChange(event);
             }}
           >
-            {cardsCardPageContext[index].hasnonfoil && (
+            {cardsCardPageContext[cardID].hasnonfoil && (
               <option value="No">
                 {intl.formatMessage({
                   id: "app.generics.no",
@@ -213,7 +209,7 @@ const CardLine = ({ card, handleAddSellingBasket, index, setName }) => {
                 })}
               </option>
             )}
-            {cardsCardPageContext[index].hasfoil && (
+            {cardsCardPageContext[cardID].hasfoil && (
               <option value="Yes">
                 {intl.formatMessage({
                   id: "app.generics.yes",
@@ -247,7 +243,7 @@ const CardLine = ({ card, handleAddSellingBasket, index, setName }) => {
         <Td>
           <select
             name="quantity"
-            id={cardsCardPageContext[index].name + "id3"}
+            id={cardsCardPageContext[cardID].name + "id3"}
             onChange={(event) => {
               handleChange(event);
             }}
@@ -266,7 +262,7 @@ const CardLine = ({ card, handleAddSellingBasket, index, setName }) => {
             <option value="12">12</option>
           </select>
         </Td>
-        <Td>{cardsCardPageContext[index].price || 0} </Td>
+        <Td>{cardsCardPageContext[cardID].price || 0} </Td>
         <Td className="AddButton">
           <FeatherIcon
             icon="plus-circle"
@@ -275,7 +271,7 @@ const CardLine = ({ card, handleAddSellingBasket, index, setName }) => {
             onClick={() => {
               return handleAddSellingBasket(
                 currentBasket,
-                cardsCardPageContext[index]
+                cardsCardPageContext[cardID]
               );
             }}
           />

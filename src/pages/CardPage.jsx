@@ -40,6 +40,46 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
 
   const ENGLISH_LANG_ID = 9;
 
+  const buildContextFromAPIResponse = (data) => {
+    const contextCopy = { ...cardsCardPageContext };
+
+    for (let i = 0; i < data.length; i++) {
+      contextCopy[data[i]["@id"].substr(7)] = {
+        cardID: parseInt(data[i]["@id"].substr(7)),
+        id: parseInt(data[i]["@id"].substr(7)),
+        ["@id"]: "/cards/" + parseInt(data[i]["@id"].substr(7)),
+        hasfoil: data[i].hasfoil,
+        hasnonfoil: data[i].hasnonfoil,
+        name: data[i].name,
+        cardName: data[i].name,
+        scryfallid: data[i].scryfallid,
+        uuid: data[i].uuid,
+        foreignData: data[i].foreignData,
+        price: 0,
+        isFoil: data[i].hasnonfoil ? "No" : "Yes",
+        isSigned: "No",
+        set: data[i].edition.name,
+        quantity: 1,
+        condition: 2,
+        lang: ENGLISH_LANG_ID,
+        foreignDataObject: transformLanguagesArrayIntoObject(
+          data[i].foreignData
+        ),
+      };
+    }
+    setCardsCardPageContext(contextCopy);
+  };
+
+  const transformLanguagesArrayIntoObject = (array) => {
+    let langObject = {};
+
+    for (let i = 0; i < array.length; i++) {
+      langObject[array[i].language_id.id] = array[i].name;
+    }
+
+    return langObject;
+  };
+
   //This function takes API reponse with CardShopPrices and feeds the context.
   // If several languages are received from a single card, we prioritize baseLang price.
   const addFirstDisplayedPricesToContext = (data) => {
@@ -91,7 +131,7 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
         })
         .then((data) => {
           console.log(data);
-          setCardsCardPageContext(data);
+          buildContextFromAPIResponse(data);
         })
         .then(setHasUpdatedPrices(false))
         .then(() => setIsLoading(false));
@@ -112,9 +152,10 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
         Object.keys(cardsCardPageContext).map((id) => parseInt(id)),
         config.baseLang
       )
-        .then((data) =>
-          addFirstDisplayedPricesToContext(data.data["hydra:member"])
-        )
+        .then((data) => {
+          // console.log(data);
+          addFirstDisplayedPricesToContext(data.data["hydra:member"]);
+        })
         .then(setHasUpdatedPrices(true));
     }
   }, [cardsCardPageContext, setCardsCardPageContext]);
@@ -188,11 +229,11 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
             <Tbody>
               {Object.keys(cardsCardPageContext) &&
                 Object.keys(cardsCardPageContext).length > 0 &&
-                Object.keys(cardsCardPageContext).map((card, index) => (
+                Object.keys(cardsCardPageContext).map((id, index) => (
                   <CardLine
-                    card={card}
+                    card={cardsCardPageContext[id]}
+                    cardID={id}
                     index={index}
-                    setName={card.edition ? card.edition.name : null}
                     key={index}
                     displaySets={true}
                     handleAddSellingBasket={handleAddSellingBasket}
