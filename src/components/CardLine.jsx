@@ -60,6 +60,7 @@ const CardLine = ({ card, handleAddSellingBasket, index, setName }) => {
       set: setName,
       isSigned: "No",
       price: 0,
+    });
   }, [card]);
 
   const handleChange = ({ currentTarget }, currentCard) => {

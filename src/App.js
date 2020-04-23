@@ -172,7 +172,7 @@ function App() {
   });
 
   //STATE - Cards Context for CardPage components (public search result)
-  const [cardsCardPageContext, setCardsCardPageContext] = useContext([]);
+  const [cardsCardPageContext, setCardsCardPageContext] = useState([]);
 
   //STATE - Display preferences
   //Default : Local Storage
@@ -281,7 +281,7 @@ function App() {
   //CONTEXT - CardPage Result (public search)
   const ContextCardPage = {
     cardsCardPageContext: cardsCardPageContext,
-    setCardsCardPageContext: setCardsCardPageContexts,
+    setCardsCardPageContext: setCardsCardPageContext,
   };
 
   function getUserPreferenceCardsSetLang() {

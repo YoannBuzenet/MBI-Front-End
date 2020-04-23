@@ -19,12 +19,9 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
   );
 
   //CONTEXT - All cards displayed
-  const { cardsCardPageContext, setCardsCardPageContext } = useCOntext(
+  const { cardsCardPageContext, setCardsCardPageContext } = useContext(
     CardPageContext
   );
-
-  //STATE - current cards displayed
-  const [allCardsDisplayed, setAllCardsDisplayed] = useState([]);
 
   //STATE - Is Loading
   const [isLoading, setIsLoading] = useState(true);
@@ -90,8 +87,8 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
   useEffect(() => {
     if (
       match.params.cardName !== currentName ||
-      allCardsDisplayed.length === 0 ||
-      allCardsDisplayed[0].name !== currentName
+      cardsCardPageContext.length === 0 ||
+      cardsCardPageContext[0].name !== currentName
     ) {
       //Cancel subscriptions preparation
       const CancelToken = axios.CancelToken;
@@ -105,7 +102,7 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
           // console.log(data.data["hydra:member"]);
           return data.data["hydra:member"];
         })
-        .then((data) => setAllCardsDisplayed(data))
+        .then((data) => setCardsCardPageContext(data))
         .then(() => setIsLoading(false));
 
       return () => source.cancel("");
@@ -113,7 +110,7 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
   }, [
     currentNameDecoded,
     currentName,
-    allCardsDisplayed,
+    cardsCardPageContext,
     match.params.cardName,
   ]);
 
@@ -184,7 +181,7 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
               </Tr>
             </Thead>
             <Tbody>
-              {allCardsDisplayed.map((card, index) => (
+              {cardsCardPageContext.map((card, index) => (
                 <CardLine
                   card={card}
                   index={index}
