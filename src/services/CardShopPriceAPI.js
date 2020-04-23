@@ -44,7 +44,13 @@ function getOnePrice(shopID, cardID, langID, conditionID, isFoil, isSigned) {
 }
 
 function getAllCSPFromOneEdition(cardID) {
-  return axios.get(config.URL_API + "/cardcsp/" + cardID + ".json");
+  return axios.get(
+    config.URL_API +
+      "/card_shop_prices.json?shop.id=" +
+      config.shopID +
+      "card.id[]=" +
+      cardID
+  );
 }
 
 export default { getArrayofPrices, getOnePrice, getAllCSPFromOneEdition };
