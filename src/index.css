@@ -793,6 +793,7 @@ div.lang-select-applevel {
   top: 2.5rem;
   width: 100%;
   box-shadow: 1px 5px 5px black;
+  border-radius: 5px;
 }
 
 .search-card-form .search-result a {
@@ -802,6 +803,16 @@ div.lang-select-applevel {
 .search-card-form .search-result .card-line-result {
   padding: 1rem 0;
   background-color: white;
+}
+
+.search-card-form .search-result .card-line-result:first-child {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.search-card-form .search-result .card-line-result:last-child {
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
 
 .search-card-form .search-result .card-line-result-text {
