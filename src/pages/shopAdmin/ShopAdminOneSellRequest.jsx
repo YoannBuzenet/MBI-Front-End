@@ -15,6 +15,7 @@ import errorHandlingAPI from "../../services/errorHandlingAPI";
 import { isMobile } from "react-device-detect";
 import SetListLoader from "../../components/loaders/SetListLoader";
 import { FormattedMessage } from "react-intl";
+import priceUpdateAPI from "../../services/priceUpdateAPI";
 
 const ShopAdminOneSellRequest = ({ match }) => {
   const { id } = match.params;
@@ -366,11 +367,13 @@ const ShopAdminOneSellRequest = ({ match }) => {
                 <td>
                   {currentAdminSellRequest.sellRequests &&
                     currentAdminSellRequest.sellRequests.length > 0 &&
-                    currentAdminSellRequest.sellRequests.reduce(
-                      (total, card) => {
-                        return total + card.price * card.quantity;
-                      },
-                      0
+                    priceUpdateAPI.smoothFloatKeepEntireComplete(
+                      currentAdminSellRequest.sellRequests.reduce(
+                        (total, card) => {
+                          return total + card.price * card.quantity;
+                        },
+                        0
+                      )
                     )}
                 </td>
               </tr>

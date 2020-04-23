@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import GenericCardInfosContext from "../../context/genericCardInfosContext";
 import { isMobile } from "react-device-detect";
+import priceUpdateAPI from "../../services/priceUpdateAPI";
 
 const CardLineShopStuck = ({ card }) => {
   //DEFINED langages and Conditions
@@ -24,7 +25,11 @@ const CardLineShopStuck = ({ card }) => {
         <td>{card.isSigned}</td>
         <td>{card.quantity}</td>
         <td>{card.price}</td>
-        <td>{card.quantity * card.price}</td>
+        <td>
+          {priceUpdateAPI.smoothFloatKeepEntireComplete(
+            card.quantity * card.price
+          )}
+        </td>
       </tr>
     </>
   );

@@ -7,6 +7,7 @@ import SellRequestStatusUpdater from "../components/SellRequestStatusUpdater";
 import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 import config from "../services/config";
 import { FormattedMessage } from "react-intl";
+import priceUpdateAPI from "../services/priceUpdateAPI";
 
 const OneSellRequest = ({ match, history }) => {
   const { id } = match.params;
@@ -157,9 +158,11 @@ const OneSellRequest = ({ match, history }) => {
           defaultMessage={`Total : `}
         />
         {currentSellRequest.sellRequestCards.length > 0 &&
-          currentSellRequest.sellRequestCards.reduce((total, card) => {
-            return total + card.price * card.cardQuantity;
-          }, 0)}
+          priceUpdateAPI.smoothFloatKeepEntireComplete(
+            currentSellRequest.sellRequestCards.reduce((total, card) => {
+              return total + card.price * card.cardQuantity;
+            }, 0)
+          )}
       </span>
       <SellRequestStatusUpdater
         currentSellRequest={currentSellRequest}
