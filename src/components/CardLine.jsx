@@ -9,7 +9,6 @@ import { Tr, Td } from "react-super-responsive-table";
 import CardDisplayOnPageContext from "../context/cardDisplayOnPageContext";
 import BlackDivModalContext from "../context/blackDivModalContext";
 import config from "../services/config";
-import { FormattedMessage } from "react-intl";
 import { useIntl } from "react-intl";
 
 const CardLine = ({ card, handleAddSellingBasket, index, setName }) => {
@@ -48,14 +47,7 @@ const CardLine = ({ card, handleAddSellingBasket, index, setName }) => {
     isFoil: card.hasnonfoil ? "No" : "Yes",
     isSigned: "No",
     set: setName,
-    price:
-      card.hasnonfoil === 1
-        ? card.allPrices[LANGUAGE_ID_ENG][CONDITION_ID_NM][ISFOILFALSE][
-            ISSIGNEDFALSE
-          ]
-        : card.allPrices[LANGUAGE_ID_ENG][CONDITION_ID_NM][ISFOILTRUE][
-            ISSIGNEDFALSE
-          ],
+    price: 0,
   });
 
   useEffect(() => {
@@ -67,15 +59,7 @@ const CardLine = ({ card, handleAddSellingBasket, index, setName }) => {
       isFoil: card.hasnonfoil ? "No" : "Yes",
       set: setName,
       isSigned: "No",
-      price:
-        card.hasnonfoil === 1
-          ? card.allPrices[LANGUAGE_ID_ENG][CONDITION_ID_NM][ISFOILFALSE][
-              ISSIGNEDFALSE
-            ]
-          : card.allPrices[LANGUAGE_ID_ENG][CONDITION_ID_NM][ISFOILTRUE][
-              ISSIGNEDFALSE
-            ],
-    });
+      price: 0,
   }, [card]);
 
   const handleChange = ({ currentTarget }, currentCard) => {

@@ -25,6 +25,7 @@ import MKMModalContext from "./context/mkmModalConnectionContext";
 import shopPublicInfoContext from "./context/publicShopInfoContext";
 import UserPreferenceContext from "./context/userPreferenceContext";
 import LoginRenewOrLogOutContext from "./context/logAutoRenewOrLogout";
+import CardsCardPageContext from "./context/cardsCardPageContext";
 
 import {
   BrowserRouter as Router,
@@ -170,6 +171,9 @@ function App() {
     isDisplayed: false,
   });
 
+  //STATE - Cards Context for CardPage components (public search result)
+  const [cardsCardPageContext, setCardsCardPageContext] = useContext([]);
+
   //STATE - Display preferences
   //Default : Local Storage
   const [userPreferences, setUserPreferences] = useState(
@@ -272,6 +276,12 @@ function App() {
   const ContextloginLogOut = {
     timers: timers,
     setTimers: setTimers,
+  };
+
+  //CONTEXT - CardPage Result (public search)
+  const ContextCardPage = {
+    cardsCardPageContext: cardsCardPageContext,
+    setCardsCardPageContext: setCardsCardPageContexts,
   };
 
   function getUserPreferenceCardsSetLang() {
@@ -561,18 +571,22 @@ function App() {
                                 )}
                               />
 
-                              <Route
-                                path="/card/:cardName"
-                                render={({ match, history }) => (
-                                  <CardPage
-                                    match={match}
-                                    history={history}
-                                    handleAddSellingBasket={
-                                      handleAddSellingBasket
-                                    }
-                                  />
-                                )}
-                              />
+                              <CardsCardPageContext.Provider
+                                value={ContextCardPage}
+                              >
+                                <Route
+                                  path="/card/:cardName"
+                                  render={({ match, history }) => (
+                                    <CardPage
+                                      match={match}
+                                      history={history}
+                                      handleAddSellingBasket={
+                                        handleAddSellingBasket
+                                      }
+                                    />
+                                  )}
+                                />
+                              </CardsCardPageContext.Provider>
 
                               <Route
                                 path="/register"

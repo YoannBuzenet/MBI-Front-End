@@ -52,16 +52,14 @@ const ShopAdminOneCard = ({ match }) => {
   //Once Context has been built, we need to make all the API calls
   const makeAPIcallsAsync = async () => {
     const promises = allPricesBuffer.map((set) => {
-      console.log("calling");
+      // console.log("calling");
       return cardsAPI.getById(set.id);
     });
 
-    const res = await Promise.all(promises).then((responses) => {
-      responses.forEach((response, index) =>
-        parseCSPinResponse(response.data, index)
-      );
-    });
+    const res = await Promise.all(promises);
     console.log(res);
+    res.forEach((response, index) => parseCSPinResponse(response.data, index));
+
     setAllPricesBuffer([...allPricesBuffer]);
     setIsLoading(false);
   };

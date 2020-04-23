@@ -45,7 +45,7 @@ function getOnePrice(shopID, cardID, langID, conditionID, isFoil, isSigned) {
 
   return axios.get(
     config.URL_API +
-      "/card_shop_prices?shop.id" +
+      "/card_shop_prices?shop.id=" +
       shopID +
       "&card.id=" +
       cardID +

@@ -13,7 +13,7 @@ function searchApproxByName(cardName, cleaningParam) {
 }
 
 function getById(id) {
-  return axios.get(config.URL_API + "/cards/" + id);
+  return axios.get(config.URL_API + "/cards/" + id) + ".json";
 }
 
 function getSmallPictureFromScryfallId(card) {
