@@ -154,7 +154,7 @@ function App() {
     "deactivated"
   );
 
-  //STATE - Cards Context in One Set
+  //STATE - Cards Context in One Set Page
   const [cardsContext, setCardsContext] = useState({});
 
   //STATE - is Plain Page Black Div Displayed ?
@@ -172,7 +172,7 @@ function App() {
   });
 
   //STATE - Cards Context for CardPage components (public search result)
-  const [cardsCardPageContext, setCardsCardPageContext] = useState([]);
+  const [cardsCardPageContext, setCardsCardPageContext] = useState({});
 
   //STATE - Display preferences
   //Default : Local Storage
@@ -571,12 +571,12 @@ function App() {
                                 )}
                               />
 
-                              <CardsCardPageContext.Provider
-                                value={ContextCardPage}
-                              >
-                                <Route
-                                  path="/card/:cardName"
-                                  render={({ match, history }) => (
+                              <Route
+                                path="/card/:cardName"
+                                render={({ match, history }) => (
+                                  <CardsCardPageContext.Provider
+                                    value={ContextCardPage}
+                                  >
                                     <CardPage
                                       match={match}
                                       history={history}
@@ -584,9 +584,9 @@ function App() {
                                         handleAddSellingBasket
                                       }
                                     />
-                                  )}
-                                />
-                              </CardsCardPageContext.Provider>
+                                  </CardsCardPageContext.Provider>
+                                )}
+                              />
 
                               <Route
                                 path="/register"
