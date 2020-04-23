@@ -13,6 +13,7 @@ import CardDisplayOnPageContext from "../context/cardDisplayOnPageContext";
 import BlackDivModalContext from "../context/blackDivModalContext";
 import { Tr, Td } from "react-super-responsive-table";
 import config from "../services/config";
+import priceUpdateAPI from "../services/priceUpdateAPI";
 
 //TODO : REQUEST PRICE FOR IS_SIGNED
 
@@ -318,7 +319,11 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
           {isLoading && <div className="loading-loop"></div>}
           {!isLoading && card.price}
         </Td>
-        <Td>{card.price * card.quantity || "0"}</Td>
+        <Td>
+          {priceUpdateAPI.smoothFloatKeepEntireComplete(
+            card.price * card.quantity
+          ) || "0"}
+        </Td>
         <Td className="AddButton">
           <FeatherIcon
             icon="minus-circle"
