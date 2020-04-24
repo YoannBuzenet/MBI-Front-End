@@ -3,6 +3,7 @@ import ShopConditionPriceUpdate from "./ShopConditionPriceUpdate";
 import priceBufferContext from "../../context/priceBufferContext";
 import { useEffect } from "react";
 import { FormattedMessage } from "react-intl";
+import config from "../../services/config";
 
 const ShopOneLangAllConditionsCard = ({ oneLang, index }) => {
   //Context - building the memoization of all condition/lang possibilities
@@ -22,8 +23,6 @@ const ShopOneLangAllConditionsCard = ({ oneLang, index }) => {
 
   const isSignedTRUE = 1;
   const isSignedFALSE = 0;
-
-  //TODO : check if logged at any load of admin page and put a toast if not logged
 
   function buildNonFoilNonSignedDisplayArray(context, index, idLang) {
     var array_to_display = [];
@@ -202,6 +201,11 @@ const ShopOneLangAllConditionsCard = ({ oneLang, index }) => {
     );
   }, []);
 
+  //In the render part here we check the grading area of the shop.
+  // If it's Eu, we show the 7 conditions.
+  // If it's US, we show the 6 they use.
+  //There is a filter a all 4 array that may be displayed.
+
   return (
     <div>
       <form className="price-update-form">
@@ -217,28 +221,36 @@ const ShopOneLangAllConditionsCard = ({ oneLang, index }) => {
             )}
 
             {nonFoilNonSignedArray.length !== 0 &&
-              nonFoilNonSignedArray.map((infoContainer) => {
-                return (
-                  <ShopConditionPriceUpdate
-                    key={parseInt(
-                      infoContainer.cardID +
-                        "" +
-                        infoContainer.conditionKey +
-                        "" +
-                        infoContainer.langKey +
-                        "" +
-                        infoContainer.isFoilKey
-                    )}
-                    conditionID={infoContainer.conditionKey}
-                    langID={infoContainer.langKey}
-                    isFoil={infoContainer.isFoilKey}
-                    isSigned={infoContainer.isSignedKey}
-                    priceValue={infoContainer.priceValue}
-                    index={index}
-                    cardID={infoContainer.cardID}
-                  />
-                );
-              })}
+              nonFoilNonSignedArray
+                .filter((futureFormField) => {
+                  if (config.gradingArea === "US") {
+                    return futureFormField.conditionKey !== 5;
+                  } else {
+                    return futureFormField;
+                  }
+                })
+                .map((infoContainer) => {
+                  return (
+                    <ShopConditionPriceUpdate
+                      key={parseInt(
+                        infoContainer.cardID +
+                          "" +
+                          infoContainer.conditionKey +
+                          "" +
+                          infoContainer.langKey +
+                          "" +
+                          infoContainer.isFoilKey
+                      )}
+                      conditionID={infoContainer.conditionKey}
+                      langID={infoContainer.langKey}
+                      isFoil={infoContainer.isFoilKey}
+                      isSigned={infoContainer.isSignedKey}
+                      priceValue={infoContainer.priceValue}
+                      index={index}
+                      cardID={infoContainer.cardID}
+                    />
+                  );
+                })}
           </div>
           <div className="regular-signed">
             {nonFoilSignedArray.length > 0 && (
@@ -250,28 +262,36 @@ const ShopOneLangAllConditionsCard = ({ oneLang, index }) => {
               </p>
             )}
             {nonFoilSignedArray.length !== 0 &&
-              nonFoilSignedArray.map((infoContainer) => {
-                return (
-                  <ShopConditionPriceUpdate
-                    key={parseInt(
-                      infoContainer.cardID +
-                        "" +
-                        infoContainer.conditionKey +
-                        "" +
-                        infoContainer.langKey +
-                        "" +
-                        infoContainer.isFoilKey
-                    )}
-                    conditionID={infoContainer.conditionKey}
-                    langID={infoContainer.langKey}
-                    isFoil={infoContainer.isFoilKey}
-                    isSigned={infoContainer.isSignedKey}
-                    priceValue={infoContainer.priceValue}
-                    index={index}
-                    cardID={infoContainer.cardID}
-                  />
-                );
-              })}
+              nonFoilSignedArray
+                .filter((futureFormField) => {
+                  if (config.gradingArea === "US") {
+                    return futureFormField.conditionKey !== 5;
+                  } else {
+                    return futureFormField;
+                  }
+                })
+                .map((infoContainer) => {
+                  return (
+                    <ShopConditionPriceUpdate
+                      key={parseInt(
+                        infoContainer.cardID +
+                          "" +
+                          infoContainer.conditionKey +
+                          "" +
+                          infoContainer.langKey +
+                          "" +
+                          infoContainer.isFoilKey
+                      )}
+                      conditionID={infoContainer.conditionKey}
+                      langID={infoContainer.langKey}
+                      isFoil={infoContainer.isFoilKey}
+                      isSigned={infoContainer.isSignedKey}
+                      priceValue={infoContainer.priceValue}
+                      index={index}
+                      cardID={infoContainer.cardID}
+                    />
+                  );
+                })}
           </div>
         </div>
         <div className="foil-cards">
@@ -286,28 +306,36 @@ const ShopOneLangAllConditionsCard = ({ oneLang, index }) => {
             )}
 
             {foilNonSignedArray.length !== 0 &&
-              foilNonSignedArray.map((infoContainer) => {
-                return (
-                  <ShopConditionPriceUpdate
-                    key={parseInt(
-                      infoContainer.cardID +
-                        "" +
-                        infoContainer.conditionKey +
-                        "" +
-                        infoContainer.langKey +
-                        "" +
-                        infoContainer.isFoilKey
-                    )}
-                    conditionID={infoContainer.conditionKey}
-                    langID={infoContainer.langKey}
-                    isFoil={infoContainer.isFoilKey}
-                    isSigned={infoContainer.isSignedKey}
-                    priceValue={infoContainer.priceValue}
-                    index={index}
-                    cardID={infoContainer.cardID}
-                  />
-                );
-              })}
+              foilNonSignedArray
+                .filter((futureFormField) => {
+                  if (config.gradingArea === "US") {
+                    return futureFormField.conditionKey !== 5;
+                  } else {
+                    return futureFormField;
+                  }
+                })
+                .map((infoContainer) => {
+                  return (
+                    <ShopConditionPriceUpdate
+                      key={parseInt(
+                        infoContainer.cardID +
+                          "" +
+                          infoContainer.conditionKey +
+                          "" +
+                          infoContainer.langKey +
+                          "" +
+                          infoContainer.isFoilKey
+                      )}
+                      conditionID={infoContainer.conditionKey}
+                      langID={infoContainer.langKey}
+                      isFoil={infoContainer.isFoilKey}
+                      isSigned={infoContainer.isSignedKey}
+                      priceValue={infoContainer.priceValue}
+                      index={index}
+                      cardID={infoContainer.cardID}
+                    />
+                  );
+                })}
           </div>
           <div className="foil-signed">
             {foilSignedArray.length > 0 && (
@@ -319,28 +347,36 @@ const ShopOneLangAllConditionsCard = ({ oneLang, index }) => {
               </p>
             )}
             {foilSignedArray.length !== 0 &&
-              foilSignedArray.map((infoContainer) => {
-                return (
-                  <ShopConditionPriceUpdate
-                    key={parseInt(
-                      infoContainer.cardID +
-                        "" +
-                        infoContainer.conditionKey +
-                        "" +
-                        infoContainer.langKey +
-                        "" +
-                        infoContainer.isFoilKey
-                    )}
-                    conditionID={infoContainer.conditionKey}
-                    langID={infoContainer.langKey}
-                    isFoil={infoContainer.isFoilKey}
-                    isSigned={infoContainer.isSignedKey}
-                    priceValue={infoContainer.priceValue}
-                    index={index}
-                    cardID={infoContainer.cardID}
-                  />
-                );
-              })}
+              foilSignedArray
+                .filter((futureFormField) => {
+                  if (config.gradingArea === "US") {
+                    return futureFormField.conditionKey !== 5;
+                  } else {
+                    return futureFormField;
+                  }
+                })
+                .map((infoContainer) => {
+                  return (
+                    <ShopConditionPriceUpdate
+                      key={parseInt(
+                        infoContainer.cardID +
+                          "" +
+                          infoContainer.conditionKey +
+                          "" +
+                          infoContainer.langKey +
+                          "" +
+                          infoContainer.isFoilKey
+                      )}
+                      conditionID={infoContainer.conditionKey}
+                      langID={infoContainer.langKey}
+                      isFoil={infoContainer.isFoilKey}
+                      isSigned={infoContainer.isSignedKey}
+                      priceValue={infoContainer.priceValue}
+                      index={index}
+                      cardID={infoContainer.cardID}
+                    />
+                  );
+                })}
           </div>
         </div>
       </form>
