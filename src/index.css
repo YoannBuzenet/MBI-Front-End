@@ -1456,6 +1456,12 @@ tbody.cardLineShop {
   justify-content: center;
 }
 
+.form-field-price-update {
+  position: relative;
+}
+.conditionField {
+}
+
 input.conditionDisplay {
   padding: 0.5rem;
   border-radius: 5px;
