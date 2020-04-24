@@ -6,10 +6,11 @@ import { toast } from "react-toastify";
 import config from "../../services/config";
 import { FormattedMessage } from "react-intl";
 
-//Based on context defined in page ShopAdminOneCard
-//This component updates prices in context, send some of data to API, and treats resp back to update context with new ID.
+//This component updates prices in context, send some of data to API, and treats resp back to update context with new Card Shop Prices ID.
 //Data that are saved in context and NOT sent to API (was updated property) only serve display purposes for UX improvment.
 //Depending if updated lang is baseLang or not, and Mint condition or not, we update several languages or fields of the form, or just one.
+//If Baselang is edited, a big modification is done, and we use SendBigBatch function. If not baselang, we use sendSmallBatch.
+//DIff between these 2 functions are the level of the context where they loop : all langs for baseLang, only conditions for smallBatch.
 
 const ShopConditionPriceUpdate = ({
   conditionID,
@@ -87,6 +88,7 @@ const ShopConditionPriceUpdate = ({
       }
 
       //This second blocks takes the modified cards and put into the batch, signed or not.
+      // With the block above and the one below, we make sure signed and non signed can be updated depending of user input.
       if (
         allPricesCopy[index].langs[langID][objectToParse][isFoil][
           isSigned + "idCardShopPrice"
@@ -141,18 +143,17 @@ const ShopConditionPriceUpdate = ({
 
   const registerBatchResponseIntoContext = (data) => {
     const contextCopy = [...allPricesBuffer];
-    //Copy context
-    //Parse Data
+    //Copy context and mutate it
+    //Parse Data, put it into context
+    //The important part here is the idCardShopPrice that allows us to know if a price must be POST or PUT
+    //If it has an ID, it must be PUT, else it's POST
     for (let i = 0; i < data.length; i++) {
       const idCardShopPrice = data[i].id;
-      // const price = data[i].price;
-      // const shop = parseInt(data[i].shop.substr(7));
-      // const idcard = parseInt(data[i].card.substr(7));
       const languageID = parseInt(data[i].language.substr(11));
       const conditionID = parseInt(data[i].cardCondition.substr(17));
       const isFoil = data[i].isFoil === true ? 1 : 0;
       const isSigned = data[i].isSigned === true ? 1 : 0;
-      // TODO : check s'il y a oubli de la prise en des modifs dans le contexte
+
       contextCopy[index].langs[languageID][conditionID][isFoil][
         isSigned + "idCardShopPrice"
       ] = idCardShopPrice;
@@ -161,8 +162,7 @@ const ShopConditionPriceUpdate = ({
   };
 
   /*
-   * Browsing all languages on the 'foil' data passed
-   * Creating the batch with potentiel ID lareadi implemented
+   * Creating the batch with potentiel ID already implemented
    */
   const sendBigBatchToAPI = () => {
     console.log("big batch)");
@@ -178,6 +178,8 @@ const ShopConditionPriceUpdate = ({
           // variable i will indicate if the card is signed, in this block
           for (let i = 0; i < 2; i++) {
             //Does the object has an ID or not
+            //If yes, we use this ID and put it into object.
+            //With an ID, the API understands it must update an existing cardShopPrice.
             if (
               allPricesCopy[index].langs[LangToParse][objectToParse][isFoil][
                 i + "idCardShopPrice"
@@ -201,7 +203,8 @@ const ShopConditionPriceUpdate = ({
                 cardCondition: parseInt(objectToParse),
               };
               batch.push(newPriceToSend);
-              //If no ID :
+              //If no ID, we create the object without the ID
+              //The API understands that it must create a new Card Shop Price then
             } else {
               const newPriceToSend = {
                 price:
@@ -219,9 +222,10 @@ const ShopConditionPriceUpdate = ({
               batch.push(newPriceToSend);
             }
           }
-          console.log("là on a mis à jour les NON signed ET SIGNED en théorie");
+
           //If we're updating only the signed cards
         } else {
+          //Again, we check if there's already an id for the cardShopPrice or not.
           if (
             allPricesCopy[index].langs[LangToParse][objectToParse][isFoil][
               isSigned + "idCardShopPrice"
@@ -262,11 +266,10 @@ const ShopConditionPriceUpdate = ({
             };
             batch.push(newPriceToSend);
           }
-          console.log("là on a mis à jour que les signed en théorie");
         }
       }
     }
-    console.log(JSON.stringify(batch));
+
     console.log(batch);
     try {
       priceUpdateAPI
@@ -279,7 +282,6 @@ const ShopConditionPriceUpdate = ({
           defaultMessage={"An error occured. Please try again."}
         />
       );
-      //TODO TRanslate Toast
     }
   };
 
@@ -309,10 +311,13 @@ const ShopConditionPriceUpdate = ({
       setAllPricesBuffer(allPricesCopy);
     }
 
-    //If it's a number, real logic triggers here
+    //If it's a number, the important logic of this component triggers here
+    //We check which field was edited, depending on it, one, several or no field can be updated indirectly
+    //The batch we send to API will depend on the updated field
     else if (!isNaN(parseFloat(event.target.value))) {
       const newPrice = parseFloat(event.target.value);
-      // console.log("here");
+
+      //BIG BATCH : BASELANG MINT
       if (
         conditionID === 1 &&
         langID === authenticationInfos.shop.shopData.baseLang.id
@@ -320,7 +325,7 @@ const ShopConditionPriceUpdate = ({
         //AIM - update all languages and condition in the current set (NON SIGNED AND SIGNED)
         //1. Copy context
         const contextCopy = [...allPricesBuffer];
-        //2. Update baselang
+        //2. Update baselang prices
         var j = 1;
         for (const conditions in contextCopy[index].langs[
           authenticationInfos.shop.shopData.baseLang.id
@@ -648,6 +653,8 @@ const ShopConditionPriceUpdate = ({
       } else if (conditionID === 1) {
         sendSmallBatchToAPI();
       } else {
+        //Here, user did edit only one field.
+        //Depending on if there is already a CardShopPrice id, we create an object with or without that props.
         if (
           allPricesBuffer[index].langs[langID][conditionID][isFoil][
             isSigned + "idCardShopPrice"
