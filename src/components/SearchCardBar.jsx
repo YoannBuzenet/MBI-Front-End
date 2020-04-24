@@ -83,6 +83,7 @@ const SearchCardBar = (props) => {
       <form className="search-card-form">
         <input
           type="search"
+          className="searchCardBar"
           placeholder={searchCardBarPlaceholderTranslated}
           value={currentSearch}
           onChange={(event) => handleChange(event)}

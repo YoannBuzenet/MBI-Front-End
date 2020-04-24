@@ -778,10 +778,10 @@ div.lang-select-applevel {
 **************************/
 .search-card-form {
   position: relative;
+  padding: 0.5rem;
 }
 
 .search-card-form input {
-  padding: 0.5rem;
   border-radius: 8px;
   width: 140px;
   border: none;
@@ -844,6 +844,10 @@ div.lang-select-applevel {
 .footer a {
   text-decoration: none;
   color: black;
+}
+
+.footer a:hover {
+  text-decoration: underline;
 }
 
 @media only screen and (max-width: 1000px) {
@@ -1442,12 +1446,19 @@ tbody.cardLineShop {
 
 .one-set {
   margin-bottom: 1rem;
-  background-color: lightblue;
+  padding: 1rem;
+  background-color: rgba(173, 216, 230, 0.8);
+  border-radius: 5px;
 }
 
 .price-update-form {
   display: flex;
   justify-content: center;
+}
+
+input.conditionDisplay {
+  padding: 0.5rem;
+  border-radius: 5px;
 }
 
 .regular-cards,
@@ -1472,7 +1483,7 @@ tbody.cardLineShop {
 }
 
 input.updated {
-  background-color: red;
+  background-color: green;
 }
 
 .price-update-flag-lang {

@@ -46,7 +46,7 @@ const ShopOneLangAllConditionsCard = ({ oneLang, index }) => {
               langKey: idLang,
               conditionKey: parseInt(conditionKey),
               isFoilKey: parseInt(isFoilKey),
-              isSignedKey: 0,
+              isSignedKey: isSignedFALSE,
               priceValue: priceValue,
               cardID: context[index].id,
               idCardShopPrice:
