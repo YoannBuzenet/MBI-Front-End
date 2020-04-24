@@ -1,69 +1,69 @@
-const allConditions = [
-  {
+const allConditions = {
+  1: {
     id: 1,
     nameEU: "Mint",
     nameUS: null,
     isEU: true,
     isUS: false,
     shortname: "M",
-    shortnameUS: null
+    shortnameUS: null,
   },
-  {
+  2: {
     id: 2,
     nameEU: "Near-Mint",
     nameUS: "Near-Mint",
     isEU: true,
     isUS: true,
     shortname: "NM",
-    shortnameUS: "NM"
+    shortnameUS: "NM",
   },
-  {
+  3: {
     id: 3,
     nameEU: "Excellent",
     nameUS: "Slightly Played",
     isEU: true,
     isUS: false,
     shortname: "EXC",
-    shortnameUS: "LP"
+    shortnameUS: "LP",
   },
-  {
+  4: {
     id: 4,
     nameEU: "Good",
     nameUS: "Moderately Played",
     isEU: true,
     isUS: true,
     shortname: "GD",
-    shortnameUS: "MP"
+    shortnameUS: "MP",
   },
-  {
+  5: {
     id: 5,
     nameEU: "Light-Played",
     nameUS: null,
     isEU: true,
     isUS: false,
     shortname: "LP",
-    shortnameUS: null
+    shortnameUS: null,
   },
-  {
+  6: {
     id: 6,
     nameEU: "Played",
     nameUS: "Heavily Played",
     isEU: true,
     isUS: true,
     shortname: "PL",
-    shortnameUS: "HP"
+    shortnameUS: "HP",
   },
-  {
+  7: {
     id: 7,
     nameEU: "Poor",
     nameUS: "Damaged",
     isEU: true,
     isUS: true,
     shortname: "PO",
-    shortnameUS: "D"
-  }
-];
+    shortnameUS: "D",
+  },
+};
 
 export default {
-  allConditions
+  allConditions,
 };

@@ -5,6 +5,7 @@ import AuthContext from "../../context/authContext";
 import { toast } from "react-toastify";
 import config from "../../services/config";
 import { FormattedMessage } from "react-intl";
+import conditionsDefinition from "../../definitions/conditionsDefinition";
 
 //This component updates prices in context, send some of data to API, and treats resp back to update context with new Card Shop Prices ID.
 //Data that are saved in context and NOT sent to API (was updated property) only serve display purposes for UX improvment.
@@ -715,11 +716,15 @@ const ShopConditionPriceUpdate = ({
     ? "updated"
     : "not-updated";
   return (
-    <p>
+    <p className="form-field-price-update">
+      {/* <span className="conditionField">
+        {conditionsDefinition.allConditions[conditionID].shortname}
+      </span> */}
       <input
         key={parseInt(cardID + "" + conditionID + "" + langID + "" + isFoil)}
         type="text"
         value={priceDisplayed}
+        placeholder={conditionsDefinition.allConditions[conditionID].shortname}
         onChange={(event) => {
           handlechange(
             event,
