@@ -5,8 +5,7 @@ const allConditions = {
     nameUS: null,
     isEU: true,
     isUS: false,
-    shortname: "M",
-    shortnameUS: null,
+    shortname: { EU: "Mint", US: "Mint" },
   },
   2: {
     id: 2,
@@ -14,8 +13,7 @@ const allConditions = {
     nameUS: "Near-Mint",
     isEU: true,
     isUS: true,
-    shortname: "NM",
-    shortnameUS: "NM",
+    shortname: { EU: "NM", US: "NM" },
   },
   3: {
     id: 3,
@@ -23,8 +21,7 @@ const allConditions = {
     nameUS: "Slightly Played",
     isEU: true,
     isUS: false,
-    shortname: "EXC",
-    shortnameUS: "LP",
+    shortname: { EU: "EXC", US: "LP" },
   },
   4: {
     id: 4,
@@ -32,8 +29,7 @@ const allConditions = {
     nameUS: "Moderately Played",
     isEU: true,
     isUS: true,
-    shortname: "GD",
-    shortnameUS: "MP",
+    shortname: { EU: "GD", US: "MP" },
   },
   5: {
     id: 5,
@@ -41,8 +37,7 @@ const allConditions = {
     nameUS: null,
     isEU: true,
     isUS: false,
-    shortname: "LP",
-    shortnameUS: null,
+    shortname: { EU: "LP", US: null },
   },
   6: {
     id: 6,
@@ -50,8 +45,7 @@ const allConditions = {
     nameUS: "Heavily Played",
     isEU: true,
     isUS: true,
-    shortname: "PL",
-    shortnameUS: "HP",
+    shortname: { EU: "PL", US: "HP" },
   },
   7: {
     id: 7,
@@ -59,8 +53,7 @@ const allConditions = {
     nameUS: "Damaged",
     isEU: true,
     isUS: true,
-    shortname: "PO",
-    shortnameUS: "D",
+    shortname: { EU: "PO", US: "D" },
   },
 };
 

@@ -21,6 +21,8 @@ const MKMConnectModal = () => {
   //Loading
   const [isLoading, setIsLoading] = useState(false);
 
+  // console.log(authenticationInfos);
+
   const handleClick = () => {
     //Get info back from API to update MKM info on session to be able to do MKM API calls
     authAPI
@@ -29,7 +31,7 @@ const MKMConnectModal = () => {
         //TO DO Checker si la date de réception en session est VALIDE
         console.log(data);
 
-        if (data.data.shop.dateReceptionMKMToken) {
+        if (data.data.shop.ExpirationMkmToken) {
           const authenticationInfoCopy = { ...authenticationInfos };
 
           authenticationInfoCopy.shop.accesToken = "updated";

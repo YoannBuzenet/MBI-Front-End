@@ -80,7 +80,7 @@ function smoothNumbers(price) {
 
 function smoothFloatKeepEntireComplete(number) {
   if (number % 1 !== 0) {
-    return number.toFixed(2);
+    return parseFloat(number.toFixed(2));
   } else {
     return number;
   }

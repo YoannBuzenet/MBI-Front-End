@@ -21,9 +21,11 @@ const URL_MKM_ADD_STOCK = "https://api.cardmarket.com/ws/v2.0/stock";
 const URL_MKM_SANDBOX_ADD_STOCK =
   "https://sandbox.cardmarket.com/ws/v2.0/stock";
 
-//App token must be added after the final slash
+//Real Link
+// const MKM_AUTHENTICATION_URL_BASE ="https://api.cardmarket.com/ws/v2.0/authenticate/";
+//Sandbox
 const MKM_AUTHENTICATION_URL_BASE =
-  "https://api.cardmarket.com/ws/v2.0/authenticate/";
+  "https://sandbox.cardmarket.com/ws/v2.0/authenticate/";
 
 const MKM_LANG_DEFINITION = {
   English: 1,

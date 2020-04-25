@@ -104,8 +104,6 @@ function App() {
 
   //APP INITIALIZATION USE EFFECT
   useEffect(() => {
-    //Load all the sets on App first Load
-
     const allLangs = genericCardCharacteristicsAPI.getAllLang();
     const allConditions = genericCardCharacteristicsAPI.getAllConditions();
     const publicShopInfos = shopAPI.getPublicInfos();
