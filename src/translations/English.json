@@ -232,7 +232,7 @@
   "app.shop.MKMConnect.stepConnect": "Login on Magic Card Market website",
   "app.shop.MKMConnect.stepConnectClick": "Click Here",
   "app.shop.MKMConnect.stepMTGI": "Once Authentication completed, you will be redirected to www.mtgInterface.com. Please login there too.",
-  "app.shop.MKMConnect.stepSynchronize": "nce you have the confirmation message on www.mtgInterface.com, you can sync data.",
+  "app.shop.MKMConnect.stepSynchronize": "Once you have the confirmation message on www.mtgInterface.com, you can sync data.",
   "app.shop.MKMConnect.stepSynchronizeButton": "Sync",
 
   "app.sellRequestValidation.validationCTA": "Validate my Sell Request",

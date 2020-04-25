@@ -8,8 +8,8 @@ function check401Unauthorized(error) {
     if (error.response.statusText === "Unauthorized") {
       toast.error(
         <FormattedMessage
-          id="app.shop.shopSettings.toast.failure"
-          defaultMessage={`The data couldn't be updated. Please try again.`}
+          id="app.loginOutdated.toast.failure"
+          defaultMessage={`You are not logged anymore. Please log again.`}
         />
       );
       return true;

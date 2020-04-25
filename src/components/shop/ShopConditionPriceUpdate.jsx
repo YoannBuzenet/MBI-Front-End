@@ -718,13 +718,17 @@ const ShopConditionPriceUpdate = ({
   return (
     <p className="form-field-price-update">
       {/* <span className="conditionField">
-        {conditionsDefinition.allConditions[conditionID].shortname}
+        {conditionsDefinition.allConditions[conditionID].shortname[config.gradingArea]}
       </span> */}
       <input
         key={parseInt(cardID + "" + conditionID + "" + langID + "" + isFoil)}
         type="text"
         value={priceDisplayed}
-        placeholder={conditionsDefinition.allConditions[conditionID].shortname}
+        placeholder={
+          conditionsDefinition.allConditions[conditionID].shortname[
+            config.gradingArea
+          ]
+        }
         onChange={(event) => {
           handlechange(
             event,
