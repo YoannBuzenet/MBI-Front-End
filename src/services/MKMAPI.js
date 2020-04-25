@@ -80,13 +80,14 @@ function calculateSigningKey(appSecret, accessTokenSecret) {
 //TODO : Create a function thats takes an URL to reach and return an object with
 // Raw URL, and parameters (key/value)
 
-function buildOAuthHeader(method, URLToReach) {
-  //Gathering all needed info (some will be function parameters with value hidden in a config file)
-  const app_secret = "76tBmByr3luWVJAEp0yB0WBpnYnhmU2X";
-  const access_token_secret = "0aG8CGgNcR47UwGs7cERd9iyilrdRFo2";
-  const appToken = "ImbvOWpgbnWN4qKA";
-  const accessToken = "Cl2lfYbQr1KknVG2zIwkZLNbHE3sZWMF";
-
+function buildOAuthHeader(
+  method,
+  URLToReach,
+  appToken,
+  app_secret,
+  accessToken,
+  access_token_secret
+) {
   const timestamp = Date.now();
   const nonce =
     Math.random().toString(36).substring(2, 15) +
@@ -234,16 +235,16 @@ function transformSellRequestIntoXML(sellRequest) {
   return xml_to_send;
 }
 
-function MKM_AddToStock(XMLObject) {
+function AddToStock(XMLObject) {
   //PREPARE THE REQUEST TO SPLIT INTO SEVERAL - ONE FOR 100 OBJECTS
-  return axios.post(URL_MKM_ADD_STOCK, XMLObject);
+  return axios.post(URL_MKM_SANDBOX_ADD_STOCK, XMLObject);
 }
 
 export default {
   URL_MKM_ADD_STOCK,
   URL_MKM_SANDBOX_ADD_STOCK,
   MKM_AUTHENTICATION_URL_BASE,
-  MKM_AddToStock,
+  AddToStock,
   transformSellRequestIntoXML,
   buildOAuthHeader,
 };

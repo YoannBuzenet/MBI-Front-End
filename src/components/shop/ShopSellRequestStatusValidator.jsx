@@ -125,7 +125,7 @@ const ShopSellRequestStatusValidator = () => {
     // console.log("le rachat va etre validé");
 
     //TODO : CHECK IS MKM CREDENTIALS ARE UP TO DAT
-    if (authenticationInfos.shop.ExpirationMkmToken > new Date()) {
+    if (authenticationInfos.shop.ExpirationMkmToken < new Date()) {
       const newData = {
         dateValidated: new Date(),
       };
@@ -134,17 +134,32 @@ const ShopSellRequestStatusValidator = () => {
           currentAdminSellRequest.id,
           newData
         );
-        console.log("api update ok");
 
         setCurrentAdminSellRequest({
           ...currentAdminSellRequest,
           dateValidated: API_update.data.dateValidated,
         });
-        console.log("session update ok");
+
+        //1. We must create a XML object for each 100 items => Sell Request modulo 100
+        //2. Header created + MKM Request
 
         //TODO - CHECK XML IS WELL FORMED AND SENT TO MKM
-        MKMAPI.transformSellRequestIntoXML(currentAdminSellRequest);
-        console.log("mkm prévenu");
+        const XMLRequest = MKMAPI.transformSellRequestIntoXML(
+          currentAdminSellRequest
+        );
+        //TODO : API Request to POST XML on MKM
+        const header = MKMAPI.buildOAuthHeader(
+          "POST",
+          MKMAPI.URL_MKM_SANDBOX_ADD_STOCK,
+          authenticationInfos.shop.appToken,
+          authenticationInfos.shop.appSecret,
+          authenticationInfos.shop.accessToken,
+          authenticationInfos.shop.accessSecret
+        );
+
+        MKMAPI.AddToStock(XMLRequest, header);
+
+        console.log("mkm requeste lancée");
       } catch (error) {
         //TODO Translate error
         toast.error(

@@ -31,7 +31,7 @@ const MKMConnectModal = () => {
         //TO DO Checker si la date de réception en session est VALIDE
         console.log(data);
 
-        if (data.data.shop.ExpirationMkmToken) {
+        if (data.data.shop.ExpirationMkmToken < new Date()) {
           const authenticationInfoCopy = { ...authenticationInfos };
 
           authenticationInfoCopy.shop.accesToken = "updated";
