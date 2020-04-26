@@ -6,6 +6,7 @@ import sellRequestAPI from "../../services/sellRequestAPI";
 import authAPI from "../../services/authAPI";
 import { toast } from "react-toastify";
 import { FormattedMessage } from "react-intl";
+import localStorageAPI from "../../services/localStorageAPI";
 
 const SellRequestValidation = ({ history, checkForDuplicates }) => {
   //Current Basket
@@ -24,6 +25,7 @@ const SellRequestValidation = ({ history, checkForDuplicates }) => {
       //Building an object in the format of what is saved in Local Storage
       authAPI.updateUserInfosLocalStorage({
         token: window.localStorage.getItem("authToken"),
+        refresh_token: window.localStorage.getItem("refreshToken"),
         user: {
           id: authenticationInfos.user.id,
           email: authenticationInfos.user.email,
@@ -60,6 +62,39 @@ const SellRequestValidation = ({ history, checkForDuplicates }) => {
           adress: authenticationInfos.shop.adress,
           postalCode: authenticationInfos.shop.postalCode,
           town: authenticationInfos.shop.town,
+          legalClausesBuying: authenticationInfos.shop
+            ? authenticationInfos.shop.legalClausesBuying === null
+              ? ""
+              : authenticationInfos.shop.legalClausesBuying
+            : "",
+          shopData: authenticationInfos.shop
+            ? {
+                baseLang: authenticationInfos.shop.baseLang,
+                PercentPerLangs: localStorageAPI.transformPercentPerLangArrayIntoObject(
+                  authenticationInfos.shop.PercentPerLangs
+                ),
+                PercentPerConditions:
+                  authenticationInfos.shop.PercentPerConditions,
+                PercentPerConditionFoils:
+                  authenticationInfos.shop.PercentPerConditionFoils,
+                PercentPerSigned: authenticationInfos.shop.percentPerSigned,
+              }
+            : null,
+          appToken: authenticationInfos.shop
+            ? authenticationInfos.shop.appToken
+            : null,
+          appSecret: authenticationInfos.shop
+            ? authenticationInfos.shop.appSecret
+            : null,
+          accessToken: authenticationInfos.shop
+            ? authenticationInfos.shop.accessToken
+            : null,
+          accessSecret: authenticationInfos.shop
+            ? authenticationInfos.shop.accessSecret
+            : null,
+          ExpirationMkmToken: authenticationInfos.shop
+            ? authenticationInfos.shop.ExpirationMkmToken
+            : null,
         },
       });
     }

@@ -17,6 +17,7 @@ function authenticate(credentials) {
       console.log(data);
       //Stocking in local storage
       window.localStorage.setItem("authToken", data.token);
+      window.localStorage.setItem("refreshToken", data.refresh_token);
 
       window.localStorage.setItem("userInfos", JSON.stringify(data));
 

@@ -14,7 +14,7 @@ const ShopNavbar = ({ history }) => {
     AuthContext
   );
 
-  // console.log(authenticationInfos);
+  console.log(authenticationInfos);
 
   // useEffect(() => {
   //   console.log(authenticationInfos);
