@@ -154,7 +154,7 @@
   "app.shop.OneSellRequest.mail": "Mail : ",
   "app.shop.OneSellRequest.telephone": "Tel : ",
   "app.shop.OneSellRequest.adress": "Adress : ",
-  "app.shop.OneSellRequest.postalCode": "Postal Code",
+  "app.shop.OneSellRequest.postalCode": "Postal Code : ",
   "app.shop.OneSellRequest.town": "Town : ",
   "app.shop.OneSellRequest.status": "Status",
   "app.shop.OneSellRequest.lastInformation": "Last Information",

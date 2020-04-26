@@ -235,16 +235,19 @@ function transformSellRequestIntoXML(sellRequest) {
   return xml_to_send;
 }
 
-function AddToStock(XMLObject) {
-  //PREPARE THE REQUEST TO SPLIT INTO SEVERAL - ONE FOR 100 OBJECTS
-  return axios.post(URL_MKM_SANDBOX_ADD_STOCK, XMLObject);
+function AddCardsToStock(XMLObject, header) {
+  return axios.post(URL_MKM_SANDBOX_ADD_STOCK, XMLObject, {
+    headers: {
+      Authorization: header,
+    },
+  });
 }
 
 export default {
   URL_MKM_ADD_STOCK,
   URL_MKM_SANDBOX_ADD_STOCK,
   MKM_AUTHENTICATION_URL_BASE,
-  AddToStock,
+  AddCardsToStock,
   transformSellRequestIntoXML,
   buildOAuthHeader,
 };
