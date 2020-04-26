@@ -25,7 +25,7 @@ const ShopAdminOneSellRequest = ({ match }) => {
   const { currentAdminSellRequest, setCurrentAdminSellRequest } = useContext(
     AdminSellRequestContext
   );
-  // console.log(currentAdminSellRequest);
+  console.log(currentAdminSellRequest);
 
   useEffect(() => {
     if (
@@ -314,17 +314,17 @@ const ShopAdminOneSellRequest = ({ match }) => {
                     <CardLineShop key={card.id} card={card} indexCard={index} />
                   );
                 })}
-              {currentAdminSellRequest.dateValidated ||
-                (currentAdminSellRequest.dateCanceled &&
-                  currentAdminSellRequest.sellRequests.map((card, index) => {
-                    return (
-                      <CardLineShopStuck
-                        key={card.id}
-                        card={card}
-                        indexCard={index}
-                      />
-                    );
-                  }))}
+              {(currentAdminSellRequest.dateValidated !== null ||
+                currentAdminSellRequest.dateCanceled !== null) &&
+                currentAdminSellRequest.sellRequests.map((card, index) => {
+                  return (
+                    <CardLineShopStuck
+                      key={card.id}
+                      card={card}
+                      indexCard={index}
+                    />
+                  );
+                })}
               <tr className="total-line">
                 <td></td>
                 <td></td>

@@ -8,21 +8,23 @@ const CardLineShopStuck = ({ card }) => {
   const { lang, conditions } = useContext(GenericCardInfosContext);
 
   console.log(conditions);
+  console.log(lang);
+  console.log("hey");
+  console.log(card);
   return (
     <>
       <tr>
         <td>{card.name}</td>
         <td>{card.set}</td>
         <td>/</td>
-        <td>{lang.filter((lang) => lang.id === card.lang)[0].shortname}</td>
+        <td>{lang[card.lang] ? lang[card.lang - 1].shortname : null}</td>
         <td>
-          {
-            conditions.filter((condition) => condition.id == card.condition)[0]
-              .shortname
-          }
+          {conditions[card.condition]
+            ? conditions[card.condition - 1].shortname
+            : null}
         </td>
         <td>{card.isFoil === true ? "Yes" : "No"}</td>
-        <td>{card.isSigned}</td>
+        <td>{card.isSigned === true ? "Yes" : "No"}</td>
         <td>{card.quantity}</td>
         <td>{card.price}</td>
         <td>

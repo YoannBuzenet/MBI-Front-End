@@ -34,7 +34,6 @@ const LoginPage = ({ history, eraseAuthContext, renewJWTToken }) => {
 
   const handleSubmit = async (event) => {
     //Remove that line when going live
-    // setIsAuthenticated(true);
     event.preventDefault();
     setIsLoading(true);
 
