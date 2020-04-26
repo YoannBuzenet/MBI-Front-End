@@ -199,11 +199,11 @@ function buildOAuthHeader(
   return header;
 }
 
-function transformSellRequestIntoXML(sellRequest) {
-  console.log(sellRequest);
+function transformSellRequestIntoXML(arrayOfSellRequestCards) {
+  console.log(arrayOfSellRequestCards);
   const xml_start = '<?xml version="1.0" encoding="UTF-8" ?><request>';
   const xml_end = "</request>";
-  const xml_body = sellRequest.sellRequests.reduce(
+  const xml_body = arrayOfSellRequestCards.reduce(
     (accumulator, currentValue) => {
       const article =
         "<article> <idProduct>" +
@@ -236,11 +236,14 @@ function transformSellRequestIntoXML(sellRequest) {
 }
 
 function AddCardsToStock(XMLObject, header) {
-  return axios.post(URL_MKM_SANDBOX_ADD_STOCK, XMLObject, {
-    headers: {
-      Authorization: header,
-    },
-  });
+  return axios
+    .post(URL_MKM_SANDBOX_ADD_STOCK, XMLObject, {
+      headers: {
+        Authorization: header,
+      },
+    })
+    .then((data) => console.log(data))
+    .catch((err) => console.log(err));
 }
 
 export default {
