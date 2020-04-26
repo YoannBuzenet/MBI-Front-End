@@ -21,7 +21,7 @@ const Navbar = ({ history }) => {
   //Current toggle menu state.
   const [toggleMenu, setToggleMenu] = useState(false);
 
-  // console.log(authenticationInfos);
+  console.log(authenticationInfos);
 
   const handleLogout = () => {
     history.replace("/");

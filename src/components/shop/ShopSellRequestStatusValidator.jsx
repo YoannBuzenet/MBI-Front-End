@@ -122,13 +122,14 @@ const ShopSellRequestStatusValidator = () => {
   }, [currentStatus, currentAdminSellRequest]);
 
   const validateSellRequest = async (event) => {
-    // console.log("le rachat va etre validé");
-
-    //TODO : CHECK IS MKM CREDENTIALS ARE UP TO DAT
-    if (authenticationInfos.shop.ExpirationMkmToken < new Date()) {
+    if (
+      authenticationInfos.shop &&
+      authenticationInfos.shop.ExpirationMkmToken < new Date()
+    ) {
       const newData = {
         dateValidated: new Date(),
       };
+
       try {
         const API_update = await sellRequestAPI.updateAsShop(
           currentAdminSellRequest.id,
@@ -163,6 +164,8 @@ const ShopSellRequestStatusValidator = () => {
             (i + 1) * 100
           );
 
+          console.log(chunkOfRequest);
+
           //Send the request HERE
           const XMLRequest = MKMAPI.transformSellRequestIntoXML(chunkOfRequest);
 
@@ -171,6 +174,9 @@ const ShopSellRequestStatusValidator = () => {
         }
       } catch (error) {
         //TODO Translate error
+        if (error.message) {
+          console.log(error.message);
+        }
         toast.error(
           "Le rachat n'a pu être validé. Merci de recommencer ultérieurement."
         );
