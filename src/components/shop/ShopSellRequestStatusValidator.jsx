@@ -142,12 +142,9 @@ const ShopSellRequestStatusValidator = () => {
 
         //1. We must create a XML object for each 100 items => Sell Request modulo 100
         //2. Header created + MKM Request
+        //3. Confirm Request has been posted
+        //4. Validate + update Sell Request UI to mark it's done
 
-        //TODO - CHECK XML IS WELL FORMED AND SENT TO MKM
-        const XMLRequest = MKMAPI.transformSellRequestIntoXML(
-          currentAdminSellRequest
-        );
-        //TODO : API Request to POST XML on MKM
         const header = MKMAPI.buildOAuthHeader(
           "POST",
           MKMAPI.URL_MKM_SANDBOX_ADD_STOCK,
@@ -157,9 +154,21 @@ const ShopSellRequestStatusValidator = () => {
           authenticationInfos.shop.accessSecret
         );
 
-        MKMAPI.AddToStock(XMLRequest, header);
+        const numberOfCutsInSellRequests =
+          currentAdminSellRequest.sellRequests.length % 100;
 
-        console.log("mkm requeste lancée");
+        for (let i = 0; i < numberOfCutsInSellRequests; i++) {
+          let chunkOfRequest = currentAdminSellRequest.sellRequests.slice(
+            i * 100,
+            (i + 1) * 100
+          );
+
+          //Send the request HERE
+          const XMLRequest = MKMAPI.transformSellRequestIntoXML(chunkOfRequest);
+
+          MKMAPI.AddCardsToStock(XMLRequest, header);
+          console.log(`mkm requete ${i} lancée`);
+        }
       } catch (error) {
         //TODO Translate error
         toast.error(
