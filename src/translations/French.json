@@ -172,6 +172,10 @@
   "app.shop.OneSellRequest.numberOfCards": "NOMBRE DE CARTES",
   "app.shop.OneSellRequest.total": "TOTAL",
 
+  "app.shop.MKMPOSTrequest.toast.success": "Les cartes ont bien été ajoutées sur MCM.",
+  "app.shop.MKMPOSTrequest.toast.failure": "Le rachat n'a pu être validé. Merci de recommencer ultérieurement.",
+  "app.shop.MKMPOSTrequest.toast.info": "Merci de suivre la procédure de synchronisation. Vous pourrez ensuite valider votre rachat.",
+
   "app.shop.shopSettings.title": "Paramètres",
   "app.shop.shopSettings.defaultWebsiteLanguage": "Langue du site par défaut : ",
   "app.shop.shopSettings.defaultBuyingLanguage": "Langue d'achat par défaut : ",

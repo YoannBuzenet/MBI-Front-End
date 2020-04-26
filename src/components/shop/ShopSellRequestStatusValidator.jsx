@@ -131,16 +131,6 @@ const ShopSellRequestStatusValidator = () => {
       };
 
       try {
-        const API_update = await sellRequestAPI.updateAsShop(
-          currentAdminSellRequest.id,
-          newData
-        );
-
-        setCurrentAdminSellRequest({
-          ...currentAdminSellRequest,
-          dateValidated: API_update.data.dateValidated,
-        });
-
         //1. We must create a XML object for each 100 items => Sell Request modulo 100
         //2. Header created + MKM Request
         //3. Confirm Request has been posted
@@ -164,27 +154,49 @@ const ShopSellRequestStatusValidator = () => {
             (i + 1) * 100
           );
 
-          console.log(chunkOfRequest);
+          // console.log(chunkOfRequest);
 
           //Send the request HERE
           const XMLRequest = MKMAPI.transformSellRequestIntoXML(chunkOfRequest);
 
           MKMAPI.AddCardsToStock(XMLRequest, header);
-          console.log(`mkm requete ${i} lancée`);
+          toast.success(
+            <FormattedMessage
+              id="app.shop.MKMPOSTrequest.toast.success"
+              defaultMessage={`Cards have been posted to MCM successfully.`}
+            />
+          );
+
+          //If everything happened without mistake, we update the Sell Request status to validated.
+
+          const API_update = await sellRequestAPI.updateAsShop(
+            currentAdminSellRequest.id,
+            newData
+          );
+
+          setCurrentAdminSellRequest({
+            ...currentAdminSellRequest,
+            dateValidated: API_update.data.dateValidated,
+          });
         }
       } catch (error) {
-        //TODO Translate error
-        console.log(error);
-        if (error.message) {
-          console.log(error.message);
-        }
+        // console.log(error);
+        // if (error.message) {
+        //   console.log(error.message);
+        // }
         toast.error(
-          "Le rachat n'a pu être validé. Merci de recommencer ultérieurement."
+          <FormattedMessage
+            id="app.shop.MKMPOSTrequest.toast.failure"
+            defaultMessage={`Cards couln't be added to MCM. Please try again.`}
+          />
         );
       }
     } else {
       toast.info(
-        "Merci de suivre la procédure de synchronisation. Vous pourrez ensuite valider votre rachat."
+        <FormattedMessage
+          id="app.shop.MKMPOSTrequest.toast.info"
+          defaultMessage={`Please sync your account to MCM by following the procedure.`}
+        />
       );
       setIsBlackDivModalDisplayed("activated");
       setIsMKMModalDisplayed("activated");
