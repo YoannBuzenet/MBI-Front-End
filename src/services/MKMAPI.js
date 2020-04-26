@@ -236,14 +236,11 @@ function transformSellRequestIntoXML(arrayOfSellRequestCards) {
 }
 
 function AddCardsToStock(XMLObject, header) {
-  return axios
-    .post(URL_MKM_SANDBOX_ADD_STOCK, XMLObject, {
-      headers: {
-        Authorization: header,
-      },
-    })
-    .then((data) => console.log(data))
-    .catch((err) => console.log(err));
+  return axios.post(URL_MKM_SANDBOX_ADD_STOCK, XMLObject, {
+    headers: {
+      Authorization: header,
+    },
+  });
 }
 
 export default {
