@@ -174,6 +174,7 @@ const ShopSellRequestStatusValidator = () => {
         }
       } catch (error) {
         //TODO Translate error
+        console.log(error);
         if (error.message) {
           console.log(error.message);
         }
@@ -234,7 +235,7 @@ const ShopSellRequestStatusValidator = () => {
           />
         </p>
       )}
-      {availableOptions.length > 0 && (
+      {availableOptions.length > 0 && currentStatus !== "Validé" && (
         <select
           value="default"
           onChange={(event) => {
