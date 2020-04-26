@@ -172,6 +172,10 @@
   "app.shop.OneSellRequest.numberOfCards": "NUMBER OF CARDS",
   "app.shop.OneSellRequest.total": "TOTAL",
 
+  "app.shop.MKMPOSTrequest.toast.success": "Cards have been added to MCM successfully.",
+  "app.shop.MKMPOSTrequest.toast.failure": "Cards couln't be added to MCM. Please try again.",
+  "app.shop.MKMPOSTrequest.toast.info": "Please sync your account to MCM by following the procedure.",
+
   "app.shop.shopSettings.title": "Settings",
   "app.shop.shopSettings.defaultWebsiteLanguage": "Website Default Language : ",
   "app.shop.shopSettings.defaultBuyingLanguage": "Default Buying Language : ",
