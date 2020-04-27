@@ -782,7 +782,8 @@ div.lang-select-applevel {
 }
 
 .search-card-form input {
-  border-radius: 8px;
+  padding: 0.5rem;
+  border-radius: 5px;
   width: 140px;
   border: none;
   outline: none;
@@ -790,10 +791,11 @@ div.lang-select-applevel {
 
 .search-card-form .search-result {
   position: absolute;
-  top: 2.5rem;
+  top: 2.7rem;
   width: 100%;
   box-shadow: 1px 5px 5px black;
   border-radius: 5px;
+  left: 0.5rem;
 }
 
 .search-card-form .search-result a {
@@ -805,12 +807,12 @@ div.lang-select-applevel {
   background-color: white;
 }
 
-.search-card-form .search-result .card-line-result:first-child {
+.search-card-form .search-result a:first-child .card-line-result {
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
 }
 
-.search-card-form .search-result .card-line-result:last-child {
+.search-card-form .search-result a:last-child .card-line-result {
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
 }
@@ -1460,9 +1462,16 @@ tbody.cardLineShop {
   position: relative;
 }
 .conditionField {
+  position: absolute;
+  color: rgba(0, 0, 0, 0.5);
+  font-size: 1.4rem;
+  left: 0.5rem;
+  top: 0.7rem;
 }
 
 input.conditionDisplay {
+  text-align: right;
+  font-size: 1.4rem;
   padding: 0.5rem;
   border-radius: 5px;
 }
