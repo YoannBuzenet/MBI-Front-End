@@ -199,7 +199,7 @@ const ShopAdminOneCard = ({ match }) => {
           allPricesBuffer.map((variation, index) => {
             return (
               <ShopSetLangCards
-                variation={variation}
+                card={variation}
                 key={variation.id}
                 index={index}
               />

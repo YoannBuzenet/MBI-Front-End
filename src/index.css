@@ -1498,7 +1498,7 @@ input.conditionDisplay {
 }
 
 input.updated {
-  background-color: green;
+  background-color: rgba(169, 236, 135, 0.6);
 }
 
 .price-update-flag-lang {

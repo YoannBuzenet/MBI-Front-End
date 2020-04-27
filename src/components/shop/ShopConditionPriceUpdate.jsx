@@ -728,11 +728,7 @@ const ShopConditionPriceUpdate = ({
         key={parseInt(cardID + "" + conditionID + "" + langID + "" + isFoil)}
         type="text"
         value={priceDisplayed}
-        placeholder={
-          conditionsDefinition.allConditions[conditionID].shortname[
-            config.gradingArea
-          ]
-        }
+        placeholder="Price"
         onChange={(event) => {
           handlechange(
             event,
