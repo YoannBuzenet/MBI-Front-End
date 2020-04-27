@@ -1,33 +1,48 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import ShopOneLangAllConditionsCard from "./ShopOneLangAllConditionsCard";
 import priceBufferContext from "../../context/priceBufferContext";
 import config from "../../services/config";
+import cardsAPI from "../../services/cardsAPI";
 
-const ShopSetLangCards = ({ variation, index }) => {
+const ShopSetLangCards = ({ card, index }) => {
   //Context - building the memoization of all condition/lang possibilities
   const { allPricesBuffer } = useContext(priceBufferContext);
 
+  const [isHover, setIsHover] = useState(false);
+
   const Fragment = React.Fragment;
+
+  console.log(card);
 
   return (
     <>
       <div className="one-set">
-        <h2>{allPricesBuffer[index].edition.name}</h2>
+        <img src={cardsAPI.getSmallPictureFromScryfallId(card)} alt="" />
+        <h2
+        // onMouseEnter={(event) => {
+        //   setIsHover(true);
+        // }}
+        // onMouseLeave={(event) => {
+        //   setIsHover(false);
+        // }}
+        >
+          {allPricesBuffer[index].edition.name}
+        </h2>
         {/* integrate English in the lang array, and then put the BaseLang on top by filtering arrays */}
         {[
           {
-            name: variation.name,
+            name: card.name,
             language_id: { id: 9, name: "English", shortname: "EN" },
           },
         ]
-          .concat(variation.foreignData)
+          .concat(card.foreignData)
           .filter(
             (currentLang) => currentLang.language_id.id === config.baseLang
           )
           .concat(
             [
               {
-                name: variation.name,
+                name: card.name,
                 language_id: { id: 9, name: "English", shortname: "EN" },
               },
             ].filter(
@@ -35,7 +50,7 @@ const ShopSetLangCards = ({ variation, index }) => {
             )
           )
           .concat(
-            variation.foreignData.filter(
+            card.foreignData.filter(
               (currentLang) => currentLang.language_id.id !== config.baseLang
             )
           )
@@ -57,7 +72,7 @@ const ShopSetLangCards = ({ variation, index }) => {
                 <ShopOneLangAllConditionsCard
                   oneLang={oneLang}
                   index={index}
-                  variation={variation}
+                  card={card}
                 />
               </Fragment>
             );
