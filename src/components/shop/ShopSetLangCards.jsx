@@ -17,7 +17,10 @@ const ShopSetLangCards = ({ card, index }) => {
   return (
     <>
       <div className="one-set">
-        <img src={cardsAPI.getSmallPictureFromScryfallId(card)} alt="" />
+        <div className="priceUpdate-cardInfos">
+          <img src={cardsAPI.getSmallPictureFromScryfallId(card)} alt="" />
+        </div>
+
         <h2
         // onMouseEnter={(event) => {
         //   setIsHover(true);

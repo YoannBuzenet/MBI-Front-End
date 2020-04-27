@@ -1453,6 +1453,10 @@ tbody.cardLineShop {
   border-radius: 5px;
 }
 
+.priceUpdate-cardInfos {
+  /* Display market info there */
+}
+
 .price-update-form {
   display: flex;
   justify-content: center;
