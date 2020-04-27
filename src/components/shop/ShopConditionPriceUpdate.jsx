@@ -44,7 +44,7 @@ const ShopConditionPriceUpdate = ({
    * Update just the language passed
    */
   const sendSmallBatchToAPI = () => {
-    console.log("small batch)");
+    // console.log("small batch)");
     const batch = [];
     const allPricesCopy = [...allPricesBuffer];
     //Preparing Small Batch
@@ -717,9 +717,13 @@ const ShopConditionPriceUpdate = ({
     : "not-updated";
   return (
     <p className="form-field-price-update">
-      {/* <span className="conditionField">
-        {conditionsDefinition.allConditions[conditionID].shortname[config.gradingArea]}
-      </span> */}
+      <span className="conditionField unselectable">
+        {
+          conditionsDefinition.allConditions[conditionID].shortname[
+            config.gradingArea
+          ]
+        }
+      </span>
       <input
         key={parseInt(cardID + "" + conditionID + "" + langID + "" + isFoil)}
         type="text"

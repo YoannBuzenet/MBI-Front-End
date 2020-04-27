@@ -7,10 +7,8 @@ const CardLineShopStuck = ({ card }) => {
   //DEFINED langages and Conditions
   const { lang, conditions } = useContext(GenericCardInfosContext);
 
-  console.log(conditions);
-  console.log(lang);
-  console.log("hey");
-  console.log(card);
+  // console.log(card);
+
   return (
     <>
       <tr>
@@ -25,6 +23,7 @@ const CardLineShopStuck = ({ card }) => {
         </td>
         <td>{card.isFoil === true ? "Yes" : "No"}</td>
         <td>{card.isSigned === true ? "Yes" : "No"}</td>
+        <td>{card.isAltered === true ? "Yes" : "No"}</td>
         <td>{card.quantity}</td>
         <td>{card.price}</td>
         <td>
