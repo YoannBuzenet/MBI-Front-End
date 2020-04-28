@@ -12,6 +12,8 @@ const LoggedRoute = ({ path, component, match, history }) => {
 
   const hasTheRightToLog = AuthAPI.setup();
 
+  //TODO : translate error message
+
   if (!hasTheRightToLog) {
     setAuthenticationInfos({
       ...authenticationInfos,

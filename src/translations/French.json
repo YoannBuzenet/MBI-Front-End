@@ -74,6 +74,7 @@
   "app.OneSellRequest.totalAmount": "Total : ",
   "app.OneSellRequest.totalCardSellRequest": "Total : ",
   "app.OneSellRequest.totalAmountSellRequest": "Total : ",
+  "app.OneSellRequest.getRequest.toast.failure": "Le rachat n'a pu être chargé. Merci de réessayer ultérieurement.",
 
   "app.OneSet.cardName": "Carte",
   "app.OneSet.language": "Langue",
