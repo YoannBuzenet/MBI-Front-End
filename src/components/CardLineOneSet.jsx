@@ -159,7 +159,7 @@ const CardLineOneSet = ({
           className="cardPictureHolder"
           onClick={(event) => {
             if (isMobile) {
-              //FUNCTION TO DISPLAY THE CARD
+              //Function to display the card in big screen in responsive
               displayCardPlainPage(event, urlPictureCard);
             }
           }}

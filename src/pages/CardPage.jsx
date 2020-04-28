@@ -41,6 +41,7 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
   const ENGLISH_LANG_ID = 9;
 
   const buildContextFromAPIResponse = (data) => {
+    // console.log(data);
     const contextEmpty = {};
 
     for (let i = 0; i < data.length; i++) {
@@ -220,7 +221,7 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
                     card={cardsCardPageContext[id]}
                     cardID={id}
                     index={index}
-                    key={index}
+                    key={id}
                     displaySets={true}
                     handleAddSellingBasket={handleAddSellingBasket}
                   />
