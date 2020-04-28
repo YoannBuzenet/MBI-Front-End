@@ -120,7 +120,9 @@ const SellRequestStatusUpdater = ({
 
   return (
     <>
-      {currentSellRequest && !hasBeenSent ? (
+      {currentSellRequest &&
+      !currentSellRequest.dateValidated &&
+      !hasBeenSent ? (
         <p
           className="sellRequest-sending-button"
           onClick={(event) => {
