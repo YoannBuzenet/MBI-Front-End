@@ -306,7 +306,7 @@ const CardLineOneSet = ({
         <Td className="AddButton">
           <FeatherIcon
             icon="plus-circle"
-            size="20"
+            size={isMobile ? config.iconSizeMobile : config.iconSizeDesktop}
             className="downsize-icon add-item-basket"
             onClick={() => {
               console.log(cardsContext[cardID]);

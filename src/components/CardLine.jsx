@@ -73,7 +73,6 @@ const CardLine = ({ card, handleAddSellingBasket, index, cardID }) => {
         contextCopy[cardID].isSigned
       )
         .then((data) => {
-          
           if (data.data["hydra:member"].length > 0) {
             contextCopy[cardID].price = data.data["hydra:member"][0].price;
           } else {
@@ -284,7 +283,7 @@ const CardLine = ({ card, handleAddSellingBasket, index, cardID }) => {
         <Td className="AddButton">
           <FeatherIcon
             icon="plus-circle"
-            size="20"
+            size={isMobile ? config.iconSizeMobile : config.iconSizeDesktop}
             className="downsize-icon add-item-basket"
             onClick={() => {
               return handleAddSellingBasket(

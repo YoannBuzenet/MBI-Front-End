@@ -327,8 +327,8 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
         <Td className="AddButton">
           <FeatherIcon
             icon="minus-circle"
-            size="20"
-            className="downsize-icon pointer"
+            size={isMobile ? config.iconSizeMobile : config.iconSizeDesktop}
+            className="downsize-icon pointer remove-item-basket"
             onClick={() => {
               console.log(card);
               return handleDelete();
