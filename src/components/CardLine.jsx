@@ -16,6 +16,8 @@ import { toast } from "react-toastify";
 import { FormattedMessage } from "react-intl";
 
 const CardLine = ({ card, handleAddSellingBasket, index, cardID }) => {
+  console.log(card);
+
   //Current Selling Request Basket
   const { currentBasket } = useContext(SellingBasketContext);
 
@@ -184,7 +186,7 @@ const CardLine = ({ card, handleAddSellingBasket, index, cardID }) => {
             onChange={(event) => {
               handleChange(event);
             }}
-            defaultValue="2"
+            value={2}
           >
             {conditions.length > 0
               ? config.gradingArea === "EU"
