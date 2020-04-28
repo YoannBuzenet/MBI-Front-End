@@ -117,7 +117,7 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
           return data.data["hydra:member"];
         })
         .then((data) => {
-          console.log(data);
+          // console.log(data);
           buildContextFromAPIResponse(data);
         })
         .then(setHasUpdatedPrices(false))

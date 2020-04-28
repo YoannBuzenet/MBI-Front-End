@@ -16,7 +16,7 @@ import { toast } from "react-toastify";
 import { FormattedMessage } from "react-intl";
 
 const CardLine = ({ card, handleAddSellingBasket, index, cardID }) => {
-  console.log(card);
+  // console.log(card);
 
   //Current Selling Request Basket
   const { currentBasket } = useContext(SellingBasketContext);
