@@ -1010,6 +1010,10 @@ div.lang-select-applevel {
   top: 12px;
   right: 2px;
 }
+.AddButton {
+  position: relative;
+}
+
 .add-item-basket {
   cursor: pointer;
 }
@@ -1090,20 +1094,24 @@ div.blockFlags span.blockArrow {
     padding: 0.5rem;
   }
 
-  .AddButton i {
-    width: 30px;
+  .AddButton {
+    height: 60px;
+    width: 40px;
+    margin: 0;
+    padding: 1rem;
   }
+
   /* Button adding/removing */
   .add-item-basket,
   .remove-item-basket {
+    position: absolute;
+    top: 50%;
+    left: 90%;
+    transform: translate(-50%, -50%);
   }
 }
 
 @media only screen and (max-width: 750px) {
-  .AddButton i {
-    font-size: 3rem;
-    width: 50px;
-  }
 }
 
 /**************************
