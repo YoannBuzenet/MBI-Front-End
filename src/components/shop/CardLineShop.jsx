@@ -540,6 +540,7 @@ const CardLineShop = ({ card, indexCard }) => {
         <Td>
           <input
             type="text"
+            className="cardLineShop-input-price"
             onChange={(event) => {
               handleChange(event, currentCard);
             }}
