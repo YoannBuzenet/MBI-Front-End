@@ -552,7 +552,7 @@ const CardLineShop = ({ card, indexCard }) => {
             currentCard.quantity * currentCard.price
           )}
         </Td>
-        <Td>
+        <Td className="AddButton">
           <FeatherIcon
             icon="minus-circle"
             size={isMobile ? config.iconSizeMobile : config.iconSizeDesktop}
