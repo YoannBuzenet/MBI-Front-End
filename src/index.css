@@ -1290,7 +1290,15 @@ tbody.cardLineShop {
   justify-content: center;
   align-items: center;
 }
-.edition-modal select {
+
+.edition-modal-centering {
+  width: 80%;
+  margin: auto;
+}
+.edition-modal p {
+  text-align: center;
+  max-width: 80%;
+  margin: 1rem auto;
 }
 
 .blackSheet {
@@ -1405,6 +1413,9 @@ tbody.cardLineShop {
   }
   .mkm-modal-container {
     padding: 0 10rem;
+  }
+  .edition-modal p {
+    font-size: 1.4rem;
   }
 }
 @media only screen and (max-width: 900px) {
