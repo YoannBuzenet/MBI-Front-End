@@ -74,6 +74,7 @@
   "app.OneSellRequest.totalAmount": "Total : ",
   "app.OneSellRequest.totalCardSellRequest": "Total : ",
   "app.OneSellRequest.totalAmountSellRequest": "Total : ",
+  "app.OneSellRequest.getRequest.toast.failure": "The Sell Request couldn't be loaded. Please try again later.",
 
   "app.OneSet.cardName": "Card",
   "app.OneSet.language": "Language",
@@ -251,7 +252,7 @@
 
   "app.burgerMenu.customer.mySellRequest": "My Sell Request ",
   "app.burgerMenu.customer.myAccount": "My Account",
-  "app.burgerMenu.customer.mySellRequests": "My Sell Request",
+  "app.burgerMenu.customer.mySellRequests": "My Sell Requests",
   "app.burgerMenu.customer.logOut": "Log Out",
   "app.burgerMenu.customer.register": "Register",
   "app.burgerMenu.customer.connect": "Connect",
