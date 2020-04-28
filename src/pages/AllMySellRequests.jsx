@@ -10,7 +10,7 @@ const AllMySellRequests = (props) => {
   //Current Authentication
   const { authenticationInfos } = useContext(AuthContext);
 
-  console.log(authenticationInfos.customer.SellRequests);
+  // console.log(authenticationInfos.customer.SellRequests);
 
   useEffect(() => {
     // console.log(authenticationInfos.customer.SellRequests);
