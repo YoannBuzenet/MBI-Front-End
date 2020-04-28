@@ -553,13 +553,15 @@ const CardLineShop = ({ card, indexCard }) => {
           )}
         </Td>
         <Td>
-          <i
-            className="fas fa-minus-circle delete-from-selling-basket"
+          <FeatherIcon
+            icon="minus-circle"
+            size={isMobile ? config.iconSizeMobile : config.iconSizeDesktop}
+            className="downsize-icon pointer remove-item-basket"
             onClick={() => {
-              // console.log(currentCard);
-              return handleDelete(currentCard);
+              console.log(card);
+              return handleDelete();
             }}
-          ></i>
+          />
         </Td>
       </Tr>
     </>

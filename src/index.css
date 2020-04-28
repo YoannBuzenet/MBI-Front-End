@@ -1093,6 +1093,10 @@ div.blockFlags span.blockArrow {
   .AddButton i {
     width: 30px;
   }
+  /* Button adding/removing */
+  .add-item-basket,
+  .remove-item-basket {
+  }
 }
 
 @media only screen and (max-width: 750px) {
