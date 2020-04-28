@@ -124,7 +124,7 @@ const ShopSellRequestStatusValidator = () => {
   const validateSellRequest = async (event) => {
     if (
       authenticationInfos.shop &&
-      authenticationInfos.shop.ExpirationMkmToken < new Date()
+      authenticationInfos.shop.ExpirationMkmToken > new Date().getTime()
     ) {
       const newData = {
         dateValidated: new Date(),

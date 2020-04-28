@@ -13,6 +13,7 @@ const MKMConnectModal = () => {
   const { authenticationInfos, setAuthenticationInfos } = useContext(
     AuthContext
   );
+
   //MKM Modal Control
   const { setIsMKMModalDisplayed } = useContext(MKM_ModalContext);
   //Black Div Control
@@ -31,7 +32,7 @@ const MKMConnectModal = () => {
         //TO DO Checker si la date de réception en session est VALIDE
         console.log(data);
 
-        if (data.data.shop.ExpirationMkmToken < new Date()) {
+        if (data.data.shop.ExpirationMkmToken > new Date().getTime()) {
           const authenticationInfoCopy = { ...authenticationInfos };
 
           authenticationInfoCopy.shop.accesToken = "updated";
@@ -99,6 +100,7 @@ const MKMConnectModal = () => {
                 authenticationInfos.shop.appToken
               }
               target="_blank"
+              rel="noopener noreferrer"
             >
               &#8594;
               <FormattedMessage

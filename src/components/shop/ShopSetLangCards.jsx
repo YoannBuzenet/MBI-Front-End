@@ -8,8 +8,6 @@ const ShopSetLangCards = ({ card, index }) => {
   //Context - building the memoization of all condition/lang possibilities
   const { allPricesBuffer } = useContext(priceBufferContext);
 
-  const [isHover, setIsHover] = useState(false);
-
   const Fragment = React.Fragment;
 
   console.log(card);
@@ -21,16 +19,7 @@ const ShopSetLangCards = ({ card, index }) => {
           <img src={cardsAPI.getSmallPictureFromScryfallId(card)} alt="" />
         </div>
 
-        <h2
-        // onMouseEnter={(event) => {
-        //   setIsHover(true);
-        // }}
-        // onMouseLeave={(event) => {
-        //   setIsHover(false);
-        // }}
-        >
-          {allPricesBuffer[index].edition.name}
-        </h2>
+        <h2>{allPricesBuffer[index].edition.name}</h2>
         {/* integrate English in the lang array, and then put the BaseLang on top by filtering arrays */}
         {[
           {
