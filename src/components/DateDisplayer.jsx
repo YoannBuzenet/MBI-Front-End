@@ -9,7 +9,7 @@ const DateDisplayer = ({ dateToHandle }) => {
   var date = "";
 
   if (dateToHandle !== null) {
-    date = new Date(dateToHandle);
+    date = new Date(dateToHandle.date);
     date = intl.formatDate(date);
   } else {
     date = (
@@ -19,6 +19,8 @@ const DateDisplayer = ({ dateToHandle }) => {
       />
     );
   }
+
+  console.log(date);
 
   return <>{date}</>;
 };

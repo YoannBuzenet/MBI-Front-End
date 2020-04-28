@@ -26,7 +26,6 @@ const RegisterPage = ({ history }) => {
     event.preventDefault();
 
     try {
-      //Object creation to remake with destructuration, to keep up with async
       const jsonToSend = {
         email: credentials.mail,
         pass: credentials.password,

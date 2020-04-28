@@ -10,7 +10,7 @@ const AllMySellRequests = (props) => {
   //Current Authentication
   const { authenticationInfos } = useContext(AuthContext);
 
-  // console.log(authenticationInfos.customer.SellRequests);
+  console.log(authenticationInfos.customer.SellRequests);
 
   useEffect(() => {
     // console.log(authenticationInfos.customer.SellRequests);
@@ -123,9 +123,7 @@ const AllMySellRequests = (props) => {
                         to={"/my_sell_requests/" + sellRequest.id}
                         className="sellRequest-table-link"
                       >
-                        <DateDisplayer
-                          dateToHandle={sellRequest.DateSubmit.date}
-                        />
+                        <DateDisplayer dateToHandle={sellRequest.DateSubmit} />
                       </Link>
                     </Td>
                     <Td>
@@ -133,13 +131,7 @@ const AllMySellRequests = (props) => {
                         to={"/my_sell_requests/" + sellRequest.id}
                         className="sellRequest-table-link"
                       >
-                        <DateDisplayer
-                          dateToHandle={
-                            sellRequest.dateEnvoi
-                              ? sellRequest.dateEnvoi.date
-                              : sellRequest.dateEnvoi
-                          }
-                        />
+                        <DateDisplayer dateToHandle={sellRequest.dateEnvoi} />
                       </Link>
                     </Td>
                     <Td>
