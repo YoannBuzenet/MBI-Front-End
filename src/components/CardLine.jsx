@@ -186,7 +186,7 @@ const CardLine = ({ card, handleAddSellingBasket, index, cardID }) => {
             onChange={(event) => {
               handleChange(event);
             }}
-            value={2}
+            value={card.condition}
           >
             {conditions.length > 0
               ? config.gradingArea === "EU"
