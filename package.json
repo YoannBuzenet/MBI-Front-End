@@ -44,6 +44,9 @@
     ]
   },
   "devDependencies": {
+    "@babel/core": "^7.9.6",
+    "@babel/preset-env": "^7.9.6",
+    "babel-jest": "^26.0.1",
     "react-test-renderer": "^16.13.1",
     "why-did-you-update": "^1.0.8"
   }
