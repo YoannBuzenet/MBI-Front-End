@@ -1,5 +1,32 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`General tests renders its UI correctly 1`] = `
+<div
+  className="isUserAuthenticated"
+>
+  <form
+    action=""
+  >
+    <input
+      id="checkbox-compliance"
+      required={true}
+      type="checkbox"
+    />
+    <label
+      htmlFor="checkbox-compliance"
+    >
+      I accept the shop buying clauses.
+    </label>
+    <button
+      className="sellRequest-validation-button"
+      type="submit"
+    >
+      Validate
+    </button>
+  </form>
+</div>
+`;
+
 exports[`renders its UI correctly 1`] = `
 <div
   className="isUserAuthenticated"
