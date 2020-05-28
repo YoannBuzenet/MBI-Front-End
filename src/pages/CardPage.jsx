@@ -124,8 +124,10 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
         .then(() => setIsLoading(false));
 
       return () => {
-        // source.cancel("");
+        source.cancel("");
       };
+    } else {
+      setIsLoading(false);
     }
   }, [
     currentNameDecoded,
