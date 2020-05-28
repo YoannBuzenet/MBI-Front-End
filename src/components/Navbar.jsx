@@ -62,7 +62,7 @@ const Navbar = ({ history }) => {
         <div className="container">
           <div className="menu-links-left">
             <Link to="/" className="classic-links">
-              Logo Boutique
+              Shop Logo
             </Link>
             {/* <Link to="/" className="classic-links big-screen-info">
               Fantasy Sphere

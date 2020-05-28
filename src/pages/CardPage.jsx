@@ -22,6 +22,7 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
 
   const [hasUpdatedPrices, setHasUpdatedPrices] = useState(false);
 
+  //TODO - Passer la carte en State au lieu de contexte
   //CONTEXT - All cards displayed
   const { cardsCardPageContext, setCardsCardPageContext } = useContext(
     CardPageContext
