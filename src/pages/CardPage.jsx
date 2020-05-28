@@ -32,7 +32,6 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
 
   useEffect(() => {
     setCurrentName(match.params.cardName);
-    setCardsCardPageContext({});
   }, [match.params.cardName]);
 
   useEffect(() => {
@@ -125,7 +124,7 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
         .then(() => setIsLoading(false));
 
       return () => {
-        source.cancel("");
+        // source.cancel("");
       };
     }
   }, [
