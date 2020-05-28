@@ -89,9 +89,9 @@ const ShopAdminAllCustomers = (props) => {
                   return (
                     <Tr
                       key={customer.id}
-                      onClick={history.push(
-                        "/shopadmin/customers/" + customer.id
-                      )}
+                      onClick={() =>
+                        history.push("/shopadmin/customers/" + customer.id)
+                      }
                       className="cursor-pointer"
                     >
                       <Td>{customer.id}</Td>

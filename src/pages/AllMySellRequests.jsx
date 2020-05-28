@@ -100,9 +100,9 @@ const AllMySellRequests = (props) => {
                 (sellRequest, index) => (
                   <Tr
                     key={sellRequest.id}
-                    onClick={history.push(
-                      "/my_sell_requests/" + sellRequest.id
-                    )}
+                    onClick={() =>
+                      history.push("/my_sell_requests/" + sellRequest.id)
+                    }
                   >
                     <Td>
                       <Link
