@@ -108,8 +108,6 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
       const CancelToken = axios.CancelToken;
       const source = CancelToken.source();
 
-      setCardsCardPageContext({});
-
       cardsAPI
         .getByName(currentNameDecoded, {
           cancelToken: source.token,
@@ -122,8 +120,8 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
           // console.log(data);
           buildContextFromAPIResponse(data);
         })
-        .then(setHasUpdatedPrices(false))
-        .then(() => setIsLoading(false));
+        .then(setHasUpdatedPrices(false));
+      // .then(() => setIsLoading(false));
 
       return () => {
         source.cancel("");
@@ -150,6 +148,8 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
           addFirstDisplayedPricesToContext(data.data["hydra:member"]);
         })
         .then(setHasUpdatedPrices(true));
+
+      setIsLoading(false);
     }
   }, [cardsCardPageContext, setCardsCardPageContext]);
 
