@@ -5,6 +5,7 @@ import StatusCalculator from "../components/StatusCalculator";
 import { FormattedMessage } from "react-intl";
 import DateDisplayer from "../components/DateDisplayer";
 import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
+import { useHistory } from "react-router-dom";
 
 const AllMySellRequests = (props) => {
   //Current Authentication
@@ -15,6 +16,8 @@ const AllMySellRequests = (props) => {
   useEffect(() => {
     // console.log(authenticationInfos.customer.SellRequests);
   });
+
+  let history = useHistory();
 
   return (
     <>
@@ -97,10 +100,9 @@ const AllMySellRequests = (props) => {
                 (sellRequest, index) => (
                   <Tr
                     key={sellRequest.id}
-                    onClick={() =>
-                      (window.location.href =
-                        "/my_sell_requests/" + sellRequest.id)
-                    }
+                    onClick={history.push(
+                      "/my_sell_requests/" + sellRequest.id
+                    )}
                   >
                     <Td>
                       <Link

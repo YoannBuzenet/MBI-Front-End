@@ -7,11 +7,14 @@ import errorHandlingAPI from "../../services/errorHandlingAPI";
 import { isMobile } from "react-device-detect";
 import SetListLoader from "../../components/loaders/SetListLoader";
 import { FormattedMessage } from "react-intl";
+import { useHistory } from "react-router-dom";
 
 const ShopAdminAllCustomers = (props) => {
   const [listCustomers, setListCustomers] = useState([]);
 
   const [isLoading, setIsLoading] = useState(true);
+
+  let history = useHistory();
 
   //Preparing the variable that allow Promises clean up on Axios
   const CancelToken = axios.CancelToken;
@@ -86,10 +89,9 @@ const ShopAdminAllCustomers = (props) => {
                   return (
                     <Tr
                       key={customer.id}
-                      onClick={() =>
-                        (window.location.href =
-                          "/shopadmin/customers/" + customer.id)
-                      }
+                      onClick={history.push(
+                        "/shopadmin/customers/" + customer.id
+                      )}
                       className="cursor-pointer"
                     >
                       <Td>{customer.id}</Td>
