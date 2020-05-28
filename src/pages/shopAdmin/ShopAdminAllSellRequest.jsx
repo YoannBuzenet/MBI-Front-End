@@ -10,6 +10,7 @@ import { isMobile } from "react-device-detect";
 import SetListLoader from "../../components/loaders/SetListLoader";
 import { FormattedMessage } from "react-intl";
 import priceUpdateAPI from "../../services/priceUpdateAPI";
+import { useHistory } from "react-router-dom";
 
 const ShopAdminAllSellRequests = (props) => {
   //Variable to clean up useEffect Axios
@@ -20,6 +21,8 @@ const ShopAdminAllSellRequests = (props) => {
   const [allSellRequests, setAllSellRequests] = useState([]);
 
   const [isLoading, setIsLoading] = useState(true);
+
+  let history = useHistory();
 
   useEffect(() => {
     sellRequestAPI
@@ -93,10 +96,9 @@ const ShopAdminAllSellRequests = (props) => {
                   return (
                     <Tr
                       key={sellRequest.id}
-                      onClick={() =>
-                        (window.location.href =
-                          "/shopadmin/sell_requests/" + sellRequest.id)
-                      }
+                      onClick={history.push(
+                        "/shopadmin/sell_requests/" + sellRequest.id
+                      )}
                       className="cursor-pointer"
                     >
                       <Td>{sellRequest.id}</Td>

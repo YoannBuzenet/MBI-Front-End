@@ -9,6 +9,7 @@ import FeatherIcon from "feather-icons-react";
 import OneBigLineLoader from "../../components/loaders/OneBigLineLoader";
 import errorHandlingAPI from "../../services/errorHandlingAPI";
 import { FormattedMessage } from "react-intl";
+import { useHistory } from "react-router-dom";
 
 const ShopAdminCustomer = ({ match }) => {
   const { id } = match.params;
@@ -19,6 +20,8 @@ const ShopAdminCustomer = ({ match }) => {
   const [customerData, setCustomerData] = useState();
 
   const [isLoading, setIsLoading] = useState(true);
+
+  let history = useHistory();
 
   useEffect(() => {
     customersAPI
@@ -142,10 +145,9 @@ const ShopAdminCustomer = ({ match }) => {
                   <Tr
                     key={sellRequest.id}
                     className="cursor-pointer"
-                    onClick={() =>
-                      (window.location.href =
-                        "/shopadmin/sell_requests/" + sellRequest.id)
-                    }
+                    onClick={history.push(
+                      "/shopadmin/sell_requests/" + sellRequest.id
+                    )}
                   >
                     <Td>{sellRequest.id}</Td>
                     <Td>
