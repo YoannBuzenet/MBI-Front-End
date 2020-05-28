@@ -123,7 +123,10 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
         .then(setHasUpdatedPrices(false))
         .then(() => setIsLoading(false));
 
-      return () => source.cancel("");
+      return () => {
+        source.cancel("");
+        setCardsCardPageContext({});
+      };
     }
   }, [
     currentNameDecoded,
