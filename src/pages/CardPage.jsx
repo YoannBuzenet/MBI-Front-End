@@ -108,6 +108,8 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
       const CancelToken = axios.CancelToken;
       const source = CancelToken.source();
 
+      setCardsCardPageContext({});
+
       cardsAPI
         .getByName(currentNameDecoded, {
           cancelToken: source.token,
