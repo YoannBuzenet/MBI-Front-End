@@ -32,7 +32,7 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
 
   useEffect(() => {
     setCurrentName(match.params.cardName);
-    cardsCardPageContext({});
+    setCardsCardPageContext({});
   }, [match.params.cardName]);
 
   useEffect(() => {
