@@ -96,9 +96,11 @@ const ShopAdminAllSellRequests = (props) => {
                   return (
                     <Tr
                       key={sellRequest.id}
-                      onClick={history.push(
-                        "/shopadmin/sell_requests/" + sellRequest.id
-                      )}
+                      onClick={() =>
+                        history.push(
+                          "/shopadmin/sell_requests/" + sellRequest.id
+                        )
+                      }
                       className="cursor-pointer"
                     >
                       <Td>{sellRequest.id}</Td>

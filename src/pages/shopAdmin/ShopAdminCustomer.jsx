@@ -145,9 +145,9 @@ const ShopAdminCustomer = ({ match }) => {
                   <Tr
                     key={sellRequest.id}
                     className="cursor-pointer"
-                    onClick={history.push(
-                      "/shopadmin/sell_requests/" + sellRequest.id
-                    )}
+                    onClick={() =>
+                      history.push("/shopadmin/sell_requests/" + sellRequest.id)
+                    }
                   >
                     <Td>{sellRequest.id}</Td>
                     <Td>
