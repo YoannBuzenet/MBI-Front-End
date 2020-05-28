@@ -4,15 +4,24 @@ import { Link } from "react-router-dom";
 import MKMAPI from "../services/MKMAPI";
 import axios from "axios";
 import { FormattedMessage } from "react-intl";
+import { useHistory } from "react-router-dom";
 
 const CardWithThumbnail = ({ card }) => {
   const picture = cardsAPI.getSmallPictureFromScryfallId(card);
+
+  let history = useHistory();
+
+  function handleClick() {
+    history.push("/card/" + card.name);
+  }
 
   return (
     <>
       <div
         className="card"
-        onClick={() => (window.location.href = "/card/" + card.name)}
+        // onClick={() => (window.location.href = "/card/" + card.name)}
+        onClick={handleClick}
+
         //TEST MKM CONNECTION
         // onClick={() =>
         //   axios
