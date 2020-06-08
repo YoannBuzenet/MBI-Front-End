@@ -1,5 +1,6 @@
 {
   "name": "mbi_front",
+  "main": "server/server.js",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -9,6 +10,7 @@
     "@welldone-software/why-did-you-render": "^4.0.5",
     "axios": "^0.19.2",
     "crypto-js": "^4.0.0",
+    "express": "^4.17.1",
     "feather-icons-react": "^0.4.1",
     "jwt-decode": "^2.2.0",
     "react": "^16.13.1",
@@ -26,7 +28,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "start:server": "node server/server.js"
   },
   "eslintConfig": {
     "extends": "react-app"
