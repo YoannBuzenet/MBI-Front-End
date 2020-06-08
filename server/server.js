@@ -13,6 +13,12 @@ app.get("/api/getList", (req, res) => {
   console.log("Sent list of items");
 });
 
+//Mail Processing
+//TODO : Build an endpoint for each mail type + parse data in POST
+app.get("/api/mail", (req, res) => {
+  console.log("Processing Mail");
+});
+
 // Handles any requests that don't match the ones above
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname + "/mbi_front/build/index.html"));
