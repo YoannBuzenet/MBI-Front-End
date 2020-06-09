@@ -1,10 +1,14 @@
 const express = require("express");
 const path = require("path");
-
+const bodyParser = require("body-parser");
 const app = express();
 
 // Serve the static files from the React app
-app.use(express.static(path.join(__dirname, "mbi_front/build")));
+app.use(express.static(path.join(__dirname, "../build")));
+
+//Parse each call
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 // An api endpoint that returns a short list of items
 app.get("/api/getList", (req, res) => {
@@ -14,14 +18,15 @@ app.get("/api/getList", (req, res) => {
 });
 
 //Mail Processing
-//TODO : Build an endpoint for each mail type + parse data in POST
-app.get("/api/mail", (req, res) => {
+//TODO : Build an endpoint for each mail type + find how to parse data in POST
+app.post("/api/mail", (req, res) => {
   console.log("Processing Mail");
+  console.log("req body : ", req.body);
 });
 
 // Handles any requests that don't match the ones above
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname + "/mbi_front/build/index.html"));
+  res.sendFile(path.join(__dirname, "../build/index.html"));
 });
 
 const port = process.env.PORT || 5000;
