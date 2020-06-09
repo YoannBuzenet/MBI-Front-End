@@ -2,7 +2,7 @@ const express = require("express");
 const path = require("path");
 const bodyParser = require("body-parser");
 const app = express();
-
+const { sendMail } = require("./mailing/sendMail");
 // Serve the static files from the React app
 app.use(express.static(path.join(__dirname, "../build")));
 
@@ -18,10 +18,12 @@ app.get("/api/getList", (req, res) => {
 });
 
 //Mail Processing
-//TODO : Build an endpoint for each mail type + find how to parse data in POST
+//TODO : Build an endpoint for each mail type
 app.post("/api/mail", (req, res) => {
   console.log("Processing Mail");
   console.log("req body : ", req.body);
+  console.log(sendMail);
+  sendMail();
 });
 
 // Handles any requests that don't match the ones above
