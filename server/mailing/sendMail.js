@@ -1,9 +1,13 @@
 const ejs = require("ejs");
 const nodemailer = require("nodemailer");
 
-function sendMail() {
+function sendMail(action) {
   //TODO : Créer des templates ! Parcourir un Switch pour envoyer le bon template
-  const template = "./dashboards/dashboard.ejs";
+  let template;
+  switch (action) {
+    default:
+      template = __dirname + "/templates/confirmationInscriptionMail.ejs";
+  }
 
   const transport = nodemailer.createTransport({
     host: "smtp.gmail.com",
@@ -16,11 +20,13 @@ function sendMail() {
   });
 
   let templateData = {
-    name: "Test Name",
+    user: { name: "Yoann" },
   };
 
   ejs.renderFile(template, templateData, (err, html) => {
     if (err) console.log(err); // Handle error
+    console.log(templateData);
+    console.log(template);
 
     console.log(`HTML: ${html}`);
 
