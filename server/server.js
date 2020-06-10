@@ -28,7 +28,7 @@ app.post("/api/mail", (req, res) => {
   console.log("req body : ", req.body);
   console.log(sendMail);
 
-  sendMail(mailRequest);
+  sendMail(req.body.mailRequest);
 });
 
 // Handles any requests that don't match the ones above

@@ -1,7 +1,7 @@
 const ejs = require("ejs");
 const nodemailer = require("nodemailer");
 
-function sendMail(action) {
+function sendMail(mailRequest) {
   //TODO : Créer des templates ! Parcourir un Switch pour envoyer le bon template
   let template;
   switch (mailRequest.action) {
