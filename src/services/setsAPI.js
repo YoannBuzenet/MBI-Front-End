@@ -4,7 +4,7 @@ import localStorageAPI from "./localStorageAPI";
 
 function findAll() {
   return axios
-    .get(config.URL_API + "/sets")
+    .get(process.env.REACT_APP_MTGAPI_URL + "/sets")
     .then((data) => {
       //truc
       let allSetsCookie = {
@@ -19,7 +19,7 @@ function findAll() {
 
 function findOneById(id, cleanUpParam) {
   return axios
-    .get(config.URL_API + "/sets/" + id, cleanUpParam)
+    .get(process.env.REACT_APP_MTGAPI_URL + "/sets/" + id, cleanUpParam)
     .then((response) => response.data.cards);
 }
 

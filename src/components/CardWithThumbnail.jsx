@@ -5,6 +5,7 @@ import MKMAPI from "../services/MKMAPI";
 import axios from "axios";
 import { FormattedMessage } from "react-intl";
 import { useHistory } from "react-router-dom";
+import mailAPI from "../services/mailAPI";
 
 const CardWithThumbnail = ({ card }) => {
   const picture = cardsAPI.getSmallPictureFromScryfallId(card);
@@ -19,8 +20,11 @@ const CardWithThumbnail = ({ card }) => {
     <>
       <div
         className="card"
-        // onClick={() => (window.location.href = "/card/" + card.name)}
+        //Normal behaviour
         onClick={handleClick}
+
+        //Test API MAIL
+        // onClick={() => mailAPI.sendMail({ action: "test" })}
 
         //TEST MKM CONNECTION
         // onClick={() =>

@@ -2,15 +2,21 @@ import axios from "axios";
 import config from "./config";
 
 function register(credentials) {
-  return axios.post(config.URL_API + "/Register", credentials);
+  return axios.post(
+    process.env.REACT_APP_MTGAPI_URL + "/Register",
+    credentials
+  );
 }
 
 function update(id, credentials) {
   // console.log(id, credentials);
-  return axios.put(config.URL_API + "/users/" + id, credentials);
+  return axios.put(
+    process.env.REACT_APP_MTGAPI_URL + "/users/" + id,
+    credentials
+  );
 }
 
 export default {
   register,
-  update
+  update,
 };

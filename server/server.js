@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const express = require("express");
 const path = require("path");
 const bodyParser = require("body-parser");
@@ -25,8 +27,8 @@ app.post("/api/mail", (req, res) => {
   console.log("Processing Mail");
   console.log("req body : ", req.body);
   console.log(sendMail);
-  let action = "on chope l'action depuis la payload";
-  sendMail(action);
+
+  sendMail(mailRequest);
 });
 
 // Handles any requests that don't match the ones above
