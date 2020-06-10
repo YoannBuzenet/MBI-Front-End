@@ -9,7 +9,7 @@ import config from "./config";
 //Then we store data into local storage.
 function authenticate(credentials) {
   return axios
-    .post(config.URL_API + "/login", credentials)
+    .post(process.env.REACT_APP_MTGAPI_URL + "/login", credentials)
     .then((response) => {
       return response.data;
     })
@@ -76,6 +76,7 @@ function userInfos() {
         id: "",
         email: "",
         roles: [],
+        token: "",
       },
       customer: {
         id: "",
@@ -112,7 +113,10 @@ function refreshTokenAndInfos(refresh_token) {
   let object_refresh_token = { refresh_token: refresh_token };
 
   return axios
-    .post(config.URL_API + "/token/refresh", object_refresh_token)
+    .post(
+      process.env.REACT_APP_MTGAPI_URL + "/token/refresh",
+      object_refresh_token
+    )
     .then((data) => {
       //Saving the new JWT token in localStorage
       window.localStorage.setItem("authToken", data.data.token);
@@ -134,6 +138,7 @@ function transformAPIdataIntoAppData(data) {
   return {
     isAuthenticated: jwtData.exp * 1000 > new Date().getTime(),
     refresh_token: data.refresh_token,
+    token: data.token,
     user: {
       id: data.user.id,
       email: data.user.email,

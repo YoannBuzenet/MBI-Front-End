@@ -4,7 +4,12 @@ const nodemailer = require("nodemailer");
 function sendMail(action) {
   //TODO : Créer des templates ! Parcourir un Switch pour envoyer le bon template
   let template;
-  switch (action) {
+  switch (mailRequest.action) {
+    case "cancel":
+      //On fait une requete sur l'api centrale en tant que shop avec le jwt. Si on a une 200 alors on envoie le mail de cancel
+      console.log("cancel sell request");
+      console.log(mailRequest.action);
+
     default:
       template = __dirname + "/templates/confirmationInscriptionMail.ejs";
   }
@@ -20,7 +25,7 @@ function sendMail(action) {
   });
 
   let templateData = {
-    user: { name: "Yoann" },
+    user: { name: "Thomas" },
   };
 
   ejs.renderFile(template, templateData, (err, html) => {
@@ -32,16 +37,16 @@ function sendMail(action) {
 
     let mailOpts = {
       from: "ybuzenet@gmail.com",
-      to: "ybuzenet@gmail.com",
+      to: "thomas.g.guillot@gmail.com ",
       subject: "EJS Test File",
       html: html,
     };
 
-    transport.sendMail(mailOpts, (err, info) => {
-      if (err) console.log(err); //Handle Error
+    // transport.sendMail(mailOpts, (err, info) => {
+    //   if (err) console.log(err); //Handle Error
 
-      console.log(info);
-    });
+    //   console.log(info);
+    // });
   });
 }
 

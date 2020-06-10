@@ -1,15 +1,14 @@
 import axios from "axios";
-import config from "./config";
 
 function getAllLang() {
   return axios
-    .get(config.URL_API + "/languages")
+    .get(process.env.REACT_APP_MTGAPI_URL + "/languages")
     .then((response) => response.data["hydra:member"]);
 }
 
 function getAllConditions() {
   return axios
-    .get(config.URL_API + "/card_conditions")
+    .get(process.env.REACT_APP_MTGAPI_URL + "/card_conditions")
     .then((response) => response.data["hydra:member"]);
 }
 

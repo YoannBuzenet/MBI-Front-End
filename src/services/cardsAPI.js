@@ -2,18 +2,21 @@ import axios from "axios";
 import config from "./config";
 
 function getByName(cardName, cleaningParam) {
-  return axios.get(config.URL_API + "/cards?name=" + cardName, cleaningParam);
+  return axios.get(
+    process.env.REACT_APP_MTGAPI_URL + "/cards?name=" + cardName,
+    cleaningParam
+  );
 }
 
 function searchApproxByName(cardName, cleaningParam) {
   return axios.get(
-    config.URL_API + "/cardsearch?name=" + cardName,
+    process.env.REACT_APP_MTGAPI_URL + "/cardsearch?name=" + cardName,
     cleaningParam
   );
 }
 
 function getById(id) {
-  return axios.get(config.URL_API + "/cards/" + id);
+  return axios.get(process.env.REACT_APP_MTGAPI_URL + "/cards/" + id);
 }
 
 function getSmallPictureFromScryfallId(card) {

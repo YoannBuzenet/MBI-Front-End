@@ -3,7 +3,7 @@ import config from "./config";
 
 function getArrayofPrices(arrayOfIdCards, baseLangID, cleaningParam) {
   return axios.get(
-    config.URL_API +
+    process.env.REACT_APP_MTGAPI_URL +
       "/card_shop_prices?shop.id=" +
       config.shopID +
       "&language.id[]=9&cardCondition.id=2&isSigned=false&language.id[]=" +
@@ -27,7 +27,7 @@ function getOnePrice(shopID, cardID, langID, conditionID, isFoil, isSigned) {
   }
 
   return axios.get(
-    config.URL_API +
+    process.env.REACT_APP_MTGAPI_URL +
       "/card_shop_prices?shop.id=" +
       shopID +
       "&card.id=" +
@@ -45,7 +45,7 @@ function getOnePrice(shopID, cardID, langID, conditionID, isFoil, isSigned) {
 
 function getAllCSPFromOneEdition(cardID) {
   return axios.get(
-    config.URL_API +
+    process.env.REACT_APP_MTGAPI_URL +
       "/card_shop_prices.json?shop.id=" +
       config.shopID +
       "&card.id=" +

@@ -104,6 +104,8 @@ const ShopAdminOneSellRequest = ({ match }) => {
     return () => source.cancel("");
   }, [id]);
 
+  console.log(currentAdminSellRequest);
+
   return (
     <>
       <div className="container">
@@ -307,6 +309,7 @@ const ShopAdminOneSellRequest = ({ match }) => {
             </Thead>
             <Tbody className="cardLineShop">
               {!currentAdminSellRequest.dateValidated &&
+                currentAdminSellRequest.dateCanceled === null &&
                 currentAdminSellRequest.sellRequests &&
                 currentAdminSellRequest.sellRequests.length > 0 &&
                 currentAdminSellRequest.sellRequests.map((card, index) => {

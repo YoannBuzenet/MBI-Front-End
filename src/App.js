@@ -84,6 +84,8 @@ function App() {
     AuthAPI.userInfos()
   );
 
+  // console.log(authenticationInfos);
+
   //Checking is the JWT token is still good, if yes, Keep it in Axios + Launch JWT Renew setTimeout
   //If not, log out
   useEffect(() => {

@@ -3,15 +3,15 @@ import config from "./config";
 
 function postOnePrice(cardInfo, cleaningParam) {
   return axios.post(
-    config.URL_API + "/card_shop_prices",
+    process.env.REACT_APP_MTGAPI_URL + "/card_shop_prices",
     cardInfo,
     cleaningParam
   );
 }
 function putOnePrice(cardInfo, cardShopPriceID, cleaningParam) {
-  // console.log(config.URL_API + "/card_shop_prices/" + cardShopPriceID);
+  // console.log(process.env.REACT_APP_MTGAPI_URL + "/card_shop_prices/" + cardShopPriceID);
   return axios.put(
-    config.URL_API + "/card_shop_prices/" + cardShopPriceID,
+    process.env.REACT_APP_MTGAPI_URL + "/card_shop_prices/" + cardShopPriceID,
     cardInfo,
     cleaningParam
   );
@@ -19,7 +19,7 @@ function putOnePrice(cardInfo, cardShopPriceID, cleaningParam) {
 
 function deleteOnePrice(cardShopPriceID, cleaningParam) {
   return axios.delete(
-    config.URL_API + "/card_shop_prices/" + cardShopPriceID,
+    process.env.REACT_APP_MTGAPI_URL + "/card_shop_prices/" + cardShopPriceID,
     cleaningParam
   );
 }
@@ -27,7 +27,7 @@ function deleteOnePrice(cardShopPriceID, cleaningParam) {
 function batchPriceUpdate(batch, cleaningParam) {
   console.log("batch sent");
   return axios.post(
-    config.URL_API + "/batchCardShopPrice",
+    process.env.REACT_APP_MTGAPI_URL + "/batchCardShopPrice",
     batch,
     cleaningParam
   );

@@ -1,9 +1,6 @@
 import English from "../translations/English.json";
 import French from "../translations/French.json";
 
-// const URL_API = "http://mtgapi.local:8888" ;
-const URL_API = "https://mtgapi.tgit.fr";
-
 const shopID = 1;
 
 const avatarShopURL = "";
@@ -83,7 +80,6 @@ const websiteDefaultLanguageContext = {
 const baseLang = 3;
 
 export default {
-  URL_API,
   shopID,
   shopName,
   baseLang,

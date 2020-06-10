@@ -31,7 +31,9 @@ const LastModifications = () => {
       //If cookie is expired, we call API
       axios
         .get(
-          config.URL_API + "/lastcardsmodified?limit=10&shopid=" + config.shopID
+          process.env.REACT_APP_MTGAPI_URL +
+            "/lastcardsmodified?limit=10&shopid=" +
+            config.shopID
         )
         .then((data) => {
           setLastModificationList(data.data);

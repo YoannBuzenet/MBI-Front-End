@@ -8,6 +8,7 @@ import MKM_ModalContext from "../../context/mkmModalConnectionContext";
 import BlackDivContext from "../../context/blackDivModalContext";
 import { FormattedMessage } from "react-intl";
 import { useIntl } from "react-intl";
+import mailAPI from "../../services/mailAPI";
 
 const ShopSellRequestStatusValidator = () => {
   const { currentAdminSellRequest, setCurrentAdminSellRequest } = useContext(
@@ -28,8 +29,9 @@ const ShopSellRequestStatusValidator = () => {
   //We initialize the state to Cancelled so that the button to update the Sell Request remain hidden while the real status is being computed
   const [currentStatus, setCurrentStatus] = useState("Cancelled");
 
-  // TRANSLATION
+  console.log(availableOptions);
 
+  // TRANSLATION
   //Hook Intl to translate an attribute
   const intl = useIntl();
 
@@ -113,6 +115,21 @@ const ShopSellRequestStatusValidator = () => {
       ]);
     } else if (currentStatus === "En traitement") {
       setAvailableOptions([
+        {
+          status: awaitingCustomerValidationStatusTranslation,
+          value: "dateApprovalPending",
+        },
+      ]);
+    } else if (currentStatus === "Cancelled") {
+      setAvailableOptions([
+        {
+          status: receivedStatusTranslation,
+          value: "dateRecu",
+        },
+        {
+          status: beingProcessedValidationStatusTranslation,
+          value: "dateProcessing",
+        },
         {
           status: awaitingCustomerValidationStatusTranslation,
           value: "dateApprovalPending",
@@ -215,6 +232,15 @@ const ShopSellRequestStatusValidator = () => {
           dateCanceled: data.data.dateCanceled,
         });
       });
+
+    //Send mail here
+    mailAPI.sendMail({
+      mailRequest: {
+        action: "cancel",
+        user: authenticationInfos,
+        infos: currentAdminSellRequest,
+      },
+    });
   };
 
   const handleChange = ({ currentTarget }) => {
@@ -223,6 +249,7 @@ const ShopSellRequestStatusValidator = () => {
 
     const newData = {
       [value]: new Date(),
+      dateCanceled: null,
     };
 
     sellRequestAPI
@@ -231,6 +258,7 @@ const ShopSellRequestStatusValidator = () => {
         setCurrentAdminSellRequest({
           ...currentAdminSellRequest,
           [value]: data.data[value],
+          dateCanceled: null,
         });
         // console.log(data.data);
         // console.log(data.data[value]);
