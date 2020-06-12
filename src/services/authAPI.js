@@ -11,10 +11,11 @@ function authenticate(credentials) {
   return axios
     .post(process.env.REACT_APP_MTGAPI_URL + "/login", credentials)
     .then((response) => {
+      console.log(response);
       return response.data;
     })
     .then((data) => {
-      console.log(data);
+      // console.log(data);
       //Stocking in local storage
       window.localStorage.setItem("authToken", data.token);
       window.localStorage.setItem("refreshToken", data.refresh_token);

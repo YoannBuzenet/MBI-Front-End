@@ -38,7 +38,7 @@ const LoginPage = ({ history, eraseAuthContext, renewJWTToken }) => {
 
     try {
       const userData = await authAPI.authenticate(credentials);
-      console.log(userData);
+      // console.log(userData);
       setAuthenticationInfos(userData);
       setIsLoading(false);
       toast.success(
