@@ -22,12 +22,7 @@ app.get("/api/getList", (req, res) => {
 //Mail Processing
 //TODO : Build an endpoint for each mail type
 app.post("/api/mail", (req, res) => {
-  //Parser une option qui dit quel mail envoyer.
-  //En fonction de l'option, check la sécurité ou non
   console.log("Processing Mail");
-  // console.log("req body : ", req.body);
-  // console.log(sendMail);
-
   sendMail(req.body.mailRequest);
 });
 
