@@ -1,0 +1,12 @@
+<h2>Bonjour <%= user.prenom%>,</h2>
+<p>Votre rachat n° <%= sellRequest.id %> a été traité !</p>
+<p>
+  Vous pouvez dès à présent vous connecter sur votre espace client pour vérifier
+  l'offre de rachat.
+</p>
+<p>
+  Vous pouvez dès à présent la vérifier sur <%= process.env.REACT_APP_EXPRESSAPI
+  %>.
+</p>
+<p>Merci,</p>
+<p><%= user.shop.legalName %></p>
