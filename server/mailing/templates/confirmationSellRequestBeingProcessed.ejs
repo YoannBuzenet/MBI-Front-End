@@ -1,1 +1,8 @@
-<!-- Your Sell Request has been processed by the shop ! -->
+<h2>Bonjour <%= user.prenom%>,</h2>
+<p>Votre rachat n°<%= sellRequest.id %> est en train d'être traité.</p>
+<p>
+  Dès que celui-ci sera finalisé et que les cartes auront été vérifiées, vous
+  recevrez une notification par mail avec une offre de rachat.
+</p>
+<p>Merci,</p>
+<p><%= user.shop.legalName %></p>

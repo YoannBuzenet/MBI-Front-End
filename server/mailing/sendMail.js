@@ -31,16 +31,25 @@ function sendMail(mailRequest) {
     case "received":
       //SHOP user security
       templateData = { ...templateData, sellRequest: mailRequest.infos };
-      template = __dirname + "/templates/confirmationCardsAreSent.ejs";
+      template = __dirname + "/templates/confirmationCardsAreReceived.ejs";
       break;
     case "beingProcessed":
       //SHOP user security
+      templateData = { ...templateData, sellRequest: mailRequest.infos };
+      template =
+        __dirname + "/templates/confirmationSellRequestBeingProcessed.ejs";
       break;
     case "awaitingCustomerValidation":
       //SHOP user security
+      templateData = { ...templateData, sellRequest: mailRequest.infos };
+      template =
+        __dirname + "/templates/confirmationSellRequestAwaitingValidation.ejs";
       break;
     case "validated":
       //SHOP user security
+      templateData = { ...templateData, sellRequest: mailRequest.infos };
+      template =
+        __dirname + "/templates/confirmationSellRequestValidatedByShop.ejs";
       break;
     case "cancel":
       //SHOP user security
@@ -52,6 +61,7 @@ function sendMail(mailRequest) {
       break;
 
     default:
+      //TODO : what do we do in case of default ?
       template = __dirname + "/templates/confirmationInscriptionMail.ejs";
   }
 
