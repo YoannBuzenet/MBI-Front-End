@@ -46,6 +46,7 @@ const CardLine = ({ card, handleAddSellingBasket, index, cardID }) => {
   );
 
   const handleChange = ({ currentTarget }) => {
+    // console.log(cardsCardPageContext[cardID]);
     const { name, value } = currentTarget;
     if (name !== "quantity") {
       setIsLoading(true);
@@ -288,6 +289,7 @@ const CardLine = ({ card, handleAddSellingBasket, index, cardID }) => {
             size={isMobile ? config.iconSizeMobile : config.iconSizeDesktop}
             className="downsize-icon add-item-basket"
             onClick={() => {
+              // console.log(cardsCardPageContext[cardID]);
               return handleAddSellingBasket(
                 currentBasket,
                 cardsCardPageContext[cardID]

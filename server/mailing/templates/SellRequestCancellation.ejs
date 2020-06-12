@@ -1,0 +1,12 @@
+<h2>Bonjour <%= user.customer.prenom %>,</h2>
+
+<p>
+  Ce message pour vous prévenir que votre rachat numéro <%= sellRequest.id %> a
+  été annulé.
+</p>
+<p>
+  En cas de question, n'hésitez pas à nous contacter à l'adresse email suivante
+  : <%= user.shop.email %>
+</p>
+<p>Merci,</p>
+<p><%= user.shop.legalName %></p>
