@@ -1,3 +1,5 @@
-<h2>Salut <%= user.name %> !</h2>
-<p>Ceci est un mail envoyé automatiquement avec Node et le smtp google !</p>
-<p>Stylé nan ?</p>
+<h2>Bonjour <%= user.prenom %>, et Bienvenue !</h2>
+<p>Vous êtes inscrit sur <%= process.env.REACT_APP_EXPRESSAPI %> !</p>
+<p>Vous pouvez désormais créer des demandes de rachat.</p>
+<p>Merci,</p>
+<p><%= user.shop.legalName %></p>

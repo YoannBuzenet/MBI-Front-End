@@ -3,6 +3,7 @@ const nodemailer = require("nodemailer");
 
 function sendMail(mailRequest) {
   //TODO : Traduire tous les templates
+  //TODO : ajouter la langue dans l'object MailRequest React side
   let template;
   let templateData = {
     user: mailRequest.user,
@@ -12,6 +13,8 @@ function sendMail(mailRequest) {
   switch (mailRequest.action) {
     case "welcomeEmail":
       //Unlogged user -> must implement follow up on IP/mail with DB
+      //TODO: Security Check
+      template = __dirname + "/templates/welcomeEmail.ejs";
       break;
     case "submitted":
       //Logged user security
@@ -21,9 +24,14 @@ function sendMail(mailRequest) {
       break;
     case "cards Sent":
       //Logged user security
+      //TO DO -> check that the sell request is sent in info prop React Side
+      templateData = { ...templateData, sellRequest: mailRequest.infos };
+      template = __dirname + "/templates/confirmationCardsAreSent.ejs";
       break;
     case "received":
       //SHOP user security
+      templateData = { ...templateData, sellRequest: mailRequest.infos };
+      template = __dirname + "/templates/confirmationCardsAreSent.ejs";
       break;
     case "beingProcessed":
       //SHOP user security
