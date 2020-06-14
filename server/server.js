@@ -30,6 +30,7 @@ app.get("/api/getList", (req, res) => {
 //TODO : Build an endpoint for each mail type
 app.post("/api/mail", (req, res) => {
   console.log("Processing Mail");
+  console.trace(req.body.mailRequest);
   sendMail(req.body.mailRequest);
 });
 
