@@ -3,6 +3,7 @@ const nodemailer = require("nodemailer");
 const { securityCheckAPI } = require("../services/securityCheckAPI");
 
 function sendMail(mailRequest) {
+  console.log(mailRequest);
   //TODO : Traduire tous les templates
   //TODO : ajouter la langue dans l'object MailRequest React side
   let template;
@@ -12,10 +13,17 @@ function sendMail(mailRequest) {
 
   //Security check params
   let securityCheckMailCanBeSent = true;
-  let AllSecurityLevels = { unlogged, logged, shop };
+  let AllSecurityLevels = {
+    unlogged: "unlogged",
+    logged: "logged",
+    shop: "shop",
+  };
   let currentSecurityLevel;
-  let { token } = template.user;
-  let { userSellRequest } = templateData.user.customer.SellRequests;
+  let { token } = templateData.user;
+  let userSellRequest = templateData.user.customer.SellRequests;
+  let userShopSellRequest = templateData.shop
+    ? templateData.shop.sellRequests
+    : null;
 
   //TODO -> 1.On each case, API call must be implemented React side
   //TODO -> 2. Security API for logged user, shop user, non logged user
@@ -27,47 +35,42 @@ function sendMail(mailRequest) {
       template = __dirname + "/templates/welcomeEmail.ejs";
       break;
     case "submitted":
-      //Logged user security
-      currentSecurityLevel = AllSecurityLevels[logged];
+      currentSecurityLevel = AllSecurityLevels["logged"];
       //TO DO -> check that the sell request is sent in info prop React Side
       templateData = { ...templateData, sellRequest: mailRequest.infos };
       template = __dirname + "/templates/confirmationSellRequestSubmitted.ejs";
       break;
     case "cards Sent":
-      //Logged user security
-      currentSecurityLevel = AllSecurityLevels[logged];
+      currentSecurityLevel = AllSecurityLevels["logged"];
       //TO DO -> check that the sell request is sent in info prop React Side
       templateData = { ...templateData, sellRequest: mailRequest.infos };
       template = __dirname + "/templates/confirmationCardsAreSent.ejs";
       break;
     case "received":
-      //SHOP user security
+      currentSecurityLevel = AllSecurityLevels["shop"];
       templateData = { ...templateData, sellRequest: mailRequest.infos };
       template = __dirname + "/templates/confirmationCardsAreReceived.ejs";
       break;
     case "beingProcessed":
-      //SHOP user security
+      currentSecurityLevel = AllSecurityLevels["shop"];
       templateData = { ...templateData, sellRequest: mailRequest.infos };
       template =
         __dirname + "/templates/confirmationSellRequestBeingProcessed.ejs";
       break;
     case "awaitingCustomerValidation":
-      //SHOP user security
+      currentSecurityLevel = AllSecurityLevels["shop"];
       templateData = { ...templateData, sellRequest: mailRequest.infos };
       template =
         __dirname + "/templates/confirmationSellRequestAwaitingValidation.ejs";
       break;
     case "validated":
-      //SHOP user security
+      currentSecurityLevel = AllSecurityLevels["shop"];
       templateData = { ...templateData, sellRequest: mailRequest.infos };
       template =
         __dirname + "/templates/confirmationSellRequestValidatedByShop.ejs";
       break;
     case "cancel":
-      //SHOP user security
-      //On fait une requete sur l'api centrale en tant que shop avec le jwt. Si on a une 200 alors on envoie le mail de cancel
-      //TO DO : CALL TO CHECK USER RIGHTS
-      console.log("action : cancel -> cancel sell request");
+      currentSecurityLevel = AllSecurityLevels["shop"];
       templateData = { ...templateData, sellRequest: mailRequest.infos };
       template = __dirname + "/templates/SellRequestCancellation.ejs";
       break;
@@ -83,16 +86,21 @@ function sendMail(mailRequest) {
     userSellRequest,
     token
   ) => {
-    if (currentSecurityLevel === AllSecurityLevels[logged]) {
-      securityCheckMailCanBeSent = await securityCheckAPI.checkIfUserIsReallyLogged(
-        userSellRequest[0],
+    if (currentSecurityLevel === AllSecurityLevels["logged"]) {
+      //Checking if we can make an API request with the JWT as a logged user
+      let userPermissionsCheck = await securityCheckAPI.checkIfUserIsReallyLogged(
+        userSellRequest[0].id,
         token
       );
-      return securityCheckMailCanBeSent.status === 200;
-    } else if (currentSecurityLevel === AllSecurityLevels[shop]) {
-      //Check logged shop
-      return true;
-    } else if (currentSecurityLevel === AllSecurityLevels[unlogged]) {
+      return userPermissionsCheck.status === 200;
+    } else if (currentSecurityLevel === AllSecurityLevels["shop"]) {
+      //Checking if we can make an API request with the JWT as the logged shop
+      let userShopPermissionsCheck = await securityCheckAPI.checkIfUserIsReallyLogged(
+        userShopSellRequest[0].id,
+        token
+      );
+      return userShopPermissionsCheck.status === 200;
+    } else if (currentSecurityLevel === AllSecurityLevels["unlogged"]) {
       //check unlog bro
       return true;
     } else {
@@ -105,7 +113,8 @@ function sendMail(mailRequest) {
     currentSecurityLevel,
     AllSecurityLevels,
     userSellRequest,
-    token
+    token,
+    userShopSellRequest
   );
 
   const transport = nodemailer.createTransport({
@@ -120,9 +129,9 @@ function sendMail(mailRequest) {
 
   ejs.renderFile(template, templateData, (err, html) => {
     if (err) console.log(err); // Handle error
-    console.log(templateData);
-    console.log(templateData.user.customer.SellRequests);
-    console.log(template);
+    // console.log(templateData);
+    // console.log(templateData.user.customer.SellRequests);
+    // console.log(template);
 
     console.log(`HTML: ${html}`);
 
