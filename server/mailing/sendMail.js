@@ -1,8 +1,8 @@
 const ejs = require("ejs");
 const nodemailer = require("nodemailer");
-const { securityCheckAPI } = require("../services/securityCheckAPI");
+const { checkIfUserIsReallyLogged } = require("../services/securityCheckAPI");
 
-function sendMail(mailRequest) {
+async function sendMail(mailRequest) {
   console.log(mailRequest);
   //TODO : Traduire tous les templates
   //TODO : ajouter la langue dans l'object MailRequest React side
@@ -21,8 +21,8 @@ function sendMail(mailRequest) {
   let currentSecurityLevel; //Checking wether use is logged, shop or unlogged
   let { token } = templateData.user; // jwt
   let userSellRequest = templateData.user.customer.SellRequests;
-  let userShopSellRequest = templateData.shop
-    ? templateData.shop.sellRequests
+  let userShopSellRequest = templateData.user.shop
+    ? templateData.user.shop.sellRequests
     : null;
 
   let mailOptions = { from: "", to: "", subject: "" };
@@ -117,14 +117,14 @@ function sendMail(mailRequest) {
   ) => {
     if (currentSecurityLevel === AllSecurityLevels["logged"]) {
       //Checking if we can make an API request with the JWT as a logged user
-      let userPermissionsCheck = await securityCheckAPI.checkIfUserIsReallyLogged(
+      let userPermissionsCheck = await checkIfUserIsReallyLogged(
         userSellRequest[0].id,
         token
       );
       return userPermissionsCheck.status === 200;
     } else if (currentSecurityLevel === AllSecurityLevels["shop"]) {
       //Checking if we can make an API request with the JWT as the logged shop
-      let userShopPermissionsCheck = await securityCheckAPI.checkIfUserIsReallyLogged(
+      let userShopPermissionsCheck = await checkIfUserIsReallyLogged(
         userShopSellRequest[0].id,
         token
       );
@@ -138,7 +138,7 @@ function sendMail(mailRequest) {
     }
   };
 
-  securityCheckMailCanBeSent = checkSecurity(
+  securityCheckMailCanBeSent = await checkSecurity(
     currentSecurityLevel,
     AllSecurityLevels,
     userSellRequest,
@@ -167,7 +167,7 @@ function sendMail(mailRequest) {
     console.log(`HTML: ${html}`);
 
     let mailOpts = {
-      from: "ybuzenet@gmail.com",
+      from: "ybuzenett@gmail.com",
       to: mailOptions.to,
       subject: mailOptions.subject,
       html: html,
