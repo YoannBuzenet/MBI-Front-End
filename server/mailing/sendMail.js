@@ -3,7 +3,6 @@ const nodemailer = require("nodemailer");
 const { checkIfUserIsReallyLogged } = require("../services/securityCheckAPI");
 
 async function sendMail(mailRequest) {
-  console.log(mailRequest);
   //TODO : Traduire tous les templates
   //TODO : ajouter la langue dans l'object MailRequest React side
   let template;
@@ -20,6 +19,7 @@ async function sendMail(mailRequest) {
   };
   let currentSecurityLevel; //Checking wether use is logged, shop or unlogged
   let { token } = templateData.user; // jwt
+
   let userSellRequest = templateData.user.customer.SellRequests;
   let userShopSellRequest = templateData.user.shop
     ? templateData.user.shop.sellRequests
@@ -137,7 +137,7 @@ async function sendMail(mailRequest) {
       return false;
     }
   };
-
+  console.log("check auth 0", securityCheckMailCanBeSent);
   securityCheckMailCanBeSent = await checkSecurity(
     currentSecurityLevel,
     AllSecurityLevels,
@@ -146,7 +146,7 @@ async function sendMail(mailRequest) {
     userShopSellRequest
   );
 
-  console.log(securityCheckMailCanBeSent);
+  console.log("check auth 1", securityCheckMailCanBeSent);
 
   const transport = nodemailer.createTransport({
     host: "smtp.gmail.com",

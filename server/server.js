@@ -12,6 +12,13 @@ app.use(express.static(path.join(__dirname, "../build")));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+console.log("server is runnning en ENV : ", process.env.NODE_ENV);
+
+//Removing security check that can block in localhost (it blocks if https is missing)
+if (process.env.NODE_ENV === "dev") {
+  process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
+}
+
 // An api endpoint that returns a short list of items
 app.get("/api/getList", (req, res) => {
   var list = ["item1", "item2", "item3"];

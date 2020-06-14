@@ -43,7 +43,7 @@ const ShopAdminOneSellRequest = ({ match }) => {
 
     if (
       (currentAdminSellRequest.sellRequests &&
-        currentAdminSellRequest.sellRequests.length == 0) ||
+        currentAdminSellRequest.sellRequests.length === 0) ||
       currentAdminSellRequest.idSellRequest !== parseInt(id)
     ) {
       sellRequestAPI
@@ -101,7 +101,10 @@ const ShopAdminOneSellRequest = ({ match }) => {
         });
     }
 
-    return () => source.cancel("");
+    return () => {
+      source.cancel("");
+      return setCurrentAdminSellRequest([]);
+    };
   }, [id]);
 
   console.log(currentAdminSellRequest);
