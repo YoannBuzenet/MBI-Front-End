@@ -34,79 +34,106 @@ async function sendMail(mailRequest) {
     case "welcomeEmail":
       //Unlogged user -> must implement follow up on IP/mail with DB
       //TODO: BIG Security Check (captcha ?)
+      //TODO : think about waiting for 200 http status from API to be sure we can send the mail
       template = __dirname + "/templates/welcomeEmail.ejs";
-      mailOptions["from"] = "";
-      mailOptions["to"] = "";
+      mailOptions["to"] = ""; //TODO
       mailOptions[
         "subject"
       ] = `Bienvenue sur ${process.env.REACT_APP_EXPRESSAPI} !`;
       break;
+
     case "submitted":
       currentSecurityLevel = AllSecurityLevels["logged"];
       //TO DO -> check that the sell request is sent in info prop React Side
       templateData = { ...templateData, sellRequest: mailRequest.infos };
       template = __dirname + "/templates/confirmationSellRequestSubmitted.ejs";
-      mailOptions["from"] = "";
-      mailOptions["to"] = "";
-      mailOptions["subject"] = "";
+      mailOptions["to"] = process.env.MAIL_SHOP_SELL_REQUEST_NOTIFICATIONS;
+      mailOptions["subject"] = "Un rachat vient d'être soumis";
       break;
+
     case "cards Sent":
       currentSecurityLevel = AllSecurityLevels["logged"];
       //TO DO -> check that the sell request is sent in info prop React Side
       templateData = { ...templateData, sellRequest: mailRequest.infos };
       template = __dirname + "/templates/confirmationCardsAreSent.ejs";
-      mailOptions["from"] = "";
-      mailOptions["to"] = "";
-      mailOptions["subject"] = "";
+      mailOptions["to"] = templateData.user.email;
+      mailOptions["subject"] = "Vos cartes ont bien été notées comme envoyées.";
       break;
+
     case "received":
       currentSecurityLevel = AllSecurityLevels["shop"];
-      templateData = { ...templateData, sellRequest: mailRequest.infos };
+      //TO DO -> check that the sell request is sent in info prop React Side
+      templateData = {
+        user: mailRequest.infos.customer,
+        sellRequest: mailRequest.infos,
+      };
       template = __dirname + "/templates/confirmationCardsAreReceived.ejs";
-      mailOptions["from"] = "";
-      mailOptions["to"] = "";
-      mailOptions["subject"] = "";
+      mailOptions["to"] = mailRequest.infos.customer.user.email;
+      mailOptions[
+        "subject"
+      ] = `Les cartes de votre rachat n°${templateData.sellRequest.id} ont bien été reçues.`;
       break;
+
     case "beingProcessed":
       currentSecurityLevel = AllSecurityLevels["shop"];
-      templateData = { ...templateData, sellRequest: mailRequest.infos };
+      //TO DO -> check that the sell request is sent in info prop React Side
+      templateData = {
+        user: mailRequest.infos.customer,
+        sellRequest: mailRequest.infos,
+      };
       template =
         __dirname + "/templates/confirmationSellRequestBeingProcessed.ejs";
-      mailOptions["from"] = "";
-      mailOptions["to"] = "";
-      mailOptions["subject"] = "";
+      mailOptions["to"] = mailRequest.infos.customer.user.email;
+      mailOptions[
+        "subject"
+      ] = `Votre rachat n°${templateData.sellRequest.id} est en cours de traitement.`;
       break;
+
     case "awaitingCustomerValidation":
+      //TO DO -> check that the sell request is sent in info prop React Side
       currentSecurityLevel = AllSecurityLevels["shop"];
-      templateData = { ...templateData, sellRequest: mailRequest.infos };
+      templateData = {
+        user: mailRequest.infos.customer,
+        sellRequest: mailRequest.infos,
+      };
       template =
         __dirname + "/templates/confirmationSellRequestAwaitingValidation.ejs";
-      mailOptions["from"] = "";
-      mailOptions["to"] = "";
-      mailOptions["subject"] = "";
+      mailOptions["to"] = mailRequest.infos.customer.user.email;
+      mailOptions[
+        "subject"
+      ] = `Le rachat n°${templateData.sellRequest.id} est en attente de votre validation.`;
       break;
+
     case "validated":
+      //TO DO -> check that the sell request is sent in info prop React Side
       currentSecurityLevel = AllSecurityLevels["shop"];
-      templateData = { ...templateData, sellRequest: mailRequest.infos };
+      templateData = {
+        user: mailRequest.infos.customer,
+        sellRequest: mailRequest.infos,
+      };
       template =
         __dirname + "/templates/confirmationSellRequestValidatedByShop.ejs";
-      mailOptions["from"] = "";
-      mailOptions["to"] = "";
-      mailOptions["subject"] = "";
+      mailOptions["to"] = mailRequest.infos.customer.user.email;
+      mailOptions[
+        "subject"
+      ] = `Le rachat n°${templateData.sellRequest.id} vient d'être validé.`;
       break;
+
     case "cancel":
       currentSecurityLevel = AllSecurityLevels["shop"];
-      templateData = { ...templateData, sellRequest: mailRequest.infos };
+      templateData = {
+        user: mailRequest.infos.customer,
+        sellRequest: mailRequest.infos,
+      };
       template = __dirname + "/templates/SellRequestCancellation.ejs";
-      mailOptions["from"] = "zigguy@f.com";
-      mailOptions["to"] = "ybuzenet@gmail.com";
-      mailOptions["subject"] = "lol";
-      console.log("on cancel");
+      mailOptions["to"] = mailRequest.infos.customer.user.email;
+      mailOptions[
+        "subject"
+      ] = `Le rachat ${templateData.sellRequest.id} a été annulé.`;
       break;
 
     default:
-      //TODO : what do we do in case of default ?
-      template = __dirname + "/templates/confirmationInscriptionMail.ejs";
+      break;
   }
 
   const checkSecurity = async (
