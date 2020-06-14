@@ -18,12 +18,14 @@ function sendMail(mailRequest) {
     logged: "logged",
     shop: "shop",
   };
-  let currentSecurityLevel;
-  let { token } = templateData.user;
+  let currentSecurityLevel; //Checking wether use is logged, shop or unlogged
+  let { token } = templateData.user; // jwt
   let userSellRequest = templateData.user.customer.SellRequests;
   let userShopSellRequest = templateData.shop
     ? templateData.shop.sellRequests
     : null;
+
+  let mailOptions = { from: "", to: "", subject: "" };
 
   //TODO -> 1.On each case, API call must be implemented React side
   //TODO -> 2. Security API for logged user, shop user, non logged user
@@ -31,48 +33,75 @@ function sendMail(mailRequest) {
   switch (mailRequest.action) {
     case "welcomeEmail":
       //Unlogged user -> must implement follow up on IP/mail with DB
-      //TODO: BIG Security Check
+      //TODO: BIG Security Check (captcha ?)
       template = __dirname + "/templates/welcomeEmail.ejs";
+      mailOptions["from"] = "";
+      mailOptions["to"] = "";
+      mailOptions[
+        "subject"
+      ] = `Bienvenue sur ${process.env.REACT_APP_EXPRESSAPI} !`;
       break;
     case "submitted":
       currentSecurityLevel = AllSecurityLevels["logged"];
       //TO DO -> check that the sell request is sent in info prop React Side
       templateData = { ...templateData, sellRequest: mailRequest.infos };
       template = __dirname + "/templates/confirmationSellRequestSubmitted.ejs";
+      mailOptions["from"] = "";
+      mailOptions["to"] = "";
+      mailOptions["subject"] = "";
       break;
     case "cards Sent":
       currentSecurityLevel = AllSecurityLevels["logged"];
       //TO DO -> check that the sell request is sent in info prop React Side
       templateData = { ...templateData, sellRequest: mailRequest.infos };
       template = __dirname + "/templates/confirmationCardsAreSent.ejs";
+      mailOptions["from"] = "";
+      mailOptions["to"] = "";
+      mailOptions["subject"] = "";
       break;
     case "received":
       currentSecurityLevel = AllSecurityLevels["shop"];
       templateData = { ...templateData, sellRequest: mailRequest.infos };
       template = __dirname + "/templates/confirmationCardsAreReceived.ejs";
+      mailOptions["from"] = "";
+      mailOptions["to"] = "";
+      mailOptions["subject"] = "";
       break;
     case "beingProcessed":
       currentSecurityLevel = AllSecurityLevels["shop"];
       templateData = { ...templateData, sellRequest: mailRequest.infos };
       template =
         __dirname + "/templates/confirmationSellRequestBeingProcessed.ejs";
+      mailOptions["from"] = "";
+      mailOptions["to"] = "";
+      mailOptions["subject"] = "";
       break;
     case "awaitingCustomerValidation":
       currentSecurityLevel = AllSecurityLevels["shop"];
       templateData = { ...templateData, sellRequest: mailRequest.infos };
       template =
         __dirname + "/templates/confirmationSellRequestAwaitingValidation.ejs";
+      mailOptions["from"] = "";
+      mailOptions["to"] = "";
+      mailOptions["subject"] = "";
       break;
     case "validated":
       currentSecurityLevel = AllSecurityLevels["shop"];
       templateData = { ...templateData, sellRequest: mailRequest.infos };
       template =
         __dirname + "/templates/confirmationSellRequestValidatedByShop.ejs";
+      mailOptions["from"] = "";
+      mailOptions["to"] = "";
+      mailOptions["subject"] = "";
       break;
     case "cancel":
       currentSecurityLevel = AllSecurityLevels["shop"];
       templateData = { ...templateData, sellRequest: mailRequest.infos };
       template = __dirname + "/templates/SellRequestCancellation.ejs";
+      mailOptions["from"] = "zigguy@f.com";
+      mailOptions["to"] = "ybuzenet@gmail.com";
+      mailOptions["subject"] = "lol";
+      console.log("on cancel");
       break;
 
     default:
@@ -117,6 +146,8 @@ function sendMail(mailRequest) {
     userShopSellRequest
   );
 
+  console.log(securityCheckMailCanBeSent);
+
   const transport = nodemailer.createTransport({
     host: "smtp.gmail.com",
     port: 465,
@@ -137,16 +168,16 @@ function sendMail(mailRequest) {
 
     let mailOpts = {
       from: "ybuzenet@gmail.com",
-      to: "thomas.g.guillot@gmail.com ",
-      subject: "EJS Test File",
+      to: mailOptions.to,
+      subject: mailOptions.subject,
       html: html,
     };
 
     if (securityCheckMailCanBeSent) {
-      // transport.sendMail(mailOpts, (err, info) => {
-      //   if (err) console.log(err); //Handle Error
-      //   console.log(info);
-      // });
+      transport.sendMail(mailOpts, (err, info) => {
+        if (err) console.log(err); //Handle Error
+        console.log(info);
+      });
     }
   });
 }
