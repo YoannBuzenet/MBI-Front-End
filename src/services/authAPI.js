@@ -186,6 +186,7 @@ function transformAPIdataIntoAppData(data) {
       accessToken: data.shop ? data.shop.accessToken : null,
       accessSecret: data.shop ? data.shop.accessSecret : null,
       ExpirationMkmToken: data.shop ? data.shop.ExpirationMkmToken : null,
+      sellRequests: data?.shop?.SellRequests,
     },
   };
 }
