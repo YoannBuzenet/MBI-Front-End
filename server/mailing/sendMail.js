@@ -27,16 +27,14 @@ async function sendMail(mailRequest) {
 
   let mailOptions = { from: "", to: "", subject: "" };
 
-  //TODO -> 1.On each case, API call must be implemented React side
-  //TODO -> 2. Security API for logged user, shop user, non logged user
+  //TODO -> Security on unlogged call (captcha)
 
   switch (mailRequest.action) {
     case "welcomeEmail":
-      //Unlogged user -> must implement follow up on IP/mail with DB
       //TODO: BIG Security Check (captcha ?)
       //TODO : think about waiting for 200 http status from API to be sure we can send the mail
       template = __dirname + "/templates/welcomeEmail.ejs";
-      mailOptions["to"] = ""; //TODO
+      mailOptions["to"] = templateData.email;
       mailOptions[
         "subject"
       ] = `Bienvenue sur ${process.env.REACT_APP_EXPRESSAPI} !`;
@@ -44,7 +42,6 @@ async function sendMail(mailRequest) {
 
     case "submitted":
       currentSecurityLevel = AllSecurityLevels["logged"];
-      //TO DO -> check that the sell request is sent in info prop React Side
       templateData = { ...templateData, sellRequest: mailRequest.infos };
       template = __dirname + "/templates/confirmationSellRequestSubmitted.ejs";
       mailOptions["to"] = process.env.MAIL_SHOP_SELL_REQUEST_NOTIFICATIONS;
@@ -53,7 +50,6 @@ async function sendMail(mailRequest) {
 
     case "cardsSent":
       currentSecurityLevel = AllSecurityLevels["logged"];
-      //TO DO -> check that the sell request is sent in info prop React Side
       templateData = { ...templateData, sellRequest: mailRequest.infos };
       template = __dirname + "/templates/confirmationCardsAreSent.ejs";
       mailOptions["to"] = templateData.user.email;
@@ -62,7 +58,6 @@ async function sendMail(mailRequest) {
 
     case "received":
       currentSecurityLevel = AllSecurityLevels["shop"];
-      //TO DO -> check that the sell request is sent in info prop React Side
       templateData = {
         user: mailRequest.infos.customer,
         sellRequest: mailRequest.infos,
@@ -76,7 +71,6 @@ async function sendMail(mailRequest) {
 
     case "beingProcessed":
       currentSecurityLevel = AllSecurityLevels["shop"];
-      //TO DO -> check that the sell request is sent in info prop React Side
       templateData = {
         user: mailRequest.infos.customer,
         sellRequest: mailRequest.infos,
@@ -90,7 +84,6 @@ async function sendMail(mailRequest) {
       break;
 
     case "awaitingCustomerValidation":
-      //TO DO -> check that the sell request is sent in info prop React Side
       currentSecurityLevel = AllSecurityLevels["shop"];
       templateData = {
         user: mailRequest.infos.customer,
@@ -105,7 +98,6 @@ async function sendMail(mailRequest) {
       break;
 
     case "validated":
-      //TO DO -> check that the sell request is sent in info prop React Side
       currentSecurityLevel = AllSecurityLevels["shop"];
       templateData = {
         user: mailRequest.infos.customer,

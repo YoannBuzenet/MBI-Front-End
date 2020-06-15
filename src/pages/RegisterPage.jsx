@@ -39,7 +39,16 @@ const RegisterPage = ({ history }) => {
           shop: "/shops/" + config.shopID,
         },
       };
-      await userAPI.register(jsonToSend);
+      //Sending the register demand, sending a welcome email if registering was successful
+      await userAPI.register(jsonToSend).then((data) => {
+        return mailAPI.sendMail({
+          mailRequest: {
+            action: "welcomeEmail",
+            user: data,
+          },
+        });
+      });
+
       toast.success(
         <FormattedMessage
           id="app.RegisterPage.accountCreation.toast.success"
