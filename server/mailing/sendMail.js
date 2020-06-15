@@ -4,7 +4,7 @@ const { checkIfUserIsReallyLogged } = require("../services/securityCheckAPI");
 
 async function sendMail(mailRequest) {
   //TODO : Traduire tous les templates
-  //TODO : ajouter la langue dans l'object MailRequest React side
+  //TODO : ajouter la langue dans l'object MailRequest React side et le traiter ici
   let template;
   let templateData = {
     user: mailRequest.user,
@@ -18,11 +18,11 @@ async function sendMail(mailRequest) {
     shop: "shop",
   };
   let currentSecurityLevel; //Checking wether use is logged, shop or unlogged
-  let { token } = templateData.user; // jwt
+  let { token } = mailRequest.user; // jwt
 
-  let userSellRequest = templateData.user.customer.SellRequests;
-  let userShopSellRequest = templateData.user.shop
-    ? templateData.user.shop.sellRequests
+  let userSellRequest = mailRequest.user.customer.SellRequests;
+  let userShopSellRequest = mailRequest.user.shop
+    ? mailRequest.user.shop.sellRequests
     : null;
 
   let mailOptions = { from: "", to: "", subject: "" };

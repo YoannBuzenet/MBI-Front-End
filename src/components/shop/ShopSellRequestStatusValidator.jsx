@@ -195,6 +195,14 @@ const ShopSellRequestStatusValidator = () => {
             ...currentAdminSellRequest,
             dateValidated: API_update.data.dateValidated,
           });
+
+          mailAPI.sendMail({
+            mailRequest: {
+              action: "validated",
+              user: authenticationInfos,
+              infos: currentAdminSellRequest,
+            },
+          });
         }
       } catch (error) {
         // console.log(error);
@@ -233,7 +241,7 @@ const ShopSellRequestStatusValidator = () => {
         });
       });
 
-    //Send mail here
+    //Send ing Notification mail to customer
     mailAPI.sendMail({
       mailRequest: {
         action: "cancel",
@@ -263,6 +271,24 @@ const ShopSellRequestStatusValidator = () => {
         // console.log(data.data);
         // console.log(data.data[value]);
       });
+
+    let mailAction;
+    switch (value) {
+      case "dateRecu":
+        mailAction = "received";
+      case "dateProcessing":
+        mailAction = "beingProcessed";
+      case "dateApprovalPending":
+        mailAction = "awaitingCustomerValidation";
+    }
+
+    mailAPI.sendMail({
+      mailRequest: {
+        action: mailAction,
+        user: authenticationInfos,
+        infos: currentAdminSellRequest,
+      },
+    });
   };
 
   return (
