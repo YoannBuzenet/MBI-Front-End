@@ -7,6 +7,7 @@ import authAPI from "../../services/authAPI";
 import { toast } from "react-toastify";
 import { FormattedMessage } from "react-intl";
 import localStorageAPI from "../../services/localStorageAPI";
+import mailAPI from "../../services/mailAPI";
 
 const SellRequestValidation = ({ history, checkForDuplicates }) => {
   //Current Basket
@@ -163,6 +164,15 @@ const SellRequestValidation = ({ history, checkForDuplicates }) => {
           defaultMessage={`Validate my Sell Request`}
         />
       );
+
+      mailAPI.sendMail({
+        mailRequest: {
+          action: "submitted",
+          user: authenticationInfos,
+          infos: { id: sendSellRequest.data.id },
+        },
+      });
+
       history.replace("/my_sell_requests");
     } catch (error) {
       console.log(error);

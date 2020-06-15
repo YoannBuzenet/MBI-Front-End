@@ -51,7 +51,7 @@ async function sendMail(mailRequest) {
       mailOptions["subject"] = "Un rachat vient d'être soumis";
       break;
 
-    case "cards Sent":
+    case "cardsSent":
       currentSecurityLevel = AllSecurityLevels["logged"];
       //TO DO -> check that the sell request is sent in info prop React Side
       templateData = { ...templateData, sellRequest: mailRequest.infos };

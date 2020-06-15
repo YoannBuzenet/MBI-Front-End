@@ -4,6 +4,7 @@ import AuthContext from "../context/authContext";
 import authAPI from "../services/authAPI";
 import { toast } from "react-toastify";
 import { FormattedMessage } from "react-intl";
+import mailAPI from "../services/mailAPI";
 
 const SellRequestStatusUpdater = ({
   currentSellRequest,
@@ -107,12 +108,21 @@ const SellRequestStatusUpdater = ({
           />
         )
       )
+      .then(() => {
+        mailAPI.sendMail({
+          mailRequest: {
+            action: "cardsSent",
+            user: authenticationInfos,
+            infos: currentSellRequest,
+          },
+        });
+      })
       .catch((error) => {
         console.log(error);
         return toast.error(
           <FormattedMessage
             id="app.sellRequest.statusUpdate.toast.failure"
-            defaultMessage={`The sell request couldn't ne updated. Please try again.`}
+            defaultMessage={`The sell request couldn't be updated. Please try again.`}
           />
         );
       });
