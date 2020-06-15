@@ -33,7 +33,7 @@ async function sendMail(mailRequest) {
     case "welcomeEmail":
       //TODO: BIG Security Check (captcha ?)
       //TODO : think about waiting for 200 http status from API to be sure we can send the mail
-      template = __dirname + "/templates/welcomeEmail.ejs";
+      template = __dirname + "/templates/french/welcomeEmail.ejs";
       mailOptions["to"] = templateData.user.email;
       mailOptions[
         "subject"
@@ -43,7 +43,8 @@ async function sendMail(mailRequest) {
     case "submitted":
       currentSecurityLevel = AllSecurityLevels["logged"];
       templateData = { ...templateData, sellRequest: mailRequest.infos };
-      template = __dirname + "/templates/confirmationSellRequestSubmitted.ejs";
+      template =
+        __dirname + "/templates/french/confirmationSellRequestSubmitted.ejs";
       mailOptions["to"] = process.env.MAIL_SHOP_SELL_REQUEST_NOTIFICATIONS;
       mailOptions["subject"] = "Un rachat vient d'être soumis";
       break;
@@ -51,7 +52,7 @@ async function sendMail(mailRequest) {
     case "cardsSent":
       currentSecurityLevel = AllSecurityLevels["logged"];
       templateData = { ...templateData, sellRequest: mailRequest.infos };
-      template = __dirname + "/templates/confirmationCardsAreSent.ejs";
+      template = __dirname + "/templates/french/confirmationCardsAreSent.ejs";
       mailOptions["to"] = templateData.user.email;
       mailOptions["subject"] = "Vos cartes ont bien été notées comme envoyées.";
       break;
@@ -62,7 +63,8 @@ async function sendMail(mailRequest) {
         user: mailRequest.infos.customer,
         sellRequest: mailRequest.infos,
       };
-      template = __dirname + "/templates/confirmationCardsAreReceived.ejs";
+      template =
+        __dirname + "/templates/french/confirmationCardsAreReceived.ejs";
       mailOptions["to"] = mailRequest.infos.customer.user.email;
       mailOptions[
         "subject"
@@ -76,7 +78,8 @@ async function sendMail(mailRequest) {
         sellRequest: mailRequest.infos,
       };
       template =
-        __dirname + "/templates/confirmationSellRequestBeingProcessed.ejs";
+        __dirname +
+        "/templates/french/confirmationSellRequestBeingProcessed.ejs";
       mailOptions["to"] = mailRequest.infos.customer.user.email;
       mailOptions[
         "subject"
@@ -90,7 +93,8 @@ async function sendMail(mailRequest) {
         sellRequest: mailRequest.infos,
       };
       template =
-        __dirname + "/templates/confirmationSellRequestAwaitingValidation.ejs";
+        __dirname +
+        "/templates/french/confirmationSellRequestAwaitingValidation.ejs";
       mailOptions["to"] = mailRequest.infos.customer.user.email;
       mailOptions[
         "subject"
@@ -104,7 +108,8 @@ async function sendMail(mailRequest) {
         sellRequest: mailRequest.infos,
       };
       template =
-        __dirname + "/templates/confirmationSellRequestValidatedByShop.ejs";
+        __dirname +
+        "/templates/french/confirmationSellRequestValidatedByShop.ejs";
       mailOptions["to"] = mailRequest.infos.customer.user.email;
       mailOptions[
         "subject"
@@ -117,7 +122,7 @@ async function sendMail(mailRequest) {
         user: mailRequest.infos.customer,
         sellRequest: mailRequest.infos,
       };
-      template = __dirname + "/templates/SellRequestCancellation.ejs";
+      template = __dirname + "/templates/french/SellRequestCancellation.ejs";
       mailOptions["to"] = mailRequest.infos.customer.user.email;
       mailOptions[
         "subject"
@@ -149,10 +154,10 @@ async function sendMail(mailRequest) {
       );
       return userShopPermissionsCheck.status === 200;
     } else if (currentSecurityLevel === AllSecurityLevels["unlogged"]) {
-      //check unlog bro
+      //TODO check unlog bro with captacha validation
       return true;
     } else {
-      //This case shouldn't happen, if it happens, something shady is happening, we block the mail sending.
+      //This case shouldn't happen. Isf it happens, something shady is happening, we block the mail sending.
       return false;
     }
   };
