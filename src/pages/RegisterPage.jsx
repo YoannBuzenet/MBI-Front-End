@@ -6,6 +6,7 @@ import config from "../services/config";
 import CSSLoaderWaitingSpiral from "../components/loaders/CSSLoaderWaitingSpiral";
 import { FormattedMessage } from "react-intl";
 import { useIntl } from "react-intl";
+import mailAPI from "../services/mailAPI";
 
 const RegisterPage = ({ history }) => {
   const [credentials, setCredentials] = useState({

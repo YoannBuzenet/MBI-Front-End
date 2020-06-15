@@ -34,7 +34,7 @@ async function sendMail(mailRequest) {
       //TODO: BIG Security Check (captcha ?)
       //TODO : think about waiting for 200 http status from API to be sure we can send the mail
       template = __dirname + "/templates/welcomeEmail.ejs";
-      mailOptions["to"] = templateData.email;
+      mailOptions["to"] = templateData.user.email;
       mailOptions[
         "subject"
       ] = `Bienvenue sur ${process.env.REACT_APP_EXPRESSAPI} !`;
