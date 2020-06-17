@@ -9,6 +9,7 @@ import BlackDivContext from "../../context/blackDivModalContext";
 import { FormattedMessage } from "react-intl";
 import { useIntl } from "react-intl";
 import mailAPI from "../../services/mailAPI";
+import SelectAppLangContext from "../../context/selectedAppLang";
 
 const ShopSellRequestStatusValidator = () => {
   const { currentAdminSellRequest, setCurrentAdminSellRequest } = useContext(
@@ -29,7 +30,8 @@ const ShopSellRequestStatusValidator = () => {
   //We initialize the state to Cancelled so that the button to update the Sell Request remain hidden while the real status is being computed
   const [currentStatus, setCurrentStatus] = useState("Cancelled");
 
-  console.log(availableOptions);
+  //App language
+  const { currentLang, setCurrentLang } = useContext(SelectAppLangContext);
 
   // TRANSLATION
   //Hook Intl to translate an attribute
@@ -201,6 +203,7 @@ const ShopSellRequestStatusValidator = () => {
               action: "validated",
               user: authenticationInfos,
               infos: currentAdminSellRequest,
+              langID: currentLang.langID,
             },
           });
         }
@@ -247,6 +250,7 @@ const ShopSellRequestStatusValidator = () => {
         action: "cancel",
         user: authenticationInfos,
         infos: currentAdminSellRequest,
+        langID: currentLang.langID,
       },
     });
   };
@@ -287,6 +291,7 @@ const ShopSellRequestStatusValidator = () => {
         action: mailAction,
         user: authenticationInfos,
         infos: currentAdminSellRequest,
+        langID: currentLang.langID,
       },
     });
   };

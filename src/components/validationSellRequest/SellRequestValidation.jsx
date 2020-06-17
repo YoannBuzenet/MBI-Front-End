@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import { FormattedMessage } from "react-intl";
 import localStorageAPI from "../../services/localStorageAPI";
 import mailAPI from "../../services/mailAPI";
+import SelectAppLangContext from "../../context/selectedAppLang";
 
 const SellRequestValidation = ({ history, checkForDuplicates }) => {
   //Current Basket
@@ -19,6 +20,9 @@ const SellRequestValidation = ({ history, checkForDuplicates }) => {
   );
 
   const [isLoaded, setIsLoaded] = useState(false);
+
+  //App language
+  const { currentLang, setCurrentLang } = useContext(SelectAppLangContext);
 
   useEffect(() => {
     if (isLoaded) {
@@ -170,6 +174,7 @@ const SellRequestValidation = ({ history, checkForDuplicates }) => {
           action: "submitted",
           user: authenticationInfos,
           infos: { id: sendSellRequest.data.id },
+          langID: currentLang.langID,
         },
       });
 
