@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import userAPI from "../services/userAPI";
 import Field from "../components/forms/Field";
 import { toast } from "react-toastify";
@@ -7,6 +7,7 @@ import CSSLoaderWaitingSpiral from "../components/loaders/CSSLoaderWaitingSpiral
 import { FormattedMessage } from "react-intl";
 import { useIntl } from "react-intl";
 import mailAPI from "../services/mailAPI";
+import SelectAppLangContext from "../context/selectedAppLang";
 
 const RegisterPage = ({ history }) => {
   const [credentials, setCredentials] = useState({
@@ -19,6 +20,10 @@ const RegisterPage = ({ history }) => {
     postalCode: "",
     town: "",
   });
+
+  const { currentLang, setCurrentLang } = useContext(SelectAppLangContext);
+
+  console.log(currentLang);
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -46,6 +51,7 @@ const RegisterPage = ({ history }) => {
           mailRequest: {
             action: "welcomeEmail",
             user: data,
+            langID: currentLang.langID,
           },
         });
       });

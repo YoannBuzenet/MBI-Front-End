@@ -5,6 +5,7 @@ import authAPI from "../services/authAPI";
 import { toast } from "react-toastify";
 import { FormattedMessage } from "react-intl";
 import mailAPI from "../services/mailAPI";
+import SelectAppLangContext from "../context/selectedAppLang";
 
 const SellRequestStatusUpdater = ({
   currentSellRequest,
@@ -18,7 +19,8 @@ const SellRequestStatusUpdater = ({
   // console.log(authenticationInfos);
   const [hasBeenSent, setHasBeenSent] = useState(true);
 
-  // console.log(currentSellRequest);
+  //App language
+  const { currentLang, setCurrentLang } = useContext(SelectAppLangContext);
 
   useEffect(() => {
     if (currentSellRequest.id) {
@@ -114,6 +116,7 @@ const SellRequestStatusUpdater = ({
             action: "cardsSent",
             user: authenticationInfos,
             infos: currentSellRequest,
+            langID: currentLang.langID,
           },
         });
       })

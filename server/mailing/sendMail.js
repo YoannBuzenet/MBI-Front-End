@@ -1,9 +1,9 @@
 const ejs = require("ejs");
 const nodemailer = require("nodemailer");
 const { checkIfUserIsReallyLogged } = require("../services/securityCheckAPI");
+const { langDefinition } = require("../../src/services/config");
 
 async function sendMail(mailRequest) {
-  //TODO : Traduire tous les templates
   //TODO : ajouter la langue dans l'object MailRequest React side et le traiter ici
   let template;
   let templateData = {
@@ -33,7 +33,11 @@ async function sendMail(mailRequest) {
     case "welcomeEmail":
       //TODO: BIG Security Check (captcha ?)
       //TODO : think about waiting for 200 http status from API to be sure we can send the mail
-      template = __dirname + "/templates/french/welcomeEmail.ejs";
+      template =
+        __dirname +
+        "/templates/" +
+        langDefinition[mailRequest.langID] +
+        "/welcomeEmail.ejs";
       mailOptions["to"] = templateData.user.email;
       mailOptions[
         "subject"
@@ -44,7 +48,10 @@ async function sendMail(mailRequest) {
       currentSecurityLevel = AllSecurityLevels["logged"];
       templateData = { ...templateData, sellRequest: mailRequest.infos };
       template =
-        __dirname + "/templates/french/confirmationSellRequestSubmitted.ejs";
+        __dirname +
+        "/templates/" +
+        langDefinition[mailRequest.langID] +
+        "/confirmationSellRequestSubmitted.ejs";
       mailOptions["to"] = process.env.MAIL_SHOP_SELL_REQUEST_NOTIFICATIONS;
       mailOptions["subject"] = "Un rachat vient d'être soumis";
       break;
@@ -52,7 +59,11 @@ async function sendMail(mailRequest) {
     case "cardsSent":
       currentSecurityLevel = AllSecurityLevels["logged"];
       templateData = { ...templateData, sellRequest: mailRequest.infos };
-      template = __dirname + "/templates/french/confirmationCardsAreSent.ejs";
+      template =
+        __dirname +
+        "/templates/" +
+        langDefinition[mailRequest.langID] +
+        "/confirmationCardsAreSent.ejs";
       mailOptions["to"] = templateData.user.email;
       mailOptions["subject"] = "Vos cartes ont bien été notées comme envoyées.";
       break;
@@ -64,7 +75,10 @@ async function sendMail(mailRequest) {
         sellRequest: mailRequest.infos,
       };
       template =
-        __dirname + "/templates/french/confirmationCardsAreReceived.ejs";
+        __dirname +
+        "/templates/" +
+        langDefinition[mailRequest.langID] +
+        "/confirmationCardsAreReceived.ejs";
       mailOptions["to"] = mailRequest.infos.customer.user.email;
       mailOptions[
         "subject"
@@ -79,7 +93,9 @@ async function sendMail(mailRequest) {
       };
       template =
         __dirname +
-        "/templates/french/confirmationSellRequestBeingProcessed.ejs";
+        "/templates/" +
+        langDefinition[mailRequest.langID] +
+        "/confirmationSellRequestBeingProcessed.ejs";
       mailOptions["to"] = mailRequest.infos.customer.user.email;
       mailOptions[
         "subject"
@@ -94,7 +110,9 @@ async function sendMail(mailRequest) {
       };
       template =
         __dirname +
-        "/templates/french/confirmationSellRequestAwaitingValidation.ejs";
+        "/templates/" +
+        langDefinition[mailRequest.langID] +
+        "/confirmationSellRequestAwaitingValidation.ejs";
       mailOptions["to"] = mailRequest.infos.customer.user.email;
       mailOptions[
         "subject"
@@ -109,7 +127,9 @@ async function sendMail(mailRequest) {
       };
       template =
         __dirname +
-        "/templates/french/confirmationSellRequestValidatedByShop.ejs";
+        "/templates/" +
+        langDefinition[mailRequest.langID] +
+        "/confirmationSellRequestValidatedByShop.ejs";
       mailOptions["to"] = mailRequest.infos.customer.user.email;
       mailOptions[
         "subject"
@@ -122,7 +142,11 @@ async function sendMail(mailRequest) {
         user: mailRequest.infos.customer,
         sellRequest: mailRequest.infos,
       };
-      template = __dirname + "/templates/french/SellRequestCancellation.ejs";
+      template =
+        __dirname +
+        "/templates/" +
+        langDefinition[mailRequest.langID] +
+        "/SellRequestCancellation.ejs";
       mailOptions["to"] = mailRequest.infos.customer.user.email;
       mailOptions[
         "subject"
