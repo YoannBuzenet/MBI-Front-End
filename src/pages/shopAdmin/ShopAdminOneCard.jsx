@@ -164,6 +164,7 @@ const ShopAdminOneCard = ({ match }) => {
           cancelToken: source.token,
         })
         .then((data) => {
+          console.log(data);
           console.log(data.data["hydra:member"]);
           return data;
         })

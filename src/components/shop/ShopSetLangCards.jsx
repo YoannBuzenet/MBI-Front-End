@@ -15,11 +15,77 @@ const ShopSetLangCards = ({ card, index }) => {
   return (
     <>
       <div className="one-set">
+        <h2>{allPricesBuffer[index].edition.name}</h2>
         <div className="priceUpdate-cardInfos">
-          <img src={cardsAPI.getSmallPictureFromScryfallId(card)} alt="" />
+          <div className="shopCardInfoRecap">
+            <div className="picture">
+              <img src={cardsAPI.getSmallPictureFromScryfallId(card)} alt="" />
+            </div>
+            <div className="Allprices">
+              <div className="onePrice">
+                <span>Prix de vente moyen : </span>
+                <span>{card?.priceguide?.AvgSellPrice}</span>
+              </div>
+              <div className="onePrice">
+                <span>Tendance : </span>
+                <span>{card?.priceguide?.trendPrice}</span>
+              </div>
+              <div className="onePrice">
+                <span>Moyenne sur un jour : </span>
+                <span>{card?.priceguide?.avg1}</span>
+              </div>
+              <div className="onePrice">
+                <span>Moyenne sur 7 jours : </span>
+                <span>{card?.priceguide?.avg7}</span>
+              </div>
+              <div className="onePrice">
+                <span>Moyenne sur 7 jours : </span>
+                <span>{card?.priceguide?.avg30}</span>
+              </div>
+              <div className="onePrice">
+                <span>Foil Prix bas : </span>
+                <span>{card?.priceguide?.foilLow}</span>
+              </div>
+              <div className="onePrice">
+                <span>Foil Prix moyen sur un jour : </span>
+                <span>{card?.priceguide?.foilAvg1}</span>
+              </div>
+              <div className="onePrice">
+                <span>Foil Prix moyen sur 7 jours : </span>
+                <span>{card?.priceguide?.foilAvg7}</span>
+              </div>
+              <div className="onePrice">
+                <span>Foil Prix moyen sur 30 jours : </span>
+                <span>{card?.priceguide?.foilAvg30}</span>
+              </div>
+              <div className="onePrice">
+                <span>Foil Prix de vente moyen : </span>
+                <span>{card?.priceguide?.foilSell}</span>
+              </div>
+              <div className="onePrice">
+                <span>Foil Prix de vente Tendance </span>
+                <span>{card?.priceguide?.foilTrend}</span>
+              </div>
+              <div className="onePrice">
+                <span>Prix de vente bas allemand : </span>
+                <span>{card?.priceguide?.germanProLow}</span>
+              </div>
+              <div className="onePrice">
+                <span>Prix de vente bas : </span>
+                <span>{card?.priceguide?.lowPrice}</span>
+              </div>
+              <div className="onePrice">
+                <span>Prix de vente Exc : </span>
+                <span>{card?.priceguide?.lowPriceEx}</span>
+              </div>
+              <div className="onePrice">
+                <span>Prix de vente suggéré : </span>
+                <span>{card?.priceguide?.suggestedPrice}</span>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <h2>{allPricesBuffer[index].edition.name}</h2>
         {/* integrate English in the lang array, and then put the BaseLang on top by filtering arrays */}
         {[
           {

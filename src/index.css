@@ -1477,8 +1477,13 @@ tbody.cardLineShop {
 }
 
 .priceUpdate-cardInfos {
-  /* TODO */
-  /* Display market info there */
+  width: 70%;
+  margin: 0 auto;
+}
+
+.shopCardInfoRecap {
+  display: flex;
+  justify-content: center;
 }
 
 .price-update-form {
