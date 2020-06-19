@@ -230,8 +230,8 @@
   "app.shop.mkmPriceName.averageFoilSellPriceOnOneDay": "Foil Moyenne sur un jour : ",
   "app.shop.mkmPriceName.averageFoilSellPriceOnSevenDay": "Foil Moyenne sur 7 jours : ",
   "app.shop.mkmPriceName.averageFoilSellPriceOnThirtyDay": "Foil Moyenne sur 30 jours : ",
-  "app.shop.mkmPriceName.foilLowPrice": "Foil Prix bas",
-  "app.shop.mkmPriceName.averageFoilTrend": "Foil Tendance Prix",
+  "app.shop.mkmPriceName.foilLowPrice": "Foil Prix bas : ",
+  "app.shop.mkmPriceName.averageFoilTrend": "Foil Tendance Prix : ",
 
   "app.shop.sellrequestValidator.title": "Modifier le statut",
   "app.shop.sellrequestValidator.defaultOption": "Choisir un statut",
