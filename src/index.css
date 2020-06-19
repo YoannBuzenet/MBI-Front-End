@@ -1478,12 +1478,31 @@ tbody.cardLineShop {
 
 .priceUpdate-cardInfos {
   width: 70%;
-  margin: 0 auto;
+  margin: 5rem auto;
 }
 
 .shopCardInfoRecap {
   display: flex;
   justify-content: center;
+}
+
+.shopCardInfoRecap .allPrices {
+  display: flex;
+}
+
+.shopCardInfoRecap .allPrices .regularPrices {
+  margin: 0 3rem;
+}
+
+.regularPrices div:first-of-type span:last-child,
+.foilPrices div:first-of-type span:last-child {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.hrAfterPrices {
+  width: 70%;
+  margin: auto;
 }
 
 .price-update-form {
