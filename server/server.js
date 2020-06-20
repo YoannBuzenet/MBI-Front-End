@@ -27,11 +27,24 @@ app.get("/api/getList", (req, res) => {
 });
 
 //Mail Processing
-//TODO : Build an endpoint for each mail type
 app.post("/api/mail", (req, res) => {
   console.log("Processing Mail");
   console.trace(req.body.mailRequest);
   sendMail(req.body.mailRequest);
+});
+
+//Shop Selling Settings
+app.post("/api/shop/SellingSettings", (req, res) => {
+  console.log("Receiving selling settings");
+  //Check if this is the right shop (does he have the shop access & is the id the one of this server)
+  //if yes, write into this file with stringy
+  //if not, send back a 401
+});
+app.get("/api/shop/SellingSettings", (req, res) => {
+  console.log("sending selling settings");
+  //Check if this is the right shop (does he have the shop access & is the id the one of this server)
+  //if yes, get the data and send it back, ready to be parsed
+  //if not, send back a 401
 });
 
 // Handles any requests that don't match the ones above
