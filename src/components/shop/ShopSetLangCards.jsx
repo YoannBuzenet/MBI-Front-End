@@ -37,7 +37,7 @@ const ShopSetLangCards = ({ card, index }) => {
                 <div className="onePrice">
                   <span>
                     <FormattedMessage
-                      id="app.shop.mkmPriceName.averageRegularSellPriceOnOneDay"
+                      id="app.shop.priceFormUpdate.mkmPriceName.averageRegularSellPriceOnOneDay"
                       defaultMessage={`Average on one day : `}
                     />
                   </span>
@@ -46,7 +46,7 @@ const ShopSetLangCards = ({ card, index }) => {
                 <div className="onePrice">
                   <span>
                     <FormattedMessage
-                      id="app.shop.mkmPriceName.averageRegularSellPriceOnSevenDay"
+                      id="app.shop.priceFormUpdate.mkmPriceName.averageRegularSellPriceOnSevenDay"
                       defaultMessage={`Average on 7 days : `}
                     />
                   </span>
@@ -55,7 +55,7 @@ const ShopSetLangCards = ({ card, index }) => {
                 <div className="onePrice">
                   <span>
                     <FormattedMessage
-                      id="app.shop.mkmPriceName.averageRegularSellPriceOnThirtyDay"
+                      id="app.shop.priceFormUpdate.mkmPriceName.averageRegularSellPriceOnThirtyDay"
                       defaultMessage={`Average on 30 days : `}
                     />
                   </span>
@@ -64,7 +64,7 @@ const ShopSetLangCards = ({ card, index }) => {
                 <div className="onePrice">
                   <span>
                     <FormattedMessage
-                      id="app.shop.mkmPriceName.regularGermanLowPrice"
+                      id="app.shop.priceFormUpdate.mkmPriceName.regularGermanLowPrice"
                       defaultMessage={`German Low Price : `}
                     />
                   </span>
@@ -73,7 +73,7 @@ const ShopSetLangCards = ({ card, index }) => {
                 <div className="onePrice">
                   <span>
                     <FormattedMessage
-                      id="app.shop.mkmPriceName.regularLowPrice"
+                      id="app.shop.priceFormUpdate.mkmPriceName.regularLowPrice"
                       defaultMessage={`Low Price : `}
                     />
                   </span>
@@ -82,7 +82,7 @@ const ShopSetLangCards = ({ card, index }) => {
                 <div className="onePrice">
                   <span>
                     <FormattedMessage
-                      id="app.shop.mkmPriceName.regularExcPrice"
+                      id="app.shop.priceFormUpdate.mkmPriceName.regularExcPrice"
                       defaultMessage={`Low Price Exc : `}
                     />
                   </span>
@@ -91,7 +91,7 @@ const ShopSetLangCards = ({ card, index }) => {
                 <div className="onePrice">
                   <span>
                     <FormattedMessage
-                      id="app.shop.mkmPriceName.suggestedSalePrice"
+                      id="app.shop.priceFormUpdate.mkmPriceName.suggestedSalePrice"
                       defaultMessage={`Suggested Sell Price : `}
                     />
                   </span>
@@ -107,7 +107,7 @@ const ShopSetLangCards = ({ card, index }) => {
                 <div className="onePrice">
                   <span>
                     <FormattedMessage
-                      id="app.shop.mkmPriceName.foilMediumPrice"
+                      id="app.shop.priceFormUpdate.mkmPriceName.foilMediumPrice"
                       defaultMessage={`Foil Average Sell Price : `}
                     />
                   </span>
@@ -116,7 +116,7 @@ const ShopSetLangCards = ({ card, index }) => {
                 <div className="onePrice">
                   <span>
                     <FormattedMessage
-                      id="app.shop.mkmPriceName.averageFoilSellPriceOnOneDay"
+                      id="app.shop.priceFormUpdate.mkmPriceName.averageFoilSellPriceOnOneDay"
                       defaultMessage={`Foil Average on One day :  `}
                     />
                   </span>
@@ -125,7 +125,7 @@ const ShopSetLangCards = ({ card, index }) => {
                 <div className="onePrice">
                   <span>
                     <FormattedMessage
-                      id="app.shop.mkmPriceName.averageFoilSellPriceOnSevenDay"
+                      id="app.shop.priceFormUpdate.mkmPriceName.averageFoilSellPriceOnSevenDay"
                       defaultMessage={`Foil Average on 7 days :  `}
                     />
                   </span>
@@ -134,7 +134,7 @@ const ShopSetLangCards = ({ card, index }) => {
                 <div className="onePrice">
                   <span>
                     <FormattedMessage
-                      id="app.shop.mkmPriceName.averageFoilSellPriceOnThirtyDay"
+                      id="app.shop.priceFormUpdate.mkmPriceName.averageFoilSellPriceOnThirtyDay"
                       defaultMessage={`Foil Average on 30 days : `}
                     />
                   </span>
@@ -143,7 +143,7 @@ const ShopSetLangCards = ({ card, index }) => {
                 <div className="onePrice">
                   <span>
                     <FormattedMessage
-                      id="app.shop.mkmPriceName.foilLowPrice"
+                      id="app.shop.priceFormUpdate.mkmPriceName.foilLowPrice"
                       defaultMessage={`Foil Low Price : `}
                     />
                   </span>
@@ -152,7 +152,7 @@ const ShopSetLangCards = ({ card, index }) => {
                 <div className="onePrice">
                   <span>
                     <FormattedMessage
-                      id="app.shop.mkmPriceName.averageFoilTrend"
+                      id="app.shop.priceFormUpdate.mkmPriceName.averageFoilTrend"
                       defaultMessage={`Foil Price Trend : `}
                     />
                   </span>

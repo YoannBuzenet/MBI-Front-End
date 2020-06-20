@@ -7,4 +7,8 @@ function checkIfUserIsReallyLogged(sellRequestID, jwt) {
   );
 }
 
-module.exports = { checkIfUserIsReallyLogged };
+function checkIfUserIsCurrentShop(idShop, jwt) {
+  //PUT /usersShop​/{id} withoutdata ?
+}
+
+module.exports = { checkIfUserIsReallyLogged, checkIfUserIsCurrentShop };
