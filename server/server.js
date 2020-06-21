@@ -28,8 +28,13 @@ app.get("/api/getList", (req, res) => {
 //Mail Processing
 app.post("/api/mail", (req, res) => {
   console.log("Processing Mail");
-  console.trace(req.body.mailRequest);
-  sendMail(req.body.mailRequest);
+  // console.trace(req.body.mailRequest);
+
+  if (sendMail(req.body.mailRequest)) {
+    res.send(200);
+  } else {
+    res.status(500).send("An error occurred");
+  }
 });
 
 //Shop Selling Settings
