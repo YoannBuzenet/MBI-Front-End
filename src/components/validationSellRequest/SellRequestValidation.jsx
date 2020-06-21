@@ -173,7 +173,7 @@ const SellRequestValidation = ({ history, checkForDuplicates }) => {
         mailRequest: {
           action: "submitted",
           user: authenticationInfos,
-          infos: { id: sendSellRequest.data.id },
+          infos: { id: sendSellRequest.data.id, sellRequest: sendSellRequest },
           langID: currentLang.langID,
         },
       });
