@@ -53,6 +53,7 @@ app.get("/api/shop/SellingSettings", async (req, res) => {
     const securityCheck = await securityCheckAPI.checkIfUserIsCurrentShop(
       req.headers.authorization
     );
+
     const shopSettings = require("../server/shopData/sellingsSettings");
     res.send(shopSettings);
   } catch (err) {
