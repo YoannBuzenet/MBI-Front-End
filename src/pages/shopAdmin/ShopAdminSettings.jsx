@@ -10,6 +10,7 @@ import { FormattedMessage } from "react-intl";
 import LanguageNameDisplay from "../../components/LanguageNameDisplay";
 import config from "../../services/config";
 import AppLangChoice from "../../components/AppLangChoice";
+import SellingSettingsLang from "../../components/shop/sellingSettings/SellingSettingsLang";
 
 const ShopAdminSettings = () => {
   //Current Authentication
@@ -212,6 +213,8 @@ const ShopAdminSettings = () => {
     }
   };
 
+  console.log(lang);
+
   return (
     <>
       <div className="container">
@@ -373,6 +376,16 @@ const ShopAdminSettings = () => {
         </div>
         <div className="categorySetting">
           <h2 className="categoryTitle">Selling Settings</h2>
+          {lang.length > 0 &&
+            lang.map((oneLang) => {
+              return (
+                <>
+                  <h3>{oneLang.name}</h3>
+                  <SellingSettingsLang />
+                  <div></div>
+                </>
+              );
+            })}
         </div>
       </div>
     </>
