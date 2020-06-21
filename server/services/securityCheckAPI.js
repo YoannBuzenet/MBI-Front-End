@@ -7,8 +7,36 @@ function checkIfUserIsReallyLogged(sellRequestID, jwt) {
   );
 }
 
-function checkIfUserIsCurrentShop(idShop, jwt) {
-  //PUT /usersShop​/{id} withoutdata ?
+function checkIfUserIsCurrentShop(jwt) {
+  axios.defaults.headers["Authorization"] = jwt;
+
+  console.log(JSON.stringify(process.env.REACT_APP_SHOP_ID));
+  console.log(
+    JSON.stringify(
+      process.env.REACT_APP_MTGAPI_URL +
+        "/usersShop​/" +
+        process.env.REACT_APP_SHOP_ID
+    )
+  );
+
+  const url_escaped = encodeURIComponent(
+    process.env.REACT_APP_MTGAPI_URL +
+      "/usersShop​/" +
+      process.env.REACT_APP_SHOP_ID
+  );
+
+  console.log(
+    process.env.REACT_APP_MTGAPI_URL +
+      "/usersShop​/" +
+      process.env.REACT_APP_SHOP_ID
+  );
+
+  return axios.put(
+    process.env.REACT_APP_MTGAPI_URL +
+      "/usersShop​/" +
+      process.env.REACT_APP_SHOP_ID,
+    {}
+  );
 }
 
 module.exports = { checkIfUserIsReallyLogged, checkIfUserIsCurrentShop };

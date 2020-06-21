@@ -5,14 +5,13 @@ const path = require("path");
 const bodyParser = require("body-parser");
 const app = express();
 const { sendMail } = require("./mailing/sendMail");
+const securityCheckAPI = require("./services/securityCheckAPI");
 // Serve the static files from the React app
 app.use(express.static(path.join(__dirname, "../build")));
 
 //Parse each call
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-
-console.log("server is runnning en ENV : ", process.env.NODE_ENV);
 
 //Removing security check that can block in localhost (it blocks if https is missing)
 if (process.env.NODE_ENV === "dev") {
@@ -36,21 +35,25 @@ app.post("/api/mail", (req, res) => {
 //Shop Selling Settings
 app.post("/api/shop/SellingSettings", (req, res) => {
   console.log("Receiving selling settings");
-  //GET shopID from auth context
   console.log(req.body);
   //Check if this is the right shop (does he have the shop access & is the id the one of this server)
   //if yes, write into this file with stringy
   //if not, send back a 401
 });
-app.get("/api/shop/SellingSettings", (req, res) => {
+app.get("/api/shop/SellingSettings", async (req, res) => {
   console.log("sending selling settings");
-  //GET shopID from auth context
-  console.log(req.body);
-  //Check if this is the right shop (does he have the shop access & is the id the one of this server)
-  //if yes, get the data and send it back, ready to be parsed
-  const shopSettings = require("../server/shopData/sellingsSettings");
-  res.send(shopSettings);
-  //if not, send back a 401
+  // console.log("/api/shop/SellingSettings", req.headers.authorization);
+  //Checking if this is the right shop (does he have the shop access & is the id the one of this server)
+  try {
+    const securityCheck = await securityCheckAPI.checkIfUserIsCurrentShop(
+      req.headers.authorization
+    );
+    const shopSettings = require("../server/shopData/sellingsSettings");
+    res.send(shopSettings);
+  } catch (err) {
+    console.log("error thrown in .catch", err);
+    res.status(401).send("Acces Denied.");
+  }
 });
 
 // Handles any requests that don't match the ones above

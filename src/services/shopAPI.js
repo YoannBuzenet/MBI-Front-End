@@ -43,10 +43,10 @@ function getBuyingClauses() {
     .then((data) => data.data);
 }
 
-function getShopSellingSettings(authContext) {
+function getShopSellingSettings() {
   console.log("getting shop settings");
   return axios.get(
-    process.env.REACT_APP_EXPRESSAPI + "/api/shop/SellingSettings"
+    process.env.REACT_APP_EXPRESSAPI + "/api/shop/SellingSettings/"
   );
 }
 
