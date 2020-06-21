@@ -20,7 +20,11 @@ async function sendMail(mailRequest) {
   let currentSecurityLevel; //Checking wether use is logged, shop or unlogged
   let { token } = mailRequest.user; // jwt
 
-  let userSellRequest = mailRequest.user.customer.SellRequests;
+  let userSellRequest = mailRequest.user
+    ? mailRequest.user.customer
+      ? mailRequest.user.customer.SellRequests
+      : null
+    : null;
   let userShopSellRequest = mailRequest.user.shop
     ? mailRequest.user.shop.sellRequests
     : null;
@@ -31,6 +35,8 @@ async function sendMail(mailRequest) {
 
   switch (mailRequest.action) {
     case "welcomeEmail":
+      console.log("welcome Email", templateData);
+      console.log("welcome Email", templateData.user.data.client);
       //TODO: BIG Security Check (captcha ?)
       //TODO : think about waiting for 200 http status from API to be sure we can send the mail
       template =
@@ -42,6 +48,7 @@ async function sendMail(mailRequest) {
       mailOptions[
         "subject"
       ] = `Bienvenue sur ${process.env.REACT_APP_EXPRESSAPI} !`;
+
       break;
 
     case "submitted":
@@ -74,6 +81,7 @@ async function sendMail(mailRequest) {
         user: mailRequest.infos.customer,
         sellRequest: mailRequest.infos,
       };
+
       template =
         __dirname +
         "/templates/" +
@@ -88,7 +96,7 @@ async function sendMail(mailRequest) {
     case "beingProcessed":
       currentSecurityLevel = AllSecurityLevels["shop"];
       templateData = {
-        user: mailRequest.infos.customer,
+        user: mailRequest.user,
         sellRequest: mailRequest.infos,
       };
       template =
@@ -105,9 +113,10 @@ async function sendMail(mailRequest) {
     case "awaitingCustomerValidation":
       currentSecurityLevel = AllSecurityLevels["shop"];
       templateData = {
-        user: mailRequest.infos.customer,
+        user: mailRequest.user,
         sellRequest: mailRequest.infos,
       };
+      // console.log("LA", templateData);
       template =
         __dirname +
         "/templates/" +
@@ -122,9 +131,10 @@ async function sendMail(mailRequest) {
     case "validated":
       currentSecurityLevel = AllSecurityLevels["shop"];
       templateData = {
-        user: mailRequest.infos.customer,
+        user: mailRequest.user,
         sellRequest: mailRequest.infos,
       };
+      console.log("la belle data", templateData);
       template =
         __dirname +
         "/templates/" +
@@ -139,7 +149,7 @@ async function sendMail(mailRequest) {
     case "cancel":
       currentSecurityLevel = AllSecurityLevels["shop"];
       templateData = {
-        user: mailRequest.infos.customer,
+        user: mailRequest.user,
         sellRequest: mailRequest.infos,
       };
       template =
@@ -208,7 +218,7 @@ async function sendMail(mailRequest) {
 
   ejs.renderFile(template, templateData, (err, html) => {
     if (err) console.log(err); // Handle error
-    // console.log(templateData);
+    console.log(templateData);
     // console.log(templateData.user.customer.SellRequests);
     // console.log(template);
 
@@ -222,11 +232,13 @@ async function sendMail(mailRequest) {
     };
 
     if (securityCheckMailCanBeSent) {
-      transport.sendMail(mailOpts, (err, info) => {
-        if (err) console.log(err); //Handle Error
-        console.log(info);
-      });
+      //   transport.sendMail(mailOpts, (err, info) => {
+      //     if (err) console.log(err); //Handle Error
+      //     console.log(info);
+      //   });
+      return true;
     }
+    return false;
   });
 }
 

@@ -1,5 +1,5 @@
-<h2>Bonjour <%= user.client.prenom %>, et Bienvenue !</h2>
+<h2>Bonjour <%= user.data.client.prenom %>, et Bienvenue !</h2>
 <p>Vous êtes inscrit sur <%= process.env.REACT_APP_EXPRESSAPI %> !</p>
 <p>Vous pouvez désormais créer des demandes de rachat sur le site.</p>
 <p>Merci,</p>
-<p><%= user.shop.legalName %></p>
+<p><%= user.data.client.shop.legalName %></p>
