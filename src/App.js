@@ -26,6 +26,7 @@ import shopPublicInfoContext from "./context/publicShopInfoContext";
 import UserPreferenceContext from "./context/userPreferenceContext";
 import LoginRenewOrLogOutContext from "./context/logAutoRenewOrLogout";
 import CardsCardPageContext from "./context/cardsCardPageContext";
+import SellingSettingsContext from "./context/sellingSettingsContext";
 
 import {
   BrowserRouter as Router,
@@ -183,6 +184,9 @@ function App() {
   //STATE - Auto Renew LogIn or Auto Log Out
   const [timers, setTimers] = useState({ autoRenew: "", autoLogOut: "" });
 
+  //STATE - Set Sellering Context
+  const [SellingSettings, setSellingSettings] = useState({});
+
   // CONTEXT CREATION Creating All Sets value for context
   const contextAllSets = {
     allSets: allSets,
@@ -282,6 +286,12 @@ function App() {
   const ContextCardPage = {
     cardsCardPageContext: cardsCardPageContext,
     setCardsCardPageContext: setCardsCardPageContext,
+  };
+
+  //CONTEXT - Seller Settings
+  const SellerSettingsContext = {
+    SellingSettings: SellingSettings,
+    setSellingSettings: setSellingSettings,
   };
 
   function getUserPreferenceCardsSetLang() {
@@ -645,10 +655,16 @@ function App() {
                                 path="/shopadmin/customers"
                                 component={ShopAdminAllCustomers}
                               />
-                              <LoggedShopRouteRender
-                                path="/shopadmin/settings"
-                                component={ShopAdminSettings}
-                              />
+
+                              <SellingSettingsContext.Provider
+                                value={SellerSettingsContext}
+                              >
+                                <LoggedShopRouteRender
+                                  path="/shopadmin/settings"
+                                  component={ShopAdminSettings}
+                                />
+                              </SellingSettingsContext.Provider>
+
                               <LoggedShopRouteRender
                                 path="/shopadmin/shopInfos"
                                 component={MyShopAccount}
