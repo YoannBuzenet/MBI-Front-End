@@ -9,11 +9,11 @@ const SellingSettingsFoilNonFoil = ({ lang }) => {
   return (
     <div className="foilConditionsContainer">
       <div>
-        Foil
+        Regular
         <div>
           {conditions.map((oneCondition, index) => (
             <SellingSettingsCondition
-              isFoil={true}
+              isFoil={false}
               condition={oneCondition}
               lang={lang}
               key={lang.id + "" + index}
@@ -22,11 +22,11 @@ const SellingSettingsFoilNonFoil = ({ lang }) => {
         </div>
       </div>
       <div>
-        Non Foil
+        Foil
         <div>
           {conditions.map((oneCondition, index) => (
             <SellingSettingsCondition
-              isFoil={false}
+              isFoil={true}
               condition={oneCondition}
               lang={lang}
               key={lang.id + "" + index}
