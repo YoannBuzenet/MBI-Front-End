@@ -228,9 +228,7 @@ const ShopAdminSettings = () => {
 
   const initializeSellingPriceContext = () => {
     //Get something from Express API
-    shopAPI
-      .getShopSellingSettings(authenticationInfos)
-      .then((data) => console.log(data));
+    shopAPI.getShopSellingSettings().then((data) => console.log(data.data));
     //Parse it and hydrate context
     //if empty, build context
     return;

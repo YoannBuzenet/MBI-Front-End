@@ -1,5 +1,8 @@
-import English from "../translations/English.json";
-import French from "../translations/French.json";
+// import English from "../translations/English.json";
+// import French from "../translations/French.json";
+
+const French = require("../translations/French.json");
+const English = require("../translations/English.json");
 
 const shopID = 1;
 
@@ -79,7 +82,7 @@ const websiteDefaultLanguageContext = {
 //Default Buying Language ID
 const baseLang = 3;
 
-export default {
+module.exports = {
   shopID,
   shopName,
   baseLang,
