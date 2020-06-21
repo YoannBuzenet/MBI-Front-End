@@ -38,20 +38,22 @@ app.post("/api/mail", (req, res) => {
 });
 
 //Shop Selling Settings
-app.post("/api/shop/SellingSettings", (req, res) => {
+app.post("/api/shop/RewriteSellingSettings", (req, res) => {
   console.log("Receiving selling settings");
   console.log(req.body);
   //Check if this is the right shop (does he have the shop access & is the id the one of this server)
   //if yes, write into this file with stringy
   //if not, send back a 401
 });
-app.get("/api/shop/SellingSettings", async (req, res) => {
+app.post("/api/shop/TryToGetSellingSettings", async (req, res) => {
   console.log("sending selling settings");
+  console.log(req);
   // console.log("/api/shop/SellingSettings", req.headers.authorization);
   //Checking if this is the right shop (does he have the shop access & is the id the one of this server)
   try {
     const securityCheck = await securityCheckAPI.checkIfUserIsCurrentShop(
-      req.headers.authorization
+      req.headers.authorization,
+      req.body.id
     );
 
     const shopSettings = require("../server/shopData/sellingsSettings");
