@@ -127,10 +127,10 @@ function App() {
   const [allSets, setAllSets] = useState([]);
 
   // STATE Creating the langage definition state
-  const [langDefinition, setLangDefinition] = useState({});
+  const [langDefinition, setLangDefinition] = useState([]);
 
   // STATE Creating the conditions definition state
-  const [conditionDefinition, setConditionDefinition] = useState({});
+  const [conditionDefinition, setConditionDefinition] = useState([]);
 
   // STATE Storing Shop Public Infos
   const [shopInfos, setShopInfos] = useState({});
