@@ -8,14 +8,12 @@ function checkIfUserIsReallyLogged(sellRequestID, jwt) {
   );
 }
 
-function checkIfUserIsCurrentShop(jwt) {
+function checkIfUserIsCurrentShop(jwt, id) {
   axios.defaults.headers["Authorization"] = jwt;
 
-  let normalURL =
-    process.env.REACT_APP_MTGAPI_URL +
-    "/usersShop​/" +
-    process.env.REACT_APP_SHOP_ID;
+  let normalURL = process.env.REACT_APP_MTGAPI_URL + "/usersShop​/" + id;
 
+  //Removing invisible space that was created by .env
   normalURL = normalURL.replace(/[\u200B-\u200D\uFEFF]/g, "");
 
   return axios.put(normalURL, {});
