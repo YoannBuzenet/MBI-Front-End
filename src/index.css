@@ -14,6 +14,7 @@
   --main-bg-color-weak: rgba(255, 127, 80, 0.3);
   --background-color: #f9f9f9;
   --border-radius-form-field: 8px;
+  --back-office-back-color: rgba(173, 216, 230, 0.8);
 }
 
 html {
@@ -1472,7 +1473,7 @@ tbody.cardLineShop {
 .one-set {
   margin-bottom: 1rem;
   padding: 1rem;
-  background-color: rgba(173, 216, 230, 0.8);
+  background-color: var(--back-office-back-color);
   border-radius: 5px;
 }
 
@@ -1667,7 +1668,7 @@ span.customer_lastName {
 }
 
 .categorySetting {
-  background-color: rgba(173, 216, 230, 0.8);
+  background-color: var(--back-office-back-color);
   border-radius: 5px;
   margin-bottom: 3rem;
   padding: 3rem;
@@ -1675,6 +1676,15 @@ span.customer_lastName {
 
 .categorySetting .categoryTitle {
   text-transform: uppercase;
+}
+
+.foilConditionsContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.foilConditionsContainer > div {
+  width: 30%;
 }
 
 @media only screen and (max-width: 1860px) {
