@@ -43,6 +43,13 @@ function getBuyingClauses() {
     .then((data) => data.data);
 }
 
+function getShopSellingSettings(authContext) {
+  console.log("getting shop settings");
+  return axios.get(
+    process.env.REACT_APP_EXPRESSAPI + "/api/shop/SellingSettings"
+  );
+}
+
 export default {
   updatePercentPerLang,
   updatePercentPerCondition,
@@ -50,4 +57,5 @@ export default {
   updateFields,
   getPublicInfos,
   getBuyingClauses,
+  getShopSellingSettings,
 };

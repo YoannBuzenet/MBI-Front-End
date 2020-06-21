@@ -36,14 +36,20 @@ app.post("/api/mail", (req, res) => {
 //Shop Selling Settings
 app.post("/api/shop/SellingSettings", (req, res) => {
   console.log("Receiving selling settings");
+  //GET shopID from auth context
+  console.log(req.body);
   //Check if this is the right shop (does he have the shop access & is the id the one of this server)
   //if yes, write into this file with stringy
   //if not, send back a 401
 });
 app.get("/api/shop/SellingSettings", (req, res) => {
   console.log("sending selling settings");
+  //GET shopID from auth context
+  console.log(req.body);
   //Check if this is the right shop (does he have the shop access & is the id the one of this server)
   //if yes, get the data and send it back, ready to be parsed
+  const shopSettings = require("../server/shopData/sellingsSettings");
+  res.send(shopSettings);
   //if not, send back a 401
 });
 
