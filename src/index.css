@@ -1628,6 +1628,22 @@ span.customer_lastName {
   margin-top: 5rem;
 }
 
+.percentPerLang > form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.percentPerLang > form input {
+  margin: 0 100px;
+}
+
+.percentPerLang > form div:nth-of-type(1) input,
+.percentPerLang > form div:nth-of-type(5) input,
+.percentPerLang > form div:nth-of-type(9) input {
+  margin-left: 120px;
+}
+
 .percentSettings .field {
   margin-top: 1rem;
 }
@@ -1649,6 +1665,33 @@ span.customer_lastName {
   font-size: 1.4rem;
   font-style: italic;
 }
+
+.categorySetting {
+  background-color: rgba(173, 216, 230, 0.8);
+  border-radius: 5px;
+  margin-bottom: 3rem;
+  padding: 3rem;
+}
+
+.categorySetting .categoryTitle {
+  text-transform: uppercase;
+}
+
+@media only screen and (max-width: 1860px) {
+  .percentPerLang > form {
+    display: block;
+    text-align: center;
+  }
+  .percentPerLang > form input {
+    margin: auto;
+  }
+  .percentPerLang > form div:nth-of-type(1) input,
+  .percentPerLang > form div:nth-of-type(5) input,
+  .percentPerLang > form div:nth-of-type(9) input {
+    margin-left: auto;
+  }
+}
+
 /**************************
 *********LOGIN PAGE********
 **************************/
