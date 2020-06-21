@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import AuthContext from "../../context/authContext";
+import SellingSettingsContext from "../../context/sellingSettingsContext";
 import GenericCardInfosContext from "../../context/genericCardInfosContext";
 import Field from "../../components/forms/Field";
 import { toast } from "react-toastify";
@@ -11,15 +12,27 @@ import LanguageNameDisplay from "../../components/LanguageNameDisplay";
 import config from "../../services/config";
 import AppLangChoice from "../../components/AppLangChoice";
 import SellingSettingsLang from "../../components/shop/sellingSettings/SellingSettingsLang";
+import { useEffect } from "react";
 
 const ShopAdminSettings = () => {
+  //Handling shop Settings here
+  //Percent buying are stored in localstorage, session context and on central API
+  // TODO Selling Settings are stored on localstorage, session context and Express API
+
   //Current Authentication
   const { authenticationInfos, setAuthenticationInfos } = useContext(
     AuthContext
   );
 
+  //Selling Price settings
+  const { SellingSettings, setSellingSettings } = useContext(
+    SellingSettingsContext
+  );
+
   //DEFINED langages and Conditions
   const { lang, conditions } = useContext(GenericCardInfosContext);
+
+  useEffect(() => initializeSellingPriceContext(), []);
 
   //We add a timer to not hit API at each user input.
   //This way there is at least WAIT_INTERVAL interval between each sending, or more if the user continues to input.
@@ -213,7 +226,15 @@ const ShopAdminSettings = () => {
     }
   };
 
-  console.log(lang);
+  const initializeSellingPriceContext = () => {
+    //Get something from Express API
+    shopAPI
+      .getShopSellingSettings(authenticationInfos)
+      .then((data) => console.log(data));
+    //Parse it and hydrate context
+    //if empty, build context
+    return;
+  };
 
   return (
     <>

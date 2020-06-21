@@ -10,12 +10,21 @@ const SellingSettingsCondition = ({ isFoil, condition, lang }) => {
   );
 
   console.log(isFoil, condition, lang);
+
   //Hook Intl to translate an attribute
   const intl = useIntl();
 
+  const conditionShortname =
+    config.gradingArea === "EU" ? "shortname" : "shortnameUS";
+  const conditionCompleteName = "shortname" + config.gradingArea;
+
+  const handleChange = (event) => {
+    console.log("input");
+  };
+
   return (
     <div>
-      <span>{condition["name" + config.gradingArea]}</span>
+      <span>{condition[conditionShortname]}</span>
       <select>
         {Object.keys(allPricesAvailableOnMKM).map((onePrice) => (
           <option value={onePrice}>
@@ -26,6 +35,7 @@ const SellingSettingsCondition = ({ isFoil, condition, lang }) => {
           </option>
         ))}
       </select>
+      <input type="text" onChange={handleChange} />
     </div>
   );
 };
