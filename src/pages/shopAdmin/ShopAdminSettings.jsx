@@ -377,13 +377,12 @@ const ShopAdminSettings = () => {
         <div className="categorySetting">
           <h2 className="categoryTitle">Selling Settings</h2>
           {lang.length > 0 &&
-            lang.map((oneLang) => {
+            lang.map((oneLang, index) => {
               return (
-                <>
+                <div key={index}>
                   <h3>{oneLang.name}</h3>
-                  <SellingSettingsLang />
-                  <div></div>
-                </>
+                  <SellingSettingsLang lang={oneLang} key={oneLang.id} />
+                </div>
               );
             })}
         </div>

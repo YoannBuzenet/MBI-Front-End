@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import SellingSettingsCondition from "./SellingSettingsCondition";
 import GenericCardInfosContext from "../../../context/genericCardInfosContext";
 
-const SellingSettingsFoilNonFoil = (props) => {
+const SellingSettingsFoilNonFoil = ({ lang }) => {
   //DEFINED langages and Conditions
   const { conditions } = useContext(GenericCardInfosContext);
 
@@ -11,16 +11,26 @@ const SellingSettingsFoilNonFoil = (props) => {
       <div>
         Foil
         <div>
-          {conditions.map((oneCondition) => (
-            <SellingSettingsCondition />
+          {conditions.map((oneCondition, index) => (
+            <SellingSettingsCondition
+              isFoil={true}
+              condition={oneCondition}
+              lang={lang}
+              key={lang.id + "" + index}
+            />
           ))}
         </div>
       </div>
       <div>
         Non Foil
         <div>
-          {conditions.map((oneCondition) => (
-            <SellingSettingsCondition />
+          {conditions.map((oneCondition, index) => (
+            <SellingSettingsCondition
+              isFoil={false}
+              condition={oneCondition}
+              lang={lang}
+              key={lang.id + "" + index}
+            />
           ))}
         </div>
       </div>
