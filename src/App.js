@@ -656,14 +656,17 @@ function App() {
                                 component={ShopAdminAllCustomers}
                               />
 
-                              <SellingSettingsContext.Provider
-                                value={SellerSettingsContext}
-                              >
-                                <LoggedShopRouteRender
-                                  path="/shopadmin/settings"
-                                  component={ShopAdminSettings}
-                                />
-                              </SellingSettingsContext.Provider>
+                              <LoggedShopRouteRender
+                                path="/shopadmin/settings"
+                                component={ShopAdminSettings}
+                                render={({ match, history }) => (
+                                  <SellingSettingsContext.Provider
+                                    value={SellerSettingsContext}
+                                  >
+                                    <ShopAdminSettings />
+                                  </SellingSettingsContext.Provider>
+                                )}
+                              />
 
                               <LoggedShopRouteRender
                                 path="/shopadmin/shopInfos"
