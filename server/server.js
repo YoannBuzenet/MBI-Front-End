@@ -47,7 +47,7 @@ app.post("/api/shop/RewriteSellingSettings", (req, res) => {
 });
 app.post("/api/shop/TryToGetSellingSettings", async (req, res) => {
   console.log("sending selling settings");
-  console.log(req);
+  // console.log(req);
   // console.log("/api/shop/SellingSettings", req.headers.authorization);
   //Checking if this is the right shop (does he have the shop access & is the id the one of this server)
   try {

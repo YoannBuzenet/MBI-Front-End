@@ -16,16 +16,24 @@ import { isMobile } from "react-device-detect";
 import SetListLoader from "../../components/loaders/SetListLoader";
 import { FormattedMessage } from "react-intl";
 import priceUpdateAPI from "../../services/priceUpdateAPI";
+import AuthContext from "../../context/authContext";
+import shopAPI from "../../services/shopAPI";
 
 const ShopAdminOneSellRequest = ({ match }) => {
   const { id } = match.params;
 
   const [isLoading, setIsLoading] = useState(true);
 
+  //Current Authentication
+  const { authenticationInfos, setAuthenticationInfos } = useContext(
+    AuthContext
+  );
+
   const { currentAdminSellRequest, setCurrentAdminSellRequest } = useContext(
     AdminSellRequestContext
   );
   // console.log(currentAdminSellRequest);
+  console.log(authenticationInfos);
 
   useEffect(() => {
     if (
@@ -36,6 +44,23 @@ const ShopAdminOneSellRequest = ({ match }) => {
       setCurrentAdminSellRequest([]);
     }
   }, [id]);
+
+  useEffect(() => {
+    if (!authenticationInfos?.shop?.shopData?.SellingSettings) {
+      shopAPI.getShopSellingSettings(authenticationInfos).then((data) =>
+        setAuthenticationInfos({
+          ...authenticationInfos,
+          shop: {
+            ...authenticationInfos.shop,
+            shopData: {
+              ...authenticationInfos.shop.shopData,
+              SellingSettings: data.data,
+            },
+          },
+        })
+      );
+    }
+  }, []);
 
   useEffect(() => {
     const CancelToken = axios.CancelToken;

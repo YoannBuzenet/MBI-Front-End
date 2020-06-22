@@ -1,11 +1,18 @@
 import React, { useContext, useState } from "react";
 import SellingSettingsContext from "../../../context/sellingSettingsContext";
+import AuthContext from "../../../context/authContext";
 import config from "../../../services/config";
 import { allPricesAvailableOnMKM } from "../../../services/mkmPriceGuideDefinition";
 import { useIntl, FormattedMessage } from "react-intl";
 import { toast } from "react-toastify";
 
 const SellingSettingsCondition = ({ isFoil, condition, lang }) => {
+  //Current Authentication
+  const { authenticationInfos, setAuthenticationInfos } = useContext(
+    AuthContext
+  );
+
+  //Selling Prices context
   const { SellingSettings, setSellingSettings } = useContext(
     SellingSettingsContext
   );
@@ -69,12 +76,20 @@ const SellingSettingsCondition = ({ isFoil, condition, lang }) => {
     //Pas besoin de traitement granulaire comme sur ShopPriceCondition
     //Juste traiter le fichier et l'envoyer
     console.log("sending to Express !");
-
-    //Saving into localStorage
-    console.log("sending to Local Storage !");
+    const StringifiedContext = JSON.stringify(SellingSettings);
 
     //Saving into AuthContext
-    console.log("sending to AuthContext !");
+    console.log("saving into to AuthContext !");
+    setAuthenticationInfos({
+      ...authenticationInfos,
+      shop: {
+        ...authenticationInfos.shop,
+        shopData: {
+          ...authenticationInfos.shop.shopData,
+          SellingSettings: SellingSettings,
+        },
+      },
+    });
   };
 
   return (
