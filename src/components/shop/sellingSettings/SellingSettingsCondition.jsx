@@ -16,7 +16,7 @@ const SellingSettingsCondition = ({ isFoil, condition, lang }) => {
   const WAIT_INTERVAL = 2000;
 
   //Aligning the boolean to the JSON
-  isFoil = isFoil ? 2 : 1;
+  isFoil = isFoil ? 1 : 0;
   console.log("line id", isFoil, condition, lang);
   console.log(authenticationInfos);
 
@@ -106,14 +106,14 @@ const SellingSettingsCondition = ({ isFoil, condition, lang }) => {
   const priceDisplayed =
     authenticationInfos?.shop?.shopData?.SellingSettings?.[lang.id]?.[
       condition.id
-    ]?.[isFoil] === null ||
+    ]?.[isFoil].price === null ||
     authenticationInfos?.shop?.shopData?.SellingSettings?.[lang.id]?.[
       condition.id
-    ]?.[isFoil] === undefined
+    ]?.[isFoil].price === undefined
       ? ""
       : authenticationInfos?.shop?.shopData?.SellingSettings[lang.id][
           condition.id
-        ][isFoil];
+        ][isFoil].price;
 
   return (
     <div>
