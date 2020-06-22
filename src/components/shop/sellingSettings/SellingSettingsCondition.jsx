@@ -103,17 +103,17 @@ const SellingSettingsCondition = ({ isFoil, condition, lang }) => {
     ]?.[isFoil]
   );
 
-  const priceDisplayed =
+  const percentDisplayed =
     authenticationInfos?.shop?.shopData?.SellingSettings?.[lang.id]?.[
       condition.id
-    ]?.[isFoil].price === null ||
+    ]?.[isFoil].percent === null ||
     authenticationInfos?.shop?.shopData?.SellingSettings?.[lang.id]?.[
       condition.id
-    ]?.[isFoil].price === undefined
+    ]?.[isFoil].percent === undefined
       ? ""
       : authenticationInfos?.shop?.shopData?.SellingSettings[lang.id][
           condition.id
-        ][isFoil].price;
+        ][isFoil].percent;
 
   return (
     <div>
@@ -131,7 +131,7 @@ const SellingSettingsCondition = ({ isFoil, condition, lang }) => {
       <input
         type="text"
         onChange={(event) => handleChange(event, lang, isFoil, condition)}
-        value={priceDisplayed}
+        value={percentDisplayed}
       />
     </div>
   );
