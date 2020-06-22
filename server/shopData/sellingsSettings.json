@@ -1,332 +1,332 @@
 {
   "1": {
     "1": {
-      "0": { "price": null, "algoName": null },
-      "1": { "price": null, "algoName": null }
+      "0": { "percent": 100, "algoName": "AvgSellPrice" },
+      "1": { "percent": 100, "algoName": "foilSell" }
     },
     "2": {
-      "0": { "price": null, "algoName": null },
-      "1": { "price": null, "algoName": null }
+      "0": { "percent": 100, "algoName": "AvgSellPrice" },
+      "1": { "percent": 100, "algoName": "foilSell" }
     },
     "3": {
-      "0": { "price": null, "algoName": null },
-      "1": { "price": null, "algoName": null }
+      "0": { "percent": 90, "algoName": "AvgSellPrice" },
+      "1": { "percent": 90, "algoName": "foilSell" }
     },
     "4": {
-      "0": { "price": null, "algoName": null },
-      "1": { "price": null, "algoName": null }
+      "0": { "percent": 80, "algoName": "AvgSellPrice" },
+      "1": { "percent": 80, "algoName": "foilSell" }
     },
     "5": {
-      "0": { "price": null, "algoName": null },
-      "1": { "price": null, "algoName": null }
+      "0": { "percent": 70, "algoName": "AvgSellPrice" },
+      "1": { "percent": 70, "algoName": "foilSell" }
     },
     "6": {
-      "0": { "price": null, "algoName": null },
-      "1": { "price": null, "algoName": null }
+      "0": { "percent": 65, "algoName": "AvgSellPrice" },
+      "1": { "percent": 65, "algoName": "foilSell" }
     },
     "7": {
-      "0": { "price": null, "algoName": null },
-      "1": { "price": null, "algoName": null }
+      "0": { "percent": 60, "algoName": "AvgSellPrice" },
+      "1": { "percent": 60, "algoName": "foilSell" }
     }
   },
   "2": {
     "1": {
-      "0": { "price": null, "algoName": null },
-      "1": { "price": null, "algoName": null }
+      "0": { "percent": 100, "algoName": "AvgSellPrice" },
+      "1": { "percent": 100, "algoName": "foilSell" }
     },
     "2": {
-      "0": { "price": null, "algoName": null },
-      "1": { "price": null, "algoName": null }
+      "0": { "percent": 100, "algoName": "AvgSellPrice" },
+      "1": { "percent": 100, "algoName": "foilSell" }
     },
     "3": {
-      "0": { "price": null, "algoName": null },
-      "1": { "price": null, "algoName": null }
+      "0": { "percent": 90, "algoName": "AvgSellPrice" },
+      "1": { "percent": 90, "algoName": "foilSell" }
     },
     "4": {
-      "0": { "price": null, "algoName": null },
-      "1": { "price": null, "algoName": null }
+      "0": { "percent": 80, "algoName": "AvgSellPrice" },
+      "1": { "percent": 80, "algoName": "foilSell" }
     },
     "5": {
-      "0": { "price": null, "algoName": null },
-      "1": { "price": null, "algoName": null }
+      "0": { "percent": 70, "algoName": "AvgSellPrice" },
+      "1": { "percent": 70, "algoName": "foilSell" }
     },
     "6": {
-      "0": { "price": null, "algoName": null },
-      "1": { "price": null, "algoName": null }
+      "0": { "percent": 65, "algoName": "AvgSellPrice" },
+      "1": { "percent": 65, "algoName": "foilSell" }
     },
     "7": {
-      "0": { "price": null, "algoName": null },
-      "1": { "price": null, "algoName": null }
+      "0": { "percent": 60, "algoName": "AvgSellPrice" },
+      "1": { "percent": 60, "algoName": "foilSell" }
     }
   },
   "3": {
     "1": {
-      "0": { "price": null, "algoName": null },
-      "1": { "price": null, "algoName": null }
+      "0": { "percent": 100, "algoName": "AvgSellPrice" },
+      "1": { "percent": 100, "algoName": "foilSell" }
     },
     "2": {
-      "0": { "price": null, "algoName": null },
-      "1": { "price": null, "algoName": null }
+      "0": { "percent": 100, "algoName": "AvgSellPrice" },
+      "1": { "percent": 100, "algoName": "foilSell" }
     },
     "3": {
-      "0": { "price": null, "algoName": null },
-      "1": { "price": null, "algoName": null }
+      "0": { "percent": 90, "algoName": "AvgSellPrice" },
+      "1": { "percent": 90, "algoName": "foilSell" }
     },
     "4": {
-      "0": { "price": null, "algoName": null },
-      "1": { "price": null, "algoName": null }
+      "0": { "percent": 80, "algoName": "AvgSellPrice" },
+      "1": { "percent": 80, "algoName": "foilSell" }
     },
     "5": {
-      "0": { "price": null, "algoName": null },
-      "1": { "price": null, "algoName": null }
+      "0": { "percent": 70, "algoName": "AvgSellPrice" },
+      "1": { "percent": 70, "algoName": "foilSell" }
     },
     "6": {
-      "0": { "price": null, "algoName": null },
-      "1": { "price": null, "algoName": null }
+      "0": { "percent": 65, "algoName": "AvgSellPrice" },
+      "1": { "percent": 65, "algoName": "foilSell" }
     },
     "7": {
-      "0": { "price": null, "algoName": null },
-      "1": { "price": null, "algoName": null }
+      "0": { "percent": 60, "algoName": "AvgSellPrice" },
+      "1": { "percent": 60, "algoName": "foilSell" }
     }
   },
   "4": {
     "1": {
-      "0": { "price": null, "algoName": null },
-      "1": { "price": null, "algoName": null }
+      "0": { "percent": 100, "algoName": "AvgSellPrice" },
+      "1": { "percent": 100, "algoName": "foilSell" }
     },
     "2": {
-      "0": { "price": null, "algoName": null },
-      "1": { "price": null, "algoName": null }
+      "0": { "percent": 100, "algoName": "AvgSellPrice" },
+      "1": { "percent": 100, "algoName": "foilSell" }
     },
     "3": {
-      "0": { "price": null, "algoName": null },
-      "1": { "price": null, "algoName": null }
+      "0": { "percent": 90, "algoName": "AvgSellPrice" },
+      "1": { "percent": 90, "algoName": "foilSell" }
     },
     "4": {
-      "0": { "price": null, "algoName": null },
-      "1": { "price": null, "algoName": null }
+      "0": { "percent": 80, "algoName": "AvgSellPrice" },
+      "1": { "percent": 80, "algoName": "foilSell" }
     },
     "5": {
-      "0": { "price": null, "algoName": null },
-      "1": { "price": null, "algoName": null }
+      "0": { "percent": 70, "algoName": "AvgSellPrice" },
+      "1": { "percent": 70, "algoName": "foilSell" }
     },
     "6": {
-      "0": { "price": null, "algoName": null },
-      "1": { "price": null, "algoName": null }
+      "0": { "percent": 65, "algoName": "AvgSellPrice" },
+      "1": { "percent": 65, "algoName": "foilSell" }
     },
     "7": {
-      "0": { "price": null, "algoName": null },
-      "1": { "price": null, "algoName": null }
+      "0": { "percent": 60, "algoName": "AvgSellPrice" },
+      "1": { "percent": 60, "algoName": "foilSell" }
     }
   },
   "5": {
     "1": {
-      "0": { "price": null, "algoName": null },
-      "1": { "price": null, "algoName": null }
+      "0": { "percent": 100, "algoName": "AvgSellPrice" },
+      "1": { "percent": 100, "algoName": "foilSell" }
     },
     "2": {
-      "0": { "price": null, "algoName": null },
-      "1": { "price": null, "algoName": null }
+      "0": { "percent": 100, "algoName": "AvgSellPrice" },
+      "1": { "percent": 100, "algoName": "foilSell" }
     },
     "3": {
-      "0": { "price": null, "algoName": null },
-      "1": { "price": null, "algoName": null }
+      "0": { "percent": 90, "algoName": "AvgSellPrice" },
+      "1": { "percent": 90, "algoName": "foilSell" }
     },
     "4": {
-      "0": { "price": null, "algoName": null },
-      "1": { "price": null, "algoName": null }
+      "0": { "percent": 80, "algoName": "AvgSellPrice" },
+      "1": { "percent": 80, "algoName": "foilSell" }
     },
     "5": {
-      "0": { "price": null, "algoName": null },
-      "1": { "price": null, "algoName": null }
+      "0": { "percent": 70, "algoName": "AvgSellPrice" },
+      "1": { "percent": 70, "algoName": "foilSell" }
     },
     "6": {
-      "0": { "price": null, "algoName": null },
-      "1": { "price": null, "algoName": null }
+      "0": { "percent": 65, "algoName": "AvgSellPrice" },
+      "1": { "percent": 65, "algoName": "foilSell" }
     },
     "7": {
-      "0": { "price": null, "algoName": null },
-      "1": { "price": null, "algoName": null }
+      "0": { "percent": 60, "algoName": "AvgSellPrice" },
+      "1": { "percent": 60, "algoName": "foilSell" }
     }
   },
   "6": {
     "1": {
-      "0": { "price": null, "algoName": null },
-      "1": { "price": null, "algoName": null }
+      "0": { "percent": 100, "algoName": "AvgSellPrice" },
+      "1": { "percent": 100, "algoName": "foilSell" }
     },
     "2": {
-      "0": { "price": null, "algoName": null },
-      "1": { "price": null, "algoName": null }
+      "0": { "percent": 100, "algoName": "AvgSellPrice" },
+      "1": { "percent": 100, "algoName": "foilSell" }
     },
     "3": {
-      "0": { "price": null, "algoName": null },
-      "1": { "price": null, "algoName": null }
+      "0": { "percent": 90, "algoName": "AvgSellPrice" },
+      "1": { "percent": 90, "algoName": "foilSell" }
     },
     "4": {
-      "0": { "price": null, "algoName": null },
-      "1": { "price": null, "algoName": null }
+      "0": { "percent": 80, "algoName": "AvgSellPrice" },
+      "1": { "percent": 80, "algoName": "foilSell" }
     },
     "5": {
-      "0": { "price": null, "algoName": null },
-      "1": { "price": null, "algoName": null }
+      "0": { "percent": 70, "algoName": "AvgSellPrice" },
+      "1": { "percent": 70, "algoName": "foilSell" }
     },
     "6": {
-      "0": { "price": null, "algoName": null },
-      "1": { "price": null, "algoName": null }
+      "0": { "percent": 65, "algoName": "AvgSellPrice" },
+      "1": { "percent": 65, "algoName": "foilSell" }
     },
     "7": {
-      "0": { "price": null, "algoName": null },
-      "1": { "price": null, "algoName": null }
+      "0": { "percent": 60, "algoName": "AvgSellPrice" },
+      "1": { "percent": 60, "algoName": "foilSell" }
     }
   },
   "7": {
     "1": {
-      "0": { "price": null, "algoName": null },
-      "1": { "price": null, "algoName": null }
+      "0": { "percent": 100, "algoName": "AvgSellPrice" },
+      "1": { "percent": 100, "algoName": "foilSell" }
     },
     "2": {
-      "0": { "price": null, "algoName": null },
-      "1": { "price": null, "algoName": null }
+      "0": { "percent": 100, "algoName": "AvgSellPrice" },
+      "1": { "percent": 100, "algoName": "foilSell" }
     },
     "3": {
-      "0": { "price": null, "algoName": null },
-      "1": { "price": null, "algoName": null }
+      "0": { "percent": 90, "algoName": "AvgSellPrice" },
+      "1": { "percent": 90, "algoName": "foilSell" }
     },
     "4": {
-      "0": { "price": null, "algoName": null },
-      "1": { "price": null, "algoName": null }
+      "0": { "percent": 80, "algoName": "AvgSellPrice" },
+      "1": { "percent": 80, "algoName": "foilSell" }
     },
     "5": {
-      "0": { "price": null, "algoName": null },
-      "1": { "price": null, "algoName": null }
+      "0": { "percent": 70, "algoName": "AvgSellPrice" },
+      "1": { "percent": 70, "algoName": "foilSell" }
     },
     "6": {
-      "0": { "price": null, "algoName": null },
-      "1": { "price": null, "algoName": null }
+      "0": { "percent": 65, "algoName": "AvgSellPrice" },
+      "1": { "percent": 65, "algoName": "foilSell" }
     },
     "7": {
-      "0": { "price": null, "algoName": null },
-      "1": { "price": null, "algoName": null }
+      "0": { "percent": 60, "algoName": "AvgSellPrice" },
+      "1": { "percent": 60, "algoName": "foilSell" }
     }
   },
   "8": {
     "1": {
-      "0": { "price": null, "algoName": null },
-      "1": { "price": null, "algoName": null }
+      "0": { "percent": 100, "algoName": "AvgSellPrice" },
+      "1": { "percent": 100, "algoName": "foilSell" }
     },
     "2": {
-      "0": { "price": null, "algoName": null },
-      "1": { "price": null, "algoName": null }
+      "0": { "percent": 100, "algoName": "AvgSellPrice" },
+      "1": { "percent": 100, "algoName": "foilSell" }
     },
     "3": {
-      "0": { "price": null, "algoName": null },
-      "1": { "price": null, "algoName": null }
+      "0": { "percent": 90, "algoName": "AvgSellPrice" },
+      "1": { "percent": 90, "algoName": "foilSell" }
     },
     "4": {
-      "0": { "price": null, "algoName": null },
-      "1": { "price": null, "algoName": null }
+      "0": { "percent": 80, "algoName": "AvgSellPrice" },
+      "1": { "percent": 80, "algoName": "foilSell" }
     },
     "5": {
-      "0": { "price": null, "algoName": null },
-      "1": { "price": null, "algoName": null }
+      "0": { "percent": 70, "algoName": "AvgSellPrice" },
+      "1": { "percent": 70, "algoName": "foilSell" }
     },
     "6": {
-      "0": { "price": null, "algoName": null },
-      "1": { "price": null, "algoName": null }
+      "0": { "percent": 65, "algoName": "AvgSellPrice" },
+      "1": { "percent": 65, "algoName": "foilSell" }
     },
     "7": {
-      "0": { "price": null, "algoName": null },
-      "1": { "price": null, "algoName": null }
+      "0": { "percent": 60, "algoName": "AvgSellPrice" },
+      "1": { "percent": 60, "algoName": "foilSell" }
     }
   },
   "9": {
     "1": {
-      "0": { "price": null, "algoName": null },
-      "1": { "price": null, "algoName": null }
+      "0": { "percent": 100, "algoName": "AvgSellPrice" },
+      "1": { "percent": 100, "algoName": "foilSell" }
     },
     "2": {
-      "0": { "price": null, "algoName": null },
-      "1": { "price": null, "algoName": null }
+      "0": { "percent": 100, "algoName": "AvgSellPrice" },
+      "1": { "percent": 100, "algoName": "foilSell" }
     },
     "3": {
-      "0": { "price": null, "algoName": null },
-      "1": { "price": null, "algoName": null }
+      "0": { "percent": 90, "algoName": "AvgSellPrice" },
+      "1": { "percent": 90, "algoName": "foilSell" }
     },
     "4": {
-      "0": { "price": null, "algoName": null },
-      "1": { "price": null, "algoName": null }
+      "0": { "percent": 80, "algoName": "AvgSellPrice" },
+      "1": { "percent": 80, "algoName": "foilSell" }
     },
     "5": {
-      "0": { "price": null, "algoName": null },
-      "1": { "price": null, "algoName": null }
+      "0": { "percent": 70, "algoName": "AvgSellPrice" },
+      "1": { "percent": 70, "algoName": "foilSell" }
     },
     "6": {
-      "0": { "price": null, "algoName": null },
-      "1": { "price": null, "algoName": null }
+      "0": { "percent": 65, "algoName": "AvgSellPrice" },
+      "1": { "percent": 65, "algoName": "foilSell" }
     },
     "7": {
-      "0": { "price": null, "algoName": null },
-      "1": { "price": null, "algoName": null }
+      "0": { "percent": 60, "algoName": "AvgSellPrice" },
+      "1": { "percent": 60, "algoName": "foilSell" }
     }
   },
   "10": {
     "1": {
-      "0": { "price": null, "algoName": null },
-      "1": { "price": null, "algoName": null }
+      "0": { "percent": 100, "algoName": "AvgSellPrice" },
+      "1": { "percent": 100, "algoName": "foilSell" }
     },
     "2": {
-      "0": { "price": null, "algoName": null },
-      "1": { "price": null, "algoName": null }
+      "0": { "percent": 100, "algoName": "AvgSellPrice" },
+      "1": { "percent": 100, "algoName": "foilSell" }
     },
     "3": {
-      "0": { "price": null, "algoName": null },
-      "1": { "price": null, "algoName": null }
+      "0": { "percent": 90, "algoName": "AvgSellPrice" },
+      "1": { "percent": 90, "algoName": "foilSell" }
     },
     "4": {
-      "0": { "price": null, "algoName": null },
-      "1": { "price": null, "algoName": null }
+      "0": { "percent": 80, "algoName": "AvgSellPrice" },
+      "1": { "percent": 80, "algoName": "foilSell" }
     },
     "5": {
-      "0": { "price": null, "algoName": null },
-      "1": { "price": null, "algoName": null }
+      "0": { "percent": 70, "algoName": "AvgSellPrice" },
+      "1": { "percent": 70, "algoName": "foilSell" }
     },
     "6": {
-      "0": { "price": null, "algoName": null },
-      "1": { "price": null, "algoName": null }
+      "0": { "percent": 65, "algoName": "AvgSellPrice" },
+      "1": { "percent": 65, "algoName": "foilSell" }
     },
     "7": {
-      "0": { "price": null, "algoName": null },
-      "1": { "price": null, "algoName": null }
+      "0": { "percent": 60, "algoName": "AvgSellPrice" },
+      "1": { "percent": 60, "algoName": "foilSell" }
     }
   },
   "11": {
     "1": {
-      "0": { "price": null, "algoName": null },
-      "1": { "price": null, "algoName": null }
+      "0": { "percent": 100, "algoName": "AvgSellPrice" },
+      "1": { "percent": 100, "algoName": "foilSell" }
     },
     "2": {
-      "0": { "price": null, "algoName": null },
-      "1": { "price": null, "algoName": null }
+      "0": { "percent": 100, "algoName": "AvgSellPrice" },
+      "1": { "percent": 100, "algoName": "foilSell" }
     },
     "3": {
-      "0": { "price": null, "algoName": null },
-      "1": { "price": null, "algoName": null }
+      "0": { "percent": 90, "algoName": "AvgSellPrice" },
+      "1": { "percent": 90, "algoName": "foilSell" }
     },
     "4": {
-      "0": { "price": null, "algoName": null },
-      "1": { "price": null, "algoName": null }
+      "0": { "percent": 80, "algoName": "AvgSellPrice" },
+      "1": { "percent": 80, "algoName": "foilSell" }
     },
     "5": {
-      "0": { "price": null, "algoName": null },
-      "1": { "price": null, "algoName": null }
+      "0": { "percent": 70, "algoName": "AvgSellPrice" },
+      "1": { "percent": 70, "algoName": "foilSell" }
     },
     "6": {
-      "0": { "price": null, "algoName": null },
-      "1": { "price": null, "algoName": null }
+      "0": { "percent": 65, "algoName": "AvgSellPrice" },
+      "1": { "percent": 65, "algoName": "foilSell" }
     },
     "7": {
-      "0": { "price": null, "algoName": null },
-      "1": { "price": null, "algoName": null }
+      "0": { "percent": 60, "algoName": "AvgSellPrice" },
+      "1": { "percent": 60, "algoName": "foilSell" }
     }
   }
 }
