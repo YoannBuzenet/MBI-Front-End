@@ -15,7 +15,9 @@ const SellingSettingsCondition = ({ isFoil, condition, lang }) => {
 
   const WAIT_INTERVAL = 2000;
 
-  // console.log(isFoil, condition, lang);
+  //Aligning the boolean to the JSON
+  isFoil = isFoil ? 2 : 1;
+  console.log("line id", isFoil, condition, lang);
   console.log(authenticationInfos);
 
   //Hook Intl to translate an attribute
@@ -93,6 +95,13 @@ const SellingSettingsCondition = ({ isFoil, condition, lang }) => {
       authenticationInfos.shop.ShopData.SellingSettings
     );
   };
+
+  console.log(
+    "what's in here",
+    authenticationInfos?.shop?.shopData?.SellingSettings?.[lang.id]?.[
+      condition.id
+    ]?.[isFoil]
+  );
 
   const priceDisplayed =
     authenticationInfos?.shop?.shopData?.SellingSettings?.[lang.id]?.[
