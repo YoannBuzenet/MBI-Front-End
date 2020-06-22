@@ -21,7 +21,7 @@ const SellingSettingsCondition = ({ isFoil, condition, lang }) => {
 
   const WAIT_INTERVAL = 2000;
 
-  console.log(isFoil, condition, lang);
+  // console.log(isFoil, condition, lang);
 
   //Hook Intl to translate an attribute
   const intl = useIntl();
@@ -92,6 +92,18 @@ const SellingSettingsCondition = ({ isFoil, condition, lang }) => {
     });
   };
 
+  const priceDisplayed =
+    authenticationInfos?.shop?.shopData?.SellingSettings?.[lang.id]?.[
+      condition.id
+    ]?.[isFoil] === null ||
+    authenticationInfos?.shop?.shopData?.SellingSettings?.[lang.id]?.[
+      condition.id
+    ]?.[isFoil] === undefined
+      ? ""
+      : authenticationInfos?.shop?.shopData?.SellingSettings[lang.id][
+          condition.id
+        ][isFoil];
+
   return (
     <div>
       <span>{condition[conditionShortname]}</span>
@@ -108,6 +120,7 @@ const SellingSettingsCondition = ({ isFoil, condition, lang }) => {
       <input
         type="text"
         onChange={(event) => handleChange(event, lang, isFoil, condition)}
+        value={priceDisplayed}
       />
     </div>
   );

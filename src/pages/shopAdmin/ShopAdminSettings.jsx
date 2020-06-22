@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import AuthContext from "../../context/authContext";
 import SellingSettingsContext from "../../context/sellingSettingsContext";
 import GenericCardInfosContext from "../../context/genericCardInfosContext";
@@ -12,7 +12,6 @@ import LanguageNameDisplay from "../../components/LanguageNameDisplay";
 import config from "../../services/config";
 import AppLangChoice from "../../components/AppLangChoice";
 import SellingSettingsLang from "../../components/shop/sellingSettings/SellingSettingsLang";
-import { useEffect } from "react";
 
 const ShopAdminSettings = () => {
   //Handling shop Settings here
@@ -32,14 +31,22 @@ const ShopAdminSettings = () => {
   //DEFINED langages and Conditions
   const { lang, conditions } = useContext(GenericCardInfosContext);
 
-  useEffect(() => initializeSellingPriceContext(), []);
+  useEffect(() => {
+    if (
+      !authenticationInfos?.shop?.shopData?.SellingSettings &&
+      lang.length > 0
+    ) {
+      initializeSellingPriceContext();
+      console.log("future crazy context", SellingSettings);
+    }
+  }, [lang, authenticationInfos, setAuthenticationInfos]);
 
   //We add a timer to not hit API at each user input.
   //This way there is at least WAIT_INTERVAL interval between each sending, or more if the user continues to input.
   const WAIT_INTERVAL = 1000;
   const [timer, setTimer] = useState(null);
 
-  console.log(authenticationInfos);
+  // console.log(authenticationInfos);
 
   const updateState = (fieldModified, name, value) => {
     const authenticationInfosCopy = { ...authenticationInfos };
@@ -229,12 +236,25 @@ const ShopAdminSettings = () => {
   };
 
   const initializeSellingPriceContext = () => {
+    //build empty object that we're going to pass in context (put null everywhere)
+    let priceContextToBuild = {};
+
+    for (let i = 0; i < lang.length; i++) {
+      console.log(lang[i].id);
+      priceContextToBuild[lang[i].id] = {};
+    }
+
+    console.log("serieux bro", priceContextToBuild);
+
+    setSellingSettings(priceContextToBuild);
+
     //Get something from Express API
     shopAPI
       .getShopSellingSettings(authenticationInfos)
       .then((data) => console.log(data.data));
-    //Parse it and hydrate context
-    //if empty, build context
+    //Parse it and eventually hydrate context
+
+    //set the result in context + session
     return;
   };
 
