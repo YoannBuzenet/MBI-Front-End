@@ -7,6 +7,7 @@ import LoginLogOutContext from "../context/logAutoRenewOrLogout";
 import config from "../services/config";
 import CSSLoaderWaitingSpiral from "../components/loaders/CSSLoaderWaitingSpiral";
 import { FormattedMessage } from "react-intl";
+import shopAPI from "../services/shopAPI";
 
 const LoginPage = ({ history, eraseAuthContext, renewJWTToken }) => {
   const { setAuthenticationInfos } = useContext(AuthContext);
