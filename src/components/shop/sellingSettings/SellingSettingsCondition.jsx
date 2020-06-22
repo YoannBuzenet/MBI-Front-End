@@ -3,6 +3,7 @@ import SellingSettingsContext from "../../../context/sellingSettingsContext";
 import config from "../../../services/config";
 import { allPricesAvailableOnMKM } from "../../../services/mkmPriceGuideDefinition";
 import { useIntl, FormattedMessage } from "react-intl";
+import { toast } from "react-toastify";
 
 const SellingSettingsCondition = ({ isFoil, condition, lang }) => {
   const { SellingSettings, setSellingSettings } = useContext(
@@ -20,6 +21,8 @@ const SellingSettingsCondition = ({ isFoil, condition, lang }) => {
 
   const conditionShortname =
     config.gradingArea === "EU" ? "shortname" : "shortnameUS";
+
+  //If it's needed to get the condition complete name ("Near Mint")
   const conditionCompleteName = "shortname" + config.gradingArea;
 
   const handleChange = (event, lang, isFoil, condition) => {
@@ -27,8 +30,15 @@ const SellingSettingsCondition = ({ isFoil, condition, lang }) => {
     console.log("input");
     const newContext = SellingSettings;
     const newPrice = event.target.value;
-    if (!isNaN(parseFloat(event.target.value))) {
-      newContext[lang][condition][isFoil] = newPrice;
+
+    if (!isNaN(parseFloat(newPrice))) {
+      if (condition.id === 1) {
+        //If Mint condition is updated, we compute all condition of the current lang/isFoil
+      } else {
+        //If non Mint condition is updated, we don't change other prices
+      }
+      newContext[lang.id][condition.id][isFoil] = newPrice;
+      setSellingSettings(newContext);
       setTimer(
         setTimeout(
           () => triggerAPISending(event, lang, condition, isFoil),
@@ -36,10 +46,11 @@ const SellingSettingsCondition = ({ isFoil, condition, lang }) => {
         )
       );
     } else if (event.target.value === "") {
-      newContext[lang][condition][isFoil] = 0;
+      newContext[lang.id][condition.id][isFoil] = 0;
+      setSellingSettings(newContext);
       setTimer(
         setTimeout(
-          () => triggerAPISending(event, lang, condition, isFoil),
+          () => triggerAPISending(event, lang.id, condition.id, isFoil),
           WAIT_INTERVAL
         )
       );
@@ -53,10 +64,17 @@ const SellingSettingsCondition = ({ isFoil, condition, lang }) => {
     }
   };
 
-  const triggerAPISending = (event, lang, condition, isFoil) => {
+  const triggerAPISending = (event, langID, conditionID, isFoil) => {
     //MAJ l'objet sur Express : json.stringify it and send it to Express
     //Pas besoin de traitement granulaire comme sur ShopPriceCondition
     //Juste traiter le fichier et l'envoyer
+    console.log("sending to Express !");
+
+    //Saving into localStorage
+    console.log("sending to Local Storage !");
+
+    //Saving into AuthContext
+    console.log("sending to AuthContext !");
   };
 
   return (
