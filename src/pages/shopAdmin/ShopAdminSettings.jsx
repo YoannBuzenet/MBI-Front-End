@@ -34,12 +34,12 @@ const ShopAdminSettings = () => {
   useEffect(() => {
     if (
       !authenticationInfos?.shop?.shopData?.SellingSettings &&
-      lang.length > 0
+      lang.length > 0 &&
+      conditions.length > 0
     ) {
       initializeSellingPriceContext();
-      console.log("future crazy context", SellingSettings);
     }
-  }, [lang, authenticationInfos, setAuthenticationInfos]);
+  }, [lang, conditions, authenticationInfos, setAuthenticationInfos]);
 
   //We add a timer to not hit API at each user input.
   //This way there is at least WAIT_INTERVAL interval between each sending, or more if the user continues to input.
@@ -236,12 +236,20 @@ const ShopAdminSettings = () => {
   };
 
   const initializeSellingPriceContext = () => {
-    //build empty object that we're going to pass in context (put null everywhere)
+    //build EMPTY object Context that we're going to pass in context (put null everywhere)
     let priceContextToBuild = {};
 
     for (let i = 0; i < lang.length; i++) {
       console.log(lang[i].id);
       priceContextToBuild[lang[i].id] = {};
+
+      for (let j = 0; j < conditions.length; j++) {
+        priceContextToBuild[lang[i].id][conditions[j].id] = {};
+
+        for (let k = 0; k < 2; k++) {
+          priceContextToBuild[lang[i].id][conditions[j].id][k] = null;
+        }
+      }
     }
 
     console.log("serieux bro", priceContextToBuild);
