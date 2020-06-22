@@ -1,101 +1,332 @@
 {
   "1": {
-    "1": { "1": null, "2": null },
-    "2": { "1": null, "2": null },
-    "3": { "1": null, "2": null },
-    "4": { "1": null, "2": null },
-    "5": { "1": null, "2": null },
-    "6": { "1": null, "2": null },
-    "7": { "1": null, "2": null }
+    "1": {
+      "0": { "price": null, "algoName": null },
+      "1": { "price": null, "algoName": null }
+    },
+    "2": {
+      "0": { "price": null, "algoName": null },
+      "1": { "price": null, "algoName": null }
+    },
+    "3": {
+      "0": { "price": null, "algoName": null },
+      "1": { "price": null, "algoName": null }
+    },
+    "4": {
+      "0": { "price": null, "algoName": null },
+      "1": { "price": null, "algoName": null }
+    },
+    "5": {
+      "0": { "price": null, "algoName": null },
+      "1": { "price": null, "algoName": null }
+    },
+    "6": {
+      "0": { "price": null, "algoName": null },
+      "1": { "price": null, "algoName": null }
+    },
+    "7": {
+      "0": { "price": null, "algoName": null },
+      "1": { "price": null, "algoName": null }
+    }
   },
   "2": {
-    "1": { "1": null, "2": null },
-    "2": { "1": null, "2": null },
-    "3": { "1": null, "2": null },
-    "4": { "1": null, "2": null },
-    "5": { "1": null, "2": null },
-    "6": { "1": null, "2": null },
-    "7": { "1": null, "2": null }
+    "1": {
+      "0": { "price": null, "algoName": null },
+      "1": { "price": null, "algoName": null }
+    },
+    "2": {
+      "0": { "price": null, "algoName": null },
+      "1": { "price": null, "algoName": null }
+    },
+    "3": {
+      "0": { "price": null, "algoName": null },
+      "1": { "price": null, "algoName": null }
+    },
+    "4": {
+      "0": { "price": null, "algoName": null },
+      "1": { "price": null, "algoName": null }
+    },
+    "5": {
+      "0": { "price": null, "algoName": null },
+      "1": { "price": null, "algoName": null }
+    },
+    "6": {
+      "0": { "price": null, "algoName": null },
+      "1": { "price": null, "algoName": null }
+    },
+    "7": {
+      "0": { "price": null, "algoName": null },
+      "1": { "price": null, "algoName": null }
+    }
   },
   "3": {
-    "1": { "1": null, "2": null },
-    "2": { "1": null, "2": null },
-    "3": { "1": null, "2": null },
-    "4": { "1": null, "2": null },
-    "5": { "1": null, "2": null },
-    "6": { "1": null, "2": null },
-    "7": { "1": null, "2": null }
+    "1": {
+      "0": { "price": null, "algoName": null },
+      "1": { "price": null, "algoName": null }
+    },
+    "2": {
+      "0": { "price": null, "algoName": null },
+      "1": { "price": null, "algoName": null }
+    },
+    "3": {
+      "0": { "price": null, "algoName": null },
+      "1": { "price": null, "algoName": null }
+    },
+    "4": {
+      "0": { "price": null, "algoName": null },
+      "1": { "price": null, "algoName": null }
+    },
+    "5": {
+      "0": { "price": null, "algoName": null },
+      "1": { "price": null, "algoName": null }
+    },
+    "6": {
+      "0": { "price": null, "algoName": null },
+      "1": { "price": null, "algoName": null }
+    },
+    "7": {
+      "0": { "price": null, "algoName": null },
+      "1": { "price": null, "algoName": null }
+    }
   },
   "4": {
-    "1": { "1": null, "2": null },
-    "2": { "1": null, "2": null },
-    "3": { "1": null, "2": null },
-    "4": { "1": null, "2": null },
-    "5": { "1": null, "2": null },
-    "6": { "1": null, "2": null },
-    "7": { "1": null, "2": null }
+    "1": {
+      "0": { "price": null, "algoName": null },
+      "1": { "price": null, "algoName": null }
+    },
+    "2": {
+      "0": { "price": null, "algoName": null },
+      "1": { "price": null, "algoName": null }
+    },
+    "3": {
+      "0": { "price": null, "algoName": null },
+      "1": { "price": null, "algoName": null }
+    },
+    "4": {
+      "0": { "price": null, "algoName": null },
+      "1": { "price": null, "algoName": null }
+    },
+    "5": {
+      "0": { "price": null, "algoName": null },
+      "1": { "price": null, "algoName": null }
+    },
+    "6": {
+      "0": { "price": null, "algoName": null },
+      "1": { "price": null, "algoName": null }
+    },
+    "7": {
+      "0": { "price": null, "algoName": null },
+      "1": { "price": null, "algoName": null }
+    }
   },
   "5": {
-    "1": { "1": null, "2": null },
-    "2": { "1": null, "2": null },
-    "3": { "1": null, "2": null },
-    "4": { "1": null, "2": null },
-    "5": { "1": null, "2": null },
-    "6": { "1": null, "2": null },
-    "7": { "1": null, "2": null }
+    "1": {
+      "0": { "price": null, "algoName": null },
+      "1": { "price": null, "algoName": null }
+    },
+    "2": {
+      "0": { "price": null, "algoName": null },
+      "1": { "price": null, "algoName": null }
+    },
+    "3": {
+      "0": { "price": null, "algoName": null },
+      "1": { "price": null, "algoName": null }
+    },
+    "4": {
+      "0": { "price": null, "algoName": null },
+      "1": { "price": null, "algoName": null }
+    },
+    "5": {
+      "0": { "price": null, "algoName": null },
+      "1": { "price": null, "algoName": null }
+    },
+    "6": {
+      "0": { "price": null, "algoName": null },
+      "1": { "price": null, "algoName": null }
+    },
+    "7": {
+      "0": { "price": null, "algoName": null },
+      "1": { "price": null, "algoName": null }
+    }
   },
   "6": {
-    "1": { "1": null, "2": null },
-    "2": { "1": null, "2": null },
-    "3": { "1": null, "2": null },
-    "4": { "1": null, "2": null },
-    "5": { "1": null, "2": null },
-    "6": { "1": null, "2": null },
-    "7": { "1": null, "2": null }
+    "1": {
+      "0": { "price": null, "algoName": null },
+      "1": { "price": null, "algoName": null }
+    },
+    "2": {
+      "0": { "price": null, "algoName": null },
+      "1": { "price": null, "algoName": null }
+    },
+    "3": {
+      "0": { "price": null, "algoName": null },
+      "1": { "price": null, "algoName": null }
+    },
+    "4": {
+      "0": { "price": null, "algoName": null },
+      "1": { "price": null, "algoName": null }
+    },
+    "5": {
+      "0": { "price": null, "algoName": null },
+      "1": { "price": null, "algoName": null }
+    },
+    "6": {
+      "0": { "price": null, "algoName": null },
+      "1": { "price": null, "algoName": null }
+    },
+    "7": {
+      "0": { "price": null, "algoName": null },
+      "1": { "price": null, "algoName": null }
+    }
   },
   "7": {
-    "1": { "1": null, "2": null },
-    "2": { "1": null, "2": null },
-    "3": { "1": null, "2": null },
-    "4": { "1": null, "2": null },
-    "5": { "1": null, "2": null },
-    "6": { "1": null, "2": null },
-    "7": { "1": null, "2": null }
+    "1": {
+      "0": { "price": null, "algoName": null },
+      "1": { "price": null, "algoName": null }
+    },
+    "2": {
+      "0": { "price": null, "algoName": null },
+      "1": { "price": null, "algoName": null }
+    },
+    "3": {
+      "0": { "price": null, "algoName": null },
+      "1": { "price": null, "algoName": null }
+    },
+    "4": {
+      "0": { "price": null, "algoName": null },
+      "1": { "price": null, "algoName": null }
+    },
+    "5": {
+      "0": { "price": null, "algoName": null },
+      "1": { "price": null, "algoName": null }
+    },
+    "6": {
+      "0": { "price": null, "algoName": null },
+      "1": { "price": null, "algoName": null }
+    },
+    "7": {
+      "0": { "price": null, "algoName": null },
+      "1": { "price": null, "algoName": null }
+    }
   },
   "8": {
-    "1": { "1": null, "2": null },
-    "2": { "1": null, "2": null },
-    "3": { "1": null, "2": null },
-    "4": { "1": null, "2": null },
-    "5": { "1": null, "2": null },
-    "6": { "1": null, "2": null },
-    "7": { "1": null, "2": null }
+    "1": {
+      "0": { "price": null, "algoName": null },
+      "1": { "price": null, "algoName": null }
+    },
+    "2": {
+      "0": { "price": null, "algoName": null },
+      "1": { "price": null, "algoName": null }
+    },
+    "3": {
+      "0": { "price": null, "algoName": null },
+      "1": { "price": null, "algoName": null }
+    },
+    "4": {
+      "0": { "price": null, "algoName": null },
+      "1": { "price": null, "algoName": null }
+    },
+    "5": {
+      "0": { "price": null, "algoName": null },
+      "1": { "price": null, "algoName": null }
+    },
+    "6": {
+      "0": { "price": null, "algoName": null },
+      "1": { "price": null, "algoName": null }
+    },
+    "7": {
+      "0": { "price": null, "algoName": null },
+      "1": { "price": null, "algoName": null }
+    }
   },
   "9": {
-    "1": { "1": null, "2": null },
-    "2": { "1": null, "2": null },
-    "3": { "1": null, "2": null },
-    "4": { "1": null, "2": null },
-    "5": { "1": null, "2": null },
-    "6": { "1": null, "2": null },
-    "7": { "1": null, "2": null }
+    "1": {
+      "0": { "price": null, "algoName": null },
+      "1": { "price": null, "algoName": null }
+    },
+    "2": {
+      "0": { "price": null, "algoName": null },
+      "1": { "price": null, "algoName": null }
+    },
+    "3": {
+      "0": { "price": null, "algoName": null },
+      "1": { "price": null, "algoName": null }
+    },
+    "4": {
+      "0": { "price": null, "algoName": null },
+      "1": { "price": null, "algoName": null }
+    },
+    "5": {
+      "0": { "price": null, "algoName": null },
+      "1": { "price": null, "algoName": null }
+    },
+    "6": {
+      "0": { "price": null, "algoName": null },
+      "1": { "price": null, "algoName": null }
+    },
+    "7": {
+      "0": { "price": null, "algoName": null },
+      "1": { "price": null, "algoName": null }
+    }
   },
   "10": {
-    "1": { "1": null, "2": null },
-    "2": { "1": null, "2": null },
-    "3": { "1": null, "2": null },
-    "4": { "1": null, "2": null },
-    "5": { "1": null, "2": null },
-    "6": { "1": null, "2": null },
-    "7": { "1": null, "2": null }
+    "1": {
+      "0": { "price": null, "algoName": null },
+      "1": { "price": null, "algoName": null }
+    },
+    "2": {
+      "0": { "price": null, "algoName": null },
+      "1": { "price": null, "algoName": null }
+    },
+    "3": {
+      "0": { "price": null, "algoName": null },
+      "1": { "price": null, "algoName": null }
+    },
+    "4": {
+      "0": { "price": null, "algoName": null },
+      "1": { "price": null, "algoName": null }
+    },
+    "5": {
+      "0": { "price": null, "algoName": null },
+      "1": { "price": null, "algoName": null }
+    },
+    "6": {
+      "0": { "price": null, "algoName": null },
+      "1": { "price": null, "algoName": null }
+    },
+    "7": {
+      "0": { "price": null, "algoName": null },
+      "1": { "price": null, "algoName": null }
+    }
   },
   "11": {
-    "1": { "1": null, "2": null },
-    "2": { "1": null, "2": null },
-    "3": { "1": null, "2": null },
-    "4": { "1": null, "2": null },
-    "5": { "1": null, "2": null },
-    "6": { "1": null, "2": null },
-    "7": { "1": null, "2": null }
+    "1": {
+      "0": { "price": null, "algoName": null },
+      "1": { "price": null, "algoName": null }
+    },
+    "2": {
+      "0": { "price": null, "algoName": null },
+      "1": { "price": null, "algoName": null }
+    },
+    "3": {
+      "0": { "price": null, "algoName": null },
+      "1": { "price": null, "algoName": null }
+    },
+    "4": {
+      "0": { "price": null, "algoName": null },
+      "1": { "price": null, "algoName": null }
+    },
+    "5": {
+      "0": { "price": null, "algoName": null },
+      "1": { "price": null, "algoName": null }
+    },
+    "6": {
+      "0": { "price": null, "algoName": null },
+      "1": { "price": null, "algoName": null }
+    },
+    "7": {
+      "0": { "price": null, "algoName": null },
+      "1": { "price": null, "algoName": null }
+    }
   }
 }
