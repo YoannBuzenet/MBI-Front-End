@@ -1,6 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
 import AuthContext from "../../context/authContext";
-import SellingSettingsContext from "../../context/sellingSettingsContext";
 import GenericCardInfosContext from "../../context/genericCardInfosContext";
 import Field from "../../components/forms/Field";
 import { toast } from "react-toastify";
@@ -23,23 +22,15 @@ const ShopAdminSettings = () => {
     AuthContext
   );
 
-  //Selling Price settings
-  const { SellingSettings, setSellingSettings } = useContext(
-    SellingSettingsContext
-  );
-
   //DEFINED langages and Conditions
   const { lang, conditions } = useContext(GenericCardInfosContext);
 
   useEffect(() => {
-    if (
-      !authenticationInfos?.shop?.shopData?.SellingSettings &&
-      lang.length > 0 &&
-      conditions.length > 0
-    ) {
+    if (!authenticationInfos?.shop?.shopData?.SellingSettings) {
       initializeSellingPriceContext();
+      console.log("initializing content");
     }
-  }, [lang, conditions, authenticationInfos, setAuthenticationInfos]);
+  }, [authenticationInfos, setAuthenticationInfos]);
 
   //We add a timer to not hit API at each user input.
   //This way there is at least WAIT_INTERVAL interval between each sending, or more if the user continues to input.
@@ -236,34 +227,21 @@ const ShopAdminSettings = () => {
   };
 
   const initializeSellingPriceContext = () => {
-    //build EMPTY object Context that we're going to pass in context (put null everywhere)
-    let priceContextToBuild = {};
-
-    for (let i = 0; i < lang.length; i++) {
-      console.log(lang[i].id);
-      priceContextToBuild[lang[i].id] = {};
-
-      for (let j = 0; j < conditions.length; j++) {
-        priceContextToBuild[lang[i].id][conditions[j].id] = {};
-
-        for (let k = 0; k < 2; k++) {
-          priceContextToBuild[lang[i].id][conditions[j].id][k] = null;
-        }
-      }
-    }
-
-    console.log("serieux bro", priceContextToBuild);
-
-    setSellingSettings(priceContextToBuild);
-
     //Get something from Express API
-    shopAPI
-      .getShopSellingSettings(authenticationInfos)
-      .then((data) => console.log(data.data));
-    //Parse it and eventually hydrate context
-
-    //set the result in context + session
-    return;
+    shopAPI.getShopSellingSettings(authenticationInfos).then((data) => {
+      console.log(data);
+      //Storing in Session
+      setAuthenticationInfos({
+        ...authenticationInfos,
+        shop: {
+          ...authenticationInfos.shop,
+          shopData: {
+            ...authenticationInfos.shop.shopData,
+            SellingSettings: data.data,
+          },
+        },
+      });
+    });
   };
 
   return (

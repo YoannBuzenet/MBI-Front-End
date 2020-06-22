@@ -24,3 +24,4 @@ yarn-error.log*
 
 #Server
 /server/shopInfos.js
+/server/shopData
