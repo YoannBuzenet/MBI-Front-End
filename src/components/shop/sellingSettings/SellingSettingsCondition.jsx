@@ -1,5 +1,4 @@
 import React, { useContext, useState } from "react";
-import SellingSettingsContext from "../../../context/sellingSettingsContext";
 import AuthContext from "../../../context/authContext";
 import config from "../../../services/config";
 import { allPricesAvailableOnMKM } from "../../../services/mkmPriceGuideDefinition";
@@ -12,16 +11,12 @@ const SellingSettingsCondition = ({ isFoil, condition, lang }) => {
     AuthContext
   );
 
-  //Selling Prices context
-  const { SellingSettings, setSellingSettings } = useContext(
-    SellingSettingsContext
-  );
-
   const [timer, setTimer] = useState(null);
 
   const WAIT_INTERVAL = 2000;
 
   // console.log(isFoil, condition, lang);
+  console.log(authenticationInfos);
 
   //Hook Intl to translate an attribute
   const intl = useIntl();
@@ -35,7 +30,7 @@ const SellingSettingsCondition = ({ isFoil, condition, lang }) => {
   const handleChange = (event, lang, isFoil, condition) => {
     setTimer(clearTimeout(timer));
     console.log("input");
-    const newContext = SellingSettings;
+    const newContext = authenticationInfos.shop.shopData.SellingSettings;
     const newPrice = event.target.value;
 
     if (!isNaN(parseFloat(newPrice))) {
@@ -45,7 +40,16 @@ const SellingSettingsCondition = ({ isFoil, condition, lang }) => {
         //If non Mint condition is updated, we don't change other prices
       }
       newContext[lang.id][condition.id][isFoil] = newPrice;
-      setSellingSettings(newContext);
+      setAuthenticationInfos({
+        ...authenticationInfos,
+        shop: {
+          ...authenticationInfos.shop,
+          shopData: {
+            ...authenticationInfos.shop.shopData,
+            SellingSettings: newContext,
+          },
+        },
+      });
       setTimer(
         setTimeout(
           () => triggerAPISending(event, lang, condition, isFoil),
@@ -54,7 +58,16 @@ const SellingSettingsCondition = ({ isFoil, condition, lang }) => {
       );
     } else if (event.target.value === "") {
       newContext[lang.id][condition.id][isFoil] = 0;
-      setSellingSettings(newContext);
+      setAuthenticationInfos({
+        ...authenticationInfos,
+        shop: {
+          ...authenticationInfos.shop,
+          shopData: {
+            ...authenticationInfos.shop.shopData,
+            SellingSettings: newContext,
+          },
+        },
+      });
       setTimer(
         setTimeout(
           () => triggerAPISending(event, lang.id, condition.id, isFoil),
@@ -76,20 +89,9 @@ const SellingSettingsCondition = ({ isFoil, condition, lang }) => {
     //Pas besoin de traitement granulaire comme sur ShopPriceCondition
     //Juste traiter le fichier et l'envoyer
     console.log("sending to Express !");
-    const StringifiedContext = JSON.stringify(SellingSettings);
-
-    //Saving into AuthContext
-    console.log("saving into to AuthContext !");
-    setAuthenticationInfos({
-      ...authenticationInfos,
-      shop: {
-        ...authenticationInfos.shop,
-        shopData: {
-          ...authenticationInfos.shop.shopData,
-          SellingSettings: SellingSettings,
-        },
-      },
-    });
+    const StringifiedContext = JSON.stringify(
+      authenticationInfos.shop.ShopData.SellingSettings
+    );
   };
 
   const priceDisplayed =
