@@ -35,8 +35,8 @@ app.post("/api/mail", (req, res) => {
 
 //Shop Selling Settings
 app.post("/api/shop/RewriteSellingSettings", async (req, res) => {
+  //Check if this is the right shop (does he have the shop access & is the id the one of this server)
   console.log("Receiving selling settings");
-  // console.log(req.body);
   try {
     const securityCheck = await securityCheckAPI.checkIfUserIsCurrentShop(
       req.headers.authorization,
@@ -56,14 +56,9 @@ app.post("/api/shop/RewriteSellingSettings", async (req, res) => {
     console.log(err);
     res.status(401).send("Acces Denied.");
   }
-  //Check if this is the right shop (does he have the shop access & is the id the one of this server)
-  //if yes, write into this file with stringy
-  //if not, send back a 401
 });
 app.post("/api/shop/TryToGetSellingSettings", async (req, res) => {
   console.log("sending selling settings");
-  // console.log(req);
-  // console.log("/api/shop/SellingSettings", req.headers.authorization);
   //Checking if this is the right shop (does he have the shop access & is the id the one of this server)
   try {
     const securityCheck = await securityCheckAPI.checkIfUserIsCurrentShop(
@@ -75,8 +70,8 @@ app.post("/api/shop/TryToGetSellingSettings", async (req, res) => {
       err,
       shopSettings
     ) {
-      if (err) throw err;
-      res.send(shopSettings);
+      if (err) console.log(err);
+      res.status(200).send(shopSettings);
     });
   } catch (err) {
     console.log(err);

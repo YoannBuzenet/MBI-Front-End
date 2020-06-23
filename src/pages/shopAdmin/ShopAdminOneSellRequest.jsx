@@ -35,6 +35,8 @@ const ShopAdminOneSellRequest = ({ match }) => {
   // console.log(currentAdminSellRequest);
   console.log(authenticationInfos);
 
+  const [priceHaveBeenLoaded, setPriceHaveBeenLoaded] = useState(false);
+
   useEffect(() => {
     if (
       currentAdminSellRequest.sellRequests &&
@@ -45,6 +47,7 @@ const ShopAdminOneSellRequest = ({ match }) => {
     }
   }, [id]);
 
+  //Getting Selling Settings percent & algo from the shop
   useEffect(() => {
     if (!authenticationInfos?.shop?.shopData?.SellingSettings) {
       shopAPI.getShopSellingSettings(authenticationInfos).then((data) =>
@@ -131,6 +134,24 @@ const ShopAdminOneSellRequest = ({ match }) => {
       return setCurrentAdminSellRequest([]);
     };
   }, [id]);
+
+  //Refreshing MKM prices on each card of the sell request
+  useEffect(() => {
+    if (
+      currentAdminSellRequest.sellRequests &&
+      currentAdminSellRequest.sellRequests.length > 0 &&
+      !priceHaveBeenLoaded
+    ) {
+      console.log("loading prices...");
+      setPriceHaveBeenLoaded(true);
+    }
+  }, [
+    setCurrentAdminSellRequest,
+    currentAdminSellRequest,
+    id,
+    isLoading,
+    setIsLoading,
+  ]);
 
   console.log(currentAdminSellRequest);
 
