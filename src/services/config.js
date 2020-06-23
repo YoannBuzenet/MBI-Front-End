@@ -82,6 +82,17 @@ const websiteDefaultLanguageContext = {
 //Default Buying Language ID
 const baseLang = 3;
 
+//Defaults Percent Selling Price Per Condition
+const defaultSellingPercents = {
+  1: 1,
+  2: 0.9,
+  3: 0.8,
+  4: 0.7,
+  5: 0.6,
+  6: 0.5,
+  7: 0.4,
+};
+
 module.exports = {
   shopID,
   shopName,
@@ -98,4 +109,5 @@ module.exports = {
   websiteDefaultLanguageArrayLangAvailables,
   iconSizeMobile,
   iconSizeDesktop,
+  defaultSellingPercents,
 };

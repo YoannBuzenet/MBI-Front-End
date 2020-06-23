@@ -37,7 +37,7 @@ const ShopAdminSettings = () => {
   const WAIT_INTERVAL = 1000;
   const [timer, setTimer] = useState(null);
 
-  // console.log(authenticationInfos);
+  console.log(authenticationInfos);
 
   const updateState = (fieldModified, name, value) => {
     const authenticationInfosCopy = { ...authenticationInfos };

@@ -1,11 +1,14 @@
+// Core
 require("dotenv").config();
-
 const express = require("express");
 const path = require("path");
 const bodyParser = require("body-parser");
 const app = express();
+
 const { sendMail } = require("./mailing/sendMail");
+const fs = require("fs");
 const securityCheckAPI = require("./services/securityCheckAPI");
+
 // Serve the static files from the React app
 app.use(express.static(path.join(__dirname, "../build")));
 
@@ -17,13 +20,6 @@ app.use(bodyParser.json());
 if (process.env.NODE_ENV === "dev") {
   process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
 }
-
-// An api endpoint that returns a short list of items
-app.get("/api/getList", (req, res) => {
-  var list = ["item1", "item2", "item3"];
-  res.json(list);
-  console.log("Sent list of items");
-});
 
 //Mail Processing
 app.post("/api/mail", (req, res) => {
@@ -38,9 +34,28 @@ app.post("/api/mail", (req, res) => {
 });
 
 //Shop Selling Settings
-app.post("/api/shop/RewriteSellingSettings", (req, res) => {
+app.post("/api/shop/RewriteSellingSettings", async (req, res) => {
   console.log("Receiving selling settings");
-  console.log(req.body);
+  // console.log(req.body);
+  try {
+    const securityCheck = await securityCheckAPI.checkIfUserIsCurrentShop(
+      req.headers.authorization,
+      req.body.id
+    );
+
+    //Writing the new selling settings in the file on the server
+    const SellingSettings = req.body.authContext.shop.shopData.SellingSettings;
+    fs.writeFile(
+      __dirname + "/shopData/sellingsSettings.json",
+      JSON.stringify(SellingSettings),
+      (err) => console.log("after writing", err)
+    );
+
+    res.status(200).send();
+  } catch (err) {
+    console.log(err);
+    res.status(401).send("Acces Denied.");
+  }
   //Check if this is the right shop (does he have the shop access & is the id the one of this server)
   //if yes, write into this file with stringy
   //if not, send back a 401
@@ -59,7 +74,7 @@ app.post("/api/shop/TryToGetSellingSettings", async (req, res) => {
     const shopSettings = require("../server/shopData/sellingsSettings");
     res.send(shopSettings);
   } catch (err) {
-    console.log("error thrown in .catch", err);
+    console.log(err);
     res.status(401).send("Acces Denied.");
   }
 });

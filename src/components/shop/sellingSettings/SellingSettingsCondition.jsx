@@ -1,15 +1,21 @@
 import React, { useContext, useState } from "react";
 import AuthContext from "../../../context/authContext";
+import GenericCardInfosContext from "../../../context/genericCardInfosContext";
 import config from "../../../services/config";
 import { allPricesAvailableOnMKM } from "../../../services/mkmPriceGuideDefinition";
 import { useIntl, FormattedMessage } from "react-intl";
 import { toast } from "react-toastify";
+import priceUpdateAPI from "../../../services/priceUpdateAPI";
+import shopAPI from "../../../services/shopAPI";
 
-const SellingSettingsCondition = ({ isFoil, condition, lang }) => {
+const SellingSettingsCondition = ({ isFoil, condition, langObject }) => {
   //Current Authentication
   const { authenticationInfos, setAuthenticationInfos } = useContext(
     AuthContext
   );
+
+  //DEFINED langages and Conditions
+  const { lang, conditions } = useContext(GenericCardInfosContext);
 
   const [timer, setTimer] = useState(null);
 
@@ -17,7 +23,7 @@ const SellingSettingsCondition = ({ isFoil, condition, lang }) => {
 
   //Aligning the boolean to the JSON
   isFoil = isFoil ? 1 : 0;
-  console.log("line id", isFoil, condition, lang);
+  console.log("line id", isFoil, condition, langObject);
   console.log(authenticationInfos);
 
   //Hook Intl to translate an attribute
@@ -29,19 +35,27 @@ const SellingSettingsCondition = ({ isFoil, condition, lang }) => {
   //If it's needed to get the condition complete name ("Near Mint")
   const conditionCompleteName = "shortname" + config.gradingArea;
 
-  const handleChange = (event, lang, isFoil, condition) => {
+  const handleChange = (event, langObject, isFoil, condition) => {
     setTimer(clearTimeout(timer));
     console.log("input");
     const newContext = authenticationInfos.shop.shopData.SellingSettings;
-    const newPrice = event.target.value;
+    const newPercent = parseInt(event.target.value);
 
-    if (!isNaN(parseFloat(newPrice))) {
+    if (!isNaN(parseFloat(newPercent))) {
       if (condition.id === 1) {
         //If Mint condition is updated, we compute all condition of the current lang/isFoil
+        //Adjust % for each condition
+        for (let i = 0; i < conditions.length; i++) {
+          newContext[langObject.id][conditions[i].id][
+            isFoil
+          ].percent = priceUpdateAPI.smoothNumbers(
+            newPercent * config.defaultSellingPercents[i]
+          );
+        }
       } else {
         //If non Mint condition is updated, we don't change other prices
       }
-      newContext[lang.id][condition.id][isFoil] = newPrice;
+      newContext[langObject.id][condition.id][isFoil].percent = newPercent;
       setAuthenticationInfos({
         ...authenticationInfos,
         shop: {
@@ -54,12 +68,12 @@ const SellingSettingsCondition = ({ isFoil, condition, lang }) => {
       });
       setTimer(
         setTimeout(
-          () => triggerAPISending(event, lang, condition, isFoil),
+          () => triggerAPISending(event, langObject, condition, isFoil),
           WAIT_INTERVAL
         )
       );
     } else if (event.target.value === "") {
-      newContext[lang.id][condition.id][isFoil] = 0;
+      newContext[langObject.id][condition.id][isFoil].percent = 0;
       setAuthenticationInfos({
         ...authenticationInfos,
         shop: {
@@ -72,7 +86,7 @@ const SellingSettingsCondition = ({ isFoil, condition, lang }) => {
       });
       setTimer(
         setTimeout(
-          () => triggerAPISending(event, lang.id, condition.id, isFoil),
+          () => triggerAPISending(event, langObject.id, condition.id, isFoil),
           WAIT_INTERVAL
         )
       );
@@ -86,32 +100,31 @@ const SellingSettingsCondition = ({ isFoil, condition, lang }) => {
     }
   };
 
-  const triggerAPISending = (event, langID, conditionID, isFoil) => {
+  const triggerAPISending = (event, langObjectID, conditionID, isFoil) => {
     //MAJ l'objet sur Express : json.stringify it and send it to Express
     //Pas besoin de traitement granulaire comme sur ShopPriceCondition
     //Juste traiter le fichier et l'envoyer
     console.log("sending to Express !");
-    const StringifiedContext = JSON.stringify(
-      authenticationInfos.shop.ShopData.SellingSettings
-    );
+
+    shopAPI.postSellingSettings(authenticationInfos);
   };
 
   console.log(
     "what's in here",
-    authenticationInfos?.shop?.shopData?.SellingSettings?.[lang.id]?.[
+    authenticationInfos?.shop?.shopData?.SellingSettings?.[langObject.id]?.[
       condition.id
     ]?.[isFoil]
   );
 
   const percentDisplayed =
-    authenticationInfos?.shop?.shopData?.SellingSettings?.[lang.id]?.[
+    authenticationInfos?.shop?.shopData?.SellingSettings?.[langObject.id]?.[
       condition.id
     ]?.[isFoil].percent === null ||
-    authenticationInfos?.shop?.shopData?.SellingSettings?.[lang.id]?.[
+    authenticationInfos?.shop?.shopData?.SellingSettings?.[langObject.id]?.[
       condition.id
     ]?.[isFoil].percent === undefined
       ? ""
-      : authenticationInfos?.shop?.shopData?.SellingSettings[lang.id][
+      : authenticationInfos?.shop?.shopData?.SellingSettings[langObject.id][
           condition.id
         ][isFoil].percent;
 
@@ -130,7 +143,7 @@ const SellingSettingsCondition = ({ isFoil, condition, lang }) => {
       </select>
       <input
         type="text"
-        onChange={(event) => handleChange(event, lang, isFoil, condition)}
+        onChange={(event) => handleChange(event, langObject, isFoil, condition)}
         value={percentDisplayed}
       />
     </div>
