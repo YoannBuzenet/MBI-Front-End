@@ -55,7 +55,7 @@ function getShopSellingSettings(authContext) {
 function postSellingSettings(authContext) {
   return axios.post(
     process.env.REACT_APP_EXPRESSAPI + "/api/shop/RewriteSellingSettings",
-    { id: authContext.customer.id }
+    { id: authContext.customer.id, authContext }
   );
 }
 

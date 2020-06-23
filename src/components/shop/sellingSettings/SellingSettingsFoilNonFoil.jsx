@@ -15,7 +15,7 @@ const SellingSettingsFoilNonFoil = ({ lang }) => {
             <SellingSettingsCondition
               isFoil={false}
               condition={oneCondition}
-              lang={lang}
+              langObject={lang}
               key={lang.id + "" + index}
             />
           ))}
@@ -28,7 +28,7 @@ const SellingSettingsFoilNonFoil = ({ lang }) => {
             <SellingSettingsCondition
               isFoil={true}
               condition={oneCondition}
-              lang={lang}
+              langObject={lang}
               key={lang.id + "" + index}
             />
           ))}
