@@ -71,8 +71,13 @@ app.post("/api/shop/TryToGetSellingSettings", async (req, res) => {
       req.body.id
     );
 
-    const shopSettings = require("../server/shopData/sellingsSettings");
-    res.send(shopSettings);
+    fs.readFile(__dirname + "/shopData/sellingsSettings.json", function (
+      err,
+      shopSettings
+    ) {
+      if (err) throw err;
+      res.send(shopSettings);
+    });
   } catch (err) {
     console.log(err);
     res.status(401).send("Acces Denied.");

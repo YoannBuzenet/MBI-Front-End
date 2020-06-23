@@ -90,8 +90,35 @@ const SellingSettingsCondition = ({ isFoil, condition, langObject }) => {
     }
   };
 
-  const handleChangeSelect = (event) => {
+  const handleChangeSelect = (event, langObject, isFoil, condition) => {
+    setTimer(clearTimeout(timer));
+    const newAlgoChosen = event.target.value;
+    console.log(newAlgoChosen);
+    const newContext = authenticationInfos.shop.shopData.SellingSettings;
     console.log("on met à jour l'algo dans le contexte");
+    if (condition.id === 1) {
+      //On maj les 7 conditions
+      for (let i = 0; i < conditions.length; i++) {
+        newContext[langObject.id][conditions[i].id][
+          isFoil
+        ].algoName = newAlgoChosen;
+      }
+    } else {
+      // on mAJ que la bonne ligne
+      newContext[langObject.id][condition.id][isFoil].algoName = newAlgoChosen;
+    }
+    setAuthenticationInfos({
+      ...authenticationInfos,
+      shop: {
+        ...authenticationInfos.shop,
+        shopData: {
+          ...authenticationInfos.shop.shopData,
+          SellingSettings: newContext,
+        },
+      },
+    });
+
+    setTimer(setTimeout(() => triggerAPISending(), WAIT_INTERVAL));
   };
 
   const triggerAPISending = () => {
@@ -127,7 +154,9 @@ const SellingSettingsCondition = ({ isFoil, condition, langObject }) => {
     <div>
       <span>{condition[conditionShortname]}</span>
       <select
-        onChange={(event) => handleChangeSelect(event)}
+        onChange={(event) =>
+          handleChangeSelect(event, langObject, isFoil, condition)
+        }
         value={algoDisplayed}
       >
         {Object.keys(allPricesAvailableOnMKM).map((onePrice) => (
