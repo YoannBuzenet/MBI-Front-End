@@ -66,12 +66,7 @@ const SellingSettingsCondition = ({ isFoil, condition, langObject }) => {
           },
         },
       });
-      setTimer(
-        setTimeout(
-          () => triggerAPISending(event, langObject, condition, isFoil),
-          WAIT_INTERVAL
-        )
-      );
+      setTimer(setTimeout(() => triggerAPISending(), WAIT_INTERVAL));
     } else if (event.target.value === "") {
       newContext[langObject.id][condition.id][isFoil].percent = 0;
       setAuthenticationInfos({
@@ -84,12 +79,7 @@ const SellingSettingsCondition = ({ isFoil, condition, langObject }) => {
           },
         },
       });
-      setTimer(
-        setTimeout(
-          () => triggerAPISending(event, langObject.id, condition.id, isFoil),
-          WAIT_INTERVAL
-        )
-      );
+      setTimer(setTimeout(() => triggerAPISending(), WAIT_INTERVAL));
     } else {
       toast.error(
         <FormattedMessage
@@ -100,21 +90,14 @@ const SellingSettingsCondition = ({ isFoil, condition, langObject }) => {
     }
   };
 
-  const triggerAPISending = (event, langObjectID, conditionID, isFoil) => {
-    //MAJ l'objet sur Express : json.stringify it and send it to Express
-    //Pas besoin de traitement granulaire comme sur ShopPriceCondition
-    //Juste traiter le fichier et l'envoyer
-    console.log("sending to Express !");
-
-    shopAPI.postSellingSettings(authenticationInfos);
+  const handleChangeSelect = (event) => {
+    console.log("on met à jour l'algo dans le contexte");
   };
 
-  console.log(
-    "what's in here",
-    authenticationInfos?.shop?.shopData?.SellingSettings?.[langObject.id]?.[
-      condition.id
-    ]?.[isFoil]
-  );
+  const triggerAPISending = () => {
+    console.log("sending to Express !");
+    shopAPI.postSellingSettings(authenticationInfos);
+  };
 
   const percentDisplayed =
     authenticationInfos?.shop?.shopData?.SellingSettings?.[langObject.id]?.[
@@ -128,10 +111,25 @@ const SellingSettingsCondition = ({ isFoil, condition, langObject }) => {
           condition.id
         ][isFoil].percent;
 
+  const algoDisplayed =
+    authenticationInfos?.shop?.shopData?.SellingSettings?.[langObject.id]?.[
+      condition.id
+    ]?.[isFoil].algoName === null ||
+    authenticationInfos?.shop?.shopData?.SellingSettings?.[langObject.id]?.[
+      condition.id
+    ]?.[isFoil].algoName === undefined
+      ? ""
+      : authenticationInfos?.shop?.shopData?.SellingSettings[langObject.id][
+          condition.id
+        ][isFoil].algoName;
+
   return (
     <div>
       <span>{condition[conditionShortname]}</span>
-      <select>
+      <select
+        onChange={(event) => handleChangeSelect(event)}
+        value={algoDisplayed}
+      >
         {Object.keys(allPricesAvailableOnMKM).map((onePrice) => (
           <option value={onePrice}>
             {intl.formatMessage({
