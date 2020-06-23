@@ -23,8 +23,8 @@ const SellingSettingsCondition = ({ isFoil, condition, langObject }) => {
 
   //Aligning the boolean to the JSON
   isFoil = isFoil ? 1 : 0;
-  console.log("line id", isFoil, condition, langObject);
-  console.log(authenticationInfos);
+
+  // console.log(authenticationInfos);
 
   //Hook Intl to translate an attribute
   const intl = useIntl();
