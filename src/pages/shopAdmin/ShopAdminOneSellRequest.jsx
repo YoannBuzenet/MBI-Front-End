@@ -18,6 +18,7 @@ import { FormattedMessage } from "react-intl";
 import priceUpdateAPI from "../../services/priceUpdateAPI";
 import AuthContext from "../../context/authContext";
 import shopAPI from "../../services/shopAPI";
+import cardsAPI from "../../services/cardsAPI";
 
 const ShopAdminOneSellRequest = ({ match }) => {
   const { id } = match.params;
@@ -143,6 +144,16 @@ const ShopAdminOneSellRequest = ({ match }) => {
       !priceHaveBeenLoaded
     ) {
       console.log("loading prices...");
+      //Array of sell request cards here
+      const promises = currentAdminSellRequest.sellRequests.map((card) => {
+      return cardsAPI.getById(card.id);
+      });
+       const res = await Promise.all(promises);
+
+       //Les ajouter aux contexte
+       
+       }
+
       setPriceHaveBeenLoaded(true);
     }
   }, [
