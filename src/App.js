@@ -68,12 +68,10 @@ import Settings from "./pages/Settings";
 import LoggedRouteRender from "./components/LoggedRouteRender";
 
 //Really Useful library to check all rerenders made on ALL components (you can setup it to check just one)
-// if (process.env.NODE_ENV === "development") {
-//   const whyDidYouRender = require("@welldone-software/why-did-you-render");
-//   whyDidYouRender(React, {
-//     include: [/.*/]
-//   });
-// }
+// const whyDidYouRender = require("@welldone-software/why-did-you-render");
+// whyDidYouRender(React, {
+//   include: [/.*/],
+// });
 
 function App() {
   document.title = config.shopName;
