@@ -144,15 +144,22 @@ const ShopAdminOneSellRequest = ({ match }) => {
       !priceHaveBeenLoaded
     ) {
       console.log("loading prices...");
-      //Array of sell request cards here
-      const promises = currentAdminSellRequest.sellRequests.map((card) => {
-      return cardsAPI.getById(card.id);
-      });
-       const res = await Promise.all(promises);
 
-       //Les ajouter aux contexte
-       
-       }
+      async function awaitPrices() {
+        //Array of sell request cards here
+        const promises = currentAdminSellRequest.sellRequests.map((card) => {
+          return cardsAPI.getById(card.id);
+        });
+        const res = await Promise.all(promises);
+        console.log(res);
+
+        //TODO : Les ajouter aux contexte
+        res.map((card, index) => {
+          currentAdminSellRequest.sellRequests[index]["mkmPriceGuide"] =
+            card.data.priceguide;
+        });
+      }
+      awaitPrices();
 
       setPriceHaveBeenLoaded(true);
     }

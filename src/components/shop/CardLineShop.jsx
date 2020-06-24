@@ -19,6 +19,7 @@ import { useIntl } from "react-intl";
 import priceUpdateAPI from "../../services/priceUpdateAPI";
 
 const CardLineShop = ({ card, indexCard }) => {
+  console.log(card);
   //Getting the Sell Request state by context
   const { currentAdminSellRequest, setCurrentAdminSellRequest } = useContext(
     AdminSellRequestContext
