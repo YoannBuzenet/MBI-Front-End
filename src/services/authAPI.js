@@ -181,6 +181,7 @@ function transformAPIdataIntoAppData(data) {
             PercentPerSigned: data.shop.percentPerSigned,
           }
         : null,
+
       appToken: data.shop ? data.shop.appToken : null,
       appSecret: data.shop ? data.shop.appSecret : null,
       accessToken: data.shop ? data.shop.accessToken : null,

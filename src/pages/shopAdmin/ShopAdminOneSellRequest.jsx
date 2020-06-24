@@ -50,19 +50,28 @@ const ShopAdminOneSellRequest = ({ match }) => {
 
   //Getting Selling Settings percent & algo from the shop
   useEffect(() => {
+    console.log("loading price setting context");
     if (!authenticationInfos?.shop?.shopData?.SellingSettings) {
-      shopAPI.getShopSellingSettings(authenticationInfos).then((data) =>
-        setAuthenticationInfos({
-          ...authenticationInfos,
-          shop: {
-            ...authenticationInfos.shop,
-            shopData: {
-              ...authenticationInfos.shop.shopData,
-              SellingSettings: data.data,
-            },
-          },
+      console.log("its starting bro");
+      shopAPI
+        .getShopSellingSettings(authenticationInfos)
+        .then((data) => {
+          console.log(data);
+          return data;
         })
-      );
+        .then((data) =>
+          setAuthenticationInfos({
+            ...authenticationInfos,
+            shop: {
+              ...authenticationInfos.shop,
+              shopData: {
+                ...authenticationInfos.shop.shopData,
+                SellingSettings: data.data,
+              },
+            },
+          })
+        )
+        .catch((err) => console.log(err));
     }
   }, []);
 
@@ -364,6 +373,18 @@ const ShopAdminOneSellRequest = ({ match }) => {
                   <FormattedMessage
                     id="app.shop.OneSellRequest.price"
                     defaultMessage={`Price`}
+                  />
+                </Th>
+                <Th>
+                  <FormattedMessage
+                    id="app.shop.OneSellRequest.MKMpriceguide"
+                    defaultMessage={`MKM Price`}
+                  />
+                </Th>
+                <Th>
+                  <FormattedMessage
+                    id="app.shop.OneSellRequest.MKMSellingPrice"
+                    defaultMessage={`MKM Selling Price`}
                   />
                 </Th>
                 <Th>
