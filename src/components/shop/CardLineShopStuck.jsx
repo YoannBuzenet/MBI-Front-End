@@ -26,6 +26,8 @@ const CardLineShopStuck = ({ card }) => {
         <td>{card.isAltered === true ? "Yes" : "No"}</td>
         <td>{card.quantity}</td>
         <td>{card.price}</td>
+        <td>/</td>
+        <td>/</td>
         <td>
           {priceUpdateAPI.smoothFloatKeepEntireComplete(
             card.quantity * card.price

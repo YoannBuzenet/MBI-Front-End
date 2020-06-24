@@ -17,9 +17,11 @@ import config from "../../services/config";
 import { FormattedMessage } from "react-intl";
 import { useIntl } from "react-intl";
 import priceUpdateAPI from "../../services/priceUpdateAPI";
+import AuthContext from "../../context/authContext";
 
 const CardLineShop = ({ card, indexCard }) => {
   console.log(card);
+
   //Getting the Sell Request state by context
   const { currentAdminSellRequest, setCurrentAdminSellRequest } = useContext(
     AdminSellRequestContext
@@ -32,6 +34,10 @@ const CardLineShop = ({ card, indexCard }) => {
   const { cardDisplayInformation, setCardDisplayInformation } = useContext(
     CardDisplayOnPageContext
   );
+
+  //Current Authentication
+  const { authenticationInfos } = useContext(AuthContext);
+  console.log(authenticationInfos);
 
   //Knowing if the Sell Request is OK to be submitted (no duplicate)
   const { errorList, setErrorList } = useContext(canSubmitContext);
@@ -307,6 +313,21 @@ const CardLineShop = ({ card, indexCard }) => {
     defaultMessage: "No",
   });
 
+  const relevantAlgo =
+    card.mkmPriceGuide?.[
+      authenticationInfos.shop?.shopData?.SellingSettings?.[card.lang]?.[
+        parseInt(card.condition)
+      ]?.[card.isFoil ? 1 : 0].algoName
+    ];
+
+  const relevantPercent =
+    authenticationInfos.shop?.shopData?.SellingSettings?.[card.lang]?.[
+      parseInt(card.condition)
+    ]?.[card.isFoil ? 1 : 0].percent / 100;
+
+  console.log("log percent", relevantPercent);
+  console.log("log algo", relevantAlgo);
+
   return (
     <>
       <Tr
@@ -550,10 +571,17 @@ const CardLineShop = ({ card, indexCard }) => {
           />
         </Td>
         <Td>
+          {card.isFoil
+            ? card.mkmPriceGuide?.foilAvg30
+            : card.mkmPriceGuide?.avg30}
+        </Td>
+        <Td>{relevantAlgo * relevantPercent}</Td>
+        <Td>
           {priceUpdateAPI.smoothFloatKeepEntireComplete(
             currentCard.quantity * currentCard.price
           )}
         </Td>
+
         <Td className="AddButton">
           <FeatherIcon
             icon="minus-circle"
