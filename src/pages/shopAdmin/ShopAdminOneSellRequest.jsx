@@ -169,6 +169,7 @@ const ShopAdminOneSellRequest = ({ match }) => {
         });
       }
       awaitPrices();
+      setCurrentAdminSellRequest(currentAdminSellRequest);
 
       setPriceHaveBeenLoaded(true);
     }
@@ -385,6 +386,12 @@ const ShopAdminOneSellRequest = ({ match }) => {
                   <FormattedMessage
                     id="app.shop.OneSellRequest.MKMSellingPrice"
                     defaultMessage={`MKM Selling Price`}
+                  />
+                </Th>
+                <Th>
+                  <FormattedMessage
+                    id="app.shop.OneSellRequest.ajustMKMPrice"
+                    defaultMessage={`Change Selling Price`}
                   />
                 </Th>
                 <Th>

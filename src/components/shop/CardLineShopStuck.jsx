@@ -28,6 +28,7 @@ const CardLineShopStuck = ({ card }) => {
         <td>{card.price}</td>
         <td>/</td>
         <td>/</td>
+        <td>/</td>
         <td>
           {priceUpdateAPI.smoothFloatKeepEntireComplete(
             card.quantity * card.price

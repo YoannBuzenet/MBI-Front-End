@@ -325,6 +325,10 @@ const CardLineShop = ({ card, indexCard }) => {
       parseInt(card.condition)
     ]?.[card.isFoil ? 1 : 0].percent / 100;
 
+  const sellPriceOnMKM = priceUpdateAPI.smoothNumbers(
+    relevantAlgo * relevantPercent
+  );
+
   console.log("log percent", relevantPercent);
   console.log("log algo", relevantAlgo);
 
@@ -575,7 +579,10 @@ const CardLineShop = ({ card, indexCard }) => {
             ? card.mkmPriceGuide?.foilAvg30
             : card.mkmPriceGuide?.avg30}
         </Td>
-        <Td>{relevantAlgo * relevantPercent}</Td>
+        <Td>{sellPriceOnMKM}</Td>
+        <Td>
+          <input />
+        </Td>
         <Td>
           {priceUpdateAPI.smoothFloatKeepEntireComplete(
             currentCard.quantity * currentCard.price

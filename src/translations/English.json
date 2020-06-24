@@ -171,6 +171,7 @@
   "app.shop.OneSellRequest.price": "Buying Price",
   "app.shop.OneSellRequest.MKMpriceguide": "Trend MKM",
   "app.shop.OneSellRequest.MKMSellingPrice": "MKM Selling Price",
+  "app.shop.OneSellRequest.ajustMKMPrice": "Change Selling Price",
   "app.shop.OneSellRequest.totaltable": "Total",
   "app.shop.OneSellRequest.numberOfCards": "NUMBER OF CARDS",
   "app.shop.OneSellRequest.total": "TOTAL",
