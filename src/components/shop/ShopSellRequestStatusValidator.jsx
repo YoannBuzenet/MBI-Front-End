@@ -10,6 +10,7 @@ import { FormattedMessage } from "react-intl";
 import { useIntl } from "react-intl";
 import mailAPI from "../../services/mailAPI";
 import SelectAppLangContext from "../../context/selectedAppLang";
+import priceUpdateAPI from "../../services/priceUpdateAPI";
 
 const ShopSellRequestStatusValidator = () => {
   const { currentAdminSellRequest, setCurrentAdminSellRequest } = useContext(
@@ -147,13 +148,42 @@ const ShopSellRequestStatusValidator = () => {
     ) {
       const newData = {
         dateValidated: new Date(),
+        sellRequestCards: [
+          currentAdminSellRequest.sellRequests.map((card) => {
+            //Calculating the automatic price depending of shop settings
+            //We use that price if the shop didn't indicate its selling price
+            const relevantAlgo =
+              card.mkmPriceGuide?.[
+                authenticationInfos.shop?.shopData?.SellingSettings?.[
+                  card.lang
+                ]?.[parseInt(card.condition)]?.[card.isFoil ? 1 : 0].algoName
+              ];
+
+            const relevantPercent =
+              authenticationInfos.shop?.shopData?.SellingSettings?.[
+                card.lang
+              ]?.[parseInt(card.condition)]?.[card.isFoil ? 1 : 0].percent /
+              100;
+
+            const sellPriceOnMKM = priceUpdateAPI.smoothNumbers(
+              relevantAlgo * relevantPercent
+            );
+
+            return {
+              id: card.id,
+              mkmSellPrice: card.mkmSellPrice
+                ? card.mkmSellPrice
+                : sellPriceOnMKM,
+            };
+          }),
+        ],
       };
 
       try {
         //1. We must create a XML object for each 100 items => Sell Request modulo 100
         //2. Header created + MKM Request
         //3. Confirm Request has been posted
-        //4. Validate + update Sell Request UI to mark it's done
+        //4. Validate + update Sell Request UI to mark it's done + save the selling Price into Sell Request Card ID
 
         const header = MKMAPI.buildOAuthHeader(
           "POST",
@@ -179,6 +209,7 @@ const ShopSellRequestStatusValidator = () => {
           const XMLRequest = MKMAPI.transformSellRequestIntoXML(chunkOfRequest);
 
           MKMAPI.AddCardsToStock(XMLRequest, header);
+
           toast.success(
             <FormattedMessage
               id="app.shop.MKMPOSTrequest.toast.success"
