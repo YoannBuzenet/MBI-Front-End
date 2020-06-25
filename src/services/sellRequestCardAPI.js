@@ -1,5 +1,4 @@
 import axios from "axios";
-import config from "./config";
 
 function update(
   SellRequestCard,
@@ -41,6 +40,10 @@ function update(
   } else if (SellRequestCardPropertyName === "condition") {
     propertyUpdate = {
       CardCondition: "/card_conditions/" + SellRequestCardPropertyValue,
+    };
+  } else if (SellRequestCardPropertyName === "mkmSellPrice") {
+    propertyUpdate = {
+      mkmSellPrice: parseFloat(SellRequestCardPropertyValue),
     };
   }
 

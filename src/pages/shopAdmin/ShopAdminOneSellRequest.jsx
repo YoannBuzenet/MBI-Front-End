@@ -56,7 +56,7 @@ const ShopAdminOneSellRequest = ({ match }) => {
       shopAPI
         .getShopSellingSettings(authenticationInfos)
         .then((data) => {
-          console.log(data);
+          // console.log(data);
           return data;
         })
         .then((data) =>
@@ -89,7 +89,7 @@ const ShopAdminOneSellRequest = ({ match }) => {
           cancelToken: source.token,
         })
         .then((data) => {
-          // console.log(data);
+          console.log(data);
           return data;
         })
         .then((data) => {
@@ -126,6 +126,7 @@ const ShopAdminOneSellRequest = ({ match }) => {
                   isFoil: card.isFoil,
                   isSigned: card.isSigned,
                   isAltered: card.isAltered,
+                  mkmSellPrice: card.mkmSellPrice,
                 };
               }),
             ],

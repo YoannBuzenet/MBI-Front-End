@@ -329,8 +329,53 @@ const CardLineShop = ({ card, indexCard }) => {
     relevantAlgo * relevantPercent
   );
 
-  console.log("log percent", relevantPercent);
-  console.log("log algo", relevantAlgo);
+  const handleChangeMKMSellPrice = (event) => {
+    console.log(event);
+    console.log(event.target.value);
+    console.log(currentAdminSellRequest);
+    const newPrice = event.target.value;
+    setTimer(clearTimeout(timer));
+
+    const newSellRequest = { ...currentAdminSellRequest };
+
+    if (event.target.value[event.target.value.length - 1] === ".") {
+      newSellRequest.sellRequests[indexCard].mkmSellPrice = event.target.value;
+      setCurrentAdminSellRequest(newSellRequest);
+
+      setTimer(
+        () => sellRequestCardAPI.update(card, "mkmSellPrice", newPrice),
+        2000
+      );
+    } else if (!isNaN(parseFloat(newPrice))) {
+      newSellRequest.sellRequests[indexCard].mkmSellPrice = parseFloat(
+        newPrice
+      );
+      setCurrentAdminSellRequest(newSellRequest);
+      setTimer(
+        () => sellRequestCardAPI.update(card, "mkmSellPrice", newPrice),
+        2000
+      );
+    } else if (newPrice === "") {
+      newSellRequest.sellRequests[indexCard].mkmSellPrice = null;
+      setCurrentAdminSellRequest(newSellRequest);
+      ///////TODO
+      //TODO : check si on laisse le 0 car après il faut le traiter. L'idéal serait de pouvoir mettre undefined ou null sur l'API sur cette data
+      ///////TODO
+      setTimer(() => sellRequestCardAPI.update(card, "mkmSellPrice", 0), 2000);
+    } else {
+      toast.error(
+        <FormattedMessage
+          id="app.shop.priceFormUpdate.inputNumer.toast.error"
+          defaultMessage={`Please indicate a number.`}
+        />
+      );
+    }
+  };
+
+  const priceDisplayed =
+    currentAdminSellRequest.sellRequests[indexCard].mkmSellPrice === null
+      ? ""
+      : currentAdminSellRequest.sellRequests[indexCard].mkmSellPrice;
 
   return (
     <>
@@ -581,7 +626,10 @@ const CardLineShop = ({ card, indexCard }) => {
         </Td>
         <Td>{sellPriceOnMKM}</Td>
         <Td>
-          <input />
+          <input
+            value={priceDisplayed}
+            onChange={(event) => handleChangeMKMSellPrice(event)}
+          />
         </Td>
         <Td>
           {priceUpdateAPI.smoothFloatKeepEntireComplete(
