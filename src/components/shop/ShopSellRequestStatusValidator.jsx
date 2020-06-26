@@ -150,34 +150,18 @@ const ShopSellRequestStatusValidator = () => {
         dateValidated: new Date(),
         sellRequestCards: [
           currentAdminSellRequest.sellRequests.map((card) => {
-            //Calculating the automatic price depending of shop settings
-            //We use that price if the shop didn't indicate its selling price
-            const relevantAlgo =
-              card.mkmPriceGuide?.[
-                authenticationInfos.shop?.shopData?.SellingSettings?.[
-                  card.lang
-                ]?.[parseInt(card.condition)]?.[card.isFoil ? 1 : 0].algoName
-              ];
-
-            const relevantPercent =
-              authenticationInfos.shop?.shopData?.SellingSettings?.[
-                card.lang
-              ]?.[parseInt(card.condition)]?.[card.isFoil ? 1 : 0].percent /
-              100;
-
-            const sellPriceOnMKM = priceUpdateAPI.smoothNumbers(
-              relevantAlgo * relevantPercent
-            );
-
             return {
               id: card.id,
-              mkmSellPrice: card.mkmSellPrice
-                ? card.mkmSellPrice
-                : sellPriceOnMKM,
+              mkmSellPrice:
+                card.mkmSellPrice && card.mkmSellPrice !== 0
+                  ? card.mkmSellPrice
+                  : card["AutomaticSellingPrice"],
             };
           }),
         ],
       };
+
+      console.log(newData);
 
       try {
         //1. We must create a XML object for each 100 items => Sell Request modulo 100
