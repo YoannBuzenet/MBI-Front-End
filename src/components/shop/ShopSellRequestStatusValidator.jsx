@@ -10,7 +10,6 @@ import { FormattedMessage } from "react-intl";
 import { useIntl } from "react-intl";
 import mailAPI from "../../services/mailAPI";
 import SelectAppLangContext from "../../context/selectedAppLang";
-import priceUpdateAPI from "../../services/priceUpdateAPI";
 
 const ShopSellRequestStatusValidator = () => {
   const { currentAdminSellRequest, setCurrentAdminSellRequest } = useContext(
