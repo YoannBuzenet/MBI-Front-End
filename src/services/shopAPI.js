@@ -46,10 +46,9 @@ function getBuyingClauses() {
 function getShopSellingSettings(authContext) {
   // console.log("getting shop settings");
   // console.log(authContext);
-  return axios.post(
-    process.env.REACT_APP_EXPRESSAPI + "/api/shop/TryToGetSellingSettings/",
-    { id: authContext.customer.id }
-  );
+  return axios.post("/api/shop/TryToGetSellingSettings/", {
+    id: authContext.customer.id,
+  });
 }
 
 function postSellingSettings(authContext) {
