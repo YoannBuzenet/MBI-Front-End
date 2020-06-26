@@ -39,7 +39,6 @@ const ShopAdminOneSellRequest = ({ match }) => {
   const [priceHaveBeenLoaded, setPriceHaveBeenLoaded] = useState(false);
 
   useEffect(() => {
-    console.log("reset du contexte de la SR");
     if (
       currentAdminSellRequest.sellRequests &&
       currentAdminSellRequest.sellRequests.length > 0 &&
@@ -53,7 +52,6 @@ const ShopAdminOneSellRequest = ({ match }) => {
   useEffect(() => {
     console.log("on appelle selling settings du serveur");
     if (!authenticationInfos?.shop?.shopData?.SellingSettings) {
-      console.log("its starting bro");
       shopAPI
         .getShopSellingSettings(authenticationInfos)
         .then((data) => {
@@ -79,7 +77,6 @@ const ShopAdminOneSellRequest = ({ match }) => {
   useEffect(() => {
     const CancelToken = axios.CancelToken;
     const source = CancelToken.source();
-    console.log("on appelle la sell request");
 
     if (
       (currentAdminSellRequest.sellRequests &&
@@ -155,8 +152,6 @@ const ShopAdminOneSellRequest = ({ match }) => {
       currentAdminSellRequest.sellRequests.length > 0 &&
       !priceHaveBeenLoaded
     ) {
-      console.log("loading prices...");
-
       async function awaitPrices() {
         //Array of sell request cards here
         const promises = currentAdminSellRequest.sellRequests.map((card) => {
