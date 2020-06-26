@@ -39,6 +39,7 @@ const ShopAdminOneSellRequest = ({ match }) => {
   const [priceHaveBeenLoaded, setPriceHaveBeenLoaded] = useState(false);
 
   useEffect(() => {
+    console.log("reset du contexte de la SR");
     if (
       currentAdminSellRequest.sellRequests &&
       currentAdminSellRequest.sellRequests.length > 0 &&
@@ -50,7 +51,7 @@ const ShopAdminOneSellRequest = ({ match }) => {
 
   //Getting Selling Settings percent & algo from the shop
   useEffect(() => {
-    console.log("loading price setting context");
+    console.log("on appelle selling settings du serveur");
     if (!authenticationInfos?.shop?.shopData?.SellingSettings) {
       console.log("its starting bro");
       shopAPI
@@ -78,6 +79,7 @@ const ShopAdminOneSellRequest = ({ match }) => {
   useEffect(() => {
     const CancelToken = axios.CancelToken;
     const source = CancelToken.source();
+    console.log("on appelle la sell request");
 
     if (
       (currentAdminSellRequest.sellRequests &&

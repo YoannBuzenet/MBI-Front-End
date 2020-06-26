@@ -81,6 +81,7 @@ const CardLineShop = ({ card, indexCard }) => {
       authenticationInfos.shop?.shopData?.SellingSettings &&
       !currentAdminSellRequest.sellRequests[indexCard]["AutomaticSellingPrice"]
     ) {
+      console.log("c'est moi qui loop ?");
       const relevantAlgo =
         card.mkmPriceGuide?.[
           authenticationInfos.shop?.shopData?.SellingSettings?.[card.lang]?.[
@@ -164,6 +165,7 @@ const CardLineShop = ({ card, indexCard }) => {
 
   //Triggers if a card is deleted
   useEffect(() => {
+    console.log("est-ce qu'une carta a été effacée ?");
     if (cardHasBeenDeleted) {
       // console.log("card has been deleted : ", cardHasBeenDeleted);
       var newSellRequest = currentAdminSellRequest;
