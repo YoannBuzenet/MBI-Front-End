@@ -69,8 +69,39 @@ const CardLineShop = ({ card, indexCard }) => {
 
   const [timer, setTimer] = useState(null);
 
+  const [automaticMKMSellingPrice, setAutomaticMKMSellingPrice] = useState("");
+
   //Translation Hook
   const intl = useIntl();
+
+  //A card add its MKM automatic price to context at loading
+  useEffect(() => {
+    if (
+      !currentAdminSellRequest.sellRequests[indexCard]["AutomaticSellingPrice"]
+    ) {
+      const relevantAlgo =
+        card.mkmPriceGuide?.[
+          authenticationInfos.shop?.shopData?.SellingSettings?.[card.lang]?.[
+            parseInt(card.condition)
+          ]?.[card.isFoil ? 1 : 0].algoName
+        ];
+
+      const relevantPercent =
+        authenticationInfos.shop?.shopData?.SellingSettings?.[card.lang]?.[
+          parseInt(card.condition)
+        ]?.[card.isFoil ? 1 : 0].percent / 100;
+
+      setAutomaticMKMSellingPrice(
+        priceUpdateAPI.smoothNumbers(relevantAlgo * relevantPercent)
+      );
+
+      let newContext = { ...currentAdminSellRequest };
+      newContext.sellRequests[indexCard][
+        "AutomaticSellingPrice"
+      ] = automaticMKMSellingPrice;
+      setCurrentAdminSellRequest(newContext);
+    }
+  });
 
   useEffect(() => {
     if (isOnHover) {
@@ -313,22 +344,6 @@ const CardLineShop = ({ card, indexCard }) => {
     defaultMessage: "No",
   });
 
-  const relevantAlgo =
-    card.mkmPriceGuide?.[
-      authenticationInfos.shop?.shopData?.SellingSettings?.[card.lang]?.[
-        parseInt(card.condition)
-      ]?.[card.isFoil ? 1 : 0].algoName
-    ];
-
-  const relevantPercent =
-    authenticationInfos.shop?.shopData?.SellingSettings?.[card.lang]?.[
-      parseInt(card.condition)
-    ]?.[card.isFoil ? 1 : 0].percent / 100;
-
-  const sellPriceOnMKM = priceUpdateAPI.smoothNumbers(
-    relevantAlgo * relevantPercent
-  );
-
   const handleChangeMKMSellPrice = (event) => {
     console.log(event);
     console.log(event.target.value);
@@ -372,7 +387,7 @@ const CardLineShop = ({ card, indexCard }) => {
     }
   };
 
-  const priceDisplayed =
+  const humanFixedPriceDisplayed =
     currentAdminSellRequest.sellRequests[indexCard].mkmSellPrice === null
       ? ""
       : currentAdminSellRequest.sellRequests[indexCard].mkmSellPrice;
@@ -624,10 +639,10 @@ const CardLineShop = ({ card, indexCard }) => {
             ? card.mkmPriceGuide?.foilAvg30
             : card.mkmPriceGuide?.avg30}
         </Td>
-        <Td>{sellPriceOnMKM}</Td>
+        <Td>{automaticMKMSellingPrice}</Td>
         <Td>
           <input
-            value={priceDisplayed}
+            value={humanFixedPriceDisplayed}
             onChange={(event) => handleChangeMKMSellPrice(event)}
           />
         </Td>
