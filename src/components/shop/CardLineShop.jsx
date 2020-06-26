@@ -36,7 +36,9 @@ const CardLineShop = ({ card, indexCard }) => {
   );
 
   //Current Authentication
-  const { authenticationInfos } = useContext(AuthContext);
+  const { authenticationInfos, setAuthenticationInfos } = useContext(
+    AuthContext
+  );
   console.log(authenticationInfos);
 
   //Knowing if the Sell Request is OK to be submitted (no duplicate)
@@ -69,37 +71,58 @@ const CardLineShop = ({ card, indexCard }) => {
 
   const [timer, setTimer] = useState(null);
 
+  const [prioriMKMSellingPrice, setPrioriMKMSellingPrice] = useState("");
+
   //Translation Hook
   const intl = useIntl();
 
-  //A card add its MKM automatic price to context at loading
   useEffect(() => {
     if (
+      authenticationInfos.shop?.shopData?.SellingSettings &&
       !currentAdminSellRequest.sellRequests[indexCard]["AutomaticSellingPrice"]
     ) {
+      const relevantAlgo =
+        card.mkmPriceGuide?.[
+          authenticationInfos.shop?.shopData?.SellingSettings?.[card.lang]?.[
+            parseInt(card.condition)
+          ]?.[card.isFoil ? 1 : 0].algoName
+        ];
+
+      const relevantPercent =
+        authenticationInfos.shop?.shopData?.SellingSettings?.[card.lang]?.[
+          parseInt(card.condition)
+        ]?.[card.isFoil ? 1 : 0].percent / 100;
+
+      console.log(relevantAlgo);
+      console.log(relevantPercent);
+      let automaticMKMSellingPrice;
+
+      if (relevantAlgo !== undefined && relevantPercent !== undefined) {
+        // setPrioriMKMSellingPrice(
+        //   priceUpdateAPI.smoothNumbers(relevantAlgo * relevantPercent)
+        // );
+        automaticMKMSellingPrice = priceUpdateAPI.smoothNumbers(
+          relevantAlgo * relevantPercent
+        );
+      }
       let newContext = { ...currentAdminSellRequest };
       newContext.sellRequests[indexCard][
         "AutomaticSellingPrice"
-      ] = priceUpdateAPI.smoothNumbers(relevantAlgo * relevantPercent);
+      ] = automaticMKMSellingPrice;
+
       setCurrentAdminSellRequest(newContext);
     }
-  }, []);
+  }, [
+    authenticationInfos,
+    setAuthenticationInfos,
+    card.mkmPriceGuide,
+    currentAdminSellRequest,
+    setCurrentAdminSellRequest,
+    currentCard,
+    conditions,
+  ]);
 
-  const relevantAlgo =
-    card.mkmPriceGuide?.[
-      authenticationInfos.shop?.shopData?.SellingSettings?.[card.lang]?.[
-        parseInt(card.condition)
-      ]?.[card.isFoil ? 1 : 0].algoName
-    ];
-
-  const relevantPercent =
-    authenticationInfos.shop?.shopData?.SellingSettings?.[card.lang]?.[
-      parseInt(card.condition)
-    ]?.[card.isFoil ? 1 : 0].percent / 100;
-
-  const sellPriceOnMKM = priceUpdateAPI.smoothNumbers(
-    relevantAlgo * relevantPercent
-  );
+  console.log(prioriMKMSellingPrice);
 
   useEffect(() => {
     if (isOnHover) {
@@ -637,7 +660,7 @@ const CardLineShop = ({ card, indexCard }) => {
             ? card.mkmPriceGuide?.foilAvg30
             : card.mkmPriceGuide?.avg30}
         </Td>
-        <Td>{sellPriceOnMKM}</Td>
+        <Td>{card.AutomaticSellingPrice}</Td>
         <Td>
           <input
             value={humanFixedPriceDisplayed}

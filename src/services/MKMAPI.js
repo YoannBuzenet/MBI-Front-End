@@ -214,19 +214,17 @@ function transformSellRequestIntoXML(arrayOfSellRequestCards) {
         MKM_MTG_API_LANG_TRANSLATION[currentValue.lang] +
         "</idLanguage><comments>" +
         "" + //Optional comment to post
-          "</comments><count>" +
-          currentValue.quantity +
-          "</count><price>" +
-          currentValue.mkmSellPrice && currentValue.mkmSellPrice !== 0
-          ? currentValue.mkmSellPrice
-          : currentValue["AutomaticSellingPrice"] +
-            "</price><condition>" +
-            MKM_MTG_API_CONDITION_TRANSLATION[currentValue.condition] +
-            "</condition><isFoil>" +
-            currentValue.isFoil +
-            "</isFoil><isSigned>" +
-            currentValue.isSigned +
-            "</isSigned><isPlayset>false</isPlayset></article>";
+        "</comments><count>" +
+        currentValue.quantity +
+        "</count><price>" +
+        currentValue.mkmSellPrice +
+        "</price><condition>" +
+        MKM_MTG_API_CONDITION_TRANSLATION[currentValue.condition] +
+        "</condition><isFoil>" +
+        currentValue.isFoil +
+        "</isFoil><isSigned>" +
+        currentValue.isSigned +
+        "</isSigned><isPlayset>false</isPlayset></article>";
 
       return article + accumulator;
     },
