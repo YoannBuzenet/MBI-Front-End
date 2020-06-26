@@ -69,8 +69,6 @@ const CardLineShop = ({ card, indexCard }) => {
 
   const [timer, setTimer] = useState(null);
 
-  const [automaticMKMSellingPrice, setAutomaticMKMSellingPrice] = useState("");
-
   //Translation Hook
   const intl = useIntl();
 
@@ -79,29 +77,29 @@ const CardLineShop = ({ card, indexCard }) => {
     if (
       !currentAdminSellRequest.sellRequests[indexCard]["AutomaticSellingPrice"]
     ) {
-      const relevantAlgo =
-        card.mkmPriceGuide?.[
-          authenticationInfos.shop?.shopData?.SellingSettings?.[card.lang]?.[
-            parseInt(card.condition)
-          ]?.[card.isFoil ? 1 : 0].algoName
-        ];
-
-      const relevantPercent =
-        authenticationInfos.shop?.shopData?.SellingSettings?.[card.lang]?.[
-          parseInt(card.condition)
-        ]?.[card.isFoil ? 1 : 0].percent / 100;
-
-      setAutomaticMKMSellingPrice(
-        priceUpdateAPI.smoothNumbers(relevantAlgo * relevantPercent)
-      );
-
       let newContext = { ...currentAdminSellRequest };
       newContext.sellRequests[indexCard][
         "AutomaticSellingPrice"
-      ] = automaticMKMSellingPrice;
+      ] = priceUpdateAPI.smoothNumbers(relevantAlgo * relevantPercent);
       setCurrentAdminSellRequest(newContext);
     }
-  });
+  }, []);
+
+  const relevantAlgo =
+    card.mkmPriceGuide?.[
+      authenticationInfos.shop?.shopData?.SellingSettings?.[card.lang]?.[
+        parseInt(card.condition)
+      ]?.[card.isFoil ? 1 : 0].algoName
+    ];
+
+  const relevantPercent =
+    authenticationInfos.shop?.shopData?.SellingSettings?.[card.lang]?.[
+      parseInt(card.condition)
+    ]?.[card.isFoil ? 1 : 0].percent / 100;
+
+  const sellPriceOnMKM = priceUpdateAPI.smoothNumbers(
+    relevantAlgo * relevantPercent
+  );
 
   useEffect(() => {
     if (isOnHover) {
@@ -639,7 +637,7 @@ const CardLineShop = ({ card, indexCard }) => {
             ? card.mkmPriceGuide?.foilAvg30
             : card.mkmPriceGuide?.avg30}
         </Td>
-        <Td>{automaticMKMSellingPrice}</Td>
+        <Td>{sellPriceOnMKM}</Td>
         <Td>
           <input
             value={humanFixedPriceDisplayed}
