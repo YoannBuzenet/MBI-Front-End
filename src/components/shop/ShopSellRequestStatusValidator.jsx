@@ -155,7 +155,7 @@ const ShopSellRequestStatusValidator = () => {
               mkmSellPrice:
                 card.mkmSellPrice && card.mkmSellPrice !== 0
                   ? card.mkmSellPrice
-                  : card["AutomaticSellingPrice"],
+                  : card.AutomaticSellingPrice,
             };
           }),
         ],

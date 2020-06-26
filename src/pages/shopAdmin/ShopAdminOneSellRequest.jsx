@@ -170,7 +170,9 @@ const ShopAdminOneSellRequest = ({ match }) => {
         });
       }
       awaitPrices();
-      setCurrentAdminSellRequest(currentAdminSellRequest);
+      setCurrentAdminSellRequest({
+        ...currentAdminSellRequest,
+      });
 
       setPriceHaveBeenLoaded(true);
     }
