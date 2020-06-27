@@ -28,6 +28,8 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
     CardPageContext
   );
 
+  // console.log(cardsCardPageContext);
+
   //STATE - Is Loading
   const [isLoading, setIsLoading] = useState(true);
 
@@ -64,6 +66,7 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
         quantity: 1,
         condition: 2,
         lang: ENGLISH_LANG_ID,
+        isonlineonly: data[i].edition.isonlineonly,
         foreignDataObject: transformLanguagesArrayIntoObject(
           data[i].foreignData
         ),
@@ -118,7 +121,7 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
           return data.data["hydra:member"];
         })
         .then((data) => {
-          // console.log(data);
+          console.log(data);
           buildContextFromAPIResponse(data);
         })
         .then(setHasUpdatedPrices(false))
@@ -221,16 +224,20 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
             <Tbody>
               {Object.keys(cardsCardPageContext) &&
                 Object.keys(cardsCardPageContext).length > 0 &&
-                Object.keys(cardsCardPageContext).map((id, index) => (
-                  <CardLine
-                    card={cardsCardPageContext[id]}
-                    cardID={id}
-                    index={index}
-                    key={id}
-                    displaySets={true}
-                    handleAddSellingBasket={handleAddSellingBasket}
-                  />
-                ))}
+                Object.keys(cardsCardPageContext)
+                  //Removing the online only set
+                  .filter((id) => cardsCardPageContext[id].isonlineonly === 0)
+                  //Displaying what's left
+                  .map((id, index) => (
+                    <CardLine
+                      card={cardsCardPageContext[id]}
+                      cardID={id}
+                      index={index}
+                      key={id}
+                      displaySets={true}
+                      handleAddSellingBasket={handleAddSellingBasket}
+                    />
+                  ))}
             </Tbody>
           </Table>
         )}

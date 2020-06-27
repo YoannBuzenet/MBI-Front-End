@@ -1,8 +1,6 @@
 import React, { useState, useContext } from "react";
-import { useEffect } from "react";
 import cardsAPI from "../services/cardsAPI";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import AuthContext from "../context/authContext";
 import { useIntl } from "react-intl";
 
@@ -94,25 +92,27 @@ const SearchCardBar = (props) => {
         />
         <div className="search-result">
           {searchResult.length > 0 &&
-            searchResult.map((cardResult, index) => {
-              // console.log(searchResult);
-              // console.log(cardResult);
-              return (
-                <Link
-                  to={linkSearchCardBar + cardResult.name}
-                  onClick={() => {
-                    setSearchResult([]);
-                  }}
-                  key={cardResult.id}
-                >
-                  <div className="card-line-result">
-                    <span className="card-line-result-text">
-                      {cardResult.name}
-                    </span>
-                  </div>
-                </Link>
-              );
-            })}
+            searchResult
+              .filter((card) => card.edition.isonlineonly === 0)
+              .map((cardResult, index) => {
+                console.log(searchResult);
+                // console.log(cardResult);
+                return (
+                  <Link
+                    to={linkSearchCardBar + cardResult.name}
+                    onClick={() => {
+                      setSearchResult([]);
+                    }}
+                    key={cardResult.id}
+                  >
+                    <div className="card-line-result">
+                      <span className="card-line-result-text">
+                        {cardResult.name}
+                      </span>
+                    </div>
+                  </Link>
+                );
+              })}
         </div>
       </form>
     </>
