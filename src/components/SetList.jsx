@@ -59,17 +59,19 @@ const SetList = (props) => {
           <table className="setList-table">
             <tbody>
               {allSets.length > 0 &&
-                allSets.map((set) => {
-                  return (
-                    <tr key={set.id}>
-                      <td>
-                        <Link to={"/sets/" + set.id} className="setList-link">
-                          {set.name}
-                        </Link>
-                      </td>
-                    </tr>
-                  );
-                })}
+                allSets
+                  .filter((set) => set.isonlineonly === 0)
+                  .map((set) => {
+                    return (
+                      <tr key={set.id}>
+                        <td>
+                          <Link to={"/sets/" + set.id} className="setList-link">
+                            {set.name}
+                          </Link>
+                        </td>
+                      </tr>
+                    );
+                  })}
             </tbody>
           </table>
         )}
