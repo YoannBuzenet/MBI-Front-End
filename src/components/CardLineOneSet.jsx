@@ -131,6 +131,10 @@ const CardLineOneSet = ({
     ) {
       cardName =
         cardsContext[cardID].foreignDataObject[userPreferences.cardsSetLang];
+
+      if (cardName === undefined) {
+        cardName = cardsContext[cardID].name;
+      }
     } else {
       cardName = cardsContext[cardID].name;
     }
