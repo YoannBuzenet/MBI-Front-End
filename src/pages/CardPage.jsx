@@ -28,7 +28,7 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
     CardPageContext
   );
 
-  // console.log(cardsCardPageContext);
+  console.log(cardsCardPageContext);
 
   //STATE - Is Loading
   const [isLoading, setIsLoading] = useState(true);
@@ -88,16 +88,17 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
   //This function takes API reponse with CardShopPrices and feeds the context.
   // If several languages are received from a single card, we prioritize baseLang price.
   const addFirstDisplayedPricesToContext = (data) => {
-    const contextCopy = { ...cardsCardPageContext };
     for (let i = 0; i < data.length; i++) {
-      if (contextCopy[data[i].card.substr(7)].LangOfPrice !== ENGLISH_LANG_ID) {
-        contextCopy[data[i].card.substr(7)].price = data[i].price;
-        contextCopy[data[i].card.substr(7)].LangOfPrice = parseInt(
+      if (
+        cardsCardPageContext[data[i].card.substr(7)].LangOfPrice !==
+        ENGLISH_LANG_ID
+      ) {
+        cardsCardPageContext[data[i].card.substr(7)].price = data[i].price;
+        cardsCardPageContext[data[i].card.substr(7)].LangOfPrice = parseInt(
           data[i].language.substr(11)
         );
       }
     }
-    setCardsCardPageContext(contextCopy);
   };
 
   useEffect(() => {
@@ -108,6 +109,7 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
         cardsCardPageContext[Object.keys(cardsCardPageContext)[0]].name !==
           currentName)
     ) {
+      console.log("on appelle le serv pour la data de base");
       //Cancel subscriptions preparation
       const CancelToken = axios.CancelToken;
       const source = CancelToken.source();
