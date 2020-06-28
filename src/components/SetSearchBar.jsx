@@ -12,7 +12,7 @@ const SetSearchBar = (props) => {
     defaultMessage: "Search a set...",
   });
 
-  const { allSets } = useContext(SetsContext);
+  const { allSets, setAllSets } = useContext(SetsContext);
 
   const [currentSearch, setCurrentSearch] = useState("");
 
