@@ -8,8 +8,6 @@ const shopID = 1;
 
 const avatarShopURL = "";
 
-const shopName = "Fantasy Sphere - Nous rachetons toutes vos cartes";
-
 //DEFINED LANGUAGE ID
 const langDefinition = {
   1: "German",
@@ -95,7 +93,6 @@ const defaultSellingPercents = {
 
 module.exports = {
   shopID,
-  shopName,
   baseLang,
   websiteDefaultLanguageContext,
   langDefinition,

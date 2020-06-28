@@ -207,12 +207,12 @@ async function sendMail(mailRequest) {
   console.log("check auth 1", securityCheckMailCanBeSent);
 
   const transport = nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    port: 465,
+    host: process.env.SMTP_NODEMAILER,
+    port: process.env.SMTP_PORT,
     secure: true,
     auth: {
-      user: "ybuzenet@gmail.com",
-      pass: "Orel1977!",
+      user: process.env.AUTH_USER,
+      pass: process.env.AUTH_PASSWORD,
     },
   });
 
@@ -225,7 +225,7 @@ async function sendMail(mailRequest) {
     console.log(`HTML: ${html}`);
 
     let mailOpts = {
-      from: "ybuzenett@gmail.com",
+      from: "testMail@gmail.com",
       to: mailOptions.to,
       subject: mailOptions.subject,
       html: html,
