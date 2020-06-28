@@ -39,7 +39,7 @@ const CardLineShop = ({ card, indexCard }) => {
   const { authenticationInfos, setAuthenticationInfos } = useContext(
     AuthContext
   );
-  // console.log(authenticationInfos);
+  console.log(authenticationInfos);
 
   //Knowing if the Sell Request is OK to be submitted (no duplicate)
   const { errorList, setErrorList } = useContext(canSubmitContext);
@@ -394,9 +394,7 @@ const CardLineShop = ({ card, indexCard }) => {
     } else if (newPrice === "") {
       newSellRequest.sellRequests[indexCard].mkmSellPrice = null;
       setCurrentAdminSellRequest(newSellRequest);
-      ///////TODO
-      //TODO : check si on laisse le 0 car après il faut le traiter. L'idéal serait de pouvoir mettre undefined ou null sur l'API sur cette data
-      ///////TODO
+
       setTimer(() => sellRequestCardAPI.update(card, "mkmSellPrice", 0), 2000);
     } else {
       toast.error(
