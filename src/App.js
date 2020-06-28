@@ -372,54 +372,50 @@ function App() {
 
   //VERY IMPORTANT Function to add cards to Selling Basket.
   //We put it in App component because it need the use of hooks.
-  const handleAddSellingBasket = (currentBasket, card) => {
-    // console.log(card);
-    // console.log(currentBasket);
+  const handleAddSellingBasket = (card) => {
+    let contextCopy = [...currentBasket];
+    console.log("card to add", card);
+    console.log("basket", currentBasket);
+    console.log("copy", contextCopy);
     //If the selling basket is empty, just add the new card.
     if (currentBasket.length === 0) {
       setCurrentBasket([card]);
-    }
-    //If there are cards, we parse each of them and check which are in.
-    //Here we just check and update quantity
-    for (var i = 0; i < currentBasket.length; i++) {
-      if (
-        currentBasket[i].cardName === card.cardName &&
-        currentBasket[i].set === card.set &&
-        currentBasket[i].price === card.price &&
-        currentBasket[i].condition === card.condition &&
-        currentBasket[i].lang === card.lang &&
-        currentBasket[i].isFoil === card.isFoil &&
-        currentBasket[i].uuid === card.uuid &&
-        currentBasket[i].isSigned === card.isSigned
-      ) {
-        var updatedCard = currentBasket[i];
-        //updating quantities in the basket with destructuration (to stay tuned with async updates)
-        updatedCard = {
-          ...updatedCard,
-          quantity: card.quantity + updatedCard.quantity,
-        };
-
-        // setCurrentbasket by adding quantity of the card currently added to the selling basket
-        // Here we update the new card OBJECT into the selling basket
-        setCurrentBasket(
-          currentBasket.map((card) => {
-            return card.cardName === updatedCard.cardName &&
-              card.set === updatedCard.set &&
-              card.price === updatedCard.price &&
-              card.condition === updatedCard.condition &&
-              card.lang === updatedCard.lang &&
-              card.isFoil === updatedCard.isFoil &&
-              card.uuid === updatedCard.uuid &&
-              card.isSigned === updatedCard.isSigned
-              ? { ...updatedCard }
-              : card;
-          })
-        );
-
-        break;
-      } else {
-        setCurrentBasket([...currentBasket, card]);
+    } else {
+      //If there are cards, we parse each of them and check which are in.
+      //Here we just check and update quantity
+      for (var i = 0; i < currentBasket.length; i++) {
+        console.log("carte du panier", currentBasket[i]);
+        console.log("carte à ajouter", card);
+        console.log(currentBasket[i].cardName === card.cardName);
+        console.log(currentBasket[i].set === card.set);
+        console.log(currentBasket[i].price === card.price);
+        console.log(currentBasket[i].condition === card.condition);
+        console.log(currentBasket[i].lang === card.lang);
+        console.log(currentBasket[i].isFoil === card.isFoil);
+        console.log(currentBasket[i].uuid === card.uuid);
+        console.log(currentBasket[i].isSigned === card.isSigned);
+        if (
+          currentBasket[i].cardName === card.cardName &&
+          currentBasket[i].set === card.set &&
+          currentBasket[i].price === card.price &&
+          currentBasket[i].condition === card.condition &&
+          currentBasket[i].lang === card.lang &&
+          currentBasket[i].isFoil === card.isFoil &&
+          currentBasket[i].uuid === card.uuid &&
+          currentBasket[i].isSigned === card.isSigned
+        ) {
+          //updating quantities in the basket with destructuration (to stay tuned with async updates)
+          let updatedCard = {
+            ...currentBasket[i],
+            quantity: currentBasket[i].quantity + card.quantity,
+          };
+          contextCopy[i] = updatedCard;
+        } else {
+          contextCopy = [...contextCopy, card];
+        }
       }
+      console.log("context copy", contextCopy);
+      setCurrentBasket(contextCopy);
     }
   };
 

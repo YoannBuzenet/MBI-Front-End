@@ -15,6 +15,7 @@ import BlackDivModalContext from "../context/blackDivModalContext";
 import userPreferencesContext from "../context/userPreferenceContext";
 import { FormattedMessage } from "react-intl";
 import { useIntl } from "react-intl";
+import { useEffect } from "react";
 
 const CardLineOneSet = ({
   card,
@@ -24,6 +25,7 @@ const CardLineOneSet = ({
   langsAvailable,
 }) => {
   //Current Selling Request Basket
+
   const { currentBasket } = useContext(SellingBasketContext);
 
   const { userPreferences } = useContext(userPreferencesContext);
@@ -314,10 +316,7 @@ const CardLineOneSet = ({
             className="downsize-icon add-item-basket"
             onClick={() => {
               console.log(cardsContext[cardID]);
-              return handleAddSellingBasket(
-                currentBasket,
-                cardsContext[cardID]
-              );
+              return handleAddSellingBasket({ ...cardsContext[cardID] });
             }}
           />
         </Td>
