@@ -88,17 +88,16 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
   //This function takes API reponse with CardShopPrices and feeds the context.
   // If several languages are received from a single card, we prioritize baseLang price.
   const addFirstDisplayedPricesToContext = (data) => {
+    let contextCopy = { ...cardsCardPageContext };
     for (let i = 0; i < data.length; i++) {
-      if (
-        cardsCardPageContext[data[i].card.substr(7)].LangOfPrice !==
-        ENGLISH_LANG_ID
-      ) {
-        cardsCardPageContext[data[i].card.substr(7)].price = data[i].price;
-        cardsCardPageContext[data[i].card.substr(7)].LangOfPrice = parseInt(
+      if (contextCopy[data[i].card.substr(7)].LangOfPrice !== ENGLISH_LANG_ID) {
+        contextCopy[data[i].card.substr(7)].price = data[i].price;
+        contextCopy[data[i].card.substr(7)].LangOfPrice = parseInt(
           data[i].language.substr(11)
         );
       }
     }
+    setCardsCardPageContext(contextCopy);
   };
 
   useEffect(() => {
