@@ -22,6 +22,8 @@ const OneSellRequest = ({ match, history }) => {
 
   const [isLoading, setIsLoading] = useState(true);
 
+  console.log("current sell request", currentSellRequest);
+
   useEffect(() => {
     const CancelToken = axios.CancelToken;
     const source = CancelToken.source();
@@ -68,6 +70,7 @@ const OneSellRequest = ({ match, history }) => {
           id="app.OneSellRequest.title"
           defaultMessage={`My Sell Request`}
         />
+        <span> n°{id}</span>
       </h1>
       {isLoading && !isMobile && <TableLoader />}
       {isLoading && isMobile && (
