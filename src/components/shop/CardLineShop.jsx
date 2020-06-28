@@ -81,13 +81,6 @@ const CardLineShop = ({ card, indexCard }) => {
       authenticationInfos.shop?.shopData?.SellingSettings &&
       !currentAdminSellRequest.sellRequests[indexCard]["AutomaticSellingPrice"]
     ) {
-      console.log("c'est moi qui loop ?");
-      console.log(authenticationInfos.shop?.shopData?.SellingSettings);
-      console.log(
-        !currentAdminSellRequest.sellRequests[indexCard][
-          "AutomaticSellingPrice"
-        ]
-      );
       const relevantAlgo =
         card.mkmPriceGuide?.[
           authenticationInfos.shop?.shopData?.SellingSettings?.[card.lang]?.[
@@ -670,7 +663,12 @@ const CardLineShop = ({ card, indexCard }) => {
         <Td>{card.AutomaticSellingPrice}</Td>
         <Td>
           <input
-            value={humanFixedPriceDisplayed}
+            value={
+              humanFixedPriceDisplayed && humanFixedPriceDisplayed !== 0
+                ? humanFixedPriceDisplayed
+                : ""
+            }
+            className="cardLineShop-input-price"
             onChange={(event) => handleChangeMKMSellPrice(event)}
           />
         </Td>
