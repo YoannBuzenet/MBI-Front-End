@@ -34,7 +34,7 @@ const ShopAdminOneSellRequest = ({ match }) => {
     AdminSellRequestContext
   );
   // console.log(currentAdminSellRequest);
-  console.log(authenticationInfos);
+  // console.log(authenticationInfos);
 
   const [priceHaveBeenLoaded, setPriceHaveBeenLoaded] = useState(false);
 
@@ -109,7 +109,7 @@ const ShopAdminOneSellRequest = ({ match }) => {
             sellRequests: [
               ...data.sellRequestCards.map((card) => {
                 return {
-                  id: card.id,
+                  id: card.cards["@id"].substring(7),
                   mcmId: card.cards.mcmid,
                   name: card.cards.name,
                   scryfallid: card.cards.scryfallid,
@@ -152,13 +152,15 @@ const ShopAdminOneSellRequest = ({ match }) => {
       currentAdminSellRequest.sellRequests.length > 0 &&
       !priceHaveBeenLoaded
     ) {
+      console.log("in useEffect out of awaitPrice", currentAdminSellRequest);
       async function awaitPrices() {
+        console.log("in useEffect in awaitPrice", currentAdminSellRequest);
         //Array of sell request cards here
         const promises = currentAdminSellRequest.sellRequests.map((card) => {
           return cardsAPI.getById(card.id);
         });
         const res = await Promise.all(promises);
-        console.log(res);
+        console.log("API result with priceguide", res);
 
         //TODO : Les ajouter aux contexte
         res.map((card, index) => {
