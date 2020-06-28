@@ -1,6 +1,9 @@
 // Key is the MKM id of the priceguide, used on on central API
 // Value is the corresponding translation in /translations/{language}.json
 
+//Removed this algo because data is often missing
+//foilSell: "app.shop.priceFormUpdate.mkmPriceName.foilMediumPrice",
+
 const allPricesAvailableOnMKM = {
   AvgSellPrice: "app.shop.priceFormUpdate.mkmPriceName.regularMediumPrice",
   avg1: "app.shop.priceFormUpdate.mkmPriceName.averageRegularSellPriceOnOneDay",
@@ -13,7 +16,6 @@ const allPricesAvailableOnMKM = {
   lowPrice: "app.shop.priceFormUpdate.mkmPriceName.regularLowPrice",
   lowPriceEx: "app.shop.priceFormUpdate.mkmPriceName.regularExcPrice",
   suggestedPrice: "app.shop.priceFormUpdate.mkmPriceName.suggestedSalePrice",
-  foilSell: "app.shop.priceFormUpdate.mkmPriceName.foilMediumPrice",
   foilAvg1:
     "app.shop.priceFormUpdate.mkmPriceName.averageFoilSellPriceOnOneDay",
   foilAvg7:
