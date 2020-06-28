@@ -157,6 +157,19 @@ const ShopNavbar = ({ history }) => {
                   </Link>
 
                   <Link
+                    to="/my_sell_requests"
+                    className="toggle-menu-links"
+                    onClick={() => setToggleMenu(!toggleMenu)}
+                  >
+                    <li>
+                      <FormattedMessage
+                        id="app.navbar.mySellRequests"
+                        defaultMessage={`My Sell Requests`}
+                      />
+                    </li>
+                  </Link>
+
+                  <Link
                     to="/shopadmin/settings"
                     className="toggle-menu-links"
                     onClick={() => setToggleMenu(!toggleMenu)}
