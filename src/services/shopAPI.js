@@ -52,10 +52,10 @@ function getShopSellingSettings(authContext) {
 }
 
 function postSellingSettings(authContext) {
-  return axios.post(
-    process.env.REACT_APP_EXPRESSAPI + "/api/shop/RewriteSellingSettings",
-    { id: authContext.customer.id, authContext }
-  );
+  return axios.post("/api/shop/RewriteSellingSettings", {
+    id: authContext.customer.id,
+    authContext,
+  });
 }
 
 export default {
