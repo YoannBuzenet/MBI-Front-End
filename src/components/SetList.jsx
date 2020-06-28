@@ -6,7 +6,6 @@ import { isMobile } from "react-device-detect";
 import { useEffect } from "react";
 import setsAPI from "../services/setsAPI";
 import { FormattedMessage, useIntl } from "react-intl";
-import SetSearchBar from "./SetSearchBar";
 
 const SetList = (props) => {
   const { allSets, setAllSets } = useContext(SetsContext);
@@ -44,7 +43,9 @@ const SetList = (props) => {
     }
   }, []);
 
-  //Set Search Bar
+  /***********************/
+  //Set Search Bar settings
+  /***********************/
 
   //Hook Intl to translate an attribute
   const intl = useIntl();
@@ -61,6 +62,9 @@ const SetList = (props) => {
   const WAIT_INTERVAL = 200;
   const [timer, setTimer] = useState(null);
 
+  //Timer on handleChange to avoid spamming with user input
+  //We search for corresponding character in all EN set names and update search results accordingly
+  //If there are some result, we .map on result and not on allSets
   const handleChange = (event) => {
     setTimer(clearTimeout(timer));
     const value = event.currentTarget.value;
