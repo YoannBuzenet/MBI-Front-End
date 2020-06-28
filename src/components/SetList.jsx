@@ -6,6 +6,7 @@ import { isMobile } from "react-device-detect";
 import { useEffect } from "react";
 import setsAPI from "../services/setsAPI";
 import { FormattedMessage } from "react-intl";
+import SetSearchBar from "./SetSearchBar";
 
 const SetList = (props) => {
   const { allSets, setAllSets } = useContext(SetsContext);
@@ -56,24 +57,30 @@ const SetList = (props) => {
         {isLoading && <SetListLoader />}
 
         {!isLoading && (
-          <table className="setList-table">
-            <tbody>
-              {allSets.length > 0 &&
-                allSets
-                  .filter((set) => set.isonlineonly === 0)
-                  .map((set) => {
-                    return (
-                      <tr key={set.id}>
-                        <td>
-                          <Link to={"/sets/" + set.id} className="setList-link">
-                            {set.name}
-                          </Link>
-                        </td>
-                      </tr>
-                    );
-                  })}
-            </tbody>
-          </table>
+          <>
+            <SetSearchBar />
+            <table className="setList-table">
+              <tbody>
+                {allSets.length > 0 &&
+                  allSets
+                    .filter((set) => set.isonlineonly === 0)
+                    .map((set) => {
+                      return (
+                        <tr key={set.id}>
+                          <td>
+                            <Link
+                              to={"/sets/" + set.id}
+                              className="setList-link"
+                            >
+                              {set.name}
+                            </Link>
+                          </td>
+                        </tr>
+                      );
+                    })}
+              </tbody>
+            </table>
+          </>
         )}
       </div>
     </>

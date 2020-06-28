@@ -2,6 +2,7 @@
   "app.lastModification.title": "Les dernières modifications",
 
   "app.setList.title": "Les éditions",
+  "app.setList.searchSetsBar.placeholder": "Chercher...",
 
   "app.allMySellRequests.title": "Mes demandes de rachat",
   "app.allMySellRequests.table.reference": "Reference",
