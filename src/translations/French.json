@@ -2,7 +2,7 @@
   "app.lastModification.title": "Les dernières modifications",
 
   "app.setList.title": "Les éditions",
-  "app.setList.searchSetsBar.placeholder": "Chercher...",
+  "app.setList.searchSetsBar.placeholder": "Chercher une édition...",
 
   "app.allMySellRequests.title": "Mes demandes de rachat",
   "app.allMySellRequests.table.reference": "Reference",
@@ -286,7 +286,7 @@
   "app.navbar.register": "S'inscrire",
   "app.navbar.connect": "Se connecter",
 
-  "app.searchCardBar.placeholder": "Rechercher...",
+  "app.searchCardBar.placeholder": "Rechercher une carte...",
 
   "app.sellRequest.statusUpdate.toast.success": "Le rachat a été marqué comme envoyé.",
   "app.sellRequest.statusUpdate.toast.failure": "Le rachat n'a pu être marqué comme envoyé. Merci de rééssayer.",

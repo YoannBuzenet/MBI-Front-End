@@ -39,7 +39,7 @@ const CardLineShop = ({ card, indexCard }) => {
   const { authenticationInfos, setAuthenticationInfos } = useContext(
     AuthContext
   );
-  console.log(authenticationInfos);
+  // console.log(authenticationInfos);
 
   //Knowing if the Sell Request is OK to be submitted (no duplicate)
   const { errorList, setErrorList } = useContext(canSubmitContext);
@@ -93,8 +93,8 @@ const CardLineShop = ({ card, indexCard }) => {
           parseInt(card.condition)
         ]?.[card.isFoil ? 1 : 0].percent / 100;
 
-      console.log(relevantAlgo);
-      console.log(relevantPercent);
+      // console.log(relevantAlgo);
+      // console.log(relevantPercent);
       let automaticMKMSellingPrice;
 
       if (relevantAlgo !== undefined && relevantPercent !== undefined) {
@@ -122,7 +122,7 @@ const CardLineShop = ({ card, indexCard }) => {
     conditions,
   ]);
 
-  console.log(prioriMKMSellingPrice);
+  // console.log(prioriMKMSellingPrice);
 
   useEffect(() => {
     if (isOnHover) {
