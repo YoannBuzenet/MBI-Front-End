@@ -18,7 +18,7 @@ const SetSearchBar = (props) => {
 
   const [searchResult, setSearchResult] = useState([]);
 
-  const WAIT_INTERVAL = 200;
+  const WAIT_INTERVAL = 50;
   const [timer, setTimer] = useState(null);
 
   console.log(allSets);
