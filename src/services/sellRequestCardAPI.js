@@ -52,7 +52,7 @@ function update(
   return axios.put(
     process.env.REACT_APP_MTGAPI_URL +
       "/sell_request_cards/" +
-      SellRequestCard.id,
+      SellRequestCard.idSellRequestCard,
     propertyUpdate
   );
 }
