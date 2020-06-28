@@ -2,6 +2,7 @@
   "app.lastModification.title": "Last updated cards",
 
   "app.setList.title": "All Sets",
+  "app.setList.searchSetsBar.placeholder": "Search a set...",
 
   "app.allMySellRequests.title": "My Sell Requests",
   "app.allMySellRequests.table.reference": "Reference",

@@ -918,6 +918,10 @@ div.lang-select-applevel {
   display: block;
 }
 
+input[type="search"] {
+  border: 1px solid rgba(0, 0, 0, 0.5);
+}
+
 /**************************
 *****LAST MODIFICATIONS****
 **************************/
