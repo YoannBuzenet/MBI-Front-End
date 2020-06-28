@@ -68,11 +68,6 @@ const MKM_MTG_API_CONDITION_TRANSLATION = {
   7: "PO",
 };
 
-function setSellingMKMPrice(number) {
-  //TODO Put here any algorithms with maybe parameters to ajdust the price
-  return number;
-}
-
 function calculateSigningKey(appSecret, accessTokenSecret) {
   const signingKey =
     encodeURIComponent(appSecret) + "&" + encodeURIComponent(accessTokenSecret);
