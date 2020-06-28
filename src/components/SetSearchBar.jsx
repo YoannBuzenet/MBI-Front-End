@@ -33,15 +33,11 @@ const SetSearchBar = (props) => {
       setTimeout(() => {
         if (value.length >= 2) {
           setSearchResult(
-            allSets.filter((oneSet) =>
-              oneSet.name.split(" ").some(function (word) {
-                let valueToSearch = value.toLowerCase();
-
-                word = word.toLowerCase();
-
-                return value === word;
-              })
-            )
+            allSets.filter((oneSet) => {
+              let valueToLowerCase = value.toLowerCase();
+              let setNameLowerCase = oneSet.name.toLowerCase();
+              return setNameLowerCase.includes(valueToLowerCase);
+            })
           );
         } else {
           setSearchResult([]);
