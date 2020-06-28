@@ -24,10 +24,11 @@ const URL_MKM_SANDBOX_ADD_STOCK =
   "https://sandbox.cardmarket.com/ws/v2.0/stock";
 
 //Real Link
-// const MKM_AUTHENTICATION_URL_BASE ="https://api.cardmarket.com/ws/v2.0/authenticate/";
-//Sandbox
 const MKM_AUTHENTICATION_URL_BASE =
-  "https://sandbox.cardmarket.com/ws/v2.0/authenticate/";
+  "https://api.cardmarket.com/ws/v2.0/authenticate/";
+//Sandbox
+// const MKM_AUTHENTICATION_URL_BASE =
+//"https://sandbox.cardmarket.com/ws/v2.0/authenticate/";
 
 const MKM_LANG_DEFINITION = {
   English: 1,
