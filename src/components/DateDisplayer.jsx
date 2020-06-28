@@ -3,14 +3,19 @@ import { FormattedMessage } from "react-intl";
 import { useIntl } from "react-intl";
 
 const DateDisplayer = ({ dateToHandle }) => {
+  console.log(dateToHandle);
   //Hook Intl to translate an attribute
   const intl = useIntl();
 
   var date = "";
 
   if (dateToHandle !== null) {
-    date = new Date(dateToHandle.date);
-    date = intl.formatDate(date);
+    if (dateToHandle.date) {
+      date = new Date(dateToHandle.date);
+      date = intl.formatDate(date);
+    } else {
+      date = intl.formatDate(dateToHandle);
+    }
   } else {
     date = (
       <FormattedMessage

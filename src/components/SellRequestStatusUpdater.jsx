@@ -96,12 +96,12 @@ const SellRequestStatusUpdater = ({
   const handleClick = (event, currentSellRequest) => {
     sellRequestAPI
       .update(currentSellRequest.id, { dateEnvoi: new Date() })
-      .then((data) =>
+      .then((response) => {
         setCurrentSellRequest({
           ...currentSellRequest,
-          dateEnvoi: data.data.dateEnvoi,
-        })
-      )
+          dateEnvoi: response.data.dateEnvoi,
+        });
+      })
       .then(
         toast.success(
           <FormattedMessage

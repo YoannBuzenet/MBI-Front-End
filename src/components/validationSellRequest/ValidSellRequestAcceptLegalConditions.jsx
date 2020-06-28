@@ -9,7 +9,17 @@ const ValidSellRequestAcceptLegalConditions = (props) => {
         <label htmlFor="checkbox-compliance">
           <FormattedMessage
             id="app.sellRequestValidation.legalConditionsAccepting"
-            defaultMessage={`I accept the shop buying clauses.`}
+            defaultMessage={`I accept the {link}.`}
+            values={{
+              link: (
+                <a href="/buyingClauses" target="_blank">
+                  <FormattedMessage
+                    id="app.sellRequestValidation.legalConditionsAccepting.link"
+                    defaultMessage="shop buying clauses"
+                  />
+                </a>
+              ),
+            }}
           />
         </label>
         <button className="sellRequest-validation-button" type="submit">
