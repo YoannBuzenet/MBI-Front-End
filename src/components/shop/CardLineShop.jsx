@@ -93,8 +93,8 @@ const CardLineShop = ({ card, indexCard }) => {
           parseInt(card.condition)
         ]?.[card.isFoil ? 1 : 0].percent / 100;
 
-      console.log(card.id, relevantAlgo);
-      console.log(card.id, relevantPercent);
+      // console.log("price from algo : ",card.id, relevantAlgo);
+      // console.log("% applied",card.id, relevantPercent);
       let automaticMKMSellingPrice;
 
       if (relevantAlgo !== undefined && relevantPercent !== undefined) {
@@ -102,7 +102,7 @@ const CardLineShop = ({ card, indexCard }) => {
           relevantAlgo * relevantPercent
         );
       }
-      console.log(card.id, automaticMKMSellingPrice);
+      // console.log("automatic sell price",card.id, automaticMKMSellingPrice);
       let newContext = { ...currentAdminSellRequest };
       newContext.sellRequests[indexCard][
         "AutomaticSellingPrice"
