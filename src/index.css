@@ -1367,6 +1367,19 @@ tbody.cardLineShop {
   font-size: 2rem;
   margin-right: 10px;
 }
+
+.MKM-connection-modal .mkm_link_auth {
+  width: 300px;
+  padding: 1rem;
+  margin: 0 auto;
+  cursor: pointer;
+  background-color: lightgreen;
+  border-radius: 8px;
+  box-shadow: 1px 1px 3px black;
+  height: 70px;
+  overflow: hidden;
+}
+
 .MKM-connection-modal > div .syncronization-button {
   width: 300px;
   padding: 1rem;
