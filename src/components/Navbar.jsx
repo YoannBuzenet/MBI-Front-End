@@ -62,7 +62,7 @@ const Navbar = ({ history }) => {
         <div className="container">
           <div className="menu-links-left">
             <Link to="/" className="classic-links">
-              Shop Logo
+              {process.env.REACT_APP_SHOP_LOGO_URL}
             </Link>
             {/* <Link to="/" className="classic-links big-screen-info">
               Fantasy Sphere
