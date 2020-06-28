@@ -74,7 +74,7 @@ import LoggedRouteRender from "./components/LoggedRouteRender";
 // });
 
 function App() {
-  document.title = config.shopName;
+  document.title = process.env.REACT_APP_SHOP_NAME + "";
 
   // STATE Creating the Authentication state
   const [authenticationInfos, setAuthenticationInfos] = useState(
