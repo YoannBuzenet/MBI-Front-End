@@ -373,6 +373,7 @@ function App() {
   //VERY IMPORTANT Function to add cards to Selling Basket.
   //We put it in App component because it need the use of hooks.
   const handleAddSellingBasket = (card) => {
+    let shouldAddTheCardToBasket = true;
     let contextCopy = [...currentBasket];
     console.log("card to add", card);
     console.log("basket", currentBasket);
@@ -410,9 +411,11 @@ function App() {
             quantity: currentBasket[i].quantity + card.quantity,
           };
           contextCopy[i] = updatedCard;
-        } else {
-          contextCopy = [...contextCopy, card];
+          shouldAddTheCardToBasket = false;
         }
+      }
+      if (shouldAddTheCardToBasket) {
+        contextCopy = [...contextCopy, card];
       }
       console.log("context copy", contextCopy);
       setCurrentBasket(contextCopy);
