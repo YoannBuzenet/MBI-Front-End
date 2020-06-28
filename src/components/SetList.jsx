@@ -5,7 +5,7 @@ import SetListLoader from "./loaders/SetListLoader";
 import { isMobile } from "react-device-detect";
 import { useEffect } from "react";
 import setsAPI from "../services/setsAPI";
-import { FormattedMessage } from "react-intl";
+import { FormattedMessage, useIntl } from "react-intl";
 import SetSearchBar from "./SetSearchBar";
 
 const SetList = (props) => {
@@ -24,6 +24,7 @@ const SetList = (props) => {
     return 0;
   });
 
+  //Set List Initiliazation
   useEffect(() => {
     setIsLoading(true);
     //Check if last modification cookie is here and not EXP
@@ -43,6 +44,48 @@ const SetList = (props) => {
     }
   }, []);
 
+  //Set Search Bar
+
+  //Hook Intl to translate an attribute
+  const intl = useIntl();
+
+  const searchSETSBarPlaceholderTranslated = intl.formatMessage({
+    id: "app.setList.searchSetsBar.placeholder",
+    defaultMessage: "Search a set...",
+  });
+
+  const [currentSearch, setCurrentSearch] = useState("");
+
+  const [searchResult, setSearchResult] = useState([]);
+
+  const WAIT_INTERVAL = 200;
+  const [timer, setTimer] = useState(null);
+
+  const handleChange = (event) => {
+    setTimer(clearTimeout(timer));
+    const value = event.currentTarget.value;
+    setCurrentSearch(value);
+
+    setTimer(
+      setTimeout(() => {
+        if (value.length >= 2) {
+          setSearchResult(
+            allSets.filter((oneSet) => {
+              let valueToLowerCase = value.toLowerCase();
+              let setNameLowerCase = oneSet.name.toLowerCase();
+              return (
+                setNameLowerCase.includes(valueToLowerCase) &&
+                oneSet.isonlineonly === 0
+              );
+            })
+          );
+        } else {
+          setSearchResult([]);
+        }
+      }, WAIT_INTERVAL)
+    );
+  };
+
   return (
     <>
       <div className="left-div">
@@ -58,10 +101,46 @@ const SetList = (props) => {
 
         {!isLoading && (
           <>
-            <SetSearchBar />
+            <>
+              <form className="search-card-form">
+                <input
+                  type="search"
+                  className="searchCardBar"
+                  placeholder={searchSETSBarPlaceholderTranslated}
+                  value={currentSearch}
+                  onChange={(event) => handleChange(event)}
+                  onClick={(event) => {
+                    setSearchResult([]);
+                    handleChange(event);
+                  }}
+                />
+              </form>
+            </>
             <table className="setList-table">
               <tbody>
-                {allSets.length > 0 &&
+                {searchResult.length > 0 &&
+                  searchResult.map((setsResults, index) => {
+                    console.log(searchResult);
+                    // console.log(setsResults);
+                    return (
+                      <tr key={setsResults.id}>
+                        <td>
+                          <Link
+                            to={"/sets/" + setsResults.id}
+                            className="setList-link"
+                            onClick={() => {
+                              setSearchResult([]);
+                            }}
+                            key={setsResults.id}
+                          >
+                            {setsResults.name}
+                          </Link>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                {searchResult.length === 0 &&
+                  allSets.length > 0 &&
                   allSets
                     .filter((set) => set.isonlineonly === 0)
                     .map((set) => {
