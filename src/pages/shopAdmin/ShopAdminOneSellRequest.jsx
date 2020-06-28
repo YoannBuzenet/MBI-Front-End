@@ -110,6 +110,7 @@ const ShopAdminOneSellRequest = ({ match }) => {
               ...data.sellRequestCards.map((card) => {
                 return {
                   id: card.cards["@id"].substring(7),
+                  idSellRequestCard: card.id,
                   mcmId: card.cards.mcmid,
                   name: card.cards.name,
                   scryfallid: card.cards.scryfallid,
