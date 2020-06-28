@@ -27,25 +27,22 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
     CardPageContext
   );
 
-  console.log("current context", cardsCardPageContext);
+  // console.log("current context", cardsCardPageContext);
 
   //STATE - Is Loading
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    console.log("detecting change in param name");
     setCurrentName(match.params.cardName);
   }, [match.params.cardName]);
 
   useEffect(() => {
-    console.log(" chaging current name");
     setCurrentNameDecoded(currentName);
   }, [currentName]);
 
   const ENGLISH_LANG_ID = 9;
 
   const buildContextFromAPIResponse = (data) => {
-    console.log("building context function");
     // console.log(data);
     const contextEmpty = {};
 
@@ -90,7 +87,6 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
   //This function takes API reponse with CardShopPrices and feeds the context.
   // If several languages are received from a single card, we prioritize baseLang price.
   const addFirstDisplayedPricesToContext = (data) => {
-    console.log("adding prices function");
     let contextCopy = { ...cardsCardPageContext };
     for (let i = 0; i < data.length; i++) {
       if (contextCopy[data[i].card.substr(7)].LangOfPrice !== ENGLISH_LANG_ID) {
@@ -111,7 +107,6 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
         cardsCardPageContext[Object.keys(cardsCardPageContext)[0]].name !==
           currentName)
     ) {
-      console.log("on appelle le serv pour la data de base");
       //Cancel subscriptions preparation
       const CancelToken = axios.CancelToken;
       const source = CancelToken.source();
@@ -125,7 +120,6 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
           return data.data["hydra:member"];
         })
         .then((data) => {
-          console.log("data received from api", data);
           buildContextFromAPIResponse(data);
         })
         .then(setHasUpdatedPrices(false))
@@ -146,19 +140,12 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
 
   //Fetching prices once context is set up
   useEffect(() => {
-    console.log("getting prices from API", cardsCardPageContext);
     if (Object.keys(cardsCardPageContext).length > 0 && !hasUpdatedPrices) {
-      console.log("contexte inside buggy function", cardsCardPageContext);
-      console.log(
-        "key of conside inside buggy function",
-        Object.keys(cardsCardPageContext)
-      );
       CardShopPriceAPI.getArrayofPrices(
         Object.keys(cardsCardPageContext).map((id) => parseInt(id)),
         config.baseLang
       )
         .then((data) => {
-          console.log("data price from api", data);
           addFirstDisplayedPricesToContext(data.data["hydra:member"]);
         })
         .then(setHasUpdatedPrices(true));

@@ -21,6 +21,10 @@ const CardLine = ({ card, handleAddSellingBasket, index, cardID }) => {
   //Current Selling Request Basket
   const { currentBasket } = useContext(SellingBasketContext);
 
+  useEffect(() => {
+    console.log(currentBasket);
+  }, [currentBasket]);
+
   //DEFINED langages and Conditions
   const { conditions } = useContext(GenericCardInfosContext);
 
@@ -56,7 +60,7 @@ const CardLine = ({ card, handleAddSellingBasket, index, cardID }) => {
 
     //Updating the card following the new info
 
-    if (name === "quantity" || name === "lang") {
+    if (name === "quantity" || name === "lang" || name === "condition") {
       var newValue = parseInt(value);
     } else {
       var newValue = value.toString();
@@ -290,10 +294,9 @@ const CardLine = ({ card, handleAddSellingBasket, index, cardID }) => {
             className="downsize-icon add-item-basket"
             onClick={() => {
               // console.log(cardsCardPageContext[cardID]);
-              return handleAddSellingBasket(
-                currentBasket,
-                cardsCardPageContext[cardID]
-              );
+              return handleAddSellingBasket({
+                ...cardsCardPageContext[cardID],
+              });
             }}
           />
         </Td>
