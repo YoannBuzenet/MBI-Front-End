@@ -128,7 +128,6 @@ const OneSetLoader = () => {
         <rect x="318" y="771" rx="0" ry="0" width="306" height="15" />
         <rect x="498" y="778" rx="0" ry="0" width="7" height="2" />
       </ContentLoader>
-      )
     </>
   );
 };
