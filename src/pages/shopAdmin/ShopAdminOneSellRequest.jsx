@@ -19,9 +19,14 @@ import priceUpdateAPI from "../../services/priceUpdateAPI";
 import AuthContext from "../../context/authContext";
 import shopAPI from "../../services/shopAPI";
 import cardsAPI from "../../services/cardsAPI";
+import SellRequestRecapPDF from "../../components/PDFtemplates/SellRequestRecapPDF";
+import { PDFDownloadLink } from "@react-pdf/renderer";
+import { useIntl } from "react-intl";
 
 const ShopAdminOneSellRequest = ({ match }) => {
   const { id } = match.params;
+  //Hook Intl to translate an attribute
+  const intl = useIntl();
 
   const [isLoading, setIsLoading] = useState(true);
 
@@ -268,7 +273,23 @@ const ShopAdminOneSellRequest = ({ match }) => {
             </p>
           </div>
           {currentAdminSellRequest.dateApprovalPending && (
-            <p className="SellRequestAction">Generate PDF</p>
+            <>
+              <p>
+                <PDFDownloadLink
+                  document={<SellRequestRecapPDF />}
+                  fileName="somename.pdf"
+                >
+                  {({ blob, url, loading, error }) =>
+                    loading
+                      ? ""
+                      : intl.formatMessage({
+                          id: "app.shop.OneSellRequest.generatePDF",
+                          defaultMessage: "Generate PDF",
+                        })
+                  }
+                </PDFDownloadLink>
+              </p>
+            </>
           )}
         </div>
         <div className="sellRequest-infos">

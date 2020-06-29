@@ -1598,7 +1598,7 @@ SHOP ADMIN ONE SELL REQUEST
 
 .SellRequestAction {
   position: absolute;
-  right: 0;
+  right: 20px;
   top: 0;
 }
 
