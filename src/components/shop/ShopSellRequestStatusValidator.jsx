@@ -292,6 +292,8 @@ const ShopSellRequestStatusValidator = () => {
 
     let newData;
 
+    //Preparing DB sending
+    //As the Sell Request status is based on existing dates or not, we set non relevant one to null in order to stay up to date.
     if (value === "dateRecu") {
       newData = {
         [value]: new Date(),
@@ -319,6 +321,8 @@ const ShopSellRequestStatusValidator = () => {
         currentAdminSellRequest.id,
         newData
       );
+      //Preparing Context Updating
+      //As the Sell Request status is based on existing dates or not, we set non relevant one to null in order to stay up to date.
       if (value === "dateRecu") {
         setCurrentAdminSellRequest({
           ...currentAdminSellRequest,

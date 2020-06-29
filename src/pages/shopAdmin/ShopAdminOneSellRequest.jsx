@@ -185,7 +185,7 @@ const ShopAdminOneSellRequest = ({ match }) => {
   return (
     <>
       <div className="container">
-        <h1>
+        <h1 className="shopSellRequestTitle">
           <FormattedMessage
             id="app.shop.OneSellRequest.number"
             defaultMessage={`N° `}
@@ -267,6 +267,9 @@ const ShopAdminOneSellRequest = ({ match }) => {
                 currentAdminSellRequest.customer.town}
             </p>
           </div>
+          {currentAdminSellRequest.dateApprovalPending && (
+            <p className="SellRequestAction">Generate PDF</p>
+          )}
         </div>
         <div className="sellRequest-infos">
           <p className="sellRequest-status">
