@@ -180,6 +180,7 @@
   "app.shop.MKMPOSTrequest.toast.success": "Cards have been added to MCM successfully.",
   "app.shop.MKMPOSTrequest.toast.failure": "Cards couln't be added to MCM. Please try again.",
   "app.shop.MKMPOSTrequest.toast.info": "Please sync your account to MCM by following the procedure.",
+  "app.shop.MKMPOSTrequest.toast.errorPriceis0": "One of your selling prices is set up to 0. Please check your selling prices.",
 
   "app.shop.shopSettings.title": "Settings",
   "app.shop.shopSettings.defaultWebsiteLanguage": "Website Default Language : ",
