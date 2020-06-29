@@ -142,20 +142,6 @@ const ShopSellRequestStatusValidator = () => {
 
   const validateSellRequest = async (event) => {
     if (
-      currentAdminSellRequest.sellRequests.filter((card) => card.price === 0)
-        .length > 0
-    ) {
-      toast.error(
-        <FormattedMessage
-          id="app.shop.MKMPOSTrequest.toast.errorPriceis0"
-          defaultMessage={`One of your selling prices is set up to 0. Please check your selling prices.`}
-        />
-      );
-      //Ending the whole function is a selling price is set to 0
-      return;
-    }
-
-    if (
       authenticationInfos.shop &&
       authenticationInfos.shop.ExpirationMkmToken > new Date().getTime()
     ) {
@@ -173,6 +159,21 @@ const ShopSellRequestStatusValidator = () => {
           }),
         ],
       };
+
+      if (
+        currentAdminSellRequest.sellRequests.filter(
+          (card) => card.mkmSellPrice === 0
+        ).length > 0
+      ) {
+        toast.error(
+          <FormattedMessage
+            id="app.shop.MKMPOSTrequest.toast.errorPriceis0"
+            defaultMessage={`One of your selling prices is set up to 0. Please check your selling prices.`}
+          />
+        );
+        //Ending the whole function is a selling price is set to 0
+        return;
+      }
 
       console.log(newData);
 
