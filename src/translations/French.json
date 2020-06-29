@@ -176,6 +176,7 @@
   "app.shop.OneSellRequest.totaltable": "Total",
   "app.shop.OneSellRequest.numberOfCards": "NOMBRE DE CARTES",
   "app.shop.OneSellRequest.total": "TOTAL",
+  "app.shop.OneSellRequest.generatePDF": "Générer PDF",
 
   "app.shop.SellRequest.updatedSuccessfully": "Le statut du rachat a bien été mis à jour.",
   "app.shop.SellRequest.updatedFailure": "Le rachat n'a pu être mis à jour. Merci de vous déconnecter et de vous reconnecter.",

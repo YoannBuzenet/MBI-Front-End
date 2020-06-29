@@ -176,6 +176,7 @@
   "app.shop.OneSellRequest.totaltable": "Total",
   "app.shop.OneSellRequest.numberOfCards": "NUMBER OF CARDS",
   "app.shop.OneSellRequest.total": "TOTAL",
+  "app.shop.OneSellRequest.generatePDF": "Generate PDF",
 
   "app.shop.SellRequest.updatedSuccessfully": "The Sell Request status have been updated successfully.",
   "app.shop.SellRequest.updatedFailure": "The Sell Request couldn't be updated. Please log out and log in again.",
