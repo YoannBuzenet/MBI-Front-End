@@ -37,6 +37,8 @@ const ShopSellRequestStatusValidator = () => {
   //Hook Intl to translate an attribute
   const intl = useIntl();
 
+  console.log(currentAdminSellRequest);
+
   const defaultOptionTranslation = intl.formatMessage({
     id: "app.shop.sellrequestValidator.defaultOption",
     defaultMessage: "Select a status",
@@ -288,10 +290,27 @@ const ShopSellRequestStatusValidator = () => {
     const { value } = currentTarget;
     // console.log(value);
 
-    const newData = {
-      [value]: new Date(),
-      dateCanceled: null,
-    };
+    let newData;
+
+    if (value === "dateRecu") {
+      newData = {
+        [value]: new Date(),
+        dateCanceled: null,
+        dateProcessing: null,
+        dateApprovalPending: null,
+      };
+    } else if (value === "dateProcessing") {
+      newData = {
+        [value]: new Date(),
+        dateCanceled: null,
+        dateApprovalPending: null,
+      };
+    } else {
+      newData = {
+        [value]: new Date(),
+        dateCanceled: null,
+      };
+    }
 
     console.log("data pushing", newData);
 
@@ -300,11 +319,28 @@ const ShopSellRequestStatusValidator = () => {
         currentAdminSellRequest.id,
         newData
       );
-      setCurrentAdminSellRequest({
-        ...currentAdminSellRequest,
-        [value]: dataSentToAPI.data[value],
-        dateCanceled: null,
-      });
+      if (value === "dateRecu") {
+        setCurrentAdminSellRequest({
+          ...currentAdminSellRequest,
+          [value]: dataSentToAPI.data[value],
+          dateApprovalPending: null,
+          dateCanceled: null,
+          dateProcessing: null,
+        });
+      } else if (value === "dateProcessing") {
+        setCurrentAdminSellRequest({
+          ...currentAdminSellRequest,
+          [value]: dataSentToAPI.data[value],
+          dateApprovalPending: null,
+          dateCanceled: null,
+        });
+      } else {
+        setCurrentAdminSellRequest({
+          ...currentAdminSellRequest,
+          [value]: dataSentToAPI.data[value],
+          dateCanceled: null,
+        });
+      }
 
       toast.success(
         <FormattedMessage
