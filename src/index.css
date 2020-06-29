@@ -1596,9 +1596,21 @@ SHOP ADMIN ONE SELL REQUEST
   border-radius: 5px;
 }
 
+.SellRequestAction {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
 @media only screen and (max-width: 1000px) {
   .update-set {
     background-color: skyblue;
+  }
+  .SellRequestAction {
+    position: static;
+  }
+  .shopSellRequestTitle {
+    margin-top: 8rem;
   }
 }
 
@@ -1628,10 +1640,19 @@ span.customer_lastName {
 .customer-infos {
   display: flex;
   justify-content: space-evenly;
+  position: relative;
 }
 
 .customer-infos p {
   text-align: left;
+}
+
+@media only screen and (max-width: 1000px) {
+  .customer-infos {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
 /**************************
