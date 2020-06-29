@@ -300,7 +300,23 @@ const ShopSellRequestStatusValidator = () => {
           ...currentAdminSellRequest,
           [value]: data.data[value],
           dateCanceled: null,
-        });
+        })
+          .then(() => {
+            toast.success(
+              <FormattedMessage
+                id="app.shop.SellRequest.updatedSuccessfully"
+                defaultMessage={`Please sync your account to MCM by following the procedure.`}
+              />
+            );
+          })
+          .catch(() => {
+            toast.error(
+              <FormattedMessage
+                id="app.shop.SellRequest.updatedSuccessfully"
+                defaultMessage={`Please sync your account to MCM by following the procedure.`}
+              />
+            );
+          });
         // console.log(data.data);
         // console.log(data.data[value]);
       });

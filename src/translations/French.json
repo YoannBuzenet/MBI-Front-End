@@ -177,6 +177,8 @@
   "app.shop.OneSellRequest.numberOfCards": "NOMBRE DE CARTES",
   "app.shop.OneSellRequest.total": "TOTAL",
 
+  "app.shop.SellRequest.updatedSuccessfully": "Le statut du rachat a bien été mis à jour.",
+  "app.shop.SellRequest.updatedFailure": "Le rachat n'a pu être mis à jour. Merci de vous déconnecter et de vous reconnecter.",
   "app.shop.MKMPOSTrequest.toast.success": "Les cartes ont bien été ajoutées sur MCM.",
   "app.shop.MKMPOSTrequest.toast.failure": "Le rachat n'a pu être validé. Merci de recommencer ultérieurement.",
   "app.shop.MKMPOSTrequest.toast.info": "Merci de suivre la procédure de synchronisation. Vous pourrez ensuite valider votre rachat.",
