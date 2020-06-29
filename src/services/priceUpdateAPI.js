@@ -58,7 +58,10 @@ function roundUnit50Down(number) {
 }
 
 function smoothNumbers(price) {
-  if (price <= 0.05) {
+  if (price === 0) {
+    price = 0;
+  }
+  if (price > 0 && price <= 0.05) {
     price = 0.01;
   } else if (price > 0.05 && price <= 1) {
     price = roundCentsHalfDecadeDown(price);
