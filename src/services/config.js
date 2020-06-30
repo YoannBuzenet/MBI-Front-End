@@ -23,6 +23,16 @@ const langDefinition = {
   11: "Traditional Chinese",
 };
 
+const conditionDefinition = {
+  1: "Mint",
+  2: "Near Mint",
+  3: "Excellent",
+  4: "Good",
+  5: "Light Played",
+  6: "Played",
+  7: "Poor",
+};
+
 //SHOP GRADING SYSTEM
 //EU or US
 const gradingArea = "EU";
@@ -107,4 +117,5 @@ module.exports = {
   iconSizeMobile,
   iconSizeDesktop,
   defaultSellingPercents,
+  conditionDefinition,
 };
