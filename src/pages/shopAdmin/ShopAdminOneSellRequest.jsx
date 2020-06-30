@@ -14,14 +14,13 @@ import OneBigLineLoader from "../../components/loaders/OneBigLineLoader";
 import errorHandlingAPI from "../../services/errorHandlingAPI";
 import { isMobile } from "react-device-detect";
 import SetListLoader from "../../components/loaders/SetListLoader";
-import { FormattedMessage } from "react-intl";
+import { FormattedMessage, useIntl } from "react-intl";
 import priceUpdateAPI from "../../services/priceUpdateAPI";
 import AuthContext from "../../context/authContext";
 import shopAPI from "../../services/shopAPI";
 import cardsAPI from "../../services/cardsAPI";
 import SellRequestRecapPDF from "../../components/PDFtemplates/SellRequestRecapPDF";
 import { PDFDownloadLink } from "@react-pdf/renderer";
-import { useIntl } from "react-intl";
 
 const ShopAdminOneSellRequest = ({ match }) => {
   const { id } = match.params;
@@ -276,8 +275,15 @@ const ShopAdminOneSellRequest = ({ match }) => {
             <>
               <p>
                 <PDFDownloadLink
-                  document={<SellRequestRecapPDF />}
-                  fileName="somename.pdf"
+                  document={
+                    <SellRequestRecapPDF
+                      sellRequest={currentAdminSellRequest}
+                      shopData={authenticationInfos.shop}
+                    />
+                  }
+                  fileName={
+                    "SellRequest n°" + currentAdminSellRequest.id + ".pdf"
+                  }
                 >
                   {({ blob, url, loading, error }) =>
                     loading

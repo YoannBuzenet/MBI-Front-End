@@ -17,6 +17,8 @@ const SellingSettingsCondition = ({ isFoil, condition, langObject }) => {
   //DEFINED langages and Conditions
   const { lang, conditions } = useContext(GenericCardInfosContext);
 
+  // console.log(lang, conditions);
+
   const [timer, setTimer] = useState(null);
 
   const WAIT_INTERVAL = 2000;
