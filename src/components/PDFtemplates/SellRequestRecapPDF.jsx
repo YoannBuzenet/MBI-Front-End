@@ -65,135 +65,148 @@ const styles = StyleSheet.create({
 });
 
 // Create Document Component
-const SellRequestTemplatePDF = ({ sellRequest, shopData }) => (
-  <Document>
-    {/* Compter le nombre de sell request card, eventuellement chunker en plusieurs pages le nombre de sell request card */}
-    <Page style={styles.body}>
-      <View>
-        <Text style={{ marginTop: "30px" }}>Rachat n°{sellRequest.id}</Text>
-        <Text style={{ fontSize: "10px", marginTop: "30px" }}>
-          Le DATE, à {shopData.town}
-        </Text>
-        <Text style={{ fontSize: "10px", margin: "20px 0" }}>
-          Je soussigné Madame/Monsieur {sellRequest.customer.prenom}{" "}
-          {sellRequest.customer.nom}, habitant à {sellRequest.customer.adress},{" "}
-          {sellRequest.customer.postalCode} {sellRequest.customer.town},
-          reconnait sur l'honneur avoir vendu les cartes suivantes à la société{" "}
-          {shopData.legalName}.
-        </Text>
-      </View>
-      <View style={styles.table}>
-        {/* Table Head */}
-        <View style={styles.tableRow}>
-          <View style={styles.tableColHeader}>
-            <Text style={styles.tableCellHeader}>Card</Text>
-          </View>
-          <View style={styles.tableColHeader}>
-            <Text style={styles.tableCellHeader}>Set</Text>
-          </View>
-          <View style={styles.tableColHeader}>
-            <Text style={styles.tableCellHeader}>Language</Text>
-          </View>
-          <View style={styles.tableColHeader}>
-            <Text style={styles.tableCellHeader}>Condition</Text>
-          </View>
-          <View style={styles.tableColHeader}>
-            <Text style={styles.tableCellHeader}>Foil</Text>
-          </View>
-          <View style={styles.tableColHeader}>
-            <Text style={styles.tableCellHeader}>Signed</Text>
-          </View>
-          <View style={styles.tableColHeader}>
-            <Text style={styles.tableCellHeader}>Price</Text>
-          </View>
-          <View style={styles.tableColHeader}>
-            <Text style={styles.tableCellHeader}>Quantity</Text>
-          </View>
-          <View style={styles.tableColHeader}>
-            <Text style={styles.tableCellHeader}>Total</Text>
-          </View>
-        </View>
-        {/* Table Body */}
+const SellRequestTemplatePDF = ({ sellRequest, shopData }) => {
+  //Hook Intl to translate an attribute
+  const intl = useIntl();
 
-        {sellRequest.sellRequests.map((card) => {
-          return (
-            <>
-              <View style={styles.tableRow}>
-                <View style={styles.tableCol}>
-                  <Text style={styles.tableCell}>{card.name}</Text>
-                </View>
-                <View style={styles.tableCol}>
-                  <Text style={styles.tableCell}>{card.set}</Text>
-                </View>
-                <View style={styles.tableCol}>
-                  <Text style={styles.tableCell}>
-                    {config.langDefinition[card.lang]}
-                  </Text>
-                </View>
-                <View style={styles.tableCol}>
-                  <Text style={styles.tableCell}>
-                    {config.conditionDefinition[parseInt(card.condition)]}
-                  </Text>
-                </View>
-                <View style={styles.tableCol}>
-                  <Text style={styles.tableCell}>
-                    {card.isFoil ? "Yes" : "No"}
-                  </Text>
-                </View>
-                <View style={styles.tableCol}>
-                  <Text style={styles.tableCell}>
-                    {card.isSigned ? "Yes" : "No"}
-                  </Text>
-                </View>
-                <View style={styles.tableCol}>
-                  <Text style={styles.tableCell}>{card.price}</Text>
-                </View>
-                <View style={styles.tableCol}>
-                  <Text style={styles.tableCell}>{card.quantity}</Text>
-                </View>
-                <View style={styles.tableCol}>
-                  <Text style={styles.tableCell}>
-                    {card.price * card.quantity}€
-                  </Text>
-                </View>
+  return (
+    <>
+      <Document>
+        {/* Compter le nombre de sell request card, eventuellement chunker en plusieurs pages le nombre de sell request card */}
+        <Page style={styles.body}>
+          <View>
+            <Text style={{ marginTop: "30px" }}>
+              {intl.formatMessage({
+                id: "app.shop.OneSellRequestPDF.SellRequestNumber",
+                defaultMessage: "Sell Request N°",
+              })}
+              {sellRequest.id}
+            </Text>
+            <Text style={{ fontSize: "10px", marginTop: "30px" }}>
+              Le DATE, à {shopData.town}
+            </Text>
+            <Text style={{ fontSize: "10px", margin: "20px 0" }}>
+              Je soussigné Madame/Monsieur {sellRequest.customer.prenom}{" "}
+              {sellRequest.customer.nom}, habitant à{" "}
+              {sellRequest.customer.adress}, {sellRequest.customer.postalCode}{" "}
+              {sellRequest.customer.town}, reconnait sur l'honneur avoir vendu
+              les cartes suivantes à la société {shopData.legalName}.
+            </Text>
+          </View>
+          <View style={styles.table}>
+            {/* Table Head */}
+            <View style={styles.tableRow}>
+              <View style={styles.tableColHeader}>
+                <Text style={styles.tableCellHeader}>Card</Text>
               </View>
-            </>
-          );
-        })}
-        <View style={styles.tableRow}>
-          <View style={styles.tableColTotalProducts}>
-            <Text style={styles.regularText}>
-              {sellRequest.sellRequests.reduce(
-                (total, card) => total + card.quantity,
-                0
-              )}{" "}
-              products
-            </Text>
+              <View style={styles.tableColHeader}>
+                <Text style={styles.tableCellHeader}>Set</Text>
+              </View>
+              <View style={styles.tableColHeader}>
+                <Text style={styles.tableCellHeader}>Language</Text>
+              </View>
+              <View style={styles.tableColHeader}>
+                <Text style={styles.tableCellHeader}>Condition</Text>
+              </View>
+              <View style={styles.tableColHeader}>
+                <Text style={styles.tableCellHeader}>Foil</Text>
+              </View>
+              <View style={styles.tableColHeader}>
+                <Text style={styles.tableCellHeader}>Signed</Text>
+              </View>
+              <View style={styles.tableColHeader}>
+                <Text style={styles.tableCellHeader}>Price</Text>
+              </View>
+              <View style={styles.tableColHeader}>
+                <Text style={styles.tableCellHeader}>Quantity</Text>
+              </View>
+              <View style={styles.tableColHeader}>
+                <Text style={styles.tableCellHeader}>Total</Text>
+              </View>
+            </View>
+            {/* Table Body */}
+
+            {sellRequest.sellRequests.map((card) => {
+              return (
+                <>
+                  <View style={styles.tableRow}>
+                    <View style={styles.tableCol}>
+                      <Text style={styles.tableCell}>{card.name}</Text>
+                    </View>
+                    <View style={styles.tableCol}>
+                      <Text style={styles.tableCell}>{card.set}</Text>
+                    </View>
+                    <View style={styles.tableCol}>
+                      <Text style={styles.tableCell}>
+                        {config.langDefinition[card.lang]}
+                      </Text>
+                    </View>
+                    <View style={styles.tableCol}>
+                      <Text style={styles.tableCell}>
+                        {config.conditionDefinition[parseInt(card.condition)]}
+                      </Text>
+                    </View>
+                    <View style={styles.tableCol}>
+                      <Text style={styles.tableCell}>
+                        {card.isFoil ? "Yes" : "No"}
+                      </Text>
+                    </View>
+                    <View style={styles.tableCol}>
+                      <Text style={styles.tableCell}>
+                        {card.isSigned ? "Yes" : "No"}
+                      </Text>
+                    </View>
+                    <View style={styles.tableCol}>
+                      <Text style={styles.tableCell}>{card.price}</Text>
+                    </View>
+                    <View style={styles.tableCol}>
+                      <Text style={styles.tableCell}>{card.quantity}</Text>
+                    </View>
+                    <View style={styles.tableCol}>
+                      <Text style={styles.tableCell}>
+                        {card.price * card.quantity}€
+                      </Text>
+                    </View>
+                  </View>
+                </>
+              );
+            })}
+            <View style={styles.tableRow}>
+              <View style={styles.tableColTotalProducts}>
+                <Text style={styles.regularText}>
+                  {sellRequest.sellRequests.reduce(
+                    (total, card) => total + card.quantity,
+                    0
+                  )}{" "}
+                  products
+                </Text>
+              </View>
+              <View style={styles.tableCol}>
+                <Text style={styles.tableCell}>
+                  {sellRequest.sellRequests.reduce(
+                    (total, card) => total + card.quantity,
+                    0
+                  )}
+                </Text>
+              </View>
+              <View style={styles.tableCol}>
+                <Text style={styles.tableCell}>
+                  {sellRequest.sellRequests.reduce(
+                    (total, card) => total + card.quantity * card.price,
+                    0
+                  )}
+                  €
+                </Text>
+              </View>
+            </View>
           </View>
-          <View style={styles.tableCol}>
-            <Text style={styles.tableCell}>
-              {sellRequest.sellRequests.reduce(
-                (total, card) => total + card.quantity,
-                0
-              )}
-            </Text>
+          <View>
+            <Text style={styles.signature}>Signature</Text>
           </View>
-          <View style={styles.tableCol}>
-            <Text style={styles.tableCell}>
-              {sellRequest.sellRequests.reduce(
-                (total, card) => total + card.quantity * card.price,
-                0
-              )}
-              €
-            </Text>
-          </View>
-        </View>
-      </View>
-      <View>
-        <Text style={styles.signature}>Signature</Text>
-      </View>
-    </Page>
-  </Document>
-);
+        </Page>
+      </Document>
+    </>
+  );
+};
 
 export default SellRequestTemplatePDF;

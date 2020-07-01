@@ -21,6 +21,8 @@ import shopAPI from "../../services/shopAPI";
 import cardsAPI from "../../services/cardsAPI";
 import SellRequestRecapPDF from "../../components/PDFtemplates/SellRequestRecapPDF";
 import { PDFDownloadLink } from "@react-pdf/renderer";
+import { IntlProvider } from "react-intl";
+import SelectAppLangContext from "../../context/selectedAppLang";
 
 const ShopAdminOneSellRequest = ({ match }) => {
   const { id } = match.params;
@@ -39,6 +41,8 @@ const ShopAdminOneSellRequest = ({ match }) => {
   );
   // console.log(currentAdminSellRequest);
   // console.log(authenticationInfos);
+
+  const { currentLang, setCurrentLang } = useContext(SelectAppLangContext);
 
   const [priceHaveBeenLoaded, setPriceHaveBeenLoaded] = useState(false);
 
@@ -276,10 +280,15 @@ const ShopAdminOneSellRequest = ({ match }) => {
               <p>
                 <PDFDownloadLink
                   document={
-                    <SellRequestRecapPDF
-                      sellRequest={currentAdminSellRequest}
-                      shopData={authenticationInfos.shop}
-                    />
+                    <IntlProvider
+                      locale={currentLang.locale}
+                      messages={currentLang.translationsForUsersLocale}
+                    >
+                      <SellRequestRecapPDF
+                        sellRequest={currentAdminSellRequest}
+                        shopData={authenticationInfos.shop}
+                      />
+                    </IntlProvider>
                   }
                   fileName={
                     "SellRequest n°" + currentAdminSellRequest.id + ".pdf"
