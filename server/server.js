@@ -33,6 +33,11 @@ app.post("/api/mail", (req, res) => {
   }
 });
 
+app.get("/api/PDF", (req, res) => {
+  const getPDFTranslated = require("./PDF_handling/SellRequestRecap.js");
+  getPDFTranslated("en-US", "English", 12);
+});
+
 //Shop Selling Settings
 app.post("/api/shop/RewriteSellingSettings", async (req, res) => {
   //Check if this is the right shop (does he have the shop access & is the id the one of this server)

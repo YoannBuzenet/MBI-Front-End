@@ -375,9 +375,9 @@ function App() {
   const handleAddSellingBasket = (card) => {
     let shouldAddTheCardToBasket = true;
     let contextCopy = [...currentBasket];
-    console.log("card to add", card);
-    console.log("basket", currentBasket);
-    console.log("copy", contextCopy);
+    // console.log("card to add", card);
+    // console.log("basket", currentBasket);
+    // console.log("copy", contextCopy);
     //If the selling basket is empty, just add the new card.
     if (currentBasket.length === 0) {
       setCurrentBasket([card]);
@@ -385,16 +385,16 @@ function App() {
       //If there are cards, we parse each of them and check which are in.
       //Here we just check and update quantity
       for (var i = 0; i < currentBasket.length; i++) {
-        console.log("carte du panier", currentBasket[i]);
-        console.log("carte à ajouter", card);
-        console.log(currentBasket[i].cardName === card.cardName);
-        console.log(currentBasket[i].set === card.set);
-        console.log(currentBasket[i].price === card.price);
-        console.log(currentBasket[i].condition === card.condition);
-        console.log(currentBasket[i].lang === card.lang);
-        console.log(currentBasket[i].isFoil === card.isFoil);
-        console.log(currentBasket[i].uuid === card.uuid);
-        console.log(currentBasket[i].isSigned === card.isSigned);
+        // console.log("carte du panier", currentBasket[i]);
+        // console.log("carte à ajouter", card);
+        // console.log(currentBasket[i].cardName === card.cardName);
+        // console.log(currentBasket[i].set === card.set);
+        // console.log(currentBasket[i].price === card.price);
+        // console.log(currentBasket[i].condition === card.condition);
+        // console.log(currentBasket[i].lang === card.lang);
+        // console.log(currentBasket[i].isFoil === card.isFoil);
+        // console.log(currentBasket[i].uuid === card.uuid);
+        // console.log(currentBasket[i].isSigned === card.isSigned);
         if (
           currentBasket[i].cardName === card.cardName &&
           currentBasket[i].set === card.set &&
