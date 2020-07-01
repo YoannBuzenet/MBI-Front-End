@@ -56,6 +56,12 @@ const styles = StyleSheet.create({
   tableColTotalProducts: {
     width: "77.77%",
   },
+  signature: {
+    textAlign: "right",
+    fontSize: 10,
+    marginTop: "50px",
+    marginRight: "100px",
+  },
 });
 
 // Create Document Component
@@ -64,9 +70,17 @@ const SellRequestTemplatePDF = ({ sellRequest, shopData }) => (
     {/* Compter le nombre de sell request card, eventuellement chunker en plusieurs pages le nombre de sell request card */}
     <Page style={styles.body}>
       <View>
-        <Text>Hey</Text>
-        <Text>Rachat n°{sellRequest.id}</Text>
-        <Text>Proposition de rachat</Text>
+        <Text style={{ marginTop: "30px" }}>Rachat n°{sellRequest.id}</Text>
+        <Text style={{ fontSize: "10px", marginTop: "30px" }}>
+          Le DATE, à {shopData.town}
+        </Text>
+        <Text style={{ fontSize: "10px", margin: "20px 0" }}>
+          Je soussigné Madame/Monsieur {sellRequest.customer.prenom}{" "}
+          {sellRequest.customer.nom}, habitant à {sellRequest.customer.adress},{" "}
+          {sellRequest.customer.postalCode} {sellRequest.customer.town},
+          reconnait sur l'honneur avoir vendu les cartes suivantes à la société{" "}
+          {shopData.legalName}.
+        </Text>
       </View>
       <View style={styles.table}>
         {/* Table Head */}
@@ -90,10 +104,10 @@ const SellRequestTemplatePDF = ({ sellRequest, shopData }) => (
             <Text style={styles.tableCellHeader}>Signed</Text>
           </View>
           <View style={styles.tableColHeader}>
-            <Text style={styles.tableCellHeader}>Quantity</Text>
+            <Text style={styles.tableCellHeader}>Price</Text>
           </View>
           <View style={styles.tableColHeader}>
-            <Text style={styles.tableCellHeader}>Price</Text>
+            <Text style={styles.tableCellHeader}>Quantity</Text>
           </View>
           <View style={styles.tableColHeader}>
             <Text style={styles.tableCellHeader}>Total</Text>
@@ -132,10 +146,10 @@ const SellRequestTemplatePDF = ({ sellRequest, shopData }) => (
                   </Text>
                 </View>
                 <View style={styles.tableCol}>
-                  <Text style={styles.tableCell}>{card.quantity}</Text>
+                  <Text style={styles.tableCell}>{card.price}</Text>
                 </View>
                 <View style={styles.tableCol}>
-                  <Text style={styles.tableCell}>{card.price}€</Text>
+                  <Text style={styles.tableCell}>{card.quantity}</Text>
                 </View>
                 <View style={styles.tableCol}>
                   <Text style={styles.tableCell}>
@@ -157,26 +171,26 @@ const SellRequestTemplatePDF = ({ sellRequest, shopData }) => (
             </Text>
           </View>
           <View style={styles.tableCol}>
-            <Text style={styles.tableCell}>Total cartes€</Text>
+            <Text style={styles.tableCell}>
+              {sellRequest.sellRequests.reduce(
+                (total, card) => total + card.quantity,
+                0
+              )}
+            </Text>
           </View>
           <View style={styles.tableCol}>
-            <Text style={styles.tableCell}>THUNES€</Text>
+            <Text style={styles.tableCell}>
+              {sellRequest.sellRequests.reduce(
+                (total, card) => total + card.quantity * card.price,
+                0
+              )}
+              €
+            </Text>
           </View>
         </View>
       </View>
       <View>
-        <Text style={styles.regularText}>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Et,
-          recusandae fuga cupiditate ut tempora cum rem iste tempore distinctio
-          sunt fugiat modi aut non consequatur libero odit repudiandae qui nemo?
-        </Text>
-      </View>
-      <View>
-        <Text style={styles.regularText}>
-          Je soussignée M.NOM PRENOM, domicilé au RUE, Ville, ZipCode, Pays,
-          accepte de revendre mes cartes à la société SHOP pour un montant de X
-          euros. Fait à BLANK, DATE SIGNATURE
-        </Text>
+        <Text style={styles.signature}>Signature</Text>
       </View>
     </Page>
   </Document>
