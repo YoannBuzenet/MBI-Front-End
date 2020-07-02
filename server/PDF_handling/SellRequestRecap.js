@@ -1,10 +1,10 @@
 import React from "react";
-import ReactPDF from "@react-pdf/renderer";
 import SellRequestRecap from "../../src/components/PDFtemplates/SellRequestRecapPDF";
+import ReactPDF from "@react-pdf/renderer";
 import { IntlProvider } from "react-intl";
-import config from "../../src/services/config";
+const config = require("../../src/services/config");
 
-export default function getPDFTranslated(locale, langName, sellRequestNumber) {
+function getPDFTranslated(locale, langName, sellRequestNumber) {
   //locale can be fr-FR or en-US
   //langName is either French or English for now
 
@@ -18,3 +18,5 @@ export default function getPDFTranslated(locale, langName, sellRequestNumber) {
     `${__dirname}/SellRequest${sellRequestNumber}.pdf`
   );
 }
+
+module.exports = { getPDFTranslated };
