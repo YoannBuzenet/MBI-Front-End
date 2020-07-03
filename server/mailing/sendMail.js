@@ -264,6 +264,14 @@ async function sendMail(mailRequest) {
       transport.sendMail(mailOpts, (err, info) => {
         if (err) console.log(err); //Handle Error
         console.log(info);
+        fs.unlink(
+          path.join(
+            __dirname,
+            "../../server/PDF_handling/PDF_buffer/" +
+              templateData.sellRequest.id +
+              ".pdf"
+          )
+        );
       });
       return true;
     }
