@@ -2,6 +2,7 @@ const ejs = require("ejs");
 const nodemailer = require("nodemailer");
 const { checkIfUserIsReallyLogged } = require("../services/securityCheckAPI");
 const { langDefinition } = require("../../src/services/config");
+const path = require("path");
 
 async function sendMail(mailRequest) {
   //TODO : ajouter la langue dans l'object MailRequest React side et le traiter ici
@@ -29,7 +30,8 @@ async function sendMail(mailRequest) {
     ? mailRequest.user.shop.sellRequests
     : null;
 
-  let mailOptions = { from: "", to: "", subject: "" };
+  //This object will be mutated during the Switch and hydrated with relevant data
+  let mailOptions = { from: "", to: "", subject: "", attachments: [] };
 
   //TODO -> Security on unlogged call (captcha)
 
@@ -52,6 +54,7 @@ async function sendMail(mailRequest) {
       break;
 
     case "submitted":
+      console.log("Sell Request passed to status being submitted");
       currentSecurityLevel = AllSecurityLevels["logged"];
       templateData = { ...templateData, sellRequest: mailRequest.infos };
       template =
@@ -64,6 +67,7 @@ async function sendMail(mailRequest) {
       break;
 
     case "cardsSent":
+      console.log("Sell Request passed to status being cards sents");
       currentSecurityLevel = AllSecurityLevels["logged"];
       templateData = { ...templateData, sellRequest: mailRequest.infos };
       template =
@@ -76,6 +80,7 @@ async function sendMail(mailRequest) {
       break;
 
     case "received":
+      console.log("Sell Request passed to status being received");
       currentSecurityLevel = AllSecurityLevels["shop"];
       templateData = {
         user: mailRequest.infos.customer,
@@ -94,6 +99,7 @@ async function sendMail(mailRequest) {
       break;
 
     case "beingProcessed":
+      console.log("Sell Request passed to status being processed");
       currentSecurityLevel = AllSecurityLevels["shop"];
       templateData = {
         user: mailRequest.user,
@@ -111,12 +117,13 @@ async function sendMail(mailRequest) {
       break;
 
     case "awaitingCustomerValidation":
+      console.log("Sell Request passed to status awaitingCustomerValidation");
       currentSecurityLevel = AllSecurityLevels["shop"];
       templateData = {
         user: mailRequest.user,
         sellRequest: mailRequest.infos,
       };
-      // console.log("LA", templateData);
+
       template =
         __dirname +
         "/templates/" +
@@ -126,15 +133,32 @@ async function sendMail(mailRequest) {
       mailOptions[
         "subject"
       ] = `Le rachat n°${templateData.sellRequest.id} est en attente de votre validation.`;
+
+      const { writePDF } = require("../PDF_handling/SellRequestServerTemplate");
+      writePDF(mailRequest.infos, mailRequest.user.shop, mailRequest.langID);
+      //Attaching the PDF
+      mailOptions.attachments = [
+        {
+          filename: "SellRequest" + templateData.sellRequest.id + ".pdf",
+          path: path.join(
+            __dirname,
+            "../../server/PDF_handling/PDF_buffer/" +
+              templateData.sellRequest.id +
+              ".pdf"
+          ),
+        },
+      ];
+
       break;
 
     case "validated":
+      console.log("Sell Request passed to status validated");
       currentSecurityLevel = AllSecurityLevels["shop"];
       templateData = {
         user: mailRequest.user,
         sellRequest: mailRequest.infos,
       };
-      console.log("la belle data", templateData);
+
       template =
         __dirname +
         "/templates/" +
@@ -147,6 +171,7 @@ async function sendMail(mailRequest) {
       break;
 
     case "cancel":
+      console.log("Sell Request passed to status cancel");
       currentSecurityLevel = AllSecurityLevels["shop"];
       templateData = {
         user: mailRequest.user,
@@ -195,7 +220,7 @@ async function sendMail(mailRequest) {
       return false;
     }
   };
-  console.log("check auth 0", securityCheckMailCanBeSent);
+  console.log("check auth 0, a priori true", securityCheckMailCanBeSent);
   securityCheckMailCanBeSent = await checkSecurity(
     currentSecurityLevel,
     AllSecurityLevels,
@@ -204,7 +229,10 @@ async function sendMail(mailRequest) {
     userShopSellRequest
   );
 
-  console.log("check auth 1", securityCheckMailCanBeSent);
+  console.log(
+    "check auth 1, after check can we send ?",
+    securityCheckMailCanBeSent
+  );
 
   const transport = nodemailer.createTransport({
     host: process.env.SMTP_NODEMAILER,
@@ -218,7 +246,7 @@ async function sendMail(mailRequest) {
 
   ejs.renderFile(template, templateData, (err, html) => {
     if (err) console.log(err); // Handle error
-    console.log(templateData);
+    // console.log(templateData);
     // console.log(templateData.user.customer.SellRequests);
     // console.log(template);
 
@@ -229,13 +257,14 @@ async function sendMail(mailRequest) {
       to: mailOptions.to,
       subject: mailOptions.subject,
       html: html,
+      attachments: mailOptions.attachments,
     };
 
     if (securityCheckMailCanBeSent) {
-      //   transport.sendMail(mailOpts, (err, info) => {
-      //     if (err) console.log(err); //Handle Error
-      //     console.log(info);
-      //   });
+      transport.sendMail(mailOpts, (err, info) => {
+        if (err) console.log(err); //Handle Error
+        console.log(info);
+      });
       return true;
     }
     return false;
