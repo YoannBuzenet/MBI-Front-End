@@ -2,7 +2,9 @@ var PdfPrinter = require("pdfmake");
 var fs = require("fs");
 
 const config = require("../../src/services/config");
-const translation = require("./Translations/Translation_SellRequestServerTemplate");
+const {
+  translation,
+} = require("./Translations/Translation_SellRequestServerTemplate");
 
 //https://pdfmake.github.io/docs/document-definition-object/tables/
 //http://pdfmake.org/playground.html
@@ -19,7 +21,7 @@ var fonts = {
 
 var printer = new PdfPrinter(fonts);
 
-function writePDF(sellRequest, shopData) {
+function writePDF(sellRequest, shopData, langName) {
   const sellRequestData = sellRequest.sellRequests.map((card) => {
     return [
       { text: `${card.name}`, style: "smallText" },
@@ -33,13 +35,15 @@ function writePDF(sellRequest, shopData) {
       `${card.price * card.quantity}`,
     ];
   });
-  console.log(sellRequestData);
 
   var docDefinition = {
     content: [
-      { text: `SellRequest N°${sellRequest.idSellRequest}`, style: "header" },
       {
-        text: `Je soussigné Madame/Monsieur ${sellRequest.customer.prenom} ${sellRequest.customer.nom}, habitant à ${sellRequest.customer.adress}, ${sellRequest.customer.postalCode} ${sellRequest.customer.town}, reconnait sur l'honneur avoir vendu les cartes suivantes à la société ${shopData.legalName}.`,
+        text: `${translation.sellRequestName[langName]} N°${sellRequest.idSellRequest}`,
+        style: "header",
+      },
+      {
+        text: `${translation.FirstParagraphPart1[langName]}${sellRequest.customer.prenom} ${sellRequest.customer.nom},${translation.FirstParagraphPart2[langName]}${sellRequest.customer.adress}, ${sellRequest.customer.postalCode} ${sellRequest.customer.town}, ${translation.FirstParagraphPart3[langName]}${shopData.legalName}.`,
         style: "firstParagraph",
       },
       {
@@ -83,14 +87,18 @@ function writePDF(sellRequest, shopData) {
               "",
               "",
               {
-                text: `Nombre de cartes : ${sellRequest.sellRequests.reduce(
+                text: `${
+                  translation.nombreDeCartes[langName]
+                }${sellRequest.sellRequests.reduce(
                   (total, card) => total + card.quantity,
                   0
                 )}`,
                 style: "smallText",
               },
               {
-                text: `Total :${sellRequest.sellRequests.reduce(
+                text: `${
+                  translation.Total[langName]
+                }${sellRequest.sellRequests.reduce(
                   (total, card) => total + card.quantity * card.price,
                   0
                 )} `,
@@ -132,21 +140,7 @@ function writePDF(sellRequest, shopData) {
     },
   };
   var options;
-  console.log([
-    ...sellRequest.sellRequests.map((card) => {
-      return [
-        `${card.name}`,
-        `${card.set}`,
-        `${config.langDefinition[card.lang]}`,
-        `${config.conditionDefinition[parseInt(card.condition)]}`,
-        `${card.isFoil ? "Yes" : "No"}`,
-        `${card.isSigned ? "Yes" : "No"}`,
-        `${card.price}`,
-        `${card.quantity}`,
-        `${card.price * card.quantity}`,
-      ];
-    }),
-  ]);
+
   var pdfDoc = printer.createPdfKitDocument(docDefinition, options);
   pdfDoc.pipe(
     fs.createWriteStream(`SellRequest${sellRequest.idSellRequest}.pdf`)
