@@ -35,7 +35,63 @@ app.post("/api/mail", (req, res) => {
 
 app.get("/api/PDF", (req, res) => {
   const { writePDF } = require("./PDF_handling/SellRequestServerTemplate");
-  writePDF();
+  writePDF(
+    {
+      idSellRequest: 25,
+      customer: {
+        prenom: "Yoann",
+        nom: "Buzenet",
+        adress: "5 Rue Edouard Detaille",
+        postalCode: "75017",
+        town: "Paris",
+      },
+      sellRequests: [
+        {
+          condition: "2",
+          foreignData: [],
+          hasfoil: 1,
+          hasnonfoil: 1,
+          id: "36213",
+          idSellRequestCard: 59,
+          isAltered: false,
+          isFoil: true,
+          isSigned: false,
+          lang: 9,
+          mcmId: 285589,
+          mkmPriceGuide: {},
+          mkmSellPrice: 120,
+          name: "Snapcaster Mage",
+          price: 50,
+          quantity: 2,
+          scryfallid: "befab3d3-87ce-4b55-a6c9-51db8dd41f71",
+          set: "Pro Tour Promos",
+          uuid: "959d6de9-1171-542a-84f3-1a9fe4305532",
+        },
+        {
+          condition: "6",
+          foreignData: [],
+          hasfoil: 1,
+          hasnonfoil: 1,
+          id: "36213",
+          idSellRequestCard: 60,
+          isAltered: false,
+          isFoil: true,
+          isSigned: false,
+          lang: 9,
+          mcmId: 285589,
+          mkmPriceGuide: {},
+          mkmSellPrice: 130,
+          name: "Snapcaster MagAA",
+          price: 25,
+          quantity: 1,
+          scryfallid: "befab3d3-87ce-4b55-a6c9-51db8dd41f71",
+          set: "Pro Tour Promos",
+          uuid: "959d6de9-1171-542a-84f3-1a9fe4305532",
+        },
+      ],
+    },
+    { legalName: "ShopNameYeah" }
+  );
   // const { getPDFTranslated } = require("./PDF_handling/React_SellRequestRecap");
   // getPDFTranslated("fr-FR", "French", 23);
   res.send("WIP");
