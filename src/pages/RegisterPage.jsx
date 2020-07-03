@@ -46,15 +46,18 @@ const RegisterPage = ({ history }) => {
         },
       };
       //Sending the register demand, sending a welcome email if registering was successful
-      await userAPI.register(jsonToSend).then((data) => {
-        return mailAPI.sendMail({
+      const serverResponse = await userAPI.register(jsonToSend);
+      try {
+        await mailAPI.sendMail({
           mailRequest: {
             action: "welcomeEmail",
-            user: data,
+            user: serverResponse,
             langID: currentLang.langID,
           },
         });
-      });
+      } catch (e) {
+        console.log("Mail couln't be sent, but registration happened.");
+      }
 
       toast.success(
         <FormattedMessage
