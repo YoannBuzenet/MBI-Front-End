@@ -34,8 +34,11 @@ app.post("/api/mail", (req, res) => {
 });
 
 app.get("/api/PDF", (req, res) => {
-  const getPDFTranslated = require("./PDF_handling/SellRequestRecap.js");
-  getPDFTranslated("en-US", "English", 12);
+  const { writePDF } = require("./PDF_handling/SellRequestServerTemplate");
+  writePDF();
+  // const { getPDFTranslated } = require("./PDF_handling/React_SellRequestRecap");
+  // getPDFTranslated("fr-FR", "French", 23);
+  res.send("WIP");
 });
 
 //Shop Selling Settings

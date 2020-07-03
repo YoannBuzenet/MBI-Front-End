@@ -19,7 +19,7 @@ import priceUpdateAPI from "../../services/priceUpdateAPI";
 import AuthContext from "../../context/authContext";
 import shopAPI from "../../services/shopAPI";
 import cardsAPI from "../../services/cardsAPI";
-import SellRequestRecapPDF from "../../components/PDFtemplates/SellRequestRecapPDF";
+import SellRequestRecapPDF from "../../components/PDFtemplates/SellRequestTemplatePDF";
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import { IntlProvider } from "react-intl";
 import SelectAppLangContext from "../../context/selectedAppLang";
