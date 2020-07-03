@@ -37,7 +37,7 @@ function writePDF(sellRequest, shopData) {
 
   var docDefinition = {
     content: [
-      { text: "SellRequest N°25", style: "header" },
+      { text: `SellRequest N°${sellRequest.idSellRequest}`, style: "header" },
       {
         text: `Je soussigné Madame/Monsieur ${sellRequest.customer.prenom} ${sellRequest.customer.nom}, habitant à ${sellRequest.customer.adress}, ${sellRequest.customer.postalCode} ${sellRequest.customer.town}, reconnait sur l'honneur avoir vendu les cartes suivantes à la société ${shopData.legalName}.`,
         style: "firstParagraph",
@@ -82,12 +82,20 @@ function writePDF(sellRequest, shopData) {
               "",
               "",
               "",
-              `Nombre de cartes : ${sellRequest.sellRequests.reduce(
-                (total, card) => total + card.quantity
-              )}`,
-              `Total :${sellRequest.sellRequests.reduce(
-                (total, card) => total + card.quantity * card.price
-              )} `,
+              {
+                text: `Nombre de cartes : ${sellRequest.sellRequests.reduce(
+                  (total, card) => total + card.quantity,
+                  0
+                )}`,
+                style: "smallText",
+              },
+              {
+                text: `Total :${sellRequest.sellRequests.reduce(
+                  (total, card) => total + card.quantity * card.price,
+                  0
+                )} `,
+                style: "smallText",
+              },
             ],
           ],
         },
@@ -140,7 +148,9 @@ function writePDF(sellRequest, shopData) {
     }),
   ]);
   var pdfDoc = printer.createPdfKitDocument(docDefinition, options);
-  pdfDoc.pipe(fs.createWriteStream("document.pdf"));
+  pdfDoc.pipe(
+    fs.createWriteStream(`SellRequest${sellRequest.idSellRequest}.pdf`)
+  );
   pdfDoc.end();
 }
 
