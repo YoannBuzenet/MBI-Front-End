@@ -1,6 +1,10 @@
 var PdfPrinter = require("pdfmake");
-
 var fs = require("fs");
+
+const translation = require("./Translations/Translation_SellRequestServerTemplate");
+
+//https://pdfmake.github.io/docs/document-definition-object/tables/
+//http://pdfmake.org/playground.html
 
 var fonts = {
   Roboto: {
@@ -23,12 +27,52 @@ function writePDF() {
           // headers are automatically repeated if the table spans over multiple pages
           // you can declare how many rows should be treated as headers
           headerRows: 1,
-          widths: ["*", "auto", 100, "*"],
+          widths: [
+            "11.11%",
+            "11.11%",
+            "11.11%",
+            "11.11%",
+            "11.11%",
+            "11.11%",
+            "11.11%",
+            "11.11%",
+            "11.11%",
+          ],
 
           body: [
-            ["First", "Second", "Third", "The last one"],
-            ["Value 1", "Value 2", "Value 3", "Value 4"],
-            [{ text: "Bold value", bold: true }, "Val 2", "Val 3", "Val 4"],
+            [
+              "First",
+              "Second",
+              "Third",
+              "The last one",
+              "First",
+              "Second",
+              "Third",
+              "The last one",
+              "The last one",
+            ],
+            [
+              "Value 1",
+              "Value 2",
+              "Value 3",
+              "Value 4",
+              "Value 1",
+              "Value 2",
+              "Value 3",
+              "Value 4",
+              "Value 4",
+            ],
+            [
+              { text: "Bold value", bold: true },
+              "Val 2",
+              "Val 3",
+              "Val 4",
+              "Val 2",
+              "Val 3",
+              "Val 4",
+              "Val 4",
+              "Val 4",
+            ],
           ],
         },
       },
