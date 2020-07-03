@@ -1,5 +1,6 @@
 var PdfPrinter = require("pdfmake");
 var fs = require("fs");
+const path = require("path");
 
 const config = require("../../src/services/config");
 const {
@@ -145,7 +146,14 @@ function writePDF(sellRequest, shopData, langID) {
 
   var pdfDoc = printer.createPdfKitDocument(docDefinition, options);
   pdfDoc.pipe(
-    fs.createWriteStream(`SellRequest${sellRequest.idSellRequest}.pdf`)
+    fs.createWriteStream(
+      path.join(
+        __dirname,
+        "../../server/PDF_handling/PDF_buffer/" +
+          sellRequest.idSellRequest +
+          ".pdf"
+      )
+    )
   );
   pdfDoc.end();
 }

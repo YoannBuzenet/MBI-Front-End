@@ -365,6 +365,7 @@ const ShopSellRequestStatusValidator = () => {
     // console.log(data.data[value]);
 
     let mailAction;
+    console.log("value is:", value);
     switch (value) {
       case "dateRecu":
         mailAction = "received";
