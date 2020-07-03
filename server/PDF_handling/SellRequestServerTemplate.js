@@ -21,7 +21,9 @@ var fonts = {
 
 var printer = new PdfPrinter(fonts);
 
-function writePDF(sellRequest, shopData, langName) {
+function writePDF(sellRequest, shopData, langID) {
+  const langName = config.langDefinition[langID];
+
   const sellRequestData = sellRequest.sellRequests.map((card) => {
     return [
       { text: `${card.name}`, style: "smallText" },
