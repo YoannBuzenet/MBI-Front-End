@@ -1775,6 +1775,7 @@ div.connecting-button {
   background-color: var(--main-bg-color-almost);
   color: white;
   outline: none;
+  cursor: pointer;
 }
 
 .connecting-button:hover {
