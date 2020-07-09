@@ -153,7 +153,7 @@ const SellingSettingsCondition = ({ isFoil, condition, langObject }) => {
         ][isFoil].algoName;
 
   return (
-    <div>
+    <div className="SellingPercentageContainer">
       <span>{condition[conditionShortname]}</span>
       <select
         onChange={(event) =>
@@ -174,6 +174,7 @@ const SellingSettingsCondition = ({ isFoil, condition, langObject }) => {
         type="text"
         onChange={(event) => handleChange(event, langObject, isFoil, condition)}
         value={percentDisplayed}
+        className="SellingPercentageInput"
       />
     </div>
   );

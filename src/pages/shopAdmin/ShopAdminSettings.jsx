@@ -346,60 +346,70 @@ const ShopAdminSettings = () => {
                   ))}
               </form>
             </div>
-            <div className="percentPerConditions">
-              <h2>
+            <div className="conditionsSettingsDiv">
+              <span className="explaination">
                 <FormattedMessage
-                  id="app.shop.shopSettings.conditions"
-                  defaultMessage={`Conditions`}
+                  id="app.shop.shopSettings.conditionsExplainations"
+                  defaultMessage={`Choose the percentage you want to apply to each condition. Mint is the base number and should always be 100%.`}
                 />
-              </h2>
-              <form>
-                {conditions.length > 0 &&
-                  conditions.map((condition, index) => (
-                    <Field
-                      name={condition.id}
-                      label={condition.nameEU}
-                      value={
-                        authenticationInfos.shop.shopData.PercentPerConditions[
-                          condition.id - 1
-                        ].percent
-                      }
-                      onChange={(event) =>
-                        handleChange(event, "percentPerCondition")
-                      }
-                      placeholder="Pourcentage d'achat de la condition"
-                      key={condition.id + index}
-                      idNumber={Math.random()}
+              </span>
+              <div className="ShopSettingsConditionsFoilAndNonFoil">
+                <div className="percentPerConditions">
+                  <h2>
+                    <FormattedMessage
+                      id="app.shop.shopSettings.conditions"
+                      defaultMessage={`Conditions`}
                     />
-                  ))}
-              </form>
-            </div>
-            <div className="percentPerConditionsFoil">
-              <h2>
-                <FormattedMessage
-                  id="app.shop.shopSettings.conditionsFoil"
-                  defaultMessage={`Foil Conditions`}
-                />
-              </h2>
-              <form>
-                {conditions.length > 0 &&
-                  conditions.map((condition, index) => (
-                    <Field
-                      name={condition.id}
-                      label={condition.nameEU + " Foil"}
-                      value={
-                        authenticationInfos.shop.shopData
-                          .PercentPerConditionFoils[condition.id - 1].percent
-                      }
-                      onChange={(event) =>
-                        handleChange(event, "percentPerConditionFoil")
-                      }
-                      placeholder="Pourcentage d'achat de la condition en Foil"
-                      key={condition.id + index}
-                      idNumber={Math.random()}
+                  </h2>
+                  <form>
+                    {conditions.length > 0 &&
+                      conditions.map((condition, index) => (
+                        <Field
+                          name={condition.id}
+                          label={condition.nameEU}
+                          value={
+                            authenticationInfos.shop.shopData
+                              .PercentPerConditions[condition.id - 1].percent
+                          }
+                          onChange={(event) =>
+                            handleChange(event, "percentPerCondition")
+                          }
+                          placeholder="Pourcentage d'achat de la condition"
+                          key={condition.id + index}
+                          idNumber={Math.random()}
+                        />
+                      ))}
+                  </form>
+                </div>
+                <div className="percentPerConditionsFoil">
+                  <h2>
+                    <FormattedMessage
+                      id="app.shop.shopSettings.conditionsFoil"
+                      defaultMessage={`Foil Conditions`}
                     />
-                  ))}
-              </form>
+                  </h2>
+                  <form>
+                    {conditions.length > 0 &&
+                      conditions.map((condition, index) => (
+                        <Field
+                          name={condition.id}
+                          label={condition.nameEU + " Foil"}
+                          value={
+                            authenticationInfos.shop.shopData
+                              .PercentPerConditionFoils[condition.id - 1]
+                              .percent
+                          }
+                          onChange={(event) =>
+                            handleChange(event, "percentPerConditionFoil")
+                          }
+                          placeholder="Pourcentage d'achat de la condition en Foil"
+                          key={condition.id + index}
+                          idNumber={Math.random()}
+                        />
+                      ))}
+                  </form>
+                </div>
+              </div>
             </div>
           </div>
         </div>

@@ -194,6 +194,7 @@
   "app.shop.shopSettings.signedCards": "Cartes signées",
   "app.shop.shopSettings.labelPercentToApply": "Pourcentage à appliquer",
   "app.shop.shopSettings.languages": "Langues",
+  "app.shop.shopSettings.conditionsExplainations": "Choisissez un pourcentage à appliquer à chaque état. Mint est l'état de base et doit toujours être à 100%.",
   "app.shop.shopSettings.conditions": "Etats",
   "app.shop.shopSettings.conditionsFoil": "Etats Foils",
   "app.shop.shopSettings.percentExplaination": "Quel pourcentage voulez-vous appliquer aux langues ? Votre langue d'achat préférée est le repère, elle doit être à 100%.",
