@@ -25,6 +25,14 @@ let translation = {
     English: "Total:",
     French: "Total :",
   },
+  IntroDate: {
+    English: "On the ",
+    French: "Le ",
+  },
+  FormatDate: {
+    English: "MM-DD-YYYY",
+    French: "DD-MM-YYYY",
+  },
 };
 
 module.exports = { translation };
