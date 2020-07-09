@@ -10,28 +10,32 @@ const SellingSettingsFoilNonFoil = ({ lang }) => {
     <div className="foilConditionsContainer">
       <div>
         Regular
-        <div>
-          {conditions.map((oneCondition, index) => (
-            <SellingSettingsCondition
-              isFoil={false}
-              condition={oneCondition}
-              langObject={lang}
-              key={lang.id + "" + index}
-            />
-          ))}
+        <div className="PercentageInputDivContainer">
+          <div>
+            {conditions.map((oneCondition, index) => (
+              <SellingSettingsCondition
+                isFoil={false}
+                condition={oneCondition}
+                langObject={lang}
+                key={lang.id + "" + index}
+              />
+            ))}
+          </div>
         </div>
       </div>
       <div>
         Foil
-        <div>
-          {conditions.map((oneCondition, index) => (
-            <SellingSettingsCondition
-              isFoil={true}
-              condition={oneCondition}
-              langObject={lang}
-              key={lang.id + "" + index}
-            />
-          ))}
+        <div className="PercentageInputDivContainer">
+          <div>
+            {conditions.map((oneCondition, index) => (
+              <SellingSettingsCondition
+                isFoil={true}
+                condition={oneCondition}
+                langObject={lang}
+                key={lang.id + "" + index}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </div>

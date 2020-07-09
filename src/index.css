@@ -1729,6 +1729,34 @@ span.customer_lastName {
   width: 30%;
 }
 
+.conditionsSettingsDiv {
+  margin-top: 3em;
+}
+
+.ShopSettingsConditionsFoilAndNonFoil {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.ShopSettingsConditionsFoilAndNonFoil > div {
+  margin: 0 3em;
+}
+
+.SellingPercentageContainer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.PercentageInputDivContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.SellingPercentageInput {
+  width: 60px;
+}
+
 @media only screen and (max-width: 1860px) {
   .percentPerLang > form {
     display: block;

@@ -194,6 +194,7 @@
   "app.shop.shopSettings.signedCards": "Signed Cards",
   "app.shop.shopSettings.labelPercentToApply": "Percent to Apply",
   "app.shop.shopSettings.languages": "Languages",
+  "app.shop.shopSettings.conditionsExplainations": "Choose the percentage you want to apply to each condition. Mint is the base number and should always be 100%.",
   "app.shop.shopSettings.conditions": "Conditions",
   "app.shop.shopSettings.conditionsFoil": "Foil Conditions",
   "app.shop.shopSettings.percentExplaination": "Choose which percentage you wish to pay per language. Your default buying language should be 100%.",
