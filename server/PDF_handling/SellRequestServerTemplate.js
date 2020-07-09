@@ -116,7 +116,7 @@ function writePDF(sellRequest, shopData, langID) {
         text:
           translation.IntroDate[langName] +
           moment().format(translation.FormatDate[langName]),
-        style: "smallText",
+        style: "smallTextAlignRight",
       },
       { text: "Signature", style: "signature" },
     ],
@@ -146,6 +146,10 @@ function writePDF(sellRequest, shopData, langID) {
       },
       smallText: {
         fontSize: 9,
+      },
+      smallTextAlignRight: {
+        fontSize: 9,
+        alignment: "right",
       },
     },
   };
