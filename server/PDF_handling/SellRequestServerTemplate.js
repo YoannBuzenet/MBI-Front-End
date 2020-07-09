@@ -1,6 +1,7 @@
 var PdfPrinter = require("pdfmake");
 var fs = require("fs");
 const path = require("path");
+const moment = require("moment");
 
 const config = require("../../src/services/config");
 const {
@@ -110,6 +111,12 @@ function writePDF(sellRequest, shopData, langID) {
             ],
           ],
         },
+      },
+      {
+        text:
+          translation.IntroDate[langName] +
+          moment().format(translation.FormatDate[langName]),
+        style: "smallText",
       },
       { text: "Signature", style: "signature" },
     ],
