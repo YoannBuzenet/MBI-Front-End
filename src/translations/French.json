@@ -177,6 +177,7 @@
   "app.shop.OneSellRequest.numberOfCards": "NOMBRE DE CARTES",
   "app.shop.OneSellRequest.total": "TOTAL",
   "app.shop.OneSellRequest.generatePDF": "Générer PDF",
+  "app.shop.OneSellRequest.warningDiv": "Les prix automatiques sont adaptés aux cartes normales de tous les jours. Pour les cartes plus rares, exotiques comme du foil russe, foil japonais, ou d'une valeur supérieure à {minimum_price_to_check}€, le prix doit être vérifié. Les cartes de ce type sont surlignées.",
 
   "app.shop.OneSellRequestPDF.SellRequestNumber": "Rachat N°",
 

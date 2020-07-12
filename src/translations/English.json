@@ -177,6 +177,7 @@
   "app.shop.OneSellRequest.numberOfCards": "NUMBER OF CARDS",
   "app.shop.OneSellRequest.total": "TOTAL",
   "app.shop.OneSellRequest.generatePDF": "Generate PDF",
+  "app.shop.OneSellRequest.warningDiv": "Automatic Selling Prices are adapted to classic day-to-day cards. For exotic cards like foil Russian, Signed, BGS, or price above {minimum_price_to_check}€ it should be checked. These cards are highlighted.",
 
   "app.shop.OneSellRequestPDF.SellRequestNumber": "Sell Request N°",
 

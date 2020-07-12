@@ -14,15 +14,15 @@ import OneBigLineLoader from "../../components/loaders/OneBigLineLoader";
 import errorHandlingAPI from "../../services/errorHandlingAPI";
 import { isMobile } from "react-device-detect";
 import SetListLoader from "../../components/loaders/SetListLoader";
-import { FormattedMessage, useIntl } from "react-intl";
+import { FormattedMessage, useIntl, IntlProvider } from "react-intl";
 import priceUpdateAPI from "../../services/priceUpdateAPI";
 import AuthContext from "../../context/authContext";
 import shopAPI from "../../services/shopAPI";
 import cardsAPI from "../../services/cardsAPI";
 import SellRequestRecapPDF from "../../components/PDFtemplates/SellRequestTemplatePDF";
 import { PDFDownloadLink } from "@react-pdf/renderer";
-import { IntlProvider } from "react-intl";
 import SelectAppLangContext from "../../context/selectedAppLang";
+import FeatherIcon from "feather-icons-react";
 
 const ShopAdminOneSellRequest = ({ match }) => {
   const { id } = match.params;
@@ -425,6 +425,23 @@ const ShopAdminOneSellRequest = ({ match }) => {
                     id="app.shop.OneSellRequest.MKMSellingPrice"
                     defaultMessage={`MKM Selling Price`}
                   />
+                  <div className="infoHoverContainer">
+                    <FeatherIcon icon="info" />
+                    <p className="infoHover">
+                      <FormattedMessage
+                        id="app.shop.OneSellRequest.warningDiv"
+                        description="Greeting to welcome the user to the app"
+                        defaultMessage="Automatic Selling Prices are adapted to classic day-to-day
+                      cards. For exotic cards like foil Russian, Signed, BGS, or
+                      price above {minimum_price_to_check}
+                      € it should be checked. These cards are highlighted."
+                        values={{
+                          minimum_price_to_check:
+                            process.env.REACT_APP_MINIMUM_PRICE_TO_CHECK,
+                        }}
+                      />
+                    </p>
+                  </div>
                 </Th>
                 <Th>
                   <FormattedMessage

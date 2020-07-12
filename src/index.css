@@ -1602,6 +1602,33 @@ SHOP ADMIN ONE SELL REQUEST
   top: 0;
 }
 
+table.zebra-table tbody tr.cardSellingPriceShouldBeCheckedByHuman {
+  background-color: orange;
+}
+table.zebra-table tbody tr.cardSellingPriceShouldBeCheckedByHuman:hover {
+  background-color: rgba(255, 165, 0, 0.5);
+}
+
+.infoHoverContainer {
+  position: relative;
+}
+.infoHoverContainer:hover svg {
+  background-color: rgba(134, 133, 133, 0.5);
+}
+
+.infoHover {
+  position: absolute;
+  display: none;
+  background-color: rgba(134, 133, 133, 0.7);
+  border-radius: 5px;
+  font-weight: normal;
+  font-size: 12px;
+}
+
+.infoHoverContainer:hover .infoHover {
+  display: block;
+}
+
 @media only screen and (max-width: 1000px) {
   .update-set {
     background-color: skyblue;
