@@ -187,6 +187,7 @@
   "app.shop.MKMPOSTrequest.toast.failure": "Le rachat n'a pu être validé. Merci de recommencer ultérieurement.",
   "app.shop.MKMPOSTrequest.toast.info": "Merci de suivre la procédure de synchronisation. Vous pourrez ensuite valider votre rachat.",
   "app.shop.MKMPOSTrequest.toast.errorPriceis0": "L'un de vos prix de vente est à 0. Merci de vérifier vos prix.",
+  "app.shop.MKMPOSTrequest.toast.errorSellingPriceBelowBuyingPrice": "L'un de vos prix de vente est inférieur ou égal à l'un de vos prix de rachat. Merci de revérifier vos prix.",
 
   "app.shop.shopSettings.title": "Paramètres",
   "app.shop.shopSettings.defaultWebsiteLanguage": "Langue du site par défaut : ",

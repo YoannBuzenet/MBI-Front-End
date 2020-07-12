@@ -175,6 +175,17 @@ const ShopSellRequestStatusValidator = () => {
         );
         //Ending the whole function is a selling price is set to 0
         return;
+      } else if (
+        currentAdminSellRequest.sellRequests.filter(
+          (card) => card.mkmSellPrice <= card.price
+        ).length > 0
+      ) {
+        toast.error(
+          <FormattedMessage
+            id="app.shop.MKMPOSTrequest.toast.errorSellingPriceBelowBuyingPrice"
+            defaultMessage={`One of your selling prices is below your buying price. Please check it again.`}
+          />
+        );
       }
 
       console.log(newData);
