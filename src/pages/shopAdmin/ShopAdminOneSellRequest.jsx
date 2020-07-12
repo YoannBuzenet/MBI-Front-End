@@ -464,7 +464,17 @@ const ShopAdminOneSellRequest = ({ match }) => {
                 currentAdminSellRequest.sellRequests.length > 0 &&
                 currentAdminSellRequest.sellRequests.map((card, index) => {
                   return (
-                    <CardLineShop key={card.id} card={card} indexCard={index} />
+                    <CardLineShop
+                      key={
+                        "" +
+                        card.id +
+                        card.condition +
+                        card.price +
+                        card.idSellRequestCard
+                      }
+                      card={card}
+                      indexCard={index}
+                    />
                   );
                 })}
               {(currentAdminSellRequest.dateValidated !== null ||
