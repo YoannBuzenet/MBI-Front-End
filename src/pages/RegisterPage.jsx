@@ -42,7 +42,7 @@ const RegisterPage = ({ history }) => {
           postalCode: credentials.postalCode,
           town: credentials.town,
           tel: credentials.tel,
-          shop: "/shops/" + config.shopID,
+          shop: "/shops/" + process.env.REACT_APP_SHOP_ID,
         },
       };
       //Sending the register demand, sending a welcome email if registering was successful

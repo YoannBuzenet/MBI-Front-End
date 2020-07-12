@@ -40,13 +40,13 @@ const MyShopAccount = (props) => {
   const triggerAPISending = (name, value) => {
     const objectToSend = {
       shop: {
-        id: config.shopID,
+        id: process.env.REACT_APP_SHOP_ID,
         [name]: value,
       },
     };
 
     shopAPI
-      .updateFields(objectToSend, config.shopID)
+      .updateFields(objectToSend, process.env.REACT_APP_SHOP_ID)
       .then((data) => {
         const localStorage = localStorageAPI.getLocalStorageSession();
         localStorage.shop[name] = value;

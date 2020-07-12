@@ -33,7 +33,7 @@ const LastModifications = () => {
         .get(
           process.env.REACT_APP_MTGAPI_URL +
             "/lastcardsmodified?limit=10&shopid=" +
-            config.shopID
+            process.env.REACT_APP_SHOP_ID
         )
         .then((data) => {
           setLastModificationList(data.data);
