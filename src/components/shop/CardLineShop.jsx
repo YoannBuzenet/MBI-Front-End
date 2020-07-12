@@ -76,6 +76,7 @@ const CardLineShop = ({ card, indexCard }) => {
   //Translation Hook
   const intl = useIntl();
 
+  //Getting automatic selling price
   useEffect(() => {
     if (
       authenticationInfos.shop?.shopData?.SellingSettings &&
@@ -409,6 +410,19 @@ const CardLineShop = ({ card, indexCard }) => {
       ? ""
       : currentAdminSellRequest.sellRequests[indexCard].mkmSellPrice;
 
+  const sellingPriceShouldBeCheckedByHuman =
+    card.price > process.env.REACT_APP_MINIMUM_PRICE_TO_CHECK ||
+    (card.isFoil && card.lang === 5) ||
+    (card.isFoil && card.lang === 7) ||
+    (card.isFoil && card.lang === 8) ||
+    (card.isFoil && card.lang === 10) ||
+    (card.isFoil && card.lang === 11) ||
+    card.isSigned
+      ? " cardSellingPriceShouldBeCheckedByHuman"
+      : "";
+
+  // console.log(process.env.REACT_APP_MINIMUM_PRICE_TO_CHECK);
+
   return (
     <>
       <Tr
@@ -423,7 +437,9 @@ const CardLineShop = ({ card, indexCard }) => {
             setIsOnHover(false);
           }
         }}
-        className={sellingBasketLine || ""}
+        className={
+          sellingBasketLine || sellingPriceShouldBeCheckedByHuman || ""
+        }
       >
         <Td
           className="cardPictureHolder"
