@@ -4,8 +4,6 @@
 const French = require("../translations/French.json");
 const English = require("../translations/English.json");
 
-const shopID = 1;
-
 const avatarShopURL = "";
 
 //DEFINED LANGUAGE ID
@@ -102,7 +100,6 @@ const defaultSellingPercents = {
 };
 
 module.exports = {
-  shopID,
   baseLang,
   websiteDefaultLanguageContext,
   langDefinition,

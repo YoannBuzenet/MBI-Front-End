@@ -72,7 +72,7 @@ const CardLine = ({ card, handleAddSellingBasket, index, cardID }) => {
     if (name !== "quantity") {
       //API call to get the relevant price and UPDATE PRICE
       CardShopPriceAPI.getOnePrice(
-        config.shopID,
+        process.env.REACT_APP_SHOP_ID,
         cardID,
         contextCopy[cardID].lang,
         contextCopy[cardID].condition,

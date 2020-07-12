@@ -33,13 +33,21 @@ function updateFields(fieldObject, shopID) {
 
 function getPublicInfos() {
   return axios
-    .get(process.env.REACT_APP_MTGAPI_URL + "/shopInfos/" + config.shopID)
+    .get(
+      process.env.REACT_APP_MTGAPI_URL +
+        "/shopInfos/" +
+        process.env.REACT_APP_SHOP_ID
+    )
     .then((data) => data.data);
 }
 
 function getBuyingClauses() {
   return axios
-    .get(process.env.REACT_APP_MTGAPI_URL + "/shopClauses/" + config.shopID)
+    .get(
+      process.env.REACT_APP_MTGAPI_URL +
+        "/shopClauses/" +
+        process.env.REACT_APP_SHOP_ID
+    )
     .then((data) => data.data);
 }
 

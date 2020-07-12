@@ -73,7 +73,7 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
     if (name !== "quantity") {
       //Updating price
       CardShopPriceAPI.getOnePrice(
-        config.shopID,
+        process.env.REACT_APP_SHOP_ID,
         currentBasket[indexCard].id,
         currentBasket[indexCard].lang,
         currentBasket[indexCard].condition,

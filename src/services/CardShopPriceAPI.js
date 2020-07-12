@@ -5,7 +5,7 @@ function getArrayofPrices(arrayOfIdCards, baseLangID, cleaningParam) {
   return axios.get(
     process.env.REACT_APP_MTGAPI_URL +
       "/card_shop_prices?shop.id=" +
-      config.shopID +
+      process.env.REACT_APP_SHOP_ID +
       "&language.id[]=9&cardCondition.id=2&isSigned=false&language.id[]=" +
       baseLangID +
       "&" +
@@ -47,7 +47,7 @@ function getAllCSPFromOneEdition(cardID) {
   return axios.get(
     process.env.REACT_APP_MTGAPI_URL +
       "/card_shop_prices.json?shop.id=" +
-      config.shopID +
+      process.env.REACT_APP_SHOP_ID +
       "&card.id=" +
       cardID
   );
