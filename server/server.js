@@ -1,5 +1,6 @@
 // Core
 require("dotenv").config();
+require("dotenv").config({ path: "../.env.local" });
 const express = require("express");
 const path = require("path");
 const bodyParser = require("body-parser");
@@ -97,6 +98,11 @@ app.get("/api/PDF", (req, res) => {
   // getPDFTranslated("fr-FR", "French", 23);
   res.send("WIP");
 });
+
+// app.get("/api/test", (req, res) => {
+//   console.log("test env.local", process.env.SMTP_NODEMAILER);
+//   console.log("test env.local", process.env);
+// });
 
 //Shop Selling Settings
 app.post("/api/shop/RewriteSellingSettings", async (req, res) => {
