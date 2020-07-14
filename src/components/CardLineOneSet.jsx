@@ -214,7 +214,7 @@ const CardLineOneSet = ({
             defaultValue="2"
           >
             {conditions.length > 0
-              ? config.gradingArea === "EU"
+              ? process.env.REACT_APP_SHOP_GRADING_AREA === "EU"
                 ? conditions.map((condition, index) =>
                     condition.isEU ? (
                       <option key={index} value={condition.id}>

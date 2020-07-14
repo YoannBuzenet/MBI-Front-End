@@ -32,10 +32,13 @@ const SellingSettingsCondition = ({ isFoil, condition, langObject }) => {
   const intl = useIntl();
 
   const conditionShortname =
-    config.gradingArea === "EU" ? "shortname" : "shortnameUS";
+    process.env.REACT_APP_SHOP_GRADING_AREA === "EU"
+      ? "shortname"
+      : "shortnameUS";
 
   //If it's needed to get the condition complete name ("Near Mint")
-  const conditionCompleteName = "shortname" + config.gradingArea;
+  const conditionCompleteName =
+    "shortname" + process.env.REACT_APP_SHOP_GRADING_AREA;
 
   const handleChange = (event, langObject, isFoil, condition) => {
     setTimer(clearTimeout(timer));

@@ -223,7 +223,7 @@ const ShopOneLangAllConditionsCard = ({ oneLang, index }) => {
             {nonFoilNonSignedArray.length !== 0 &&
               nonFoilNonSignedArray
                 .filter((futureFormField) => {
-                  if (config.gradingArea === "US") {
+                  if (process.env.REACT_APP_SHOP_GRADING_AREA === "US") {
                     return futureFormField.conditionKey !== 5;
                   } else {
                     return futureFormField;
@@ -264,7 +264,7 @@ const ShopOneLangAllConditionsCard = ({ oneLang, index }) => {
             {nonFoilSignedArray.length !== 0 &&
               nonFoilSignedArray
                 .filter((futureFormField) => {
-                  if (config.gradingArea === "US") {
+                  if (process.env.REACT_APP_SHOP_GRADING_AREA === "US") {
                     return futureFormField.conditionKey !== 5;
                   } else {
                     return futureFormField;
@@ -308,7 +308,7 @@ const ShopOneLangAllConditionsCard = ({ oneLang, index }) => {
             {foilNonSignedArray.length !== 0 &&
               foilNonSignedArray
                 .filter((futureFormField) => {
-                  if (config.gradingArea === "US") {
+                  if (process.env.REACT_APP_SHOP_GRADING_AREA === "US") {
                     return futureFormField.conditionKey !== 5;
                   } else {
                     return futureFormField;
@@ -349,7 +349,7 @@ const ShopOneLangAllConditionsCard = ({ oneLang, index }) => {
             {foilSignedArray.length !== 0 &&
               foilSignedArray
                 .filter((futureFormField) => {
-                  if (config.gradingArea === "US") {
+                  if (process.env.REACT_APP_SHOP_GRADING_AREA === "US") {
                     return futureFormField.conditionKey !== 5;
                   } else {
                     return futureFormField;

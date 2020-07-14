@@ -720,7 +720,7 @@ const ShopConditionPriceUpdate = ({
       <span className="conditionField unselectable">
         {
           conditionsDefinition.allConditions[conditionID].shortname[
-            config.gradingArea
+            process.env.REACT_APP_SHOP_GRADING_AREA
           ]
         }
       </span>
