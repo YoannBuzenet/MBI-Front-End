@@ -31,10 +31,6 @@ const conditionDefinition = {
   7: "Poor",
 };
 
-//SHOP GRADING SYSTEM
-//EU or US
-const gradingArea = "EU";
-
 //TIME TO AUTO LOG OUT
 //30 minutes
 const TIME_TO_LOG_OUT = 30 * 60 * 1000;
@@ -97,10 +93,8 @@ const defaultSellingPercents = {
 };
 
 module.exports = {
-  baseLang,
   websiteDefaultLanguageContext,
   langDefinition,
-  gradingArea,
   TIME_TO_LOG_OUT,
   TIME_JWT_RENEW,
   TIME_THROTTLE,
