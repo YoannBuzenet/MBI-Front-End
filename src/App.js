@@ -74,6 +74,7 @@ import LoggedRouteRender from "./components/LoggedRouteRender";
 // });
 
 function App() {
+  // console.log("test .env", typeof process.env.REACT_APP_SHOP_BASELANG);
   document.title = process.env.REACT_APP_SHOP_NAME + "";
 
   // STATE Creating the Authentication state
@@ -288,7 +289,7 @@ function App() {
     if (savedUserPreferenceCardsSetsLang) {
       return savedUserPreferenceCardsSetsLang;
     } else {
-      return { cardsSetLang: process.env.REACT_APP_SHOP_BASELANG };
+      return { cardsSetLang: parseInt(process.env.REACT_APP_SHOP_BASELANG) };
     }
   }
 

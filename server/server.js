@@ -130,12 +130,17 @@ app.post("/api/shop/RewriteSellingSettings", async (req, res) => {
 });
 app.post("/api/shop/TryToGetSellingSettings", async (req, res) => {
   console.log("sending selling settings");
+  console.log(req.body.id);
+  console.log(req.headers.authorization);
+
   //Checking if this is the right shop (does he have the shop access & is the id the one of this server)
   try {
     const securityCheck = await securityCheckAPI.checkIfUserIsCurrentShop(
       req.headers.authorization,
       req.body.id
     );
+
+    console.log(securityCheck);
 
     fs.readFile(__dirname + "/shopData/sellingsSettings.json", function (
       err,

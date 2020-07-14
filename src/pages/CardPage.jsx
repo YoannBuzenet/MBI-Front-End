@@ -143,7 +143,7 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
     if (Object.keys(cardsCardPageContext).length > 0 && !hasUpdatedPrices) {
       CardShopPriceAPI.getArrayofPrices(
         Object.keys(cardsCardPageContext).map((id) => parseInt(id)),
-        process.env.REACT_APP_SHOP_BASELANG
+        parseInt(process.env.REACT_APP_SHOP_BASELANG)
       )
         .then((data) => {
           addFirstDisplayedPricesToContext(data.data["hydra:member"]);
