@@ -288,7 +288,7 @@ function App() {
     if (savedUserPreferenceCardsSetsLang) {
       return savedUserPreferenceCardsSetsLang;
     } else {
-      return { cardsSetLang: config.baseLang };
+      return { cardsSetLang: process.env.REACT_APP_SHOP_BASELANG };
     }
   }
 

@@ -230,7 +230,7 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
             value={card.condition}
           >
             {conditions.length > 0
-              ? config.gradingArea === "EU"
+              ? process.env.REACT_APP_SHOP_GRADING_AREA === "EU"
                 ? conditions
                     // .filter(condition => condition.id !== card.condition)
                     .map((condition, index) =>

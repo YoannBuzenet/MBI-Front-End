@@ -285,7 +285,7 @@ const ShopAdminSettings = () => {
             id="app.shop.shopSettings.defaultGradingSystem"
             defaultMessage={`Grading System : `}
           />{" "}
-          {config.gradingArea}
+          {process.env.REACT_APP_SHOP_GRADING_AREA}
         </p>
         <div className="categorySetting">
           <h2 className="categoryTitle">Buying Settings</h2>

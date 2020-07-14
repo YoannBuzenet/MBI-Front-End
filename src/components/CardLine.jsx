@@ -194,7 +194,7 @@ const CardLine = ({ card, handleAddSellingBasket, index, cardID }) => {
             value={card.condition}
           >
             {conditions.length > 0
-              ? config.gradingArea === "EU"
+              ? process.env.REACT_APP_SHOP_GRADING_AREA === "EU"
                 ? conditions.map((condition, index) =>
                     condition.isEU ? (
                       <option key={index} value={condition.id}>
