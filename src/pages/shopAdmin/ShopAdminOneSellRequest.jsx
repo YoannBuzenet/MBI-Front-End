@@ -65,22 +65,22 @@ const ShopAdminOneSellRequest = ({ match }) => {
   }
 
   useEffect(() => {
-    console.log("hey avant filtre");
+    // console.log("hey avant filtre");
     if (
       currentAdminSellRequest.sellRequests &&
       currentAdminSellRequest.sellRequests.length > 0 &&
       currentAdminSellRequest.idSellRequest !== parseInt(id)
     ) {
-      console.log("hey");
+      // console.log("hey");
       setCurrentAdminSellRequest([]);
     }
   }, [id]);
 
   //Getting Selling Settings percent & algo from the shop
   useEffect(() => {
-    console.log("lô avant filtre");
+    // console.log("lô avant filtre");
     if (!authenticationInfos?.shop?.shopData?.SellingSettings) {
-      console.log("lô");
+      // console.log("lô");
       shopAPI
         .getShopSellingSettings(authenticationInfos)
         .then((data) => {
@@ -106,19 +106,19 @@ const ShopAdminOneSellRequest = ({ match }) => {
   useEffect(() => {
     const CancelToken = axios.CancelToken;
     const source = CancelToken.source();
-    console.log("la avant filtre");
+    // console.log("la avant filtre");
     if (
       (currentAdminSellRequest.sellRequests &&
         currentAdminSellRequest.sellRequests.length === 0) ||
       currentAdminSellRequest.idSellRequest !== parseInt(id)
     ) {
-      console.log("la");
+      // console.log("la");
       sellRequestAPI
         .findById(id, {
           cancelToken: source.token,
         })
         .then((data) => {
-          console.log("resp from sellRequestAPI", data);
+          // console.log("resp from sellRequestAPI", data);
           return data;
         })
         .then((data) => {
@@ -178,13 +178,13 @@ const ShopAdminOneSellRequest = ({ match }) => {
 
   //Refreshing MKM prices on each card of the sell request
   useEffect(() => {
-    console.log("ici avant filtre");
+    // console.log("ici avant filtre");
     if (
       currentAdminSellRequest.sellRequests &&
       currentAdminSellRequest.sellRequests.length > 0 &&
       !priceHaveBeenLoaded
     ) {
-      console.log("ici");
+      // console.log("ici");
 
       awaitPrices();
 
