@@ -20,7 +20,7 @@ import priceUpdateAPI from "../../services/priceUpdateAPI";
 import AuthContext from "../../context/authContext";
 
 const CardLineShop = ({ card, indexCard }) => {
-  console.log(card);
+  console.log("cardlineshop card", card);
 
   //Getting the Sell Request state by context
   const { currentAdminSellRequest, setCurrentAdminSellRequest } = useContext(
@@ -39,7 +39,7 @@ const CardLineShop = ({ card, indexCard }) => {
   const { authenticationInfos, setAuthenticationInfos } = useContext(
     AuthContext
   );
-  console.log(authenticationInfos);
+  console.log("cardlineshop auth infos", authenticationInfos);
 
   //Knowing if the Sell Request is OK to be submitted (no duplicate)
   const { errorList, setErrorList } = useContext(canSubmitContext);
@@ -78,10 +78,34 @@ const CardLineShop = ({ card, indexCard }) => {
 
   //Getting automatic selling price
   useEffect(() => {
+    // console.log("trigger adding automatic prices ");
+
+    // console.log(
+    //   "seling settings OK",
+    //   authenticationInfos.shop?.shopData.hasOwnProperty("SellingSettings")
+    // );
+    // console.log(
+    //   "test value automaticSellingPrice",
+    //   currentAdminSellRequest.sellRequests[indexCard]["AutomaticSellingPrice"]
+    // );
+    // console.log(
+    //   "test value automaticSellingPrice is undefined",
+    //   currentAdminSellRequest.sellRequests[indexCard][
+    //     "AutomaticSellingPrice"
+    //   ] === undefined
+    // );
+    // console.log(
+    //   "has card its priceguide ?",
+    //   card.hasOwnProperty("mkmPriceGuide")
+    // );
     if (
-      authenticationInfos.shop?.shopData?.SellingSettings &&
-      !currentAdminSellRequest.sellRequests[indexCard]["AutomaticSellingPrice"]
+      authenticationInfos.shop?.shopData.hasOwnProperty("SellingSettings") &&
+      currentAdminSellRequest.sellRequests[indexCard][
+        "AutomaticSellingPrice"
+      ] === undefined &&
+      card.hasOwnProperty("mkmPriceGuide")
     ) {
+      // console.log("passed the filter to set automatic prices");
       const relevantAlgo =
         card.mkmPriceGuide?.[
           authenticationInfos.shop?.shopData?.SellingSettings?.[card.lang]?.[
@@ -97,6 +121,12 @@ const CardLineShop = ({ card, indexCard }) => {
       // console.log("price from algo : ",card.id, relevantAlgo);
       // console.log("% applied",card.id, relevantPercent);
       let automaticMKMSellingPrice;
+      // console.log("relevant algo", relevantAlgo);
+      // console.log("relevant percent", relevantPercent);
+      // console.log(
+      //   "automatic selling price to be set",
+      //   automaticMKMSellingPrice
+      // );
 
       if (relevantAlgo !== undefined && relevantPercent !== undefined) {
         automaticMKMSellingPrice = priceUpdateAPI.smoothNumbers(
@@ -114,7 +144,7 @@ const CardLineShop = ({ card, indexCard }) => {
   }, [
     authenticationInfos,
     setAuthenticationInfos,
-    card.mkmPriceGuide,
+    card,
     currentAdminSellRequest,
     setCurrentAdminSellRequest,
     currentCard,
@@ -198,7 +228,7 @@ const CardLineShop = ({ card, indexCard }) => {
       // (ADD TOAST IF FAILURE)
       sellRequestAPI
         .updateAsShop(newSellRequest.id, newData)
-        .then((data) => console.log("update OK"));
+        .then((data) => console.log("cardlineshop update OK"));
     }
   }, [cardHasBeenDeleted]);
 
@@ -227,7 +257,7 @@ const CardLineShop = ({ card, indexCard }) => {
 
     sellRequestCardAPI
       .update(currentCard, name, newValue)
-      .catch((error) => console.log(error));
+      .catch((error) => console.log("cardlineshop error", error));
     // console.log(currentCard);
 
     //mutating to get local change immediatly
@@ -365,9 +395,9 @@ const CardLineShop = ({ card, indexCard }) => {
   });
 
   const handleChangeMKMSellPrice = (event) => {
-    console.log(event);
-    console.log(event.target.value);
-    console.log(currentAdminSellRequest);
+    console.log("cardline shop", event);
+    console.log("cardline shop", event.target.value);
+    console.log("cardline shop", currentAdminSellRequest);
     const newPrice = event.target.value;
     setTimer(clearTimeout(timer));
 
@@ -696,7 +726,7 @@ const CardLineShop = ({ card, indexCard }) => {
             size={isMobile ? config.iconSizeMobile : config.iconSizeDesktop}
             className="downsize-icon pointer remove-item-basket"
             onClick={() => {
-              console.log(card);
+              console.log("cardline shop", card);
               return handleDelete();
             }}
           />

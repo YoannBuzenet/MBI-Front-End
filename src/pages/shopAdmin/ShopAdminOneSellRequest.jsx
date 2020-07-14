@@ -46,19 +46,41 @@ const ShopAdminOneSellRequest = ({ match }) => {
 
   const [priceHaveBeenLoaded, setPriceHaveBeenLoaded] = useState(false);
 
+  async function awaitPrices() {
+    //Array of sell request cards here
+    const promises = currentAdminSellRequest.sellRequests.map((card) => {
+      return cardsAPI.getById(card.id);
+    });
+    const res = await Promise.all(promises);
+
+    //TODO : Les ajouter aux contexte
+    res.map((card, index) => {
+      currentAdminSellRequest.sellRequests[index]["mkmPriceGuide"] =
+        card.data.priceguide;
+    });
+
+    setCurrentAdminSellRequest({
+      ...currentAdminSellRequest,
+    });
+  }
+
   useEffect(() => {
+    console.log("hey avant filtre");
     if (
       currentAdminSellRequest.sellRequests &&
       currentAdminSellRequest.sellRequests.length > 0 &&
       currentAdminSellRequest.idSellRequest !== parseInt(id)
     ) {
+      console.log("hey");
       setCurrentAdminSellRequest([]);
     }
   }, [id]);
 
   //Getting Selling Settings percent & algo from the shop
   useEffect(() => {
+    console.log("lô avant filtre");
     if (!authenticationInfos?.shop?.shopData?.SellingSettings) {
+      console.log("lô");
       shopAPI
         .getShopSellingSettings(authenticationInfos)
         .then((data) => {
@@ -84,18 +106,19 @@ const ShopAdminOneSellRequest = ({ match }) => {
   useEffect(() => {
     const CancelToken = axios.CancelToken;
     const source = CancelToken.source();
-
+    console.log("la avant filtre");
     if (
       (currentAdminSellRequest.sellRequests &&
         currentAdminSellRequest.sellRequests.length === 0) ||
       currentAdminSellRequest.idSellRequest !== parseInt(id)
     ) {
+      console.log("la");
       sellRequestAPI
         .findById(id, {
           cancelToken: source.token,
         })
         .then((data) => {
-          console.log(data);
+          console.log("resp from sellRequestAPI", data);
           return data;
         })
         .then((data) => {
@@ -155,28 +178,15 @@ const ShopAdminOneSellRequest = ({ match }) => {
 
   //Refreshing MKM prices on each card of the sell request
   useEffect(() => {
+    console.log("ici avant filtre");
     if (
       currentAdminSellRequest.sellRequests &&
       currentAdminSellRequest.sellRequests.length > 0 &&
       !priceHaveBeenLoaded
     ) {
-      async function awaitPrices() {
-        //Array of sell request cards here
-        const promises = currentAdminSellRequest.sellRequests.map((card) => {
-          return cardsAPI.getById(card.id);
-        });
-        const res = await Promise.all(promises);
+      console.log("ici");
 
-        //TODO : Les ajouter aux contexte
-        res.map((card, index) => {
-          currentAdminSellRequest.sellRequests[index]["mkmPriceGuide"] =
-            card.data.priceguide;
-        });
-      }
       awaitPrices();
-      setCurrentAdminSellRequest({
-        ...currentAdminSellRequest,
-      });
 
       setPriceHaveBeenLoaded(true);
     }
