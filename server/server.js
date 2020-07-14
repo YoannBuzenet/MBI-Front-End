@@ -141,11 +141,14 @@ app.post("/api/shop/TryToGetSellingSettings", async (req, res) => {
       err,
       shopSettings
     ) {
-      if (err) console.log(err);
+      if (err) {
+        console.log("fs error", err);
+        res.status(500).send(err);
+      }
       res.status(200).send(shopSettings);
     });
   } catch (err) {
-    console.log(err);
+    console.log("catch", err);
     res.status(401).send("Acces Denied.");
   }
 });
