@@ -1613,13 +1613,13 @@ table.zebra-table tbody tr.cardSellingPriceShouldBeCheckedByHuman:hover {
   position: relative;
 }
 .infoHoverContainer:hover svg {
-  background-color: rgba(134, 133, 133, 0.5);
+  background-color: rgba(134, 133, 133, 0.7);
 }
 
 .infoHover {
   position: absolute;
   display: none;
-  background-color: rgba(134, 133, 133, 0.7);
+  background-color: rgba(134, 133, 133, 1);
   border-radius: 5px;
   font-weight: normal;
   font-size: 12px;
