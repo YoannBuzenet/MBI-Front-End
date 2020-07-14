@@ -269,7 +269,7 @@ const ShopAdminSettings = () => {
             id="app.shop.shopSettings.defaultWebsiteLanguage"
             defaultMessage={`Website Default Language : `}
           />
-          <LanguageNameDisplay langID={config.baseLang} />
+          <LanguageNameDisplay langID={process.env.REACT_APP_SHOP_BASELANG} />
         </p>
         <p>
           <FormattedMessage

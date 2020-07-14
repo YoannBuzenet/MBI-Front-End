@@ -43,7 +43,9 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
 
   const [isLoading, setIsLoading] = useState(true);
 
-  const [langIDToDisplay, setLangIDToDisplay] = useState(config.baseLang);
+  const [langIDToDisplay, setLangIDToDisplay] = useState(
+    process.env.REACT_APP_SHOP_BASELANG
+  );
 
   const [isDisplayedLangChoice, setIsDisplayedLangChoice] = useState(false);
 
@@ -173,7 +175,7 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
     if (Object.keys(cardsContext).length > 0 && !hasUpdatedPrices) {
       CardShopPriceAPI.getArrayofPrices(
         Object.keys(cardsContext).map((id) => parseInt(id)),
-        config.baseLang
+        process.env.REACT_APP_SHOP_BASELANG
       )
         .then((data) =>
           addFirstDisplayedPricesToContext(data.data["hydra:member"])
