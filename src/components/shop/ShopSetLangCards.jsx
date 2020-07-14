@@ -173,7 +173,8 @@ const ShopSetLangCards = ({ card, index }) => {
         ]
           .concat(card.foreignData)
           .filter(
-            (currentLang) => currentLang.language_id.id === config.baseLang
+            (currentLang) =>
+              currentLang.language_id.id === process.env.REACT_APP_SHOP_BASELANG
           )
           .concat(
             [
@@ -182,12 +183,16 @@ const ShopSetLangCards = ({ card, index }) => {
                 language_id: { id: 9, name: "English", shortname: "EN" },
               },
             ].filter(
-              (currentLang) => currentLang.language_id.id !== config.baseLang
+              (currentLang) =>
+                currentLang.language_id.id !==
+                process.env.REACT_APP_SHOP_BASELANG
             )
           )
           .concat(
             card.foreignData.filter(
-              (currentLang) => currentLang.language_id.id !== config.baseLang
+              (currentLang) =>
+                currentLang.language_id.id !==
+                process.env.REACT_APP_SHOP_BASELANG
             )
           )
 

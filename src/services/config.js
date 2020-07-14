@@ -85,9 +85,6 @@ const websiteDefaultLanguageContext = {
   langID: 9,
 };
 
-//Default Buying Language ID
-const baseLang = 3;
-
 //Defaults Percent Selling Price Per Condition
 const defaultSellingPercents = {
   1: 1,
