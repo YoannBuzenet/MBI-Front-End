@@ -198,13 +198,15 @@ const ShopAdminOneCard = ({ match }) => {
         )}
         {!isLoading &&
           allPricesBuffer.map((variation, index) => {
-            return (
-              <ShopSetLangCards
-                card={variation}
-                key={variation.id}
-                index={index}
-              />
-            );
+            if (variation.edition.isonlineonly === 0) {
+              return (
+                <ShopSetLangCards
+                  card={variation}
+                  key={variation.id}
+                  index={index}
+                />
+              );
+            }
           })}
       </div>
     </>
