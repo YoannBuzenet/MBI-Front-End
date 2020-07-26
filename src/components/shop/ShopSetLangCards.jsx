@@ -26,76 +26,108 @@ const ShopSetLangCards = ({ card, index }) => {
               <div className="regularPrices">
                 <h2>Regular</h2>
                 <div className="onePrice">
-                  <span>
-                    <FormattedMessage
-                      id="app.shop.mkmPriceName.regularMediumPrice"
-                      defaultMessage={`Average Sell Price`}
-                    />
-                  </span>
-                  <span>{card?.priceguide?.AvgSellPrice}</span>
+                  <div>
+                    <span>
+                      <FormattedMessage
+                        id="app.shop.priceFormUpdate.mkmPriceName.regularMediumPrice"
+                        defaultMessage={`Average Sell Price`}
+                      />
+                    </span>
+                  </div>
+                  <div>
+                    <span>{card?.priceguide?.AvgSellPrice}</span>
+                  </div>
                 </div>
                 <div className="onePrice">
-                  <span>
-                    <FormattedMessage
-                      id="app.shop.priceFormUpdate.mkmPriceName.averageRegularSellPriceOnOneDay"
-                      defaultMessage={`Average on one day : `}
-                    />
-                  </span>
-                  <span>{card?.priceguide?.avg1}</span>
+                  <div>
+                    <span>
+                      <FormattedMessage
+                        id="app.shop.priceFormUpdate.mkmPriceName.averageRegularSellPriceOnOneDay"
+                        defaultMessage={`Average on one day : `}
+                      />
+                    </span>
+                  </div>
+                  <div>
+                    <span>{card?.priceguide?.avg1}</span>
+                  </div>
                 </div>
                 <div className="onePrice">
-                  <span>
-                    <FormattedMessage
-                      id="app.shop.priceFormUpdate.mkmPriceName.averageRegularSellPriceOnSevenDay"
-                      defaultMessage={`Average on 7 days : `}
-                    />
-                  </span>
-                  <span>{card?.priceguide?.avg7}</span>
+                  <div>
+                    <span>
+                      <FormattedMessage
+                        id="app.shop.priceFormUpdate.mkmPriceName.averageRegularSellPriceOnSevenDay"
+                        defaultMessage={`Average on 7 days : `}
+                      />
+                    </span>
+                  </div>
+                  <div>
+                    <span>{card?.priceguide?.avg7}</span>
+                  </div>
                 </div>
                 <div className="onePrice">
-                  <span>
-                    <FormattedMessage
-                      id="app.shop.priceFormUpdate.mkmPriceName.averageRegularSellPriceOnThirtyDay"
-                      defaultMessage={`Average on 30 days : `}
-                    />
-                  </span>
-                  <span>{card?.priceguide?.avg30}</span>
+                  <div>
+                    <span>
+                      <FormattedMessage
+                        id="app.shop.priceFormUpdate.mkmPriceName.averageRegularSellPriceOnThirtyDay"
+                        defaultMessage={`Average on 30 days : `}
+                      />
+                    </span>
+                  </div>
+                  <div>
+                    <span>{card?.priceguide?.avg30}</span>
+                  </div>
                 </div>
                 <div className="onePrice">
-                  <span>
-                    <FormattedMessage
-                      id="app.shop.priceFormUpdate.mkmPriceName.regularGermanLowPrice"
-                      defaultMessage={`German Low Price : `}
-                    />
-                  </span>
-                  <span>{card?.priceguide?.germanProLow}</span>
+                  <div>
+                    <span>
+                      <FormattedMessage
+                        id="app.shop.priceFormUpdate.mkmPriceName.regularGermanLowPrice"
+                        defaultMessage={`German Low Price : `}
+                      />
+                    </span>
+                  </div>
+                  <div>
+                    <span>{card?.priceguide?.germanProLow}</span>
+                  </div>
                 </div>
                 <div className="onePrice">
-                  <span>
-                    <FormattedMessage
-                      id="app.shop.priceFormUpdate.mkmPriceName.regularLowPrice"
-                      defaultMessage={`Low Price : `}
-                    />
-                  </span>
-                  <span>{card?.priceguide?.lowPrice}</span>
+                  <div>
+                    <span>
+                      <FormattedMessage
+                        id="app.shop.priceFormUpdate.mkmPriceName.regularLowPrice"
+                        defaultMessage={`Low Price : `}
+                      />
+                    </span>
+                  </div>
+                  <div>
+                    <span>{card?.priceguide?.lowPrice}</span>
+                  </div>
                 </div>
                 <div className="onePrice">
-                  <span>
-                    <FormattedMessage
-                      id="app.shop.priceFormUpdate.mkmPriceName.regularExcPrice"
-                      defaultMessage={`Low Price Exc : `}
-                    />
-                  </span>
-                  <span>{card?.priceguide?.lowPriceEx}</span>
+                  <div>
+                    <span>
+                      <FormattedMessage
+                        id="app.shop.priceFormUpdate.mkmPriceName.regularExcPrice"
+                        defaultMessage={`Low Price Exc : `}
+                      />
+                    </span>
+                  </div>
+                  <div>
+                    <span>{card?.priceguide?.lowPriceEx}</span>
+                  </div>
                 </div>
                 <div className="onePrice">
-                  <span>
-                    <FormattedMessage
-                      id="app.shop.priceFormUpdate.mkmPriceName.suggestedSalePrice"
-                      defaultMessage={`Suggested Sell Price : `}
-                    />
-                  </span>
-                  <span>{card?.priceguide?.suggestedPrice}</span>
+                  <div>
+                    <span>
+                      <FormattedMessage
+                        id="app.shop.priceFormUpdate.mkmPriceName.suggestedSalePrice"
+                        defaultMessage={`Suggested Sell Price : `}
+                      />
+                    </span>
+                  </div>
+                  <div>
+                    <span>{card?.priceguide?.suggestedPrice}</span>
+                  </div>
                 </div>
               </div>
               {/* <div className="onePrice">
@@ -105,58 +137,82 @@ const ShopSetLangCards = ({ card, index }) => {
               <div className="foilPrices">
                 <h2>Foil</h2>
                 <div className="onePrice">
-                  <span>
-                    <FormattedMessage
-                      id="app.shop.priceFormUpdate.mkmPriceName.foilMediumPrice"
-                      defaultMessage={`Foil Average Sell Price : `}
-                    />
-                  </span>
-                  <span>{card?.priceguide?.foilSell}</span>
+                  <div>
+                    <span>
+                      <FormattedMessage
+                        id="app.shop.priceFormUpdate.mkmPriceName.foilMediumPrice"
+                        defaultMessage={`Foil Average Sell Price : `}
+                      />
+                    </span>
+                  </div>
+                  <div>
+                    <span>{card?.priceguide?.foilSell}</span>
+                  </div>
                 </div>
                 <div className="onePrice">
-                  <span>
-                    <FormattedMessage
-                      id="app.shop.priceFormUpdate.mkmPriceName.averageFoilSellPriceOnOneDay"
-                      defaultMessage={`Foil Average on One day :  `}
-                    />
-                  </span>
-                  <span>{card?.priceguide?.foilAvg1}</span>
+                  <div>
+                    <span>
+                      <FormattedMessage
+                        id="app.shop.priceFormUpdate.mkmPriceName.averageFoilSellPriceOnOneDay"
+                        defaultMessage={`Foil Average on One day :  `}
+                      />
+                    </span>
+                  </div>
+                  <div>
+                    <span>{card?.priceguide?.foilAvg1}</span>
+                  </div>
                 </div>
                 <div className="onePrice">
-                  <span>
-                    <FormattedMessage
-                      id="app.shop.priceFormUpdate.mkmPriceName.averageFoilSellPriceOnSevenDay"
-                      defaultMessage={`Foil Average on 7 days :  `}
-                    />
-                  </span>
-                  <span>{card?.priceguide?.foilAvg7}</span>
+                  <div>
+                    <span>
+                      <FormattedMessage
+                        id="app.shop.priceFormUpdate.mkmPriceName.averageFoilSellPriceOnSevenDay"
+                        defaultMessage={`Foil Average on 7 days :  `}
+                      />
+                    </span>
+                  </div>
+                  <div>
+                    <span>{card?.priceguide?.foilAvg7}</span>
+                  </div>
                 </div>
                 <div className="onePrice">
-                  <span>
-                    <FormattedMessage
-                      id="app.shop.priceFormUpdate.mkmPriceName.averageFoilSellPriceOnThirtyDay"
-                      defaultMessage={`Foil Average on 30 days : `}
-                    />
-                  </span>
-                  <span>{card?.priceguide?.foilAvg30}</span>
+                  <div>
+                    <span>
+                      <FormattedMessage
+                        id="app.shop.priceFormUpdate.mkmPriceName.averageFoilSellPriceOnThirtyDay"
+                        defaultMessage={`Foil Average on 30 days : `}
+                      />
+                    </span>
+                  </div>
+                  <div>
+                    <span>{card?.priceguide?.foilAvg30}</span>
+                  </div>
                 </div>
                 <div className="onePrice">
-                  <span>
-                    <FormattedMessage
-                      id="app.shop.priceFormUpdate.mkmPriceName.foilLowPrice"
-                      defaultMessage={`Foil Low Price : `}
-                    />
-                  </span>
-                  <span>{card?.priceguide?.foilLow}</span>
+                  <div>
+                    <span>
+                      <FormattedMessage
+                        id="app.shop.priceFormUpdate.mkmPriceName.foilLowPrice"
+                        defaultMessage={`Foil Low Price : `}
+                      />
+                    </span>
+                  </div>
+                  <div>
+                    <span>{card?.priceguide?.foilLow}</span>
+                  </div>
                 </div>
                 <div className="onePrice">
-                  <span>
-                    <FormattedMessage
-                      id="app.shop.priceFormUpdate.mkmPriceName.averageFoilTrend"
-                      defaultMessage={`Foil Price Trend : `}
-                    />
-                  </span>
-                  <span>{card?.priceguide?.foilTrend}</span>
+                  <div>
+                    <span>
+                      <FormattedMessage
+                        id="app.shop.priceFormUpdate.mkmPriceName.averageFoilTrend"
+                        defaultMessage={`Foil Price Trend : `}
+                      />
+                    </span>{" "}
+                  </div>
+                  <div>
+                    <span>{card?.priceguide?.foilTrend}</span>
+                  </div>
                 </div>
               </div>
             </div>

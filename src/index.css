@@ -1491,6 +1491,8 @@ tbody.cardLineShop {
 ****SHOP ADMIN ONE CARD****
 **************************/
 
+/* <Prices Infos part> */
+
 .one-set {
   margin-bottom: 1rem;
   padding: 1rem;
@@ -1516,11 +1518,34 @@ tbody.cardLineShop {
   margin: 0 3rem;
 }
 
-.regularPrices div:first-of-type span:last-child,
-.foilPrices div:first-of-type span:last-child {
-  font-size: 2rem;
+.regularPrices > div:first-of-type > div > span:last-child,
+.foilPrices div:first-of-type > div > span:last-child {
   font-weight: bold;
 }
+
+.onePrice {
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 0.25rem;
+}
+
+.onePrice div:first-child {
+  font-weight: normal;
+  width: 190px;
+  text-align: left;
+}
+.onePrice div:last-child {
+  width: 50px;
+  text-align: right;
+}
+
+.picture {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+/* </Prices Infos part> */
 
 .hrAfterPrices {
   width: 70%;
