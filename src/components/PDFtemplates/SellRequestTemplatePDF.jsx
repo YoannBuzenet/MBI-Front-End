@@ -1,6 +1,6 @@
 import React from "react";
 import { Page, Text, View, Document, StyleSheet } from "@react-pdf/renderer";
-import { useIntl } from "react-intl";
+import { useIntl, FormattedMessage } from "react-intl";
 import config from "../../services/config";
 
 // Create styles
@@ -69,6 +69,8 @@ const SellRequestTemplatePDF = ({ sellRequest, shopData }) => {
   //Hook Intl to translate an attribute
   const intl = useIntl();
 
+  const date = intl.formatDate(Date.now());
+
   return (
     <Document>
       {/* Compter le nombre de sell request card, eventuellement chunker en plusieurs pages le nombre de sell request card */}
@@ -82,45 +84,112 @@ const SellRequestTemplatePDF = ({ sellRequest, shopData }) => {
             {sellRequest.id}
           </Text>
           <Text style={{ fontSize: "10px", marginTop: "30px" }}>
-            Le DATE, à {shopData.town}
+            <FormattedMessage
+              id="app.shop.OneSellRequestPDF.date1"
+              defaultMessage={`On the `}
+            />
+            {date}
+            <FormattedMessage
+              id="app.shop.OneSellRequestPDF.date2"
+              defaultMessage={`On the `}
+            />
+            {shopData.town}
           </Text>
           <Text style={{ fontSize: "10px", margin: "20px 0" }}>
-            Je soussigné Madame/Monsieur {sellRequest.customer.prenom}{" "}
-            {sellRequest.customer.nom}, habitant à {sellRequest.customer.adress}
-            , {sellRequest.customer.postalCode} {sellRequest.customer.town},
-            reconnait sur l'honneur avoir vendu les cartes suivantes à la
-            société {shopData.legalName}.
+            <FormattedMessage
+              id="app.shop.OneSellRequestPDF.Sentence1"
+              defaultMessage={`I, the undersigned Madam / Sir `}
+            />
+            <span className="pdf-username-and-firstname">
+              {sellRequest.customer.prenom} {sellRequest.customer.nom}
+            </span>
+            <FormattedMessage
+              id="app.shop.OneSellRequestPDF.Sentence2"
+              defaultMessage={`, living at `}
+            />
+            {sellRequest.customer.adress}, {sellRequest.customer.postalCode}{" "}
+            {sellRequest.customer.town}
+            <FormattedMessage
+              id="app.shop.OneSellRequestPDF.Sentence2"
+              defaultMessage={`, acknowledges on honor having sold the following cards to the company `}
+            />
+            {shopData.legalName}.
           </Text>
         </View>
         <View style={styles.table}>
           {/* Table Head */}
           <View style={styles.tableRow}>
             <View style={styles.tableColHeader}>
-              <Text style={styles.tableCellHeader}>Card</Text>
+              <Text style={styles.tableCellHeader}>
+                <FormattedMessage
+                  id="app.shop.OneSellRequestPDF.card"
+                  defaultMessage={`Card`}
+                />
+              </Text>
             </View>
             <View style={styles.tableColHeader}>
-              <Text style={styles.tableCellHeader}>Set</Text>
+              <Text style={styles.tableCellHeader}>
+                <FormattedMessage
+                  id="app.shop.OneSellRequestPDF.set"
+                  defaultMessage={`Set`}
+                />
+              </Text>
             </View>
             <View style={styles.tableColHeader}>
-              <Text style={styles.tableCellHeader}>Language</Text>
+              <Text style={styles.tableCellHeader}>
+                <FormattedMessage
+                  id="app.shop.OneSellRequestPDF.language"
+                  defaultMessage={`Language`}
+                />
+              </Text>
             </View>
             <View style={styles.tableColHeader}>
-              <Text style={styles.tableCellHeader}>Condition</Text>
+              <Text style={styles.tableCellHeader}>
+                <FormattedMessage
+                  id="app.shop.OneSellRequestPDF.condition"
+                  defaultMessage={`Condition`}
+                />
+              </Text>
             </View>
             <View style={styles.tableColHeader}>
-              <Text style={styles.tableCellHeader}>Foil</Text>
+              <Text style={styles.tableCellHeader}>
+                <FormattedMessage
+                  id="app.shop.OneSellRequestPDF.foil"
+                  defaultMessage={`Foil`}
+                />
+              </Text>
             </View>
             <View style={styles.tableColHeader}>
-              <Text style={styles.tableCellHeader}>Signed</Text>
+              <Text style={styles.tableCellHeader}>
+                <FormattedMessage
+                  id="app.shop.OneSellRequestPDF.signed"
+                  defaultMessage={`Signed`}
+                />
+              </Text>
             </View>
             <View style={styles.tableColHeader}>
-              <Text style={styles.tableCellHeader}>Price</Text>
+              <Text style={styles.tableCellHeader}>
+                <FormattedMessage
+                  id="app.shop.OneSellRequestPDF.price"
+                  defaultMessage={`Price`}
+                />
+              </Text>
             </View>
             <View style={styles.tableColHeader}>
-              <Text style={styles.tableCellHeader}>Quantity</Text>
+              <Text style={styles.tableCellHeader}>
+                <FormattedMessage
+                  id="app.shop.OneSellRequestPDF.quantity"
+                  defaultMessage={`Quantity`}
+                />
+              </Text>
             </View>
             <View style={styles.tableColHeader}>
-              <Text style={styles.tableCellHeader}>Total</Text>
+              <Text style={styles.tableCellHeader}>
+                <FormattedMessage
+                  id="app.shop.OneSellRequestPDF.total"
+                  defaultMessage={`Total`}
+                />
+              </Text>
             </View>
           </View>
           {/* Table Body */}
@@ -177,7 +246,10 @@ const SellRequestTemplatePDF = ({ sellRequest, shopData }) => {
                   (total, card) => total + card.quantity,
                   0
                 )}{" "}
-                products
+                <FormattedMessage
+                  id="app.shop.OneSellRequestPDF.products"
+                  defaultMessage={`products`}
+                />
               </Text>
             </View>
             <View style={styles.tableCol}>
@@ -200,7 +272,12 @@ const SellRequestTemplatePDF = ({ sellRequest, shopData }) => {
           </View>
         </View>
         <View>
-          <Text style={styles.signature}>Signature</Text>
+          <Text style={styles.signature}>
+            <FormattedMessage
+              id="app.shop.OneSellRequestPDF.signature"
+              defaultMessage={`Signature`}
+            />
+          </Text>
         </View>
       </Page>
     </Document>
