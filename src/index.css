@@ -1667,6 +1667,13 @@ table.zebra-table tbody tr.cardSellingPriceShouldBeCheckedByHuman:hover {
 }
 
 /**************************
+*PDF GENERATION REACT SIDE*
+**************************/
+.pdf-username-and-firstname {
+  font-weight: bold;
+}
+
+/**************************
 **SHOP ADMIN ONE CUSTOMER**
 **************************/
 
