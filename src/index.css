@@ -184,6 +184,7 @@ h2 {
 @media only screen and (max-width: 1000px) {
   #root {
     padding-bottom: 220px;
+    min-height: 1000px;
   }
   .container-table-responsive {
     max-width: 100%;
@@ -228,9 +229,6 @@ h2 {
 }
 
 @media only screen and (max-width: 640px) {
-  #root {
-    min-height: 1000px;
-  }
   .loading-loop {
     display: inline-block;
     width: 1.4rem;
