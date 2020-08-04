@@ -684,6 +684,9 @@ div.lang-select-applevel {
     animation-duration: 0.25s;
     animation-name: slidein500;
   }
+  .margin-bottom {
+    margin-bottom: 9rem;
+  }
 }
 @media only screen and (max-width: 450px) {
   .responsive_menu {
