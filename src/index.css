@@ -26,7 +26,6 @@ html {
 body {
   margin: 0;
   padding: 0;
-  min-height: 300px;
 }
 
 .container {
@@ -229,6 +228,9 @@ h2 {
 }
 
 @media only screen and (max-width: 640px) {
+  #root {
+    min-height: 1000px;
+  }
   .loading-loop {
     display: inline-block;
     width: 1.4rem;
