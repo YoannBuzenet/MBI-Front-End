@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
+import { Helmet } from "react-helmet";
 
 import "./App.css";
 import "react-super-responsive-table/dist/SuperResponsiveTableStyle.css";
@@ -75,9 +76,6 @@ import ScrollToTop from "./components/ScrollToTop";
 // });
 
 function App() {
-  // console.log("test .env", typeof process.env.REACT_APP_SHOP_BASELANG);
-  document.title = process.env.REACT_APP_SHOP_NAME + "";
-
   // STATE Creating the Authentication state
   const [authenticationInfos, setAuthenticationInfos] = useState(
     AuthAPI.userInfos()
@@ -459,6 +457,13 @@ function App() {
       onMouseMove={() => delayedQuery()}
       onTouchMove={() => delayedQuery()}
     >
+      <Helmet>
+        <meta charSet="utf-8" />
+        <meta
+          description={`Welcome to ${process.env.REACT_APP_SHOP_NAME} ! We buy all kind of cards.`}
+        />
+        <title>{process.env.REACT_APP_SHOP_NAME + ""}</title>
+      </Helmet>
       <AuthContext.Provider value={contextValue}>
         <SellingBasketContext.Provider value={contextBasket}>
           <SetsContext.Provider value={contextAllSets}>
