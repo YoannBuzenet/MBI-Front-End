@@ -460,7 +460,8 @@ function App() {
       <Helmet>
         <meta charSet="utf-8" />
         <meta
-          description={`Welcome to ${process.env.REACT_APP_SHOP_NAME} ! We buy all kind of cards.`}
+          name="description"
+          content={`Welcome to ${process.env.REACT_APP_SHOP_NAME} ! We buy all kind of cards.`}
         />
         <title>{process.env.REACT_APP_SHOP_NAME + ""}</title>
       </Helmet>
