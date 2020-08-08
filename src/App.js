@@ -457,14 +457,6 @@ function App() {
       onMouseMove={() => delayedQuery()}
       onTouchMove={() => delayedQuery()}
     >
-      <Helmet>
-        <meta charSet="utf-8" />
-        <meta
-          name="description"
-          content={`Welcome to ${process.env.REACT_APP_SHOP_NAME} ! We buy all kind of cards.`}
-        />
-        <title>{process.env.REACT_APP_SHOP_NAME + ""}</title>
-      </Helmet>
       <AuthContext.Provider value={contextValue}>
         <SellingBasketContext.Provider value={contextBasket}>
           <SetsContext.Provider value={contextAllSets}>
