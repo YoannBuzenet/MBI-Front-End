@@ -1,20 +1,44 @@
-import React, { useState } from "react";
+/* eslint-disable */
+import React, { useState, useEffect } from "react";
 import Field from "./forms/Field";
 import { FormattedMessage } from "react-intl";
 import axios from "axios";
 
 const ResetMail = () => {
-  const [userMail, setUserMail] = useState("");
+  const [userInfos, setUserInfos] = useState({ mail: "" });
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleChange = (e) => {
-    setUserMail(e.target.value);
+  useEffect(() => {
+    const script = document.createElement("script");
+
+    script.src =
+      "https://www.google.com/recaptcha/api.js?render=" +
+      process.env.REACT_APP_CLIENTSIDE_RECAPTCHA_KEY;
+    script.async = true;
+    document.body.appendChild(script);
+  }, []);
+
+  const checkCaptcha = (e) => {
+    e.preventDefault();
+    grecaptcha.ready(function () {
+      grecaptcha
+        .execute(process.env.REACT_APP_CLIENTSIDE_RECAPTCHA_KEY, {
+          action: "form_submission",
+        })
+        .then(function (token) {
+          console.log(token);
+          //Adding token to state
+          userInfos["token"] = token;
+          axios
+            .post("api/usermail/reset", userInfos)
+            .then((respServer) => console.log(respServer))
+            .catch((error) => console.log(error));
+        });
+    });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // axios.post
-    console.log("submitted form");
+  const handleChange = (e) => {
+    setUserInfos({ mail: e.target.value });
   };
 
   return (
@@ -25,7 +49,10 @@ const ResetMail = () => {
           defaultMessage={`Forgot your password ?`}
         />
       </h1>
-      <form className="login-form reset-password-form" onSubmit={handleSubmit}>
+      <form
+        className="login-form reset-password-form"
+        onSubmit={(e) => checkCaptcha(e)}
+      >
         <Field
           name="emailToReset"
           label={
@@ -34,7 +61,7 @@ const ResetMail = () => {
               defaultMessage={`Please indicate your mail :`}
             />
           }
-          value={userMail}
+          value={userInfos.mail}
           onChange={handleChange}
           placeholder={
             <FormattedMessage

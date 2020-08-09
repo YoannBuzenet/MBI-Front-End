@@ -130,6 +130,31 @@ app.post("/api/shop/RewriteSellingSettings", async (req, res) => {
     res.status(401).send("Acces Denied.");
   }
 });
+//RESET MAIL FIRST STEP
+// app.post("api/usermail/reset", async (req, res) => {
+//   //Check if this is the right shop (does he have the shop access & is the id the one of this server)
+//   console.log("Receiving selling settings");
+//   try {
+//     const securityCheck = await securityCheckAPI.checkIfUserIsCurrentShop(
+//       req.headers.authorization,
+//       req.body.id
+//     );
+
+//     //Writing the new selling settings in the file on the server
+//     const SellingSettings = req.body.authContext.shop.shopData.SellingSettings;
+//     fs.writeFile(
+//       __dirname + "/shopData/sellingsSettings.json",
+//       JSON.stringify(SellingSettings),
+//       (err) => console.log("after writing", err)
+//     );
+
+//     res.status(200).send();
+//   } catch (err) {
+//     console.log(err);
+//     res.status(401).send("Acces Denied.");
+//   }
+// });
+
 app.post("/api/shop/TryToGetSellingSettings", async (req, res) => {
   console.log("sending selling settings");
   console.log(req.body.id);

@@ -1963,3 +1963,10 @@ form.reset-password-form button {
 .settings-language-choice .current-lang-flag {
   top: 18px;
 }
+
+/*****************/
+/*****Google******/
+/*****************/
+div.grecaptcha-badge {
+  width: 0px !important;
+}
