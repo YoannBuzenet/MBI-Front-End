@@ -47,6 +47,7 @@
   "app.LoginPage.button.connect": "Connect",
   "app.LoginPage.toast.success": "You are connected.",
   "app.LoginPage.toast.failure": "Login or password incorrect. Please try again.",
+  "app.LoginPage.forgottePassword": "Forgot your password ?",
 
   "app.Basket.title": "My Sell Request ",
   "app.Basket.cardName": "Card",
