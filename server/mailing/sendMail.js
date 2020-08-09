@@ -279,4 +279,43 @@ async function sendMail(mailRequest) {
   });
 }
 
-module.exports = { sendMail };
+async function sendResetPasswordMail(userMail, langID, challenge) {
+  let template =
+    __dirname +
+    "/templates/" +
+    langDefinition[langID] +
+    "/resetMailSendChallenge.ejs";
+
+  let templateData = {
+    challenge,
+  };
+
+  let subject = {
+    french: "Réinitialisation de mot de passe",
+    english: "Password Reset",
+  };
+
+  ejs.renderFile(template, templateData, (err, html) => {
+    if (err) console.log(err); // Handle error
+    // console.log(templateData);
+    // console.log(templateData.user.customer.SellRequests);
+    // console.log(template);
+
+    console.log(`HTML: ${html}`);
+
+    let mailOpts = {
+      from: process.env.OFFICIAL_SMTP_MAIL_SENDING,
+      to: userMail,
+      subject: subject[langDefinition[langID]],
+      html: html,
+    };
+
+    transport.sendMail(mailOpts, (err, info) => {
+      if (err) console.log(err); //Handle Error
+      console.log(info);
+    });
+    return true;
+  });
+}
+
+module.exports = { sendMail, sendResetPasswordMail };
