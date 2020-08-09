@@ -162,6 +162,7 @@ app.post("api/usermail/reset", async (req, res) => {
         axios
           .post(process.env.REACT_APP_MTGAPI_URL + "/usermail/challenge", {
             mail: usermail,
+            shopKey: process.env.SHOPKEY,
           })
           .then((respServ) => console.log(respServ));
 
