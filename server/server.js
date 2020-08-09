@@ -158,7 +158,13 @@ app.post("api/usermail/reset", async (req, res) => {
     )
     .then((googleResp) => {
       if (googleResp.data.success) {
-        //MAIL USER + PING MTGAPI + RES 200 + NOTIF
+        //PING MTGAPI + MAIL USER + RES 200 + NOTIF
+        axios
+          .post(process.env.REACT_APP_MTGAPI_URL + "/usermail/challenge", {
+            mail: usermail,
+          })
+          .then((respServ) => console.log(respServ));
+
         res.statusCode = 200;
         res.end();
       } else {
