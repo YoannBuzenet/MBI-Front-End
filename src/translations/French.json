@@ -49,6 +49,10 @@
   "app.LoginPage.toast.failure": "Login ou mot de passe incorrect. Merci de réessayer.",
   "app.LoginPage.forgottePassword": "Mot de passe oublié",
 
+  "app.ResetMail.title": "Mot de passe oublié ?",
+  "app.ResetMail.label.email": "Merci d'indiquer votre adresse mail :",
+  "app.ResetMail.button.submit": "M'envoyer un lien par email",
+
   "app.Basket.title": "Ma demande de rachat",
   "app.Basket.cardName": "Carte",
   "app.Basket.set": "Edition",

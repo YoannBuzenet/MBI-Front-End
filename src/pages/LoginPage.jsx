@@ -150,7 +150,7 @@ const LoginPage = ({ history, eraseAuthContext, renewJWTToken }) => {
             </div>
           </form>
           <div className="forgotten-password">
-            <Link>
+            <Link to="/usermail/reset">
               <div>
                 <span>
                   <FormattedMessage
