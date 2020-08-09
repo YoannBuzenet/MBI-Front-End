@@ -49,6 +49,10 @@
   "app.LoginPage.toast.failure": "Login or password incorrect. Please try again.",
   "app.LoginPage.forgottePassword": "Forgot your password ?",
 
+  "app.ResetMail.title": "Forgot your password ?",
+  "app.ResetMail.label.email": "Please indicate your mail adress :",
+  "app.ResetMail.button.submit": "Send me an email to reset my password",
+
   "app.Basket.title": "My Sell Request ",
   "app.Basket.cardName": "Card",
   "app.Basket.set": "Set",

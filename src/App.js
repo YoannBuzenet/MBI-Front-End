@@ -68,6 +68,7 @@ import authAPI from "./services/authAPI";
 import Settings from "./pages/Settings";
 import LoggedRouteRender from "./components/LoggedRouteRender";
 import ScrollToTop from "./components/ScrollToTop";
+import ResetMail from "./components/ResetMail";
 
 //Really Useful library to check all rerenders made on ALL components (you can setup it to check just one)
 // const whyDidYouRender = require("@welldone-software/why-did-you-render");
@@ -592,6 +593,10 @@ function App() {
                               <Route
                                 path="/buyingClauses"
                                 component={BuyingClauses}
+                              />
+                              <Route
+                                path="/usermail/reset"
+                                component={ResetMail}
                               />
 
                               <Route

@@ -1925,6 +1925,24 @@ div.connecting-button {
 }
 
 /**************************
+*******RESET MAIL PAGE******
+**************************/
+
+div.reset-password {
+}
+
+form.reset-password-form {
+  margin-top: 2rem;
+}
+
+form.reset-password-form input {
+  margin-top: 2rem;
+}
+form.reset-password-form button {
+  margin-top: 2rem;
+}
+
+/**************************
 *******REGISTER PAGE*******
 **************************/
 .RegisterLoader {
