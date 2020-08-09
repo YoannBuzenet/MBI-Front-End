@@ -7,7 +7,7 @@ import LoginLogOutContext from "../context/logAutoRenewOrLogout";
 import config from "../services/config";
 import CSSLoaderWaitingSpiral from "../components/loaders/CSSLoaderWaitingSpiral";
 import { FormattedMessage } from "react-intl";
-import shopAPI from "../services/shopAPI";
+import { Link } from "react-router-dom";
 
 const LoginPage = ({ history, eraseAuthContext, renewJWTToken }) => {
   const { setAuthenticationInfos } = useContext(AuthContext);
@@ -149,6 +149,18 @@ const LoginPage = ({ history, eraseAuthContext, renewJWTToken }) => {
               )}
             </div>
           </form>
+          <div className="forgotten-password">
+            <Link>
+              <div>
+                <span>
+                  <FormattedMessage
+                    id="app.LoginPage.forgottePassword"
+                    defaultMessage={`Forgot your password ?`}
+                  />
+                </span>
+              </div>
+            </Link>
+          </div>
         </div>
       </div>
     </>

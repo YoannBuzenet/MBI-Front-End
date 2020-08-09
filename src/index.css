@@ -1895,6 +1895,22 @@ div.connecting-button {
   text-align: center;
 }
 
+.forgotten-password {
+  margin-top: 2rem;
+}
+.forgotten-password span {
+  font-size: 1.2rem;
+  color: blue;
+  cursor: pointer;
+}
+
+.forgotten-password a {
+  text-decoration: none;
+}
+.forgotten-password:hover {
+  text-decoration: underline;
+}
+
 @media only screen and (max-width: 1000px) {
   .field-form input,
   .login-form input,
