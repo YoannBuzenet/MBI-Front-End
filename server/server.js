@@ -36,6 +36,7 @@ app.post("/api/mail", (req, res) => {
   }
 });
 
+//TODO : commenter cet endpoint de test au moment de la mise en prod
 app.get("/api/PDF", (req, res) => {
   const { writePDF } = require("./PDF_handling/SellRequestServerTemplate");
   writePDF(
@@ -130,30 +131,44 @@ app.post("/api/shop/RewriteSellingSettings", async (req, res) => {
     res.status(401).send("Acces Denied.");
   }
 });
-//RESET MAIL FIRST STEP
-// app.post("api/usermail/reset", async (req, res) => {
-//   //Check if this is the right shop (does he have the shop access & is the id the one of this server)
-//   console.log("Receiving selling settings");
-//   try {
-//     const securityCheck = await securityCheckAPI.checkIfUserIsCurrentShop(
-//       req.headers.authorization,
-//       req.body.id
-//     );
 
-//     //Writing the new selling settings in the file on the server
-//     const SellingSettings = req.body.authContext.shop.shopData.SellingSettings;
-//     fs.writeFile(
-//       __dirname + "/shopData/sellingsSettings.json",
-//       JSON.stringify(SellingSettings),
-//       (err) => console.log("after writing", err)
-//     );
+/*******************************/
+/******RESET MAIL FIRST STEP****/
+/*******************************/
+app.post("api/usermail/reset", async (req, res) => {
+  //Receving the google Token : sending to their server and then doing stuff
+  console.log("Receiving mail reset request");
+  let googleToken = req.body.token;
+  let usermail = req.body.mail;
 
-//     res.status(200).send();
-//   } catch (err) {
-//     console.log(err);
-//     res.status(401).send("Acces Denied.");
-//   }
-// });
+  let config = {
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded; charset=utf-8",
+    },
+  };
+
+  axios
+    .post(
+      "https://www.google.com/recaptcha/api/siteverify?secret=" +
+        process.env.SERVERSIDE_RECAPTCHA_KEY +
+        "&response=" +
+        googleToken,
+      {},
+      config
+    )
+    .then((googleResp) => {
+      if (googleResp.data.success) {
+        //MAIL USER + PING MTGAPI + RES 200 + NOTIF
+        res.statusCode = 200;
+        res.end();
+      } else {
+        //TRAITER LE CATCH AVEC NOTIF ERROR
+        console.log(googleResp);
+        res.statusCode = 500;
+        res.end("Message couldn't be posted.");
+      }
+    });
+});
 
 app.post("/api/shop/TryToGetSellingSettings", async (req, res) => {
   console.log("sending selling settings");
