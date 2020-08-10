@@ -30,7 +30,7 @@ const ResetMail = () => {
           //Adding token to state
           userInfos["token"] = token;
           axios
-            .post("api/usermail/reset", userInfos)
+            .post("/api/usermail/reset", userInfos)
             .then((respServer) => console.log(respServer))
             .catch((error) => console.log(error));
         });
