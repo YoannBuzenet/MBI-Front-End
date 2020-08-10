@@ -7,7 +7,7 @@ const bodyParser = require("body-parser");
 const app = express();
 const axios = require("axios");
 
-const { sendMail } = require("./mailing/sendMail");
+const { sendMail, sendResetPasswordMail } = require("./mailing/sendMail");
 const fs = require("fs");
 const securityCheckAPI = require("./services/securityCheckAPI");
 
@@ -139,6 +139,7 @@ app.post("/api/usermail/reset", async (req, res) => {
   console.log("Receiving mail reset request");
   let googleToken = req.body.token;
   let usermail = req.body.mail;
+  let langID = req.body.langID;
 
   let config = {
     headers: {
@@ -164,7 +165,10 @@ app.post("/api/usermail/reset", async (req, res) => {
             mail: usermail,
             shopKey: process.env.SHOPKEY,
           })
-          .then((respServ) => console.log(respServ))
+          .then((respServ) => {
+            console.log(respServ);
+            sendResetPasswordMail(usermail, langID, respServ.data);
+          })
           .catch((e) =>
             console.log(
               e +

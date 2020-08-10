@@ -1,5 +1,6 @@
 /* eslint-disable */
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import LangContext from "../context/selectedAppLang";
 import Field from "./forms/Field";
 import { FormattedMessage } from "react-intl";
 import axios from "axios";
@@ -7,6 +8,8 @@ import axios from "axios";
 const ResetMail = () => {
   const [userInfos, setUserInfos] = useState({ mail: "" });
   const [isLoading, setIsLoading] = useState(false);
+
+  const { currentLang } = useContext(LangContext);
 
   useEffect(() => {
     const script = document.createElement("script");
@@ -29,6 +32,7 @@ const ResetMail = () => {
           // console.log(token);
           //Adding token to state
           userInfos["token"] = token;
+          userInfos["langID"] = currentLang.langID;
           axios
             .post("/api/usermail/reset", userInfos)
             .then((respServer) =>
