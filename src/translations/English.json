@@ -64,6 +64,7 @@
   "app.setNewPassword.failSubmit.challengeMissing": "There has been an error. Please try again from the link in your email.",
   "app.setNewPassword.failSubmit.serverError": "There has been an error. Please try again later.",
   "app.setNewPassword.success": "Your password has been updated.",
+  "app.setNewPassword.failure.passwordDontMatch": "Passwords don't match. Please try again.",
 
   "app.Basket.title": "My Sell Request ",
   "app.Basket.cardName": "Card",

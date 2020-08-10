@@ -91,7 +91,20 @@ const SetNewPassword = ({ match, history }) => {
       <p>{match.params.challenge}</p>
       <form
         className="login-form reset-password-form"
-        onSubmit={(e) => checkCaptcha(e)}
+        onSubmit={(e) => {
+          if (userInfos.password === userInfos.passwordCheck) {
+            checkCaptcha(e);
+          } else {
+            e.preventDefault();
+            toast.error(
+              <FormattedMessage
+                id="app.setNewPassword.failure.passwordDontMatch"
+                defaultMessage={`Passwords don't match. Please try again.`}
+              />
+            );
+            return;
+          }
+        }}
       >
         <Field
           name="passwordToSet"
