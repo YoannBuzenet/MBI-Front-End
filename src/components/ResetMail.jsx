@@ -26,12 +26,17 @@ const ResetMail = () => {
           action: "form_submission",
         })
         .then(function (token) {
-          console.log(token);
+          // console.log(token);
           //Adding token to state
           userInfos["token"] = token;
           axios
             .post("/api/usermail/reset", userInfos)
-            .then((respServer) => console.log(respServer))
+            .then((respServer) =>
+              console.log(
+                "response from server after veryfing token",
+                respServer
+              )
+            )
             .catch((error) => console.log(error));
         });
     });
