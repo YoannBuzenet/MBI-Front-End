@@ -9,6 +9,8 @@ import { useIntl } from "react-intl";
 import mailAPI from "../services/mailAPI";
 import SelectAppLangContext from "../context/selectedAppLang";
 
+//TODO : ADD CAPTCHA ON REGISTER THROUGH EXPRESS
+
 const RegisterPage = ({ history }) => {
   const [credentials, setCredentials] = useState({
     mail: "",
