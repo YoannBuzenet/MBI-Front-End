@@ -174,7 +174,8 @@ app.post("api/usermail/reset", async (req, res) => {
         res.statusCode = 500;
         res.end("Message couldn't be posted.");
       }
-    });
+    })
+    .catch((e) => console.log("ici LOL", e));
 });
 
 app.post("/api/shop/TryToGetSellingSettings", async (req, res) => {
