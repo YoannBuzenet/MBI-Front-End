@@ -163,7 +163,8 @@ app.post("/api/usermail/reset", async (req, res) => {
             mail: usermail,
             shopKey: process.env.SHOPKEY,
           })
-          .then((respServ) => console.log(respServ));
+          .then((respServ) => console.log(respServ))
+          .catch((e) => console.log(e + "error when trying to reach MTG API"));
 
         res.statusCode = 200;
         res.end();
