@@ -160,6 +160,7 @@ app.post("/api/usermail/reset", async (req, res) => {
         //PING MTGAPI + MAIL USER + RES 200 + NOTIF
         axios
           .post(process.env.REACT_APP_MTGAPI_URL + "/usermail/challenge", {
+            shopId: process.env.REACT_APP_SHOP_ID,
             mail: usermail,
             shopKey: process.env.SHOPKEY,
           })
