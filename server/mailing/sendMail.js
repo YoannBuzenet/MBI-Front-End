@@ -44,7 +44,7 @@ async function sendMail(mailRequest) {
       template =
         __dirname +
         "/templates/" +
-        langDefinition[mailRequest.langID] +
+        langDefinition[mailRequest.langID].toLowerCase() +
         "/welcomeEmail.ejs";
       mailOptions["to"] = templateData.user.email;
       mailOptions[
@@ -60,7 +60,7 @@ async function sendMail(mailRequest) {
       template =
         __dirname +
         "/templates/" +
-        langDefinition[mailRequest.langID] +
+        langDefinition[mailRequest.langID].toLowerCase() +
         "/confirmationSellRequestSubmitted.ejs";
       mailOptions["to"] = process.env.MAIL_SHOP_SELL_REQUEST_NOTIFICATIONS;
       mailOptions["subject"] = "Un rachat vient d'être soumis";
@@ -73,7 +73,7 @@ async function sendMail(mailRequest) {
       template =
         __dirname +
         "/templates/" +
-        langDefinition[mailRequest.langID] +
+        langDefinition[mailRequest.langID].toLowerCase() +
         "/confirmationCardsAreSent.ejs";
       mailOptions["to"] = templateData.user.email;
       mailOptions["subject"] = "Vos cartes ont bien été notées comme envoyées.";
@@ -90,7 +90,7 @@ async function sendMail(mailRequest) {
       template =
         __dirname +
         "/templates/" +
-        langDefinition[mailRequest.langID] +
+        langDefinition[mailRequest.langID].toLowerCase() +
         "/confirmationCardsAreReceived.ejs";
       mailOptions["to"] = mailRequest.infos.customer.user.email;
       mailOptions[
@@ -108,7 +108,7 @@ async function sendMail(mailRequest) {
       template =
         __dirname +
         "/templates/" +
-        langDefinition[mailRequest.langID] +
+        langDefinition[mailRequest.langID].toLowerCase() +
         "/confirmationSellRequestBeingProcessed.ejs";
       mailOptions["to"] = mailRequest.infos.customer.user.email;
       mailOptions[
@@ -127,7 +127,7 @@ async function sendMail(mailRequest) {
       template =
         __dirname +
         "/templates/" +
-        langDefinition[mailRequest.langID] +
+        langDefinition[mailRequest.langID].toLowerCase() +
         "/confirmationSellRequestAwaitingValidation.ejs";
       mailOptions["to"] = mailRequest.infos.customer.user.email;
       mailOptions[
@@ -162,7 +162,7 @@ async function sendMail(mailRequest) {
       template =
         __dirname +
         "/templates/" +
-        langDefinition[mailRequest.langID] +
+        langDefinition[mailRequest.langID].toLowerCase() +
         "/confirmationSellRequestValidatedByShop.ejs";
       mailOptions["to"] = mailRequest.infos.customer.user.email;
       mailOptions[
@@ -180,7 +180,7 @@ async function sendMail(mailRequest) {
       template =
         __dirname +
         "/templates/" +
-        langDefinition[mailRequest.langID] +
+        langDefinition[mailRequest.langID].toLowerCase() +
         "/SellRequestCancellation.ejs";
       mailOptions["to"] = mailRequest.infos.customer.user.email;
       mailOptions[
@@ -283,7 +283,7 @@ async function sendResetPasswordMail(userMail, langID, challenge) {
   let template =
     __dirname +
     "/templates/" +
-    langDefinition[langID] +
+    langDefinition[langID].toLowerCase() +
     "/resetMailSendChallenge.ejs";
 
   let templateData = {
@@ -316,7 +316,7 @@ async function sendResetPasswordMail(userMail, langID, challenge) {
     let mailOpts = {
       from: process.env.OFFICIAL_SMTP_MAIL_SENDING,
       to: userMail,
-      subject: subject[langDefinition[langID]],
+      subject: subject[langDefinition[langID].toLowerCase()],
       html: html,
     };
 
