@@ -158,7 +158,7 @@ app.post("/api/usermail/reset", async (req, res) => {
     )
     .then((googleResp) => {
       if (googleResp.data.success) {
-        //PING MTGAPI + MAIL USER + RES 200 + NOTIF
+        //TO DO : RES 200 + NOTIF
         axios
           .post(process.env.REACT_APP_MTGAPI_URL + "/usermail/challenge", {
             shopId: process.env.REACT_APP_SHOP_ID,
@@ -181,10 +181,39 @@ app.post("/api/usermail/reset", async (req, res) => {
         res.statusCode = 200;
         res.end();
       } else {
-        //TRAITER LE CATCH AVEC NOTIF ERROR
+        //TODO TRAITER LE CATCH AVEC NOTIF ERROR
         console.log(googleResp);
         res.statusCode = 500;
         res.end("Message couldn't be posted.");
+      }
+    })
+    .catch((e) => console.log("ERROR IN GOOGLE ASKING", e));
+});
+
+app.get("/api/usermail/setNewPassword", (req, res) => {
+  let googleToken = req.body.token;
+
+  axios
+    .post(
+      "https://www.google.com/recaptcha/api/siteverify?secret=" +
+        process.env.SERVERSIDE_RECAPTCHA_KEY +
+        "&response=" +
+        googleToken,
+      {},
+      config
+    )
+    .then((googleResp) => {
+      if (googleResp.data.success) {
+        //TO DO : RES 200 + NOTIF
+        //PING MTGI API WITH THE NEW PASSWORD AND ALL INFOS
+
+        res.statusCode = 200;
+        res.end();
+      } else {
+        //TODO TRAITER LE CATCH AVEC NOTIF ERROR
+        console.log(googleResp);
+        res.statusCode = 500;
+        res.end("Password couldn't be updated.");
       }
     })
     .catch((e) => console.log("ici LOL", e));
