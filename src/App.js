@@ -599,7 +599,7 @@ function App() {
                                 component={ResetMail}
                               />
                               <Route
-                                path="/usermail/setNewPassword/:challenge"
+                                path="/usermail/setNewPassword/:challenge?"
                                 render={({ match, history }) => (
                                   <SetNewPassword
                                     match={match}

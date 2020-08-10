@@ -53,6 +53,14 @@
   "app.ResetMail.label.email": "Merci d'indiquer votre adresse mail :",
   "app.ResetMail.button.submit": "M'envoyer un lien par email",
 
+  "app.setNewPassword.title": "Saisissez votre nouveau mot de passe",
+  "app.setNewPassword.firstLabel": "Mot de passe",
+  "app.setNewPassword.firstPlaceholder": "Votre nouveau mot de passe",
+  "app.setNewPassword.SecondLabel": "Tappez le même mot de passe",
+  "app.setNewPassword.secondPlaceholder": "Tappez le même mot de passe",
+  "app.setNewPassword.button.submit": "Sauvegarder",
+  "app.setNewPassword.failSubmit.challengeMissing": "Il y a eu une erreur. Merci de réessayer depuis le lien reçu dans votre email.",
+
   "app.Basket.title": "Ma demande de rachat",
   "app.Basket.cardName": "Carte",
   "app.Basket.set": "Edition",
