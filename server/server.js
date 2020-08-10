@@ -192,7 +192,7 @@ app.post("/api/usermail/reset", async (req, res) => {
 
 app.post("/api/usermail/setNewPassword", (req, res) => {
   let googleToken = req.body.token;
-  let { challenge } = req.body;
+  let { challenge, password } = req.body;
 
   let config = {
     headers: {
@@ -215,9 +215,9 @@ app.post("/api/usermail/setNewPassword", (req, res) => {
         //PING MTGI API WITH THE NEW PASSWORD AND ALL INFOS
         axios.post(process.env.REACT_APP_MTGAPI_URL + "/usermail/reset", {
           shopId: process.env.REACT_APP_SHOP_ID,
-          mail: usermail,
           shopKey: process.env.SHOPKEY,
           challenge,
+          password,
         });
 
         res.statusCode = 200;
