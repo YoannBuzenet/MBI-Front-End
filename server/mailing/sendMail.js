@@ -295,6 +295,16 @@ async function sendResetPasswordMail(userMail, langID, challenge) {
     english: "Password Reset",
   };
 
+  const transport = nodemailer.createTransport({
+    host: process.env.SMTP_NODEMAILER,
+    port: process.env.SMTP_PORT,
+    secure: true,
+    auth: {
+      user: process.env.AUTH_USER,
+      pass: process.env.AUTH_PASSWORD,
+    },
+  });
+
   ejs.renderFile(template, templateData, (err, html) => {
     if (err) console.log(err); // Handle error
     // console.log(templateData);
