@@ -135,7 +135,7 @@ app.post("/api/shop/RewriteSellingSettings", async (req, res) => {
 /*******************************/
 /******RESET MAIL FIRST STEP****/
 /*******************************/
-app.post("api/usermail/reset", async (req, res) => {
+app.post("/api/usermail/reset", async (req, res) => {
   //Receving the google Token : sending to their server and then doing stuff
   console.log("Receiving mail reset request");
   let googleToken = req.body.token;
