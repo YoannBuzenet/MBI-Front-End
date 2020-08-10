@@ -129,7 +129,7 @@ const SetNewPassword = ({ match, history }) => {
             />
           }
           className="form-group"
-          type="password"
+          type="email"
           required
         />
         <Field
