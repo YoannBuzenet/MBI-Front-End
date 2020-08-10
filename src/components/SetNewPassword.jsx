@@ -37,12 +37,21 @@ const SetNewPassword = ({ match, history }) => {
             axios
               .post("/api/usermail/reset", userInfos)
               .then((respServer) =>
-                console.log(
-                  "response from server after veryfing token",
-                  respServer
+                toast.success(
+                  <FormattedMessage
+                    id="app.setNewPassword.success"
+                    defaultMessage={`Your password has been updated.`}
+                  />
                 )
               )
-              .catch((error) => console.log(error));
+              .catch((error) =>
+                toast.error(
+                  <FormattedMessage
+                    id="app.setNewPassword.failSubmit.serverError"
+                    defaultMessage={`There has been an error. Please try again later.`}
+                  />
+                )
+              );
           });
       });
       /*eslint-enable */
