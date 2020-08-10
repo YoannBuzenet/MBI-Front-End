@@ -8,6 +8,7 @@ const SetNewPassword = ({ match, history }) => {
   const [userInfos, setUserInfos] = useState({
     password: "",
     passwordCheck: "",
+    mail: "",
   });
   const [isLoading, setIsLoading] = useState(false);
 
@@ -78,6 +79,10 @@ const SetNewPassword = ({ match, history }) => {
         setUserInfos({ ...userInfos, passwordCheck: value });
         break;
       }
+      case "mail": {
+        setUserInfos({ ...userInfos, mail: value });
+        break;
+      }
     }
   };
 
@@ -107,6 +112,26 @@ const SetNewPassword = ({ match, history }) => {
           }
         }}
       >
+        <Field
+          name="mail"
+          label={
+            <FormattedMessage
+              id="app.setNewPassword.mailLabel"
+              defaultMessage={`Please type your mail adress`}
+            />
+          }
+          value={userInfos.mail}
+          onChange={handleChange}
+          placeholder={
+            <FormattedMessage
+              id="app.setNewPassword.mailPlaceholder"
+              defaultMessage={`Your mail`}
+            />
+          }
+          className="form-group"
+          type="password"
+          required
+        />
         <Field
           name="passwordToSet"
           label={

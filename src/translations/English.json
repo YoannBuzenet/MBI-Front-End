@@ -65,6 +65,8 @@
   "app.setNewPassword.failSubmit.serverError": "There has been an error. Please try again later.",
   "app.setNewPassword.success": "Your password has been updated.",
   "app.setNewPassword.failure.passwordDontMatch": "Passwords don't match. Please try again.",
+  "app.setNewPassword.mailLabel": "Please type your mail adress",
+  "app.setNewPassword.mailPlaceholder": "Your Mail",
 
   "app.Basket.title": "My Sell Request ",
   "app.Basket.cardName": "Card",
