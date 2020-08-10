@@ -89,7 +89,7 @@ const SetNewPassword = ({ match, history }) => {
           defaultMessage={`Set your new password`}
         />
       </h1>
-      <p>{match.params.challenge}</p>
+
       <form
         className="login-form reset-password-form"
         onSubmit={(e) => {

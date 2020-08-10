@@ -194,6 +194,12 @@ app.post("/api/usermail/setNewPassword", (req, res) => {
   let googleToken = req.body.token;
   let { challenge } = req.body;
 
+  let config = {
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded; charset=utf-8",
+    },
+  };
+
   axios
     .post(
       "https://www.google.com/recaptcha/api/siteverify?secret=" +
