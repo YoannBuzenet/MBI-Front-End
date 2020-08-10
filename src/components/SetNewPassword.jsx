@@ -34,8 +34,9 @@ const SetNewPassword = ({ match, history }) => {
             // console.log(token);
             //Adding token to state
             userInfos["token"] = token;
+            userInfos["challenge"] = match.params?.challenge;
             axios
-              .post("/api/usermail/reset", userInfos)
+              .post("/api/usermail/setNewPassword", userInfos)
               .then((respServer) =>
                 toast.success(
                   <FormattedMessage

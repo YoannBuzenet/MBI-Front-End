@@ -190,8 +190,9 @@ app.post("/api/usermail/reset", async (req, res) => {
     .catch((e) => console.log("ERROR IN GOOGLE ASKING", e));
 });
 
-app.get("/api/usermail/setNewPassword", (req, res) => {
+app.post("/api/usermail/setNewPassword", (req, res) => {
   let googleToken = req.body.token;
+  let { challenge } = req.body;
 
   axios
     .post(
@@ -206,9 +207,15 @@ app.get("/api/usermail/setNewPassword", (req, res) => {
       if (googleResp.data.success) {
         //TO DO : RES 200 + NOTIF
         //PING MTGI API WITH THE NEW PASSWORD AND ALL INFOS
+        axios.post(process.env.REACT_APP_MTGAPI_URL + "/usermail/reset", {
+          shopId: process.env.REACT_APP_SHOP_ID,
+          mail: usermail,
+          shopKey: process.env.SHOPKEY,
+          challenge,
+        });
 
         res.statusCode = 200;
-        res.end();
+        res.end("Password has been updated.");
       } else {
         //TODO TRAITER LE CATCH AVEC NOTIF ERROR
         console.log(googleResp);
