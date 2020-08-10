@@ -52,6 +52,8 @@
   "app.ResetMail.title": "Forgot your password ?",
   "app.ResetMail.label.email": "Please indicate your mail adress :",
   "app.ResetMail.button.submit": "Send me an email to reset my password",
+  "app.ResetMail.success": "An email has been sent to your mailbox.",
+  "app.ResetMail.failure": "There has been error. Please try again later.",
 
   "app.setNewPassword.title": "Set your new password",
   "app.setNewPassword.firstLabel": "Please type your new password",
@@ -60,6 +62,8 @@
   "app.setNewPassword.secondPlaceholder": "Type the same password",
   "app.setNewPassword.button.submit": "Set new password",
   "app.setNewPassword.failSubmit.challengeMissing": "There has been an error. Please try again from the link in your email.",
+  "app.setNewPassword.failSubmit.serverError": "There has been an error. Please try again later.",
+  "app.setNewPassword.success": "Your password has been updated.",
 
   "app.Basket.title": "My Sell Request ",
   "app.Basket.cardName": "Card",

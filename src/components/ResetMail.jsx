@@ -4,6 +4,7 @@ import LangContext from "../context/selectedAppLang";
 import Field from "./forms/Field";
 import { FormattedMessage } from "react-intl";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const ResetMail = () => {
   const [userInfos, setUserInfos] = useState({ mail: "" });
@@ -36,12 +37,21 @@ const ResetMail = () => {
           axios
             .post("/api/usermail/reset", userInfos)
             .then((respServer) =>
-              console.log(
-                "response from server after veryfing token",
-                respServer
+              toast.success(
+                <FormattedMessage
+                  id="app.ResetMail.success"
+                  defaultMessage={`An email has been sent to your mailbox.`}
+                />
               )
             )
-            .catch((error) => console.log(error));
+            .catch((error) =>
+              toast.error(
+                <FormattedMessage
+                  id="app.ResetMail.failure"
+                  defaultMessage={`There has been error. Please try again later.`}
+                />
+              )
+            );
         });
     });
   };
