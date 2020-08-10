@@ -65,6 +65,8 @@
   "app.setNewPassword.failSubmit.serverError": "Il y a eu une erreur. Merci de réessayer plus tard.",
   "app.setNewPassword.success": "Votre mot de passe a été mis à jour.",
   "app.setNewPassword.failure.passwordDontMatch": "Les mots de passe ne sont pas identiques. Merci de vérifier.",
+  "app.setNewPassword.mailLabel": "Merci d'indiquer votre adresse mail",
+  "app.setNewPassword.mailPlaceholder": "Votre email",
 
   "app.Basket.title": "Ma demande de rachat",
   "app.Basket.cardName": "Carte",

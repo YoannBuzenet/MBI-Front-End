@@ -192,7 +192,7 @@ app.post("/api/usermail/reset", async (req, res) => {
 
 app.post("/api/usermail/setNewPassword", (req, res) => {
   let googleToken = req.body.token;
-  let { challenge, password } = req.body;
+  let { challenge, password, mail } = req.body;
 
   let config = {
     headers: {
@@ -218,6 +218,7 @@ app.post("/api/usermail/setNewPassword", (req, res) => {
           shopKey: process.env.SHOPKEY,
           challenge,
           password,
+          mail,
         });
 
         res.statusCode = 200;
