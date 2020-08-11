@@ -214,6 +214,8 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
   //Hook Intl to translate an attribute
   const intl = useIntl();
 
+  console.log("contextToCheck", cardsContext);
+
   return (
     <>
       <div className="container">
@@ -336,7 +338,11 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
                             return cardID;
                           }
                         } else {
-                          return cardID;
+                          if (cardsContext[cardID].price > 0) {
+                            return cardID;
+                          } else {
+                            return;
+                          }
                         }
                       })
                       .map((cardID, index) => {
