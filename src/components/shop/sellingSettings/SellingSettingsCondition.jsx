@@ -132,28 +132,28 @@ const SellingSettingsCondition = ({ isFoil, condition, langObject }) => {
   };
 
   const percentDisplayed =
-    authenticationInfos?.shop?.shopData?.SellingSettings?.[langObject.id]?.[
-      condition.id
-    ]?.[isFoil].percent === null ||
-    authenticationInfos?.shop?.shopData?.SellingSettings?.[langObject.id]?.[
-      condition.id
-    ]?.[isFoil].percent === undefined
+    authenticationInfos?.shop?.shopData?.SellingSettings
+      ?.percentToSetSellingPrices?.[langObject.id]?.[condition.id]?.[isFoil]
+      .percent === null ||
+    authenticationInfos?.shop?.shopData?.SellingSettings
+      ?.percentToSetSellingPrices?.[langObject.id]?.[condition.id]?.[isFoil]
+      .percent === undefined
       ? ""
-      : authenticationInfos?.shop?.shopData?.SellingSettings[langObject.id][
-          condition.id
-        ][isFoil].percent;
+      : authenticationInfos?.shop?.shopData?.SellingSettings
+          ?.percentToSetSellingPrices?.[langObject.id][condition.id][isFoil]
+          .percent;
 
   const algoDisplayed =
-    authenticationInfos?.shop?.shopData?.SellingSettings?.[langObject.id]?.[
-      condition.id
-    ]?.[isFoil].algoName === null ||
-    authenticationInfos?.shop?.shopData?.SellingSettings?.[langObject.id]?.[
-      condition.id
-    ]?.[isFoil].algoName === undefined
+    authenticationInfos?.shop?.shopData?.SellingSettings
+      ?.percentToSetSellingPrices?.[langObject.id]?.[condition.id]?.[isFoil]
+      .algoName === null ||
+    authenticationInfos?.shop?.shopData?.SellingSettings
+      ?.percentToSetSellingPrices?.[langObject.id]?.[condition.id]?.[isFoil]
+      .algoName === undefined
       ? ""
-      : authenticationInfos?.shop?.shopData?.SellingSettings[langObject.id][
-          condition.id
-        ][isFoil].algoName;
+      : authenticationInfos?.shop?.shopData?.SellingSettings
+          ?.percentToSetSellingPrices?.[langObject.id][condition.id][isFoil]
+          .algoName;
 
   return (
     <div className="SellingPercentageContainer">
