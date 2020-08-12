@@ -94,7 +94,7 @@ function findTheRightPriceRange(arrayOfPriceRanges, priceInput, counter = 0) {
     !Array.isArray(arrayOfPriceRanges) ||
     (Array.isArray(arrayOfPriceRanges) && arrayOfPriceRanges).length === 0
   ) {
-    return "array empty";
+    return -2;
   }
   counter++;
   let middleArrayIndex = Math.floor(arrayOfPriceRanges.length / 2);
@@ -122,7 +122,7 @@ function findTheRightPriceRange(arrayOfPriceRanges, priceInput, counter = 0) {
     );
   }
 
-  return "not found";
+  return -1;
 }
 
 export default {
@@ -132,4 +132,5 @@ export default {
   batchPriceUpdate,
   smoothNumbers,
   smoothFloatKeepEntireComplete,
+  findTheRightPriceRange,
 };
