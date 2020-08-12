@@ -76,28 +76,9 @@ const CardLineShop = ({ card, indexCard }) => {
   //Translation Hook
   const intl = useIntl();
 
-  //Getting automatic selling price
+  //Calculating automatic selling price
+  //And passing it to Context
   useEffect(() => {
-    // console.log("trigger adding automatic prices ");
-
-    // console.log(
-    //   "seling settings OK",
-    //   authenticationInfos.shop?.shopData.hasOwnProperty("SellingSettings")
-    // );
-    // console.log(
-    //   "test value automaticSellingPrice",
-    //   currentAdminSellRequest.sellRequests[indexCard]["AutomaticSellingPrice"]
-    // );
-    // console.log(
-    //   "test value automaticSellingPrice is undefined",
-    //   currentAdminSellRequest.sellRequests[indexCard][
-    //     "AutomaticSellingPrice"
-    //   ] === undefined
-    // );
-    // console.log(
-    //   "has card its priceguide ?",
-    //   card.hasOwnProperty("mkmPriceGuide")
-    // );
     if (
       authenticationInfos.shop?.shopData.hasOwnProperty("SellingSettings") &&
       currentAdminSellRequest.sellRequests[indexCard][
@@ -105,7 +86,6 @@ const CardLineShop = ({ card, indexCard }) => {
       ] === undefined &&
       card.hasOwnProperty("mkmPriceGuide")
     ) {
-      // console.log("passed the filter to set automatic prices");
       const relevantAlgo =
         card.mkmPriceGuide?.[
           authenticationInfos.shop?.shopData?.SellingSettings
@@ -120,22 +100,14 @@ const CardLineShop = ({ card, indexCard }) => {
           parseInt(card.condition)
         ]?.[card.isFoil ? 1 : 0].percent / 100;
 
-      // console.log("price from algo : ",card.id, relevantAlgo);
-      // console.log("% applied",card.id, relevantPercent);
       let automaticMKMSellingPrice;
-      // console.log("relevant algo", relevantAlgo);
-      // console.log("relevant percent", relevantPercent);
-      // console.log(
-      //   "automatic selling price to be set",
-      //   automaticMKMSellingPrice
-      // );
 
       if (relevantAlgo !== undefined && relevantPercent !== undefined) {
         automaticMKMSellingPrice = priceUpdateAPI.smoothNumbers(
           relevantAlgo * relevantPercent
         );
       }
-      // console.log("automatic sell price",card.id, automaticMKMSellingPrice);
+
       let newContext = { ...currentAdminSellRequest };
       newContext.sellRequests[indexCard][
         "AutomaticSellingPrice"
