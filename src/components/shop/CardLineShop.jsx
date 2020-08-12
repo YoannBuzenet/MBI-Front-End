@@ -108,13 +108,15 @@ const CardLineShop = ({ card, indexCard }) => {
       // console.log("passed the filter to set automatic prices");
       const relevantAlgo =
         card.mkmPriceGuide?.[
-          authenticationInfos.shop?.shopData?.SellingSettings?.[card.lang]?.[
+          authenticationInfos.shop?.shopData?.SellingSettings
+            ?.percentToSetSellingPrices?.[card.lang]?.[
             parseInt(card.condition)
           ]?.[card.isFoil ? 1 : 0].algoName
         ];
 
       const relevantPercent =
-        authenticationInfos.shop?.shopData?.SellingSettings?.[card.lang]?.[
+        authenticationInfos.shop?.shopData?.SellingSettings
+          ?.percentToSetSellingPrices?.[card.lang]?.[
           parseInt(card.condition)
         ]?.[card.isFoil ? 1 : 0].percent / 100;
 
