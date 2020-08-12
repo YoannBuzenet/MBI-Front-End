@@ -224,6 +224,8 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
                 Object.keys(cardsCardPageContext)
                   //Removing the online only set
                   .filter((id) => cardsCardPageContext[id].isonlineonly === 0)
+                  //Removing cards without card shop price
+                  .filter((id) => cardsCardPageContext[id].price !== 0)
                   //Displaying what's left
                   .map((id, index) => (
                     <CardLine
