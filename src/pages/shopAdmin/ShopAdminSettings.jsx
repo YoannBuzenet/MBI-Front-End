@@ -429,10 +429,12 @@ const ShopAdminSettings = () => {
             </p>
           </div>
           <div>
-            <FormattedMessage
-              id="app.shop.shopSettings.priceRange.title"
-              defaultMessage={`Price Range`}
-            />
+            <h2>
+              <FormattedMessage
+                id="app.shop.shopSettings.priceRange.title"
+                defaultMessage={`Price Range`}
+              />
+            </h2>
             <div>
               {Array.isArray(
                 authenticationInfos?.shop?.shopData?.SellingSettings
@@ -441,10 +443,10 @@ const ShopAdminSettings = () => {
                 authenticationInfos?.shop?.shopData?.SellingSettings?.priceRangesForBaseSellingPrice.map(
                   (priceRange, index) => {
                     return (
-                      <div>
+                      <div className="RangePriceDisplay">
                         <FormattedMessage
                           id="app.shop.shopSettings.priceRange.part0"
-                          defaultMessage={`If the price is between `}
+                          defaultMessage={`If the MKM price is between `}
                         />
                         {priceRange[0]}
                         <FormattedMessage
@@ -454,7 +456,7 @@ const ShopAdminSettings = () => {
                         {priceRange[1]}
                         <FormattedMessage
                           id="app.shop.shopSettings.priceRange.part2"
-                          defaultMessage={`, Basic price will be : `}
+                          defaultMessage={`, Base price will be : `}
                         />
                         {priceRange[2]}
                       </div>

@@ -1820,6 +1820,11 @@ span.customer_lastName {
   width: 60px;
 }
 
+.RangePriceDisplay {
+  margin: 1rem 0;
+  text-align: left;
+}
+
 @media only screen and (max-width: 1860px) {
   .percentPerLang > form {
     display: block;
