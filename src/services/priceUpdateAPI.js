@@ -89,6 +89,42 @@ function smoothFloatKeepEntireComplete(number) {
   }
 }
 
+function findTheRightPriceRange(arrayOfPriceRanges, priceInput, counter = 0) {
+  if (
+    !Array.isArray(arrayOfPriceRanges) ||
+    (Array.isArray(arrayOfPriceRanges) && arrayOfPriceRanges).length === 0
+  ) {
+    return "array empty";
+  }
+  counter++;
+  let middleArrayIndex = Math.floor(arrayOfPriceRanges.length / 2);
+  let currentPointer = arrayOfPriceRanges[middleArrayIndex];
+
+  if (priceInput >= currentPointer[0] && priceInput <= currentPointer[1]) {
+    return currentPointer[2];
+  }
+
+  if (priceInput <= currentPointer[0]) {
+    return findTheRightPriceRange(
+      arrayOfPriceRanges.splice(0, middleArrayIndex),
+      priceInput,
+      counter
+    );
+  }
+  if (priceInput >= currentPointer[0]) {
+    return findTheRightPriceRange(
+      arrayOfPriceRanges.splice(
+        middleArrayIndex,
+        arrayOfPriceRanges.length - 1
+      ),
+      priceInput,
+      counter
+    );
+  }
+
+  return "not found";
+}
+
 export default {
   postOnePrice,
   putOnePrice,
