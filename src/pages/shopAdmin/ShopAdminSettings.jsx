@@ -16,7 +16,7 @@ import ShopAdminSettingsBasePrice from "./ShopAdminSettingsBasePrice";
 const ShopAdminSettings = () => {
   //Handling shop Settings here
   //Percent buying are stored in localstorage, session context and on central API
-  // TODO Selling Settings are stored on localstorage, session context and Express API
+  // TODO Selling Settings should be stored on localstorage, for now they are session context and Express API
 
   //Current Authentication
   const { authenticationInfos, setAuthenticationInfos } = useContext(
