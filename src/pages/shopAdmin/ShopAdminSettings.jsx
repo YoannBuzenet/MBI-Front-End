@@ -416,16 +416,42 @@ const ShopAdminSettings = () => {
           </div>
         </div>
         <div className="categorySetting">
-          <h2 className="categoryTitle">Selling Settings</h2>
-          {lang.length > 0 &&
-            lang.map((oneLang, index) => {
-              return (
-                <div key={index}>
-                  <h3>{oneLang.name}</h3>
-                  <SellingSettingsLang lang={oneLang} key={oneLang.id} />
-                </div>
-              );
-            })}
+          <h2 className="categoryTitle">
+            <FormattedMessage
+              id="app.shop.shopSettings.sellingSettings.title"
+              defaultMessage={`Selling Settings`}
+            />
+          </h2>
+          <div>
+            <FormattedMessage
+              id="app.shop.shopSettings.priceRange.title"
+              defaultMessage={`Price Range`}
+            />
+            <div>
+              {Array.isArray(
+                authenticationInfos?.shop?.shopData?.SellingSettings
+                  ?.priceRangesForBaseSellingPrice
+              ) &&
+                authenticationInfos?.shop?.shopData?.SellingSettings?.priceRangesForBaseSellingPrice.map(
+                  (priceRange) => {
+                    return (
+                      <div>{(priceRange[0], priceRange[1], priceRange[2])}</div>
+                    );
+                  }
+                )}
+            </div>
+          </div>
+          <div>
+            {lang.length > 0 &&
+              lang.map((oneLang, index) => {
+                return (
+                  <div key={index}>
+                    <h3>{oneLang.name}</h3>
+                    <SellingSettingsLang lang={oneLang} key={oneLang.id} />
+                  </div>
+                );
+              })}
+          </div>
         </div>
       </div>
     </>
