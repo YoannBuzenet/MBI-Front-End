@@ -1821,7 +1821,8 @@ span.customer_lastName {
 }
 
 .RangePriceDisplay {
-  margin: 1rem 0;
+  width: 50%;
+  margin: 1rem auto;
   text-align: left;
 }
 
