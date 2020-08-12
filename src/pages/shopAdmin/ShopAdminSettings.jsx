@@ -423,6 +423,12 @@ const ShopAdminSettings = () => {
             />
           </h2>
           <div>
+            <p>1. Set the base price</p>
+            <p>
+              2. Adjust the percentage following language, condition, and foil
+            </p>
+          </div>
+          <div>
             <FormattedMessage
               id="app.shop.shopSettings.priceRange.title"
               defaultMessage={`Price Range`}
@@ -433,10 +439,24 @@ const ShopAdminSettings = () => {
                   ?.priceRangesForBaseSellingPrice
               ) &&
                 authenticationInfos?.shop?.shopData?.SellingSettings?.priceRangesForBaseSellingPrice.map(
-                  (priceRange) => {
+                  (priceRange, index) => {
                     return (
                       <div>
-                        {priceRange[0]} {priceRange[1]} {priceRange[2]}
+                        <FormattedMessage
+                          id="app.shop.shopSettings.priceRange.part0"
+                          defaultMessage={`If the price is between `}
+                        />
+                        {priceRange[0]}
+                        <FormattedMessage
+                          id="app.shop.shopSettings.priceRange.part1"
+                          defaultMessage={` and `}
+                        />
+                        {priceRange[1]}
+                        <FormattedMessage
+                          id="app.shop.shopSettings.priceRange.part2"
+                          defaultMessage={`, Basic price will be : `}
+                        />
+                        {priceRange[2]}
                       </div>
                     );
                   }

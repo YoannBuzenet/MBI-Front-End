@@ -241,6 +241,9 @@
   "app.shop.shopSettings.toast.input.number.failure": "Merci de saisir un nombre.",
   "app.shop.shopSettings.priceRange.title": "Tranches de prix",
   "app.shop.shopSettings.sellingSettings.title": "Paramètres de vente",
+  "app.shop.shopSettings.priceRange.part0": "Si le prix est entre ",
+  "app.shop.shopSettings.priceRange.part1": " et ",
+  "app.shop.shopSettings.priceRange.part2": ", le prix de base sera : ",
 
   "app.shop.burgerMenu.mySellRequest": "Mon Rachat",
   "app.shop.burgerMenu.sellRequests": "Rachats",

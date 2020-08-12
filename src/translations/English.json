@@ -241,6 +241,9 @@
   "app.shop.shopSettings.toast.input.number.failure": "Please indicate a number.",
   "app.shop.shopSettings.priceRange.title": "Price Range",
   "app.shop.shopSettings.sellingSettings.title": "Selling Settings",
+  "app.shop.shopSettings.priceRange.part0": "If the price is between ",
+  "app.shop.shopSettings.priceRange.part1": " and ",
+  "app.shop.shopSettings.priceRange.part2": ", Basic price will be : ",
 
   "app.shop.burgerMenu.mySellRequest": "My Sell Request ",
   "app.shop.burgerMenu.sellRequests": "Sell Requests",
