@@ -435,7 +435,9 @@ const ShopAdminSettings = () => {
                 authenticationInfos?.shop?.shopData?.SellingSettings?.priceRangesForBaseSellingPrice.map(
                   (priceRange) => {
                     return (
-                      <div>{(priceRange[0], priceRange[1], priceRange[2])}</div>
+                      <div>
+                        {priceRange[0]} {priceRange[1]} {priceRange[2]}
+                      </div>
                     );
                   }
                 )}
