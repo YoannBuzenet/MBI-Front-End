@@ -239,6 +239,8 @@
   "app.shop.shopSettings.toast.failure": "The data couldn't be updated. Please try again.",
   "app.shop.shopSettings.toast.input.failure": "A number is mandatory for each language and condition. Please indicate one.",
   "app.shop.shopSettings.toast.input.number.failure": "Please indicate a number.",
+  "app.shop.shopSettings.priceRange.title": "Price Range",
+  "app.shop.shopSettings.sellingSettings.title": "Selling Settings",
 
   "app.shop.burgerMenu.mySellRequest": "My Sell Request ",
   "app.shop.burgerMenu.sellRequests": "Sell Requests",
