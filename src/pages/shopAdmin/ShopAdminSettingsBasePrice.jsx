@@ -107,7 +107,7 @@ const ShopAdminSettingsBasePrice = (props) => {
             <span className="explaination-text-li-number">2.</span>{" "}
             <FormattedMessage
               id="app.shop.shopSettings.sellingSettings.explaination.globalProcess.paragraph4"
-              defaultMessage={`The price is then passed into the Price Range you did set up. You can disable this step if you want. We advise to disable it if you want to always have your selling prices fixed with a percentage from the trend. Price Range are here to "round up" prices like it usually happens in business.`}
+              defaultMessage={`The price is then passed into the Price Range you did set up. Price range allow to round up prices. You can disable this step if you want. We advise to disable it if you want to always have your selling prices fixed with a percentage from the trend. Price Range are here to "round up" prices like it usually happens in business.`}
             />
           </p>
           <p>
@@ -225,16 +225,19 @@ const ShopAdminSettingsBasePrice = (props) => {
           <form>
             <input
               type="checkbox"
+              id="checkBoxPriceRange"
               checked={
                 authenticationInfos?.shop?.shopData?.SellingSettings
                   ?.shouldUseShopBasePriceStep
               }
               onChange={handleTickBox}
             />
-            <FormattedMessage
-              id="app.shop.shopSettings.priceRange.checkbox.text"
-              defaultMessage={`I want to USE the Price Range step. Untick this box if you only want to use the percentages.`}
-            />
+            <label htmlFor="checkBoxPriceRange">
+              <FormattedMessage
+                id="app.shop.shopSettings.priceRange.checkbox.text"
+                defaultMessage={`I want to USE the Price Range step that will be applied before the percentage. Untick this box if you only want to use the percentages.`}
+              />
+            </label>
           </form>
         </div>
         <div>
