@@ -427,23 +427,35 @@ const ShopAdminSettings = () => {
           <ShopAdminSettingsBasePrice />
           <div>
             <h3>
-              MKM Price to base selling price on, and Percentage following
-              Condition and Language
+              <FormattedMessage
+                id="app.shop.shopSettings.sellingSettings.explaination.title"
+                defaultMessage={`MKM Price to base selling price on, and Percentage following
+              Condition and Language`}
+              />
             </h3>
             <p>
-              Choose the price from MKM you want to base your selling price on.
+              <FormattedMessage
+                id="app.shop.shopSettings.sellingSettings.explaination.paragraph1"
+                defaultMessage={`Choose the price from MKM you want to base your selling price on.`}
+              />
             </p>
             <p>
-              Then choose the percentage your want yo apply to that particular
-              condition in that particular language.
+              <FormattedMessage
+                id="app.shop.shopSettings.sellingSettings.explaination.paragraph2"
+                defaultMessage={`Then choose the percentage your want yo apply to that particular condition in that particular language.`}
+              />
             </p>
             <p>
-              For example, Japanese Foil or Russian Foil, you may want to set
-              300% in price.
+              <FormattedMessage
+                id="app.shop.shopSettings.sellingSettings.explaination.paragraph3"
+                defaultMessage={`For example, Japanese Foil or Russian Foil, you may want to set 300% in price.`}
+              />
             </p>
             <p>
-              Remember, you can always check your selling prices before
-              validating a sell request.
+              <FormattedMessage
+                id="app.shop.shopSettings.sellingSettings.explaination.paragraph4"
+                defaultMessage={`Remember, you can always check your selling prices before validating a sell request.`}
+              />
             </p>
           </div>
 
