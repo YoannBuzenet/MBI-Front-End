@@ -43,7 +43,9 @@ const SellingSettingsCondition = ({ isFoil, condition, langObject }) => {
   const handleChange = (event, langObject, isFoil, condition) => {
     setTimer(clearTimeout(timer));
     console.log("input");
-    const newContext = authenticationInfos.shop.shopData.SellingSettings;
+    const newContext =
+      authenticationInfos.shop.shopData.SellingSettings
+        .percentToSetSellingPrices;
     const newPercent = parseInt(event.target.value);
 
     if (!isNaN(parseFloat(newPercent))) {
@@ -67,7 +69,10 @@ const SellingSettingsCondition = ({ isFoil, condition, langObject }) => {
           ...authenticationInfos.shop,
           shopData: {
             ...authenticationInfos.shop.shopData,
-            SellingSettings: newContext,
+            SellingSettings: {
+              ...authenticationInfos.shop.shopData.SellingSettings,
+              percentToSetSellingPrices: newContext,
+            },
           },
         },
       });
@@ -80,7 +85,10 @@ const SellingSettingsCondition = ({ isFoil, condition, langObject }) => {
           ...authenticationInfos.shop,
           shopData: {
             ...authenticationInfos.shop.shopData,
-            SellingSettings: newContext,
+            SellingSettings: {
+              ...authenticationInfos.shop.shopData.SellingSettings,
+              percentToSetSellingPrices: newContext,
+            },
           },
         },
       });
@@ -99,7 +107,9 @@ const SellingSettingsCondition = ({ isFoil, condition, langObject }) => {
     setTimer(clearTimeout(timer));
     const newAlgoChosen = event.target.value;
     console.log(newAlgoChosen);
-    const newContext = authenticationInfos.shop.shopData.SellingSettings;
+    const newContext =
+      authenticationInfos.shop.shopData.SellingSettings
+        .percentToSetSellingPrices;
     console.log("on met à jour l'algo dans le contexte");
     if (condition.id === 1) {
       //On maj les 7 conditions
@@ -118,7 +128,10 @@ const SellingSettingsCondition = ({ isFoil, condition, langObject }) => {
         ...authenticationInfos.shop,
         shopData: {
           ...authenticationInfos.shop.shopData,
-          SellingSettings: newContext,
+          SellingSettings: {
+            ...authenticationInfos.shop.shopData.SellingSettings,
+            percentToSetSellingPrices: newContext,
+          },
         },
       },
     });

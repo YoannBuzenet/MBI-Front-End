@@ -425,6 +425,27 @@ const ShopAdminSettings = () => {
           </h2>
 
           <ShopAdminSettingsBasePrice />
+          <div>
+            <h3>
+              MKM Price to base selling price on, and Percentage following
+              Condition and Language
+            </h3>
+            <p>
+              Choose the price from MKM you want to base your selling price on.
+            </p>
+            <p>
+              Then choose the percentage your want yo apply to that particular
+              condition in that particular language.
+            </p>
+            <p>
+              For example, Japanese Foil or Russian Foil, you may want to set
+              300% in price.
+            </p>
+            <p>
+              Remember, you can always check your selling prices before
+              validating a sell request.
+            </p>
+          </div>
 
           <div>
             {lang.length > 0 &&
