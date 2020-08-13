@@ -34,12 +34,7 @@ const ShopAdminSettingsBasePrice = (props) => {
       ][2] = value;
       setAuthenticationInfos(contextCopy);
 
-      setTimer(
-        setTimeout(
-          () => triggerAPISending("fieldModified", name, value),
-          WAIT_INTERVAL
-        )
-      );
+      setTimer(setTimeout(() => triggerAPISending(), WAIT_INTERVAL));
     } else if (value === "") {
       let contextCopy = { ...authenticationInfos };
       contextCopy.shop.shopData.SellingSettings.priceRangesForBaseSellingPrice[
@@ -63,7 +58,16 @@ const ShopAdminSettingsBasePrice = (props) => {
     }
   };
 
-  const handleTickBox = (e) => {};
+  const handleTickBox = (e) => {
+    setTimer(clearTimeout(timer));
+    let contextCopy = { ...authenticationInfos };
+    contextCopy.shop.shopData.SellingSettings.shouldUseShopBasePriceStep = !contextCopy
+      .shop.shopData.SellingSettings.shouldUseShopBasePriceStep;
+
+    setAuthenticationInfos(contextCopy);
+
+    setTimer(setTimeout(() => triggerAPISending(), WAIT_INTERVAL));
+  };
 
   const triggerAPISending = () => {
     console.log("sending to Express !");
@@ -217,6 +221,22 @@ const ShopAdminSettingsBasePrice = (props) => {
             defaultMessage={`Price Range`}
           />
         </h2>
+        <div>
+          <form>
+            <input
+              type="checkbox"
+              checked={
+                authenticationInfos?.shop?.shopData?.SellingSettings
+                  ?.shouldUseShopBasePriceStep
+              }
+              onChange={handleTickBox}
+            />
+            <FormattedMessage
+              id="app.shop.shopSettings.priceRange.checkbox.text"
+              defaultMessage={`I want to USE the Price Range step. Untick this box if you only want to use the percentages.`}
+            />
+          </form>
+        </div>
         <div>
           {Array.isArray(
             authenticationInfos?.shop?.shopData?.SellingSettings
