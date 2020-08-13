@@ -10,10 +10,6 @@ const ShopAdminSettingsBasePrice = (props) => {
     AuthContext
   );
 
-  console.log("go yo, pour le présent & le futur", authenticationInfos);
-
-  //WE MUST UPDATE CONTEXT AND API JSON
-
   //We add a timer to not hit API at each user input.
   //This way there is at least WAIT_INTERVAL interval between each sending, or more if the user continues to input.
   const WAIT_INTERVAL = 1000;
@@ -67,6 +63,8 @@ const ShopAdminSettingsBasePrice = (props) => {
     }
   };
 
+  const handleTickBox = (e) => {};
+
   const triggerAPISending = () => {
     console.log("sending to Express !");
     shopAPI.postSellingSettings(authenticationInfos);
@@ -74,9 +72,75 @@ const ShopAdminSettingsBasePrice = (props) => {
 
   return (
     <>
-      <div>
-        <p>1. Set the base price</p>
-        <p>2. Adjust the percentage following language, condition, and foil</p>
+      <div className="explaination-container">
+        <div className="explaination-text">
+          <h3>How to Fix your selling prices</h3>
+          <p>
+            The selling price is set automatically following the criterias that
+            you will indicate here.
+          </p>
+          <p>The selling price is set that way :</p>
+          <p>
+            <span className="explaination-text-li-number">1.</span> Get the MKM
+            price from MKM you did choose : Price trend, orAverage price on 7
+            days, etc...
+          </p>
+          <p>
+            <span className="explaination-text-li-number">2.</span> The price is
+            then passed into the Price Range you did set up. You can disable
+            this step if you want. We advise to disable it if you want to always
+            have your selling prices fixed with a percentage from the trend.
+            Price Range are here to "round up" prices like it usually happens in
+            business.
+          </p>
+          <p>
+            <span className="explaination-text-li-number">3.</span> Following
+            the language, condition, and if it's foil or not, we modify the
+            price with the percentage you fixed.
+          </p>
+          <p>
+            Final Price = MKM Price You chose, passed eventually in Price Range,
+            multiplied by percentage for Condition, Language, Foil
+          </p>
+          <p>Said another way :</p>
+          <p>
+            Final Price = <span className="bold">mkmMarketInitialPrice</span>{" "}
+            {"->"} <span className="bold">Price Range</span> X{" "}
+            <span>conditionPercentage</span> X{" "}
+            <span className="bold">Language Percentage</span>
+          </p>
+        </div>
+        <div className="explaination-example">
+          <h3>Example 1 : </h3>
+          <p>
+            A card is worth 1.24 of price trend euro on MKM. In your Price
+            Range, you said that anything between 1 and 1.5 should be sold for
+            2.5 euros.
+          </p>
+          <p>
+            The card is in Portuguese, Light Played, non foil. You added the
+            following parameters : Portuguese : 70%, Light Played : 60%.{" "}
+          </p>
+          <p>
+            Final Price will be : 2.5*0.7*0.6 = 1.05 euro because it's a
+            Portuguese Light Played card you would have sold for 2.5 in your
+            language of preference.
+          </p>
+          <h3>Example 2 : </h3>
+          <p>
+            A card is worth 6.87 of price trend euro on MKM. In your Price
+            Range, you said that anything between 6 and 7 should be sold for 8
+            euros.
+          </p>
+          <p>
+            The card is in English, Exc, foil. You added the following
+            parameters : English : 100%, Exc : 80%.
+          </p>
+          <p>
+            Final Price will be : 8*1*0.8 = 6.4 euro because it's a English Exc
+            card you would have sold for 8 in English Near Mint.
+          </p>
+        </div>
       </div>
       <div>
         <h2>

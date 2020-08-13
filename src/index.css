@@ -136,6 +136,10 @@ h2 {
   z-index: 2;
 }
 
+.bold {
+  font-weight: bold;
+}
+
 .blackDiv {
   position: absolute;
   top: 0;
@@ -1824,6 +1828,20 @@ span.customer_lastName {
   width: 50%;
   margin: 1rem auto;
   text-align: left;
+}
+
+.explaination-container {
+  display: flex;
+  text-align: left;
+}
+
+.explaination-text {
+  margin: 0 5rem;
+}
+
+.explaination-text-li-number {
+  font-weight: bold;
+  font-size: 1.8rem;
 }
 
 @media only screen and (max-width: 1860px) {
