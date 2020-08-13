@@ -1,12 +1,16 @@
 import React, { useState, useContext } from "react";
 import AuthContext from "../../context/authContext";
 import { FormattedMessage } from "react-intl";
+import { toast } from "react-toastify";
+import shopAPI from "../../services/shopAPI";
 
 const ShopAdminSettingsBasePrice = (props) => {
   //Current Authentication
   const { authenticationInfos, setAuthenticationInfos } = useContext(
     AuthContext
   );
+
+  console.log("go yo, pour le présent & le futur", authenticationInfos);
 
   //WE MUST UPDATE CONTEXT AND API JSON
 
@@ -15,29 +19,37 @@ const ShopAdminSettingsBasePrice = (props) => {
   const WAIT_INTERVAL = 1000;
   const [timer, setTimer] = useState(null);
 
-  const handlechange = (event) => {
-    //ici on gère le timer puis on set le new context puis on set le JSON sur le serveur
-
+  const handlechange = (event, index) => {
     setTimer(clearTimeout(timer));
-    var { name, value } = event.target;
-    if (event.target.value[event.target.value.length - 1] === ".") {
-      //TODO check ça
-      //   updateState(fieldModified, name, value);
-    } else if (!isNaN(parseFloat(event.target.value))) {
+    let { value, name } = event.target;
+
+    //ici on gère le timer puis on set le new context puis on set le JSON sur le serveur
+    if (value[value.length - 1] === ".") {
+      let contextCopy = { ...authenticationInfos };
+      contextCopy.shop.shopData.SellingSettings.priceRangesForBaseSellingPrice[
+        index
+      ][2] = value;
+      setAuthenticationInfos(contextCopy);
+    } else if (!isNaN(parseFloat(value))) {
       value = parseFloat(value);
-      //TODO check ça
-      //   updateState(fieldModified, name, value);
+      let contextCopy = { ...authenticationInfos };
+      contextCopy.shop.shopData.SellingSettings.priceRangesForBaseSellingPrice[
+        index
+      ][2] = value;
+      setAuthenticationInfos(contextCopy);
 
       setTimer(
         setTimeout(
-          () => triggerAPISending(fieldModified, name, value),
+          () => triggerAPISending("fieldModified", name, value),
           WAIT_INTERVAL
         )
       );
-    } else if (event.target.value === "") {
-      //TODO check ça
-      //We don't update on API to not create an empty field that would create bugs. We wait for another input to PUT the data.
-      //   updateState(fieldModified, name, value);
+    } else if (value === "") {
+      let contextCopy = { ...authenticationInfos };
+      contextCopy.shop.shopData.SellingSettings.priceRangesForBaseSellingPrice[
+        index
+      ][2] = value;
+      setAuthenticationInfos(contextCopy);
       toast.error(
         <FormattedMessage
           id="app.shop.shopSettings.toast.input.failure"
@@ -45,6 +57,7 @@ const ShopAdminSettingsBasePrice = (props) => {
         />
       );
     } else {
+      console.log("else");
       toast.error(
         <FormattedMessage
           id="app.shop.shopSettings.toast.input.number.failure"
@@ -55,7 +68,8 @@ const ShopAdminSettingsBasePrice = (props) => {
   };
 
   const triggerAPISending = () => {
-    //may be useful
+    console.log("sending to Express !");
+    shopAPI.postSellingSettings(authenticationInfos);
   };
 
   return (
@@ -97,7 +111,7 @@ const ShopAdminSettingsBasePrice = (props) => {
                     <input
                       type="text"
                       value={priceRange[2]}
-                      onChange={handlechange}
+                      onChange={(e) => handlechange(e, index)}
                     />
                   </div>
                 );
