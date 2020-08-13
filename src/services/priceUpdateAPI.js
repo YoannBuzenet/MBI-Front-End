@@ -90,15 +90,16 @@ function smoothFloatKeepEntireComplete(number) {
 }
 
 function findTheRightPriceRange(arrayOfPriceRanges, priceInput, counter = 0) {
+  let newArray = [...arrayOfPriceRanges];
   if (
-    !Array.isArray(arrayOfPriceRanges) ||
-    (Array.isArray(arrayOfPriceRanges) && arrayOfPriceRanges).length === 0
+    !Array.isArray(newArray) ||
+    (Array.isArray(newArray) && newArray).length === 0
   ) {
     return -2;
   }
   counter++;
-  let middleArrayIndex = Math.floor(arrayOfPriceRanges.length / 2);
-  let currentPointer = arrayOfPriceRanges[middleArrayIndex];
+  let middleArrayIndex = Math.floor(newArray.length / 2);
+  let currentPointer = newArray[middleArrayIndex];
 
   if (priceInput >= currentPointer[0] && priceInput <= currentPointer[1]) {
     return currentPointer[2];
@@ -106,17 +107,14 @@ function findTheRightPriceRange(arrayOfPriceRanges, priceInput, counter = 0) {
 
   if (priceInput <= currentPointer[0]) {
     return findTheRightPriceRange(
-      arrayOfPriceRanges.splice(0, middleArrayIndex),
+      newArray.splice(0, middleArrayIndex),
       priceInput,
       counter
     );
   }
   if (priceInput >= currentPointer[0]) {
     return findTheRightPriceRange(
-      arrayOfPriceRanges.splice(
-        middleArrayIndex,
-        arrayOfPriceRanges.length - 1
-      ),
+      newArray.splice(middleArrayIndex, newArray.length - 1),
       priceInput,
       counter
     );

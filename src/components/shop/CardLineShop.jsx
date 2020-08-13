@@ -86,13 +86,34 @@ const CardLineShop = ({ card, indexCard }) => {
       ] === undefined &&
       card.hasOwnProperty("mkmPriceGuide")
     ) {
-      const relevantAlgo =
+      //Getting the price in MKM corresponding to the algo precised by the user
+      var relevantAlgo =
         card.mkmPriceGuide?.[
           authenticationInfos.shop?.shopData?.SellingSettings
             ?.percentToSetSellingPrices?.[card.lang]?.[
             parseInt(card.condition)
           ]?.[card.isFoil ? 1 : 0].algoName
         ];
+
+      console.log("làààà", relevantAlgo);
+      //TODO DOCUMENT
+
+      if (
+        relevantAlgo !== undefined &&
+        authenticationInfos.shop.shopData.SellingSettings
+          .shouldUseShopBasePriceStep === true
+      ) {
+        let searchingForPriceRange = priceUpdateAPI.findTheRightPriceRange(
+          authenticationInfos.shop.shopData.SellingSettings
+            .priceRangesForBaseSellingPrice,
+          relevantAlgo
+        );
+        if (searchingForPriceRange !== -1 && searchingForPriceRange !== -2) {
+          relevantAlgo = searchingForPriceRange;
+        }
+      }
+
+      console.log("lààà2222", relevantAlgo);
 
       const relevantPercent =
         authenticationInfos.shop?.shopData?.SellingSettings
