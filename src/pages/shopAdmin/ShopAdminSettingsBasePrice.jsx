@@ -240,39 +240,42 @@ const ShopAdminSettingsBasePrice = (props) => {
             </label>
           </form>
         </div>
-        <div>
-          {Array.isArray(
-            authenticationInfos?.shop?.shopData?.SellingSettings
-              ?.priceRangesForBaseSellingPrice
-          ) &&
-            authenticationInfos?.shop?.shopData?.SellingSettings?.priceRangesForBaseSellingPrice.map(
-              (priceRange, index) => {
-                return (
-                  <div className="RangePriceDisplay">
-                    <FormattedMessage
-                      id="app.shop.shopSettings.priceRange.part0"
-                      defaultMessage={`If the MKM price is above `}
-                    />
-                    {priceRange[0]}
-                    <FormattedMessage
-                      id="app.shop.shopSettings.priceRange.part1"
-                      defaultMessage={` and above `}
-                    />
-                    {priceRange[1]}
-                    <FormattedMessage
-                      id="app.shop.shopSettings.priceRange.part2"
-                      defaultMessage={`, Base price will be : `}
-                    />
-                    <input
-                      type="text"
-                      value={priceRange[2]}
-                      onChange={(e) => handlechange(e, index)}
-                    />
-                  </div>
-                );
-              }
-            )}
-        </div>
+        {authenticationInfos?.shop?.shopData?.SellingSettings
+          ?.shouldUseShopBasePriceStep && (
+          <div>
+            {Array.isArray(
+              authenticationInfos?.shop?.shopData?.SellingSettings
+                ?.priceRangesForBaseSellingPrice
+            ) &&
+              authenticationInfos?.shop?.shopData?.SellingSettings?.priceRangesForBaseSellingPrice.map(
+                (priceRange, index) => {
+                  return (
+                    <div className="RangePriceDisplay">
+                      <FormattedMessage
+                        id="app.shop.shopSettings.priceRange.part0"
+                        defaultMessage={`If the MKM price is above `}
+                      />
+                      {priceRange[0]}
+                      <FormattedMessage
+                        id="app.shop.shopSettings.priceRange.part1"
+                        defaultMessage={` and above `}
+                      />
+                      {priceRange[1]}
+                      <FormattedMessage
+                        id="app.shop.shopSettings.priceRange.part2"
+                        defaultMessage={`, Base price will be : `}
+                      />
+                      <input
+                        type="text"
+                        value={priceRange[2]}
+                        onChange={(e) => handlechange(e, index)}
+                      />
+                    </div>
+                  );
+                }
+              )}
+          </div>
+        )}
       </div>
     </>
   );
