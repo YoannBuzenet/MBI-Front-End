@@ -244,6 +244,7 @@
   "app.shop.shopSettings.priceRange.part0": "If the MKM price is above ",
   "app.shop.shopSettings.priceRange.part1": " and under ",
   "app.shop.shopSettings.priceRange.part2": ", Base price will be : ",
+  "app.shop.shopSettings.priceRange.checkbox.text": "I want to USE the Price Range step that will be aplied before the percentage. Untick this box if you only want to use the percentages.",
   "app.shop.shopSettings.sellingSettings.explaination.title": "MKM Price to base selling price on, and Percentage following Condition and Language",
   "app.shop.shopSettings.sellingSettings.explaination.paragraph1": "Choose the price from MKM you want to base your selling price on. (Average on 1 day ? On 7 ?)",
   "app.shop.shopSettings.sellingSettings.explaination.paragraph2": "Then choose the percentage your want yo apply to that particular condition in that particular language, if it's foil or not.",

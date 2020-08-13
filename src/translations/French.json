@@ -244,6 +244,7 @@
   "app.shop.shopSettings.priceRange.part0": "Si le prix MKM est supérieur à ",
   "app.shop.shopSettings.priceRange.part1": " et inférieur à ",
   "app.shop.shopSettings.priceRange.part2": ", le prix de base sera : ",
+  "app.shop.shopSettings.priceRange.checkbox.text": "Je veux UTILISER les tranches de prix qui seront appliquées avant les pourcentages. Décochez cette case si vous voulez uniquement utiliser les pourcentages.",
   "app.shop.shopSettings.sellingSettings.explaination.title": "Prix sur lequel sera basé le prix de base, et choix des pourcentages pour l'état et la langue",
   "app.shop.shopSettings.sellingSettings.explaination.paragraph1": "Choisissez sur quel prix provenant de MKM vous souhaitez vous baser (moyenne sur 7 jours ? Sur un jour ?)",
   "app.shop.shopSettings.sellingSettings.explaination.paragraph2": "Indiquez ensuite les pourcentages que vous souhaitez appliquer en fonction de la langue, l'état de la carte, si elle est foil ou non.",
