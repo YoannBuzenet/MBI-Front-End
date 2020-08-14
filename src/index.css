@@ -505,6 +505,13 @@ div.connect p {
   color: white;
 }
 
+.logo-shop-link {
+  margin-right: 30px;
+}
+
+.logo-shop-link:hover {
+}
+
 .navbar {
   position: fixed;
   top: 0;
