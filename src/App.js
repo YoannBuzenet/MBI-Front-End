@@ -388,14 +388,6 @@ function App() {
       for (var i = 0; i < currentBasket.length; i++) {
         // console.log("carte du panier", currentBasket[i]);
         // console.log("carte à ajouter", card);
-        // console.log(currentBasket[i].cardName === card.cardName);
-        // console.log(currentBasket[i].set === card.set);
-        // console.log(currentBasket[i].price === card.price);
-        // console.log(currentBasket[i].condition === card.condition);
-        // console.log(currentBasket[i].lang === card.lang);
-        // console.log(currentBasket[i].isFoil === card.isFoil);
-        // console.log(currentBasket[i].uuid === card.uuid);
-        // console.log(currentBasket[i].isSigned === card.isSigned);
         if (
           currentBasket[i].cardName === card.cardName &&
           currentBasket[i].set === card.set &&
@@ -428,26 +420,48 @@ function App() {
   //To do it into N, each element should be stored as a unique has key, then compare each element of array with memoized hash key
   //use Potential Match algorithm (algoexpert.io)
   const checkForDuplicates = (currentBasket) => {
+    console.log("the basket", currentBasket);
     var areThereDuplicate = false;
     var indexItem1;
     var indexItem2;
+    let memoization = {};
     for (var i = 0; i < currentBasket.length - 1; i++) {
-      for (var j = i + 1; j < currentBasket.length; j++) {
-        if (
-          currentBasket[i].name === currentBasket[j].name &&
-          currentBasket[i].set === currentBasket[j].set &&
-          currentBasket[i].price === currentBasket[j].price &&
-          currentBasket[i].condition === currentBasket[j].condition &&
-          currentBasket[i].lang === currentBasket[j].lang &&
-          currentBasket[i].isFoil === currentBasket[j].isFoil &&
-          currentBasket[i].uuid === currentBasket[j].uuid &&
-          currentBasket[i].isSigned === currentBasket[j].isSigned
-        ) {
-          areThereDuplicate = true;
-          indexItem1 = i;
-          indexItem2 = j;
-        }
+      let buildingUniqueKey = `${currentBasket[i].name}${currentBasket[i].set}${currentBasket[i].price}${currentBasket[i].condition}${currentBasket[i].lang}${currentBasket[i].isFoil}${currentBasket[i].uuid}${currentBasket[i].isSigned}`.replace(
+        / /g,
+        ""
+      );
+      console.log("the new key", buildingUniqueKey);
+      if (buildingUniqueKey in memoization) {
+        areThereDuplicate = true;
+        indexItem1 = i;
+        indexItem2 = Object.keys(memoization).findIndex(
+          (uniqueIdentifier) => uniqueIdentifier === buildingUniqueKey
+        );
+        return [areThereDuplicate, indexItem1, indexItem2];
+      } else {
+        memoization[buildingUniqueKey] = true;
       }
+      console.log("memoization", memoization);
+
+      //TODO check si on reçoit toujours undefined après avoir l'uuid ajouté sur last updated card
+      //SI oui on doit trouver dans l'algo d'où ça vient
+
+      // for (var j = i + 1; j < currentBasket.length; j++) {
+      //   if (
+      //     currentBasket[i].name === currentBasket[j].name &&
+      //     currentBasket[i].set === currentBasket[j].set &&
+      //     currentBasket[i].price === currentBasket[j].price &&
+      //     currentBasket[i].condition === currentBasket[j].condition &&
+      //     currentBasket[i].lang === currentBasket[j].lang &&
+      //     currentBasket[i].isFoil === currentBasket[j].isFoil &&
+      //     currentBasket[i].uuid === currentBasket[j].uuid &&
+      //     currentBasket[i].isSigned === currentBasket[j].isSigned
+      //   ) {
+      //     areThereDuplicate = true;
+      //     indexItem1 = i;
+      //     indexItem2 = j;
+      //   }
+      // }
     }
     return [areThereDuplicate, indexItem1, indexItem2];
   };
