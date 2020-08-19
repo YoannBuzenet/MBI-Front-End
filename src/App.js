@@ -420,7 +420,7 @@ function App() {
   //To do it into N, each element should be stored as a unique has key, then compare each element of array with memoized hash key
   //use Potential Match algorithm (algoexpert.io)
   const checkForDuplicates = (currentBasket) => {
-    console.log("the basket", currentBasket);
+    // console.log("the basket", currentBasket);
     var areThereDuplicate = false;
     var indexItem1;
     var indexItem2;
@@ -430,7 +430,7 @@ function App() {
         / /g,
         ""
       );
-      console.log("the new key", buildingUniqueKey);
+      // console.log("the new key", buildingUniqueKey);
       if (buildingUniqueKey in memoization) {
         areThereDuplicate = true;
         indexItem1 = i;
@@ -441,7 +441,7 @@ function App() {
       } else {
         memoization[buildingUniqueKey] = true;
       }
-      console.log("memoization", memoization);
+      // console.log("memoization", memoization);
 
       //TODO check si on reçoit toujours undefined après avoir l'uuid ajouté sur last updated card
       //SI oui on doit trouver dans l'algo d'où ça vient
