@@ -59,7 +59,7 @@ import BlackDiv from "./components/BlackDiv";
 import CardPlainPage from "./components/CardPlainPage";
 import BurgerMenuShop from "./components/shop/BurgerMenuShop";
 import BurgerMenuCustomerComponents from "./components/BurgerMenuCustomerComponents";
-import MKMConnectModal from "./components/MKMConnectModal";
+import MKMConnectModal from "./components/shop/MKMConnectModal";
 import shopAPI from "./services/shopAPI";
 import BuyingClauses from "./pages/BuyingClauses";
 import config from "./services/config";
@@ -415,10 +415,6 @@ function App() {
     }
   };
 
-  //This fonction should be rewritten to get O LOG N space time & complexity
-  // Currenlty it is N²
-  //To do it into N, each element should be stored as a unique has key, then compare each element of array with memoized hash key
-  //use Potential Match algorithm (algoexpert.io)
   const checkForDuplicates = (currentBasket) => {
     // console.log("the basket", currentBasket);
     var areThereDuplicate = false;
