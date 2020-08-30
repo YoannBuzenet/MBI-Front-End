@@ -1135,7 +1135,19 @@ div.blockFlags span.blockArrow {
   }
 }
 
-@media only screen and (max-width: 750px) {
+@media only screen and (max-width: 500px) {
+  .set-top-line {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .set-top-line > h1 {
+    margin-bottom: 5px;
+  }
+
+  .set-top-line > div {
+    position: static;
+  }
 }
 
 /**************************
