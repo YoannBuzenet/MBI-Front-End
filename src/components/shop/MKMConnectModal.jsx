@@ -1,11 +1,11 @@
 import React, { useContext, useState } from "react";
-import MKMAPI from "../services/MKMAPI";
-import AuthContext from "../context/authContext";
-import authAPI from "../services/authAPI";
+import MKMAPI from "../../services/MKMAPI";
+import AuthContext from "../../context/authContext";
+import authAPI from "../../services/authAPI";
 import { toast } from "react-toastify";
-import MKM_ModalContext from "../context/mkmModalConnectionContext";
-import BlackDivContext from "../context/blackDivModalContext";
-import CSSLoaderWaitingSpiral from "./loaders/CSSLoaderWaitingSpiral";
+import MKM_ModalContext from "../../context/mkmModalConnectionContext";
+import BlackDivContext from "../../context/blackDivModalContext";
+import CSSLoaderWaitingSpiral from "../loaders/CSSLoaderWaitingSpiral";
 import { FormattedMessage } from "react-intl";
 
 const MKMConnectModal = () => {
