@@ -120,7 +120,7 @@ const ShopAdminSettingsBasePrice = (props) => {
             <span className="explaination-text-li-number">3.</span>{" "}
             <FormattedMessage
               id="app.shop.shopSettings.sellingSettings.explaination.globalProcess.paragraph5"
-              defaultMessage={`Following the language, condition, and if it's foil or not, we modify the price with the percentage you fixed.`}
+              defaultMessage={`Following the language, condition, and if it's foil or not, the price is modified following the percentage you fixed.`}
             />
           </p>
           <p>

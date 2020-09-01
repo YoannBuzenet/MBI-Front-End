@@ -177,14 +177,41 @@ const SellingSettingsCondition = ({ isFoil, condition, langObject }) => {
         }
         value={algoDisplayed}
       >
-        {Object.keys(allPricesAvailableOnMKM).map((onePrice) => (
-          <option value={onePrice}>
-            {intl.formatMessage({
-              id: allPricesAvailableOnMKM[onePrice],
-              defaultMessage: allPricesAvailableOnMKM[onePrice],
-            })}
-          </option>
-        ))}
+        {Object.keys(allPricesAvailableOnMKM)
+          .filter((onePrice) => {
+            if (isFoil) {
+              return (
+                onePrice === "foilAvg1" ||
+                onePrice === "foilAvg7" ||
+                onePrice === "foilAvg30" ||
+                onePrice === "foilLow" ||
+                onePrice === "foiltrend"
+              );
+            } else {
+              return (
+                onePrice === "AvgSellPrice" ||
+                onePrice === "avg1" ||
+                onePrice === "avg7" ||
+                onePrice === "avg30" ||
+                onePrice === "trendPrice" ||
+                onePrice === "germanProLow" ||
+                onePrice === "lowPrice" ||
+                onePrice === "lowPriceEx" ||
+                onePrice === "suggestedPrice"
+              );
+            }
+          })
+          .map((onePrice) => {
+            console.log("info to check", onePrice);
+            return (
+              <option value={onePrice}>
+                {intl.formatMessage({
+                  id: allPricesAvailableOnMKM[onePrice],
+                  defaultMessage: allPricesAvailableOnMKM[onePrice],
+                })}
+              </option>
+            );
+          })}
       </select>
       <input
         type="text"
