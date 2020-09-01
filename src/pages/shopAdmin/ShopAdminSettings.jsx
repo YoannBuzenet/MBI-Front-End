@@ -470,7 +470,7 @@ const ShopAdminSettings = () => {
             <p>
               <FormattedMessage
                 id="app.shop.shopSettings.sellingSettings.explaination.paragraph4"
-                defaultMessage={`Remember, you can always check your selling prices before validating a sell request.`}
+                defaultMessage={`Please note that a selling price can always be updated before selling the card online.`}
               />
             </p>
           </div>
