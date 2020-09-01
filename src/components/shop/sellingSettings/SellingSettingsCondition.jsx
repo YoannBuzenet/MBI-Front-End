@@ -202,7 +202,7 @@ const SellingSettingsCondition = ({ isFoil, condition, langObject }) => {
             }
           })
           .map((onePrice) => {
-            console.log("info to check", onePrice);
+            // console.log("info to check", onePrice);
             return (
               <option value={onePrice}>
                 {intl.formatMessage({
