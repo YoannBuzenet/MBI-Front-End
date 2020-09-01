@@ -29,7 +29,7 @@ async function sendMail(mailRequest) {
     cache
   );
 
-  console.log(intl);
+  // console.log(intl);
 
   let template;
   let templateData = {
@@ -80,6 +80,8 @@ async function sendMail(mailRequest) {
         },
         { url: process.env.REACT_APP_EXPRESSAPI }
       );
+
+      console.log(mailTitle);
 
       mailOptions["subject"] = mailTitle;
 
