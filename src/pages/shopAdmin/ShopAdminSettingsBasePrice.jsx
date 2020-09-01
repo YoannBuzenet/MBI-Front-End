@@ -92,6 +92,12 @@ const ShopAdminSettingsBasePrice = (props) => {
           </p>
           <p>
             <FormattedMessage
+              id="app.shop.shopSettings.sellingSettings.explaination.globalProcess.paragraph1bis"
+              defaultMessage={`Please remind that you can always overwrite a specific price if you want, before adding it to your MKM stock.`}
+            />
+          </p>
+          <p>
+            <FormattedMessage
               id="app.shop.shopSettings.sellingSettings.explaination.globalProcess.paragraph2"
               defaultMessage={`The selling price is set that way :`}
             />
@@ -107,7 +113,7 @@ const ShopAdminSettingsBasePrice = (props) => {
             <span className="explaination-text-li-number">2.</span>{" "}
             <FormattedMessage
               id="app.shop.shopSettings.sellingSettings.explaination.globalProcess.paragraph4"
-              defaultMessage={`The price is then passed into the Price Range you did set up. Price range allow to round up prices. You can disable this step if you want. We advise to disable it if you want to always have your selling prices fixed with a percentage from the trend. Price Range are here to "round up" prices like it usually happens in business.`}
+              defaultMessage={`The price is then passed into the Price Range you did set up below. Price range allow to round up prices (Example : if it's worth 6 on MKM, the shop sells it 8). You can disable this step if you want. We advise to disable it if you want to always have your selling prices fixed with only a percentage from the MKM trend.`}
             />
           </p>
           <p>
@@ -203,7 +209,7 @@ const ShopAdminSettingsBasePrice = (props) => {
           <p>
             <FormattedMessage
               id="app.shop.shopSettings.sellingSettings.explaination.globalProcess.example2.paragraph2"
-              defaultMessage={`The card is in English, Exc, foil. You added the following parameters : English : 100%, Exc : 80%.`}
+              defaultMessage={`The card is in English, Exc, Foil. You added the following parameters in nthe Foil English column : Exc : 80%.`}
             />
           </p>
           <p>

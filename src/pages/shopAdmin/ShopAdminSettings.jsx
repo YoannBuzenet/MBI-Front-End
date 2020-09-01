@@ -292,6 +292,14 @@ const ShopAdminSettings = () => {
         </p>
         <div className="categorySetting">
           <h2 className="categoryTitle">Buying Settings</h2>
+          <p className="explaination">
+            <FormattedMessage
+              id="app.shop.shopSettings.global.Explaination"
+              defaultMessage={
+                "You can set general rules for settings buying prices. This will help you when modifying your buying prices. Note that these are general rules, you can always set specific buying prices card by card, afterwards."
+              }
+            />
+          </p>
           <div className="percentSettings">
             <div className="percentPerSigned">
               <h2>
@@ -300,6 +308,14 @@ const ShopAdminSettings = () => {
                   defaultMessage={`Signed Cards`}
                 />
               </h2>
+              <p className="explaination">
+                <FormattedMessage
+                  id="app.shop.shopSettings.percentSignedExplaination"
+                  defaultMessage={
+                    "Generally speaking, do you want to pay more, or less, or equal, for a signed card ? 100% is the same price. This is a general rule. You can always specify a specific price for a particular card."
+                  }
+                />
+              </p>
               <form>
                 <Field
                   name="percentPerSigned"
@@ -321,12 +337,12 @@ const ShopAdminSettings = () => {
                   defaultMessage={`Languages`}
                 />
               </h2>
-              <span className="explaination">
+              <p className="explaination">
                 <FormattedMessage
                   id="app.shop.shopSettings.percentExplaination"
-                  defaultMessage={`Choose which percentage you wish to pay per language. Your default buying language should be 100%.`}
+                  defaultMessage={`Choose which percentage you wish to pay per language. Your default buying language should be 100%. For example, if you want to pay a language 50% cheaper than English which is your favorite language, indicate 100% in English, and 50% (or less) in the language you don't really want. `}
                 />
-              </span>
+              </p>
 
               <form>
                 {lang.length > 0 &&

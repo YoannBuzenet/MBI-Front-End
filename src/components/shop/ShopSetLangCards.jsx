@@ -116,7 +116,7 @@ const ShopSetLangCards = ({ card, index }) => {
                     <span>{card?.priceguide?.lowPriceEx}</span>
                   </div>
                 </div>
-                <div className="onePrice">
+                {/* <div className="onePrice">
                   <div>
                     <span>
                       <FormattedMessage
@@ -128,7 +128,7 @@ const ShopSetLangCards = ({ card, index }) => {
                   <div>
                     <span>{card?.priceguide?.suggestedPrice}</span>
                   </div>
-                </div>
+                </div> */}
               </div>
               {/* <div className="onePrice">
                 <span>Tendance : </span>
