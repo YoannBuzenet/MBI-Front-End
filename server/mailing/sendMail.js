@@ -62,10 +62,9 @@ async function sendMail(mailRequest) {
 
   switch (mailRequest.action) {
     case "welcomeEmail":
-      // console.log("welcome Email", templateData);
-      // console.log("welcome Email", templateData.user.data.client);
-      //TODO: BIG Security Check (captcha ?)
-      //TODO : think about waiting for 200 http status from API to be sure we can send the mail
+      currentSecurityLevel = AllSecurityLevels["unlogged"];
+      //TODO: ANTI SPAM Security Check (recaptcha ?)
+
       template =
         __dirname +
         "/templates/" +
@@ -78,10 +77,10 @@ async function sendMail(mailRequest) {
           id: "server.sendMail.welcomeEmail.title",
           defaultMessage: "Welcome on {url} !",
         },
-        { url: process.env.REACT_APP_EXPRESSAPI }
+        { url: process.env.REACT_APP_USER_FRIENDLY_URL }
       );
 
-      console.log(mailTitle);
+      // console.log(mailTitle);
 
       mailOptions["subject"] = mailTitle;
 
