@@ -72,9 +72,16 @@ async function sendMail(mailRequest) {
         langDefinition[mailRequest.langID].toLowerCase() +
         "/welcomeEmail.ejs";
       mailOptions["to"] = templateData.user.email;
-      mailOptions[
-        "subject"
-      ] = `Bienvenue sur ${process.env.REACT_APP_EXPRESSAPI} !`;
+
+      const mailTitle = intl.formatMessage(
+        {
+          id: "server.sendMail.welcomeEmail.title",
+          defaultMessage: "Welcome on {url} !",
+        },
+        { url: process.env.REACT_APP_EXPRESSAPI }
+      );
+
+      mailOptions["subject"] = mailTitle;
 
       break;
 

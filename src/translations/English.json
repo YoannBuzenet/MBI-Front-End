@@ -400,6 +400,8 @@
   "app.generics.yes": "Yes",
   "app.generics.no": "No",
 
+  "server.sendMail.welcomeEmail.title": "Welcome on {url} !",
+
   "config.definition.lang.german": "German",
   "config.definition.lang.spanish": "Spanish",
   "config.definition.lang.french": "French",
