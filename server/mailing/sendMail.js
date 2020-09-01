@@ -3,9 +3,28 @@ const nodemailer = require("nodemailer");
 const { checkIfUserIsReallyLogged } = require("../services/securityCheckAPI");
 const { langDefinition } = require("../../src/services/config");
 const path = require("path");
+const { createIntl, createIntlCache } = require("react-intl");
+const {
+  websiteDefaultLanguageArrayLangAvailables,
+} = require("../../src/services/config");
 
 async function sendMail(mailRequest) {
-  //TODO : ajouter la langue dans l'object MailRequest React side et le traiter ici
+  const intl = createIntl(
+    {
+      // Locale of the application
+      locale: websiteDefaultLanguageArrayLangAvailables.find(
+        (lang) => lang.langID === mailRequest.langID
+      ).locale,
+      // Locale of the fallback defaultMessage
+      messages: websiteDefaultLanguageArrayLangAvailables.find(
+        (lang) => lang.langID === mailRequest.langID
+      ).translationsForUsersLocale,
+    },
+    cache
+  );
+
+  console.log(intl);
+
   let template;
   let templateData = {
     user: mailRequest.user,
@@ -37,8 +56,8 @@ async function sendMail(mailRequest) {
 
   switch (mailRequest.action) {
     case "welcomeEmail":
-      console.log("welcome Email", templateData);
-      console.log("welcome Email", templateData.user.data.client);
+      // console.log("welcome Email", templateData);
+      // console.log("welcome Email", templateData.user.data.client);
       //TODO: BIG Security Check (captcha ?)
       //TODO : think about waiting for 200 http status from API to be sure we can send the mail
       template =
