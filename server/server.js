@@ -101,11 +101,6 @@ app.get("/api/PDF", (req, res) => {
   res.send("WIP");
 });
 
-// app.get("/api/test", (req, res) => {
-//   console.log("test env.local", process.env.SMTP_NODEMAILER);
-//   console.log("test env.local", process.env);
-// });
-
 //Shop Selling Settings
 app.post("/api/shop/RewriteSellingSettings", async (req, res) => {
   //Check if this is the right shop (does he have the shop access & is the id the one of this server)

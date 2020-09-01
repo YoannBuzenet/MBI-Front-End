@@ -165,7 +165,7 @@ const SellRequestValidation = ({ history, checkForDuplicates }) => {
       toast.success(
         <FormattedMessage
           id="app.sellRequestValidation.toast.success"
-          defaultMessage={`Validate my Sell Request`}
+          defaultMessage={`Your Sell Request has been posted ! You can follow it in your account.`}
         />
       );
 

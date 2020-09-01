@@ -21,7 +21,7 @@ const ValidSellRequestDuplicatesStep = ({
   useEffect(() => {
     // console.log(errorList.length);
     const check = checkForDuplicates(currentBasket);
-    console.log("check", check);
+    console.log("check if there are duplicates in basket", check);
     setFinalCheck(check[0]);
     // console.log(check);
     // console.log("check1", check[1]);
