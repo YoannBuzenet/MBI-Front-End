@@ -9,6 +9,12 @@ const {
 } = require("../../src/services/config");
 
 async function sendMail(mailRequest) {
+  // Translation Setup
+
+  // This is optional but highly recommended
+  // since it prevents memory leak
+  const cache = createIntlCache();
+
   const intl = createIntl(
     {
       // Locale of the application
