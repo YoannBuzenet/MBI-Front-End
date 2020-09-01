@@ -1793,6 +1793,8 @@ span.customer_lastName {
 .explaination {
   font-size: 1.4rem;
   font-style: italic;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 .categorySetting {
