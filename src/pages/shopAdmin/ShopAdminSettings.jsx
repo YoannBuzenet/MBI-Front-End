@@ -12,6 +12,7 @@ import config from "../../services/config";
 import AppLangChoice from "../../components/AppLangChoice";
 import SellingSettingsLang from "../../components/shop/sellingSettings/SellingSettingsLang";
 import ShopAdminSettingsBasePrice from "./ShopAdminSettingsBasePrice";
+import ExplainationContainer from "./ExplainationContainer";
 
 const ShopAdminSettings = () => {
   //Handling shop Settings here
@@ -440,7 +441,8 @@ const ShopAdminSettings = () => {
             />
           </h2>
 
-          <ShopAdminSettingsBasePrice />
+          <ExplainationContainer />
+
           <div>
             <h3>
               <FormattedMessage
@@ -486,6 +488,7 @@ const ShopAdminSettings = () => {
                 );
               })}
           </div>
+          <ShopAdminSettingsBasePrice />
         </div>
       </div>
     </>
