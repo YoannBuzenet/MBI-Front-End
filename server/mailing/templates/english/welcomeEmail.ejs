@@ -1,5 +1,7 @@
 <h2>Hello <%= user.data.client.prenom %>, and Welcome !</h2>
-<p>You are now registered on <%= process.env.REACT_APP_EXPRESSAPI %> !</p>
+<p>
+  You are now registered on <%= process.env.REACT_APP_USER_FRIENDLY_URL %> !
+</p>
 <p>You can create sell request and submit them to our shop.</p>
 <p>Bests,</p>
 <p><%= user.data.client.shop.legalName %></p>

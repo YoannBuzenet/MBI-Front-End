@@ -29,9 +29,9 @@ async function sendMail(mailRequest) {
     cache
   );
 
-  // console.log(intl);
-
   let template;
+  // MailRequest.user doesn't have always the same data structure
+  // Welcome email is different (see welcomeEmail.ejs)
   let templateData = {
     user: mailRequest.user,
   };
@@ -70,7 +70,7 @@ async function sendMail(mailRequest) {
         "/templates/" +
         langDefinition[mailRequest.langID].toLowerCase() +
         "/welcomeEmail.ejs";
-      mailOptions["to"] = templateData.user.email;
+      mailOptions["to"] = templateData.user.data.email;
 
       const mailTitle = intl.formatMessage(
         {
