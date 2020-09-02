@@ -380,10 +380,13 @@ const ShopSellRequestStatusValidator = () => {
     switch (value) {
       case "dateRecu":
         mailAction = "received";
+        break;
       case "dateProcessing":
         mailAction = "beingProcessed";
+        break;
       case "dateApprovalPending":
         mailAction = "awaitingCustomerValidation";
+        break;
     }
 
     mailAPI.sendMail({

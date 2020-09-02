@@ -71,6 +71,7 @@ async function sendMail(mailRequest) {
     : null;
 
   //This object will be mutated during the Switch and hydrated with relevant data
+  // BEWARE : structure will change following the mail sent, because we don't have access to the same data at each time
   let mailOptions = { from: "", to: "", subject: "", attachments: [] };
   let mailTitle;
 
