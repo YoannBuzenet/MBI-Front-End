@@ -168,8 +168,9 @@ async function sendMail(mailRequest) {
       console.log("Sell Request passed to status being received");
       currentSecurityLevel = AllSecurityLevels["shop"];
       templateData = {
-        user: mailRequest.infos.customer,
+        customer: mailRequest.infos.customer,
         sellRequest: mailRequest.infos,
+        user: mailRequest.user,
       };
 
       template =
