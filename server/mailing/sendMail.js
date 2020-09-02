@@ -7,6 +7,7 @@ const { createIntl, createIntlCache } = require("react-intl");
 const {
   websiteDefaultLanguageArrayLangAvailables,
 } = require("../../src/services/config");
+const fs = require("fs");
 
 async function sendMail(mailRequest) {
   // Translation Setup
