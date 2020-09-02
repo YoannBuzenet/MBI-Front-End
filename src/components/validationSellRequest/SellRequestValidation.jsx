@@ -24,6 +24,8 @@ const SellRequestValidation = ({ history, checkForDuplicates }) => {
   //App language
   const { currentLang, setCurrentLang } = useContext(SelectAppLangContext);
 
+  console.log("auth check", authenticationInfos);
+
   useEffect(() => {
     if (isLoaded) {
       //Save the new Sell Request into local storage
@@ -133,6 +135,7 @@ const SellRequestValidation = ({ history, checkForDuplicates }) => {
 
     try {
       const sendSellRequest = await sellRequestAPI.send(sellRequestData);
+      console.log("serv resp", sendSellRequest);
       setIsLoaded(true);
       // console.log(sendSellRequest.data);
 

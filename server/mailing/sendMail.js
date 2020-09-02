@@ -96,7 +96,13 @@ async function sendMail(mailRequest) {
         langDefinition[mailRequest.langID].toLowerCase() +
         "/confirmationSellRequestSubmitted.ejs";
       mailOptions["to"] = process.env.MAIL_SHOP_SELL_REQUEST_NOTIFICATIONS;
-      mailOptions["subject"] = "Un rachat vient d'être soumis";
+
+      const mailTitle = intl.formatMessage({
+        id: "server.sendMail.sellRequest.submitted",
+        defaultMessage: "Your sell request has been submitted !",
+      });
+
+      mailOptions["subject"] = mailTitle;
       break;
 
     case "cardsSent":
@@ -109,7 +115,13 @@ async function sendMail(mailRequest) {
         langDefinition[mailRequest.langID].toLowerCase() +
         "/confirmationCardsAreSent.ejs";
       mailOptions["to"] = templateData.user.email;
-      mailOptions["subject"] = "Vos cartes ont bien été notées comme envoyées.";
+
+      const mailTitle = intl.formatMessage({
+        id: "server.sendMail.sellRequest.cardsHaveBeenSent",
+        defaultMessage: "Your cards has been notified as sent.",
+      });
+
+      mailOptions["subject"] = mailTitle;
       break;
 
     case "received":
@@ -126,9 +138,17 @@ async function sendMail(mailRequest) {
         langDefinition[mailRequest.langID].toLowerCase() +
         "/confirmationCardsAreReceived.ejs";
       mailOptions["to"] = mailRequest.infos.customer.user.email;
-      mailOptions[
-        "subject"
-      ] = `Les cartes de votre rachat n°${templateData.sellRequest.id} ont bien été reçues.`;
+
+      const mailTitle = intl.formatMessage(
+        {
+          id: "server.sendMail.sellRequest.cardsHaveBeenReceived",
+          defaultMessage:
+            "Sell Request {sellRequestId} : Your cards have been received !",
+        },
+        { sellRequestId: templateData.sellRequest.id }
+      );
+
+      mailOptions["subject"] = mailTitle;
       break;
 
     case "beingProcessed":
@@ -144,9 +164,17 @@ async function sendMail(mailRequest) {
         langDefinition[mailRequest.langID].toLowerCase() +
         "/confirmationSellRequestBeingProcessed.ejs";
       mailOptions["to"] = mailRequest.infos.customer.user.email;
-      mailOptions[
-        "subject"
-      ] = `Votre rachat n°${templateData.sellRequest.id} est en cours de traitement.`;
+
+      const mailTitle = intl.formatMessage(
+        {
+          id: "server.sendMail.sellRequest.cardsBeingProcessed",
+          defaultMessage:
+            "Sell Request {sellRequestId} : Your cards are being processed.",
+        },
+        { sellRequestId: templateData.sellRequest.id }
+      );
+
+      mailOptions["subject"] = mailTitle;
       break;
 
     case "awaitingCustomerValidation":
@@ -163,9 +191,17 @@ async function sendMail(mailRequest) {
         langDefinition[mailRequest.langID].toLowerCase() +
         "/confirmationSellRequestAwaitingValidation.ejs";
       mailOptions["to"] = mailRequest.infos.customer.user.email;
-      mailOptions[
-        "subject"
-      ] = `Le rachat n°${templateData.sellRequest.id} est en attente de votre validation.`;
+
+      const mailTitle = intl.formatMessage(
+        {
+          id: "server.sendMail.sellRequest.awaitingCustomerValidation",
+          defaultMessage:
+            "Sell Request {sellRequestId} : Awaiting your validation.",
+        },
+        { sellRequestId: templateData.sellRequest.id }
+      );
+
+      mailOptions["subject"] = mailTitle;
 
       const { writePDF } = require("../PDF_handling/SellRequestServerTemplate");
       writePDF(mailRequest.infos, mailRequest.user.shop, mailRequest.langID);
@@ -198,9 +234,16 @@ async function sendMail(mailRequest) {
         langDefinition[mailRequest.langID].toLowerCase() +
         "/confirmationSellRequestValidatedByShop.ejs";
       mailOptions["to"] = mailRequest.infos.customer.user.email;
-      mailOptions[
-        "subject"
-      ] = `Le rachat n°${templateData.sellRequest.id} vient d'être validé.`;
+
+      const mailTitle = intl.formatMessage(
+        {
+          id: "server.sendMail.sellRequest.validated",
+          defaultMessage: "Sell Request {sellRequestId} has been validated !",
+        },
+        { sellRequestId: templateData.sellRequest.id }
+      );
+
+      mailOptions["subject"] = mailTitle;
       break;
 
     case "cancel":
@@ -216,9 +259,16 @@ async function sendMail(mailRequest) {
         langDefinition[mailRequest.langID].toLowerCase() +
         "/SellRequestCancellation.ejs";
       mailOptions["to"] = mailRequest.infos.customer.user.email;
-      mailOptions[
-        "subject"
-      ] = `Le rachat ${templateData.sellRequest.id} a été annulé.`;
+
+      const mailTitle = intl.formatMessage(
+        {
+          id: "server.sendMail.sellRequest.cancelled",
+          defaultMessage: "Sell Request {sellRequestId} has been canceled.",
+        },
+        { sellRequestId: templateData.sellRequest.id }
+      );
+
+      mailOptions["subject"] = mailTitle;
       break;
 
     default:
