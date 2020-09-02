@@ -71,8 +71,6 @@ const CardLineShop = ({ card, indexCard }) => {
 
   const [timer, setTimer] = useState(null);
 
-  const [prioriMKMSellingPrice, setPrioriMKMSellingPrice] = useState("");
-
   //Translation Hook
   const intl = useIntl();
 
@@ -163,25 +161,43 @@ const CardLineShop = ({ card, indexCard }) => {
       //We remove the card then we add it again at the same Index
       // console.log("is loaded", currentCard);
       // console.log("is loaded", currentAdminSellRequest);
-      var newSellRequest = currentAdminSellRequest;
+      currentAdminSellRequest.amount = priceUpdateAPI.smoothFloatKeepEntireComplete(
+        currentAdminSellRequest.sellRequests.reduce((total, card) => {
+          return total + card.quantity * card.price;
+        }, 0)
+      );
+      currentAdminSellRequest.cardTotalQuantity = currentAdminSellRequest.sellRequests.reduce(
+        (total, card) => {
+          return total + card.quantity;
+        },
+        0
+      );
 
-      newSellRequest.sellRequests = currentAdminSellRequest.sellRequests.filter(
+      var newSellRequest = { ...currentAdminSellRequest };
+
+      newSellRequest.sellRequests = newSellRequest.sellRequests.filter(
         (card, index) => index !== indexCard
       );
 
       newSellRequest.sellRequests.splice(indexCard, 0, currentCard);
 
-      setCurrentAdminSellRequest({
-        ...newSellRequest,
-        amount: priceUpdateAPI.smoothFloatKeepEntireComplete(
-          newSellRequest.sellRequests.reduce((total, card) => {
-            return total + card.quantity * card.price;
-          }, 0)
-        ),
-        cardTotalQuantity: newSellRequest.sellRequests.reduce((total, card) => {
-          return total + card.quantity;
-        }, 0),
-      });
+      setTimeout(() => {
+        setCurrentAdminSellRequest({
+          ...newSellRequest,
+          amount: priceUpdateAPI.smoothFloatKeepEntireComplete(
+            newSellRequest.sellRequests.reduce((total, card) => {
+              return total + card.quantity * card.price;
+            }, 0)
+          ),
+          cardTotalQuantity: newSellRequest.sellRequests.reduce(
+            (total, card) => {
+              return total + card.quantity;
+            },
+            0
+          ),
+        });
+      }, 1000);
+
       // console.log(currentAdminSellRequest);
     }
   }, [currentCard]);
@@ -235,6 +251,9 @@ const CardLineShop = ({ card, indexCard }) => {
     // console.log(value);
     if (name === "quantity" || name === "lang" || name === "price") {
       var newValue = parseInt(value);
+      if (isNaN(newValue)) {
+        newValue = 0;
+      }
     } else {
       var newValue = value.toString();
     }
@@ -341,6 +360,8 @@ const CardLineShop = ({ card, indexCard }) => {
   };
 
   const handleDelete = (card) => {
+    //TODO : is the deleted card removed from the sell request in memory ?
+
     //Telling the API to delete the sell request card
     sellRequestCardAPI
       .delete(card.id)
