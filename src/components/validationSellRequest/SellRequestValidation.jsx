@@ -178,7 +178,7 @@ const SellRequestValidation = ({ history, checkForDuplicates }) => {
           user: authenticationInfos,
           infos: {
             id: sendSellRequest.data.id,
-            sellRequest: [sendSellRequest],
+            sellRequest: [sendSellRequest.data],
           },
           langID: currentLang.langID,
         },
