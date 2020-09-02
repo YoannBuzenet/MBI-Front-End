@@ -233,7 +233,7 @@ const CardLineShop = ({ card, indexCard }) => {
     const { name, value } = currentTarget;
     // console.log(name);
     // console.log(value);
-    if (name === "quantity" || name === "lang") {
+    if (name === "quantity" || name === "lang" || name === "price") {
       var newValue = parseInt(value);
     } else {
       var newValue = value.toString();
