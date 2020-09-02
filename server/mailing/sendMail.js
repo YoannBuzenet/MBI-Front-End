@@ -56,7 +56,12 @@ async function sendMail(mailRequest) {
         userSellRequest = mailRequest.user.customer.sellRequests;
       } else {
         //cf SellRequestValidation.jsx line 179
-        userSellRequest = mailRequest.infos.sellRequest;
+        if (mailRequest.infos.sellRequest) {
+          userSellRequest = mailRequest.infos.sellRequest;
+        } else {
+          //cf SellRequestStatusUpdater line 114
+          userSellRequest = mailRequest.infos;
+        }
       }
     }
   }

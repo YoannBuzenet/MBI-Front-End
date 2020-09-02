@@ -115,7 +115,7 @@ const SellRequestStatusUpdater = ({
           mailRequest: {
             action: "cardsSent",
             user: authenticationInfos,
-            infos: currentSellRequest,
+            infos: [currentSellRequest],
             langID: currentLang.langID,
           },
         });
