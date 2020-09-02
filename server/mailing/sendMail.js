@@ -105,11 +105,30 @@ async function sendMail(mailRequest) {
         "/templates/" +
         langDefinition[mailRequest.langID].toLowerCase() +
         "/confirmationSellRequestSubmitted.ejs";
-      mailOptions["to"] = process.env.MAIL_SHOP_SELL_REQUEST_NOTIFICATIONS;
+      mailOptions["to"] = templateData.user.data.email;
 
       mailTitle = intl.formatMessage({
         id: "server.sendMail.sellRequest.submitted",
         defaultMessage: "Your sell request has been submitted !",
+      });
+
+      mailOptions["subject"] = mailTitle;
+      break;
+
+    case "submittedShopNotification":
+      console.log("Sell Request passed to status being submitted");
+      currentSecurityLevel = AllSecurityLevels["logged"];
+      templateData = { ...templateData, sellRequest: mailRequest.infos };
+      template =
+        __dirname +
+        "/templates/" +
+        langDefinition[mailRequest.langID].toLowerCase() +
+        "/shopMails/SellRequestSubmittedShopNotification.ejs";
+      mailOptions["to"] = process.env.MAIL_SHOP_SELL_REQUEST_NOTIFICATIONS;
+
+      mailTitle = intl.formatMessage({
+        id: "server.sendMail.sellRequest.shopNotification.submitted",
+        defaultMessage: "A new sell request has been submitted !",
       });
 
       mailOptions["subject"] = mailTitle;
@@ -336,7 +355,6 @@ async function sendMail(mailRequest) {
       pass: process.env.AUTH_PASSWORD,
     },
   });
-
   ejs.renderFile(template, templateData, (err, html) => {
     if (err) console.log(err); // Handle error
     // console.log(templateData);

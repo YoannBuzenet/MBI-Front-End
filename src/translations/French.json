@@ -408,6 +408,7 @@
   "server.sendMail.sellRequest.awaitingCustomerValidation": "Rachat n° {sellRequestId} : En attente de votre validation.",
   "server.sendMail.sellRequest.validated": "Votre rachat n° {sellRequestId} a été validé !",
   "server.sendMail.sellRequest.cancelled": "Le rachat {sellRequestId} a été annulé.",
+  "server.sendMail.sellRequest.shopNotification.submitted": "Un nouveau rachat a été posté !",
 
   "config.definition.lang.german": "Allemand",
   "config.definition.lang.spanish": "Espagnol",

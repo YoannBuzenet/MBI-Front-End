@@ -408,6 +408,7 @@
   "server.sendMail.sellRequest.awaitingCustomerValidation": "Sell Request {sellRequestId} : Awaiting your validation.",
   "server.sendMail.sellRequest.validated": "Sell Request {sellRequestId} has been validated !",
   "server.sendMail.sellRequest.cancelled": "Sell Request {sellRequestId} has been canceled.",
+  "server.sendMail.sellRequest.shopNotification.submitted": "A new sell request has been submitted !",
 
   "config.definition.lang.german": "German",
   "config.definition.lang.spanish": "Spanish",
