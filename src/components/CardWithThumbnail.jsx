@@ -18,34 +18,7 @@ const CardWithThumbnail = ({ card }) => {
 
   return (
     <>
-      <div
-        className="card"
-        //Normal behaviour
-        onClick={handleClick}
-
-        //Test API MAIL
-        // onClick={() => mailAPI.sendMail({ action: "test" })}
-
-        //TEST MKM CONNECTION
-        // onClick={() =>
-        //   axios
-        //     .get("https://api.cardmarket.com/ws/v2.0/account", {
-        //       headers: {
-        //         Authorization: MKMAPI.buildOAuthHeader(
-        //           "GET",
-        //           "https://api.cardmarket.com/ws/v2.0/account"
-        //         ),
-        //       },
-        //     })
-        //     .then((data) => console.log(data))
-        //     .catch((error) => {
-        //       if (error.response) {
-        //         console.log(error.response);
-        //       }
-        //       return console.log(error);
-        //     })
-        // }
-      >
+      <div className="card" onClick={handleClick}>
         <div className="card-picture">
           <img src={picture} alt="" />
         </div>

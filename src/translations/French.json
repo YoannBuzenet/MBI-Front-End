@@ -401,6 +401,13 @@
   "app.generics.no": "Non",
 
   "server.sendMail.welcomeEmail.title": "Bienvenue sur {url} !",
+  "server.sendMail.sellRequest.submitted": "Votre demande de rachat est enregistrée !",
+  "server.sendMail.sellRequest.cardsHaveBeenSent": "Vos cartes ont été notées comme envoyées.",
+  "server.sendMail.sellRequest.cardsHaveBeenReceived": "Rachat n° {sellRequestId} : Vos cartes ont été reçues !",
+  "server.sendMail.sellRequest.cardsBeingProcessed": "Rachat n° {sellRequestId} : Vos cartes sont en cours de traitement.",
+  "server.sendMail.sellRequest.awaitingCustomerValidation": "Rachat n° {sellRequestId} : En attente de votre validation.",
+  "server.sendMail.sellRequest.validated": "Votre rachat n° {sellRequestId} a été validé !",
+  "server.sendMail.sellRequest.cancelled": "Le rachat {sellRequestId} a été annulé.",
 
   "config.definition.lang.german": "Allemand",
   "config.definition.lang.spanish": "Espagnol",

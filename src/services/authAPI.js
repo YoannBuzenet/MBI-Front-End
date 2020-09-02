@@ -153,7 +153,7 @@ function transformAPIdataIntoAppData(data) {
       adress: data.client.adress,
       postalCode: data.client.postalCode,
       town: data.client.town,
-      SellRequests: data.client.SellRequests,
+      SellRequests: data.client.SellRequests || [],
     },
     shop: {
       id: data.client.shop.id,

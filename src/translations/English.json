@@ -401,6 +401,13 @@
   "app.generics.no": "No",
 
   "server.sendMail.welcomeEmail.title": "Welcome on {url} !",
+  "server.sendMail.sellRequest.submitted": "Your sell request has been submitted !",
+  "server.sendMail.sellRequest.cardsHaveBeenSent": "Your cards have been notified as sent.",
+  "server.sendMail.sellRequest.cardsHaveBeenReceived": "Sell Request {sellRequestId} : Your cards have been received !",
+  "server.sendMail.sellRequest.cardsBeingProcessed": "Sell Request {sellRequestId} : Your cards are being processed.",
+  "server.sendMail.sellRequest.awaitingCustomerValidation": "Sell Request {sellRequestId} : Awaiting your validation.",
+  "server.sendMail.sellRequest.validated": "Sell Request {sellRequestId} has been validated !",
+  "server.sendMail.sellRequest.cancelled": "Sell Request {sellRequestId} has been canceled.",
 
   "config.definition.lang.german": "German",
   "config.definition.lang.spanish": "Spanish",
