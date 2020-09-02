@@ -172,8 +172,8 @@ const OneSellRequest = ({ match, history }) => {
                         : card.CardCondition.shortnameUS}
                     </Td>
                     <Td>{card.language.shortname}</Td>
-                    <Td>{card.language.isFoil ? "Yes" : "No"}</Td>
-                    <Td>{card.language.isSigned ? "Yes" : "No"}</Td>
+                    <Td>{card.isFoil ? "Yes" : "No"}</Td>
+                    <Td>{card.isSigned ? "Yes" : "No"}</Td>
                     <Td>{card.price}</Td>
                     <Td>{card.cardQuantity}</Td>
                     <Td>{card.price * card.cardQuantity}</Td>
