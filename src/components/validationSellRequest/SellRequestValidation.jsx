@@ -183,6 +183,17 @@ const SellRequestValidation = ({ history, checkForDuplicates }) => {
           langID: currentLang.langID,
         },
       });
+      mailAPI.sendMail({
+        mailRequest: {
+          action: "submittedShopNotification",
+          user: authenticationInfos,
+          infos: {
+            id: sendSellRequest.data.id,
+            sellRequest: [sendSellRequest.data],
+          },
+          langID: currentLang.langID,
+        },
+      });
 
       history.replace("/my_sell_requests");
     } catch (error) {
