@@ -105,7 +105,7 @@ async function sendMail(mailRequest) {
         "/templates/" +
         langDefinition[mailRequest.langID].toLowerCase() +
         "/confirmationSellRequestSubmitted.ejs";
-      mailOptions["to"] = templateData.user.data.email;
+      mailOptions["to"] = templateData.user.email;
 
       mailTitle = intl.formatMessage({
         id: "server.sendMail.sellRequest.submitted",
