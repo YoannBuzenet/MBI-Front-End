@@ -46,11 +46,20 @@ async function sendMail(mailRequest) {
   let currentSecurityLevel; //Checking wether use is logged, shop or unlogged
   let { token } = mailRequest.user; // jwt
 
-  let userSellRequest = mailRequest.user
-    ? mailRequest.user.customer
-      ? mailRequest.user.customer.SellRequests
-      : null
-    : null;
+  let userSellRequest;
+
+  if (mailRequest.user) {
+    userSellRequest = mailRequest.user.customer;
+    if (mailRequest.user.customer) {
+      if (mailRequest.user.shop.sellRequests) {
+        userSellRequest = mailRequest.user.shop.sellRequests;
+      } else {
+        //cf SellRequestValidation.jsx line 179
+        userSellRequest = mailRequest.infos.sellRequest;
+      }
+    }
+  }
+
   let userShopSellRequest = mailRequest.user.shop
     ? mailRequest.user.shop.sellRequests
     : null;
