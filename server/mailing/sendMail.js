@@ -143,7 +143,11 @@ async function sendMail(mailRequest) {
     case "cardsSent":
       console.log("Sell Request passed to status being cards sents");
       currentSecurityLevel = AllSecurityLevels["logged"];
-      templateData = { ...templateData, sellRequest: mailRequest.infos };
+      templateData = {
+        ...templateData,
+        user: mailRequest.user,
+        sellRequest: mailRequest.infos[0],
+      };
       template =
         __dirname +
         "/templates/" +
