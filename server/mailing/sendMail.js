@@ -57,6 +57,7 @@ async function sendMail(mailRequest) {
 
   //This object will be mutated during the Switch and hydrated with relevant data
   let mailOptions = { from: "", to: "", subject: "", attachments: [] };
+  let mailTitle;
 
   //TODO -> Security on unlogged call (captcha)
 
@@ -72,7 +73,7 @@ async function sendMail(mailRequest) {
         "/welcomeEmail.ejs";
       mailOptions["to"] = templateData.user.data.email;
 
-      const mailTitle = intl.formatMessage(
+      mailTitle = intl.formatMessage(
         {
           id: "server.sendMail.welcomeEmail.title",
           defaultMessage: "Welcome on {url} !",
@@ -97,7 +98,7 @@ async function sendMail(mailRequest) {
         "/confirmationSellRequestSubmitted.ejs";
       mailOptions["to"] = process.env.MAIL_SHOP_SELL_REQUEST_NOTIFICATIONS;
 
-      const mailTitle = intl.formatMessage({
+      mailTitle = intl.formatMessage({
         id: "server.sendMail.sellRequest.submitted",
         defaultMessage: "Your sell request has been submitted !",
       });
@@ -116,7 +117,7 @@ async function sendMail(mailRequest) {
         "/confirmationCardsAreSent.ejs";
       mailOptions["to"] = templateData.user.email;
 
-      const mailTitle = intl.formatMessage({
+      mailTitle = intl.formatMessage({
         id: "server.sendMail.sellRequest.cardsHaveBeenSent",
         defaultMessage: "Your cards has been notified as sent.",
       });
@@ -139,7 +140,7 @@ async function sendMail(mailRequest) {
         "/confirmationCardsAreReceived.ejs";
       mailOptions["to"] = mailRequest.infos.customer.user.email;
 
-      const mailTitle = intl.formatMessage(
+      mailTitle = intl.formatMessage(
         {
           id: "server.sendMail.sellRequest.cardsHaveBeenReceived",
           defaultMessage:
@@ -165,7 +166,7 @@ async function sendMail(mailRequest) {
         "/confirmationSellRequestBeingProcessed.ejs";
       mailOptions["to"] = mailRequest.infos.customer.user.email;
 
-      const mailTitle = intl.formatMessage(
+      mailTitle = intl.formatMessage(
         {
           id: "server.sendMail.sellRequest.cardsBeingProcessed",
           defaultMessage:
@@ -192,7 +193,7 @@ async function sendMail(mailRequest) {
         "/confirmationSellRequestAwaitingValidation.ejs";
       mailOptions["to"] = mailRequest.infos.customer.user.email;
 
-      const mailTitle = intl.formatMessage(
+      mailTitle = intl.formatMessage(
         {
           id: "server.sendMail.sellRequest.awaitingCustomerValidation",
           defaultMessage:
@@ -235,7 +236,7 @@ async function sendMail(mailRequest) {
         "/confirmationSellRequestValidatedByShop.ejs";
       mailOptions["to"] = mailRequest.infos.customer.user.email;
 
-      const mailTitle = intl.formatMessage(
+      mailTitle = intl.formatMessage(
         {
           id: "server.sendMail.sellRequest.validated",
           defaultMessage: "Sell Request {sellRequestId} has been validated !",
@@ -260,7 +261,7 @@ async function sendMail(mailRequest) {
         "/SellRequestCancellation.ejs";
       mailOptions["to"] = mailRequest.infos.customer.user.email;
 
-      const mailTitle = intl.formatMessage(
+      mailTitle = intl.formatMessage(
         {
           id: "server.sendMail.sellRequest.cancelled",
           defaultMessage: "Sell Request {sellRequestId} has been canceled.",
