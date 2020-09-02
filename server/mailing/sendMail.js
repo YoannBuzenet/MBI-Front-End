@@ -51,8 +51,8 @@ async function sendMail(mailRequest) {
   if (mailRequest.user) {
     userSellRequest = mailRequest.user.customer;
     if (mailRequest.user.customer) {
-      if (mailRequest.user.shop.sellRequests) {
-        userSellRequest = mailRequest.user.shop.sellRequests;
+      if (mailRequest.user.customer.sellRequests) {
+        userSellRequest = mailRequest.user.customer.sellRequests;
       } else {
         //cf SellRequestValidation.jsx line 179
         userSellRequest = mailRequest.infos.sellRequest;
