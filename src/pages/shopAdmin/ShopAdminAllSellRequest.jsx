@@ -11,6 +11,7 @@ import SetListLoader from "../../components/loaders/SetListLoader";
 import { FormattedMessage } from "react-intl";
 import priceUpdateAPI from "../../services/priceUpdateAPI";
 import { useHistory } from "react-router-dom";
+import { Pagination } from "@material-ui/lab";
 
 const ShopAdminAllSellRequests = (props) => {
   //Variable to clean up useEffect Axios
@@ -22,19 +23,32 @@ const ShopAdminAllSellRequests = (props) => {
 
   const [isLoading, setIsLoading] = useState(true);
 
+  const [currentPageNumber, setCurrentPageNumber] = useState(1);
+
+  const [numberOfPages, setNumberOfPages] = useState(1);
+
   let history = useHistory();
 
-  useEffect(() => {
-    sellRequestAPI
-      .findAll({
-        cancelToken: source.token,
-      })
-      .then((response) => setAllSellRequests(response.data["hydra:member"]))
-      .then(() => setIsLoading(false))
-      .catch((error) => errorHandlingAPI.check401Unauthorized(error));
+  console.log("number", numberOfPages);
 
+  useEffect(() => {
+    handlePageChange(1);
     return () => source.cancel("");
   }, []);
+
+  const handlePageChange = (pageNumberRequested) => {
+    sellRequestAPI
+      .findAll(pageNumberRequested, {
+        cancelToken: source.token,
+      })
+      .then((response) => {
+        setAllSellRequests(response.data["hydra:member"]);
+        setNumberOfPages(response.data["hydra:view"]["hydra:last"].substr(20));
+        setCurrentPageNumber(pageNumberRequested);
+      })
+      .then(() => setIsLoading(false))
+      .catch((error) => errorHandlingAPI.check401Unauthorized(error));
+  };
 
   return (
     <>
@@ -123,6 +137,17 @@ const ShopAdminAllSellRequests = (props) => {
           </Table>
         )}
       </div>
+      {numberOfPages > 1 && (
+        <div className="paginationContainer">
+          <Pagination
+            count={numberOfPages}
+            page={currentPageNumber}
+            onChange={(event, pageNumberClicked) =>
+              handlePageChange(pageNumberClicked)
+            }
+          />
+        </div>
+      )}
     </>
   );
 };
