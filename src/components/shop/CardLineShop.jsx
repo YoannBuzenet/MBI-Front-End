@@ -156,51 +156,51 @@ const CardLineShop = ({ card, indexCard }) => {
     }
   }, [isOnHover]);
 
-  useEffect(() => {
-    if (isLoaded) {
-      //We remove the card then we add it again at the same Index
-      // console.log("is loaded", currentCard);
-      // console.log("is loaded", currentAdminSellRequest);
-      currentAdminSellRequest.amount = priceUpdateAPI.smoothFloatKeepEntireComplete(
-        currentAdminSellRequest.sellRequests.reduce((total, card) => {
-          return total + card.quantity * card.price;
-        }, 0)
-      );
-      currentAdminSellRequest.cardTotalQuantity = currentAdminSellRequest.sellRequests.reduce(
-        (total, card) => {
-          return total + card.quantity;
-        },
-        0
-      );
+  // useEffect(() => {
+  //   if (isLoaded) {
+  //     //We remove the card then we add it again at the same Index
+  //     // console.log("is loaded", currentCard);
+  //     // console.log("is loaded", currentAdminSellRequest);
+  //     currentAdminSellRequest.amount = priceUpdateAPI.smoothFloatKeepEntireComplete(
+  //       currentAdminSellRequest.sellRequests.reduce((total, card) => {
+  //         return total + card.quantity * card.price;
+  //       }, 0)
+  //     );
+  //     currentAdminSellRequest.cardTotalQuantity = currentAdminSellRequest.sellRequests.reduce(
+  //       (total, card) => {
+  //         return total + card.quantity;
+  //       },
+  //       0
+  //     );
 
-      var newSellRequest = { ...currentAdminSellRequest };
+  //     var newSellRequest = { ...currentAdminSellRequest };
 
-      newSellRequest.sellRequests = newSellRequest.sellRequests.filter(
-        (card, index) => index !== indexCard
-      );
+  //     newSellRequest.sellRequests = newSellRequest.sellRequests.filter(
+  //       (card, index) => index !== indexCard
+  //     );
 
-      newSellRequest.sellRequests.splice(indexCard, 0, currentCard);
+  //     newSellRequest.sellRequests.splice(indexCard, 0, currentCard);
 
-      setTimeout(() => {
-        setCurrentAdminSellRequest({
-          ...newSellRequest,
-          amount: priceUpdateAPI.smoothFloatKeepEntireComplete(
-            newSellRequest.sellRequests.reduce((total, card) => {
-              return total + card.quantity * card.price;
-            }, 0)
-          ),
-          cardTotalQuantity: newSellRequest.sellRequests.reduce(
-            (total, card) => {
-              return total + card.quantity;
-            },
-            0
-          ),
-        });
-      }, 1000);
+  //     setTimeout(() => {
+  //       setCurrentAdminSellRequest({
+  //         ...newSellRequest,
+  //         amount: priceUpdateAPI.smoothFloatKeepEntireComplete(
+  //           newSellRequest.sellRequests.reduce((total, card) => {
+  //             return total + card.quantity * card.price;
+  //           }, 0)
+  //         ),
+  //         cardTotalQuantity: newSellRequest.sellRequests.reduce(
+  //           (total, card) => {
+  //             return total + card.quantity;
+  //           },
+  //           0
+  //         ),
+  //       });
+  //     }, 1000);
 
-      // console.log(currentAdminSellRequest);
-    }
-  }, [currentCard]);
+  //     // console.log(currentAdminSellRequest);
+  //   }
+  // }, [currentCard]);
 
   //Triggers if a card is deleted
   useEffect(() => {
@@ -276,6 +276,17 @@ const CardLineShop = ({ card, indexCard }) => {
 
     //mutating to get local change immediatly
     currentAdminSellRequest.sellRequests[indexCard][name] = value;
+    currentAdminSellRequest.cardTotalQuantity = currentAdminSellRequest.sellRequests.reduce(
+      (total, card) => {
+        return total + card.quantity;
+      },
+      0
+    );
+    currentAdminSellRequest.amount = priceUpdateAPI.smoothFloatKeepEntireComplete(
+      currentAdminSellRequest.sellRequests.reduce((total, card) => {
+        return total + card.price * card.quantity;
+      }, 0)
+    );
 
     // console.log(currentAdminSellRequest);
 

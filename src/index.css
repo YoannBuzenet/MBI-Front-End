@@ -1638,6 +1638,18 @@ input.updated {
 }
 
 /**************************
+SHOP ADMIN ALL SELL REQUEST
+**************************/
+.paginationContainer {
+  display: flex;
+  justify-content: center;
+}
+.paginationContainer nav {
+  background-color: transparent;
+  box-shadow: none;
+}
+
+/**************************
 SHOP ADMIN ONE SELL REQUEST
 **************************/
 

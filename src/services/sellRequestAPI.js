@@ -8,9 +8,9 @@ function send(sellRequestData) {
   );
 }
 
-function findAll(cleanUpParam) {
+function findAll(pageNumber, cleanUpParam) {
   return axios.get(
-    process.env.REACT_APP_MTGAPI_URL + "/sell_requests",
+    process.env.REACT_APP_MTGAPI_URL + "/sell_requests?page=" + pageNumber,
     cleanUpParam
   );
 }
