@@ -8,11 +8,16 @@ import { isMobile } from "react-device-detect";
 import SetListLoader from "../../components/loaders/SetListLoader";
 import { FormattedMessage } from "react-intl";
 import { useHistory } from "react-router-dom";
+import { Pagination } from "@material-ui/lab";
 
 const ShopAdminAllCustomers = (props) => {
   const [listCustomers, setListCustomers] = useState([]);
 
   const [isLoading, setIsLoading] = useState(true);
+
+  const [currentPageNumber, setCurrentPageNumber] = useState(1);
+
+  const [numberOfPages, setNumberOfPages] = useState(1);
 
   let history = useHistory();
 
@@ -21,20 +26,28 @@ const ShopAdminAllCustomers = (props) => {
   const source = CancelToken.source();
 
   useEffect(() => {
-    if (listCustomers.length === 0) {
-      customersAPI
-        .findAll({
-          cancelToken: source.token,
-        })
-        .then((response) => setListCustomers(response))
-        .then(() => setIsLoading(false))
-        .catch((error) => {
-          return errorHandlingAPI.check401Unauthorized(error);
-        });
+    handlePageChange(1);
+    return () => source.cancel("");
+  }, []);
 
-      return () => source.cancel("");
-    }
-  }, [listCustomers, source]);
+  const handlePageChange = (pageNumberRequested) => {
+    customersAPI
+      .findAll(pageNumberRequested, {
+        cancelToken: source.token,
+      })
+      .then((response) => {
+        setListCustomers(response.data["hydra:member"]);
+        setNumberOfPages(
+          parseInt(response.data["hydra:view"]["hydra:last"].substr(14))
+        );
+        setCurrentPageNumber(pageNumberRequested);
+      })
+      .then(() => setIsLoading(false))
+      .catch((error) => {
+        return errorHandlingAPI.check401Unauthorized(error);
+      });
+  };
+
   return (
     <>
       <h1>
@@ -106,6 +119,17 @@ const ShopAdminAllCustomers = (props) => {
           </Table>
         )}
       </div>
+      {numberOfPages > 1 && (
+        <div className="paginationContainer">
+          <Pagination
+            count={numberOfPages}
+            page={currentPageNumber}
+            onChange={(event, pageNumberClicked) =>
+              handlePageChange(pageNumberClicked)
+            }
+          />
+        </div>
+      )}
     </>
   );
 };

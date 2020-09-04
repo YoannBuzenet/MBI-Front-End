@@ -1,10 +1,11 @@
 import axios from "axios";
 import config from "./config";
 
-function findAll(cleanUpParam) {
-  return axios
-    .get(process.env.REACT_APP_MTGAPI_URL + "/clients", cleanUpParam)
-    .then((response) => response.data["hydra:member"]);
+function findAll(pageNumber, cleanUpParam) {
+  return axios.get(
+    process.env.REACT_APP_MTGAPI_URL + "/clients?page=" + pageNumber,
+    cleanUpParam
+  );
 }
 
 function findOneById(id, cleanUpParam) {
