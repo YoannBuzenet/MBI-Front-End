@@ -106,6 +106,7 @@
   "app.OneSet.price": "Price",
   "app.OneSet.filterByPrice": "Filter by Price",
   "app.OneSet.filter.placeholder": "Minimum price...",
+  "app.OneSet.noCSP.message": "There are currently no cards bought in this set.",
 
   "app.RegisterPage.title": "Register",
   "app.RegisterPage.label.mail": "Email",
