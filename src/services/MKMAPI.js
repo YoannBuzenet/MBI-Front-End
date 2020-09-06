@@ -234,7 +234,7 @@ function transformSellRequestIntoXML(arrayOfSellRequestCards) {
 }
 
 function AddCardsToStock(XMLObject, header) {
-  return axios.post(URL_MKM_SANDBOX_ADD_STOCK, XMLObject, {
+  return axios.post(URL_MKM_ADD_STOCK, XMLObject, {
     headers: {
       Authorization: header,
     },
