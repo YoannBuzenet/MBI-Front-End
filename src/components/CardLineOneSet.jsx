@@ -302,8 +302,8 @@ const CardLineOneSet = ({
             <option value="12">12</option>
           </select>
         </Td>
-        {/* PRICE */}
 
+        {/* PRICE */}
         <Td>
           {(!isLoading && cardsContext[cardID].price) || (!isLoading && 0)}
           {isLoading && <div className="loading-loop"></div>}

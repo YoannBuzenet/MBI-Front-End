@@ -344,7 +344,16 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
                             return cardID;
                           }
                         } else {
-                          if (cardsContext[cardID].price > 0) {
+                          //If it's Near mint it must have a price to be displayed
+                          //We chose Near Mint because it's the default condition displayed
+                          if (
+                            cardsContext[cardID].price > 0 &&
+                            cardsContext[cardID].condition === 2
+                          ) {
+                            return cardID;
+                          }
+                          //If it's not near mint, it can be displayed all the time if asked by user (otherwise the card disappears from page if it had no price, not user friendly)
+                          else if (cardsContext[cardID].condition !== 2) {
                             return cardID;
                           } else {
                             return;
@@ -368,6 +377,7 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
                 </Table>
               </>
             )}
+            {/* If there are NO Card Shop Price in DB for this set */}
             {areThey0CSP && (
               <div className="noCSPMessage">
                 <p>
