@@ -143,9 +143,10 @@ const ShopSellRequestStatusValidator = () => {
   }, [currentStatus, currentAdminSellRequest]);
 
   const validateSellRequest = async (event) => {
+    //Expiration token is in second, Date.getTime is in millisecond. We divide the latter to be able to compare them.
     if (
       authenticationInfos.shop &&
-      authenticationInfos.shop.ExpirationMkmToken > new Date().getTime()
+      authenticationInfos.shop.ExpirationMkmToken > new Date().getTime() / 1000
     ) {
       const newData = {
         dateValidated: new Date(),
