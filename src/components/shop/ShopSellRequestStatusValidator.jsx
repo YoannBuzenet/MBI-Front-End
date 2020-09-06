@@ -150,17 +150,15 @@ const ShopSellRequestStatusValidator = () => {
     ) {
       const newData = {
         dateValidated: new Date(),
-        sellRequestCards: [
-          currentAdminSellRequest.sellRequests.map((card) => {
-            return {
-              id: card.id,
-              mkmSellPrice:
-                card.mkmSellPrice && card.mkmSellPrice !== 0
-                  ? card.mkmSellPrice
-                  : card.AutomaticSellingPrice,
-            };
-          }),
-        ],
+        sellRequestCards: currentAdminSellRequest.sellRequests.map((card) => {
+          return {
+            id: card.id,
+            mkmSellPrice:
+              card.mkmSellPrice && card.mkmSellPrice !== 0
+                ? card.mkmSellPrice
+                : card.AutomaticSellingPrice,
+          };
+        }),
       };
 
       if (
