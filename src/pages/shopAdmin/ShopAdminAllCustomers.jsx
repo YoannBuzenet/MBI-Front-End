@@ -37,9 +37,13 @@ const ShopAdminAllCustomers = (props) => {
       })
       .then((response) => {
         setListCustomers(response.data["hydra:member"]);
-        setNumberOfPages(
-          parseInt(response.data["hydra:view"]["hydra:last"].substr(14))
-        );
+
+        //If there are several pages
+        if (response?.data?.["hydra:view"]?.["hydra:last"]) {
+          setNumberOfPages(
+            parseInt(response.data["hydra:view"]["hydra:last"].substr(14))
+          );
+        }
         setCurrentPageNumber(pageNumberRequested);
       })
       .then(() => setIsLoading(false))
