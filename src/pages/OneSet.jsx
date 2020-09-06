@@ -53,6 +53,8 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
 
   const [priceFilter, setPriceFilter] = useState("");
 
+  const [areThey0CSP, setAreThey0CSP] = useState(false);
+
   const transformLanguagesArrayIntoObject = (array) => {
     let langObject = {};
 
@@ -177,9 +179,12 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
         Object.keys(cardsContext).map((id) => parseInt(id)),
         parseInt(process.env.REACT_APP_SHOP_BASELANG)
       )
-        .then((data) =>
-          addFirstDisplayedPricesToContext(data.data["hydra:member"])
-        )
+        .then((resp) => {
+          if (resp.data["hydra:totalItems"] === 0) {
+            setAreThey0CSP(true);
+          }
+          addFirstDisplayedPricesToContext(resp.data["hydra:member"]);
+        })
         .then(setHasUpdatedPrices(true));
     }
   }, [cardsContext, buildContextFromAPIResponse]);
@@ -214,7 +219,8 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
   //Hook Intl to translate an attribute
   const intl = useIntl();
 
-  console.log("contextToCheck", cardsContext);
+  // console.log("contextToCheck", cardsContext);
+  console.log("are they CSP ?", areThey0CSP);
 
   return (
     <>
@@ -361,6 +367,16 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
                   </Tbody>
                 </Table>
               </>
+            )}
+            {areThey0CSP && (
+              <div className="noCSPMessage">
+                <p>
+                  <FormattedMessage
+                    id="app.OneSet.noCSP.message"
+                    defaultMessage={`There are currently no cards bought in this set.`}
+                  />
+                </p>
+              </div>
             )}
           </div>
         </div>

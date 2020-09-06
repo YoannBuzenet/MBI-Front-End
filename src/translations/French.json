@@ -106,6 +106,7 @@
   "app.OneSet.price": "Prix",
   "app.OneSet.filterByPrice": "Filtrer par prix",
   "app.OneSet.filter.placeholder": "Prix minimum...",
+  "app.OneSet.noCSP.message": "Il n'y a actuellement pas de cartes rachetées dans cette édition.",
 
   "app.RegisterPage.title": "Créer un compte",
   "app.RegisterPage.label.mail": "Email",

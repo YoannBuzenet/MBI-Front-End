@@ -1004,7 +1004,7 @@ input[type="search"] {
 }
 
 /**************************
-********ONESET PAGE*******
+********ONE SET PAGE*******
 **************************/
 
 .set-top-line {
@@ -1111,6 +1111,11 @@ div.blockFlags span.blockArrow {
   height: 1.6rem;
   padding: 1rem 0.5rem;
   border-radius: 5px;
+}
+
+.noCSPMessage {
+  display: flex;
+  justify-content: center;
 }
 
 @media only screen and (max-width: 850px) {
