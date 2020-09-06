@@ -199,7 +199,7 @@ const ShopSellRequestStatusValidator = () => {
 
         const header = MKMAPI.buildOAuthHeader(
           "POST",
-          MKMAPI.URL_MKM_SANDBOX_ADD_STOCK,
+          MKMAPI.URL_MKM_ADD_STOCK, //Sandbox URL : MKMAPI.URL_MKM_SANDBOX_ADD_STOCK
           authenticationInfos.shop.appToken,
           authenticationInfos.shop.appSecret,
           authenticationInfos.shop.accessToken,
