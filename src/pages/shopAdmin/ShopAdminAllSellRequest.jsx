@@ -43,9 +43,13 @@ const ShopAdminAllSellRequests = (props) => {
       })
       .then((response) => {
         setAllSellRequests(response.data["hydra:member"]);
-        setNumberOfPages(
-          parseInt(response.data["hydra:view"]["hydra:last"].substr(20))
-        );
+
+        //If there are several pages
+        if (response?.data?.["hydra:view"]?.["hydra:last"]) {
+          setNumberOfPages(
+            parseInt(response.data["hydra:view"]["hydra:last"].substr(20))
+          );
+        }
         setCurrentPageNumber(pageNumberRequested);
       })
       .then(() => setIsLoading(false))
