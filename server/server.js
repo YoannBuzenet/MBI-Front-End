@@ -153,6 +153,7 @@ app.post("/api/usermail/reset", async (req, res) => {
     )
     .then((googleResp) => {
       if (googleResp.data.success) {
+        console.log("received the OK from google");
         //TO DO : RES 200 + NOTIF
         axios
           .post(process.env.REACT_APP_MTGAPI_URL + "/usermail/challenge", {

@@ -220,7 +220,7 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
   const intl = useIntl();
 
   // console.log("contextToCheck", cardsContext);
-  console.log("are they CSP ?", areThey0CSP);
+  // console.log("are they CSP ?", areThey0CSP);
 
   return (
     <>
