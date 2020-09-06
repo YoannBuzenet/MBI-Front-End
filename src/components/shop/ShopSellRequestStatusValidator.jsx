@@ -152,7 +152,7 @@ const ShopSellRequestStatusValidator = () => {
         dateValidated: new Date(),
         sellRequestCards: currentAdminSellRequest.sellRequests.map((card) => {
           return {
-            id: card.id,
+            id: parseInt(card.id),
             mkmSellPrice:
               card.mkmSellPrice && card.mkmSellPrice !== 0
                 ? card.mkmSellPrice
