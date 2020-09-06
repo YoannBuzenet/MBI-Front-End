@@ -32,7 +32,8 @@ const MKMConnectModal = () => {
         //TO DO Checker si la date de réception en session est VALIDE
         console.log(data);
 
-        if (data.data.shop.ExpirationMkmToken > new Date().getTime()) {
+        //Expiration token is in second, Date.getTime is in millisecond. We divide the latter to be able to compare them.
+        if (data.data.shop.ExpirationMkmToken > new Date().getTime() / 1000) {
           const authenticationInfoCopy = { ...authenticationInfos };
 
           authenticationInfoCopy.shop.accesToken = "updated";
