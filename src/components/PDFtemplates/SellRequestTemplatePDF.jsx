@@ -101,14 +101,14 @@ const SellRequestTemplatePDF = ({ sellRequest, shopData }) => {
               defaultMessage={`I, the undersigned Madam / Sir `}
             />
             <span className="pdf-username-and-firstname">
-              {sellRequest.customer.prenom} {sellRequest.customer.nom}
+              {sellRequest.customer?.prenom} {sellRequest.customer?.nom}
             </span>
             <FormattedMessage
               id="app.shop.OneSellRequestPDF.Sentence2"
               defaultMessage={`, living at `}
             />
-            {sellRequest.customer.adress}, {sellRequest.customer.postalCode}{" "}
-            {sellRequest.customer.town}
+            {sellRequest.customer?.adress}, {sellRequest.customer?.postalCode}{" "}
+            {sellRequest.customer?.town}
             <FormattedMessage
               id="app.shop.OneSellRequestPDF.Sentence2"
               defaultMessage={`, acknowledges on honor having sold the following cards to the company `}
@@ -194,58 +194,60 @@ const SellRequestTemplatePDF = ({ sellRequest, shopData }) => {
           </View>
           {/* Table Body */}
 
-          {sellRequest.sellRequests.map((card) => {
-            return (
-              <>
-                <View style={styles.tableRow}>
-                  <View style={styles.tableCol}>
-                    <Text style={styles.tableCell}>{card.name}</Text>
+          {Array.isArray(sellRequest.sellRequests) &&
+            sellRequest.sellRequests.map((card) => {
+              return (
+                <>
+                  <View style={styles.tableRow}>
+                    <View style={styles.tableCol}>
+                      <Text style={styles.tableCell}>{card.name}</Text>
+                    </View>
+                    <View style={styles.tableCol}>
+                      <Text style={styles.tableCell}>{card.set}</Text>
+                    </View>
+                    <View style={styles.tableCol}>
+                      <Text style={styles.tableCell}>
+                        {config.langDefinition[card.lang]}
+                      </Text>
+                    </View>
+                    <View style={styles.tableCol}>
+                      <Text style={styles.tableCell}>
+                        {config.conditionDefinition[parseInt(card.condition)]}
+                      </Text>
+                    </View>
+                    <View style={styles.tableCol}>
+                      <Text style={styles.tableCell}>
+                        {card.isFoil ? "Yes" : "No"}
+                      </Text>
+                    </View>
+                    <View style={styles.tableCol}>
+                      <Text style={styles.tableCell}>
+                        {card.isSigned ? "Yes" : "No"}
+                      </Text>
+                    </View>
+                    <View style={styles.tableCol}>
+                      <Text style={styles.tableCell}>{card.price}</Text>
+                    </View>
+                    <View style={styles.tableCol}>
+                      <Text style={styles.tableCell}>{card.quantity}</Text>
+                    </View>
+                    <View style={styles.tableCol}>
+                      <Text style={styles.tableCell}>
+                        {card.price * card.quantity}€
+                      </Text>
+                    </View>
                   </View>
-                  <View style={styles.tableCol}>
-                    <Text style={styles.tableCell}>{card.set}</Text>
-                  </View>
-                  <View style={styles.tableCol}>
-                    <Text style={styles.tableCell}>
-                      {config.langDefinition[card.lang]}
-                    </Text>
-                  </View>
-                  <View style={styles.tableCol}>
-                    <Text style={styles.tableCell}>
-                      {config.conditionDefinition[parseInt(card.condition)]}
-                    </Text>
-                  </View>
-                  <View style={styles.tableCol}>
-                    <Text style={styles.tableCell}>
-                      {card.isFoil ? "Yes" : "No"}
-                    </Text>
-                  </View>
-                  <View style={styles.tableCol}>
-                    <Text style={styles.tableCell}>
-                      {card.isSigned ? "Yes" : "No"}
-                    </Text>
-                  </View>
-                  <View style={styles.tableCol}>
-                    <Text style={styles.tableCell}>{card.price}</Text>
-                  </View>
-                  <View style={styles.tableCol}>
-                    <Text style={styles.tableCell}>{card.quantity}</Text>
-                  </View>
-                  <View style={styles.tableCol}>
-                    <Text style={styles.tableCell}>
-                      {card.price * card.quantity}€
-                    </Text>
-                  </View>
-                </View>
-              </>
-            );
-          })}
+                </>
+              );
+            })}
           <View style={styles.tableRow}>
             <View style={styles.tableColTotalProducts}>
               <Text style={styles.regularText}>
-                {sellRequest.sellRequests.reduce(
-                  (total, card) => total + card.quantity,
-                  0
-                )}{" "}
+                {Array.isArray(sellRequest.sellRequests) &&
+                  sellRequest.sellRequests.reduce(
+                    (total, card) => total + card.quantity,
+                    0
+                  )}{" "}
                 <FormattedMessage
                   id="app.shop.OneSellRequestPDF.products"
                   defaultMessage={`products`}
@@ -254,18 +256,20 @@ const SellRequestTemplatePDF = ({ sellRequest, shopData }) => {
             </View>
             <View style={styles.tableCol}>
               <Text style={styles.tableCell}>
-                {sellRequest.sellRequests.reduce(
-                  (total, card) => total + card.quantity,
-                  0
-                )}
+                {Array.isArray(sellRequest.sellRequests) &&
+                  sellRequest.sellRequests.reduce(
+                    (total, card) => total + card.quantity,
+                    0
+                  )}
               </Text>
             </View>
             <View style={styles.tableCol}>
               <Text style={styles.tableCell}>
-                {sellRequest.sellRequests.reduce(
-                  (total, card) => total + card.quantity * card.price,
-                  0
-                )}
+                {Array.isArray(sellRequest.sellRequests) &&
+                  sellRequest.sellRequests.reduce(
+                    (total, card) => total + card.quantity * card.price,
+                    0
+                  )}
                 €
               </Text>
             </View>

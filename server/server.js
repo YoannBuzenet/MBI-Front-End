@@ -96,8 +96,7 @@ app.get("/api/PDF", (req, res) => {
     { legalName: "ShopNameYeah" },
     9
   );
-  // const { getPDFTranslated } = require("./PDF_handling/React_SellRequestRecap");
-  // getPDFTranslated("fr-FR", "French", 23);
+
   res.send("WIP");
 });
 

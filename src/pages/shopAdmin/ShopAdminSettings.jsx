@@ -281,7 +281,7 @@ const ShopAdminSettings = () => {
             defaultMessage={`Default Buying Language : `}
           />
           <LanguageNameDisplay
-            langID={config.websiteDefaultLanguageContext.langID}
+            langID={parseInt(process.env.REACT_APP_APP_LANG_ID_DEFAULT)}
           />
         </p>
         <p>
