@@ -6,8 +6,21 @@ import config from "../services/config";
 const AppWrapper = (props) => {
   //STATE - App Lang
   //Test that : : fr-FR, en-US, en-GB
+  // Finding in the all lang available which has an ID equal to what's in .env
   const [currentLang, setCurrentLang] = useState(
-    config.websiteDefaultLanguageContext
+    ...config.websiteDefaultLanguageArrayLangAvailables.filter(
+      (langData) =>
+        langData.langID === parseInt(process.env.REACT_APP_APP_LANG_ID_DEFAULT)
+    )
+  );
+
+  console.log(currentLang);
+  console.log(parseInt(process.env.REACT_APP_APP_LANG_ID_DEFAULT));
+  console.log(
+    config.websiteDefaultLanguageArrayLangAvailables.filter(
+      (langData) =>
+        langData.langID === parseInt(process.env.REACT_APP_APP_LANG_ID_DEFAULT)
+    )
   );
 
   //CONTEXT CREATION

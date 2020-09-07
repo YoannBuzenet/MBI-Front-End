@@ -229,6 +229,7 @@ const ShopSellRequestStatusValidator = () => {
 
           //If everything happened without mistake, we update the Sell Request status to validated.
 
+          //NOTE : If BOTH notification and success and failure appears, it means the error did trigger after that point.
           const API_update = await sellRequestAPI.updateAsShop(
             currentAdminSellRequest.id,
             newData

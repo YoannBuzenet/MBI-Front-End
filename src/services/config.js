@@ -73,14 +73,6 @@ const websiteDefaultLanguageArrayLangAvailables = [
   },
 ];
 
-//Default language on the website
-const websiteDefaultLanguageContext = {
-  locale: "en-US",
-  translationsForUsersLocale: English,
-  picture: "EN",
-  langID: 9,
-};
-
 //Defaults Percent Selling Price Per Condition
 const defaultSellingPercents = {
   1: 1,
@@ -93,7 +85,6 @@ const defaultSellingPercents = {
 };
 
 module.exports = {
-  websiteDefaultLanguageContext,
   langDefinition,
   TIME_TO_LOG_OUT,
   TIME_JWT_RENEW,

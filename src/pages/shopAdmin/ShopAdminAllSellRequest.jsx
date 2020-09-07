@@ -29,7 +29,7 @@ const ShopAdminAllSellRequests = (props) => {
 
   let history = useHistory();
 
-  console.log("number", numberOfPages);
+  // console.log("number", numberOfPages);
 
   useEffect(() => {
     handlePageChange(1);

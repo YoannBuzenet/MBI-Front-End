@@ -285,37 +285,36 @@ const ShopAdminOneSellRequest = ({ match }) => {
                 currentAdminSellRequest.customer.town}
             </p>
           </div>
-          {currentAdminSellRequest.dateApprovalPending && (
-            <>
-              <p>
-                <PDFDownloadLink
-                  document={
-                    <IntlProvider
-                      locale={currentLang.locale}
-                      messages={currentLang.translationsForUsersLocale}
-                    >
-                      <SellRequestRecapPDF
-                        sellRequest={currentAdminSellRequest}
-                        shopData={authenticationInfos.shop}
-                      />
-                    </IntlProvider>
-                  }
-                  fileName={
-                    "SellRequest n°" + currentAdminSellRequest.id + ".pdf"
-                  }
-                >
-                  {({ blob, url, loading, error }) =>
-                    loading
-                      ? ""
-                      : intl.formatMessage({
-                          id: "app.shop.OneSellRequest.generatePDF",
-                          defaultMessage: "Generate PDF",
-                        })
-                  }
-                </PDFDownloadLink>
-              </p>
-            </>
-          )}
+          {/* PDF Generation */}
+          <>
+            <p>
+              <PDFDownloadLink
+                document={
+                  <IntlProvider
+                    locale={currentLang.locale}
+                    messages={currentLang.translationsForUsersLocale}
+                  >
+                    <SellRequestRecapPDF
+                      sellRequest={currentAdminSellRequest}
+                      shopData={authenticationInfos.shop}
+                    />
+                  </IntlProvider>
+                }
+                fileName={
+                  "SellRequest n°" + currentAdminSellRequest.id + ".pdf"
+                }
+              >
+                {({ blob, url, loading, error }) =>
+                  loading
+                    ? ""
+                    : intl.formatMessage({
+                        id: "app.shop.OneSellRequest.generatePDF",
+                        defaultMessage: "Generate PDF",
+                      })
+                }
+              </PDFDownloadLink>
+            </p>
+          </>
         </div>
         <div className="sellRequest-infos">
           <p className="sellRequest-status">

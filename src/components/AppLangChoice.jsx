@@ -5,10 +5,6 @@ import config from "../services/config";
 const AppLangChoice = () => {
   const { currentLang, setCurrentLang } = useContext(SelectAppLangContext);
 
-  const [arrayLangAvailables, setArrayLangAvailables] = useState(
-    config.websiteDefaultLanguageArrayLangAvailables
-  );
-
   const [areFlagsDisplayed, setAreFlagsDisplayed] = useState(false);
 
   const handleClick = (event, lang) => {
@@ -45,18 +41,20 @@ const AppLangChoice = () => {
 
           {areFlagsDisplayed && (
             <div className={"set-lang-choosing lang-select-applevel"}>
-              {arrayLangAvailables.map((lang, index) => (
-                <div
-                  className="flag-drop-down"
-                  key={index}
-                  onClick={(event) => handleClick(event, lang)}
-                >
-                  <img
-                    src={"/flags/25X13/" + lang.picture + ".png"}
-                    alt={lang.picture + " flag"}
-                  />
-                </div>
-              ))}
+              {config.websiteDefaultLanguageArrayLangAvailables.map(
+                (lang, index) => (
+                  <div
+                    className="flag-drop-down"
+                    key={index}
+                    onClick={(event) => handleClick(event, lang)}
+                  >
+                    <img
+                      src={"/flags/25X13/" + lang.picture + ".png"}
+                      alt={lang.picture + " flag"}
+                    />
+                  </div>
+                )
+              )}
             </div>
           )}
         </div>
