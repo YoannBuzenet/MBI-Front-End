@@ -14,15 +14,6 @@ const AppWrapper = (props) => {
     )
   );
 
-  console.log(currentLang);
-  console.log(parseInt(process.env.REACT_APP_APP_LANG_ID_DEFAULT));
-  console.log(
-    config.websiteDefaultLanguageArrayLangAvailables.filter(
-      (langData) =>
-        langData.langID === parseInt(process.env.REACT_APP_APP_LANG_ID_DEFAULT)
-    )
-  );
-
   //CONTEXT CREATION
   const AppLangContext = {
     currentLang: currentLang,
