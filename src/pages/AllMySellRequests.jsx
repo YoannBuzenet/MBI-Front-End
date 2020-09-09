@@ -179,7 +179,7 @@ const AllMySellRequests = (props) => {
                         to={"/my_sell_requests/" + sellRequest.id}
                         className="sellRequest-table-link"
                       >
-                        {sellRequest.amount}
+                        {sellRequest.cardTotalQuantity}
                       </Link>
                     </Td>
                     <Td>
@@ -187,7 +187,7 @@ const AllMySellRequests = (props) => {
                         to={"/my_sell_requests/" + sellRequest.id}
                         className="sellRequest-table-link"
                       >
-                        {sellRequest.cardTotalQuantity}
+                        {sellRequest.amount}
                       </Link>
                     </Td>
                   </Tr>
