@@ -29,8 +29,12 @@ const Footer = () => {
             </p>
           </div>
           <div>
-            <p>{shopInfos.tel}</p>
-            <p>{shopInfos.email}</p>
+            <p>
+              <a href={`tel:${shopInfos.tel}`}>{shopInfos.tel}</a>
+            </p>
+            <p>
+              <a href={`mailto:${shopInfos.email}`}>{shopInfos.email}</a>
+            </p>
           </div>
         </div>
       </footer>
