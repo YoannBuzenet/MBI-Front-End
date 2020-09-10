@@ -68,6 +68,7 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
   //Buildling context with the API response with all cards from the set.
   //We add also DEFAULT caracs to cards here.
   const buildContextFromAPIResponse = (data) => {
+    console.log("test", data);
     const contextCopy = { ...cardsContext };
 
     const currentSet = allSets.find((element) => element.id == idSet);
@@ -100,7 +101,7 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
 
     //Choosing lang to display
     //The list of available foreign data :
-    const arrayList_of_set_foreign_languages = [...data[0].foreignData];
+    const arrayList_of_set_foreign_languages = [...data[0]?.foreignData];
     const objectSorted_List_of_set_foreign_languages = transformLanguagesArrayIntoObject(
       arrayList_of_set_foreign_languages
     );
@@ -153,7 +154,13 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
     SetsAPI.findOneById(idSet, {
       cancelToken: source.token,
     })
-      .then((data) => buildContextFromAPIResponse(data))
+      .then((data) => {
+        if (data.length > 0) {
+          buildContextFromAPIResponse(data);
+        } else {
+          setAreThey0CSP(true);
+        }
+      })
       .then(setHasUpdatedPrices(false))
       .then(() => setIsLoading(false));
 
