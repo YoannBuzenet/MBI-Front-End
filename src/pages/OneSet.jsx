@@ -182,6 +182,8 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
         .then((resp) => {
           if (resp.data["hydra:totalItems"] === 0) {
             setAreThey0CSP(true);
+          } else {
+            setAreThey0CSP(false);
           }
           addFirstDisplayedPricesToContext(resp.data["hydra:member"]);
         })
