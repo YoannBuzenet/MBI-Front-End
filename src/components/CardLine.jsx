@@ -220,6 +220,7 @@ const CardLine = ({ card, handleAddSellingBasket, index, cardID }) => {
             onChange={(event) => {
               handleChange(event);
             }}
+            value={cardsCardPageContext[cardID].isFoil}
           >
             {cardsCardPageContext[cardID].hasnonfoil && (
               <option value="No">
