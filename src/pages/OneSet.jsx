@@ -116,23 +116,18 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
   };
 
   //This function takes API reponse with CardShopPrices and feeds the context.
-  // If several languages are received from a single card, we prioritize baseLang price.
   const addFirstDisplayedPricesToContext = (data) => {
     const contextCopy = { ...cardsContext };
     console.log(cardsContext);
     for (let i = 0; i < data.length; i++) {
-      if (contextCopy[data[i].card.substr(7)].LangOfPrice !== ENGLISH_LANG_ID) {
-        //If no price is already defined (this condition prevent foil CSP to erase non Foil CSP)
-        if (contextCopy[data[i].card.substr(7)]?.price === null) {
-          console.log(contextCopy[data[i].card.substr(7)]);
-          contextCopy[data[i].card.substr(7)].price = data[i].price;
-          contextCopy[data[i].card.substr(7)].LangOfPrice = parseInt(
-            data[i].language.substr(11)
-          );
-          contextCopy[data[i].card.substr(7)].isFoil = data[i].isFoil
-            ? "Yes"
-            : "No";
-        }
+      //If no price is already defined (this condition prevent foil CSP to erase non Foil CSP)
+      if (contextCopy[data[i].card.substr(7)]?.price === null) {
+        console.log(contextCopy[data[i].card.substr(7)]);
+        contextCopy[data[i].card.substr(7)].price = data[i].price;
+
+        contextCopy[data[i].card.substr(7)].isFoil = data[i].isFoil
+          ? "Yes"
+          : "No";
       }
     }
     setCardsContext(contextCopy);

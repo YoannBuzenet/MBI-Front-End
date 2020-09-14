@@ -284,8 +284,7 @@ const CardLine = ({ card, handleAddSellingBasket, index, cardID }) => {
           </select>
         </Td>
         <Td>
-          {(!isLoading && cardsCardPageContext[cardID].price) ||
-            (!isLoading && 0)}
+          {!isLoading && cardsCardPageContext[cardID].price}
           {isLoading && <div className="loading-loop"></div>}
         </Td>
         <Td className="AddButton">

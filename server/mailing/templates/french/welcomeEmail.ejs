@@ -1,5 +1,9 @@
 <h2>Bonjour <%= user.data.client.prenom %>, et Bienvenue !</h2>
 <p>Vous êtes inscrit sur <%= process.env.REACT_APP_USER_FRIENDLY_URL %> !</p>
 <p>Vous pouvez désormais créer des demandes de rachat sur le site.</p>
+<p>
+  Retrouvez toutes les informations sur
+  <a href="<%=process.env.REACT_APP_PUBLIC_URL %>">le site</a>.
+</p>
 <p>Merci,</p>
 <p><%= user.data.client.shop.legalName %></p>
