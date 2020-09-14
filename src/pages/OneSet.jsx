@@ -120,11 +120,24 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
     const contextCopy = { ...cardsContext };
     console.log(cardsContext);
     for (let i = 0; i < data.length; i++) {
-      //If no price is already defined (this condition prevent foil CSP to erase non Foil CSP)
+      //Searching for baselang based CSP
+      if (data[i].language.substr(11) == process.env.REACT_APP_SHOP_BASELANG) {
+        console.log(contextCopy[data[i].card.substr(7)]);
+        console.log("trying to mettre en avant baselang", data[i]);
+        contextCopy[data[i].card.substr(7)].price = data[i].price;
+        contextCopy[data[i].card.substr(7)].isFoil = data[i].isFoil
+          ? "Yes"
+          : "No";
+        contextCopy[data[i].card.substr(7)].lang = parseInt(
+          process.env.REACT_APP_SHOP_BASELANG
+        );
+      }
+    }
+    for (let i = 0; i < data.length; i++) {
+      //If no price is already defined after baselang check, we just add the first CSP
       if (contextCopy[data[i].card.substr(7)]?.price === null) {
         console.log(contextCopy[data[i].card.substr(7)]);
         contextCopy[data[i].card.substr(7)].price = data[i].price;
-
         contextCopy[data[i].card.substr(7)].isFoil = data[i].isFoil
           ? "Yes"
           : "No";
