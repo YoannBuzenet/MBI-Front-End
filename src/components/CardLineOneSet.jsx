@@ -188,6 +188,7 @@ const CardLineOneSet = ({
             onChange={(event) => {
               handleChange(event);
             }}
+            value={card.lang}
           >
             {cardsContext[cardID].foreignData.length > 0 ? (
               [

@@ -85,22 +85,31 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
   };
 
   //This function takes API reponse with CardShopPrices and feeds the context.
-
   const addFirstDisplayedPricesToContext = (data) => {
-    console.log("data", data);
     const contextCopy = { ...cardsCardPageContext };
     console.log(cardsCardPageContext);
     for (let i = 0; i < data.length; i++) {
-      console.log("ici", data[i]);
-      //If no price is already defined (this condition prevent foil CSP to erase non Foil CSP)
+      //Searching for baselang based CSP
+      if (data[i].language.substr(11) == process.env.REACT_APP_SHOP_BASELANG) {
+        console.log(contextCopy[data[i].card.substr(7)]);
+        console.log("trying to mettre en avant baselang", data[i]);
+        contextCopy[data[i].card.substr(7)].price = data[i].price;
+        contextCopy[data[i].card.substr(7)].isFoil = data[i].isFoil
+          ? "Yes"
+          : "No";
+        contextCopy[data[i].card.substr(7)].lang = parseInt(
+          process.env.REACT_APP_SHOP_BASELANG
+        );
+      }
+    }
+    for (let i = 0; i < data.length; i++) {
+      //If no price is already defined after baselang check, we just add the first CSP
       if (contextCopy[data[i].card.substr(7)]?.price === null) {
         console.log(contextCopy[data[i].card.substr(7)]);
         contextCopy[data[i].card.substr(7)].price = data[i].price;
         contextCopy[data[i].card.substr(7)].isFoil = data[i].isFoil
           ? "Yes"
           : "No";
-      } else {
-        console.log("else", contextCopy[data[i].card.substr(7)]);
       }
     }
     setCardsCardPageContext(contextCopy);

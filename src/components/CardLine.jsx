@@ -164,6 +164,7 @@ const CardLine = ({ card, handleAddSellingBasket, index, cardID }) => {
             onChange={(event) => {
               handleChange(event);
             }}
+            value={card.lang}
           >
             {cardsCardPageContext[cardID].foreignData.length > 0 ? (
               [
