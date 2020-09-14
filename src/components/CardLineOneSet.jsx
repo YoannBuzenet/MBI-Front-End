@@ -54,6 +54,8 @@ const CardLineOneSet = ({
     CardDisplayOnPageContext
   );
 
+  console.log(cardsContext[cardID]);
+
   const handleChange = ({ currentTarget }) => {
     const { name, value } = currentTarget;
     if (name !== "quantity") {
@@ -240,6 +242,7 @@ const CardLineOneSet = ({
             onChange={(event) => {
               handleChange(event);
             }}
+            value={cardsContext[cardID].isFoil}
           >
             {cardsContext[cardID].hasnonfoil && (
               <option value="No">

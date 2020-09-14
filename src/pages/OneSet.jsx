@@ -85,7 +85,7 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
         scryfallid: data[i].scryfallid,
         uuid: data[i].uuid,
         foreignData: data[i].foreignData,
-        price: 0,
+        price: null,
         isFoil: data[i].hasnonfoil ? "No" : "Yes",
         isSigned: "No",
         set: currentSet ? currentSet.name : null,
@@ -119,12 +119,20 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
   // If several languages are received from a single card, we prioritize baseLang price.
   const addFirstDisplayedPricesToContext = (data) => {
     const contextCopy = { ...cardsContext };
+    console.log(cardsContext);
     for (let i = 0; i < data.length; i++) {
       if (contextCopy[data[i].card.substr(7)].LangOfPrice !== ENGLISH_LANG_ID) {
-        contextCopy[data[i].card.substr(7)].price = data[i].price;
-        contextCopy[data[i].card.substr(7)].LangOfPrice = parseInt(
-          data[i].language.substr(11)
-        );
+        //If no price is already defined (this condition prevent foil CSP to erase non Foil CSP)
+        if (contextCopy[data[i].card.substr(7)]?.price === null) {
+          console.log(contextCopy[data[i].card.substr(7)]);
+          contextCopy[data[i].card.substr(7)].price = data[i].price;
+          contextCopy[data[i].card.substr(7)].LangOfPrice = parseInt(
+            data[i].language.substr(11)
+          );
+          contextCopy[data[i].card.substr(7)].isFoil = data[i].isFoil
+            ? "Yes"
+            : "No";
+        }
       }
     }
     setCardsContext(contextCopy);
@@ -356,13 +364,14 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
                           //If it's Near mint it must have a price to be displayed
                           //We chose Near Mint because it's the default condition displayed
                           if (
+                            cardsContext[cardID].price !== null &&
                             cardsContext[cardID].price > 0 &&
                             cardsContext[cardID].condition === 2
                           ) {
                             return cardID;
                           }
-                          //If it's not near mint, it can be displayed all the time if asked by user (otherwise the card disappears from page if it had no price, not user friendly)
-                          else if (cardsContext[cardID].condition !== 2) {
+                          // A card non null is a card whose price has been asked by user. Therefore even if it's 0 we let it  displayed.
+                          else if (cardsContext[cardID].price !== null) {
                             return cardID;
                           } else {
                             return;

@@ -58,7 +58,7 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
         scryfallid: data[i].scryfallid,
         uuid: data[i].uuid,
         foreignData: data[i].foreignData,
-        price: 0,
+        price: null,
         isFoil: data[i].hasnonfoil ? "No" : "Yes",
         isSigned: "No",
         set: data[i].edition.name,
@@ -87,13 +87,21 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
   //This function takes API reponse with CardShopPrices and feeds the context.
   // If several languages are received from a single card, we prioritize baseLang price.
   const addFirstDisplayedPricesToContext = (data) => {
-    let contextCopy = { ...cardsCardPageContext };
+    const contextCopy = { ...cardsCardPageContext };
+    console.log(cardsCardPageContext);
     for (let i = 0; i < data.length; i++) {
       if (contextCopy[data[i].card.substr(7)].LangOfPrice !== ENGLISH_LANG_ID) {
-        contextCopy[data[i].card.substr(7)].price = data[i].price;
-        contextCopy[data[i].card.substr(7)].LangOfPrice = parseInt(
-          data[i].language.substr(11)
-        );
+        //If no price is already defined (this condition prevent foil CSP to erase non Foil CSP)
+        if (contextCopy[data[i].card.substr(7)]?.price === null) {
+          console.log(contextCopy[data[i].card.substr(7)]);
+          contextCopy[data[i].card.substr(7)].price = data[i].price;
+          contextCopy[data[i].card.substr(7)].LangOfPrice = parseInt(
+            data[i].language.substr(11)
+          );
+          contextCopy[data[i].card.substr(7)].isFoil = data[i].isFoil
+            ? "Yes"
+            : "No";
+        }
       }
     }
     setCardsCardPageContext(contextCopy);
@@ -229,7 +237,7 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
                     (id) =>
                       (cardsCardPageContext[id].price !== 0 &&
                         cardsCardPageContext[id].condition === 2) ||
-                      cardsCardPageContext[id].condition !== 2
+                      cardsCardPageContext[id].condition !== null
                   )
                   //Displaying what's left
                   .map((id, index) => (
