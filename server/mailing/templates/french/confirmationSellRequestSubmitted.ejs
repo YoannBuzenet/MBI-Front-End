@@ -2,5 +2,9 @@
 <p>Votre rachat a bien été soumis à la boutique.</p>
 <p>Le numéro de référence est le numéro <%= sellRequest.id %>.</p>
 <p>Dès que celui-ci sera traité, vous recevrez une notification par mail.</p>
+<p>
+  Retrouvez toutes les informations sur
+  <a href="<%=process.env.REACT_APP_PUBLIC_URL %>">le site</a>.
+</p>
 <p>Merci,</p>
 <p><%= user.shop.legalName %></p>

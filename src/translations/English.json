@@ -378,7 +378,7 @@
   "app.sellRequest.statusDefinition.sent": "Sent",
   "app.sellRequest.statusDefinition.received": "Received",
   "app.sellRequest.statusDefinition.beingProcessed": "Being Processed",
-  "app.sellRequest.statusDefinition.awaitingYourValidation": "Awaiting your Validation",
+  "app.sellRequest.statusDefinition.awaitingYourValidation": "Awaiting Customer Validation",
   "app.sellRequest.statusDefinition.validated": "Validated",
   "app.sellRequest.statusDefinition.cancelled": "Cancelled",
 

@@ -83,7 +83,7 @@
 
   "app.OneSellRequest.title": "Mon Rachat",
   "app.OneSellRequest.status": "Statut",
-  "app.OneSellRequest.lastInformation": "Dernière information",
+  "app.OneSellRequest.lastInformation": "Dernière info.",
   "app.OneSellRequest.cardName": "Carte",
   "app.OneSellRequest.set": "Edition",
   "app.OneSellRequest.condition": "Etat",
@@ -159,7 +159,7 @@
   "app.shop.AllSellRequests.title": "Tous les rachats",
   "app.shop.AllSellRequests.reference": "Reference",
   "app.shop.AllSellRequests.status": "Statut",
-  "app.shop.AllSellRequests.lastInformation": "Dernière Information",
+  "app.shop.AllSellRequests.lastInformation": "Dernière Info.",
   "app.shop.AllSellRequests.numberOfCards": "Nombre de cartes",
   "app.shop.AllSellRequests.totalAmount": "Total",
 
@@ -167,7 +167,7 @@
   "app.shop.customer.town": "Ville : ",
   "app.shop.customer.SellRequestReference": "Numéro de Rachat",
   "app.shop.customer.status": "Statut",
-  "app.shop.customer.lastInformation": "Dernière Information",
+  "app.shop.customer.lastInformation": "Dernière Info.",
   "app.shop.customer.numberOfCards": "Nombre de cartes",
   "app.shop.customer.amount": "Total",
 
@@ -180,7 +180,7 @@
   "app.shop.OneSellRequest.postalCode": "Code Postal : ",
   "app.shop.OneSellRequest.town": "Ville : ",
   "app.shop.OneSellRequest.status": "Statut",
-  "app.shop.OneSellRequest.lastInformation": "Dernière Information",
+  "app.shop.OneSellRequest.lastInformation": "Dernière Info.",
   "app.shop.OneSellRequest.card": "Carte",
   "app.shop.OneSellRequest.set": "Edition",
   "app.shop.OneSellRequest.edit": "Modifier",
@@ -378,7 +378,7 @@
   "app.sellRequest.statusDefinition.sent": "Envoyé",
   "app.sellRequest.statusDefinition.received": "Reçu",
   "app.sellRequest.statusDefinition.beingProcessed": "En traitement",
-  "app.sellRequest.statusDefinition.awaitingYourValidation": "En attente de votre validation",
+  "app.sellRequest.statusDefinition.awaitingYourValidation": "En attente de validation Client",
   "app.sellRequest.statusDefinition.validated": "Validé",
   "app.sellRequest.statusDefinition.cancelled": "Annulé",
 

@@ -704,6 +704,7 @@ div.lang-select-applevel {
   .responsive_menu {
     animation-duration: 0.25s;
     animation-name: slidein500;
+    height: 55vh;
   }
 }
 
@@ -786,6 +787,11 @@ div.lang-select-applevel {
 
   .responsive_menu_admin {
     height: 80vh;
+  }
+}
+@media only screen and (max-width: 500px) {
+  .responsive_menu_admin {
+    height: 90vh;
   }
 }
 
@@ -1139,8 +1145,15 @@ div.blockFlags span.blockArrow {
     transform: translate(-50%, -50%);
   }
 }
-
+@media only screen and (max-width: 750px) {
+  div.blockFlags {
+    margin: -15px auto 15px;
+  }
+}
 @media only screen and (max-width: 500px) {
+  div.blockFlags {
+    margin: -5px auto 15px;
+  }
   .set-top-line {
     display: flex;
     flex-direction: column;
@@ -1151,7 +1164,7 @@ div.blockFlags span.blockArrow {
   }
 
   .set-top-line > div {
-    position: static;
+    position: relative;
   }
 }
 

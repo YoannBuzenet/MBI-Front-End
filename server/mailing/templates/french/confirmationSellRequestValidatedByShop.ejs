@@ -1,5 +1,9 @@
 <h2>Bonjour <%= sellRequest.customer.prenom %>,</h2>
 <p>Votre rachat a été validé !</p>
 <p>Le numéro de référence est le numéro <%= sellRequest.id %>.</p>
+<p>
+  Retrouvez toutes les informations sur
+  <a href="<%=process.env.REACT_APP_PUBLIC_URL %>">le site</a>.
+</p>
 <p>Merci,</p>
 <p><%= user.shop.legalName %></p>

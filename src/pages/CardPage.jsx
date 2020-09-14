@@ -85,23 +85,22 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
   };
 
   //This function takes API reponse with CardShopPrices and feeds the context.
-  // If several languages are received from a single card, we prioritize baseLang price.
+
   const addFirstDisplayedPricesToContext = (data) => {
+    console.log("data", data);
     const contextCopy = { ...cardsCardPageContext };
     console.log(cardsCardPageContext);
     for (let i = 0; i < data.length; i++) {
-      if (contextCopy[data[i].card.substr(7)].LangOfPrice !== ENGLISH_LANG_ID) {
-        //If no price is already defined (this condition prevent foil CSP to erase non Foil CSP)
-        if (contextCopy[data[i].card.substr(7)]?.price === null) {
-          console.log(contextCopy[data[i].card.substr(7)]);
-          contextCopy[data[i].card.substr(7)].price = data[i].price;
-          contextCopy[data[i].card.substr(7)].LangOfPrice = parseInt(
-            data[i].language.substr(11)
-          );
-          contextCopy[data[i].card.substr(7)].isFoil = data[i].isFoil
-            ? "Yes"
-            : "No";
-        }
+      console.log("ici", data[i]);
+      //If no price is already defined (this condition prevent foil CSP to erase non Foil CSP)
+      if (contextCopy[data[i].card.substr(7)]?.price === null) {
+        console.log(contextCopy[data[i].card.substr(7)]);
+        contextCopy[data[i].card.substr(7)].price = data[i].price;
+        contextCopy[data[i].card.substr(7)].isFoil = data[i].isFoil
+          ? "Yes"
+          : "No";
+      } else {
+        console.log("else", contextCopy[data[i].card.substr(7)]);
       }
     }
     setCardsCardPageContext(contextCopy);
@@ -233,12 +232,7 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
                   //Removing the online only set
                   .filter((id) => cardsCardPageContext[id].isonlineonly === 0)
                   //Removing cards without card shop price
-                  .filter(
-                    (id) =>
-                      (cardsCardPageContext[id].price !== 0 &&
-                        cardsCardPageContext[id].condition === 2) ||
-                      cardsCardPageContext[id].condition !== null
-                  )
+                  .filter((id) => cardsCardPageContext[id].price !== null)
                   //Displaying what's left
                   .map((id, index) => (
                     <CardLine
