@@ -124,7 +124,8 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
       //Searching for baselang based CSP
       if (
         data[i].language.substr(11) == process.env.REACT_APP_SHOP_BASELANG &&
-        data[i].isFoil === true
+        data[i].isFoil === true &&
+        data[i].condition.substr(17) == 2
       ) {
         console.log(contextCopy[data[i].card.substr(7)]);
         console.log("trying to mettre en avant baselang", data[i]);
@@ -141,7 +142,8 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
       //Searching for baselang based CSP
       if (
         data[i].language.substr(11) == process.env.REACT_APP_SHOP_BASELANG &&
-        data[i].isFoil === false
+        data[i].isFoil === false &&
+        data[i].condition.substr(17) == 2
       ) {
         console.log(contextCopy[data[i].card.substr(7)]);
         console.log("trying to mettre en avant baselang", data[i]);
@@ -162,6 +164,9 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
         contextCopy[data[i].card.substr(7)].isFoil = data[i].isFoil
           ? "Yes"
           : "No";
+        contextCopy[data[i].card.substr(7)].condition = data[
+          i
+        ].condition.substr(17);
       }
     }
     setCardsContext(contextCopy);
