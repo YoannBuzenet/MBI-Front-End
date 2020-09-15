@@ -119,9 +119,30 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
   const addFirstDisplayedPricesToContext = (data) => {
     const contextCopy = { ...cardsContext };
     console.log(cardsContext);
+
     for (let i = 0; i < data.length; i++) {
       //Searching for baselang based CSP
-      if (data[i].language.substr(11) == process.env.REACT_APP_SHOP_BASELANG) {
+      if (
+        data[i].language.substr(11) == process.env.REACT_APP_SHOP_BASELANG &&
+        data[i].isFoil === true
+      ) {
+        console.log(contextCopy[data[i].card.substr(7)]);
+        console.log("trying to mettre en avant baselang", data[i]);
+        contextCopy[data[i].card.substr(7)].price = data[i].price;
+        contextCopy[data[i].card.substr(7)].isFoil = data[i].isFoil
+          ? "Yes"
+          : "No";
+        contextCopy[data[i].card.substr(7)].lang = parseInt(
+          process.env.REACT_APP_SHOP_BASELANG
+        );
+      }
+    }
+    for (let i = 0; i < data.length; i++) {
+      //Searching for baselang based CSP
+      if (
+        data[i].language.substr(11) == process.env.REACT_APP_SHOP_BASELANG &&
+        data[i].isFoil === false
+      ) {
         console.log(contextCopy[data[i].card.substr(7)]);
         console.log("trying to mettre en avant baselang", data[i]);
         contextCopy[data[i].card.substr(7)].price = data[i].price;
