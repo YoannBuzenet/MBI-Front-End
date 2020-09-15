@@ -151,7 +151,7 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
           : "No";
         contextCopy[data[i].card.substr(7)].condition = data[
           i
-        ].condition.substr(17);
+        ].cardCondition.substr(17);
       }
     }
     setCardsCardPageContext(contextCopy);
