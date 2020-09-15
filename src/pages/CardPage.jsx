@@ -89,7 +89,7 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
     const contextCopy = { ...cardsCardPageContext };
     console.log(cardsCardPageContext);
     for (let i = 0; i < data.length; i++) {
-      //Searching for baselang based CSP
+      //Searching for baselang based CSP NM NON FOIL
       if (
         data[i].language.substr(11) == process.env.REACT_APP_SHOP_BASELANG &&
         data[i].isFoil === true &&
@@ -108,7 +108,7 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
     }
 
     for (let i = 0; i < data.length; i++) {
-      //Searching for baselang based CSP
+      //Searching for baselang based CSP NM FOIL
       if (
         data[i].language.substr(11) == process.env.REACT_APP_SHOP_BASELANG &&
         data[i].isFoil === false &&
@@ -116,6 +116,21 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
       ) {
         console.log(contextCopy[data[i].card.substr(7)]);
         console.log("trying to mettre en avant baselang", data[i]);
+        contextCopy[data[i].card.substr(7)].price = data[i].price;
+        contextCopy[data[i].card.substr(7)].isFoil = data[i].isFoil
+          ? "Yes"
+          : "No";
+        contextCopy[data[i].card.substr(7)].lang = parseInt(
+          process.env.REACT_APP_SHOP_BASELANG
+        );
+      }
+    }
+    for (let i = 0; i < data.length; i++) {
+      //Searching for baselang based CSP NM NO MATTER LANGUAGE (context is updated accordingly)
+      if (data[i].isFoil === false && data[i].condition.substr(17) == 2) {
+        console.log(contextCopy[data[i].card.substr(7)]);
+
+        contextCopy[data[i].card.substr(7)].lang = data[i].language.substr(11);
         contextCopy[data[i].card.substr(7)].price = data[i].price;
         contextCopy[data[i].card.substr(7)].isFoil = data[i].isFoil
           ? "Yes"
