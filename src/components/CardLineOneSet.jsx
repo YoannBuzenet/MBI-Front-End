@@ -198,8 +198,8 @@ const CardLineOneSet = ({
                 </option>,
               ].concat(
                 cardsContext[cardID].foreignData.map((foreignData, index) => (
-                  <option value={foreignData.language_id.id} key={index}>
-                    {foreignData.language_id.shortname}
+                  <option value={foreignData?.language_id?.id} key={index}>
+                    {foreignData?.language_id?.shortname}
                   </option>
                 ))
               )
@@ -217,7 +217,7 @@ const CardLineOneSet = ({
             }}
             defaultValue="2"
           >
-            {conditions.length > 0
+            {Array.isArray(conditions) && conditions.length > 0
               ? process.env.REACT_APP_SHOP_GRADING_AREA === "EU"
                 ? conditions.map((condition, index) =>
                     condition.isEU ? (
