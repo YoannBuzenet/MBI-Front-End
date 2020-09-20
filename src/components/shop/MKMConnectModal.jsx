@@ -39,6 +39,8 @@ const MKMConnectModal = () => {
           authenticationInfoCopy.shop.accesToken = "updated";
           authenticationInfoCopy.shop.accesSecret = "updated";
           authenticationInfoCopy.shop.dateReceptionMKMToken = "updated";
+          authenticationInfoCopy.shop.ExpirationMkmToken =
+            data.data.shop.ExpirationMkmToken;
 
           setAuthenticationInfos(authenticationInfoCopy);
           setIsMKMModalDisplayed("deactivated");
