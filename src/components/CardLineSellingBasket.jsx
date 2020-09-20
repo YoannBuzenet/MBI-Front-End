@@ -185,27 +185,27 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
               return handleChange(event);
             }}
           >
-            {card.foreignData.length > 0 ? (
+            {Array.isArray(card.foreignData) && card.foreignData.length > 0 ? (
               [
                 <option value={card.lang} key={card.id + "2"}>
                   {card.lang === 9
                     ? "EN"
                     : card.foreignData.filter((currentlanguage) => {
-                        return currentlanguage.language_id.id === card.lang;
-                      })[0].language_id.shortname}
+                        return currentlanguage?.language_id?.id === card.lang;
+                      })[0]?.language_id?.shortname}
                 </option>,
               ].concat(
                 card.foreignData
                   .filter(
                     (currentlanguage) =>
-                      currentlanguage.language_id.id !== card.lang
+                      currentlanguage?.language_id?.id !== card.lang
                   )
                   .map((foreignData, index) => (
                     <option
-                      value={foreignData.language_id.id}
+                      value={foreignData?.language_id?.id}
                       key={index + "3"}
                     >
-                      {foreignData.language_id.shortname}
+                      {foreignData?.language_id?.shortname}
                     </option>
                   ))
                   .concat([
