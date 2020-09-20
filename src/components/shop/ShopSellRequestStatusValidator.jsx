@@ -163,7 +163,7 @@ const ShopSellRequestStatusValidator = () => {
 
       if (
         currentAdminSellRequest.sellRequests.filter(
-          (card) => card.mkmSellPrice === 0
+          (card) => card.mkmSellPrice === 0 && card.AutomaticSellingPrice === 0
         ).length > 0
       ) {
         toast.error(
@@ -176,7 +176,9 @@ const ShopSellRequestStatusValidator = () => {
         return;
       } else if (
         currentAdminSellRequest.sellRequests.filter(
-          (card) => card.mkmSellPrice <= card.price
+          (card) =>
+            card.mkmSellPrice <= card.price &&
+            card.AutomaticSellingPrice <= card.price
         ).length > 0
       ) {
         toast.error(
@@ -185,6 +187,8 @@ const ShopSellRequestStatusValidator = () => {
             defaultMessage={`One of your selling prices is below your buying price. Please check it again.`}
           />
         );
+        //Ending the whole function is a selling price is inferior to selling price
+        return;
       }
 
       console.log(newData);

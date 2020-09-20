@@ -203,6 +203,9 @@ function transformSellRequestIntoXML(arrayOfSellRequestCards) {
   const xml_end = "</request>";
   const xml_body = arrayOfSellRequestCards.reduce(
     (accumulator, currentValue) => {
+      const priceForSale =
+        currentValue.mkmSellPrice || currentValue.AutomaticSellingPrice;
+
       const article =
         "<article> <idProduct>" +
         currentValue.mcmId +
@@ -213,7 +216,7 @@ function transformSellRequestIntoXML(arrayOfSellRequestCards) {
         "</comments><count>" +
         currentValue.quantity +
         "</count><price>" +
-        currentValue.mkmSellPrice +
+        priceForSale +
         "</price><condition>" +
         MKM_MTG_API_CONDITION_TRANSLATION[currentValue.condition] +
         "</condition><isFoil>" +
