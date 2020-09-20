@@ -562,7 +562,8 @@ const CardLineShop = ({ card, indexCard }) => {
               handleChange(event, currentCard);
             }}
           >
-            {currentCard.foreignData.length > 0 ? (
+            {Array.isArray(currentCard.foreignData) &&
+            currentCard.foreignData.length > 0 ? (
               [
                 //Find the selected value
                 <option value={currentCard.lang} key={currentCard.id + "2"}>

@@ -188,7 +188,7 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
             {Array.isArray(card.foreignData) && card.foreignData.length > 0 ? (
               [
                 <option value={card.lang} key={card.id + "2"}>
-                  {card.lang === 9
+                  {card.lang == 9
                     ? "EN"
                     : card.foreignData.filter((currentlanguage) => {
                         return currentlanguage?.language_id?.id === card.lang;
