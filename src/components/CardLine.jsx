@@ -120,6 +120,8 @@ const CardLine = ({ card, handleAddSellingBasket, index, cardID }) => {
   //Hook Intl to translate an attribute
   const intl = useIntl();
 
+  console.log("all cardline", cardsCardPageContext);
+
   return (
     <>
       <Tr

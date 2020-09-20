@@ -124,8 +124,9 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
       //Searching for baselang based CSP NM NON FOIL
       if (
         data[i].language.substr(11) == process.env.REACT_APP_SHOP_BASELANG &&
-        data[i].isFoil === true &&
-        data[i].cardCondition.substr(17) == 2
+        data[i].isFoil === false &&
+        data[i].cardCondition.substr(17) == 2 &&
+        contextCopy[data[i].card.substr(7)].price === null
       ) {
         console.log(contextCopy[data[i].card.substr(7)]);
         console.log("trying to mettre en avant baselang", data[i]);
@@ -142,8 +143,9 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
       //Searching for baselang based CSP NM FOIL
       if (
         data[i].language.substr(11) == process.env.REACT_APP_SHOP_BASELANG &&
-        data[i].isFoil === false &&
-        data[i].cardCondition.substr(17) == 2
+        data[i].isFoil === true &&
+        data[i].cardCondition.substr(17) == 2 &&
+        contextCopy[data[i].card.substr(7)].price === null
       ) {
         console.log(contextCopy[data[i].card.substr(7)]);
         console.log("trying to mettre en avant baselang", data[i]);
@@ -158,7 +160,11 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
     }
     for (let i = 0; i < data.length; i++) {
       //Searching for baselang based CSP NM NO MATTER LANGUAGE (context is updated accordingly)
-      if (data[i].isFoil === false && data[i].cardCondition.substr(17) == 2) {
+      if (
+        data[i].isFoil === false &&
+        data[i].cardCondition.substr(17) == 2 &&
+        contextCopy[data[i].card.substr(7)].price === null
+      ) {
         console.log(contextCopy[data[i].card.substr(7)]);
 
         contextCopy[data[i].card.substr(7)].lang = data[i].language.substr(11);
