@@ -174,8 +174,8 @@ const CardLine = ({ card, handleAddSellingBasket, index, cardID }) => {
               ].concat(
                 cardsCardPageContext[cardID].foreignData.map(
                   (foreignData, index) => (
-                    <option value={foreignData.language_id.id} key={index}>
-                      {foreignData.language_id.shortname}
+                    <option value={foreignData?.language_id?.id} key={index}>
+                      {foreignData?.language_id?.shortname}
                     </option>
                   )
                 )

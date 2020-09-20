@@ -578,14 +578,14 @@ const CardLineShop = ({ card, indexCard }) => {
                 currentCard.foreignData
                   .filter(
                     (currentlanguage) =>
-                      currentlanguage.language_id.id !== currentCard.lang
+                      currentlanguage?.language_id?.id !== currentCard.lang
                   )
                   .map((foreignData, index) => (
                     <option
-                      value={foreignData.language_id.id}
+                      value={foreignData?.language_id?.id}
                       key={index + "3"}
                     >
-                      {foreignData.language_id.shortname}
+                      {foreignData?.language_id?.shortname}
                     </option>
                   ))
                   .concat([
