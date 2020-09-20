@@ -373,11 +373,25 @@ const CardLineShop = ({ card, indexCard }) => {
   const handleDelete = (card) => {
     //TODO : is the deleted card removed from the sell request in memory ?
 
+    const savingOldSellRequest = { ...currentAdminSellRequest };
+
+    setCurrentAdminSellRequest({
+      ...currentAdminSellRequest,
+      sellRequests: [
+        ...currentAdminSellRequest.sellRequests.filter(
+          (formerCard) =>
+            formerCard.idSellRequestCard !== card.idSellRequestCard
+        ),
+      ],
+    });
+
     //Telling the API to delete the sell request card
     sellRequestCardAPI
-      .delete(card.id)
+      .delete(card.idSellRequestCard)
       .then((data) => setCardHasBeenDeleted(true))
       .catch((error) => {
+        //Putting back the card in context in case of error
+        setCurrentAdminSellRequest(savingOldSellRequest);
         toast.error(
           <FormattedMessage
             id="app.cardline.shop.deleteCard.toast.failure"
@@ -754,7 +768,7 @@ const CardLineShop = ({ card, indexCard }) => {
             className="downsize-icon pointer remove-item-basket"
             onClick={() => {
               console.log("cardline shop", card);
-              return handleDelete();
+              return handleDelete(card);
             }}
           />
         </Td>
