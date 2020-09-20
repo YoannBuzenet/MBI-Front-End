@@ -570,7 +570,7 @@ const CardLineShop = ({ card, indexCard }) => {
                     ? "EN"
                     : currentCard.foreignData.filter(
                         (currentlanguage) =>
-                          currentlanguage.language_id.id === currentCard.lang
+                          currentlanguage?.language_id?.id === currentCard.lang
                       )[0]?.language_id?.shortname}
                 </option>,
                 //Add the non selected languages among what's possible in this card
