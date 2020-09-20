@@ -462,7 +462,7 @@ const CardLineShop = ({ card, indexCard }) => {
         2000
       );
     } else if (newPrice === "") {
-      newSellRequest.sellRequests[indexCard].mkmSellPrice = null;
+      newSellRequest.sellRequests[indexCard].mkmSellPrice = undefined;
       setCurrentAdminSellRequest(newSellRequest);
 
       setTimer(() => sellRequestCardAPI.update(card, "mkmSellPrice", 0), 2000);
@@ -477,7 +477,7 @@ const CardLineShop = ({ card, indexCard }) => {
   };
 
   const humanFixedPriceDisplayed =
-    currentAdminSellRequest.sellRequests[indexCard].mkmSellPrice === null
+    currentAdminSellRequest.sellRequests[indexCard].mkmSellPrice === undefined
       ? ""
       : currentAdminSellRequest.sellRequests[indexCard].mkmSellPrice;
 
