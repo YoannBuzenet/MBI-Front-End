@@ -190,7 +190,8 @@ const CardLineOneSet = ({
             }}
             value={card.lang}
           >
-            {cardsContext[cardID].foreignData.length > 0 ? (
+            {Array.isArray(cardsContext[cardID].foreignData) &&
+            cardsContext[cardID].foreignData.length > 0 ? (
               [
                 <option value="9" key="a">
                   EN
