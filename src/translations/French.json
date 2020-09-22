@@ -230,6 +230,7 @@
   "app.shop.shopSettings.defaultWebsiteLanguage": "Langue du site par défaut : ",
   "app.shop.shopSettings.defaultBuyingLanguage": "Langue d'achat par défaut : ",
   "app.shop.shopSettings.defaultGradingSystem": "Système de Grading : ",
+  "app.shop.shopSettings.global.title": "Paramètres d'achat",
   "app.shop.shopSettings.global.Explaination": "Vous pouvez indiquer ici des règles générales pour définir un prix d'achat. Ces r-gles vous aideront à modifier vos prix. Ces règles sont génériques, vous pouvez toujours modifier un prix spéficique sur telle langue ou tel état après.",
   "app.shop.shopSettings.signedCards": "Cartes signées",
   "app.shop.shopSettings.percentSignedExplaination": "De façon généale, souhaitez-vous acheter plus cher, oiu moins cher, ou le même prix, une carte signée ? Ceci est une règle générale, vous pouvez toujours donner un prix spécifique carte par carte.",

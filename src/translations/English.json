@@ -230,6 +230,7 @@
   "app.shop.shopSettings.defaultWebsiteLanguage": "Website Default Language : ",
   "app.shop.shopSettings.defaultBuyingLanguage": "Default Buying Language : ",
   "app.shop.shopSettings.defaultGradingSystem": "Grading System : ",
+  "app.shop.shopSettings.global.title": "Buying Settings",
   "app.shop.shopSettings.global.Explaination": "You can set general rules for settings buying prices. This will help you when modifying your buying prices. Note that these are general rules, you can always set specific buying prices card by card, afterwards.",
   "app.shop.shopSettings.signedCards": "Signed Cards",
   "app.shop.shopSettings.percentSignedExplaination": "Generally speaking, do you want to pay more, or less, or equal, for a signed card ? 100% is the same price. This is a general rule. You can always specify a specific price for a particular card.",

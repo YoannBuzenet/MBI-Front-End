@@ -292,7 +292,12 @@ const ShopAdminSettings = () => {
           {process.env.REACT_APP_SHOP_GRADING_AREA}
         </p>
         <div className="categorySetting">
-          <h2 className="categoryTitle">Buying Settings</h2>
+          <h2 className="categoryTitle">
+            <FormattedMessage
+              id="app.shop.shopSettings.global.title"
+              defaultMessage={"Buying Settings"}
+            />
+          </h2>
           <p className="explaination">
             <FormattedMessage
               id="app.shop.shopSettings.global.Explaination"
