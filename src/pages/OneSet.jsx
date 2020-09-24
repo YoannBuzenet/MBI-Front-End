@@ -116,6 +116,7 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
   };
 
   //This function takes API reponse with CardShopPrices and feeds the context.
+  //This functions is also written in cardPage
   const addFirstDisplayedPricesToContext = (data) => {
     const contextCopy = { ...cardsContext };
     console.log(cardsContext);
@@ -172,9 +173,6 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
         contextCopy[data[i].card.substr(7)].isFoil = data[i].isFoil
           ? "Yes"
           : "No";
-        contextCopy[data[i].card.substr(7)].lang = parseInt(
-          process.env.REACT_APP_SHOP_BASELANG
-        );
       }
     }
     for (let i = 0; i < data.length; i++) {
