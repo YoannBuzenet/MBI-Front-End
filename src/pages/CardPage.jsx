@@ -85,6 +85,7 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
   };
 
   //This function takes API reponse with CardShopPrices and feeds the context.
+  //This functions is also written in OneSet
   const addFirstDisplayedPricesToContext = (data) => {
     const contextCopy = { ...cardsCardPageContext };
     console.log(cardsCardPageContext);
