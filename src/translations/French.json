@@ -325,7 +325,7 @@
   "app.shop.sellrequestValidator.awaitingProcessing": "En attente de traitement",
   "app.shop.sellrequestValidator.awaitingCustomerValidation": "En attente de validation client",
   "app.shop.sellrequestValidator.beingProcessed": "En traitement",
-  "app.shop.sellrequestValidator.validationCTA": "Valider",
+  "app.shop.sellrequestValidator.validationCTA": "Valider le rachat",
   "app.shop.sellrequestValidator.cancelCTA": "Annuler",
 
   "app.shop.editionUpdateModal": "CHANGER L'EDITION",
@@ -373,7 +373,7 @@
 
   "app.sellRequest.statusUpdate.toast.success": "Le rachat a été marqué comme envoyé.",
   "app.sellRequest.statusUpdate.toast.failure": "Le rachat n'a pu être marqué comme envoyé. Merci de rééssayer.",
-  "app.sellRequest.statusUpdate.button": "Expédié",
+  "app.sellRequest.statusUpdate.button": "Marquer comme expédié",
 
   "app.sellRequest.statusDefinition.submitted": "Soumis",
   "app.sellRequest.statusDefinition.sent": "Envoyé",

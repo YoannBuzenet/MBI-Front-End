@@ -14,8 +14,11 @@ const AllMySellRequests = (props) => {
   console.log("auth context", authenticationInfos);
 
   useEffect(() => {
-    // console.log(authenticationInfos.customer.SellRequests);
-  });
+    // console.log(
+    //   "sell requests customer",
+    //   authenticationInfos.customer.SellRequests
+    // );
+  }, []);
 
   let history = useHistory();
 
