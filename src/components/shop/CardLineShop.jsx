@@ -249,15 +249,21 @@ const CardLineShop = ({ card, indexCard }) => {
     const { name, value } = currentTarget;
     // console.log(name);
     // console.log(value);
-    if (name === "quantity" || name === "lang" || name === "price") {
+    if (name === "quantity" || name === "lang") {
       var newValue = parseInt(value);
       if (isNaN(newValue)) {
         newValue = 0;
+      }
+    } else if (name === "price") {
+      if (value[value.length - 1] === ".") {
+      } else {
+        newValue = parseFloat(value);
       }
     } else {
       var newValue = value.toString();
     }
     //console.log("Check SetIsLoad Passage");
+    console.log("what we got before sending", newValue);
     setIsLoaded(true);
     setErrorList([]);
     setCurrentCard({
