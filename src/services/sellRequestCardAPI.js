@@ -8,7 +8,7 @@ function update(
   var propertyUpdate;
   if (SellRequestCardPropertyName === "price") {
     propertyUpdate = {
-      price: parseInt(SellRequestCardPropertyValue),
+      price: parseFloat(SellRequestCardPropertyValue),
     };
   } else if (SellRequestCardPropertyName === "quantity") {
     propertyUpdate = {
