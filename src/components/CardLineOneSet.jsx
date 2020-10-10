@@ -15,7 +15,11 @@ import BlackDivModalContext from "../context/blackDivModalContext";
 import userPreferencesContext from "../context/userPreferenceContext";
 import { FormattedMessage } from "react-intl";
 import { useIntl } from "react-intl";
-import { useEffect } from "react";
+import TableRow from "@material-ui/core/TableRow";
+import TableCell from "@material-ui/core/TableCell";
+import AddCircleIcon from "@material-ui/icons/AddCircle";
+import IconButton from "@material-ui/core/IconButton";
+import { makeStyles } from "@material-ui/core/styles";
 
 const CardLineOneSet = ({
   card,
@@ -147,9 +151,19 @@ const CardLineOneSet = ({
   //Hook Intl to translate an attribute
   const intl = useIntl();
 
+  // Mui Style Hook
+  const useStyles = makeStyles({
+    tableRow: {
+      fontSize: "14px",
+    },
+  });
+
+  const classes = useStyles();
+
   return (
     <>
-      <Tr
+      <TableRow
+        hover
         key={index}
         onMouseEnter={(e) => {
           if (!isMobile) {
@@ -163,8 +177,8 @@ const CardLineOneSet = ({
           }
         }}
       >
-        <Td
-          className="cardPictureHolder"
+        <TableCell
+          className={"cardPictureHolder " + classes.tableRow}
           onClick={(event) => {
             if (isMobile) {
               //Function to display the card in big screen in responsive
@@ -178,9 +192,9 @@ const CardLineOneSet = ({
               <img src={urlPictureCard} alt={card.name} />
             </div>
           )}
-        </Td>
+        </TableCell>
 
-        <Td>
+        <TableCell>
           {/* Select will have to be refactored with a .map on a Select Component */}
           <select
             name="lang"
@@ -207,8 +221,8 @@ const CardLineOneSet = ({
               <option value="9">EN</option>
             )}
           </select>
-        </Td>
-        <Td>
+        </TableCell>
+        <TableCell>
           <select
             name="condition"
             id={cardsContext[cardID].name + "id2"}
@@ -235,9 +249,9 @@ const CardLineOneSet = ({
                   )
               : null}
           </select>
-        </Td>
+        </TableCell>
 
-        <Td>
+        <TableCell>
           <select
             name="isFoil"
             id={card.name + "id4"}
@@ -263,8 +277,8 @@ const CardLineOneSet = ({
               </option>
             )}
           </select>
-        </Td>
-        <Td>
+        </TableCell>
+        <TableCell>
           <select
             name="isSigned"
             onChange={(event) => {
@@ -284,8 +298,8 @@ const CardLineOneSet = ({
               })}
             </option>
           </select>
-        </Td>
-        <Td>
+        </TableCell>
+        <TableCell>
           <select
             name="quantity"
             id={cardsContext[cardID].name + "id3"}
@@ -306,16 +320,16 @@ const CardLineOneSet = ({
             <option value="11">11</option>
             <option value="12">12</option>
           </select>
-        </Td>
+        </TableCell>
 
         {/* PRICE */}
-        <Td>
+        <TableCell className={classes.tableRow}>
           {(!isLoading && cardsContext[cardID].price) || (!isLoading && 0)}
           {isLoading && <div className="loading-loop"></div>}
-        </Td>
+        </TableCell>
 
-        <Td className="AddButton">
-          <FeatherIcon
+        <TableCell className="AddButton">
+          <IconButton
             icon="plus-circle"
             size={isMobile ? config.iconSizeMobile : config.iconSizeDesktop}
             className="downsize-icon add-item-basket"
@@ -323,9 +337,11 @@ const CardLineOneSet = ({
               console.log(cardsContext[cardID]);
               return handleAddSellingBasket({ ...cardsContext[cardID] });
             }}
-          />
-        </Td>
-      </Tr>
+          >
+            <AddCircleIcon fontSize="large" color="primary" />
+          </IconButton>
+        </TableCell>
+      </TableRow>
     </>
   );
 };

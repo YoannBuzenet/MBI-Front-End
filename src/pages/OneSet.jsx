@@ -3,19 +3,24 @@ import SetList from "../components/SetList";
 import CardLineOneSet from "../components/CardLineOneSet";
 import SetsAPI from "../services/setsAPI";
 import SetsContext from "../context/setsContext";
-import { Table, Thead, Tbody, Tr, Th } from "react-super-responsive-table";
 import CardShopPriceAPI from "../services/CardShopPriceAPI";
 import cardsOneSetContext from "../context/cardsOneSetContext";
 import axios from "axios";
 import OneSetLoader from "../components/loaders/OneSetLoader";
 import { isMobile } from "react-device-detect";
 import SetListLoader from "../components/loaders/SetListLoader";
-import config from "../services/config";
 import SetLangChoice from "../components/SetLangChoice";
 import languagesDefinition from "../definitions/languagesDefinition";
 import userPreferencesContext from "../context/userPreferenceContext";
 import { FormattedMessage } from "react-intl";
 import { useIntl } from "react-intl";
+import { makeStyles } from "@material-ui/core/styles";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
+import Paper from "@material-ui/core/Paper";
 
 const OneSet = ({ handleAddSellingBasket, match }) => {
   //Current Cards displayed in One Set Page
@@ -89,6 +94,7 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
         isFoil: data[i].hasnonfoil ? "No" : "Yes",
         isSigned: "No",
         set: currentSet ? currentSet.name : null,
+        setId: idSet,
         quantity: 1,
         condition: 2,
         lang: ENGLISH_LANG_ID,
@@ -292,6 +298,19 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
   // console.log("contextToCheck", cardsContext);
   // console.log("are they CSP ?", areThey0CSP);
 
+  // Mui Style Hook
+  const useStyles = makeStyles({
+    table: {
+      minWidth: 650,
+    },
+    tableRowHead: {
+      fontSize: "16px",
+      textAlign: "center",
+    },
+  });
+
+  const classes = useStyles();
+
   return (
     <>
       <div className="container">
@@ -352,100 +371,101 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
                     onChange={(event) => handleChange(event)}
                   />
                 </div>
-
-                <Table className="zebra-table">
-                  <Thead>
-                    <Tr>
-                      <Th>
-                        <FormattedMessage
-                          id="app.OneSet.cardName"
-                          defaultMessage={`Card`}
-                        />
-                      </Th>
-                      <Th>
-                        <FormattedMessage
-                          id="app.OneSet.language"
-                          defaultMessage={`Language`}
-                        />
-                      </Th>
-                      <Th>
-                        <FormattedMessage
-                          id="app.OneSet.condition"
-                          defaultMessage={`Condition`}
-                        />
-                      </Th>
-                      <Th>
-                        <FormattedMessage
-                          id="app.OneSet.foil"
-                          defaultMessage={`Foil`}
-                        />
-                      </Th>
-                      <Th>
-                        <FormattedMessage
-                          id="app.OneSet.signed"
-                          defaultMessage={`Signed`}
-                        />
-                      </Th>
-                      <Th>
-                        <FormattedMessage
-                          id="app.OneSet.quantity"
-                          defaultMessage={`Quantity`}
-                        />
-                      </Th>
-                      <Th>
-                        <FormattedMessage
-                          id="app.OneSet.price"
-                          defaultMessage={`Price`}
-                        />
-                      </Th>
-                      <Th></Th>
-                    </Tr>
-                  </Thead>
-                  <Tbody>
-                    {Object.keys(cardsContext)
-                      .filter((cardID) => {
-                        if (priceFilter > 0) {
-                          if (
-                            parseFloat(cardsContext[cardID].price) <=
-                            parseFloat(priceFilter)
-                          ) {
-                            return;
-                          } else {
-                            return cardID;
-                          }
-                        } else {
-                          //If it's Near mint it must have a price to be displayed
-                          //We chose Near Mint because it's the default condition displayed
-                          if (
-                            cardsContext[cardID].price !== null &&
-                            cardsContext[cardID].price > 0 &&
-                            cardsContext[cardID].condition === 2
-                          ) {
-                            return cardID;
-                          }
-                          // A card non null is a card whose price has been asked by user. Therefore even if it's 0 we let it  displayed.
-                          else if (cardsContext[cardID].price !== null) {
-                            return cardID;
-                          } else {
-                            return;
-                          }
-                        }
-                      })
-                      .map((cardID, index) => {
-                        return (
-                          <CardLineOneSet
-                            card={cardsContext[cardID]}
-                            cardID={cardID}
-                            index={index}
-                            key={cardID}
-                            handleAddSellingBasket={handleAddSellingBasket}
-                            langIDToDisplay={langIDToDisplay}
-                            langsAvailable={languagesAvailables}
+                <Paper>
+                  <Table className={classes.table} aria-label="simple table">
+                    <TableHead>
+                      <TableRow>
+                        <TableCell className={classes.tableRowHead}>
+                          <FormattedMessage
+                            id="app.OneSet.cardName"
+                            defaultMessage={`Card`}
                           />
-                        );
-                      })}
-                  </Tbody>
-                </Table>
+                        </TableCell>
+                        <TableCell className={classes.tableRowHead}>
+                          <FormattedMessage
+                            id="app.OneSet.language"
+                            defaultMessage={`Language`}
+                          />
+                        </TableCell>
+                        <TableCell className={classes.tableRowHead}>
+                          <FormattedMessage
+                            id="app.OneSet.condition"
+                            defaultMessage={`Condition`}
+                          />
+                        </TableCell>
+                        <TableCell className={classes.tableRowHead}>
+                          <FormattedMessage
+                            id="app.OneSet.foil"
+                            defaultMessage={`Foil`}
+                          />
+                        </TableCell>
+                        <TableCell className={classes.tableRowHead}>
+                          <FormattedMessage
+                            id="app.OneSet.signed"
+                            defaultMessage={`Signed`}
+                          />
+                        </TableCell>
+                        <TableCell className={classes.tableRowHead}>
+                          <FormattedMessage
+                            id="app.OneSet.quantity"
+                            defaultMessage={`Quantity`}
+                          />
+                        </TableCell>
+                        <TableCell className={classes.tableRowHead}>
+                          <FormattedMessage
+                            id="app.OneSet.price"
+                            defaultMessage={`Price`}
+                          />
+                        </TableCell>
+                        <TableCell></TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {Object.keys(cardsContext)
+                        .filter((cardID) => {
+                          if (priceFilter > 0) {
+                            if (
+                              parseFloat(cardsContext[cardID].price) <=
+                              parseFloat(priceFilter)
+                            ) {
+                              return;
+                            } else {
+                              return cardID;
+                            }
+                          } else {
+                            //If it's Near mint it must have a price to be displayed
+                            //We chose Near Mint because it's the default condition displayed
+                            if (
+                              cardsContext[cardID].price !== null &&
+                              cardsContext[cardID].price > 0 &&
+                              cardsContext[cardID].condition === 2
+                            ) {
+                              return cardID;
+                            }
+                            // A card non null is a card whose price has been asked by user. Therefore even if it's 0 we let it  displayed.
+                            else if (cardsContext[cardID].price !== null) {
+                              return cardID;
+                            } else {
+                              return;
+                            }
+                          }
+                        })
+                        .map((cardID, index) => {
+                          return (
+                            <CardLineOneSet
+                              card={cardsContext[cardID]}
+                              cardID={cardID}
+                              index={index}
+                              key={cardID}
+                              handleAddSellingBasket={handleAddSellingBasket}
+                              langIDToDisplay={langIDToDisplay}
+                              langsAvailable={languagesAvailables}
+                            />
+                          );
+                        })}
+                    </TableBody>
+                  </Table>
+                </Paper>
               </>
             )}
             {/* If there are NO Card Shop Price in DB for this set */}
