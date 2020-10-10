@@ -62,6 +62,7 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
         isFoil: data[i].hasnonfoil ? "No" : "Yes",
         isSigned: "No",
         set: data[i].edition.name,
+        setId: parseInt(data[i].edition["@id"].substr(6)),
         quantity: 1,
         condition: 2,
         lang: ENGLISH_LANG_ID,
@@ -246,6 +247,7 @@ const CardPage = ({ match, handleAddSellingBasket }) => {
                     defaultMessage={`Set`}
                   />
                 </Th>
+                <Th></Th>
                 <Th>
                   <FormattedMessage
                     id="app.cardPage.language"

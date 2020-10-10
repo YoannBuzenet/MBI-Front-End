@@ -39,6 +39,7 @@ const MyCurrentSellRequest = ({ history, checkForDuplicates }) => {
                     defaultMessage={`Set`}
                   />
                 </Th>
+                <Th></Th>
                 <Th>
                   <FormattedMessage
                     id="app.Basket.language"
