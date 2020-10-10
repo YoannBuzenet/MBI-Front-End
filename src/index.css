@@ -393,6 +393,17 @@ table {
   background-color: transparent;
 }
 
+.improvedHeightTableRow {
+  height: 30px;
+}
+/* yo */
+.responsiveTable tbody tr.cardIsFoil {
+  background-color: rgba(226, 128, 37, 0.5);
+}
+.responsiveTable tbody tr.cardIsFoil:hover {
+  background-color: rgba(226, 128, 37, 0.8);
+}
+
 @media only screen and (max-width: 850px) {
   .zebra-table {
     margin: 0 auto;
@@ -2054,6 +2065,17 @@ form.reset-password-form button {
 
 .settings-language-choice .current-lang-flag {
   top: 18px;
+}
+
+/**************************
+*******ALL CARDLINE*******
+**************************/
+.foilSvgInCardName {
+  position: absolute;
+  top: 0px;
+  right: 10px;
+  height: 30px;
+  width: 30px;
 }
 
 /*****************/

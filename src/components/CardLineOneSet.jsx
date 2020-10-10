@@ -147,6 +147,13 @@ const CardLineOneSet = ({
   //Hook Intl to translate an attribute
   const intl = useIntl();
 
+  const rowClass =
+    cardsContext[cardID].isFoil === "Yes"
+      ? "improvedHeightTableRow cardIsFoil"
+      : "improvedHeightTableRow";
+
+  console.log(cardsContext[cardID].isFoil);
+
   return (
     <>
       <Tr
@@ -162,6 +169,7 @@ const CardLineOneSet = ({
             setIsOnHover(false);
           }
         }}
+        className={rowClass}
       >
         <Td
           className="cardPictureHolder"
@@ -173,6 +181,9 @@ const CardLineOneSet = ({
           }}
         >
           {cardName}
+          {cardsContext[cardID].isFoil === "Yes" && (
+            <img src="/foil.svg" className="foilSvgInCardName" />
+          )}
           {!isMobile && isOnHover && (
             <div className={hoverTopOrBottom}>
               <img src={urlPictureCard} alt={card.name} />
