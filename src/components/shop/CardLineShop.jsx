@@ -499,7 +499,10 @@ const CardLineShop = ({ card, indexCard }) => {
       ? " cardSellingPriceShouldBeCheckedByHuman"
       : "";
 
-  // console.log(process.env.REACT_APP_MINIMUM_PRICE_TO_CHECK);
+  const rowClass =
+    card.isFoil === true
+      ? " improvedHeightTableRow cardIsFoil"
+      : " improvedHeightTableRow";
 
   return (
     <>
@@ -516,7 +519,9 @@ const CardLineShop = ({ card, indexCard }) => {
           }
         }}
         className={
-          sellingBasketLine || sellingPriceShouldBeCheckedByHuman || ""
+          sellingBasketLine + rowClass ||
+          sellingPriceShouldBeCheckedByHuman + rowClass ||
+          "" + rowClass
         }
       >
         <Td
@@ -529,6 +534,9 @@ const CardLineShop = ({ card, indexCard }) => {
           }}
         >
           {currentCard.name}
+          {card.isFoil === true && (
+            <img src="/foil.svg" className="foilSvgInCardName" />
+          )}
           {!isMobile && isOnHover && (
             <div className={hoverTopOrBottom}>
               <img src={urlCard} alt={currentCard.name} />

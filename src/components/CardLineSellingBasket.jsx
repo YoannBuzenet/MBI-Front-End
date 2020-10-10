@@ -138,6 +138,11 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
     setIsBlackDivModalDisplayed("activated");
   };
 
+  const rowClass =
+    card.isFoil === "Yes"
+      ? " improvedHeightTableRow cardIsFoil"
+      : " improvedHeightTableRow";
+
   return (
     <>
       <Tr
@@ -153,10 +158,10 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
             setIsOnHover(false);
           }
         }}
-        className={sellingBasketLine || ""}
+        className={sellingBasketLine + rowClass || "" + rowClass}
       >
         <Td
-          className="cardPictureHolder"
+          className={"cardPictureHolder"}
           onClick={(event) => {
             console.log(currentBasket[indexCard].id);
             if (isMobile) {
@@ -166,6 +171,9 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
           }}
         >
           {card.name}
+          {card.isFoil === "Yes" && (
+            <img src="/foil.svg" className="foilSvgInCardName" />
+          )}
           {!isMobile && isOnHover && (
             //TODO : change className following the scrolling, to know if the position must be top or bottom, to stay in window
             <div className={hoverTopOrBottom}>

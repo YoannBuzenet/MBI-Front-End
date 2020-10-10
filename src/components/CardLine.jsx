@@ -120,7 +120,10 @@ const CardLine = ({ card, handleAddSellingBasket, index, cardID }) => {
   //Hook Intl to translate an attribute
   const intl = useIntl();
 
-  // console.log("all cardline", cardsCardPageContext);
+  const rowClass =
+    cardsCardPageContext[cardID].isFoil === "Yes"
+      ? "improvedHeightTableRow cardIsFoil"
+      : "improvedHeightTableRow";
 
   return (
     <>
@@ -137,6 +140,7 @@ const CardLine = ({ card, handleAddSellingBasket, index, cardID }) => {
             setIsOnHover(false);
           }
         }}
+        className={rowClass}
       >
         <Td
           className="cardPictureHolder"
@@ -148,6 +152,9 @@ const CardLine = ({ card, handleAddSellingBasket, index, cardID }) => {
           }}
         >
           {cardsCardPageContext[cardID].name}
+          {cardsCardPageContext[cardID].isFoil === "Yes" && (
+            <img src="/foil.svg" className="foilSvgInCardName" />
+          )}
           {!isMobile && isOnHover && (
             <div className={hoverTopOrBottom}>
               <img

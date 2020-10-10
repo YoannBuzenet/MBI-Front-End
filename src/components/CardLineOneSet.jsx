@@ -152,8 +152,6 @@ const CardLineOneSet = ({
       ? "improvedHeightTableRow cardIsFoil"
       : "improvedHeightTableRow";
 
-  console.log(cardsContext[cardID].isFoil);
-
   return (
     <>
       <Tr

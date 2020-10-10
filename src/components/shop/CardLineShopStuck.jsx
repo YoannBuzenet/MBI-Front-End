@@ -7,12 +7,20 @@ const CardLineShopStuck = ({ card }) => {
   //DEFINED langages and Conditions
   const { lang, conditions } = useContext(GenericCardInfosContext);
 
-  // console.log(card);
+  const rowClass =
+    card.isFoil === "Yes"
+      ? " improvedHeightTableRow cardIsFoil"
+      : " improvedHeightTableRow";
 
   return (
     <>
       <tr>
-        <td>{card.name}</td>
+        <td className="cardPictureHolder">
+          {card.name}
+          {card.isFoil === "Yes" && (
+            <img src="/foil.svg" className="foilSvgInCardName" />
+          )}
+        </td>
         <td>{card.set}</td>
         <td>/</td>
         <td>{lang[card.lang] ? lang[card.lang - 1].shortname : null}</td>
