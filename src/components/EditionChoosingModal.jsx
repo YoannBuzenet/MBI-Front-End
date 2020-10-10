@@ -1,6 +1,6 @@
 import React from "react";
 import CSSLoaderWaitingSpiral from "./loaders/CSSLoaderWaitingSpiral";
-import { FormattedMessage } from "react-intl";
+import { FormattedMessage, useIntl } from "react-intl";
 
 const EditionChoosingModal = ({
   editionInformations,
@@ -9,6 +9,13 @@ const EditionChoosingModal = ({
   setIsModal,
 }) => {
   console.log(editionInformations);
+  const intl = useIntl();
+
+  const chooseAset = intl.formatMessage({
+    id: "app.shop.editionUpdateModal.chooseSet",
+    defaultMessage: "Choose a set",
+  });
+
   return (
     <>
       {/* TODO METTRE UN ONCLICK DISABLE PARENT STATE ON MODAL */}
@@ -31,21 +38,13 @@ const EditionChoosingModal = ({
               value="Choose a set"
               onChange={(event) => updateDBAndContextWithNewEdition(event)}
             >
+              <option key={40000}>{chooseAset}</option>
               {editionInformations &&
-                editionInformations
-                  .map((card, index) => (
-                    <option value={index} key={card.id}>
-                      {card.edition.name}
-                    </option>
-                  ))
-                  .concat([
-                    <option key={40000}>
-                      <FormattedMessage
-                        id="app.shop.editionUpdateModal.chooseSet"
-                        defaultMessage={`Choose a set`}
-                      />
-                    </option>,
-                  ])}
+                editionInformations.map((card, index) => (
+                  <option value={index} key={card.id}>
+                    {card.edition.name}
+                  </option>
+                ))}
             </select>
           )}
         </div>

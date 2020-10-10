@@ -371,6 +371,7 @@ const CardLineShop = ({ card, indexCard }) => {
     setCurrentCard({
       ...currentCard,
       set: newCard.edition.name,
+      setId: newCard.edition["@id"].substr(6),
       lang: langNextCard,
       foreignData: newCard.foreignData,
     });
