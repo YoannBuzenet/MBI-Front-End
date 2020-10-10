@@ -151,6 +151,7 @@ const ShopAdminOneSellRequest = ({ match }) => {
                   condition: card.CardCondition.id.toString(),
                   lang: card.language.id,
                   set: card.cards.edition.name,
+                  setId: card.cards.edition.id,
                   price: card.price,
                   quantity: card.cardQuantity,
                   isFoil: card.isFoil,
@@ -375,6 +376,7 @@ const ShopAdminOneSellRequest = ({ match }) => {
                     defaultMessage={`Set`}
                   />
                 </Th>
+                <Th></Th>
                 <Th>
                   <FormattedMessage
                     id="app.shop.OneSellRequest.edit"

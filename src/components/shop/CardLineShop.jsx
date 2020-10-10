@@ -357,7 +357,7 @@ const CardLineShop = ({ card, indexCard }) => {
 
     //API Request to update the card in DB
     sellRequestCardAPI
-      .setUpdate(IRItoUpdate, langNextCard, currentCard.id)
+      .setUpdate(IRItoUpdate, langNextCard, currentCard.idSellRequestCard)
       .catch(() => {
         toast.error(
           <FormattedMessage
@@ -546,6 +546,12 @@ const CardLineShop = ({ card, indexCard }) => {
               setIsModal={setIsModal}
             />
           )}
+        </Td>
+        <Td>
+          <img
+            src={"/setIcons/" + currentCard.setId + ".svg"}
+            style={{ width: "20px", height: "20px" }}
+          />
         </Td>
         <Td
           onClick={(event) => changeEdition(event, currentCard)}

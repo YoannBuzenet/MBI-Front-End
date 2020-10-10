@@ -175,6 +175,12 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
         </Td>
         <Td>{card.set}</Td>
         <Td>
+          <img
+            src={"/setIcons/" + card.setId + ".svg"}
+            style={{ width: "20px", height: "20px" }}
+          />
+        </Td>
+        <Td>
           {/* Select will have to be refactored with a .map on a Select Component */}
           <select
             name="lang"
