@@ -10,12 +10,13 @@ import axios from "axios";
 import OneSetLoader from "../components/loaders/OneSetLoader";
 import { isMobile } from "react-device-detect";
 import SetListLoader from "../components/loaders/SetListLoader";
-import config from "../services/config";
 import SetLangChoice from "../components/SetLangChoice";
 import languagesDefinition from "../definitions/languagesDefinition";
 import userPreferencesContext from "../context/userPreferenceContext";
 import { FormattedMessage } from "react-intl";
 import { useIntl } from "react-intl";
+import { makeStyles } from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
 
 const OneSet = ({ handleAddSellingBasket, match }) => {
   //Current Cards displayed in One Set Page
@@ -54,6 +55,8 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
   const [priceFilter, setPriceFilter] = useState("");
 
   const [areThey0CSP, setAreThey0CSP] = useState(false);
+
+  const [isFilteringByFoils, setIsFilteringByFoils] = useState(false);
 
   const transformLanguagesArrayIntoObject = (array) => {
     let langObject = {};
@@ -290,8 +293,16 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
   //Hook Intl to translate an attribute
   const intl = useIntl();
 
-  // console.log("contextToCheck", cardsContext);
-  // console.log("are they CSP ?", areThey0CSP);
+  // Buttons Mui
+  const useStyles = makeStyles((theme) => ({
+    root: {
+      "& > *": {
+        margin: theme.spacing(1),
+      },
+    },
+  }));
+
+  const classes = useStyles();
 
   return (
     <>
@@ -337,21 +348,42 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
             {!isLoading && (
               <>
                 <div className="filter-cards">
-                  <p>
-                    <FormattedMessage
-                      id="app.OneSet.filterByPrice"
-                      defaultMessage={`Filtrer By Price`}
-                    />
-                  </p>
-                  <input
-                    type="text"
-                    placeholder={intl.formatMessage({
-                      id: "app.OneSet.filter.placeholder",
-                      defaultMessage: "Minimum price...",
-                    })}
-                    value={priceFilter}
-                    onChange={(event) => handleChange(event)}
-                  />
+                  <div className="filterByFoils">
+                    <span>AFFICHER LES FOILS</span>
+
+                    <Button
+                      variant={isFilteringByFoils ? "outlined" : "contained"}
+                      className="doFilterByFoil"
+                      onClick={(e) => setIsFilteringByFoils(false)}
+                      color={isFilteringByFoils ? "default" : "primary"}
+                    >
+                      Oui
+                    </Button>
+                    <Button
+                      variant={isFilteringByFoils ? "contained" : "outlined"}
+                      className="doNOTFilterByFoil"
+                      onClick={(e) => setIsFilteringByFoils(true)}
+                      color={isFilteringByFoils ? "primary" : "default"}
+                    >
+                      Non
+                    </Button>
+                  </div>
+
+                  <div className="filterbyPrice">
+                    <p>
+                      <FormattedMessage
+                        id="app.OneSet.filterByPrice"
+                        defaultMessage={`Filtrer By Price`}
+                      />
+                    </p>
+                    <select>
+                      <option>0.1</option>
+                      <option>0.5</option>
+                      <option>1</option>
+                      <option>5</option>
+                      <option>10</option>
+                    </select>
+                  </div>
                 </div>
 
                 <Table className="zebra-table">
@@ -430,6 +462,13 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
                           } else {
                             return;
                           }
+                        }
+                      })
+                      .filter((cardID) => {
+                        if (isFilteringByFoils) {
+                          return cardsContext[cardID].isFoil !== "Yes";
+                        } else {
+                          return true;
                         }
                       })
                       .map((cardID, index) => {

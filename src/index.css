@@ -1137,6 +1137,21 @@ div.blockFlags span.blockArrow {
   align-items: center;
 }
 
+.filter-cards .filterByFoils {
+}
+
+button.doFilterByFoil,
+button.doNOTFilterByFoil {
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.filter-cards .filterbyPrice {
+  margin-left: 50px;
+  display: flex;
+  justify-content: center;
+}
+
 .filter-cards p {
   margin-right: 10px;
 }
