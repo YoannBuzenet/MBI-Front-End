@@ -155,6 +155,10 @@ const CardLineOneSet = ({
     rowClass += " improvedHeightTableRow";
   }
 
+  let customStyle;
+  if (!isMobile) {
+    customStyle = { minWidth: "300px" };
+  }
   return (
     <>
       <Tr
@@ -174,6 +178,7 @@ const CardLineOneSet = ({
       >
         <Td
           className="cardPictureHolder"
+          style={customStyle}
           onClick={(event) => {
             if (isMobile) {
               //Function to display the card in big screen in responsive

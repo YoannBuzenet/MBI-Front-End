@@ -2,7 +2,8 @@ import React, { useContext } from "react";
 import CardLineOneSet from "../../../components/CardLineOneSet";
 import cardsOneSetContext from "../../../context/cardsOneSetContext";
 import { Table, Thead, Tbody, Tr, Th } from "react-super-responsive-table";
-import { FormattedMessage, useIntl } from "react-intl";
+import { FormattedMessage } from "react-intl";
+import { isMobile } from "react-device-detect";
 
 const TableForSet = ({
   arrayofIDcardToDisplay,
