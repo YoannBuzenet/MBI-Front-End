@@ -6,14 +6,12 @@ const SearchResultPage = ({ match, history }) => {
   const [searchResult, setSearchResult] = useState([]);
   const [isLoading, setisLoading] = useState(true);
 
-  console.log("match from search result page", match);
-
   useEffect(() => {
     setisLoading(true);
     cardsAPI
       .searchApproxByName(match.params.search)
       .then((data) => {
-        console.log(data.data);
+        // console.log(data.data);
         const filteringArray = [];
 
         if (data.data.length > 0) {
@@ -42,7 +40,7 @@ const SearchResultPage = ({ match, history }) => {
       });
   }, [match.params.search]);
 
-  console.log(searchResult);
+  //   console.log(searchResult);
   return (
     <div className="container">
       Search Results : {match.params.search}

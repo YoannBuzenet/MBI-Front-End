@@ -3,8 +3,9 @@ import cardsAPI from "../services/cardsAPI";
 import { Link } from "react-router-dom";
 import AuthContext from "../context/authContext";
 import { useIntl } from "react-intl";
+import { matchPath } from "react-router";
 
-const SearchCardBar = ({ history, match }) => {
+const SearchCardBar = ({ history }) => {
   // console.log("render");
   const [currentSearch, setCurrentSearch] = useState("");
 
@@ -12,23 +13,28 @@ const SearchCardBar = ({ history, match }) => {
 
   const { authenticationInfos } = useContext(AuthContext);
 
+  const [searchCopy, setSearchCopy] = useState("");
+
   const [timer, setTimer] = useState(null);
 
   const WAIT_INTERVAL = 200;
 
-  const prevSearchParams = usePrevious(match.params.search);
-
   // console.log(authenticationInfos);
 
-  console.log("old", prevSearchParams);
-  console.log(match.params.search);
-  console.log(match);
+  const match = matchPath(history.location.pathname, {
+    path: "/search/:search?",
+    exact: true,
+    strict: false,
+  });
+
+  const prevSearchParams = usePrevious(match?.params?.search);
 
   const handleChange = (event) => {
     setTimer(clearTimeout(timer));
 
     const value = event.currentTarget.value;
     setCurrentSearch(value);
+    setSearchCopy(value);
     if (currentSearch.length >= 3) {
       setTimer(
         setTimeout(
@@ -60,10 +66,7 @@ const SearchCardBar = ({ history, match }) => {
                 // return data.data;
               })
               .then((data) => {
-                console.log(match.params.search === prevSearchParams);
-                if (match.params.search === prevSearchParams) {
-                  setSearchResult(data);
-                }
+                setSearchResult(data);
               }),
           WAIT_INTERVAL
         )
@@ -110,6 +113,9 @@ const SearchCardBar = ({ history, match }) => {
     defaultMessage: "Search...",
   });
 
+  console.log("search copy", searchCopy);
+  console.log("param", match?.params?.search);
+
   return (
     <>
       <form className="search-card-form" onSubmit={handleSubmit}>
@@ -125,7 +131,8 @@ const SearchCardBar = ({ history, match }) => {
           }}
         />
         <div className="search-result">
-          {searchResult.length > 0 &&
+          {match?.params?.search !== searchCopy &&
+            searchResult.length > 0 &&
             searchResult
               .filter((card) => card.edition.isonlineonly === 0)
               .map((cardResult, index) => {
