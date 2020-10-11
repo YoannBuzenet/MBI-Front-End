@@ -67,7 +67,7 @@ const Navbar = ({ history }) => {
             {/* <Link to="/" className="classic-links big-screen-info">
               Fantasy Sphere
             </Link> */}
-            <SearchCardBar />
+            <SearchCardBar history={history} />
           </div>
           {authenticationInfos.isAuthenticated ? (
             /////////////////////////

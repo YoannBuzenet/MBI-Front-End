@@ -499,7 +499,7 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
                 </div>
                 {whitecards.length > 0 && (
                   <>
-                    <p>
+                    <p className="whiteColor">
                       <FormattedMessage
                         id="app.generics.color.white"
                         defaultMessage={`White`}
@@ -516,7 +516,7 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
 
                 {bluecards.length > 0 && (
                   <>
-                    <p>
+                    <p className="blueColor">
                       <FormattedMessage
                         id="app.generics.color.blue"
                         defaultMessage={`Blue`}
@@ -532,7 +532,7 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
                 )}
                 {blackcards.length > 0 && (
                   <>
-                    <p>
+                    <p className="blackColor">
                       <FormattedMessage
                         id="app.generics.color.black"
                         defaultMessage={`Black`}
@@ -548,7 +548,7 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
                 )}
                 {redcards.length > 0 && (
                   <>
-                    <p>
+                    <p className="redColor">
                       <FormattedMessage
                         id="app.generics.color.red"
                         defaultMessage={`Red`}
@@ -564,7 +564,7 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
                 )}
                 {greencards.length > 0 && (
                   <>
-                    <p>
+                    <p className="greenColor">
                       <FormattedMessage
                         id="app.generics.color.green"
                         defaultMessage={`Green`}
@@ -580,7 +580,7 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
                 )}
                 {goldcards.length > 0 && (
                   <>
-                    <p>
+                    <p className="goldColor">
                       <FormattedMessage
                         id="app.generics.color.gold"
                         defaultMessage={`Gold`}
@@ -596,7 +596,7 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
                 )}
                 {artifactcards.length > 0 && (
                   <>
-                    <p>
+                    <p className="artifactColor">
                       <FormattedMessage
                         id="app.generics.color.artifact"
                         defaultMessage={`Artifacts`}
@@ -612,7 +612,7 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
                 )}
                 {landscards.length > 0 && (
                   <>
-                    <p>
+                    <p className="landColor">
                       <FormattedMessage
                         id="app.generics.color.land"
                         defaultMessage={`Lands`}

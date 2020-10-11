@@ -15,9 +15,9 @@ const TableForSet = ({
   const { cardsContext, setCardsContext } = useContext(cardsOneSetContext);
 
   return (
-    <Table className="zebra-table">
+    <Table className="oneSet-table">
       <Thead>
-        <Tr>
+        <Tr className="oneset-table-tr-head">
           <Th>
             <FormattedMessage
               id="app.OneSet.cardName"

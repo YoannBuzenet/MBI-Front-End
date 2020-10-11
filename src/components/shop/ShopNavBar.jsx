@@ -74,7 +74,7 @@ const ShopNavbar = ({ history }) => {
                 defaultMessage={`Cust. Access`}
               />
             </Link>
-            <SearchCardBar />
+            <SearchCardBar history={history} />
           </div>
 
           <BurgerMenu history={history} />

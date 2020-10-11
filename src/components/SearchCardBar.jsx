@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import AuthContext from "../context/authContext";
 import { useIntl } from "react-intl";
 
-const SearchCardBar = (props) => {
+const SearchCardBar = ({ history }) => {
   // console.log("render");
   const [currentSearch, setCurrentSearch] = useState("");
 
@@ -20,6 +20,7 @@ const SearchCardBar = (props) => {
 
   const handleChange = (event) => {
     setTimer(clearTimeout(timer));
+
     const value = event.currentTarget.value;
     setCurrentSearch(value);
     if (currentSearch.length >= 3) {
@@ -61,6 +62,12 @@ const SearchCardBar = (props) => {
     }
   };
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log("qued !");
+    history.push("/search?request=" + currentSearch);
+  };
+
   const linkSearchCardBar =
     authenticationInfos.user &&
     authenticationInfos.user.roles &&
@@ -78,7 +85,7 @@ const SearchCardBar = (props) => {
 
   return (
     <>
-      <form className="search-card-form">
+      <form className="search-card-form" onSubmit={handleSubmit}>
         <input
           type="search"
           className="searchCardBar"
