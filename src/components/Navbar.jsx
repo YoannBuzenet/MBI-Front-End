@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import AuthContext from "../context/authContext";
 import SellingBasketContext from "../context/sellingBasket";
@@ -9,11 +9,12 @@ import SearchCardBar from "./SearchCardBar";
 import { FormattedMessage } from "react-intl";
 import AppLangChoice from "./AppLangChoice";
 
-const Navbar = ({ history }) => {
+const Navbar = ({ history, match }) => {
   //Current Authentication
   const { authenticationInfos, setAuthenticationInfos } = useContext(
     AuthContext
   );
+  console.log("match from navbar", match);
 
   //Current Selling Request Basket
   const { currentBasket } = useContext(SellingBasketContext);
@@ -67,7 +68,7 @@ const Navbar = ({ history }) => {
             {/* <Link to="/" className="classic-links big-screen-info">
               Fantasy Sphere
             </Link> */}
-            <SearchCardBar history={history} />
+            <SearchCardBar history={history} match={match} />
           </div>
           {authenticationInfos.isAuthenticated ? (
             /////////////////////////

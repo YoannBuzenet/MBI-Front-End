@@ -1,9 +1,12 @@
 import React, { useEffect, useContext, useState } from "react";
 import cardsAPI from "../services/cardsAPI";
+import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 
 const SearchResultPage = ({ match, history }) => {
   const [searchResult, setSearchResult] = useState([]);
   const [isLoading, setisLoading] = useState(true);
+
+  console.log("match from search result page", match);
 
   useEffect(() => {
     setisLoading(true);
@@ -39,19 +42,31 @@ const SearchResultPage = ({ match, history }) => {
       });
   }, [match.params.search]);
 
-  console.log(searchResult, isLoading);
+  console.log(searchResult);
   return (
-    <>
-      Search Results
+    <div className="container">
+      Search Results : {match.params.search}
       <div>
-        {searchResult.map((card) => (
-          <p>Card</p>
-        ))}
+        <Table className="zebra-table">
+          <Thead>
+            <Tr>
+              <Th>Name</Th>
+            </Tr>
+          </Thead>
+          <Tbody>
+            {Array.isArray(searchResult) &&
+              searchResult.map((card) => (
+                <Tr>
+                  <Td>{card.name}</Td>
+                </Tr>
+              ))}
+          </Tbody>
+        </Table>
         {!isLoading &&
           Array.isArray(searchResult) &&
           searchResult.length === 0 && <p>Pas de cartes</p>}
       </div>
-    </>
+    </div>
   );
 };
 

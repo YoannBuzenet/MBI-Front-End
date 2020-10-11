@@ -8,7 +8,7 @@ import BurgerMenu from "../BurgerMenu";
 import { toast } from "react-toastify";
 import { FormattedMessage } from "react-intl";
 
-const ShopNavbar = ({ history }) => {
+const ShopNavbar = ({ history, match }) => {
   //Current Authentication
   const { authenticationInfos, setAuthenticationInfos } = useContext(
     AuthContext
@@ -74,7 +74,7 @@ const ShopNavbar = ({ history }) => {
                 defaultMessage={`Cust. Access`}
               />
             </Link>
-            <SearchCardBar history={history} />
+            <SearchCardBar history={history} match={match} />
           </div>
 
           <BurgerMenu history={history} />

@@ -1,10 +1,10 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect, useRef } from "react";
 import cardsAPI from "../services/cardsAPI";
 import { Link } from "react-router-dom";
 import AuthContext from "../context/authContext";
 import { useIntl } from "react-intl";
 
-const SearchCardBar = ({ history }) => {
+const SearchCardBar = ({ history, match }) => {
   // console.log("render");
   const [currentSearch, setCurrentSearch] = useState("");
 
@@ -16,7 +16,13 @@ const SearchCardBar = ({ history }) => {
 
   const WAIT_INTERVAL = 200;
 
+  const prevSearchParams = usePrevious(match.params.search);
+
   // console.log(authenticationInfos);
+
+  console.log("old", prevSearchParams);
+  console.log(match.params.search);
+  console.log(match);
 
   const handleChange = (event) => {
     setTimer(clearTimeout(timer));
@@ -53,7 +59,12 @@ const SearchCardBar = ({ history }) => {
                 return filteringArray;
                 // return data.data;
               })
-              .then((data) => setSearchResult(data)),
+              .then((data) => {
+                console.log(match.params.search === prevSearchParams);
+                if (match.params.search === prevSearchParams) {
+                  setSearchResult(data);
+                }
+              }),
           WAIT_INTERVAL
         )
       );
@@ -62,11 +73,26 @@ const SearchCardBar = ({ history }) => {
     }
   };
 
+  function usePrevious(value) {
+    // The ref object is a generic container whose current property is mutable ...
+    // ... and can hold any value, similar to an instance property on a class
+    const ref = useRef();
+
+    // Store current value in ref
+    useEffect(() => {
+      ref.current = value;
+    }, [value]); // Only re-run if value changes
+
+    // Return previous value (happens before update in useEffect above)
+    return ref.current;
+  }
+
   // If user types "Enters" while typing we show it the result page
   const handleSubmit = (event) => {
     event.preventDefault();
     setSearchResult([]);
-    history.push("/search?request=" + currentSearch);
+    setCurrentSearch("");
+    history.push("/search/" + currentSearch);
   };
 
   const linkSearchCardBar =
