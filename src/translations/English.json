@@ -107,6 +107,7 @@
   "app.OneSet.filterByPrice": "Filter by Price",
   "app.OneSet.filter.placeholder": "Minimum price...",
   "app.OneSet.noCSP.message": "There are currently no cards bought in this set.",
+  "app.OneSet.filter.displayFoils": "Display Foils",
 
   "app.RegisterPage.title": "Register",
   "app.RegisterPage.label.mail": "Email",
@@ -401,6 +402,16 @@
 
   "app.generics.yes": "Yes",
   "app.generics.no": "No",
+  "app.generics.price": "Price",
+  "app.generics.none": "None",
+  "app.generics.color.white": "White",
+  "app.generics.color.blue": "Blue",
+  "app.generics.color.black": "Black",
+  "app.generics.color.red": "Red",
+  "app.generics.color.green": "Green",
+  "app.generics.color.gold": "Gold",
+  "app.generics.color.artifact": "Artifacts",
+  "app.generics.color.land": "Lands",
 
   "server.sendMail.welcomeEmail.title": "Welcome on {url} !",
   "server.sendMail.sellRequest.submitted": "Your sell request has been submitted !",

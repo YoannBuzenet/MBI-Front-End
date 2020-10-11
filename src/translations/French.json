@@ -107,6 +107,7 @@
   "app.OneSet.filterByPrice": "Filtrer par prix",
   "app.OneSet.filter.placeholder": "Prix minimum...",
   "app.OneSet.noCSP.message": "Il n'y a actuellement pas de cartes rachetées dans cette édition.",
+  "app.OneSet.filter.displayFoils": "Afficher les Foils",
 
   "app.RegisterPage.title": "Créer un compte",
   "app.RegisterPage.label.mail": "Email",
@@ -401,6 +402,16 @@
 
   "app.generics.yes": "Oui",
   "app.generics.no": "Non",
+  "app.generics.price": "Prix",
+  "app.generics.none": "Aucun",
+  "app.generics.color.white": "Blanc",
+  "app.generics.color.blue": "Bleu",
+  "app.generics.color.black": "Noir",
+  "app.generics.color.red": "Rouge",
+  "app.generics.color.green": "Vert",
+  "app.generics.color.gold": "MultiColore",
+  "app.generics.color.artifact": "Artefacts",
+  "app.generics.color.land": "Terrains",
 
   "server.sendMail.welcomeEmail.title": "Bienvenue sur {url} !",
   "server.sendMail.sellRequest.submitted": "Votre demande de rachat est enregistrée !",

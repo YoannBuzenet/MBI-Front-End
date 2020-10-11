@@ -15,7 +15,6 @@ import BlackDivModalContext from "../context/blackDivModalContext";
 import userPreferencesContext from "../context/userPreferenceContext";
 import { FormattedMessage } from "react-intl";
 import { useIntl } from "react-intl";
-import { useEffect } from "react";
 
 const CardLineOneSet = ({
   card,
@@ -148,10 +147,13 @@ const CardLineOneSet = ({
   //Hook Intl to translate an attribute
   const intl = useIntl();
 
-  const rowClass =
-    cardsContext[cardID].isFoil === "Yes"
-      ? "improvedHeightTableRow cardIsFoil"
-      : "improvedHeightTableRow";
+  let rowClass = "";
+  if (cardsContext[cardID].isFoil === "Yes") {
+    rowClass += "cardIsFoil";
+  }
+  if (!isMobile) {
+    rowClass += " improvedHeightTableRow";
+  }
 
   return (
     <>

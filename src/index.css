@@ -396,7 +396,7 @@ table {
 .improvedHeightTableRow {
   height: 30px;
 }
-/* yo */
+
 .responsiveTable tbody tr.cardIsFoil {
   background-color: rgba(226, 128, 37, 0.5);
 }

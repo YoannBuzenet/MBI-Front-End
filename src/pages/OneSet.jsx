@@ -13,8 +13,8 @@ import SetListLoader from "../components/loaders/SetListLoader";
 import SetLangChoice from "../components/SetLangChoice";
 import languagesDefinition from "../definitions/languagesDefinition";
 import userPreferencesContext from "../context/userPreferenceContext";
-import { FormattedMessage } from "react-intl";
-import { useIntl } from "react-intl";
+import { FormattedMessage, useIntl } from "react-intl";
+import TableForSet from "../components/Base/Table/TableForSet";
 
 //MUI controls
 
@@ -101,9 +101,11 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
         isSigned: "No",
         set: currentSet ? currentSet.name : null,
         setId: idSet,
+        cardType: data[i].originaltype,
         quantity: 1,
         condition: 2,
         lang: ENGLISH_LANG_ID,
+        color: data[i].colors,
         foreignDataObject: transformLanguagesArrayIntoObject(
           data[i].foreignData
         ),
@@ -290,9 +292,6 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
     setPriceFilter(value);
   };
 
-  //Hook Intl to translate an attribute
-  const intl = useIntl();
-
   // Buttons Mui
   const useStyles = makeStyles((theme) => ({
     root: {
@@ -303,6 +302,103 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
   }));
 
   const classes = useStyles();
+
+  //Hook Intl to translate an attribute
+  const intl = useIntl();
+
+  const translatedYes = intl.formatMessage({
+    id: "app.generics.yes",
+    defaultMessage: "Yes",
+  });
+  const translatedNo = intl.formatMessage({
+    id: "app.generics.no",
+    defaultMessage: "No",
+  });
+  const translatedPrice = intl.formatMessage({
+    id: "app.generics.price",
+    defaultMessage: "Price",
+  });
+  const translatedNone = intl.formatMessage({
+    id: "app.generics.none",
+    defaultMessage: "None",
+  });
+
+  /* *********************** */
+  /* *****TABLE CONTENT***** */
+  /* *********************** */
+  const cardsWithFilter = Object.keys(cardsContext)
+    .filter((cardID) => {
+      if (priceFilter > 0) {
+        if (
+          typeof cardsContext[cardID].price === "number" &&
+          parseFloat(cardsContext[cardID].price) <= parseFloat(priceFilter) &&
+          !cardsContext[cardID].hasOwnProperty("wasModifiedByUser")
+        ) {
+          return false;
+        } else if (
+          cardsContext[cardID].price === null &&
+          !cardsContext[cardID].hasOwnProperty("wasModifiedByUser")
+        ) {
+          return false;
+        } else {
+          return true;
+        }
+      } else {
+        //If it's Near mint it must have a price to be displayed
+        //We chose Near Mint because it's the default condition displayed
+        if (
+          cardsContext[cardID].price !== null &&
+          cardsContext[cardID].price > 0 &&
+          cardsContext[cardID].condition === 2
+        ) {
+          return true;
+        }
+        // A card non null is a card whose price has been asked by user. Therefore even if it's 0 we let it  displayed.
+        else if (cardsContext[cardID].price !== null) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+    })
+    .filter((cardID) => {
+      if (
+        isFilteringByFoils &&
+        !cardsContext[cardID].hasOwnProperty("wasModifiedByUser")
+      ) {
+        return cardsContext[cardID].isFoil !== "Yes";
+      } else {
+        return true;
+      }
+    });
+
+  const whitecards = cardsWithFilter.filter(
+    (cardId) => cardsContext[cardId].color === "W"
+  );
+  const bluecards = cardsWithFilter.filter(
+    (cardId) => cardsContext[cardId].color === "U"
+  );
+  const blackcards = cardsWithFilter.filter(
+    (cardId) => cardsContext[cardId].color === "B"
+  );
+  const redcards = cardsWithFilter.filter(
+    (cardId) => cardsContext[cardId].color === "R"
+  );
+  const greencards = cardsWithFilter.filter(
+    (cardId) => cardsContext[cardId].color === "G"
+  );
+  const goldcards = cardsWithFilter.filter(
+    (cardId) =>
+      typeof cardsContext[cardId].color === "string" &&
+      cardsContext[cardId].color.length > 1
+  );
+  const artifactcards = cardsWithFilter.filter(
+    (cardId) => cardsContext[cardId].cardType === "Artifact"
+  );
+
+  const landscards = cardsWithFilter.filter(
+    (cardId) => cardsContext[cardId].cardType === "Land"
+  );
 
   return (
     <>
@@ -349,7 +445,12 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
               <>
                 <div className="filter-cards">
                   <div className="filterByFoils">
-                    <span>AFFICHER LES FOILS</span>
+                    <span>
+                      <FormattedMessage
+                        id="app.OneSet.filter.displayFoils"
+                        defaultMessage={`Display Foils`}
+                      />
+                    </span>
 
                     <Button
                       variant={isFilteringByFoils ? "outlined" : "contained"}
@@ -357,7 +458,7 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
                       onClick={(e) => setIsFilteringByFoils(false)}
                       color={isFilteringByFoils ? "default" : "primary"}
                     >
-                      Oui
+                      {translatedYes}
                     </Button>
                     <Button
                       variant={isFilteringByFoils ? "contained" : "outlined"}
@@ -365,7 +466,7 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
                       onClick={(e) => setIsFilteringByFoils(true)}
                       color={isFilteringByFoils ? "primary" : "default"}
                     >
-                      Non
+                      {translatedNo}
                     </Button>
                   </div>
 
@@ -375,7 +476,7 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
                       className={classes.formControl}
                     >
                       <InputLabel id="demo-simple-select-outlined-label">
-                        Prix
+                        {translatedPrice}
                       </InputLabel>
                       <Select
                         labelId="demo-simple-select-outlined-label"
@@ -385,7 +486,7 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
                         label="Prix"
                       >
                         <MenuItem value="">
-                          <em>Aucun</em>
+                          <em>{translatedNone}</em>
                         </MenuItem>
                         <MenuItem value={0.1}>0.1</MenuItem>
                         <MenuItem value={0.5}>0.5</MenuItem>
@@ -396,123 +497,135 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
                     </FormControl>
                   </div>
                 </div>
+                {whitecards.length > 0 && (
+                  <>
+                    <p>
+                      <FormattedMessage
+                        id="app.generics.color.white"
+                        defaultMessage={`White`}
+                      />
+                    </p>
+                    <TableForSet
+                      arrayofIDcardToDisplay={whitecards}
+                      handleAddSellingBasket={handleAddSellingBasket}
+                      langIDToDisplay={langIDToDisplay}
+                      languagesAvailables={languagesAvailables}
+                    />
+                  </>
+                )}
 
-                <Table className="zebra-table">
-                  <Thead>
-                    <Tr>
-                      <Th>
-                        <FormattedMessage
-                          id="app.OneSet.cardName"
-                          defaultMessage={`Card`}
-                        />
-                      </Th>
-                      <Th>
-                        <FormattedMessage
-                          id="app.OneSet.language"
-                          defaultMessage={`Language`}
-                        />
-                      </Th>
-                      <Th>
-                        <FormattedMessage
-                          id="app.OneSet.condition"
-                          defaultMessage={`Condition`}
-                        />
-                      </Th>
-                      <Th>
-                        <FormattedMessage
-                          id="app.OneSet.foil"
-                          defaultMessage={`Foil`}
-                        />
-                      </Th>
-                      <Th>
-                        <FormattedMessage
-                          id="app.OneSet.signed"
-                          defaultMessage={`Signed`}
-                        />
-                      </Th>
-                      <Th>
-                        <FormattedMessage
-                          id="app.OneSet.quantity"
-                          defaultMessage={`Quantity`}
-                        />
-                      </Th>
-                      <Th>
-                        <FormattedMessage
-                          id="app.OneSet.price"
-                          defaultMessage={`Price`}
-                        />
-                      </Th>
-                      <Th></Th>
-                    </Tr>
-                  </Thead>
-                  <Tbody>
-                    {Object.keys(cardsContext)
-                      .filter((cardID) => {
-                        if (priceFilter > 0) {
-                          if (
-                            typeof cardsContext[cardID].price === "number" &&
-                            parseFloat(cardsContext[cardID].price) <=
-                              parseFloat(priceFilter) &&
-                            !cardsContext[cardID].hasOwnProperty(
-                              "wasModifiedByUser"
-                            )
-                          ) {
-                            return false;
-                          } else if (
-                            cardsContext[cardID].price === null &&
-                            !cardsContext[cardID].hasOwnProperty(
-                              "wasModifiedByUser"
-                            )
-                          ) {
-                            return false;
-                          } else {
-                            return true;
-                          }
-                        } else {
-                          //If it's Near mint it must have a price to be displayed
-                          //We chose Near Mint because it's the default condition displayed
-                          if (
-                            cardsContext[cardID].price !== null &&
-                            cardsContext[cardID].price > 0 &&
-                            cardsContext[cardID].condition === 2
-                          ) {
-                            return true;
-                          }
-                          // A card non null is a card whose price has been asked by user. Therefore even if it's 0 we let it  displayed.
-                          else if (cardsContext[cardID].price !== null) {
-                            return true;
-                          } else {
-                            return false;
-                          }
-                        }
-                      })
-                      .filter((cardID) => {
-                        if (
-                          isFilteringByFoils &&
-                          !cardsContext[cardID].hasOwnProperty(
-                            "wasModifiedByUser"
-                          )
-                        ) {
-                          return cardsContext[cardID].isFoil !== "Yes";
-                        } else {
-                          return true;
-                        }
-                      })
-                      .map((cardID, index) => {
-                        return (
-                          <CardLineOneSet
-                            card={cardsContext[cardID]}
-                            cardID={cardID}
-                            index={index}
-                            key={cardID}
-                            handleAddSellingBasket={handleAddSellingBasket}
-                            langIDToDisplay={langIDToDisplay}
-                            langsAvailable={languagesAvailables}
-                          />
-                        );
-                      })}
-                  </Tbody>
-                </Table>
+                {bluecards.length > 0 && (
+                  <>
+                    <p>
+                      <FormattedMessage
+                        id="app.generics.color.blue"
+                        defaultMessage={`Blue`}
+                      />
+                    </p>
+                    <TableForSet
+                      arrayofIDcardToDisplay={bluecards}
+                      handleAddSellingBasket={handleAddSellingBasket}
+                      langIDToDisplay={langIDToDisplay}
+                      languagesAvailables={languagesAvailables}
+                    />
+                  </>
+                )}
+                {blackcards.length > 0 && (
+                  <>
+                    <p>
+                      <FormattedMessage
+                        id="app.generics.color.black"
+                        defaultMessage={`Black`}
+                      />
+                    </p>
+                    <TableForSet
+                      arrayofIDcardToDisplay={blackcards}
+                      handleAddSellingBasket={handleAddSellingBasket}
+                      langIDToDisplay={langIDToDisplay}
+                      languagesAvailables={languagesAvailables}
+                    />
+                  </>
+                )}
+                {redcards.length > 0 && (
+                  <>
+                    <p>
+                      <FormattedMessage
+                        id="app.generics.color.red"
+                        defaultMessage={`Red`}
+                      />
+                    </p>
+                    <TableForSet
+                      arrayofIDcardToDisplay={redcards}
+                      handleAddSellingBasket={handleAddSellingBasket}
+                      langIDToDisplay={langIDToDisplay}
+                      languagesAvailables={languagesAvailables}
+                    />
+                  </>
+                )}
+                {greencards.length > 0 && (
+                  <>
+                    <p>
+                      <FormattedMessage
+                        id="app.generics.color.green"
+                        defaultMessage={`Green`}
+                      />
+                    </p>
+                    <TableForSet
+                      arrayofIDcardToDisplay={greencards}
+                      handleAddSellingBasket={handleAddSellingBasket}
+                      langIDToDisplay={langIDToDisplay}
+                      languagesAvailables={languagesAvailables}
+                    />
+                  </>
+                )}
+                {goldcards.length > 0 && (
+                  <>
+                    <p>
+                      <FormattedMessage
+                        id="app.generics.color.gold"
+                        defaultMessage={`Gold`}
+                      />
+                    </p>
+                    <TableForSet
+                      arrayofIDcardToDisplay={goldcards}
+                      handleAddSellingBasket={handleAddSellingBasket}
+                      langIDToDisplay={langIDToDisplay}
+                      languagesAvailables={languagesAvailables}
+                    />
+                  </>
+                )}
+                {artifactcards.length > 0 && (
+                  <>
+                    <p>
+                      <FormattedMessage
+                        id="app.generics.color.artifact"
+                        defaultMessage={`Artifacts`}
+                      />
+                    </p>
+                    <TableForSet
+                      arrayofIDcardToDisplay={artifactcards}
+                      handleAddSellingBasket={handleAddSellingBasket}
+                      langIDToDisplay={langIDToDisplay}
+                      languagesAvailables={languagesAvailables}
+                    />
+                  </>
+                )}
+                {landscards.length > 0 && (
+                  <>
+                    <p>
+                      <FormattedMessage
+                        id="app.generics.color.land"
+                        defaultMessage={`Lands`}
+                      />
+                    </p>
+                    <TableForSet
+                      arrayofIDcardToDisplay={landscards}
+                      handleAddSellingBasket={handleAddSellingBasket}
+                      langIDToDisplay={langIDToDisplay}
+                      languagesAvailables={languagesAvailables}
+                    />
+                  </>
+                )}
               </>
             )}
             {/* If there are NO Card Shop Price in DB for this set */}
