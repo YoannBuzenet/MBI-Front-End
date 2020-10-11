@@ -596,10 +596,14 @@ function App() {
                                   </CardsCardPageContext.Provider>
                                 )}
                               />
-
                               <Route
-                                path="/search"
-                                component={SearchResultPage}
+                                path="/search/:search?"
+                                render={({ match, history }) => (
+                                  <SearchResultPage
+                                    match={match}
+                                    history={history}
+                                  />
+                                )}
                               />
 
                               <Route

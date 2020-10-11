@@ -62,9 +62,10 @@ const SearchCardBar = ({ history }) => {
     }
   };
 
+  // If user types "Enters" while typing we show it the result page
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("qued !");
+    setSearchResult([]);
     history.push("/search?request=" + currentSearch);
   };
 
