@@ -304,6 +304,8 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
 
   const classes = useStyles();
 
+  console.log("priceFilter", priceFilter);
+
   return (
     <>
       <div className="container">
@@ -450,12 +452,15 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
                       .filter((cardID) => {
                         if (priceFilter > 0) {
                           if (
+                            typeof cardsContext[cardID].price === "number" &&
                             parseFloat(cardsContext[cardID].price) <=
-                            parseFloat(priceFilter)
+                              parseFloat(priceFilter)
                           ) {
-                            return;
+                            return false;
+                          } else if (cardsContext[cardID].price === null) {
+                            return false;
                           } else {
-                            return cardID;
+                            return true;
                           }
                         } else {
                           //If it's Near mint it must have a price to be displayed
@@ -465,13 +470,13 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
                             cardsContext[cardID].price > 0 &&
                             cardsContext[cardID].condition === 2
                           ) {
-                            return cardID;
+                            return true;
                           }
                           // A card non null is a card whose price has been asked by user. Therefore even if it's 0 we let it  displayed.
                           else if (cardsContext[cardID].price !== null) {
-                            return cardID;
+                            return true;
                           } else {
-                            return;
+                            return false;
                           }
                         }
                       })
