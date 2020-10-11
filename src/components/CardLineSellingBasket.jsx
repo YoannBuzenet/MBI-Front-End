@@ -138,10 +138,13 @@ const CardLineSellingBasket = ({ card, indexCard }) => {
     setIsBlackDivModalDisplayed("activated");
   };
 
-  const rowClass =
-    card.isFoil === "Yes"
-      ? " improvedHeightTableRow cardIsFoil"
-      : " improvedHeightTableRow";
+  let rowClass = "";
+  if (card.isFoil === "Yes") {
+    rowClass += "cardIsFoil";
+  }
+  if (!isMobile) {
+    rowClass += " improvedHeightTableRow";
+  }
 
   return (
     <>

@@ -7,10 +7,13 @@ const CardLineShopStuck = ({ card }) => {
   //DEFINED langages and Conditions
   const { lang, conditions } = useContext(GenericCardInfosContext);
 
-  const rowClass =
-    card.isFoil === "Yes"
-      ? " improvedHeightTableRow cardIsFoil"
-      : " improvedHeightTableRow";
+  let rowClass = "";
+  if (card.isFoil === "Yes") {
+    rowClass += "cardIsFoil";
+  }
+  if (!isMobile) {
+    rowClass += " improvedHeightTableRow";
+  }
 
   return (
     <>

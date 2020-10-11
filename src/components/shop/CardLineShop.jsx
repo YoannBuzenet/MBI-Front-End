@@ -499,10 +499,13 @@ const CardLineShop = ({ card, indexCard }) => {
       ? " cardSellingPriceShouldBeCheckedByHuman"
       : "";
 
-  const rowClass =
-    card.isFoil === true
-      ? " improvedHeightTableRow cardIsFoil"
-      : " improvedHeightTableRow";
+  let rowClass = "";
+  if (card.isFoil === "Yes") {
+    rowClass += "cardIsFoil";
+  }
+  if (!isMobile) {
+    rowClass += " improvedHeightTableRow";
+  }
 
   return (
     <>

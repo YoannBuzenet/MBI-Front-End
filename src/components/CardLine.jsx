@@ -120,10 +120,13 @@ const CardLine = ({ card, handleAddSellingBasket, index, cardID }) => {
   //Hook Intl to translate an attribute
   const intl = useIntl();
 
-  const rowClass =
-    cardsCardPageContext[cardID].isFoil === "Yes"
-      ? "improvedHeightTableRow cardIsFoil"
-      : "improvedHeightTableRow";
+  let rowClass = "";
+  if (cardsCardPageContext[cardID].isFoil === "Yes") {
+    rowClass += "cardIsFoil";
+  }
+  if (!isMobile) {
+    rowClass += " improvedHeightTableRow";
+  }
 
   return (
     <>
