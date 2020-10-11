@@ -15,8 +15,16 @@ import languagesDefinition from "../definitions/languagesDefinition";
 import userPreferencesContext from "../context/userPreferenceContext";
 import { FormattedMessage } from "react-intl";
 import { useIntl } from "react-intl";
+
+//MUI controls
+
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
+
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
+import InputLabel from "@material-ui/core/InputLabel";
+import FormControl from "@material-ui/core/FormControl";
 
 const OneSet = ({ handleAddSellingBasket, match }) => {
   //Current Cards displayed in One Set Page
@@ -277,17 +285,9 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
     isMobile && setName.length > 10 ? " flagsDropDownMobileLongName" : "";
 
   const handleChange = (event) => {
-    const value = event.target.value;
+    const value = parseFloat(event.target.value);
 
-    //Checking if user is entering a coma for decimal input
-    if (event.target.value[event.target.value.length - 1] === ".") {
-      setPriceFilter(value);
-    } else if (!isNaN(parseFloat(event.target.value))) {
-      const newPrice = parseFloat(value);
-      setPriceFilter(newPrice);
-    } else if (event.target.value === "") {
-      setPriceFilter(value);
-    }
+    setPriceFilter(value);
   };
 
   //Hook Intl to translate an attribute
@@ -370,19 +370,30 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
                   </div>
 
                   <div className="filterbyPrice">
-                    <p>
-                      <FormattedMessage
-                        id="app.OneSet.filterByPrice"
-                        defaultMessage={`Filtrer By Price`}
-                      />
-                    </p>
-                    <select>
-                      <option>0.1</option>
-                      <option>0.5</option>
-                      <option>1</option>
-                      <option>5</option>
-                      <option>10</option>
-                    </select>
+                    <FormControl
+                      variant="outlined"
+                      className={classes.formControl}
+                    >
+                      <InputLabel id="demo-simple-select-outlined-label">
+                        Prix
+                      </InputLabel>
+                      <Select
+                        labelId="demo-simple-select-outlined-label"
+                        id="demo-simple-select-outlined"
+                        value={priceFilter}
+                        onChange={handleChange}
+                        label="Prix"
+                      >
+                        <MenuItem value="">
+                          <em>Aucun</em>
+                        </MenuItem>
+                        <MenuItem value={0.1}>0.1</MenuItem>
+                        <MenuItem value={0.5}>0.5</MenuItem>
+                        <MenuItem value={1}>1</MenuItem>
+                        <MenuItem value={5}>5</MenuItem>
+                        <MenuItem value={10}>10</MenuItem>
+                      </Select>
+                    </FormControl>
                   </div>
                 </div>
 
