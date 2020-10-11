@@ -304,8 +304,6 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
 
   const classes = useStyles();
 
-  console.log("priceFilter", priceFilter);
-
   return (
     <>
       <div className="container">
@@ -454,10 +452,18 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
                           if (
                             typeof cardsContext[cardID].price === "number" &&
                             parseFloat(cardsContext[cardID].price) <=
-                              parseFloat(priceFilter)
+                              parseFloat(priceFilter) &&
+                            !cardsContext[cardID].hasOwnProperty(
+                              "wasModifiedByUser"
+                            )
                           ) {
                             return false;
-                          } else if (cardsContext[cardID].price === null) {
+                          } else if (
+                            cardsContext[cardID].price === null &&
+                            !cardsContext[cardID].hasOwnProperty(
+                              "wasModifiedByUser"
+                            )
+                          ) {
                             return false;
                           } else {
                             return true;
@@ -481,7 +487,12 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
                         }
                       })
                       .filter((cardID) => {
-                        if (isFilteringByFoils) {
+                        if (
+                          isFilteringByFoils &&
+                          !cardsContext[cardID].hasOwnProperty(
+                            "wasModifiedByUser"
+                          )
+                        ) {
                           return cardsContext[cardID].isFoil !== "Yes";
                         } else {
                           return true;

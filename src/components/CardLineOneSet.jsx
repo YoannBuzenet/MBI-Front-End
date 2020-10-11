@@ -73,6 +73,7 @@ const CardLineOneSet = ({
     }
 
     contextCopy[cardID][name] = newValue;
+    contextCopy[cardID].wasModifiedByUser = true;
 
     //IF anything but the quantity has been updated, we make an API call to get the new price
     if (name !== "quantity") {
