@@ -53,7 +53,7 @@ const CardLineOneSet = ({
     CardDisplayOnPageContext
   );
 
-  console.log(cardsContext[cardID]);
+  // console.log(cardsContext[cardID]);
 
   const handleChange = ({ currentTarget }) => {
     const { name, value } = currentTarget;

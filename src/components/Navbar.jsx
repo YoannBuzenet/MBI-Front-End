@@ -14,7 +14,7 @@ const Navbar = ({ history, match }) => {
   const { authenticationInfos, setAuthenticationInfos } = useContext(
     AuthContext
   );
-  console.log("match from navbar", match);
+  // console.log("match from navbar", match);
 
   //Current Selling Request Basket
   const { currentBasket } = useContext(SellingBasketContext);

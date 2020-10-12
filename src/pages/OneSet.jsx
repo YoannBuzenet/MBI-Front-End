@@ -79,7 +79,7 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
   //Buildling context with the API response with all cards from the set.
   //We add also DEFAULT caracs to cards here.
   const buildContextFromAPIResponse = (data) => {
-    console.log("test", data);
+    // console.log("test", data);
     const contextCopy = { ...cardsContext };
 
     const currentSet = allSets.find((element) => element.id == idSet);
@@ -326,7 +326,28 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
   /* *********************** */
   /* *****TABLE CONTENT***** */
   /* *********************** */
-  const cardsWithFilter = Object.keys(cardsContext)
+  let cardsSortedByLanguage = [];
+
+  if (userPreferences.cardsSetLang !== 9) {
+    cardsSortedByLanguage = Object.keys(cardsContext);
+
+    cardsSortedByLanguage.sort(function (a, b) {
+      var x = cardsContext[a]?.foreignDataObject[
+        userPreferences.cardsSetLang
+      ].toLowerCase();
+      var y = cardsContext[b]?.foreignDataObject[
+        userPreferences.cardsSetLang
+      ].toLowerCase();
+
+      return x < y ? -1 : x > y ? 1 : 0;
+    });
+  } else {
+    cardsSortedByLanguage = Object.keys(cardsContext);
+  }
+
+  console.log(cardsSortedByLanguage);
+
+  const cardsWithFilter = cardsSortedByLanguage
     .filter((cardID) => {
       if (priceFilter > 0) {
         if (
@@ -399,6 +420,8 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
   const landscards = cardsWithFilter.filter(
     (cardId) => cardsContext[cardId].cardType === "Land"
   );
+
+  console.log("cards context", cardsContext);
 
   return (
     <>

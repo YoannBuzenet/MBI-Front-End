@@ -70,7 +70,7 @@ const TableForSet = ({
               langsAvailable={languagesAvailables}
             />
           );
-        })}{" "}
+        })}
       </Tbody>
     </Table>
   );
