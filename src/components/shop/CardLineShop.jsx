@@ -18,6 +18,7 @@ import { FormattedMessage } from "react-intl";
 import { useIntl } from "react-intl";
 import priceUpdateAPI from "../../services/priceUpdateAPI";
 import AuthContext from "../../context/authContext";
+import slugify from "slugify";
 
 const CardLineShop = ({ card, indexCard }) => {
   console.log("cardlineshop card", card);
@@ -507,6 +508,14 @@ const CardLineShop = ({ card, indexCard }) => {
     rowClass += " improvedHeightTableRow";
   }
 
+  let slugifiedCardSet = slugify(card.set);
+  if (card.set === "Mystery Booster Retail Edition Foils") {
+    slugifiedCardSet = "Mystery-Booster";
+  }
+
+  let slugifiedCardName = slugify(card.name);
+  slugifiedCardName = slugifiedCardName.replace(/[^a-zA-Z0-9\-]/g, "");
+
   return (
     <>
       <Tr
@@ -536,7 +545,12 @@ const CardLineShop = ({ card, indexCard }) => {
             }
           }}
         >
-          {currentCard.name}
+          <a
+            target="_blank"
+            href={`https://www.cardmarket.com/en/Magic/Products/Singles/${slugifiedCardSet}/${slugifiedCardName}`}
+          >
+            {currentCard.name}
+          </a>
           {card.isFoil === true && (
             <img src="/foil.svg" className="foilSvgInCardName" />
           )}
