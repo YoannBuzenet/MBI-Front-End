@@ -2,6 +2,7 @@ import React, { useEffect, useContext, useState } from "react";
 import cardsAPI from "../services/cardsAPI";
 import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 import CardLineSearchResult from "../components/CardLineSearchResult";
+import { FormattedMessage, useIntl } from "react-intl";
 
 const SearchResultPage = ({ match, history }) => {
   const [searchResult, setSearchResult] = useState([]);
@@ -71,12 +72,21 @@ const SearchResultPage = ({ match, history }) => {
   //   console.log(searchResult);
   return (
     <div className="container">
-      Search Results for : "{match.params.search}"
+      <FormattedMessage
+        id="app.SearchResultPage.title"
+        defaultMessage={`Search Results for`}
+      />{" "}
+      "{match.params.search}"
       <div>
         <Table className="zebra-table searchResultPage">
           <Thead>
             <Tr>
-              <Th>Name</Th>
+              <Th>
+                <FormattedMessage
+                  id="app.SearchResultPage.table.head.name"
+                  defaultMessage={`Name`}
+                />
+              </Th>
             </Tr>
           </Thead>
           <Tbody>
@@ -92,7 +102,14 @@ const SearchResultPage = ({ match, history }) => {
         </Table>
         {!isLoading &&
           Array.isArray(searchResult) &&
-          searchResult.length === 0 && <p>Pas de cartes</p>}
+          searchResult.length === 0 && (
+            <p>
+              <FormattedMessage
+                id="app.SearchResultPage.resuls.noResultForThisSearch"
+                defaultMessage={`There were no results for this search.`}
+              />
+            </p>
+          )}
       </div>
     </div>
   );

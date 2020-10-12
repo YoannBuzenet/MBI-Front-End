@@ -131,6 +131,10 @@
   "app.RegisterPage.accountCreation.mailAlreadyTaken.toast.failure": "Cet email est déjà pris. Merci d'en choisir un autre.",
   "app.RegisterPage.accountCreation.toast.failure": "Une erreur est survenue. Merci de réessayer.",
 
+  "app.SearchResultPage.title": "Résultat de recherche pour ",
+  "app.SearchResultPage.table.head.name": "Nom",
+  "app.SearchResultPage.resuls.noResultForThisSearch": "Il n'y a pas de résultat pour cette recherche.",
+
   "app.shop.myAccount.title": "Informations Boutique",
   "app.shop.myAccount.label.legalName": "Raison Sociale",
   "app.shop.myAccount.label.mail": "Email",

@@ -1,9 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import SetList from "../components/SetList";
-import CardLineOneSet from "../components/CardLineOneSet";
 import SetsAPI from "../services/setsAPI";
 import SetsContext from "../context/setsContext";
-import { Table, Thead, Tbody, Tr, Th } from "react-super-responsive-table";
 import CardShopPriceAPI from "../services/CardShopPriceAPI";
 import cardsOneSetContext from "../context/cardsOneSetContext";
 import axios from "axios";

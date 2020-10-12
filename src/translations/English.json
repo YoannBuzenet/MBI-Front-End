@@ -131,6 +131,10 @@
   "app.RegisterPage.accountCreation.mailAlreadyTaken.toast.failure": "This email is already taken. Please choose another one.",
   "app.RegisterPage.accountCreation.toast.failure": "An error has occured. Please try again.",
 
+  "app.SearchResultPage.title": "Search Results for ",
+  "app.SearchResultPage.table.head.name": "Name",
+  "app.SearchResultPage.resuls.noResultForThisSearch": "There were no results for this search.",
+
   "app.shop.myAccount.title": "Shop Informations",
   "app.shop.myAccount.label.legalName": "Legal Name",
   "app.shop.myAccount.label.mail": "Email",
