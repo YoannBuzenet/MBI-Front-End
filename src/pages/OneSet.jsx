@@ -332,12 +332,24 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
     cardsSortedByLanguage = Object.keys(cardsContext);
 
     cardsSortedByLanguage.sort(function (a, b) {
-      var x = cardsContext[a]?.foreignDataObject[
-        userPreferences.cardsSetLang
-      ].toLowerCase();
-      var y = cardsContext[b]?.foreignDataObject[
-        userPreferences.cardsSetLang
-      ].toLowerCase();
+      var x;
+      if (
+        cardsContext[a]?.foreignDataObject[userPreferences.cardsSetLang] !==
+        undefined
+      ) {
+        x = cardsContext[a]?.foreignDataObject[
+          userPreferences.cardsSetLang
+        ].toLowerCase();
+      }
+      var y;
+      if (
+        cardsContext[b]?.foreignDataObject[userPreferences.cardsSetLang] !==
+        undefined
+      ) {
+        y = cardsContext[b]?.foreignDataObject[
+          userPreferences.cardsSetLang
+        ].toLowerCase();
+      }
 
       return x < y ? -1 : x > y ? 1 : 0;
     });

@@ -1235,6 +1235,7 @@ button.doNOTFilterByFoil {
   height: 40px;
   background-color: white;
   border-radius: 5px;
+  box-shadow: 1px 1px 1px lavender;
 }
 
 .blueColor {
@@ -1243,6 +1244,7 @@ button.doNOTFilterByFoil {
   border-radius: 5px;
   background-color: blue;
   color: white;
+  box-shadow: 1px 1px 1px lavender;
 }
 
 .blackColor {
@@ -1251,6 +1253,7 @@ button.doNOTFilterByFoil {
   background-color: black;
   border-radius: 5px;
   color: white;
+  box-shadow: 1px 1px 1px lavender;
 }
 
 .redColor {
@@ -1259,6 +1262,7 @@ button.doNOTFilterByFoil {
   background-color: red;
   border-radius: 5px;
   color: white;
+  box-shadow: 1px 1px 1px lavender;
 }
 
 .greenColor {
@@ -1267,6 +1271,7 @@ button.doNOTFilterByFoil {
   background-color: green;
   border-radius: 5px;
   color: white;
+  box-shadow: 1px 1px 1px lavender;
 }
 
 .goldColor {
@@ -1275,6 +1280,7 @@ button.doNOTFilterByFoil {
   background-color: rgba(226, 128, 37, 0.5);
   border-radius: 5px;
   color: white;
+  box-shadow: 1px 1px 1px lavender;
 }
 
 .artifactColor {
@@ -1283,6 +1289,7 @@ button.doNOTFilterByFoil {
   background-color: rgba(226, 128, 37, 0.8);
   border-radius: 5px;
   color: white;
+  box-shadow: 1px 1px 1px lavender;
 }
 
 .landColor {
@@ -1291,6 +1298,7 @@ button.doNOTFilterByFoil {
   background-color: rgba(255, 127, 80, 0.5);
   border-radius: 5px;
   color: white;
+  box-shadow: 1px 1px 1px lavender;
 }
 
 @media only screen and (max-width: 850px) {
