@@ -476,29 +476,32 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
               <>
                 <div className="filter-cards">
                   <div className="filterByFoils">
-                    <span>
-                      <FormattedMessage
-                        id="app.OneSet.filter.displayFoils"
-                        defaultMessage={`Display Foils`}
-                      />
-                    </span>
-
-                    <Button
-                      variant={isFilteringByFoils ? "outlined" : "contained"}
-                      className="doFilterByFoil"
-                      onClick={(e) => setIsFilteringByFoils(false)}
-                      color={isFilteringByFoils ? "default" : "primary"}
-                    >
-                      {translatedYes}
-                    </Button>
-                    <Button
-                      variant={isFilteringByFoils ? "contained" : "outlined"}
-                      className="doNOTFilterByFoil"
-                      onClick={(e) => setIsFilteringByFoils(true)}
-                      color={isFilteringByFoils ? "primary" : "default"}
-                    >
-                      {translatedNo}
-                    </Button>
+                    <div>
+                      <span>
+                        <FormattedMessage
+                          id="app.OneSet.filter.displayFoils"
+                          defaultMessage={`Display Foils`}
+                        />
+                      </span>
+                    </div>
+                    <div>
+                      <Button
+                        variant={isFilteringByFoils ? "outlined" : "contained"}
+                        className="doFilterByFoil"
+                        onClick={(e) => setIsFilteringByFoils(false)}
+                        color={isFilteringByFoils ? "default" : "primary"}
+                      >
+                        {translatedYes}
+                      </Button>
+                      <Button
+                        variant={isFilteringByFoils ? "contained" : "outlined"}
+                        className="doNOTFilterByFoil"
+                        onClick={(e) => setIsFilteringByFoils(true)}
+                        color={isFilteringByFoils ? "primary" : "default"}
+                      >
+                        {translatedNo}
+                      </Button>
+                    </div>
                   </div>
 
                   <div className="filterbyPrice">

@@ -1230,6 +1230,10 @@ button.doNOTFilterByFoil {
   background-color: rgba(0, 0, 0, 0.2);
 }
 
+.filterByFoils {
+  display: flex;
+}
+
 .whiteColor {
   line-height: 4rem;
   height: 40px;
@@ -1325,6 +1329,9 @@ button.doNOTFilterByFoil {
 @media only screen and (max-width: 750px) {
   div.blockFlags {
     margin: -15px auto 15px;
+  }
+  .filterByFoils {
+    display: block;
   }
 }
 @media only screen and (max-width: 500px) {
