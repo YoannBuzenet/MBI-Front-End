@@ -1,4 +1,12 @@
 <h2>Hello,</h2>
 <p>A new sell request n° <%= sellRequest.id %> has been submitted.</p>
 
+<p>
+  Your can check it
+  <a
+    href="<%= process.env.REACT_APP_MTGAPI_URL %>/shopadmin/sell_requests<%= sellRequest.id %>"
+    >here</a
+  >.
+</p>
+
 <p>Thanks !</p>

@@ -1,4 +1,11 @@
 <h2>Bonjour,</h2>
 <p>Une nouvelle demande de rachat n° <%= sellRequest.id %> a été postée.</p>
+<p>
+  Vous pouvez y accéder en cliquant
+  <a
+    href="<%= process.env.REACT_APP_MTGAPI_URL %>/shopadmin/sell_requests<%= sellRequest.id %>"
+    >ici</a
+  >.
+</p>
 
 <p>Merci !</p>
