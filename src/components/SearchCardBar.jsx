@@ -27,13 +27,13 @@ const SearchCardBar = ({ history }) => {
     strict: false,
   });
 
-  const prevSearchParams = usePrevious(match?.params?.search);
-
   const handleChange = (event) => {
     setTimer(clearTimeout(timer));
 
     const value = event.currentTarget.value;
     setCurrentSearch(value);
+    //We keep track of user search to know if we display search result
+    //If the URL changes and doesn't match the user search anymore, we know the page changed
     setSearchCopy(value);
     if (currentSearch.length >= 3) {
       setTimer(
@@ -42,7 +42,7 @@ const SearchCardBar = ({ history }) => {
             cardsAPI
               .searchApproxByName(value)
               .then((data) => {
-                console.log(data.data);
+                // console.log(data.data);
                 const filteringArray = [];
 
                 if (data.data.length > 0) {
@@ -53,7 +53,20 @@ const SearchCardBar = ({ history }) => {
                   var isAlreadyHere = false;
 
                   for (let j = 0; j < filteringArray.length; j++) {
+                    console.log(filteringArray);
                     if (data.data[i].name === filteringArray[j].name) {
+                      filteringArray.find((cardAlreadyThere) => {
+                        if (cardAlreadyThere.hasOwnProperty("otherSets")) {
+                          return (cardAlreadyThere.otherSets = [
+                            ...cardAlreadyThere.otherSets,
+                            data.data[i].edition,
+                          ]);
+                        } else {
+                          return (cardAlreadyThere.otherSets = [
+                            data.data[i].edition,
+                          ]);
+                        }
+                      });
                       isAlreadyHere = true;
                     }
                   }
@@ -75,20 +88,6 @@ const SearchCardBar = ({ history }) => {
       setSearchResult([]);
     }
   };
-
-  function usePrevious(value) {
-    // The ref object is a generic container whose current property is mutable ...
-    // ... and can hold any value, similar to an instance property on a class
-    const ref = useRef();
-
-    // Store current value in ref
-    useEffect(() => {
-      ref.current = value;
-    }, [value]); // Only re-run if value changes
-
-    // Return previous value (happens before update in useEffect above)
-    return ref.current;
-  }
 
   // If user types "Enters" while typing we show it the result page
   const handleSubmit = (event) => {

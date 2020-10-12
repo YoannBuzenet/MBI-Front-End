@@ -1,6 +1,7 @@
 import React, { useEffect, useContext, useState } from "react";
 import cardsAPI from "../services/cardsAPI";
 import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
+import CardLineSearchResult from "../components/CardLineSearchResult";
 
 const SearchResultPage = ({ match, history }) => {
   const [searchResult, setSearchResult] = useState([]);
@@ -22,7 +23,18 @@ const SearchResultPage = ({ match, history }) => {
           var isAlreadyHere = false;
 
           for (let j = 0; j < filteringArray.length; j++) {
+            console.log(filteringArray);
             if (data.data[i].name === filteringArray[j].name) {
+              filteringArray.find((cardAlreadyThere) => {
+                if (cardAlreadyThere.hasOwnProperty("otherSets")) {
+                  return (cardAlreadyThere.otherSets = [
+                    ...cardAlreadyThere.otherSets,
+                    data.data[i].edition,
+                  ]);
+                } else {
+                  return (cardAlreadyThere.otherSets = [data.data[i].edition]);
+                }
+              });
               isAlreadyHere = true;
             }
           }
@@ -40,12 +52,14 @@ const SearchResultPage = ({ match, history }) => {
       });
   }, [match.params.search]);
 
+  console.log(searchResult);
+
   //   console.log(searchResult);
   return (
     <div className="container">
-      Search Results : {match.params.search}
+      Search Results for : "{match.params.search}"
       <div>
-        <Table className="zebra-table">
+        <Table className="zebra-table searchResultPage">
           <Thead>
             <Tr>
               <Th>Name</Th>
@@ -54,9 +68,7 @@ const SearchResultPage = ({ match, history }) => {
           <Tbody>
             {Array.isArray(searchResult) &&
               searchResult.map((card) => (
-                <Tr>
-                  <Td>{card.name}</Td>
-                </Tr>
+                <CardLineSearchResult card={card} key={card.name} />
               ))}
           </Tbody>
         </Table>

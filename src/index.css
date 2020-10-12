@@ -421,6 +421,20 @@ table {
 }
 
 /**************************
+****SEARCH RESULT PAGE******
+**************************/
+.searchResultPage tbody tr {
+  height: 100px;
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 767px) {
+  .searchResultPage tbody tr {
+    height: auto;
+  }
+}
+
+/**************************
 *********NAVBAR***********
 **************************/
 
