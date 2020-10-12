@@ -153,6 +153,7 @@ const CardLine = ({ card, handleAddSellingBasket, index, cardID }) => {
               displayCardPlainPage(event, urlPictureCard);
             }
           }}
+          style={{ minWidth: "250px" }}
         >
           {cardsCardPageContext[cardID].name}
           {cardsCardPageContext[cardID].isFoil === "Yes" && (
