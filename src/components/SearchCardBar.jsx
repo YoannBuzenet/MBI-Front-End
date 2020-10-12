@@ -27,6 +27,22 @@ const SearchCardBar = ({ history }) => {
     strict: false,
   });
 
+  useEffect(() => {
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        setCurrentSearch("");
+        setSearchResult([]);
+      }
+    });
+
+    return window.removeEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        setCurrentSearch("");
+        setSearchResult([]);
+      }
+    });
+  });
+
   const handleChange = (event) => {
     setTimer(clearTimeout(timer));
 
@@ -53,9 +69,10 @@ const SearchCardBar = ({ history }) => {
                   var isAlreadyHere = false;
 
                   for (let j = 0; j < filteringArray.length; j++) {
-                    console.log(filteringArray);
+                    // console.log(filteringArray);
                     if (data.data[i].name === filteringArray[j].name) {
                       filteringArray.find((cardAlreadyThere) => {
+                        //Cumulating other sets
                         if (cardAlreadyThere.hasOwnProperty("otherSets")) {
                           return (cardAlreadyThere.otherSets = [
                             ...cardAlreadyThere.otherSets,
@@ -64,6 +81,19 @@ const SearchCardBar = ({ history }) => {
                         } else {
                           return (cardAlreadyThere.otherSets = [
                             data.data[i].edition,
+                          ]);
+                        }
+                      });
+                      filteringArray.find((cardAlreadyThere) => {
+                        //Cumulating other foreign Languages
+                        if (cardAlreadyThere.hasOwnProperty("foreignData")) {
+                          return (cardAlreadyThere.foreignData = [
+                            ...cardAlreadyThere.foreignData,
+                            ...data.data[i].foreignData,
+                          ]);
+                        } else {
+                          return (cardAlreadyThere.foreignData = [
+                            ...data.data[i].foreignData,
                           ]);
                         }
                       });
@@ -111,9 +141,6 @@ const SearchCardBar = ({ history }) => {
     id: "app.searchCardBar.placeholder",
     defaultMessage: "Search...",
   });
-
-  console.log("search copy", searchCopy);
-  console.log("param", match?.params?.search);
 
   return (
     <>

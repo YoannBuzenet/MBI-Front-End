@@ -23,9 +23,10 @@ const SearchResultPage = ({ match, history }) => {
           var isAlreadyHere = false;
 
           for (let j = 0; j < filteringArray.length; j++) {
-            console.log(filteringArray);
+            // console.log(filteringArray);
             if (data.data[i].name === filteringArray[j].name) {
               filteringArray.find((cardAlreadyThere) => {
+                //Cumulating other sets
                 if (cardAlreadyThere.hasOwnProperty("otherSets")) {
                   return (cardAlreadyThere.otherSets = [
                     ...cardAlreadyThere.otherSets,
@@ -33,6 +34,19 @@ const SearchResultPage = ({ match, history }) => {
                   ]);
                 } else {
                   return (cardAlreadyThere.otherSets = [data.data[i].edition]);
+                }
+              });
+              filteringArray.find((cardAlreadyThere) => {
+                //Cumulating other foreign Languages
+                if (cardAlreadyThere.hasOwnProperty("foreignData")) {
+                  return (cardAlreadyThere.foreignData = [
+                    ...cardAlreadyThere.foreignData,
+                    ...data.data[i].foreignData,
+                  ]);
+                } else {
+                  return (cardAlreadyThere.foreignData = [
+                    ...data.data[i].foreignData,
+                  ]);
                 }
               });
               isAlreadyHere = true;
@@ -68,7 +82,11 @@ const SearchResultPage = ({ match, history }) => {
           <Tbody>
             {Array.isArray(searchResult) &&
               searchResult.map((card) => (
-                <CardLineSearchResult card={card} key={card.name} />
+                <CardLineSearchResult
+                  card={card}
+                  key={card.name}
+                  history={history}
+                />
               ))}
           </Tbody>
         </Table>

@@ -423,11 +423,39 @@ table {
 /**************************
 ****SEARCH RESULT PAGE******
 **************************/
-.searchResultPage tbody tr {
-  height: 100px;
+
+table.searchResultPage {
+}
+
+.searchResultPage tbody td {
+  height: 250px;
   cursor: pointer;
 }
 
+.line-result-search-page {
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+.line-result-search-page .cardText {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.line-result-search-page .cardText p {
+  font-size: 2rem;
+}
+.line-result-search-page .pictureCard {
+  position: absolute;
+  left: 50px;
+  top: 20px;
+}
+
+@media only screen and (max-width: 967px) {
+  .line-result-search-page .pictureCard {
+    display: none;
+  }
+}
 @media only screen and (max-width: 767px) {
   .searchResultPage tbody tr {
     height: auto;
