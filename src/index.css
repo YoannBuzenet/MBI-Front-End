@@ -977,7 +977,7 @@ div.lang-select-applevel {
 }
 
 /**************************
-********SETLIST*******
+********SET LIST*******
 **************************/
 
 .setList-table td:hover {
@@ -1008,6 +1008,13 @@ div.lang-select-applevel {
 
 input[type="search"] {
   border: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.setListSetContainer {
+  display: flex;
+}
+.setListSetContainer .setListIconContainer {
+  min-width: 30px;
 }
 
 /**************************

@@ -24,6 +24,7 @@ const TableForSet = ({
               defaultMessage={`Card`}
             />
           </Th>
+          <Th></Th>
           <Th>
             <FormattedMessage
               id="app.OneSet.language"

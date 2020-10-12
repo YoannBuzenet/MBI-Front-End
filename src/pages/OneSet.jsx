@@ -100,7 +100,7 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
         isFoil: data[i].hasnonfoil ? "No" : "Yes",
         isSigned: "No",
         set: currentSet ? currentSet.name : null,
-        setId: idSet,
+        setId: parseInt(idSet),
         cardType: data[i].originaltype,
         quantity: 1,
         condition: 2,
@@ -345,8 +345,6 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
     cardsSortedByLanguage = Object.keys(cardsContext);
   }
 
-  console.log(cardsSortedByLanguage);
-
   const cardsWithFilter = cardsSortedByLanguage
     .filter((cardID) => {
       if (priceFilter > 0) {
@@ -420,8 +418,6 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
   const landscards = cardsWithFilter.filter(
     (cardId) => cardsContext[cardId].cardType === "Land"
   );
-
-  console.log("cards context", cardsContext);
 
   return (
     <>

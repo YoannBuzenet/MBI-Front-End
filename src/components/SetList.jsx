@@ -65,6 +65,7 @@ const SetList = (props) => {
   //Timer on handleChange to avoid spamming with user input
   //We search for corresponding character in all EN set names and update search results accordingly
   //If there are some result, we .map on result and not on allSets
+  // User filter
   const handleChange = (event) => {
     setTimer(clearTimeout(timer));
     const value = event.currentTarget.value;
@@ -137,7 +138,17 @@ const SetList = (props) => {
                             }}
                             key={setsResults.id}
                           >
-                            {setsResults.name}
+                            <div className="setListSetContainer">
+                              <div className="setListIconContainer">
+                                <img
+                                  src={"/setIcons/" + setsResults.id + ".svg"}
+                                  style={{ width: "20px", height: "20px" }}
+                                />
+                              </div>
+                              <div className="setListNameContainer">
+                                {setsResults.name}
+                              </div>
+                            </div>
                           </Link>
                         </td>
                       </tr>
@@ -155,7 +166,17 @@ const SetList = (props) => {
                               to={"/sets/" + set.id}
                               className="setList-link"
                             >
-                              {set.name}
+                              <div className="setListSetContainer">
+                                <div className="setListIconContainer">
+                                  <img
+                                    src={"/setIcons/" + set.id + ".svg"}
+                                    style={{ width: "20px", height: "20px" }}
+                                  />
+                                </div>
+                                <div className="setListNameContainer">
+                                  {set.name}
+                                </div>
+                              </div>
                             </Link>
                           </td>
                         </tr>
