@@ -422,7 +422,9 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
       cardsContext[cardId].color.length > 1
   );
   const artifactcards = cardsWithFilter.filter(
-    (cardId) => cardsContext[cardId].cardType === "Artifact"
+    (cardId) =>
+      cardsContext[cardId].cardType === "Artifact" ||
+      cardsContext[cardId].cardType === "Artifact Creature"
   );
 
   const landscards = cardsWithFilter.filter(
