@@ -423,7 +423,7 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
   );
   const artifactcards = cardsWithFilter.filter((cardId) => {
     const regex = /^Artifact/g;
-    return cardsContext[cardId].cardType.match(regex);
+    return cardsContext[cardId].cardType.match(regex) !== null;
   });
 
   const landscards = cardsWithFilter.filter(
