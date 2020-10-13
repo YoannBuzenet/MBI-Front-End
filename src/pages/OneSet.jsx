@@ -421,11 +421,10 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
       typeof cardsContext[cardId].color === "string" &&
       cardsContext[cardId].color.length > 1
   );
-  const artifactcards = cardsWithFilter.filter(
-    (cardId) =>
-      cardsContext[cardId].cardType === "Artifact" ||
-      cardsContext[cardId].cardType === "Artifact Creature"
-  );
+  const artifactcards = cardsWithFilter.filter((cardId) => {
+    const regex = /^Artifact/g;
+    return cardsContext[cardId].cardType.match(regex);
+  });
 
   const landscards = cardsWithFilter.filter(
     (cardId) => cardsContext[cardId].cardType === "Land"
