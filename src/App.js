@@ -84,6 +84,7 @@ function App() {
   );
 
   if (process.env.NODE_ENV === "production") {
+    console.log("Blocking Logging function.");
     console.log = function () {};
   }
 
