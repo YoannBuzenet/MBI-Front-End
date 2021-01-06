@@ -242,16 +242,16 @@ app.post("/api/shop/TryToGetSellingSettings", async (req, res) => {
 
     console.log(securityCheck);
 
-    fs.readFile(__dirname + "/shopData/sellingsSettings.json", function (
-      err,
-      shopSettings
-    ) {
-      if (err) {
-        console.log("fs error", err);
-        res.status(500).send(err);
+    fs.readFile(
+      __dirname + "/shopData/sellingsSettings.json",
+      function (err, shopSettings) {
+        if (err) {
+          console.log("fs error", err);
+          res.status(500).send(err);
+        }
+        res.status(200).send(shopSettings);
       }
-      res.status(200).send(shopSettings);
-    });
+    );
   } catch (err) {
     console.log("catch", err);
     res.status(401).send("Acces Denied.");
@@ -266,4 +266,4 @@ app.get("*", (req, res) => {
 const port = process.env.PORT || 3000;
 app.listen(port);
 
-console.log("App is listening on port " + port);
+console.log("App is listening on port " + port, new Date());
