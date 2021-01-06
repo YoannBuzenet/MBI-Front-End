@@ -2,7 +2,7 @@
 require("dotenv").config();
 const path = require("path");
 const result = require("dotenv").config({
-  path: path.resolve(process.cwd(), "./../.env.local"),
+  path: path.resolve(process.cwd(), "./.env.local"),
 });
 if (result.error) {
   throw result.error;
