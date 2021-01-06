@@ -572,6 +572,10 @@ div.connect p {
   margin-right: 30px;
 }
 
+.logo-shop-link img {
+  height: 20px;
+}
+
 .logo-shop-link:hover {
 }
 
