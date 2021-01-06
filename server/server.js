@@ -1,6 +1,8 @@
 // Core
 require("dotenv").config();
-const result = require("dotenv").config({ path: "../.env.local" });
+const result = require("dotenv").config({
+  path: path.resolve(process.cwd(), "./../.env.local"),
+});
 if (result.error) {
   throw result.error;
 }
