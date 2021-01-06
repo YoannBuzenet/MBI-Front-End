@@ -368,7 +368,7 @@ async function sendMail(mailRequest) {
     },
   });
   ejs.renderFile(template, templateData, (err, html) => {
-    if (err) console.log(err); // Handle error
+    if (err) console.log("error while rendering ejs template", err); // Handle error
     // console.log(templateData);
     // console.log(templateData.user.customer.SellRequests);
     // console.log(template);
@@ -386,7 +386,7 @@ async function sendMail(mailRequest) {
     if (securityCheckMailCanBeSent) {
       transport.sendMail(mailOpts, (err, info) => {
         if (err) console.log("error while sending the mail", err); //Handle Error
-        console.log(info);
+        console.log("info", info);
         try {
           fs.unlink(
             path.join(
@@ -394,7 +394,8 @@ async function sendMail(mailRequest) {
               "../../server/PDF_handling/PDF_buffer/" +
                 templateData?.sellRequest?.id +
                 ".pdf"
-            )
+            ),
+            () => console.log("unlink PDf is done")
           );
         } catch (e) {
           console.log("error while trying to unlink pdf", e);
