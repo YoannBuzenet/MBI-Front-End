@@ -83,6 +83,10 @@ function App() {
     AuthAPI.userInfos()
   );
 
+  if (process.env.NODE_ENV === "production") {
+    console.log = function () {};
+  }
+
   // console.log(authenticationInfos);
 
   //Checking is the JWT token is still good, if yes, Keep it in Axios + Launch JWT Renew setTimeout

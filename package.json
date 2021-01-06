@@ -45,6 +45,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "start:server": "NODE_ENV=dev node server/serverWrapper.js",
+    "start:server:prod": "NODE_ENV=production node server/serverWrapper.js",
     "start:server:windows": "SET NODE_ENV=dev& node server/server.js"
   },
   "eslintConfig": {
