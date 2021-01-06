@@ -135,7 +135,7 @@ app.post("/api/shop/RewriteSellingSettings", async (req, res) => {
 /*******************************/
 app.post("/api/usermail/reset", async (req, res) => {
   //Receving the google Token : sending to their server and then doing stuff
-  console.log("Receiving mail reset request");
+  console.log("Receiving mail reset request, step 1");
   let googleToken = req.body.token;
   let usermail = req.body.mail;
   let langID = req.body.langID;
@@ -191,6 +191,7 @@ app.post("/api/usermail/reset", async (req, res) => {
 });
 
 app.post("/api/usermail/setNewPassword", (req, res) => {
+  console.log("resting password step 2");
   let googleToken = req.body.token;
   let { challenge, password, mail } = req.body;
 
@@ -225,7 +226,7 @@ app.post("/api/usermail/setNewPassword", (req, res) => {
         res.end("Password has been updated.");
       } else {
         //TODO TRAITER LE CATCH AVEC NOTIF ERROR
-        console.log(googleResp);
+        console.log("error while contacting google servers", googleResp);
         res.statusCode = 500;
         res.end("Password couldn't be updated.");
       }
