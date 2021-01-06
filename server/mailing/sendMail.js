@@ -444,7 +444,7 @@ async function sendResetPasswordMail(userMail, langID, challenge) {
     };
 
     transport.sendMail(mailOpts, (err, info) => {
-      if (err) console.log(err); //Handle Error
+      if (err) console.error(err); //Handle Error
       console.log(info);
     });
     return true;
