@@ -385,16 +385,20 @@ async function sendMail(mailRequest) {
 
     if (securityCheckMailCanBeSent) {
       transport.sendMail(mailOpts, (err, info) => {
-        if (err) console.log(err); //Handle Error
+        if (err) console.log("error while sending the mail", err); //Handle Error
         console.log(info);
-        fs.unlink(
-          path.join(
-            __dirname,
-            "../../server/PDF_handling/PDF_buffer/" +
-              templateData.sellRequest.id +
-              ".pdf"
-          )
-        );
+        try {
+          fs.unlink(
+            path.join(
+              __dirname,
+              "../../server/PDF_handling/PDF_buffer/" +
+                templateData?.sellRequest?.id +
+                ".pdf"
+            )
+          );
+        } catch (e) {
+          console.log("error while trying to unlink pdf", e);
+        }
       });
       return true;
     }
