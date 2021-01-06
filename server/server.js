@@ -1,6 +1,9 @@
 // Core
 require("dotenv").config();
-require("dotenv").config({ path: "../.env.local" });
+const result = require("dotenv").config({ path: "../.env.local" });
+if (result.error) {
+  throw result.error;
+}
 const express = require("express");
 const path = require("path");
 const bodyParser = require("body-parser");
