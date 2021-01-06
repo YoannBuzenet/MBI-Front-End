@@ -21,6 +21,9 @@ import AuthContext from "../../context/authContext";
 import slugify from "slugify";
 
 const CardLineShop = ({ card, indexCard }) => {
+  //This component id displaying the cards for the shop in the sell request recap
+  //It is calculating the prices for each card also
+
   console.log("cardlineshop card", card);
 
   //Getting the Sell Request state by context
