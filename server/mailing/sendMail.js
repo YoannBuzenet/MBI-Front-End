@@ -376,7 +376,7 @@ async function sendMail(mailRequest) {
     console.log(`HTML: ${html}`);
 
     let mailOpts = {
-      from: "testMail@gmail.com",
+      from: process.env.MAIL_SENDING_FROM_SHOP,
       to: mailOptions.to,
       subject: mailOptions.subject,
       html: html,
