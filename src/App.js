@@ -83,11 +83,9 @@ function App() {
     AuthAPI.userInfos()
   );
 
-  if (process.env.NODE_ENV === "production") {
-    console.log("env :", process.env.NODE_ENV);
-    console.log("Blocking Logging function.");
-    console.log = function () {};
-  }
+  // if (process.env.NODE_ENV === "production") {
+  //   console.log = function () {};
+  // }
 
   // console.log(authenticationInfos);
 
