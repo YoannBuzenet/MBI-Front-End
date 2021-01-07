@@ -68,7 +68,9 @@ const OneSet = ({ handleAddSellingBasket, match }) => {
     let langObject = {};
 
     for (let i = 0; i < array.length; i++) {
-      langObject[array[i].language_id.id] = array[i].name;
+      if (array[i]?.language_id) {
+        langObject[array[i].language_id.id] = array[i].name;
+      }
     }
 
     return langObject;
