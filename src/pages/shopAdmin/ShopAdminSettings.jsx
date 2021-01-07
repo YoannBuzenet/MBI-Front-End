@@ -357,9 +357,9 @@ const ShopAdminSettings = () => {
                       name={lang.id}
                       label={lang.name}
                       value={
-                        authenticationInfos.shop.shopData.PercentPerLangs[
-                          lang.id
-                        ].percentPerLang
+                        authenticationInfos?.shop?.shopData?.PercentPerLangs?.[
+                          lang?.id
+                        ]?.percentPerLang
                       }
                       onChange={(event) =>
                         handleChange(event, "percentPerLang")
@@ -393,8 +393,9 @@ const ShopAdminSettings = () => {
                           name={condition.id}
                           label={condition.nameEU}
                           value={
-                            authenticationInfos.shop.shopData
-                              .PercentPerConditions[condition.id - 1].percent
+                            authenticationInfos?.shop?.shopData
+                              ?.PercentPerConditions?.[condition.id - 1]
+                              ?.percent
                           }
                           onChange={(event) =>
                             handleChange(event, "percentPerCondition")
@@ -420,9 +421,9 @@ const ShopAdminSettings = () => {
                           name={condition.id}
                           label={condition.nameEU + " Foil"}
                           value={
-                            authenticationInfos.shop.shopData
-                              .PercentPerConditionFoils[condition.id - 1]
-                              .percent
+                            authenticationInfos?.shop?.shopData
+                              ?.PercentPerConditionFoils?.[condition.id - 1]
+                              ?.percent
                           }
                           onChange={(event) =>
                             handleChange(event, "percentPerConditionFoil")
