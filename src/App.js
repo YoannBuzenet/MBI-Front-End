@@ -70,6 +70,7 @@ import ScrollToTop from "./components/ScrollToTop";
 import ResetMail from "./components/ResetMail";
 import SetNewPassword from "./components/SetNewPassword";
 import SearchResultPage from "./pages/SearchResultPage";
+import HowToGradeACard from "./pages/contentPages/HowToGradeACard";
 
 //Really Useful library to check all rerenders made on ALL components (you can setup it to check just one)
 // const whyDidYouRender = require("@welldone-software/why-did-you-render");
@@ -617,6 +618,10 @@ function App() {
                               <Route
                                 path="/buyingClauses"
                                 component={BuyingClauses}
+                              />
+                              <Route
+                                path="/grading"
+                                component={HowToGradeACard}
                               />
                               <Route
                                 path="/usermail/reset"

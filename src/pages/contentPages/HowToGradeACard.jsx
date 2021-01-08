@@ -1,4 +1,5 @@
 import React from "react";
+import { FormattedMessage } from "react-intl";
 
 const HowToGradeACard = () => {
   return (
@@ -98,7 +99,8 @@ const HowToGradeACard = () => {
         lors de l'évaluation de l'état de vos cartes. Si vous hésitez entre deux
         états, le meilleur moyen de lever un doute est de grader la carte dans
         l'état le plus abimé, pas principe de prudence. Dans tous les cas, ne
-        vous inquiétez pas, quelqu'un vérifiera au cas où. Bonne revente !
+        vous inquiétez pas, quelqu'un de la boutique vérifiera au cas où. Bonne
+        revente !
       </p>
     </>
   );
