@@ -2228,6 +2228,35 @@ form.reset-password-form button {
 }
 
 /**************************
+*** HOW TO GRADE A CARD ***
+**************************/
+
+.gradingPage {
+  margin-top: 100px;
+}
+
+.gradingPage p {
+  text-align: left;
+}
+
+.gradingPage .cardPicture {
+  display: flex;
+  justify-content: center;
+}
+
+.gradingPage .cardPicture img {
+  width: 40%;
+  margin: 0;
+}
+
+@media only screen and (max-width: 767px) {
+  .gradingPage .cardPicture {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+/**************************
 *******ALL CARDLINE*******
 **************************/
 .foilSvgInCardName {
