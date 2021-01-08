@@ -392,6 +392,7 @@
   "app.settings.language": "Language",
 
   "app.footer.legalBuyingClauses": "Buying Clauses",
+  "app.footer.howToGradeACard": "How to grade a card",
 
   "app.cardline.shop.loadingSets.toast.failure": "Sets couldn't be loaded. Please reload the page or login again.",
   "app.cardline.shop.updateCard.toast.failure": "The card couldn't be updated. Please try again.",

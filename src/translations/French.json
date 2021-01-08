@@ -392,6 +392,7 @@
   "app.settings.language": "Langue",
 
   "app.footer.legalBuyingClauses": "Conditions de rachat",
+  "app.footer.howToGradeACard": "Comment grader une carte",
 
   "app.cardline.loadingSets.toast.failure": "Les éditions n'ont pu être chargées. Merci de réessayer ou de vous reconnecter.",
   "app.cardline.shop.updateCard.toast.failure": "La carte n'a pu être mise à jour. Merci de réessayer ou de vous reconnecter.",

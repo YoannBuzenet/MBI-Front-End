@@ -20,6 +20,14 @@ const Footer = () => {
                 />
               </Link>
             </p>
+            <p>
+              <Link to="/grading">
+                <FormattedMessage
+                  id="app.footer.howToGradeACard"
+                  defaultMessage={`How to grade a card`}
+                />
+              </Link>
+            </p>
           </div>
           <div>
             <p>{shopInfos.legalName}</p>
