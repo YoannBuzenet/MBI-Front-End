@@ -2233,6 +2233,7 @@ form.reset-password-form button {
 
 .gradingPage {
   margin-top: 100px;
+  margin-bottom: 50px;
 }
 
 .gradingPage p {
@@ -2246,7 +2247,7 @@ form.reset-password-form button {
 
 .gradingPage .cardPicture img {
   width: 40%;
-  max-width: 200px;
+  max-width: 280px;
   margin: 0;
 }
 

@@ -20,124 +20,177 @@ import cardAltered from "./content/gradingExamples/cardAltered.png";
 const HowToGradeACard = () => {
   return (
     <div className="container gradingPage">
-      <h1>Grader une carte Magic</h1>
+      <h1>
+        <FormattedMessage
+          id="app.page.grading.title"
+          defaultMessage="How to grade a Magic Card"
+        />
+      </h1>
       <p>
-        Evaluer correctement l'état d'une carte à Magic est une tâche ardue,
-        mais on s'y fait ! Au cours de ce guide, nous allons essayer de vous
-        montrer comment classer votre carte, selon quelques repères bien précis.
+        <FormattedMessage
+          id="app.page.grading.intro"
+          defaultMessage="To grade accurately a card condition is a difficult task at first, but everyone gets better with time ! Thourgh this guide, we will try to show you how to recognize elements of condition, and class your card in the relevant condition."
+        />
       </p>
-      <h2>Mint/MT (Neuve)</h2>
+      <h2>
+        <FormattedMessage
+          id="app.page.grading.mint.title"
+          defaultMessage="Mint (MT)"
+        />
+      </h2>
       <div className="cardPicture">
         <img src={MTFront} />
         <img src={MTBack} />
       </div>
       <p>
-        Quand la carte est Mint, elle n'a aucune imperfection, et est comme
-        neuve. On dit parfois qu'elle est comme "sortie de booster". Les cartes
-        Mint sont très rare car la plus petite imperfection la recale
-        immédiatement au rang de Near-Mint. Habituellement, l'évaluation "Mint"
-        est très peu utilisée entre joueurs, et sert davantage aux
-        collectionneurs pour des cartes rares, et donc... plus chères.
+        <FormattedMessage
+          id="app.page.grading.mint.description"
+          defaultMessage="A mint card has no imperfection - we sometimes call it 'booster fresh'. Mint cards are really rare, because the smallest imperfection directly classes it as the lower condition, Near Mint. Mint condition is rarely used between players, mostly by collectors for high end cards."
+        />
       </p>
-      <h2>Near-Mint/NM (Presque neuve)</h2>
+      <h2>
+        <FormattedMessage
+          id="app.page.grading.nearMint.title"
+          defaultMessage="Near Mint (NM)"
+        />
+      </h2>
       <div className="cardPicture">
         <img src={NMFront} />
         <img src={NMTBack} />
       </div>
       <p>
-        Les cartes Near-Mint sont presque neuves. On peut distinguer de rares
-        imperfections, mais celles-ci doivent rester très légères. L'ensemble
-        reste dans un état irréprochable. C'est la condition la plus utilisée
-        par les joueurs pour les cartes neuves ou quasi-neuves.{" "}
+        <FormattedMessage
+          id="app.page.grading.nearMint.description"
+          defaultMessage="Near Mint cards are mostly perfect. You can see rares small imperfections, but very lightly. The whole card looks really clean. It's the most used condition for cards or nearly perfect cards."
+        />
       </p>
-      <h2>Excellent/EXC (Légèrement abimée)</h2>
+      <h2>
+        <FormattedMessage
+          id="app.page.grading.exc.title"
+          defaultMessage="Excellent (EX)"
+        />
+      </h2>
       <div className="cardPicture">
         <img src={ExcFront} />
         <img src={ExcBack} />
       </div>
       <p>
-        En état Excellent, on commence à discerner quelques imperfections.
-        Celles-ci sont visibles, bien que la carte reste en bon état sur
-        l'ensemble.
+        <FormattedMessage
+          id="app.page.grading.exc.description"
+          defaultMessage="In the Exc condition, you begin to see a few imperfections here and there. They are visible, however the whole card looks still nice."
+        />
       </p>
-      <h2>Good/GD (Un peu abimée)</h2>
+      <h2>
+        <FormattedMessage
+          id="app.page.grading.good.title"
+          defaultMessage="Good (GD)"
+        />
+      </h2>
       <div className="cardPicture">
         <img src={GDFront} />
         <img src={GDBack} />
       </div>
       <p>
-        En état Good, les imperfections se multiplient. Des traces blanches
-        d'usure sont très distinctement visibles et la carte semble déjà avoir
-        un peu vécu. Elle peut contenir des éraflures, ou quelques traces de
-        frottement.
+        <FormattedMessage
+          id="app.page.grading.good.description"
+          defaultMessage="When a card is Good, imperfections are more visible. More imperfections can been seen."
+        />
       </p>
-      <h2>Light Played/LP (Abimée)</h2>
+      <h2>
+        <FormattedMessage
+          id="app.page.grading.lightPlayed.title"
+          defaultMessage="Light Played (LP)"
+        />
+      </h2>
       <div className="cardPicture">
         <img src={LPFront} />
         <img src={LPBack} />
       </div>
       <p>
-        Les cartes Light Played laissent apparaitre davantage d'usure. Des
-        traces blanches très visibles parsèment la carte de part et d'autres.
-        Celle-ci a été probablement endommagée en étant manipulée sans
-        pochettes, parfois à même le sol, ou abimée lors d'un rangement
-        périlleux. Les dommages restent toutefois raisonnables : la carte est
-        encore jouable, n'a pas été marquée par une pliure, profondément
-        déformée ou modifiée.
+        <FormattedMessage
+          id="app.page.grading.lightPlayed.description"
+          defaultMessage="Light Played cards begin to be really used. White traces on the borders or white points can been seen. The card has probably been played or used without sleeve for a while."
+        />
       </p>
-      <h2>Played/PL (Serieusement abimée)</h2>
+      <h2>
+        <FormattedMessage
+          id="app.page.grading.Played.title"
+          defaultMessage="Played (PL)"
+        />
+      </h2>
       <div className="cardPicture">
         <img src={PLFront} />
         <img src={PLBack} />
       </div>
       <p>
-        Les cartes Played sont très marquées. Les usures et défauts sont
-        présents sur toute la carte. On voit des marques blanches, des rayures.
+        <FormattedMessage
+          id="app.page.grading.Played.description"
+          defaultMessage="Played cards are really used. Defaults and imperfections can been seen all over the card. You see white marks, scratchs."
+        />
       </p>
-      <h2>Poor/PO (Très sérieusement abimée)</h2>
+      <h2>
+        <FormattedMessage
+          id="app.page.grading.poor.title"
+          defaultMessage="Poor (PO)"
+        />
+      </h2>
       <div className="cardPicture">
         <img src={POFront} />
         <img src={POBack} />
       </div>
       <p>
-        Les cartes Poor sont encore plus abimées. Pour les cartes Poor, on
-        cherche quelque chose de radical : quelque chose de trop flagrant, qui
-        affecte fortement la carte : typiquement une pliure, une marques au
-        feutre, une carte tordue ou fortement gondolée, des restes d'eau... Les
-        cartes qui sont trop usées pour être jouées en pochettes, c'est à dire
-        encore reconnaissables malgré la pochette, rentrent également dans la
-        catégorie Poor.
+        <FormattedMessage
+          id="app.page.grading.poor.description"
+          defaultMessage="Poor cards are the most used cards possible. On Poor cards, we either find something really radical, like the cards has been bent, wet, a part is missing, there's oil on it, or a really heavy used condition. A card that can recognized when played in a sleeve is Poor."
+        />
       </p>
-      <h3>Informations complémentaires</h3>
-      <h2>Signature</h2>
+      <h3>
+        <FormattedMessage
+          id="app.page.grading.complementaryInformations.title"
+          defaultMessage="Complementary Informations"
+        />
+      </h3>
+      <h2>
+        <FormattedMessage
+          id="app.page.grading.signature.title"
+          defaultMessage="Signature"
+        />
+      </h2>
       <div className="cardPicture">
         <img src={cardSigned} />
       </div>
       <p>
-        Une carte signée par son illustrateur doit être marquée comme telle.
-        Certains joueurs adorent cette pratique, d'autres préfèrent l'éviter.
-        Tant que la signature reste discrète, cela n'affecte pas l'état de la
-        carte. Détail important : une carte signée par une autre personne que
-        l'illustrateur devient une carte feutrée... exception faite si c'est
-        Richard Garfield !
+        <FormattedMessage
+          id="app.page.grading.signature.description"
+          defaultMessage="A card signed by its illustrator must be indicated. A lot of players like signed cards, other don't. Important details : the signature must come from the author, otherwise it counts as a inked card. One exception though : Richard Garfield signatures."
+        />
       </p>
-      <h2>Altération</h2>
+      <h2>
+        <FormattedMessage
+          id="app.page.grading.alteration.title"
+          defaultMessage="Alteration"
+        />
+      </h2>
       <div className="cardPicture">
         <img src={cardAltered} />
       </div>
       <p>
-        Une carte altérée a été modifiée visuellement. Il existe plusieurs
-        degrés d'altération : d'une légère modification à la réinvention totale
-        de la carte.
+        <FormattedMessage
+          id="app.page.grading.alteration.description"
+          defaultMessage="An altered card has been modified on a part, if not the whole card."
+        />
       </p>
-      <h2>Conclusion</h2>
+      <h2>
+        <FormattedMessage
+          id="app.page.grading.conclusion.title"
+          defaultMessage="Conclusion"
+        />
+      </h2>
       <p>
-        L'évaluation de l'état d'une carte est un exercice au début un peu
-        complexe, qui devient plus facile avec la pratique. Si vous hésitez
-        entre deux états, le meilleur moyen de lever un doute est de grader la
-        carte dans l'état le plus abimé, pas principe de prudence. Dans tous les
-        cas, ne vous inquiétez pas, quelqu'un de la boutique vérifiera au cas
-        où. Bonne revente !
+        <FormattedMessage
+          id="app.page.grading.conclusion.description"
+          defaultMessage="Conclusion"
+        />
       </p>
     </div>
   );
