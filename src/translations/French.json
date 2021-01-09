@@ -134,7 +134,7 @@
   "app.page.grading.title": "Grader une carte Magic",
   "app.page.grading.intro": "Evaluer correctement l'état d'une carte à Magic est une tâche ardue, mais on s'y fait ! Au cours de ce guide, nous allons essayer de vous montrer comment classer votre carte, selon quelques repères bien précis.",
   "app.page.grading.mint.title": "Mint/MT (Neuve)",
-  "app.page.grading.mint.description": " Quand la carte est Mint, elle n'a aucune imperfection, et est comme neuve. On dit parfois qu'elle est comme 'sortie de booste'. Les cartes Mint sont très rares car la plus petite imperfection la recale immédiatement au rang inférieur, de Near-Mint. Habituellement, l'évaluation 'Mint' est très peu utilisée entre joueurs, et sert davantage aux collectionneurs pour des cartes rares, et donc... plus chères.",
+  "app.page.grading.mint.description": " Quand la carte est Mint, elle n'a aucune imperfection, et est comme neuve. On dit parfois qu'elle est comme 'sortie de booster'. Les cartes Mint sont très rares car la plus petite imperfection la recale immédiatement au rang inférieur, de Near-Mint. Habituellement, l'évaluation 'Mint' est très peu utilisée entre joueurs, et sert davantage aux collectionneurs pour des cartes rares, et donc... plus chères.",
   "app.page.grading.nearMint.title": "Near-Mint/NM (Presque neuve)",
   "app.page.grading.nearMint.description": "Les cartes Near-Mint sont presque neuves. On peut distinguer de rares imperfections, mais celles-ci doivent rester très légères. L'ensemble reste dans un état irréprochable. C'est la condition la plus utilisée par les joueurs pour les cartes neuves ou quasi-neuves.",
   "app.page.grading.exc.title": "Excellent/EXC (Légèrement abimée)",
