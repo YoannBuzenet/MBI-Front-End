@@ -2243,6 +2243,10 @@ form.reset-password-form button {
 .gradingPage .cardPicture {
   display: flex;
   justify-content: center;
+  max-width: 700px;
+  border-radius: 6px;
+  margin: auto;
+  background-color: #a1a1a1;
 }
 
 .gradingPage .cardPicture img {
@@ -2252,6 +2256,9 @@ form.reset-password-form button {
 }
 
 @media only screen and (max-width: 767px) {
+  .gradingPage {
+    max-width: 90%;
+  }
   .gradingPage .cardPicture {
     display: flex;
     flex-direction: column;
