@@ -46,7 +46,7 @@ const MyShopAccount = (props) => {
     };
 
     shopAPI
-      .updateFields(objectToSend, process.env.REACT_APP_SHOP_ID)
+      .updateFields(objectToSend, process.env.REACT_APP_USER_ID)
       .then((data) => {
         const localStorage = localStorageAPI.getLocalStorageSession();
         localStorage.shop[name] = value;
