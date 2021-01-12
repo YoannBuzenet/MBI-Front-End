@@ -31,3 +31,4 @@ yarn-error.log*
 #Shop Data
 /public/shopLogo.png
 /public/favicon.ico
+/public/shopPictures
