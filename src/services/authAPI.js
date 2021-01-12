@@ -15,7 +15,20 @@ function authenticate(credentials) {
       return response.data;
     })
     .then((data) => {
-      // console.log(data);
+      // Conditional filtering
+      // Ifa shop is logging onto a site that's not his : remove shop access and log normally
+      if (
+        data?.user?.roles.includes("ROLE_SHOP") &&
+        data?.client?.shop?.id !== parseInt(process.env.REACT_APP_SHOP_ID, 10)
+      ) {
+        const filteredRoles = data?.user?.roles.filter(
+          (role) => role !== "ROLE_SHOP"
+        );
+        data.user.roles = filteredRoles;
+      }
+
+      // Continue normal process
+
       //Stocking in local storage
       window.localStorage.setItem("authToken", data.token);
       window.localStorage.setItem("refreshToken", data.refresh_token);
