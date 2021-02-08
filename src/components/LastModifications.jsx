@@ -83,6 +83,7 @@ const LastModifications = () => {
             </>
           )}
           {!isLoading &&
+            Array.isArray(lastModificationList) &&
             lastModificationList.map((card, index) => (
               <CardWithThumbnail card={card} key={card.id} />
             ))}
